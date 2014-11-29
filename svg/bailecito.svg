@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet href="./schema.xsl" type="text/xsl" ?>
+
+<schema>
+	<part>
+		<element class="avanceRetroceso" times="4" id="avance" visualization="avance1" manPosition="left">Avance</element>
+		<element class="avanceRetroceso" times="4" id="retroceso" visualization="retroceso1" manPosition="left">Retroceso</element>
+		<element class="avanceRetroceso" times="4" id="avance2" visualization="avance2" manPosition="left">Avance</element>
+		<element class="avanceRetroceso" times="4" id="retroceso2" visualization="retroceso2" manPosition="left">Retroceso</element>
+		<bar/>
+		<element class="giro" times="4" id="giro" visualization="giro" manPosition="left">Giro</element>
+		<element class="giro" times="4" id="contraGiro" visualization="contraGiro" manPosition="left">Contra giro</element>
+		<bar/>
+		<element class="vuelta" times="4" id="mediaVuelta" visualization="mediaVuelta" manPosition="left">Media vuelta</element>
+		<element class="coronacion" times="4" id="coronacion" visualization="coronacion" manPosition="right">Giro y coronación</element>
+	</part>
+	<part>
+		<element class="avanceRetroceso" times="4" id="avance_2" visualization="avance1" manPosition="left">Avance</element>
+		<element class="avanceRetroceso" times="4" id="retroceso_2" visualization="retroceso1" manPosition="left">Retroceso</element>
+		<element class="avanceRetroceso" times="4" id="avance2_2" visualization="avance2" manPosition="left">Avance</element>
+		<element class="avanceRetroceso" times="4" id="retroceso2_2" visualization="retroceso2" manPosition="left">Retroceso</element>
+		<bar/>
+		<element class="giro" times="4" id="giro_2" visualization="giro" manPosition="left">Giro</element>
+		<element class="giro" times="4" id="contraGiro_2" visualization="contraGiro" manPosition="left">Contra giro</element>
+		<bar/>
+		<element class="vuelta" times="4" id="mediaVuelta_2" visualization="mediaVuelta" manPosition="left">Media vuelta</element>
+		<element class="coronacion" times="4" id="coronacion_2" visualization="coronacion" manPosition="right">Giro y coronación</element>
+	</part>
+	<part>
+		<element class="avanceRetroceso" times="4" id="avance_3" visualization="avance1" manPosition="left">Avance</element>
+		<element class="avanceRetroceso" times="4" id="retroceso_3" visualization="retroceso1" manPosition="left">Retroceso</element>
+		<element class="avanceRetroceso" times="4" id="avance2_3" visualization="avance2" manPosition="left">Avance</element>
+		<element class="avanceRetroceso" times="4" id="retroceso2_3" visualization="retroceso2" manPosition="left">Retroceso</element>
+		<bar/>
+		<element class="giro" times="4" id="giro_3" visualization="giro" manPosition="left">Giro</element>
+		<element class="giro" times="4" id="contraGiro_3" visualization="contraGiro" manPosition="left">Contra giro</element>
+		<bar/>
+		<element class="vuelta" times="4" id="mediaVuelta_3" visualization="mediaVuelta" manPosition="left">Media vuelta</element>
+		<element class="coronacion" times="4" id="coronacion_3" visualization="coronacion" manPosition="right">Giro y coronación</element>
+	</part>
+</schema>

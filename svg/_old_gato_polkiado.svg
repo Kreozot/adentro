@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet href="./schema.xsl" type="text/xsl" ?>
+
+<schema overallTimes="76">
+	<element class="vuelta" times="4" id="vuelta1">Cadena</element>
+	<element class="giro" times="8" id="giro1">Polka</element>
+	<bar/>
+	<element class="vuelta" times="8" id="vuelta1">Cadena</element>
+	<element class="giro" times="4" id="giro1">Polka</element>
+	<bar/>
+	<element class="vuelta" times="8" id="vuelta1">Cadena</element>
+	<element class="giro" times="4" id="giro1">Polka</element>
+	<pause times="4"/>
+	<element class="vuelta" times="4" id="vuelta1">Cadena</element>
+	<element class="giro" times="8" id="giro1">Polka</element>
+	<bar/>
+	<element class="vuelta" times="8" id="vuelta1">Cadena</element>
+	<element class="giro" times="4" id="giro1">Polka</element>
+	<bar/>
+	<element class="vuelta" times="8" id="vuelta1">Cadena</element>
+	<element class="giro" times="4" id="giro1">Polka</element>
+</schema>

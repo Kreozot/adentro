@@ -1,0 +1,287 @@
+/* * Skin for jPlayer Plugin (jQuery JavaScript Library)
+* http://www.jplayer.org
+*
+* Skin Name:Blue Monday
+*
+* Copyright (c) 2010-2014 Happyworm Ltd
+* Licensed under the MIT license.
+*  - http://www.opensource.org/licenses/mit-license.php
+*
+* Author:Silvia Benvenuti
+* Skin Version:4.4 (jPlayer 2.6.0)
+* Date:1st April 2014 */
+
+div.jp-audio {
+	/* Edit the font-size to counteract inherited font sizing.
+	* Eg. 1.25em = 1 / 0.8em */
+	
+	font-size: 1.25em; /* 1.25em for testing in site pages */ /* No parent CSS that can effect the size in the demos ZIP */
+	font-family: Verdana, Arial, sans-serif;
+	line-height: 1.6;
+	color: #666;
+	border: 1px solid #009be3;
+	background-color: #eee;
+}
+div.jp-audio {
+	width: 520px;
+	margin-left: auto;
+	margin-right: auto;
+}
+div.jp-interface {
+	position: relative;
+	background-color: #eee;
+	width: 100%;
+}
+div.jp-audio div.jp-type-single div.jp-interface {
+	height: 80px;
+}
+
+/* @group CONTROLS */
+div.jp-controls-holder {
+	clear: both;
+	width: 540px;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+	top: -8px; /* This negative value depends on the size of the text in jp-currentTime and jp-duration */
+}
+div.jp-interface ul.jp-controls {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+div.jp-audio ul.jp-controls {
+	width: 480px;
+	padding: 20px 20px 0 20px;
+}
+div.jp-interface ul.jp-controls li {
+	display: inline;
+	float: left;
+}
+div.jp-interface ul.jp-controls a {
+	display: block;
+	overflow: hidden;
+	text-indent: -9999px;
+}
+a.jp-play, a.jp-pause {
+	width: 40px;
+	height: 40px;
+}
+a.jp-play {
+	background: url("jplayer.blue.monday.jpg") 0 0 no-repeat;
+}
+a.jp-play:hover {
+	background: url("jplayer.blue.monday.jpg") -41px 0 no-repeat;
+}
+a.jp-pause {
+	background: url("jplayer.blue.monday.jpg") 0 -42px no-repeat;
+	display: none;
+}
+a.jp-pause:hover {
+	background: url("jplayer.blue.monday.jpg") -41px -42px no-repeat;
+}
+a.jp-stop, a.jp-previous, a.jp-next {
+	width: 28px;
+	height: 28px;
+	margin-top: 6px;
+}
+a.jp-stop {
+	background: url("jplayer.blue.monday.jpg") 0 -83px no-repeat;
+	margin-left: 10px;
+}
+a.jp-stop:hover {
+	background: url("jplayer.blue.monday.jpg") -29px -83px no-repeat;
+}
+
+/* @end */
+/* @group progress bar */
+
+div.jp-progress {
+	overflow: hidden;
+	background-color: #ddd;
+}
+div.jp-audio div.jp-progress {
+	position: absolute;
+	top: 32px;
+	height: 15px;
+}
+div.jp-audio div.jp-type-single div.jp-progress {
+	left: 110px;
+	width: 286px;
+}
+div.jp-seek-bar {
+	background: url("jplayer.blue.monday.jpg") 0 -202px repeat-x;
+	width: 0px;
+	height: 100%;
+	cursor: pointer;
+}
+div.jp-play-bar {
+	background: url("jplayer.blue.monday.jpg") 0 -218px repeat-x;
+	width: 0px;
+	height: 100%;
+}
+
+/* The seeking class is added/removed inside jPlayer */
+div.jp-seeking-bg {
+	background: url("jplayer.blue.monday.seeking.gif");
+}
+
+/* @end */
+/* @group volume controls */
+
+
+a.jp-mute, a.jp-unmute, a.jp-volume-max {
+	width: 18px;
+	height: 15px;
+	margin-top: 12px;
+}
+div.jp-audio div.jp-type-single a.jp-mute, div.jp-audio div.jp-type-single a.jp-unmute {
+	margin-left: 310px;
+}
+div.jp-audio a.jp-volume-max {
+	margin-left: 56px;
+}
+a.jp-mute {
+	background: url("jplayer.blue.monday.jpg") 0 -170px no-repeat;
+}
+a.jp-mute:hover {
+	background: url("jplayer.blue.monday.jpg") -19px -170px no-repeat;
+}
+a.jp-unmute {
+	background: url("jplayer.blue.monday.jpg") -60px -170px no-repeat;
+	display: none;
+}
+a.jp-unmute:hover {
+	background: url("jplayer.blue.monday.jpg") -79px -170px no-repeat;
+}
+a.jp-volume-max {
+	background: url("jplayer.blue.monday.jpg") 0 -186px no-repeat;
+}
+a.jp-volume-max:hover {
+	background: url("jplayer.blue.monday.jpg") -19px -186px no-repeat;
+}
+div.jp-volume-bar {
+	position: absolute;
+	overflow: hidden;
+	background: url("jplayer.blue.monday.jpg") 0 -250px repeat-x;
+	width: 46px;
+	height: 5px;
+	cursor: pointer;
+}
+div.jp-audio div.jp-volume-bar {
+	top: 37px;
+	left: 430px;
+}
+div.jp-volume-bar-value {
+	background: url("jplayer.blue.monday.jpg") 0 -256px repeat-x;
+	width: 0px;
+	height: 5px;
+}
+
+/* @end */
+/* @group current time and duration */
+
+div.jp-audio div.jp-time-holder {
+	position: absolute;
+	top: 50px;
+}
+div.jp-audio div.jp-type-single div.jp-time-holder {
+	left: 110px;
+	width: 286px;
+}
+div.jp-current-time, div.jp-duration {
+	width: 60px;
+	font-size: .64em;
+}
+div.jp-current-time {
+	float: left;
+	display: inline;
+}
+div.jp-duration {
+	float: right;
+	display: inline;
+	text-align: right;
+}
+
+/* @end */
+/* @group playlist */
+
+div.jp-details {
+	font-weight: bold;
+	text-align: center;
+	z-index: 999;
+	position: absolute;
+	width: 100%;
+	top: 0px;
+}
+div.jp-type-single div.jp-details, div.jp-type-single div.jp-playlist {
+	border-top: none;
+}
+div.jp-details ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0px;
+	font-size: .72em;
+}
+div.jp-details li {
+	font-weight: normal;
+	font-size: .6em;
+}
+
+/* Note that the first-child (IE6) and last-child (IE6/7/8) selectors do not work on IE */
+/* @end */
+div.jp-jplayer audio, div.jp-jplayer {
+	width: 0px;
+	height: 0px;
+}
+div.jp-jplayer {
+	background-color: #000000;
+}
+
+/* @group TOGGLES */
+/* The audio toggles are nested inside jp-time-holder */
+
+ul.jp-toggles {
+	list-style-type: none;
+	padding: 0;
+	margin: 0 auto;
+	overflow: hidden;
+}
+div.jp-audio .jp-type-single ul.jp-toggles {
+	width: 25px;
+}
+ul.jp-toggles li {
+	display: block;
+	float: right;
+}
+ul.jp-toggles li a {
+	display: block;
+	width: 25px;
+	height: 18px;
+	text-indent: -9999px;
+	line-height: 100%; /* need this for IE6 */
+}
+
+/* @end */
+/* @group NO SOLUTION error feedback */
+
+.jp-no-solution {
+	padding: 5px;
+	font-size: .8em;
+	background-color: #eee;
+	border: 2px solid #009be3;
+	color: #000;
+	display: none;
+}
+.jp-no-solution a {
+	color: #000;
+}
+.jp-no-solution span {
+	font-size: 1em;
+	display: block;
+	text-align: center;
+	font-weight: bold;
+}
+
+/* @end */
