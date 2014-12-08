@@ -21,6 +21,7 @@ extend(ZarandeoElement, SingleDanceAnimationElement);
 function VueltaElement(animation, pathStr) {
 	VueltaElement.superclass.constructor.apply(this, arguments);
 	this.pathStr = pathStr;
+	this.g = {};
 
 	this.setColors = function(leftColor, rightColor) {
 		this.leftColor = leftColor;
@@ -36,9 +37,19 @@ function VueltaElement(animation, pathStr) {
 
 		movePoint1 = this.path.getPointAtLength(value + this.gradientOffset);
 		movePoint2 = this.path.getPointAtLength(value2 + this.gradientOffset);
-		var g = this.animation.svg.gradient("L(" + movePoint1.x + ", " + movePoint1.y + ", " + 
-			movePoint2.x + ", " + movePoint2.y + ")" + this.gColors);
-		this.path.attr({stroke: g});		
+		if (this.g.type === 'linearGradient') {
+			this.g.attr({
+				x1: movePoint1.x,
+				y1: movePoint1.y,
+				x2: movePoint2.x,
+				y2: movePoint2.y
+			});
+			this.path.attr({stroke: this.g});
+		} else {
+			this.g = this.animation.svg.gradient("L(" + movePoint1.x + ", " + movePoint1.y + ", " + 
+				movePoint2.x + ", " + movePoint2.y + ")" + this.gColors);
+			this.path.attr({stroke: this.g});
+		}	
 	};
 
 	this.animationFunction = function(lengthMs, times, direction, startPart, stopPart) {
@@ -78,8 +89,9 @@ function VueltaElement(animation, pathStr) {
 	};
 
 	this.drawPath = function(manPosition) {
+		this.g = {};
 		this.animation.manPosition = manPosition;
-		this.path = this.animation.path(pathStr, "Black", "vueltaPath");
+		this.path = this.animation.path(pathStr);
 		this.pathLength = this.path.getTotalLength();	
 		this.gradientOffset = this.pathLength / 6;
 		this.halfLength = this.pathLength / 2;

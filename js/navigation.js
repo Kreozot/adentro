@@ -3,8 +3,8 @@ var schemaParamsMap = {
 		name: "Zamba",
 		svgName: "zamba",
 		music: ["zamba"],
-		animation: [{id: "classic", name: "ZambaAnimation", title: "Classic"},
-					{id: "simple", name: "ZambaSimpleAnimation", title: "Simple"}]
+		animation: [{id: "classic", name: "ZambaAnimation", title: "animation_links.common"},
+					{id: "simple", name: "ZambaSimpleAnimation", title: "animation_links.simple"}]
 	},
 	Gato: {
 		name: "Gato",
@@ -22,32 +22,32 @@ var schemaParamsMap = {
 		name: "Chacarera",
 		svgName: "chacarera",
 		music: ["chacarera"],
-		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "Two people"},
-					{id: "onFour", name: "Chacarera4Animation", title: "Four people"}/*,
+		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
+					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
 					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/]
 	},
 	Chacarera6: {
 		name: "Chacarera on 6",
 		svgName: "chacarera_6",
 		music: ["chacarera_6"],
-		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "Two people"},
-					{id: "onFour", name: "Chacarera4Animation", title: "Four people"}/*,
+		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
+					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
 					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/]
 	},
 	ChacareraDoble: {
 		name: "Chacarera doble",
 		svgName: "chacarera_doble",
 		music: ["chacarera_doble_el_olvidao", "chacarera_doble_sombra_enamorada"],
-		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "Two people"},
-					{id: "onFour", name: "Chacarera4Animation", title: "Four people"}/*,
+		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
+					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
 					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/]
 	},
 	ChacareraDoble6: {
 		name: "Chacarera doble on 6",
 		svgName: "chacarera_doble_6",
-		music: ["chacarera_doble_6_pampa_de_los_guanacos", "chacarera_doble_6_anorazas"],
-		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "Two people"},
-					{id: "onFour", name: "Chacarera4Animation", title: "Four people"}/*,
+		music: ["chacarera_doble_6_pampa_de_los_guanacos"/*, "chacarera_doble_6_anorazas"*/],
+		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
+					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
 					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/]
 	},
 	Bailecito: {
@@ -76,22 +76,46 @@ var schemaParamsMap = {
 	},
 };
 
-// Загрузить схему по имени
+/**
+ * [loadSchemaByName Загрузить схему]
+ * @param  {[String]} name        [идентификатор схемы]
+ * @param  {[String]} animationId [идентификатор анимации]
+ * @param  {[String]} musicId     [идентификатор композиции]
+ */
 var loadSchemaByName = function(name, animationId, musicId) {
 	var schemaParams = schemaParamsMap[name];
 	if (!schemaParams) {
 		schemaParams = schemaParamsMap.Chacarera;
 	}
 	loadSchema(schemaParams.name, schemaParams.svgName, schemaParams.music, musicId, schemaParams.animation, animationId);
+	showLanguageLinks();
 };
 
-// Загрузить схему по имени
+/**
+ * [loadSchemaEditorByName Загрузить редактор тайминга]
+ * @param  {[String]} name    [идентификатор схемы]
+ * @param  {[String]} musicId [идентификатор композиции]
+ */
 var loadSchemaEditorByName = function(name, musicId) {
 	var schemaParams = schemaParamsMap[name];
 	if (!schemaParams) {
 		schemaParams = schemaParamsMap.Chacarera;
 	}
 	loadSchemaEditor(schemaParams.name, schemaParams.svgName, schemaParams.music, musicId);
+	showLanguageLinks();
+};
+
+/**
+ * [getLanguageLink Получить ссылку на текущую страницу с параметром языка]
+ * @param  {[String]} lang [идентификатор языка]
+ * @return {[String]}      [url текущей страницы со всеми параметрами и параметром lang]
+ */
+var getLanguageLink = function(lang) {
+	var uri = new URI();
+	var query = uri.query(true);
+	query.lang = lang;
+	var newQuery = URI.buildQuery(query);
+	return uri.query(newQuery).build();
 };
 
 // Перейти на указанную схему по URL
@@ -104,18 +128,21 @@ var showSchema = function(name) {
  * @param  {[Integer]} animationId [идентификатор анимации]
  */
 var showAnimation = function(animationId) {
-	var url = purl();
-	var schema = url.param("schema");
-	var musicId = url.param("musicId");
-	History.pushState({schema: name, animationId: animationId, musicId: musicId}, name + " schema", 
-		"?schema=" + schema + "&animationId=" + animationId + (musicId ? ("&musicId=" + musicId) : ""));
+	var url = new URI();
+	var params = url.query(true);
+	History.pushState({schema: params.schema, animationId: animationId, musicId: params.musicId}, 
+		name + " - Adentro", 
+		"?schema=" + params.schema + 
+		"&animationId=" + animationId + 
+		(params.musicId ? ("&musicId=" + params.musicId) : ""));
 
-	var schemaParams = schemaParamsMap[schema];
+	var schemaParams = schemaParamsMap[params.schema];
 	var animationClassDefs = schemaParams.animation;
 	var animationClassDef = getAnimationClassDef(animationClassDefs, animationId);
 	var animationClass = animationClassDef.name;
 	loadAnimation(animationClass);
 	showAnimationLinks(animationClassDefs, animationId);
+	showLanguageLinks();
 };
 
 /**
@@ -123,20 +150,26 @@ var showAnimation = function(animationId) {
  * @param  {[Integer]} animationId [идентификатор анимации]
  */
 var showMusic = function(musicId) {
-	var url = purl();
-	var schema = url.param("schema");
-	var animationId = url.param("animationId");
-	History.pushState({schema: name, animationId: animationId, musicId: musicId}, name + " schema", 
-		"?schema=" + schema + (animationId ? ("&animationId=" + animationId) : "") + "&musicId=" + musicId);
+	var url = new URI();
+	var params = url.query(true);
+	History.pushState({schema: params.schema, animationId: params.animationId, musicId: musicId}, 
+		name + " - Adentro", 
+		"?schema=" + params.schema + 
+		(params.animationId ? ("&animationId=" + params.animationId) : "") + 
+		"&musicId=" + musicId);
 
-	var schemaParams = schemaParamsMap[schema];
+	var schemaParams = schemaParamsMap[params.schema];
 	var musicIds = schemaParams.music;
 	var musicSchema = music.get(musicId);
 	loadMusicSchema(musicSchema);
 	showMusicLinks(musicIds, musicId);
+	showLanguageLinks();
 };
 
-// Загрузить схему, указанную в URL
+/**
+ * [loadSchemaByState Загрузить схему через History]
+ * @return {[Boolean]} [true если схема была загружена]
+ */
 var loadSchemaByState = function() {
 	var state = History.getState();
 	if ((state.data) && (state.data.schema)) {
@@ -146,13 +179,18 @@ var loadSchemaByState = function() {
 	return false;
 };
 
+/**
+ * [loadSchemaByUrl Загрузить схему из URL]
+ * @return {[Boolean]} [true если схема была загружена]
+ */
 var loadSchemaByUrl = function() {
-	var url = purl();
-	if (url.param("schema")) {
-		if (url.param("editor")) {
-			loadSchemaEditorByName(url.param("schema"), url.param("musicId"));
+	var url = new URI();
+	var params = url.query(true);
+	if (params.schema) {
+		if (params.editor) {
+			loadSchemaEditorByName(params.schema, params.musicId);
 		} else {
-			loadSchemaByName(url.param("schema"), url.param("animationId"), url.param("musicId"));
+			loadSchemaByName(params.schema, params.animationId, params.musicId);
 		}
 		return true;
 	}

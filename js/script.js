@@ -150,10 +150,10 @@ var showAnimationLinks = function(animationClassDefs, animationId) {
 		var result = "";
 		for (var i = 0; i < animationClassDefs.length; i++) {
 			if (animationClassDefs[i].id === currentClassDef.id) {
-				result += animationClassDefs[i].title;
+				result += i18n.t(animationClassDefs[i].title);
 			} else {					
-				result += "<a href=\"javascript:showAnimation('" + animationClassDefs[i].id + "')\">" +
-					animationClassDefs[i].title + "</a>";
+				result += '<a href="javascript:showAnimation(\'' + animationClassDefs[i].id + '\')" data-i18n="' + animationClassDefs[i].title + '">' +
+					i18n.t(animationClassDefs[i].title) + "</a>";
 			}
 			if (i < animationClassDefs.length - 1) {
 				result += ", ";
@@ -195,6 +195,37 @@ var showMusicLinks = function(musicIds, currentMusicId) {
 	});
 };
 
+var showLanguageLinks = function() {
+	var languages = [
+		{
+			id: "ru",
+			title: "ru"
+		},
+		{
+			id: "en",
+			title: "en"
+		}
+	];
+
+	var getLanguageLinks = function() {
+		var result = '<nobr>';
+		for (var i = 0; i < languages.length; i++) {
+			if (languages[i].id == i18n.lng()) {
+				result += languages[i].title
+			} else {
+				result += '<a href="' + getLanguageLink(languages[i].id) + '">' + languages[i].title + '</a>';
+			}
+			if (i < languages.length - 1) {
+				result += " / ";
+			}
+		}
+		result += '</nobr>';
+		return result;
+	};
+
+	$("#lang").html(getLanguageLinks());
+};
+
 var loadAnimation = function(animationClass) {
 	$.animation = new window[animationClass]("animation");
 	$("#animation").attr("width", $.animation.width)
@@ -214,7 +245,7 @@ var loadAnimation = function(animationClass) {
 var loadSchema = function(name, svgName, musicIds, musicId, animationClass, animationId) {
 	$("#danceName").html(name);
 	$("#schemaDiv").html('<object data="svg/' + svgName + '.svg" type="image/svg+xml" id="schema"></object>');
-	$("#animationDiv").html('<svg id="animation" preserveAspectRatio="xMidYMid meet"></svg>');
+	$("#animationDiv").html('<svg id="animation" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>');
 
 	if (typeof animationClass === 'object') {
 		showAnimationLinks(animationClass, animationId);

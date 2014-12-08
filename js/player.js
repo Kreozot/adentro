@@ -4,7 +4,7 @@ var playerSelector = "#" + playerId;
 var loadMusicSchema = function(musicSchema) {
 	$(playerSelector).jPlayer("setMedia", {
 		title: musicSchema.title,
-		oga: musicSchema.file
+		mp3: musicSchema.file
 	});
 	$(playerSelector).data("schema", musicSchema.schema);
 }

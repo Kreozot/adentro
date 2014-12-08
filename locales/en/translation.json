@@ -1,0 +1,22 @@
+{
+	"animation_links": {
+		"two_people": "Two people",
+		"four_people": "Four people",
+		"common": "Common",
+		"simple": "Simple"
+	},
+	"tour": {
+		"navigation_title": "Adentro!",
+		"navigation": "Welcome to Adentro.ru - argentinean folkloric dances visualization project. You can choose a dance in the top menu.",
+		"player_title": "Player",
+		"player": "Here are the player. Visualization starts automaticaly when music reach particular time.",
+		"music_title": "Music",
+		"music": "You can choose another music tracks. It is helpful for better understanding how choreography links to music.",
+		"schema_title": "Schema",
+		"schema": "Schema is interactive also. You can rewind a music by clicking on elements.",
+		"animation_title": "Visualization",
+		"animation": "Visualization will be shown under the schema.",
+		"animation_links_title": "Variants",
+		"animation_links": "Also you can choose another variants of choreography."
+	}
+}

@@ -94,10 +94,10 @@ function Dance4Animation(id) {
 	this.woman2 = this.initFigure("woman");
 
 	this.hideFigures = function() {
-		this.man.attr({opacity: 0});
-		this.woman.attr({opacity: 0});
-		this.man2.attr({opacity: 0});
-		this.woman2.attr({opacity: 0});
+		this.man.addClass("invisible");
+		this.woman.addClass("invisible");
+		this.man2.addClass("invisible");
+		this.woman2.addClass("invisible");
 	};
 
 	this.startPosition = function(leftCoords1, rightCoords1, leftCoords2, rightCoords2, manPosition) {

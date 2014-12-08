@@ -82,7 +82,7 @@ function SingleDanceAnimationElement(animation, pathStrings, gender, figure) {
 	 */
 	this.drawPath = function(position, transparent) {
 		var pathId = this.gender + "_" + position + "_path";
-		this.path = this.animation.path(this.pathStrings[position], this.animation.getGenderColor(this.gender), pathId, transparent);
+		this.path = this.animation.path(this.pathStrings[position], this.gender, pathId, transparent);
 		this.pathLength = this.path.getTotalLength() - 1;
 	};
 
@@ -285,6 +285,19 @@ function DanceAnimation(id) {
 		};
 	}
 
+	// this.hidePaths = function() {
+	// 	for (var i = 0; i < this.paths.length; i++) {
+	// 		this.paths[i].attr({opacity: 0});
+	// 	};
+
+	// 	for (var i = 0; i < this.animations.length; i++) {
+	// 		this.animations[i].stop();
+	// 	};
+	// 	while (this.animations.length > 0) {
+	// 		this.animations.pop();
+	// 	};
+	// }
+
 	this.clear = function() {
 		this.paused = false;
 		this.hideFigures();
@@ -336,22 +349,23 @@ function DanceAnimation(id) {
 		return gender === "man" ? this.MAN_COLOR : this.WOMAN_COLOR;
 	}
 
-	this.initFigure = function(gender, strokeColor) {
+	this.initFigure = function(gender) {
 		var figure = this.svg.polyline("0,0 20,40 40,0")
 				.attr({
-					id: gender + "_figure",
-					fill: this.getGenderColor(gender),
-					stroke: (strokeColor ? strokeColor : "black"),
-					strokeWidth: 2,
-					opacity: 0
-				});
-		figure.strokeColor = strokeColor ? strokeColor : "black";
+					id: gender + "_figure"
+					// opacity: 0
+				})
+				.addClass("invisible")
+				.addClass("figure")
+				.addClass(gender === "man" ? "manFigure" : "womanFigure");
 		return figure;
 	};
 
 	this.hideFigures = function() {
-		this.man.attr({opacity: 0});
-		this.woman.attr({opacity: 0});
+		this.man.addClass("invisible");
+		this.woman.addClass("invisible");
+		// this.man.attr({opacity: 0});
+		// this.woman.attr({opacity: 0});
 	};
 
 	/**
@@ -374,17 +388,11 @@ function DanceAnimation(id) {
 			self.animations[self.animations.length] = Snap.animate(0, length,
 				function(value) {
 					this.lastValue = value;
-					// Дробная часть от деления текущей позиции на длину такта
-					var modValue = mod(value, oneTimeLength);
-					// Если она достаточно близка к единице, значит сейчас сильная доля
-					var isStraightBeat = (modValue > 0.8);
-					if (isStraightBeat) {
-						figure.attr({
-							strokeWidth: 5,
-							stroke: "red",
-						});
+					// Если дробная часть от деления текущей позиции на длину такта достаточно близка к единице, значит сейчас сильная доля
+					if (mod(value, oneTimeLength) > 0.8) {
+						figure.addClass("straightBeatFigure");
 					} else {
-						self.defaultFigureLook(figure);
+						figure.removeClass("straightBeatFigure");
 					}
 				}, timeLength, mina.linear);
 		};
@@ -392,15 +400,7 @@ function DanceAnimation(id) {
 
 	// Позиционирование фигуры
 	this.positionFigure = function(figure, x, y, angle) {
-		figure.transform('t' + parseInt(x - 20) + ',' + parseInt(y - 20) + 'r' + parseInt(angle));
-	};
-
-	// Сбросить вид фигуры
-	this.defaultFigureLook = function(figure) {
-		figure.attr({
-			strokeWidth: 2,
-			stroke: figure.strokeColor,
-		});
+		figure.transform('t' + Math.floor(x - 20) + ',' + Math.floor(y - 20) + 'r' + Math.floor(angle));
 	};
 
 	// Анимация фигуры по траектории
@@ -419,7 +419,7 @@ function DanceAnimation(id) {
 				if (length > pathLength) {
 					length = length - pathLength;
 				}
-				movePoint = path.getPointAtLength(length);
+				var movePoint = path.getPointAtLength(length);
 				if (direction === self.DIRECTION_STRAIGHT_FORWARD) {
 					self.positionFigure(figure, movePoint.x, movePoint.y, angle);
 				} else {
@@ -428,7 +428,8 @@ function DanceAnimation(id) {
 			}
 
 			transformAtLength(startLen);
-			figure.attr({opacity: 1});
+			figure.removeClass("invisible");
+			// figure.attr({opacity: 1});
 
 			self.animations[self.animations.length] = Snap.animate(startLen, stopLen, 
 				function(value) {
@@ -457,35 +458,40 @@ function DanceAnimation(id) {
 		};
 	}(this);
 
-	this.path = function(pathStr, color, id, transparent) {
+	this.path = function(pathStr, gender, id, transparent) {
 		var resultPath = this.svg.path(pathStr)
 				.attr({
-					id: id + this.paths.length,
-					fill: "none",
-					strokeWidth: "3",
-					stroke: color,
-					strokeMiterLimit: "10",
-					strokeDasharray: "9 9",
-					opacity: (transparent ? "0" : "1")
-				});
+					id: gender + "_path_" + this.paths.length
+					// opacity: (transparent ? "0" : "1")
+				})
+				.addClass("path");
+		if (transparent) {
+			resultPath.addClass("invisible");
+		}
+		if (gender === "man") {
+			resultPath.addClass("manPath");
+		} else if (gender === "woman") {
+			resultPath.addClass("womanPath");
+		}
 		this.paths[this.paths.length] = resultPath;
 		return resultPath;
 	};
 	this.manPath = function(self) {
 		return function(pathStr) {
-			return self.path(pathStr, self.MAN_COLOR, "manPath");
+			return self.path(pathStr, "man");
 		};
 	}(this);
 	this.womanPath = function(self) {
 		return function(pathStr) {
-			return self.path(pathStr, self.WOMAN_COLOR, "womanPath");
+			return self.path(pathStr, "woman");
 		};
 	}(this);
 
 	this.startPosFigure = function(figure, coords) {
 		this.positionFigure(figure, coords.x, coords.y, coords.angle);
-		this.defaultFigureLook(figure);
-		figure.attr({opacity: 1});
+		figure.removeClass("straightBeatFigure");
+		figure.removeClass("invisible");
+		// figure.attr({opacity: 1});
 	}
 
 	this.startPosition = function(leftCoords, rightCoords, manPosition) {
@@ -519,24 +525,5 @@ function DanceAnimation(id) {
 			paths.womanPath = this.womanPath(leftPath);
 		}
 	}
-
-	// deprecated
-	this.commonAnimation = function(seconds, manPosition, leftPath, rightPath, times, direction, dontClear) {
-		if (!dontClear) {
-			this.clearPaths();
-		}
-		this.manPosition = manPosition;
-		var paths = this.getPaths(manPosition, leftPath, rightPath);
-		// this.initManWoman();
-
-		var timeLength = seconds * 1000;
-
-		this.timeouts[this.timeouts.length] = new Timer(function(self) {
-			return function() {
-				self.animateMan(paths.manPath, 0, paths.manPath.getTotalLength(), timeLength, times, direction);
-				self.animateWoman(paths.womanPath, 0, paths.womanPath.getTotalLength(), timeLength, times, direction);
-			};
-		}(this));	
-	};
 }
 

@@ -12,7 +12,22 @@ div.center {
 	text-align: center;
 }
 
+svg#animation {
+	border: 1px dashed #DDDDDD;
+}
+
+ul#navigation {
+	display: table-cell;
+}
+
+span#lang {
+	display: table-cell;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 div#menu {
+	display: table;
 	margin-top: 0px;
 }
 
@@ -52,4 +67,10 @@ div.title {
 
 div.title h1 {	
 	font-size: 24px;
+}
+
+.footer {
+	font-size: 11px;
+	color: #222222;
+    font-family: 'Open Sans', sans-serif;
 }

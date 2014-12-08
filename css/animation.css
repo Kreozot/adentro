@@ -1,0 +1,31 @@
+.figure {
+	stroke-width: 2px;
+	stroke: black;
+}
+.manFigure {
+	fill: blue;
+}
+.womanFigure {
+	fill: darkmagenta;
+}
+.straightBeatFigure {
+	stroke-width: 5px;
+	stroke: red;
+}
+
+.path {
+	fill: none;
+	stroke-width: 3px;
+	stroke-miterlimit: 10;
+	stroke-dasharray: 9px 9px;
+}
+.manPath {
+	stroke: blue;
+}
+.womanPath {
+	stroke: darkmagenta;
+}
+
+.invisible {
+	opacity: 0;
+}
