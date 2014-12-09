@@ -2,23 +2,33 @@
 <html xmlns:svg="http://www.w3.org/2000/svg">
 	<head>
 		<meta charset="utf-8">
-		<title>Argentina folklore schemas</title>
+		<title>Adentro</title>
 		<script type="text/javascript" src="./js/thirdparty/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="./js/thirdparty/i18next-1.7.5.min.js"></script>
 		<script type="text/javascript" src="./js/thirdparty/jquery.jplayer.min.js"></script>
+		<script type="text/javascript" src="./js/thirdparty/jquery.cookie.js"></script>
 		<script type="text/javascript" src="./js/thirdparty/jquery.slimmenu.min.js"></script>
-		<script type="text/javascript" src="./js/thirdparty/snap.svg.js"></script>		
-		<script type="text/javascript" src="./js/thirdparty/purl.js"></script>
+		<script type="text/javascript" src="./js/thirdparty/snap.svg-min.js"></script>		
+		<script type="text/javascript" src="./js/thirdparty/URI.min.js"></script>
 		<script type="text/javascript" src="./js/thirdparty/history.js"></script>
 		<script type="text/javascript" src="./js/thirdparty/history.adapter.jquery.js"></script>
+		<script type="text/javascript" src="./js/thirdparty/hopscotch.min.js"></script>
+		<script type="text/javascript" src="./js-min/script.min.js"></script>
+		<!--
+		<script type="text/javascript" src="./js/tour.js"></script>
 		<script type="text/javascript" src="./js/jquery-classes.js"></script>
 		<script type="text/javascript" src="./js/script.js"></script>
 		<script type="text/javascript" src="./js/timing.js"></script>
 		<script type="text/javascript" src="./js/timing-generator.js"></script>
 		<script type="text/javascript" src="./js/navigation.js"></script>
-		<script type="text/javascript" src="./js/player.js"></script>
+		<script type="text/javascript" src="./js/player.js"></script>-->
 		<link type="text/css" href="./skin/jplayer.blue.monday.css" rel="stylesheet" />
 		<link type="text/css" href="./css/danceschema.css" rel="stylesheet" />
 		<link type="text/css" href="./css/slimmenu.css" rel="stylesheet" />
+		<link type="text/css" href="./css/animation.css" rel="stylesheet" />
+		<link type="text/css" href="./css/hopscotch.css" rel="stylesheet" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
 	</head>
 	<body>
 		<div class="center" id="menu">
@@ -52,6 +62,8 @@
 					</ul> -->
 				</li>
 			</ul>
+			<span id="lang">
+			</span>
 		</div>
 
 		<div class="title">
@@ -103,6 +115,8 @@
 		<div class="center" id="schemaDiv"></div>
 		<div class="center" id="animationDiv"></div>
 
+		<script type="text/javascript" src="./js-min/animation.min.js"></script>
+<!--
 		<script type="text/javascript" src="./js/animations/animation.js"></script>
 		<script type="text/javascript" src="./js/animations/animation4.js"></script>
 		<script type="text/javascript" src="./js/animations/animation_gato_style.js"></script>
@@ -113,29 +127,49 @@
 		<script type="text/javascript" src="./js/animations/bailecito.js"></script>
 		<script type="text/javascript" src="./js/animations/escondido.js"></script>
 		<script type="text/javascript" src="./js/animations/remedio.js"></script>
-		<script type="text/javascript" src="./js/animations/zamba.js"></script>
+		<script type="text/javascript" src="./js/animations/zamba.js"></script>-->
+		
+		
 		<script type="text/javascript">
 			jQuery(window).load(function(){
-				$("#" + playerId).jPlayer({
-					swfPath: "/js/thirdparty",
-					supplied: "oga, mp3"
-				});
+				i18n.init({
+					detectLngQS: "lang",
+					cookieName: "lang",
+					debug: true,
+					fallbackLng: "ru"
+				}, function() {
+					$("#" + playerId).jPlayer({
+						swfPath: "/js/thirdparty",
+						supplied: "mp3"
+					});
 
-				History.Adapter.bind(window, 'statechange', loadSchemaByState);
+					History.Adapter.bind(window, 'statechange', loadSchemaByState);
 
-				if (!loadSchemaByUrl()) {
-					showSchema("Chacarera");
-				}
+					if (!loadSchemaByUrl()) {
+						showSchema("Chacarera");
+					}
 
-				$('#navigation').slimmenu({
-				    resizeWidth: '800',
-				    collapserTitle: 'Main Menu',
-				    animSpeed: 'medium',
-				    easingEffect: null,
-				    indentChildren: false,
-				    childrenIndenter: '&nbsp;'
+					$('#navigation').slimmenu({
+					    resizeWidth: '800',
+					    collapserTitle: 'Main Menu',
+					    animSpeed: 'medium',
+					    easingEffect: null,
+					    indentChildren: false,
+					    childrenIndenter: '&nbsp;'
+					});
+
+					if ($.cookie('tourPassed_' + i18n.lng()) != "true") {
+						hopscotch.startTour(tour());
+						$.cookie('tourPassed_' + i18n.lng(), 'true', { expires: 365, path: '/' });
+					}
+
+					showLanguageLinks();
 				});
 			});
 		</script>
+
+		<div class="footer center">
+		Adentro 1.0.0
+		</div>
 	</body>
 </html>
