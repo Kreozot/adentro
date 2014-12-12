@@ -11,10 +11,10 @@ div.center {
 	margin-top: 15px;
 	text-align: center;
 }
-
+/*
 svg#animation {
 	border: 1px dashed #DDDDDD;
-}
+}*/
 
 ul#navigation {
 	display: table-cell;

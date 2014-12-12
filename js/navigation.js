@@ -21,7 +21,7 @@ var schemaParamsMap = {
 	Chacarera: {
 		name: "Chacarera",
 		svgName: "chacarera",
-		music: ["chacarera"],
+		music: ["la_pockoy_y_pancha", "chacarera_de_un_triste"],
 		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
 					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
 					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/]
@@ -173,7 +173,7 @@ var showMusic = function(musicId) {
 var loadSchemaByState = function() {
 	var state = History.getState();
 	if ((state.data) && (state.data.schema)) {
-		loadSchemaByName(state.data.schema);
+		loadSchemaByName(state.data.schema, state.data.animationId, state.data.musicId);
 		return true;
 	}
 	return false;

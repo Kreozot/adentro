@@ -3,32 +3,43 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Adentro</title>
-		<script type="text/javascript" src="./js/thirdparty/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="./js/thirdparty/i18next-1.7.5.min.js"></script>
-		<script type="text/javascript" src="./js/thirdparty/jquery.jplayer.min.js"></script>
-		<script type="text/javascript" src="./js/thirdparty/jquery.cookie.js"></script>
-		<script type="text/javascript" src="./js/thirdparty/jquery.slimmenu.min.js"></script>
-		<script type="text/javascript" src="./js/thirdparty/snap.svg-min.js"></script>		
-		<script type="text/javascript" src="./js/thirdparty/URI.min.js"></script>
-		<script type="text/javascript" src="./js/thirdparty/history.js"></script>
-		<script type="text/javascript" src="./js/thirdparty/history.adapter.jquery.js"></script>
-		<script type="text/javascript" src="./js/thirdparty/hopscotch.min.js"></script>
-		<script type="text/javascript" src="./js-min/script.min.js"></script>
-		<!--
-		<script type="text/javascript" src="./js/tour.js"></script>
-		<script type="text/javascript" src="./js/jquery-classes.js"></script>
-		<script type="text/javascript" src="./js/script.js"></script>
-		<script type="text/javascript" src="./js/timing.js"></script>
-		<script type="text/javascript" src="./js/timing-generator.js"></script>
-		<script type="text/javascript" src="./js/navigation.js"></script>
-		<script type="text/javascript" src="./js/player.js"></script>-->
-		<link type="text/css" href="./skin/jplayer.blue.monday.css" rel="stylesheet" />
-		<link type="text/css" href="./css/danceschema.css" rel="stylesheet" />
-		<link type="text/css" href="./css/slimmenu.css" rel="stylesheet" />
-		<link type="text/css" href="./css/animation.css" rel="stylesheet" />
-		<link type="text/css" href="./css/hopscotch.css" rel="stylesheet" />
-		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-		<link rel="icon" href="/favicon.ico" type="image/x-icon">
+		
+		<!-- build:css css/min.css -->
+		<link type="text/css" href="css/jplayer.blue.monday.css" rel="stylesheet" />
+		<link type="text/css" href="css/danceschema.css" rel="stylesheet" />
+		<link type="text/css" href="css/slimmenu.css" rel="stylesheet" />
+		<link type="text/css" href="css/animation.css" rel="stylesheet" />
+		<link type="text/css" href="css/hopscotch.css" rel="stylesheet" />
+		<!-- /build -->
+
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+		<!-- build:js js/thirdparty.min.js -->
+		<script type="text/javascript" src="js/thirdparty/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="js/thirdparty/i18next-1.7.5.min.js"></script>
+		<script type="text/javascript" src="js/thirdparty/jquery.jplayer.min.js"></script>
+		<script type="text/javascript" src="js/thirdparty/jquery.cookie.js"></script>
+		<script type="text/javascript" src="js/thirdparty/jquery.slimmenu.min.js"></script>
+		<script type="text/javascript" src="js/thirdparty/snap.svg-min.js"></script>		
+		<script type="text/javascript" src="js/thirdparty/URI.min.js"></script>
+		<script type="text/javascript" src="js/thirdparty/history.js"></script>
+		<script type="text/javascript" src="js/thirdparty/history.adapter.jquery.js"></script>
+		<script type="text/javascript" src="js/thirdparty/hopscotch.min.js"></script>-->
+		<!-- /build -->
+
+		<script type="text/javascript" src="js/thirdparty/history.js"></script>
+		<script type="text/javascript" src="js/thirdparty/history.adapter.jquery.js"></script>
+		
+		<!-- build:js js/script.min.js -->
+		<script type="text/javascript" src="js/jquery-classes.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
+		<script type="text/javascript" src="js/timing.js"></script>
+		<script type="text/javascript" src="js/timing-generator.js"></script>
+		<script type="text/javascript" src="js/navigation.js"></script>
+		<script type="text/javascript" src="js/player.js"></script>
+		<script type="text/javascript" src="js/tour.js"></script>
+		<!-- /build -->
 	</head>
 	<body>
 		<div class="center" id="menu">
@@ -52,7 +63,7 @@
 				</li>
 				<li><a href="javascript:showSchema('Zamba')">Zamba</a></li>
 				<li><a href="javascript:showSchema('Gato')">Gato</a></li>
-				<!-- <li><a href="javascript:showSchema('Caramba')">Caramba</a></li> -->
+				<li><a href="javascript:showSchema('Caramba')">Caramba</a></li>
 				<li><a href="javascript:showSchema('Bailecito')">Bailecito</a></li>
 				<li><a href="javascript:showSchema('Escondido')">Escondido</a></li>
 				<li>
@@ -115,20 +126,19 @@
 		<div class="center" id="schemaDiv"></div>
 		<div class="center" id="animationDiv"></div>
 
-		<script type="text/javascript" src="./js-min/animation.min.js"></script>
-<!--
-		<script type="text/javascript" src="./js/animations/animation.js"></script>
-		<script type="text/javascript" src="./js/animations/animation4.js"></script>
-		<script type="text/javascript" src="./js/animations/animation_gato_style.js"></script>
-		<script type="text/javascript" src="./js/animations/gato.js"></script>
-		<script type="text/javascript" src="./js/animations/chacarera.js"></script>
-		<script type="text/javascript" src="./js/animations/chacarera4.js"></script>
-		<script type="text/javascript" src="./js/animations/chacareraCadena.js"></script>
-		<script type="text/javascript" src="./js/animations/bailecito.js"></script>
-		<script type="text/javascript" src="./js/animations/escondido.js"></script>
-		<script type="text/javascript" src="./js/animations/remedio.js"></script>
-		<script type="text/javascript" src="./js/animations/zamba.js"></script>-->
-		
+		<!-- build:js js/animation.min.js -->
+		<script type="text/javascript" src="js/animations/animation.js"></script>
+		<script type="text/javascript" src="js/animations/animation4.js"></script>
+		<script type="text/javascript" src="js/animations/animation_gato_style.js"></script>
+		<script type="text/javascript" src="js/animations/gato.js"></script>
+		<script type="text/javascript" src="js/animations/chacarera.js"></script>
+		<script type="text/javascript" src="js/animations/chacarera4.js"></script>
+		<script type="text/javascript" src="js/animations/chacareraCadena.js"></script>
+		<script type="text/javascript" src="js/animations/bailecito.js"></script>
+		<script type="text/javascript" src="js/animations/escondido.js"></script>
+		<script type="text/javascript" src="js/animations/remedio.js"></script>
+		<script type="text/javascript" src="js/animations/zamba.js"></script>
+		<!-- /build -->
 		
 		<script type="text/javascript">
 			jQuery(window).load(function(){
@@ -169,7 +179,7 @@
 		</script>
 
 		<div class="footer center">
-		Adentro 1.0.0
+		Adentro 1.0.1. Created by Sergey Sharov.
 		</div>
 	</body>
 </html>

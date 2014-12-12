@@ -120,6 +120,7 @@ function ZambaSimpleAnimation(id) {
 		var secondPart = 3 / times;
 		this.mediaVueltaElement.setAngle(-45);
 
+		this.clearPaths();
 		this.mediaVueltaElement.drawPath(manPosition);
 		this.coronacionElement.drawPath((manPosition === "left") ? "right" : "left");
 		this.mediaVueltaElement.startAnimation(seconds * firstPart, times * firstPart);

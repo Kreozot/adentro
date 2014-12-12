@@ -21,7 +21,7 @@ var tour = function() {
         content: i18n.t("tour.music"),
         target: "#musicLinks>select",
         zindex: 9999,
-        placement: "right"
+        placement: "bottom"
       },
       {
         title: i18n.t("tour.schema_title"),
