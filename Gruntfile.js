@@ -3,6 +3,21 @@ module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		secret: grunt.file.readJSON('secret.json'),
+		environments: {
+			production: {
+				options: {
+					host: '<%= secret.production.host %>',
+					username: '<%= secret.production.username %>',
+					password: '<%= secret.production.password %>',
+					port: '<%= secret.production.port %>',
+					deploy_path: '/public_html',
+					local_path: 'build/',
+					current_symlink: 'current',
+					debug: true
+				}
+			}
+		},
 		uglify: {
 			build: {
 				files: {
@@ -33,7 +48,7 @@ module.exports = function(grunt) {
 		concat: {
 			build: {
 				files: {
-					'build/js/thirdparty.min.js': [
+					'build/js/thirdparty/thirdparty.min.js': [
 						'js/thirdparty/jquery-2.1.1.min.js',
 						'js/thirdparty/i18next-1.7.5.min.js',
 						'js/thirdparty/jquery.jplayer.min.js',
@@ -73,8 +88,8 @@ module.exports = function(grunt) {
 					mode: 'deflate'
 				},
 				files: [
-      				{expand: true, src: ['js-min/*.min.js'], dest: './', ext: '.min.js.gz'},
-      				{expand: true, src: ['css-min/*.css'], dest: './', ext: '.css.gz'},
+      				{expand: true, src: ['build/js/**/*.min.js'], dest: './', ext: '.min.js.gz'},
+      				{expand: true, src: ['build/css/*.css'], dest: './', ext: '.css.gz'},
 				]
 			}
 		},
@@ -122,6 +137,7 @@ module.exports = function(grunt) {
 							'locales/**/*',
 							'favicon.ico',
 							'js/thirdparty/history.js',
+							'js/thirdparty/*.swf',
 							'js/thirdparty/history.adapter.jquery.js'
 						],
 						dest: 'build/'
@@ -164,6 +180,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-xmlmin');
 	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-processhtml');
+	grunt.loadNpmTasks('grunt-ssh-deploy');
 
 	grunt.registerMultiTask('lame', 'Convert MP3 files to web-friendly quality using Lame', function() {
 		grunt.log.writeln('Conversion started...');
@@ -215,5 +232,6 @@ module.exports = function(grunt) {
 		'rename:convertmp3'
 	]);
 	grunt.registerTask('default', ['build']);
+	grunt.registerTask('deploy', ['ssh_deploy:production']);
 
 };

@@ -28,7 +28,7 @@ var music = [
 		file: './music/caramba/el_caramba.mp3',
 		schema: {
 			"#start_1": 1.7,
-			"giro": 11,
+			"giro": 11.3,
 			"contraGiro": 15.8,
 			"mediaVuelta": 20.9,
 			"giro2": 25.6,
@@ -40,7 +40,7 @@ var music = [
 			"coronacion": 53.5,
 			"#pause_2": 57.2,
 			"#start_2": 59.6,
-			"giro_2": 68.7,
+			"giro_2": 69,
 			"contraGiro_2": 73.4,
 			"mediaVuelta_2": 78.2,
 			"giro2_2": 83.2,
@@ -382,7 +382,7 @@ var music = [
 		file: './music/zamba/el_beso.mp3',
 		schema: {
 		    "#start_1": 2,
-		    "vuelta": 16.4,
+		    "vuelta": 16.7,
 		    "arresto": 31.4,
 		    "mediaVuelta": 39.1,
 		    "arrestoDoble": 46.5,
@@ -391,14 +391,14 @@ var music = [
 		    "mediaVueltaCoronacion": 77,
 		    "#pause_2": 83.7,
 		    "#start_2": 88.3,
-		    "vuelta_2": 101.5,
+		    "vuelta_2": 101.7,
 		    "arresto_2": 116.5,
 		    "mediaVuelta_2": 124.2,
 		    "arrestoDoble_2": 131.9,
 		    "mediaVuelta2_2": 146.9,
 		    "arresto2_2": 154.7,
 		    "mediaVueltaCoronacion_2": 162,
-		    "#end": 168.3
+		    "#end": 168.4
 		}
 	}
 ];

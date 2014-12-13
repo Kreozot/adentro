@@ -138,10 +138,6 @@ function Chacarera4Animation(id) {
 		this.zapateoElement2.startAnimation(seconds, times);
 	};
 
-	this.mediaVuelta = function(seconds, manPosition, times) {
-		this.mediaVueltaElement.fullAnimation(seconds, times, manPosition);
-	};
-
 	this.coronacion = function(seconds, manPosition, times) {
 		this.coronacionElement.fullAnimation(seconds, times, manPosition);
 	};
