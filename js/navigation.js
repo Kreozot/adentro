@@ -2,7 +2,14 @@ var schemaParamsMap = {
 	Zamba: {
 		name: "Zamba",
 		svgName: "zamba",
-		music: ["zamba"],
+		music: ["el_beso", "zamba_cantora"],
+		animation: [{id: "classic", name: "ZambaAnimation", title: "animation_links.common"},
+					{id: "simple", name: "ZambaSimpleAnimation", title: "animation_links.simple"}]
+	},
+	ZambaAlegre: {
+		name: "Zamba Alegre",
+		svgName: "zamba_alegre",
+		music: ["zamba_alegre"],
 		animation: [{id: "classic", name: "ZambaAnimation", title: "animation_links.common"},
 					{id: "simple", name: "ZambaSimpleAnimation", title: "animation_links.simple"}]
 	},
@@ -10,6 +17,12 @@ var schemaParamsMap = {
 		name: "Gato",
 		svgName: "gato",
 		music: ["gato"],
+		animation: "GatoAnimation"
+	},
+	GatoCuyano: {
+		name: "Gato Cuyano",
+		svgName: "gato_cuyano",
+		music: ["gato_cuyano"],
 		animation: "GatoAnimation"
 	},
 	Caramba: {
@@ -29,7 +42,7 @@ var schemaParamsMap = {
 	Chacarera6: {
 		name: "Chacarera on 6",
 		svgName: "chacarera_6",
-		music: ["chacarera_6"],
+		music: ["la_penadora", "la_baguala"],
 		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
 					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
 					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/]
@@ -45,7 +58,7 @@ var schemaParamsMap = {
 	ChacareraDoble6: {
 		name: "Chacarera doble on 6",
 		svgName: "chacarera_doble_6",
-		music: ["chacarera_doble_6_pampa_de_los_guanacos"/*, "chacarera_doble_6_anorazas"*/],
+		music: ["chacarera_doble_6_pampa_de_los_guanacos", "chacarera_doble_6_anorazas"],
 		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
 					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
 					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/]

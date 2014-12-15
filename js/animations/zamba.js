@@ -17,6 +17,7 @@ function ZambaAnimation(id) {
 		{left: "m 40,160 c 0,40 160,100 260,100 180,0 100,-200 20,-120",
 		right: "M 560,160 C 560,120 400,60 300,60 120,60 200,260 280,180"});
 
+	this.vueltaGato = this.vuelta;
 
 	this.vuelta = function(seconds, manPosition, times) {
 		var partSeconds = seconds / 2;
@@ -30,6 +31,10 @@ function ZambaAnimation(id) {
 		this.mediaVueltaElement.startAnimation(partSeconds, partTimes);
 		this.mediaVueltaToArrestoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds);
 	};
+
+	// this.vueltaGato = function(seconds, manPosition, times) {
+	// 	ZambaAnimation.superclass.vuelta.apply(seconds, manPosition, times);
+	// };
 
 	this.mediaVuelta = function(seconds, manPosition, times) {
 		this.mediaVueltaToArrestoElement.setAngle(-45);

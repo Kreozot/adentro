@@ -1,4 +1,5 @@
 var music = [
+	// Gato
 	{
 		id: "gato",
 		title: "Chaqueсo Palavecino - Gatito Pa' Don Lucas",
@@ -22,6 +23,15 @@ var music = [
 			"#end": 93.2
 		}
 	},
+	// Gato Cuyano
+	{
+		id: "gato_cuyano",
+		title: "Anibal Arias - El Correcto",
+		file: './music/gato_cuyano/el_correcto.mp3',
+		schema: {
+		}
+	},
+	// Caramba
 	{
 		id: "caramba",
 		title: 'El Caramba',
@@ -53,6 +63,7 @@ var music = [
 			"#end": 115.3
 		}
 	},
+	// Chacarera simple 8
 	{
 		id: "la_pockoy_y_pancha",
 		title: 'La pockoy y pancha',
@@ -107,8 +118,9 @@ var music = [
 			"#end": 137.9
 		}
 	},
+	// Chacarera simple 6
 	{
-		id: "chacarera_6",
+		id: "la_penadora",
 		title: 'La Penadora',
 		file: './music/chacarera_6/la_penadora.mp3',
 		schema: {
@@ -134,6 +146,14 @@ var music = [
 			"#end": 130
 		}
 	},
+	{
+		id: "la_baguala",
+		title: 'La Baguala',
+		file: './music/chacarera_6/la_baguala.mp3',
+		schema: {
+		}
+	},
+	// Chacarera doble 8
 	{
 		id: "chacarera_doble_el_olvidao",
 		title: 'Nestor Garnica - El olvidao',
@@ -204,6 +224,7 @@ var music = [
 			"#end": 176.3
 		}
 	},
+	// Chacarera doble 6
 	{
 		id: "chacarera_doble_6_pampa_de_los_guanacos",
 		title: 'Los Reynoso - Pampa de los guanacos',
@@ -246,6 +267,7 @@ var music = [
 		schema: {
 		}
 	},
+	// Bailecito
 	{
 		id: "bailecito",
 		title: 'Abel Figueroa - Toda la noche',
@@ -283,6 +305,7 @@ var music = [
 			"#end": 153.8
 		}
 	},
+	// Escondido
 	{
 		id: "escondido",
 		title: 'Tamara Castro - Huaico Hondo',
@@ -314,6 +337,7 @@ var music = [
 			"#end": 138.6
 		}
 	},
+	// Remedio
 	{
 		id: "remedio",
 		title: 'Remedio Norteno',
@@ -345,6 +369,7 @@ var music = [
 			"#end": 144.8
 		}
 	},
+	// Remedio atamisqueno
 	{
 		id: "remedio_atamisqueno",
 		title: 'Waldo Belloso - Remedio Atamisqueno',
@@ -376,8 +401,9 @@ var music = [
 			"#end": 144.8
 		}
 	},
+	// Zamba
 	{
-		id: "zamba",
+		id: "el_beso",
 		title: 'Zamba',
 		file: './music/zamba/el_beso.mp3',
 		schema: {
@@ -399,6 +425,39 @@ var music = [
 		    "arresto2_2": 154.7,
 		    "mediaVueltaCoronacion_2": 162,
 		    "#end": 168.4
+		}
+	},
+	{
+		id: "zamba_cantora",
+		title: 'Abel Figueroa - Zamba Cantora',
+		file: './music/zamba/zamba_cantora.mp3',
+		schema: {
+		}
+	},
+	// Zamba Alegre
+	{
+		id: "zamba_alegre",
+		title: 'Toсo Rearte - La Zamba Alegre',
+		file: './music/zamba_alegre/la_zamba_alegre.mp3',
+		schema: {
+			"#start_1": 5.2,
+			"vuelta": 20.2,
+			"arrestoDoble": 36.5,
+			"vueltaGato": 51.9,
+			"zapateo": 61.5,
+			"mediaVuelta": 69.3,
+			"arresto": 78.1,
+			"mediaVueltaCoronacion": 86.7,
+			"#pause_2": 95.3,
+			"#start_2": 96.3,
+			"vuelta_2": 116.3,
+			"arrestoDoble_2": 132.6,
+			"vueltaGato_2": 148,
+			"zapateo_2": 157.8,
+			"mediaVuelta_2": 165.9,
+			"arresto_2": 175,
+			"mediaVueltaCoronacion_2": 183.3,
+			"#end": 191.9
 		}
 	}
 ];
