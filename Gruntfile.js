@@ -7,10 +7,10 @@ module.exports = function(grunt) {
 		environments: {
 			production: {
 				options: {
-					host: '<%= secret.production.host %>',
-					username: '<%= secret.production.username %>',
-					password: '<%= secret.production.password %>',
-					port: '<%= secret.production.port %>',
+					host: '<%= secret.ssh.host %>',
+					username: '<%= secret.ssh.username %>',
+					password: '<%= secret.ssh.password %>',
+					port: '<%= secret.ssh.port %>',
 					deploy_path: '/public_html',
 					local_path: 'build/',
 					current_symlink: 'current',
@@ -166,6 +166,18 @@ module.exports = function(grunt) {
 					}
 				]
 			}
+		},
+		'ftp-deploy': {
+			production: {
+				auth: {
+					host: '<%= secret.ftp.host %>',
+					port: '<%= secret.ftp.port %>',
+					authPath: 'secret.json',
+					authKey: 'ftpkey'
+				},
+				src: 'build/',
+				dest: 'public_html/'
+			}
 		}
 	});
 
@@ -180,7 +192,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-xmlmin');
 	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-processhtml');
-	grunt.loadNpmTasks('grunt-ssh-deploy');
+	// grunt.loadNpmTasks('grunt-ssh-deploy');
+	grunt.loadNpmTasks('grunt-ftp-deploy');
 
 	grunt.registerMultiTask('lame', 'Convert MP3 files to web-friendly quality using Lame', function() {
 		grunt.log.writeln('Conversion started...');
@@ -214,7 +227,6 @@ module.exports = function(grunt) {
 		});
 	});
 
-	// Default task(s).
 	grunt.registerTask('build', [
 		'clean:build', 
 		'uglify:build', 
@@ -232,6 +244,6 @@ module.exports = function(grunt) {
 		'rename:convertmp3'
 	]);
 	grunt.registerTask('default', ['build']);
-	grunt.registerTask('deploy', ['ssh_deploy:production']);
+	grunt.registerTask('deploy', ['ftp-deploy:production']);
 
 };
