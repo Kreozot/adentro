@@ -32,9 +32,18 @@ function ZambaAnimation(id) {
 		this.mediaVueltaToArrestoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds);
 	};
 
-	// this.vueltaGato = function(seconds, manPosition, times) {
-	// 	ZambaAnimation.superclass.vuelta.apply(seconds, manPosition, times);
-	// };
+	this.zapateoZarandeo = function(seconds, manPosition, times) {
+		this.clearPaths();
+		this.zarandeoElement.drawPath(getOppositePosition(manPosition));
+		var partSeconds = seconds * 2 / 7;
+		this.zarandeoElement.startAnimation(partSeconds, 2, this.DIRECTION_FORWARD, 0, 0, 0.5);
+		this.zarandeoElement.startAnimation(partSeconds, 2, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
+		this.zarandeoElement.startAnimation(partSeconds, 2, this.DIRECTION_FORWARD, partSeconds * 2, 0, 0.5);
+		this.zarandeoElement.startAnimation(partSeconds, 2, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
+
+		this.zapateoElement.drawPath(manPosition);
+		this.zapateoElement.startAnimation(seconds, times);
+	};
 
 	this.mediaVuelta = function(seconds, manPosition, times) {
 		this.mediaVueltaToArrestoElement.setAngle(-45);
