@@ -73,4 +73,29 @@ div.title h1 {
 	font-size: 11px;
 	color: #222222;
     font-family: 'Open Sans', sans-serif;
+    vertical-align: middle;
+}
+
+.footerinfo {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.social {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.social a {
+	width: 24px;
+	height: 24px;
+    display: inline-block;
+}
+
+.facebook {
+	background: url('../img/facebook.png') no-repeat 0 top;
+}
+
+.twitter {
+	background: url('../img/twitter.png') no-repeat 0 top;
 }
