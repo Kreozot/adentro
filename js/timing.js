@@ -448,7 +448,7 @@ var music = [
 			"mediaVuelta": 69.3,
 			"arresto": 78.1,
 			"mediaVueltaCoronacion": 86.7,
-			"#pause_2": 94.6,
+			"#pause_2": 94.5,
 			"#start_2": 96.3,
 			"vuelta_2": 116.3,
 			"arrestoDoble_2": 132.6,
