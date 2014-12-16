@@ -95,6 +95,11 @@ module.exports = function(grunt) {
 		},
 		processhtml: {
 			build: {
+				options: {
+					data: {
+						version: '<%= pkg.version %>'
+					}
+				},
 				files: {
 					'build/index.html': 'index.html'
 				}
