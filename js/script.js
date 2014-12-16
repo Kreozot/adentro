@@ -203,10 +203,11 @@ var showAnimationLinks = function(animationClassDefs, animationId) {
 
 /**
  * [showMusicLinks Отобразить ссылки на музыкальные композиции]
- * @param  {[Object]} musicIds       [Массив идентификаторов композиций]
- * @param  {[String]} currentMusicId [Идентификатор текущей композиции]
+ * @param  {[Object]} musicIds         [Массив идентификаторов композиций]
+ * @param  {[String]} currentMusicId   [Идентификатор текущей композиции]
+ * @param  {[Boolean]} showEmptyTiming [Показывать композиции, не имеющие разметки тайминга]
  */
-var showMusicLinks = function(musicIds, currentMusicId) {
+var showMusicLinks = function(musicIds, currentMusicId, showEmptyTiming) {
 	if (musicIds.length <= 1) {
 		$("#musicLinks").html("");
 		return;
@@ -214,13 +215,20 @@ var showMusicLinks = function(musicIds, currentMusicId) {
 
 	var getMusicLinks = function() {
 		var result = 'Composition: <select id="musicSelect">';
+		var count = 0;
 		for (var i = 0; i < musicIds.length; i++) {
-			if (musicIds[i] === currentMusicId) {
-				result += '<option selected="selected" value="' + musicIds[i] + '">' + 
-						music.get(musicIds[i]).title + '</option>';
-			} else {
-				result += '<option value="' + musicIds[i] + '">' + music.get(musicIds[i]).title + '</option>';
+			if (!jQuery.isEmptyObject(music.get(musicIds[i]).schema) || showEmptyTiming) {
+				if (musicIds[i] === currentMusicId) {
+					result += '<option selected="selected" value="' + musicIds[i] + '">' + 
+							music.get(musicIds[i]).title + '</option>';
+				} else {
+					result += '<option value="' + musicIds[i] + '">' + music.get(musicIds[i]).title + '</option>';
+				}
+				count++;
 			}
+		}
+		if (count <= 1) {
+			return "";
 		}
 		result += "</select>";
 		return result;
@@ -332,7 +340,7 @@ var loadSchemaEditor = function(name, svgName, musicIds, musicId) {
 				.unbind($.jPlayer.event.pause);
 
 		musicId = musicId ? musicId : musicIds[0];
-		showMusicLinks(musicIds, musicId);
+		showMusicLinks(musicIds, musicId, true);
 		var musicSchema = music.get(musicId);
 
 		loadMusicSchema(musicSchema);
