@@ -3,9 +3,9 @@ var playerSelector = "#" + playerId;
 
 /**
  * [mod Дробная часть от деления]
- * @param  {[Number]} upVal   [Числитель]
- * @param  {[Number]} downVal [Знаменатель]
- * @return {[Number]}         [Дробная часть от деления]
+ * @param  {Number} upVal   [Числитель]
+ * @param  {Number} downVal [Знаменатель]
+ * @return {Number}         [Дробная часть от деления]
  */
 var mod = function(upVal, downVal) {
 	divVal = upVal / downVal;
@@ -15,7 +15,7 @@ var mod = function(upVal, downVal) {
 
 /**
  * [getSvgSchemaDom Получить ссылку на dom svg-схемы]
- * @return {[type]} [description]
+ * @return  {String}  [Ссылка на dom svg-схемы]
  */
 var getSvgSchemaDom = function() {
 	var svgSchemaObject = document.getElementById('schema');
@@ -29,7 +29,7 @@ var getSvgSchemaDom = function() {
 
 /**
  * [hideCurrentElementMarkOnSchema Спрятать отображение текущего элемента на схеме]
- * @param  {[type]} svgSchemaDom [Ссылка на dom svg-схемы]
+ * @param  {String} svgSchemaDom [Ссылка на dom svg-схемы]
  */
 var hideCurrentElementMarkOnSchema = function(svgSchemaDom) {
 	if (!svgSchemaDom) {
@@ -41,7 +41,7 @@ var hideCurrentElementMarkOnSchema = function(svgSchemaDom) {
 
 /**
  * [hideCurrentElement Спрятать отображение и визуализацию текущего элемента]
- * @param  {[type]} svgSchemaDom [Ссылка на dom svg-схемы]
+ * @param  {String} svgSchemaDom [Ссылка на dom svg-схемы]
  */
 var hideCurrentElement = function(svgSchemaDom) {
 	hideCurrentElementMarkOnSchema(svgSchemaDom);
@@ -51,8 +51,8 @@ var hideCurrentElement = function(svgSchemaDom) {
 
 /**
  * [markCurrentElementOnSchema Выделение текущего элемента на SVG-схеме]
- * @param  {[type]} element 	 [Идентификатор элемента]
- * @param  {[type]} svgSchemaDom [Ссылка на dom svg-схемы]
+ * @param  {String} element 	 [Идентификатор элемента]
+ * @param  {String} svgSchemaDom [Ссылка на dom svg-схемы]
  */
 var markCurrentElementOnSchema = function(element, svgSchemaDom) {
 	if (!svgSchemaDom) {
@@ -74,9 +74,9 @@ var markCurrentElementOnSchema = function(element, svgSchemaDom) {
 
 /**
  * [showCurrentElement Отображение текущего элемента]
- * @param  {[type]} element 	 [Идентификатор элемента]
- * @param  {[type]} seconds    	 [Длительность в секундах]
- * @param  {[type]} svgSchemaDom [Ссылка на dom svg-схемы]
+ * @param  {String} element 	 [Идентификатор элемента]
+ * @param  {Number} seconds    	 [Длительность в секундах]
+ * @param  {String} svgSchemaDom [Ссылка на dom svg-схемы]
  */
 var showCurrentElement = function(element, seconds, svgSchemaDom) {
 	if (!svgSchemaDom) {
@@ -162,9 +162,9 @@ var initSvgSchemaEditor = function() {
 
 /**
  * [getAnimationClassDef Получить описание определённого класса анимации из массива]
- * @param  {[type]} animationClassDefs [Массив описаний классов анимаций (из navigation.js)]
- * @param  {[type]} animationId        [Идентификатор нужного класса]
- * @return {[type]}                    [Описание класса в виде {id, name, title}]
+ * @param  {Object} animationClassDefs [Массив описаний классов анимаций (из navigation.js)]
+ * @param  {String} animationId        [Идентификатор нужного класса]
+ * @return {Object}                    [Описание класса в виде {id, name, title}]
  */
 var getAnimationClassDef = function(animationClassDefs, animationId) {
 	for (var i = 0; i < animationClassDefs.length; i++) {
@@ -177,8 +177,8 @@ var getAnimationClassDef = function(animationClassDefs, animationId) {
 
 /**
  * [showAnimationLinks Показать ссылки на варианты анимации]
- * @param  {[type]} animationClassDefs [Массив описаний анимаций]
- * @param  {[type]} animationId        [Идентификатор текущей анимации]
+ * @param  {Object} animationClassDefs [Массив описаний анимаций]
+ * @param  {String} animationId        [Идентификатор текущей анимации]
  */
 var showAnimationLinks = function(animationClassDefs, animationId) {
 	var currentClassDef = getAnimationClassDef(animationClassDefs, animationId);
@@ -203,9 +203,9 @@ var showAnimationLinks = function(animationClassDefs, animationId) {
 
 /**
  * [showMusicLinks Отобразить ссылки на музыкальные композиции]
- * @param  {[Object]} musicIds         [Массив идентификаторов композиций]
- * @param  {[String]} currentMusicId   [Идентификатор текущей композиции]
- * @param  {[Boolean]} showEmptyTiming [Показывать композиции, не имеющие разметки тайминга]
+ * @param  {Object} musicIds         [Массив идентификаторов композиций]
+ * @param  {String} currentMusicId   [Идентификатор текущей композиции]
+ * @param  {Boolean} showEmptyTiming [Показывать композиции, не имеющие разметки тайминга]
  */
 var showMusicLinks = function(musicIds, currentMusicId, showEmptyTiming) {
 	if (musicIds.length <= 1) {
@@ -276,7 +276,7 @@ var showLanguageLinks = function() {
 
 /**
  * [loadAnimation Загрузка анимации]
- * @param  {[type]} animationClass [Класс анимации]
+ * @param  {Object} animationClass [Класс анимации]
  */
 var loadAnimation = function(animationClass) {
 	$.animation = new window[animationClass]("animation");
@@ -287,12 +287,12 @@ var loadAnimation = function(animationClass) {
 
 /**
  * [loadSchema Загрузка схемы]
- * @param  {[String]} name           Название
- * @param  {[String]} svgName        Имя svg-файла схемы без расширения
- * @param  {[String]} musicIds    	 Массив идентификаторов музыкальных композиций
- * @param  {[String]} musicId    	 Идентификатор музыки
- * @param  {[Object]} animationClass Класс анимации (или список доступных классов)
- * @param  {[String]} animationId    Идентификатор конкретной анимации (если в animationClass пришёл список)
+ * @param  {String} name           Название
+ * @param  {String} svgName        Имя svg-файла схемы без расширения
+ * @param  {String} musicIds    	 Массив идентификаторов музыкальных композиций
+ * @param  {String} musicId    	 Идентификатор музыки
+ * @param  {Object} animationClass Класс анимации (или список доступных классов)
+ * @param  {String} animationId    Идентификатор конкретной анимации (если в animationClass пришёл список)
  */
 var loadSchema = function(name, svgName, musicIds, musicId, animationClass, animationId) {
 	$("#danceName").html(name);
@@ -325,10 +325,10 @@ var loadSchema = function(name, svgName, musicIds, musicId, animationClass, anim
 
 /**
  * [loadSchemaEditor Загрузка редактора тайминга]
- * @param  {[String]} name           Название
- * @param  {[String]} svgName        Имя svg-файла схемы без расширения
- * @param  {[String]} musicIds    	 Массив идентификаторов музыкальных композиций
- * @param  {[String]} musicId    	 Идентификатор музыки
+ * @param  {String} name           Название
+ * @param  {String} svgName        Имя svg-файла схемы без расширения
+ * @param  {String} musicIds    	 Массив идентификаторов музыкальных композиций
+ * @param  {String} musicId    	 Идентификатор музыки
  */
 var loadSchemaEditor = function(name, svgName, musicIds, musicId) {
 	$("#danceName").html(name + " (editor mode)");

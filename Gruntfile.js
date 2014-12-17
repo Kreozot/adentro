@@ -183,6 +183,14 @@ module.exports = function(grunt) {
 				src: 'build/',
 				dest: 'public_html/'
 			}
+		},
+		jsdoc: {
+			build: {
+				src: ['js/*.js'],
+				options: {
+					destination: 'docs'
+				}
+			}
 		}
 	});
 
@@ -199,6 +207,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-processhtml');
 	// grunt.loadNpmTasks('grunt-ssh-deploy');
 	grunt.loadNpmTasks('grunt-ftp-deploy');
+	grunt.loadNpmTasks('grunt-jsdoc');
 
 	grunt.registerMultiTask('lame', 'Convert MP3 files to web-friendly quality using Lame', function() {
 		grunt.log.writeln('Conversion started...');
