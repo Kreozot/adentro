@@ -259,5 +259,6 @@ module.exports = function(grunt) {
 	]);
 	grunt.registerTask('default', ['build']);
 	grunt.registerTask('deploy', ['ftp-deploy:production']);
+	grunt.registerTask('docs', ['jsdoc:build']);
 
 };

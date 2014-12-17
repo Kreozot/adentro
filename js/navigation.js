@@ -90,10 +90,10 @@ var schemaParamsMap = {
 };
 
 /**
- * [loadSchemaByName Загрузить схему]
- * @param  {String} name        [идентификатор схемы]
- * @param  {String} animationId [идентификатор анимации]
- * @param  {String} musicId     [идентификатор композиции]
+ * Загрузить схему
+ * @param  {String} name         Идентификатор схемы
+ * @param  {String} animationId  Идентификатор анимации
+ * @param  {String} musicId      Идентификатор композиции
  */
 var loadSchemaByName = function(name, animationId, musicId) {
 	var schemaParams = schemaParamsMap[name];
@@ -105,9 +105,9 @@ var loadSchemaByName = function(name, animationId, musicId) {
 };
 
 /**
- * [loadSchemaEditorByName Загрузить редактор тайминга]
- * @param  {String} name    [идентификатор схемы]
- * @param  {String} musicId [идентификатор композиции]
+ * Загрузить редактор тайминга
+ * @param  {String} name     Идентификатор схемы
+ * @param  {String} musicId  Идентификатор композиции
  */
 var loadSchemaEditorByName = function(name, musicId) {
 	var schemaParams = schemaParamsMap[name];
@@ -119,9 +119,9 @@ var loadSchemaEditorByName = function(name, musicId) {
 };
 
 /**
- * [getLanguageLink Получить ссылку на текущую страницу с параметром языка]
- * @param  {String} lang [идентификатор языка]
- * @return {String}      [url текущей страницы со всеми параметрами и параметром lang]
+ * Получить ссылку на текущую страницу с параметром языка
+ * @param  {String} lang Идентификатор языка
+ * @return {String}      URL текущей страницы со всеми параметрами и параметром lang
  */
 var getLanguageLink = function(lang) {
 	var uri = new URI();
@@ -131,14 +131,17 @@ var getLanguageLink = function(lang) {
 	return uri.query(newQuery).build();
 };
 
-// Перейти на указанную схему по URL
+/**
+ * Перейти на указанную схему по URL
+ * @param  {String} name Идентификатор схемы
+ */
 var showSchema = function(name) {
 	History.pushState({schema: name}, name + " schema", "?schema=" + name);
 };
 
 /**
- * [showAnimation Переключиться на определённую анимацию]
- * @param  {Number} animationId [идентификатор анимации]
+ * Переключиться на определённую анимацию
+ * @param  {Number} animationId  Идентификатор анимации
  */
 var showAnimation = function(animationId) {
 	var url = new URI();
@@ -159,8 +162,8 @@ var showAnimation = function(animationId) {
 };
 
 /**
- * [showAnimation Переключиться на определённую композицию]
- * @param  {Number} animationId [идентификатор анимации]
+ * Переключиться на определённую композицию
+ * @param  {Number} animationId  Идентификатор анимации
  */
 var showMusic = function(musicId) {
 	var url = new URI();
@@ -180,8 +183,8 @@ var showMusic = function(musicId) {
 };
 
 /**
- * [loadSchemaByState Загрузить схему через History]
- * @return {Boolean} [true если схема была загружена]
+ * Загрузить схему через History
+ * @return {Boolean} True если схема была загружена
  */
 var loadSchemaByState = function() {
 	var state = History.getState();
@@ -193,8 +196,8 @@ var loadSchemaByState = function() {
 };
 
 /**
- * [loadSchemaByUrl Загрузить схему из URL]
- * @return {Boolean} [true если схема была загружена]
+ * Загрузить схему из URL
+ * @return {Boolean} True если схема была загружена
  */
 var loadSchemaByUrl = function() {
 	var url = new URI();
