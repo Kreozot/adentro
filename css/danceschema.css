@@ -84,6 +84,7 @@ div.title h1 {
 .social {
     display: inline-block;
     vertical-align: middle;
+    margin-right: 10px;
 }
 
 .social a {
