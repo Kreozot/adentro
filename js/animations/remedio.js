@@ -72,6 +72,14 @@ function RemedioAnimation(id) {
 		var manEsquinaPath = this.manPath(manPaths.esquinaPath);
 		var womanEsquinaPath = this.womanPath(womanPaths.esquinaPath);
 
+		if ((manPosition == "left") || (manPosition == "right")) {
+			this.initRotateIcon(50, 50, -45, false);
+			this.initRotateIcon(390, 390, -45, false);
+		} else {
+			this.initRotateIcon(50, 390, -45, false);
+			this.initRotateIcon(390, 50, -45, false);
+		}
+
 		this.initManWoman();
 
 		var timeLength = seconds * 1000;

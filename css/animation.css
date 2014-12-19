@@ -29,3 +29,8 @@
 .invisible {
 	opacity: 0;
 }
+
+.rotationArrows {	
+	fill: black;
+	opacity: 0.2;
+}

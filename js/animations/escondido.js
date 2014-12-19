@@ -137,6 +137,14 @@ function EscondidoAnimation(id) {
 		this.balanceo1Element.drawPath(manPosition, true);
 		this.balanceo2Element.drawPath(manPosition, true);
 
+		if ((manPosition == "left") || (manPosition == "right")) {
+			this.initRotateIcon(50, 220, 0, false);
+			this.initRotateIcon(390, 220, 0, false);
+		} else {
+			this.initRotateIcon(220, 50, 90, false);
+			this.initRotateIcon(220, 390, 90, false);
+		}
+
 		this.balanceo1Element.setAngles(manAngle, womanAngle);
 		this.balanceo2Element.setAngles(manAngle, womanAngle);
 		this.balanceo1Element.easing = mina.easeout;
