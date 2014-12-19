@@ -140,12 +140,18 @@ module.exports = function(grunt) {
 						src: [
 							'img/**/*',
 							'locales/**/*',
-							'favicon.ico',
 							'js/thirdparty/history.js',
 							'js/thirdparty/*.swf',
 							'js/thirdparty/history.adapter.jquery.js'
 						],
 						dest: 'build/'
+					},
+					{
+						expand: true,
+						flatten: true,
+						src: ['favicons/**'],
+						dest: 'build/',
+						filter: 'isFile'
 					}
 				]
 			},
@@ -259,6 +265,6 @@ module.exports = function(grunt) {
 	]);
 	grunt.registerTask('default', ['build']);
 	grunt.registerTask('deploy', ['ftp-deploy:production']);
-	grunt.registerTask('docs', ['jsdoc:build']);
+	grunt.registerTask('deploy', ['jsdoc:build']);
 
 };
