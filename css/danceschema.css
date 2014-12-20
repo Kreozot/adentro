@@ -16,10 +16,16 @@ ul#css3menu1 {
 	display: table-cell;
 }
 
-span#lang {
+div#logo {
+	display: table-cell;
+	width: 50px;
+}
+
+div#lang {
 	display: table-cell;
 	margin-left: 10px;
 	margin-right: 10px;
+	width: 50px;
 }
 
 div#navigation {
