@@ -53,7 +53,6 @@ module.exports = function(grunt) {
 						'js/thirdparty/i18next-1.7.5.min.js',
 						'js/thirdparty/jquery.jplayer.min.js',
 						'js/thirdparty/jquery.cookie.js',
-						'js/thirdparty/jquery.slimmenu.min.js',
 						'js/thirdparty/snap.svg-min.js',
 						'js/thirdparty/URI.min.js',
 						'js/thirdparty/hopscotch.min.js'
@@ -140,8 +139,8 @@ module.exports = function(grunt) {
 						src: [
 							'img/**/*',
 							'locales/**/*',
-							'js/thirdparty/history.js',
 							'js/thirdparty/*.swf',
+							'js/thirdparty/history.js',
 							'js/thirdparty/history.adapter.jquery.js'
 						],
 						dest: 'build/'

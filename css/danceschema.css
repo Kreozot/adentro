@@ -11,12 +11,8 @@ div.center {
 	margin-top: 15px;
 	text-align: center;
 }
-/*
-svg#animation {
-	border: 1px dashed #DDDDDD;
-}*/
 
-ul#navigation {
+ul#css3menu1 {
 	display: table-cell;
 }
 
@@ -26,7 +22,7 @@ span#lang {
 	margin-right: 10px;
 }
 
-div#menu {
+div#navigation {
 	display: table;
 	margin-top: 0px;
 }
