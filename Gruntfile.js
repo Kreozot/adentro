@@ -68,7 +68,7 @@ module.exports = function(grunt) {
 						'css/animation.css',
 						'css/danceschema.css',
 						'css/hopscotch.css',
-						'css/slimmenu.css'
+						'css/menu.css'
 					]
 				}
 			}

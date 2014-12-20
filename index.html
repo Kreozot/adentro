@@ -63,13 +63,13 @@
 						<li>
 							<a href="javascript:showSchema('Chacarera')"><span>Chacarera simple</span></a>
 							<ul>
-								<li><a href="javascript:showSchema('Chacarera6')">Chacarera <nobr>simple on 6</nobr></a></li>
+								<li><a href="javascript:showSchema('Chacarera6')">Chacarera simple on 6</a></li>
 							</ul>
 						</li>
 						<li>
 							<a href="javascript:showSchema('ChacareraDoble')"><span>Chacarera doble</span></a>
 							<ul>
-								<li><a href="javascript:showSchema('ChacareraDoble6')">Chacarera <nobr>doble on 6</nobr></a></li>
+								<li><a href="javascript:showSchema('ChacareraDoble6')">Chacarera doble on 6</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -181,15 +181,6 @@
 					if (!loadSchemaByUrl()) {
 						showSchema("Chacarera");
 					}
-
-					$('#navigation').slimmenu({
-					    resizeWidth: '800',
-					    collapserTitle: 'Main Menu',
-					    animSpeed: 'medium',
-					    easingEffect: null,
-					    indentChildren: false,
-					    childrenIndenter: '&nbsp;'
-					});
 
 					if ($.cookie('tourPassed_' + i18n.lng()) != "true") {
 						hopscotch.startTour(tour());
