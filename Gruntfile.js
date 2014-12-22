@@ -141,6 +141,7 @@ module.exports = function(grunt) {
 							'locales/**/*',
 							'js/thirdparty/*.swf',
 							'js/thirdparty/history.js',
+							'js/thirdparty/history.html4.js',
 							'js/thirdparty/history.adapter.jquery.js'
 						],
 						dest: 'build/'

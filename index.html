@@ -42,6 +42,7 @@
 
 		<script type="text/javascript" src="js/thirdparty/history.js"></script>
 		<script type="text/javascript" src="js/thirdparty/history.adapter.jquery.js"></script>
+		<script type="text/javascript" src="js/thirdparty/history.html4.js"></script>
 		
 		<!-- build:js js/script.min.js -->
 		<script type="text/javascript" src="js/jquery-classes.js"></script>
@@ -175,7 +176,7 @@
 						swfPath: "/js/thirdparty",
 						supplied: "mp3"
 					});
-
+					History.options.html4Mode = true;
 					History.Adapter.bind(window, 'statechange', loadSchemaByState);
 
 					if (!loadSchemaByUrl()) {
