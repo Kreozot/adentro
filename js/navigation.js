@@ -88,6 +88,19 @@ var schemaParamsMap = {
 		animation: "RemedioAnimation"
 	},
 };
+/**
+ * Получить название схемы
+ * @param  {String} schemaId Идентификатор схемы
+ * @return {String}          Название схемы
+ */
+schemaParamsMap.getName = function(schemaId) {
+	var schema = schemaParamsMap[schemaId];
+	if (schema) {
+		return schema.name;
+	} else {
+		return "";
+	}
+};
 
 /**
  * Загрузить схему
@@ -132,11 +145,26 @@ var getLanguageLink = function(lang) {
 };
 
 /**
- * Перейти на указанную схему по URL
- * @param  {String} name Идентификатор схемы
+ * Если IE9 и ниже, то редирект на страницу, иначе - сделать pushState в History
+ * @param  {Object} params Параметры запроса
+ * @param  {String} title  Заголовок страницы
+ * @param  {String} query  Фрагмент URL запроса
  */
-var showSchema = function(name) {
-	History.pushState({schema: name}, name + " schema", "?schema=" + name);
+var pushStateOrRedirect = function(params, title, query) {
+	if (History.isInternetExplorer() && (History.getInternetExplorerMajorVersion() <= 9)) {
+		window.location.href = query;
+	} else {
+		History.pushState(params, title, query);
+	}
+}
+
+/**
+ * Перейти на указанную схему по URL
+ * @param  {String} schemaId Идентификатор схемы
+ */
+var showSchema = function(schemaId) {
+	this.pushStateOrRedirect({schema: schemaId}, 
+		schemaParamsMap.getName(schemaId) + " - Adentro", "?schema=" + schemaId);
 };
 
 /**
@@ -146,16 +174,21 @@ var showSchema = function(name) {
 var showAnimation = function(animationId) {
 	var url = new URI();
 	var params = url.query(true);
-	History.pushState({schema: params.schema, animationId: animationId, musicId: params.musicId}, 
-		name + " - Adentro", 
-		"?schema=" + params.schema + 
-		"&animationId=" + animationId + 
-		(params.musicId ? ("&musicId=" + params.musicId) : ""));
+
+	this.pushStateOrRedirect({schema: params.schema, animationId: animationId, musicId: params.musicId}, 
+			schemaParamsMap.getName(params.schema) + " - Adentro", 
+			"?schema=" + params.schema + 
+			"&animationId=" + animationId + 
+			(params.musicId ? ("&musicId=" + params.musicId) : ""));
 
 	var schemaParams = schemaParamsMap[params.schema];
 	var animationClassDefs = schemaParams.animation;
-	var animationClassDef = getAnimationClassDef(animationClassDefs, animationId);
-	var animationClass = animationClassDef.name;
+	if (typeof animationClassDefs === 'object') {
+		var animationClassDef = getAnimationClassDef(animationClassDefs, animationId);
+		var animationClass = animationClassDef.name;
+	} else {		
+		var animationClass = animationClassDefs;
+	}
 	loadAnimation(animationClass);
 	showAnimationLinks(animationClassDefs, animationId);
 	showLanguageLinks();
@@ -168,11 +201,12 @@ var showAnimation = function(animationId) {
 var showMusic = function(musicId) {
 	var url = new URI();
 	var params = url.query(true);
-	History.pushState({schema: params.schema, animationId: params.animationId, musicId: musicId}, 
-		name + " - Adentro", 
-		"?schema=" + params.schema + 
-		(params.animationId ? ("&animationId=" + params.animationId) : "") + 
-		"&musicId=" + musicId);
+
+	this.pushStateOrRedirect({schema: params.schema, animationId: params.animationId, musicId: musicId}, 
+			schemaParamsMap.getName(params.schema) + " - Adentro", 
+			"?schema=" + params.schema + 
+			(params.animationId ? ("&animationId=" + params.animationId) : "") + 
+			"&musicId=" + musicId);
 
 	var schemaParams = schemaParamsMap[params.schema];
 	var musicIds = schemaParams.music;

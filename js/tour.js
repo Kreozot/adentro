@@ -5,7 +5,7 @@ var tour = function() {
 			{
 				title: i18n.t("tour.navigation_title"),
 				content: i18n.t("tour.navigation"),
-				target: "#navigation>li",
+				target: "#css3menu1>li",
 				zindex: 9999,
 				placement: "bottom"
 			},
