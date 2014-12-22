@@ -51,15 +51,13 @@ ul#css3menu1 a {
 	display: block;
 	vertical-align: middle;
 	text-align: left;
-	/*text-decoration: underline;*/
 	font: 14px Open Sans, Arial, sans-serif;
 	color: #000000;
-	/*cursor: pointer;*/
 	padding: 10px;
 	background-color: #bbb;
 	border-width: 0 0 0 1px;
 	border-style: solid;
-	border-color: #C0C0C0;
+	border-color: #aaa;
 }
 ul#css3menu1 ul li {
 	float: none;
@@ -71,7 +69,6 @@ ul#css3menu1 ul a {
 	border-width: 0;
 	font: 14px Open Sans, Arial, sans-serif;
 	color: #000;
-	/*text-decoration: underline;*/
 }
 ul#css3menu1 li a:hover, ul#css3menu1 li a.pressed {
 	background-color: #aaa;
