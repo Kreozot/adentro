@@ -296,6 +296,14 @@ var loadAnimation = function(animationClass) {
  */
 var loadSchema = function(name, svgName, musicIds, musicId, animationClass, animationId) {
 	$("#danceName").html(name);
+
+/*@cc_on 
+	@if (@_jscript_version < 9)
+		svgName = 'compiled/' + svgName;
+		alert('1');
+	@end 
+@*/
+// svgName = 'compiled/' + svgName;
 	$("#schemaDiv").html('<object data="svg/' + svgName + '.svg" type="image/svg+xml" id="schema"></object>');
 	$("#animationDiv").html('<svg id="animation" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>');
 

@@ -49,7 +49,6 @@ module.exports = function(grunt) {
 			build: {
 				files: {
 					'build/js/thirdparty/thirdparty.min.js': [
-						'js/thirdparty/jquery-2.1.1.min.js',
 						'js/thirdparty/i18next-1.7.5.min.js',
 						'js/thirdparty/jquery.jplayer.min.js',
 						'js/thirdparty/jquery.cookie.js',
@@ -121,6 +120,11 @@ module.exports = function(grunt) {
 				src: 'music/*/*.mp3'
 			}
 		},
+		msxsl: {
+			build: {
+				src: 'svg/*.svg'
+			}
+		},
 		clean: {
 			build: {
 				src: [
@@ -139,7 +143,10 @@ module.exports = function(grunt) {
 						src: [
 							'img/**/*',
 							'locales/**/*',
+							'svg/compiled/*',
 							'js/thirdparty/*.swf',
+							'js/thirdparty/jquery-1.11.2.min.js',
+							'js/thirdparty/jquery-2.1.3.min.js',
 							'js/thirdparty/history.js',
 							'js/thirdparty/history.html4.js',
 							'js/thirdparty/history.adapter.jquery.js'
@@ -247,10 +254,44 @@ module.exports = function(grunt) {
 		});
 	});
 
+	grunt.registerMultiTask('msxsl', 'Convert XML files with XSL stylesheet using MSXSL', function() {
+		grunt.log.writeln('Conversion started...');
+		var exec = require('child_process').exec;
+		var done = grunt.task.current.async();
+
+		var i = 0;
+		this.files.forEach(function(file) {
+			grunt.log.writeln('Processing ' + file.src.length + ' files.');
+
+			file.src.forEach(function(f) { 
+				var fileName = f.split("/").pop();
+				exec('"./tools/msxsl.exe" ' + f + ' svg/schema.xsl -o svg/compiled/' + fileName,
+					function(error, stdout, stderr) {
+						if (stdout && (stdout.length > 0)) {
+							grunt.log.writeln('stdout: ' + stdout);
+						}
+						if (stderr && (stderr.length > 0)) {
+							grunt.log.writeln('stderr: ' + stderr);
+						}	
+						if (error !== null) {
+							grunt.log.writeln('exec error: ' + error);
+						}
+						i++;
+						grunt.log.write('+');
+						if (i >= file.src.length) {
+							done(error);
+						}
+					}
+				);
+			});
+		});
+	});
+
 	grunt.registerTask('build', [
 		'clean:build', 
 		'uglify:build', 
 		'cssmin:build',
+		'msxsl:build',
 		'xmlmin:build',
 		'processhtml:build',
 		'htmlmin:build',
