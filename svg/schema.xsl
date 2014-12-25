@@ -21,6 +21,7 @@
 		<!-- Ширина одного такта в пикселях -->
 		<xsl:param name="oneTimeWidth" />
 
+		<!-- Смещение элемента после разделителя части -->
 		<xsl:variable name="xOffset">
 			<xsl:choose>
 				<!-- Если до этого был разделитель части -->
@@ -54,10 +55,23 @@
 		    	</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
+
+		<!-- Смещение по горизонтали для подписи -->
+		<xsl:variable name="textOffset">
+			<xsl:choose>
+		    	<xsl:when test="@textOffset">
+					<xsl:value-of select="@textOffset"/>
+		    	</xsl:when>	  
+		    	<xsl:otherwise>
+					<xsl:value-of select="0"/>
+		    	</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+
 		<xsl:if test="@yOffset">
 			<line x1="{$x + ($blockWidth div 2)}" y1="{$y + $blockHeight + 3}" x2="{$x + ($blockWidth div 2)}" y2="{$y + $textTop - 11}" class="text-line"/>
 		</xsl:if>
-    	<text class="element-text" x="{$x + ($blockWidth div 2)}" y="{$y + $textTop}" id="{@id}-text"><xsl:copy-of select="./node()" /></text>
+    	<text class="element-text" x="{$x + ($blockWidth div 2) + $textOffset}" y="{$y + $textTop}" id="{@id}-text"><xsl:copy-of select="./node()" /></text>
 
  		<!-- Передаём обработчику следующий элемент -->
 		<xsl:apply-templates select="./following-sibling::*[1]">
@@ -198,12 +212,24 @@
 						fill: #00EE00;
 					}
 
+					.avance {
+						fill: #00EE00;
+					}
+
 					.entera {
 						fill: #44AAEE;
 					}
 
 					.avanceRetroceso {
 						fill: #93DD22;
+					}
+
+					.esquina {
+						fill: #4488ff;
+					}
+
+					.regreso {
+						fill: #99aaee;
 					}
 				</style>
 			</defs>
