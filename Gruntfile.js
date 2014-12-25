@@ -49,6 +49,7 @@ module.exports = function(grunt) {
 			build: {
 				files: {
 					'build/js/thirdparty/thirdparty.min.js': [
+						'js/thirdparty/jquery-2.1.3.min.js',
 						'js/thirdparty/i18next-1.7.5.min.js',
 						'js/thirdparty/jquery.jplayer.min.js',
 						'js/thirdparty/jquery.cookie.js',
@@ -145,8 +146,6 @@ module.exports = function(grunt) {
 							'locales/**/*',
 							'svg/compiled/*',
 							'js/thirdparty/*.swf',
-							'js/thirdparty/jquery-1.11.2.min.js',
-							'js/thirdparty/jquery-2.1.3.min.js',
 							'js/thirdparty/history.js',
 							'js/thirdparty/history.html4.js',
 							'js/thirdparty/history.adapter.jquery.js'
@@ -291,7 +290,6 @@ module.exports = function(grunt) {
 		'clean:build', 
 		'uglify:build', 
 		'cssmin:build',
-		'msxsl:build',
 		'xmlmin:build',
 		'processhtml:build',
 		'htmlmin:build',
