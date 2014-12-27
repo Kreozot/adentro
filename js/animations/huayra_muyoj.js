@@ -16,9 +16,13 @@ function HuayraMuyojAnimation(id) {
 		{left: "M 50,220 50,50",
 		right: "m 390,220 0,170"}, 315);
 
+	this.esquinaEndElement = new RotateDanceAnimationElement(this, 
+		{left: "M 50,390 50,220",
+		right: "M 390,50 390,220"}, 315);
+
 	this.contraGiroEndElement = new RotateDanceAnimationElement(this, 
-		{left: "M 50,50 50,220",
-		right: "M 390,390 390,220"}, -315);
+		{left: "m 50,220 1,1",
+		right: "m 390,220 1,1"}, -315);
 
 	this.contraGiroElement = new RotateDanceAnimationElement(this, 
 		{left: "M 50,50 200,200",
@@ -113,13 +117,13 @@ function HuayraMuyojAnimation(id) {
 		var partTimes = times / 2;
 		var manAngle = this.startPos[manPosition].angle;
 		var womanAngle = this.startPos[getOppositePosition(manPosition)].angle;
-		this.esquinaElement.drawPath(manPosition);
+		this.esquinaEndElement.drawPath(manPosition);
 		this.contraGiroEndElement.drawPath(manPosition, true);
 
-		var arrows1 = this.initRotateIcon(50, 220, 0, false);
-		var arrows2 = this.initRotateIcon(390, 220, 0, false);
-		var arrows1_2 = this.initRotateIcon(50, 135, 0, true).removeClass("rotationArrows").addClass("invisible");
-		var arrows2_2 = this.initRotateIcon(390, 305, 0, true).removeClass("rotationArrows").addClass("invisible");
+		var arrows1 = this.initRotateIcon(50, 305, 0, false);
+		var arrows2 = this.initRotateIcon(390, 135, 0, false);
+		var arrows1_2 = this.initRotateIcon(50, 220, 0, true).removeClass("rotationArrows").addClass("invisible");
+		var arrows2_2 = this.initRotateIcon(390, 220, 0, true).removeClass("rotationArrows").addClass("invisible");
 		this.timeouts[this.timeouts.length] = new Timer(function() {
 			arrows1.removeClass("rotationArrows").addClass("invisible");
 			arrows2.removeClass("rotationArrows").addClass("invisible");
@@ -127,7 +131,7 @@ function HuayraMuyojAnimation(id) {
 			arrows2_2.addClass("rotationArrows").removeClass("invisible");
 		}, partSeconds * 1000);
 
-		this.esquinaElement.startAnimation(partSeconds, partTimes, manAngle, womanAngle);
+		this.esquinaEndElement.startAnimation(partSeconds, partTimes, manAngle, womanAngle);
 		this.contraGiroEndElement.startAnimation(partSeconds, partTimes, manAngle - 270, womanAngle - 270, this.DIRECTION_FORWARD, partSeconds);
 	};
 

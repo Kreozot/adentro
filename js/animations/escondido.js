@@ -24,7 +24,7 @@ function RotateElement(animation, pathStrings, gender, figure, rotateAngle) {
 			}
 
 			transformAtLength(startLen);
-			self.figure.attr({opacity: 1});
+			self.figure.removeClass("invisible");
 
 			self.animation.animations[self.animation.animations.length] = Snap.animate(startLen, stopLen, 
 				function(value) {

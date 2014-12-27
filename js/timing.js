@@ -496,7 +496,7 @@ var music = [
 			"esquina3": 55.6,
 			"avance": 59.9,
 			"coronacion": 61.6,
-			"#pause_2": 64.6,
+			"#pause_2": 63.6,
 			"#start_2": 66.9,
 			"esquina_2": 74.4,
 			"regreso_2": 78.4,
@@ -509,7 +509,7 @@ var music = [
 			"esquina3_2": 121.3,
 			"avance_2": 125.3,
 			"coronacion_2": 127.3,
-			"#end": 130.1
+			"#end": 129.2
 		}
 	},
 ];

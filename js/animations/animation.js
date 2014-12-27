@@ -287,20 +287,7 @@ function DanceAnimation(id) {
 		while (this.animations.length > 0) {
 			this.animations.pop();
 		};
-	}
-
-	// this.hidePaths = function() {
-	// 	for (var i = 0; i < this.paths.length; i++) {
-	// 		this.paths[i].attr({opacity: 0});
-	// 	};
-
-	// 	for (var i = 0; i < this.animations.length; i++) {
-	// 		this.animations[i].stop();
-	// 	};
-	// 	while (this.animations.length > 0) {
-	// 		this.animations.pop();
-	// 	};
-	// }
+	};
 
 	this.clear = function() {
 		this.paused = false;
@@ -446,7 +433,6 @@ function DanceAnimation(id) {
 
 			transformAtLength(startLen);
 			figure.removeClass("invisible");
-			// figure.attr({opacity: 1});
 
 			self.animations[self.animations.length] = Snap.animate(startLen, stopLen, 
 				function(value) {
@@ -479,7 +465,6 @@ function DanceAnimation(id) {
 		var resultPath = this.svg.path(pathStr)
 				.attr({
 					id: gender + "_path_" + this.paths.length
-					// opacity: (transparent ? "0" : "1")
 				})
 				.addClass("path");
 		if (transparent) {
@@ -508,7 +493,6 @@ function DanceAnimation(id) {
 		this.positionFigure(figure, coords.x, coords.y, coords.angle);
 		figure.removeClass("straightBeatFigure");
 		figure.removeClass("invisible");
-		// figure.attr({opacity: 1});
 	}
 
 	this.startPosition = function(leftCoords, rightCoords, manPosition) {
