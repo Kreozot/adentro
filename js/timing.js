@@ -477,7 +477,41 @@ var music = [
 			"mediaVueltaCoronacion_2": 183.3,
 			"#end": 191.1
 		}
-	}
+	},
+	// Huayra Muyoj
+	{
+		id: "huayra_muyoj",
+		title: 'Huayra Muyoj',
+		file: './music/huayra_muyoj/huayra_muyoj.mp3',
+		schema: {
+			"#start_1": 8,
+			"esquina": 8.7,
+			"regreso": 12.8,
+			"medioGiro": 22.3,
+			"zapateoZarandeo": 24.3,
+			"esquina2": 32.3,
+			"regreso2": 36.1,
+			"medioGiro2": 46.1,
+			"zapateoZarandeo2": 47.6,
+			"esquina3": 55.6,
+			"avance": 59.9,
+			"coronacion": 61.6,
+			"#pause_2": 64.6,
+			"#start_2": 66.9,
+			"esquina_2": 74.4,
+			"regreso_2": 78.4,
+			"medioGiro_2": 88,
+			"zapateoZarandeo_2": 90,
+			"esquina2_2": 98,
+			"regreso2_2": 101.8,
+			"medioGiro2_2": 111.3,
+			"zapateoZarandeo2_2": 113.3,
+			"esquina3_2": 121.3,
+			"avance_2": 125.3,
+			"coronacion_2": 127.3,
+			"#end": 130.1
+		}
+	},
 ];
 
 music.get = function(id) {

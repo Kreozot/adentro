@@ -87,6 +87,12 @@ var schemaParamsMap = {
 		music: ["remedio_atamisqueno"],
 		animation: "RemedioAnimation"
 	},
+	HuayraMuyoj: {
+		name: "Huayra Muyoj",
+		svgName: "huayra_muyoj",
+		music: ["huayra_muyoj"],
+		animation: "HuayraMuyojAnimation"
+	}
 };
 /**
  * Получить название схемы

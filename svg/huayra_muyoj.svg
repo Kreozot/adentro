@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet href="./schema.xsl" type="text/xsl" ?>
+
+<schema>
+	<part>
+		<element class="esquina" times="4" id="esquina" visualization="esquinaStart" manPosition="left">Esquina y contragiro</element>
+		<element class="regreso" times="4" id="regreso" visualization="regreso" manPosition="top" yOffset="true">Regreso</element>
+		<element class="giro"  times="2" id="medioGiro" visualization="medioGiro" manPosition="top">Medio giro</element>
+		<element class="zapateo" times="8" id="zapateoZarandeo" visualization="zapateoZarandeo" manPosition="top">Zapateo / Zarandeo</element>
+		<bar/>
+		<element class="esquina" times="4" id="esquina2" visualization="esquina" manPosition="top">Esquina y contragiro</element>
+		<element class="regreso" times="4" id="regreso2" visualization="regreso" manPosition="right" yOffset="true">Regreso</element>
+		<element class="giro"  times="2" id="medioGiro2" visualization="medioGiro" manPosition="right">Medio giro</element>
+		<element class="zapateo" times="8" id="zapateoZarandeo2" visualization="zapateoZarandeo" manPosition="right">Zapateo / Zarandeo</element>
+		<bar/>
+		<element class="esquina" times="4" id="esquina3" visualization="esquinaEnd" manPosition="right">Esquina y contragiro</element>
+		<element class="avance" times="2" id="avance" visualization="avance" manPosition="right" yOffset="true">Avance y retroceso</element>
+		<element class="coronacion" times="2" id="coronacion" visualization="coronacion" manPosition="right" textOffset="10">Giro y coronación</element>
+	</part>
+	<part>
+		<element class="esquina" times="4" id="esquina_2" visualization="esquinaStart" manPosition="left">Esquina y contragiro</element>
+		<element class="regreso" times="4" id="regreso_2" visualization="regreso" manPosition="top" yOffset="true">Regreso</element>
+		<element class="giro"  times="2" id="medioGiro_2" visualization="medioGiro" manPosition="top">Medio giro</element>
+		<element class="zapateo" times="8" id="zapateoZarandeo_2" visualization="zapateoZarandeo" manPosition="top">Zapateo / Zarandeo</element>
+		<bar/>
+		<element class="esquina" times="4" id="esquina2_2" visualization="esquina" manPosition="top">Esquina y contragiro</element>
+		<element class="regreso" times="4" id="regreso2_2" visualization="regreso" manPosition="right" yOffset="true">Regreso</element>
+		<element class="giro"  times="2" id="medioGiro2_2" visualization="medioGiro" manPosition="right">Medio giro</element>
+		<element class="zapateo" times="8" id="zapateoZarandeo2_2" visualization="zapateoZarandeo" manPosition="right">Zapateo / Zarandeo</element>
+		<bar/>
+		<element class="esquina" times="4" id="esquina3_2" visualization="esquinaEnd" manPosition="right">Esquina y contragiro</element>
+		<element class="avance" times="2" id="avance_2" visualization="avance" manPosition="right" yOffset="true">Avance y retroceso</element>
+		<element class="coronacion" times="2" id="coronacion_2" visualization="coronacion" manPosition="right" textOffset="10">Giro y coronación</element>
+	</part>
+</schema>

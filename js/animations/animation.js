@@ -42,6 +42,10 @@ function Timer(callback, delay) {
  */
 function getOppositePosition(position) {
 	switch (position) {
+		case "start_left":
+			return "start_right";
+		case "start_right":
+			return "start_left";
 		case "left":
 			return "right";
 		case "right":
