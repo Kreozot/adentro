@@ -3,10 +3,10 @@
 
 <schema>
 	<part>
-		<element class="giro" times="4" id="esquina1" visualization="esquina" manPosition="left">Esquina y balanceo</element>
-		<element class="giro" yOffset="true" times="4" id="esquina2" visualization="esquina" manPosition="top">Esquina y balanceo</element>
-		<element class="giro" times="4" id="esquina3" visualization="esquina" manPosition="right">Esquina y balanceo</element>
-		<element class="giro" yOffset="true" times="4" id="esquina4" visualization="esquina" manPosition="bottom">Esquina y balanceo</element>
+		<element class="esquina" times="4" id="esquina1" visualization="esquina" manPosition="left">Esquina y balanceo</element>
+		<element class="esquina" times="4" id="esquina2" visualization="esquina" manPosition="top" yOffset="true">Esquina y balanceo</element>
+		<element class="esquina" times="4" id="esquina3" visualization="esquina" manPosition="right">Esquina y balanceo</element>
+		<element class="esquina" times="4" id="esquina4" visualization="esquina" manPosition="bottom" yOffset="true">Esquina y balanceo</element>
 		<bar/>
 		<element class="vuelta" times="8" id="vuelta" visualization="vueltaGiro" manPosition="left">Vuelta entera y giro</element>
 		<element class="zapateo" times="8" id="zapateo" visualization="zapateo" manPosition="left">Zapateo</element>
@@ -15,13 +15,13 @@
 		<element class="zarandeo" times="8" id="zarandeo" visualization="zarandeo" manPosition="left">Zarandeo</element>
 		<bar/>
 		<element class="vuelta" times="4" id="mediaVuelta" visualization="mediaVuelta" manPosition="left">Media vuelta</element>
-		<element class="coronacion" yOffset="true" times="4" id="coronacion" visualization="coronacion" manPosition="right">Giro y coronación</element>
+		<element class="coronacion" times="4" id="coronacion" visualization="coronacion" manPosition="right" yOffset="true">Giro y coronación</element>
 	</part>
 	<part>
-		<element class="giro" times="4" id="esquina1_2" visualization="esquina" manPosition="right">Esquina y balanceo</element>
-		<element class="giro" yOffset="true" times="4" id="esquina2_2" visualization="esquina" manPosition="bottom">Esquina y balanceo</element>
-		<element class="giro" times="4" id="esquina3_2" visualization="esquina" manPosition="left">Esquina y balanceo</element>
-		<element class="giro" yOffset="true" times="4" id="esquina4_2" visualization="esquina" manPosition="top">Esquina y balanceo</element>
+		<element class="esquina" times="4" id="esquina1_2" visualization="esquina" manPosition="right">Esquina y balanceo</element>
+		<element class="esquina" times="4" id="esquina2_2" visualization="esquina" manPosition="bottom" yOffset="true">Esquina y balanceo</element>
+		<element class="esquina" times="4" id="esquina3_2" visualization="esquina" manPosition="left">Esquina y balanceo</element>
+		<element class="esquina" times="4" id="esquina4_2" visualization="esquina" manPosition="top" yOffset="true">Esquina y balanceo</element>
 		<bar/>
 		<element class="vuelta" times="8" id="vuelta_2" visualization="vueltaGiro" manPosition="right">Vuelta entera y giro</element>
 		<element class="zarandeo" times="8" id="zarandeo_2" visualization="zarandeo" manPosition="right">Zarandeo</element>
@@ -30,6 +30,6 @@
 		<element class="zapateo" times="8" id="zapateo_2" visualization="zapateo" manPosition="right">Zapateo</element>
 		<bar/>
 		<element class="vuelta" times="4" id="mediaVuelta_2" visualization="mediaVuelta" manPosition="right">Media vuelta</element>
-		<element class="coronacion" yOffset="true" times="4" id="coronacion_2" visualization="coronacion" manPosition="left">Giro y coronación</element>
+		<element class="coronacion" times="4" id="coronacion_2" visualization="coronacion" manPosition="left" yOffset="true">Giro y coronación</element>
 	</part>
 </schema>

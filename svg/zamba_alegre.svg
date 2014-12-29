@@ -4,24 +4,24 @@
 <schema>
 	<part>
 		<element class="vuelta" times="16" id="vuelta" visualization="vuelta" manPosition="left">Vuelta entera</element>
-		<element class="giro" times="15" id="arrestoDoble" visualization="arrestoDoble" manPosition="right">Arresto doble</element>
+		<element class="arresto" times="15" id="arrestoDoble" visualization="arrestoDoble" manPosition="right">Arresto doble</element>
 		<bar/>
 		<element class="vuelta" times="8" id="vueltaGato" visualization="vueltaGato" manPosition="left">Vuelta entera (gato)</element>
-		<element class="zapateo" yOffset="true" times="7" id="zapateo" visualization="zapateoZarandeo" manPosition="right">Zapateo / Zarandeo</element>
+		<element class="zapateo" times="7" id="zapateo" visualization="zapateoZarandeo" manPosition="right" yOffset="true">Zapateo / Zarandeo</element>
 		<bar/>
 		<element class="vuelta" times="8" id="mediaVuelta" visualization="mediaVuelta" manPosition="right">Media vuelta</element>
-		<element class="giro" times="8" id="arresto" visualization="arresto" manPosition="left">Arresto</element>
-		<element class="coronacion" yOffset="true" times="7" id="mediaVueltaCoronacion" visualization="mediaVueltaCoronacion" manPosition="left">Media vuelta y coronación</element>
+		<element class="arresto" times="8" id="arresto" visualization="arresto" manPosition="left">Arresto</element>
+		<element class="coronacion" times="7" id="mediaVueltaCoronacion" visualization="mediaVueltaCoronacion" manPosition="left" yOffset="true">Media vuelta y coronación</element>
 	</part>
 	<part>
 		<element class="vuelta" times="16" id="vuelta_2" visualization="vuelta" manPosition="left">Vuelta entera</element>
-		<element class="giro" times="15" id="arrestoDoble_2" visualization="arrestoDoble" manPosition="right">Arresto doble</element>
+		<element class="arresto" times="15" id="arrestoDoble_2" visualization="arrestoDoble" manPosition="right">Arresto doble</element>
 		<bar/>
 		<element class="vuelta" times="8" id="vueltaGato_2" visualization="vueltaGato" manPosition="left">Vuelta entera (gato)</element>
-		<element class="zapateo" yOffset="true" times="7" id="zapateo_2" visualization="zapateoZarandeo" manPosition="right">Zapateo / Zarandeo</element>
+		<element class="zapateo" times="7" id="zapateo_2" visualization="zapateoZarandeo" manPosition="right" yOffset="true">Zapateo / Zarandeo</element>
 		<bar/>
 		<element class="vuelta" times="8" id="mediaVuelta_2" visualization="mediaVuelta" manPosition="right">Media vuelta</element>
-		<element class="giro" times="8" id="arresto_2" visualization="arresto" manPosition="left">Arresto</element>
-		<element class="coronacion" yOffset="true" times="7" id="mediaVueltaCoronacion_2" visualization="mediaVueltaCoronacion" manPosition="left">Media vuelta y coronación</element>
+		<element class="arresto" times="8" id="arresto_2" visualization="arresto" manPosition="left">Arresto</element>
+		<element class="coronacion" times="7" id="mediaVueltaCoronacion_2" visualization="mediaVueltaCoronacion" manPosition="left" yOffset="true">Media vuelta y coronación</element>
 	</part>
 </schema>

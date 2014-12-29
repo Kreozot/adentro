@@ -193,10 +193,10 @@
 					}
 
 					.coronacion {
-						fill: #55E6B9;
+						fill: #BD9DFF;
 					}
 
-					.aresto {
+					.arresto {
 						fill: #A0F675;
 					}
 
@@ -205,7 +205,7 @@
 					}
 
 					.zarandeo {
-						fill: #a6CF45;
+						fill: #CCFF33;
 					}
 
 					.giro {
@@ -213,15 +213,7 @@
 					}
 
 					.avance {
-						fill: #00EE00;
-					}
-
-					.entera {
-						fill: #44AAEE;
-					}
-
-					.avanceRetroceso {
-						fill: #93DD22;
+						fill: #3399FF;
 					}
 
 					.esquina {
