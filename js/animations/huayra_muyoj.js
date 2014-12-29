@@ -28,7 +28,7 @@ function HuayraMuyojAnimation(id) {
 		{left: "M 50,50 200,200",
 		top: "M 390,50 240,200",
 		right: "M 390,390 240,240",
-		bottom: "M 50,390 200,240"}, -180);
+		bottom: "M 50,390 200,240"}, -540);
 
 	this.regresoElement = new DanceAnimationElement(this, 
 		{left: "M 200,240 50,390",
@@ -36,11 +36,11 @@ function HuayraMuyojAnimation(id) {
 		right: "M 240,200 390,50",
 		bottom: "M 240,240 390,390"});
 
-	this.medioGiroElement = new RotateDanceAnimationElement(this, 
+	this.giroElement = new RotateDanceAnimationElement(this, 
 		{left: "m 50,390 1,1",
 		top: "m 50,50 1,1",
 		right: "m 390,50 1,1",
-		bottom: "m 390,390 1,1"}, 180);
+		bottom: "m 390,390 1,1"}, 540);
 
 	this.zapateoElement = new ZapateoElement(this);
 
@@ -151,11 +151,15 @@ function HuayraMuyojAnimation(id) {
 		this.regresoElement.fullAnimation(seconds, times, manPosition);
 	};
 
-	this.medioGiro = function(seconds, manPosition, times) {
-		this.medioGiroElement.fullAnimation(seconds, times, 
+	this.giro = function(seconds, manPosition, times) {
+		this.giroElement.fullAnimation(seconds, times, 
 			this.startPos[manPosition].angle - 180, 
 			this.startPos[getOppositePosition(manPosition)].angle - 180, 
 			manPosition);
+		this.initRotateIcon(this.startPos[manPosition].x, 
+			this.startPos[manPosition].y, -45, false);
+		this.initRotateIcon(this.startPos[getOppositePosition(manPosition)].x, 
+			this.startPos[getOppositePosition(manPosition)].y, -45, false);
 	};
 
 	this.zapateoZarandeo = function(seconds, manPosition, times) {
