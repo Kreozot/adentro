@@ -31,7 +31,8 @@ module.exports = function(grunt) {
 						'js/animations/chacarera4.js',
 						'js/animations/escondido.js',
 						'js/animations/remedio.js',
-						'js/animations/zamba.js'
+						'js/animations/zamba.js',
+						'js/animations/huayra_muyoj.js'
 					],
 					'build/js/script.min.js' : [
 						'js/jquery-classes.js',
@@ -116,9 +117,10 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		lame: {
+		sox: {
 			convertmp3: {
 				src: 'music/*/*.mp3'
+				// src: 'music/huayra_muyoj/huayra_muyoj.mp3'
 			}
 		},
 		msxsl: {
@@ -161,29 +163,31 @@ module.exports = function(grunt) {
 					}
 				]
 			},
+			//Копирование структуры директорий в папке с музыкой
 			convertmp3: {
 				files: [
 					{
 						expand: true,
 						src: 'music/**/*',
+						// src: 'music/huayra_muyoj/huayra_muyoj.mp3',
 						dest: 'build/',
 						filter: 'isDirectory'
 					}
 				]
 			}
 		},
-		rename: {
-			convertmp3: {
-				files: [
-					{
-						expand: true,
-						src: 'music/**/*.mp3.tmp',
-						dest: 'build/',
-						ext: '.mp3'
-					}
-				]
-			}
-		},
+		// rename: {
+		// 	convertmp3: {
+		// 		files: [
+		// 			{
+		// 				expand: true,
+		// 				src: 'music/**/*.mp3.tmp',
+		// 				dest: 'build/',
+		// 				ext: '.mp3'
+		// 			}
+		// 		]
+		// 	}
+		// },
 		'ftp-deploy': {
 			production: {
 				auth: {
@@ -221,70 +225,56 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-ftp-deploy');
 	grunt.loadNpmTasks('grunt-jsdoc');
 
-	grunt.registerMultiTask('lame', 'Convert MP3 files to web-friendly quality using Lame', function() {
-		grunt.log.writeln('Conversion started...');
-		var exec = require('child_process').exec;
-		var done = grunt.task.current.async();
+	/**
+	 * Функция для задач обработки файлов с помощью сторонних утилит
+	 * @param  {Function} getCommandLine Функция для получения строки комманды (аргумент - путь к файлу)
+	 */
+	function processFilesWithTool(getCommandLine) {
+		return function() {
+			grunt.log.writeln('Processing started...');
+			var exec = require('child_process').exec;
+			var done = grunt.task.current.async();
 
-		var i = 0;
-		this.files.forEach(function(file) {
-			grunt.log.writeln('Processing ' + file.src.length + ' files.');
+			var i = 0;
+			this.files.forEach(function(file) {
+				grunt.log.writeln('Processing ' + file.src.length + ' files.');
 
-			file.src.forEach(function(f) { 
-				exec('"./tools/lame.exe" -b 128 --resample 22.05 --silent ' + f + ' ' + f + '.tmp',
-					function(error, stdout, stderr) {
-						if (stdout && (stdout.length > 0)) {
-							grunt.log.writeln('stdout: ' + stdout);
+				file.src.forEach(function(f) { 
+					exec(getCommandLine(f),
+						function(error, stdout, stderr) {
+							if (stdout && (stdout.length > 0)) {
+								grunt.log.writeln('stdout: ' + stdout);
+							}
+							if (stderr && (stderr.length > 0)) {
+								grunt.log.writeln('stderr: ' + stderr);
+							}	
+							if (error !== null) {
+								grunt.log.writeln('exec error: ' + error);
+							}
+							i++;
+							grunt.log.write('+');
+							if (i >= file.src.length) {
+								done(error);
+							}
 						}
-						if (stderr && (stderr.length > 0)) {
-							grunt.log.writeln('stderr: ' + stderr);
-						}	
-						if (error !== null) {
-							grunt.log.writeln('exec error: ' + error);
-						}
-						i++;
-						grunt.log.write('+');
-						if (i >= file.src.length) {
-							done(error);
-						}
-					}
-				);
+					);
+				});
 			});
-		});
-	});
+		};
+	}
 
-	grunt.registerMultiTask('msxsl', 'Convert XML files with XSL stylesheet using MSXSL', function() {
-		grunt.log.writeln('Conversion started...');
-		var exec = require('child_process').exec;
-		var done = grunt.task.current.async();
+	grunt.registerMultiTask('sox', 'Convert MP3 files to WAV using SOX', 
+		processFilesWithTool(function(f) {
+			return '"./tools/sox.exe" ' + f + ' build/' + f;
+		})
+	);
 
-		var i = 0;
-		this.files.forEach(function(file) {
-			grunt.log.writeln('Processing ' + file.src.length + ' files.');
-
-			file.src.forEach(function(f) { 
-				var fileName = f.split("/").pop();
-				exec('"./tools/msxsl.exe" ' + f + ' svg/schema.xsl -o svg/compiled/' + fileName,
-					function(error, stdout, stderr) {
-						if (stdout && (stdout.length > 0)) {
-							grunt.log.writeln('stdout: ' + stdout);
-						}
-						if (stderr && (stderr.length > 0)) {
-							grunt.log.writeln('stderr: ' + stderr);
-						}	
-						if (error !== null) {
-							grunt.log.writeln('exec error: ' + error);
-						}
-						i++;
-						grunt.log.write('+');
-						if (i >= file.src.length) {
-							done(error);
-						}
-					}
-				);
-			});
-		});
-	});
+	grunt.registerMultiTask('msxsl', 'Convert XML files with XSL stylesheet using MSXSL', 
+		processFilesWithTool(function(f) {
+			var fileName = f.split("/").pop();
+			return '"./tools/msxsl.exe" ' + f + ' svg/schema.xsl -o svg/compiled/' + fileName;
+		})
+	);
 
 	grunt.registerTask('build', [
 		'clean:build', 
@@ -297,10 +287,9 @@ module.exports = function(grunt) {
 		'copy:build'
 	]);
 	grunt.registerTask('convertmp3', [
-		'lame:convertmp3', 
 		'clean:convertmp3',
 		'copy:convertmp3',
-		'rename:convertmp3'
+		'sox:convertmp3'
 	]);
 	grunt.registerTask('default', ['build']);
 	grunt.registerTask('deploy', ['ftp-deploy:production']);
