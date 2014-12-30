@@ -1,6 +1,13 @@
 function RemedioAnimation(id) {
 	RemedioAnimation.superclass.constructor.apply(this, arguments);
 
+	this.giroCoronacionElement = new RotateDanceAnimationElement(this,
+		{left: "M 50,390 200,240",
+		right: "M 390,50 240,200"}, 360);
+	this.contragiroCoronacionElement = new RotateDanceAnimationElement(this,
+		{left: "M 50,390 200,240",
+		right: "M 390,50 240,200"}, -360);
+
 	this.rotateFigure = function(self) {
 		return 	function(figure, seconds, times, x, y, startAngle, endAngle) {
 			var timeLength = seconds * 1000;
@@ -123,5 +130,24 @@ function RemedioAnimation(id) {
 		this.zapateoElement.drawPath(manPosition);
 		this.zapateoElement.startAnimation(seconds, times);
 	};
+
+	this.giroContragiroCoronacion = function(seconds, manPosition, times) {
+		this.clearPaths();
+		var partSeconds = seconds / 2;
+		var partTimes = times / 2;
+		var manAngle = this.startPos[manPosition].angle;
+		var womanAngle = this.startPos[getOppositePosition(manPosition)].angle;
+		this.giroCoronacionElement.drawPath(manPosition);
+		this.contragiroCoronacionElement.drawPath(manPosition, true);
+
+		this.initRotateIcon(87, 352, 45, false);
+		this.initRotateIcon(352, 87, 45, false);
+		this.initRotateIcon(162, 277, 45, true);
+		this.initRotateIcon(277, 162, 45, true);
+
+		this.giroCoronacionElement.startAnimation(partSeconds, partTimes, manAngle, womanAngle, this.DIRECTION_FORWARD, 0, 0, 0.5);
+		this.contragiroCoronacionElement.startAnimation(partSeconds, partTimes, manAngle, womanAngle, this.DIRECTION_FORWARD, partSeconds, 0.5, 1);
+
+	}
 };
 extend(RemedioAnimation, EscondidoAnimation);
