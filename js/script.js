@@ -117,7 +117,9 @@ var initSvgSchema = function() {
 				// Есле остановлено
 				if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
 					hideCurrentElement(svgdom);
-				} else if (!event.jPlayer.status.paused) {
+				} else if ((!event.jPlayer.status.paused) && 
+						(!event.jPlayer.status.waitForPlay) && 
+						(!event.jPlayer.status.waitForLoad)) {
 					$.animation.resume();
 					var time = event.jPlayer.status.currentTime;
 					var element = getElement(time);
@@ -258,7 +260,7 @@ var showLanguageLinks = function() {
 	var getLanguageLinks = function() {
 		var result = '<nobr>';
 		for (var i = 0; i < languages.length; i++) {
-			if (languages[i].id == i18n.lng()) {
+			if ((languages[i].id == i18n.lng()) || (languages[i].id == i18n.lng().substr(0, 2))) {
 				result += languages[i].title
 			} else {
 				result += '<a href="' + getLanguageLink(languages[i].id) + '">' + languages[i].title + '</a>';
