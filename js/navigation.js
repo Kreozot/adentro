@@ -82,7 +82,7 @@ var schemaParamsMap = {
 		animation: "RemedioAnimation"
 	},
 	RemedioAtamisqueno: {
-		name: "Remedio Atamisqueno",
+		name: "Remedio Atamisqueño",
 		svgName: "remedio_atamisqueno",
 		music: ["remedio_atamisqueno"],
 		animation: "RemedioAnimation"

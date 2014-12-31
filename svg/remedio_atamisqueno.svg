@@ -10,7 +10,7 @@
 		<element class="esquina" times="4" id="esquina3" visualization="esquina" manPosition="right">Esquina y medio giro</element>
 		<element class="zapateo" times="4" id="zapateoZarandeo3" visualization="zapateoZarandeo" manPosition="bottom" yOffset="true">Zapateo / Zarandeo</element>
 		<element class="esquina" times="4" id="esquina4" visualization="esquina" manPosition="bottom">Esquina y medio giro</element>
-		<element class="zapateo" times="4" id="zapateoZarandeo4" visualization="zapateoZarandeo" manPosition="tleftop" yOffset="true">Zapateo / Zarandeo</element>
+		<element class="zapateo" times="4" id="zapateoZarandeo4" visualization="zapateoZarandeo" manPosition="left" yOffset="true">Zapateo / Zarandeo</element>
 		<bar/>
 		<element class="vuelta" times="8" id="vuelta" visualization="vueltaGiro" manPosition="left">Vuelta entera y giro</element>
 		<element class="zapateo" times="8" id="zapateoZarandeo5" visualization="zapateoZarandeo" manPosition="left">Zapateo / Zarandeo</element>

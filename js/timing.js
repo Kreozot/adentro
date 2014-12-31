@@ -406,7 +406,7 @@ var music = [
 	// Remedio
 	{
 		id: "remedio",
-		title: 'Remedio Norteno',
+		title: 'Remedio Norteño',
 		file: './music/remedio/remedio_norteno.mp3',
 		schema: {
 			"#start_1": 1.4,
@@ -438,11 +438,11 @@ var music = [
 	// Remedio atamisqueno
 	{
 		id: "remedio_atamisqueno",
-		title: 'Waldo Belloso - Remedio Atamisqueno',
+		title: 'Waldo Belloso - Remedio Atamisqueño',
 		file: './music/remedio_atamisqueno/remedio_atamisqueno.mp3',
 		schema: {
 			"#start_1": 5.4,
-			"esquina1": 9.3,
+			"esquina1": 9.6,
 			"zapateoZarandeo1": 14.1,
 			"esquina2": 18.5,
 			"zapateoZarandeo2": 23.1,
@@ -454,9 +454,9 @@ var music = [
 			"zapateoZarandeo5": 55.4,
 			"mediaVuelta": 64.9,
 			"coronacion": 69.7,
-			"#pause_2": 75.4,
+			"#pause_2": 74.6,
 			"#start_2": 77.1,
-			"esquina1_2": 86.5,
+			"esquina1_2": 86.7,
 			"zapateoZarandeo1_2": 91.2,
 			"esquina2_2": 96.1,
 			"zapateoZarandeo2_2": 100.3,
@@ -468,7 +468,7 @@ var music = [
 			"zapateoZarandeo5_2": 132.1,
 			"mediaVuelta_2": 141.7,
 			"coronacion_2": 146.2,
-			"#end": 151.8
+			"#end": 151
 		}
 	},
 	// Zamba
@@ -502,24 +502,24 @@ var music = [
 		title: 'Abel Figueroa - Zamba Cantora',
 		file: './music/zamba/zamba_cantora.mp3',
 		schema: {
-			// "#start_1": 2.2,
-			// "vuelta": 17.5,
-			// "arresto": 33,
-			// "mediaVuelta": 40.5,
-			// "arrestoDoble": 48.3,
-			// "mediaVuelta2": 63.9,
-			// "arresto2": 71.6,
-			// "mediaVueltaCoronacion": 79.4,
-			// "#pause_2": 87.4,
-			// "#start_2": 89.4,
-			// "vuelta_2": 104.7,
-			// "arresto_2": 120.5,
-			// "mediaVuelta_2": 128.5,
-			// "arrestoDoble_2": 136.3,
-			// "mediaVuelta2_2": 152.1,
-			// "arresto2_2": 159.8,
-			// "mediaVueltaCoronacion_2": 167.6,
-			// "#end": 175.4
+			"#start_1": 2.2,
+			"vuelta": 17.5,
+			"arresto": 33,
+			"mediaVuelta": 40.5,
+			"arrestoDoble": 48.3,
+			"mediaVuelta2": 63.9,
+			"arresto2": 71.6,
+			"mediaVueltaCoronacion": 79.4,
+			"#pause_2": 86.6,
+			"#start_2": 89.4,
+			"vuelta_2": 104.7,
+			"arresto_2": 120.5,
+			"mediaVuelta_2": 128.5,
+			"arrestoDoble_2": 136.3,
+			"mediaVuelta2_2": 152.1,
+			"arresto2_2": 159.8,
+			"mediaVueltaCoronacion_2": 167.6,
+			"#end": 174.6
 		}
 	},
 	// Zamba Alegre
