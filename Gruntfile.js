@@ -112,15 +112,15 @@ module.exports = function(grunt) {
 					collapseWhitespace:true,
 					minifyJS: true
 				},
-				files: {
-					'build/index.html': 'build/index.html'
-				}
+				files: [
+					{'build/index.html': 'build/index.html'},
+					{expand: true, src: 'info/*.inc', dest: 'build/'}
+				]
 			}
 		},
 		sox: {
 			convertmp3: {
 				src: 'music/*/*.mp3'
-				// src: 'music/huayra_muyoj/huayra_muyoj.mp3'
 			}
 		},
 		msxsl: {
@@ -169,25 +169,12 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						src: 'music/**/*',
-						// src: 'music/huayra_muyoj/huayra_muyoj.mp3',
 						dest: 'build/',
 						filter: 'isDirectory'
 					}
 				]
 			}
 		},
-		// rename: {
-		// 	convertmp3: {
-		// 		files: [
-		// 			{
-		// 				expand: true,
-		// 				src: 'music/**/*.mp3.tmp',
-		// 				dest: 'build/',
-		// 				ext: '.mp3'
-		// 			}
-		// 		]
-		// 	}
-		// },
 		'ftp-deploy': {
 			production: {
 				auth: {

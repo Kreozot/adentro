@@ -71,6 +71,15 @@ div.title h1 {
 	font-size: 24px;
 }
 
+div#info {
+	text-align: left;
+	font-size: 14px;
+}
+
+div#info h2 {
+	font-size: 16px;
+}
+
 .footer {
 	font-size: 11px;
 	color: #222222;
@@ -101,4 +110,8 @@ div.title h1 {
 
 .twitter {
 	background: url('../img/twitter.png') no-repeat 0 top;
+}
+
+.gitlab {
+	background: url('../img/gitlab.png') no-repeat 0 top;
 }

@@ -4,6 +4,8 @@
 		<meta charset="utf-8"/>
 		<meta name="description" content="Проект по визуализации хореографии аргентинских народных танцев. Argentina folk dances visualization project."/>
 		<title>Adentro</title>
+
+		<!--[if gt IE 8]><!-->
 		
 		<!-- build:css css/min.css -->
 		<link type="text/css" href="css/jplayer.blue.monday.css" rel="stylesheet" />
@@ -12,8 +14,6 @@
 		<link type="text/css" href="css/animation.css" rel="stylesheet" />
 		<link type="text/css" href="css/hopscotch.css" rel="stylesheet" />
 		<!-- /build -->
-
-		<!--[if gt IE 8]><!-->
 
 		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
@@ -185,6 +185,8 @@
 
 		<div class="center" id="schemaDiv"></div>
 		<div class="center" id="animationDiv"></div>
+		<div class="center" id="showInfoLink" href="javascript:showInfo()"></div>
+		<div class="center" id="info"></div>
 		
 		<!-- build:js js/animation.min.js -->
 		<script type="text/javascript" src="js/animations/animation.js"></script>
@@ -234,6 +236,7 @@
 			<div class="social">
 				<a class="facebook" href="http://www.facebook.com/adentro.ru" title="Facebook" target="blank"></a>
 				<a class="twitter" href="http://twitter.com/adentro_ru" title="Twitter" target="blank"></a>
+				<a class="gitlab" href="https://gitlab.com/Kreozot/adentro" title="Gitlab (sources)" target="blank"></a>
 			</div>
 			<div class="footerinfo">
 			<!-- build:template

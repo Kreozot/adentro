@@ -4,7 +4,8 @@ var schemaParamsMap = {
 		svgName: "zamba",
 		music: ["el_beso", "zamba_cantora"],
 		animation: [{id: "classic", name: "ZambaAnimation", title: "animation_links.common"},
-					{id: "simple", name: "ZambaSimpleAnimation", title: "animation_links.simple"}]
+					{id: "simple", name: "ZambaSimpleAnimation", title: "animation_links.simple"}],
+		info: "zamba"
 	},
 	ZambaAlegre: {
 		name: "Zamba Alegre",
@@ -37,7 +38,8 @@ var schemaParamsMap = {
 		music: ["la_pockoy_y_pancha", "chacarera_de_un_triste"],
 		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
 					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
-					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/]
+					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/],
+		info: "chacarera"
 	},
 	Chacarera6: {
 		name: "Chacarera on 6",
@@ -45,7 +47,8 @@ var schemaParamsMap = {
 		music: ["la_penadora", "la_baguala"],
 		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
 					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
-					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/]
+					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/],
+		info: "chacarera"
 	},
 	ChacareraDoble: {
 		name: "Chacarera doble",
@@ -53,7 +56,8 @@ var schemaParamsMap = {
 		music: ["chacarera_doble_el_olvidao", "chacarera_doble_sombra_enamorada"],
 		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
 					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
-					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/]
+					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/],
+		info: "chacarera"
 	},
 	ChacareraDoble6: {
 		name: "Chacarera doble on 6",
@@ -61,7 +65,8 @@ var schemaParamsMap = {
 		music: ["chacarera_doble_6_pampa_de_los_guanacos", "chacarera_doble_6_anorazas"],
 		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
 					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
-					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/]
+					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/],
+		info: "chacarera"
 	},
 	Bailecito: {
 		name: "Bailecito",
@@ -119,7 +124,7 @@ var loadSchemaByName = function(name, animationId, musicId) {
 	if (!schemaParams) {
 		schemaParams = schemaParamsMap.Chacarera;
 	}
-	loadSchema(schemaParams.name, schemaParams.svgName, schemaParams.music, musicId, schemaParams.animation, animationId);
+	loadSchema(schemaParams.name, schemaParams.svgName, schemaParams.music, musicId, schemaParams.animation, animationId, schemaParams.info);
 	showLanguageLinks();
 };
 

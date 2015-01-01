@@ -277,6 +277,27 @@ var showLanguageLinks = function() {
 };
 
 /**
+ * Загрузка информации
+ * @param  {String} infoName Имя файла с информацией (без расширения)
+ */
+var loadInfo = function(infoName) {
+	$("#info").css("display", "none");
+	if (infoName) {
+		$("#info").load("info/" + infoName + ".inc", function() {
+			$("#showInfoLink").html('<a href="javascript:showInfo()">Показать информацию</a>');
+			$("#showInfoLink").css("display", "block");
+		});
+	} else {
+		$("#showInfoLink").css("display", "none");
+	}
+};
+
+var showInfo = function() {
+	$("#info").css("display", "block");
+	$("#showInfoLink").css("display", "none");
+}
+
+/**
  * Загрузка анимации
  * @param  {Object} animationClass  Класс анимации
  */
@@ -295,8 +316,9 @@ var loadAnimation = function(animationClass) {
  * @param  {String} musicId    	   Идентификатор музыки
  * @param  {Object} animationClass Класс анимации (или список доступных классов)
  * @param  {String} animationId    Идентификатор конкретной анимации (если в animationClass пришёл список)
+ * @param  {String} infoName       Имя файла с информацией (без расширения)
  */
-var loadSchema = function(name, svgName, musicIds, musicId, animationClass, animationId) {
+var loadSchema = function(name, svgName, musicIds, musicId, animationClass, animationId, infoName) {
 	$("#danceName").html(name);
 	$("#schemaDiv").html('<object data="svg/' + svgName + '.svg" type="image/svg+xml" id="schema"></object>');
 	$("#animationDiv").html('<svg id="animation" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>');
@@ -312,6 +334,8 @@ var loadSchema = function(name, svgName, musicIds, musicId, animationClass, anim
 	musicId = musicId ? musicId : musicIds[0];
 	showMusicLinks(musicIds, musicId);
 	var musicSchema = music.get(musicId);
+
+	loadInfo(infoName);
 
 	var svgobject = document.getElementById('schema');
 	$(svgobject).load(function() {
