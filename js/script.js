@@ -292,6 +292,9 @@ var loadInfo = function(infoName) {
 	}
 };
 
+/**
+ * Отображение информации
+ */
 var showInfo = function() {
 	$("#info").css("display", "block");
 	$("#showInfoLink").css("display", "none");

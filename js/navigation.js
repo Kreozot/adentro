@@ -99,6 +99,7 @@ var schemaParamsMap = {
 		animation: "HuayraMuyojAnimation"
 	}
 };
+
 /**
  * Получить название схемы
  * @param  {String} schemaId Идентификатор схемы
@@ -112,6 +113,12 @@ schemaParamsMap.getName = function(schemaId) {
 		return "";
 	}
 };
+
+/**
+ * Текущие параметры страницы
+ * @type {Object}
+ */
+var context = {};
 
 /**
  * Загрузить схему
@@ -170,12 +177,48 @@ var pushStateOrRedirect = function(params, title, query) {
 }
 
 /**
+ * Получить относительный адрес URL для заданных параметров
+ * @param  {String} schema    Идентификатор схемы
+ * @param  {String} animation Идентификатор анимации
+ * @param  {String} music     Идентификатор композиции
+ * @return {String}           Относительный путь URL
+ */
+var getRelativeUrl = function(schema, animation, music) {
+	return "?schema=" + schema +
+		(animation ? ("&animation=" + animation) : "") +
+		(music ? ("&music=" + music) : "");
+	//TODO: Настройка алиасов URL. Тогда можно будет сделать нормальный relative path
+	// return schema +
+	// 	(animation ? ("/" + animation) : "") +
+	// 	(music ? ("?music=" + music) : "");
+}
+
+/**
+ * Получение параметров контекста из URL
+ * @return {Object} Объект контекста
+ */
+var getContextFromUrl = function() {
+	var url = new URI();
+	var segments = url.segment();
+	var params = url.query(true);
+	var context = {};
+	context.schema = params.music;
+	context.animation = params.animation;
+	//TODO: Настройка алиасов URL. Тогда можно будет сделать нормальный relative path
+	// context.schema = segments[0];
+	// context.animation = segments[1];
+	context.music = params.music;
+	context.editor = params.editor;
+	return context;
+}
+
+/**
  * Перейти на указанную схему по URL
  * @param  {String} schemaId Идентификатор схемы
  */
 var showSchema = function(schemaId) {
 	this.pushStateOrRedirect({schema: schemaId}, 
-		schemaParamsMap.getName(schemaId) + " - Adentro", "?schema=" + schemaId);
+		schemaParamsMap.getName(schemaId) + " - Adentro", getRelativeUrl(schemaId));
 };
 
 /**
@@ -183,16 +226,12 @@ var showSchema = function(schemaId) {
  * @param  {Number} animationId  Идентификатор анимации
  */
 var showAnimation = function(animationId) {
-	var url = new URI();
-	var params = url.query(true);
+	context.animation = animationId;
+	this.pushStateOrRedirect({schema: context.schema, animation: context.animation, music: context.music}, 
+			schemaParamsMap.getName(context.schema) + " - Adentro", 
+			getRelativeUrl(context.schema, context.animation, context.music));
 
-	this.pushStateOrRedirect({schema: params.schema, animationId: animationId, musicId: params.musicId}, 
-			schemaParamsMap.getName(params.schema) + " - Adentro", 
-			"?schema=" + params.schema + 
-			"&animationId=" + animationId + 
-			(params.musicId ? ("&musicId=" + params.musicId) : ""));
-
-	var schemaParams = schemaParamsMap[params.schema];
+	var schemaParams = schemaParamsMap[context.schema];
 	var animationClassDefs = schemaParams.animation;
 	if (typeof animationClassDefs === 'object') {
 		var animationClassDef = getAnimationClassDef(animationClassDefs, animationId);
@@ -210,16 +249,12 @@ var showAnimation = function(animationId) {
  * @param  {Number} animationId  Идентификатор анимации
  */
 var showMusic = function(musicId) {
-	var url = new URI();
-	var params = url.query(true);
+	context.music = musicId;
+	this.pushStateOrRedirect({schema: context.schema, animation: context.animation, music: context.music}, 
+			schemaParamsMap.getName(context.schema) + " - Adentro", 
+			getRelativeUrl(context.schema, context.animation, context.music));
 
-	this.pushStateOrRedirect({schema: params.schema, animationId: params.animationId, musicId: musicId}, 
-			schemaParamsMap.getName(params.schema) + " - Adentro", 
-			"?schema=" + params.schema + 
-			(params.animationId ? ("&animationId=" + params.animationId) : "") + 
-			"&musicId=" + musicId);
-
-	var schemaParams = schemaParamsMap[params.schema];
+	var schemaParams = schemaParamsMap[context.schema];
 	var musicIds = schemaParams.music;
 	var musicSchema = music.get(musicId);
 	loadMusicSchema(musicSchema);
@@ -234,7 +269,14 @@ var showMusic = function(musicId) {
 var loadSchemaByState = function() {
 	var state = History.getState();
 	if ((state.data) && (state.data.schema)) {
-		loadSchemaByName(state.data.schema, state.data.animationId, state.data.musicId);
+		context.schema = state.data.schema;
+		context.animation = state.data.animation;
+		context.music = state.data.music;
+		if (context.editor) {
+			loadSchemaEditorByName(context.schema, context.music);
+		} else {
+			loadSchemaByName(context.schema, context.animation, context.music);
+		}
 		return true;
 	}
 	return false;
@@ -245,13 +287,12 @@ var loadSchemaByState = function() {
  * @return {Boolean} True если схема была загружена
  */
 var loadSchemaByUrl = function() {
-	var url = new URI();
-	var params = url.query(true);
-	if (params.schema) {
-		if (params.editor) {
-			loadSchemaEditorByName(params.schema, params.musicId);
+	context = getContextFromUrl();
+	if (context.schema) {
+		if (context.editor) {
+			loadSchemaEditorByName(context.schema, context.music);
 		} else {
-			loadSchemaByName(params.schema, params.animationId, params.musicId);
+			loadSchemaByName(context.schema, context.animation, context.music);
 		}
 		return true;
 	}
