@@ -74,6 +74,7 @@ div.title h1 {
 div#info {
 	text-align: left;
 	font-size: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 div#info h2 {
