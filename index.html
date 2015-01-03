@@ -4,6 +4,9 @@
 		<meta charset="utf-8"/>
 		<meta name="description" content="Проект по визуализации хореографии аргентинских народных танцев. Argentina folk dances visualization project."/>
 		<title>Adentro</title>
+		<!--[if lte IE 8]>
+		<meta http-equiv="refresh" content="0; url=old_browser.html" />
+		<![endif]-->
 
 		<!--[if gt IE 8]><!-->
 		
@@ -59,36 +62,7 @@
 		<!--<![endif]-->
 	</head>
 	<body>
-		<!--[if lte IE 8]>
-		<div>
-			К сожалению, сайт не работает на Internet Explorer версии 8 и ниже (из-за отсутствия в нём возможности отображения векторной графики). Пожалуйста, обновите или смените браузер. Для этого можете воспользоваться следующими ссылками:
-		</div>
-		<ul>
-			<li>
-				<a href="https://www.google.ru/chrome/browser/desktop/">Google Chrome</a>
-			</li>
-			<li>
-				<a href="https://www.mozilla.org/ru/firefox/new/">Mozilla Firefox</a>
-			</li>
-			<li>
-				<a href="http://windows.microsoft.com/ru-ru/internet-explorer/download-ie">Internet Explorer</a>
-			</li>
-		</ul>
-		<div>
-			Unfortunately site doesn't work on Internet Explorer 8 and below. Please update or change browser. You can use following links:
-		</div>
-		<ul>
-			<li>
-				<a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a>
-			</li>
-			<li>
-				<a href="https://www.mozilla.org/en/firefox/new/">Mozilla Firefox</a>
-			</li>
-			<li>
-				<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">Internet Explorer</a>
-			</li>
-		</ul>
-		<![endif]-->
+
 		<!--[if gt IE 8]><!-->
 		<div class="center" id="navigation">
 			<div id="logo"></div>
@@ -185,7 +159,7 @@
 
 		<div class="center" id="schemaDiv"></div>
 		<div class="center" id="animationDiv"></div>
-		<div class="center" id="showInfoLink" href="javascript:showInfo()"></div>
+		<div class="center" id="showInfoLink"></div>
 		<div class="center" id="info"></div>
 		
 		<!-- build:js js/animation.min.js -->
