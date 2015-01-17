@@ -11,7 +11,7 @@ function ChacareraCadenaAnimation(id) {
 	this.CadenaVisualPath = "m 50,310 340,0 0,-180 -340,0 z";
 
 	this.vuelta = function(seconds, manPosition, times) {		
-		this.CadenaPath = this.path(this.CadenaVisualPath, "black", "cadena");
+		this.CadenaPath = this.path(this.CadenaVisualPath, "black");
 
 		this.CadenaElement.drawPath(manPosition, true);
 		this.CadenaElement.startAnimation(seconds, times);

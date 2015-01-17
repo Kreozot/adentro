@@ -83,10 +83,10 @@ function SingleDanceAnimationElement(animation, pathStrings, gender, figure) {
 	/**
 	 * Отрисовка траектории
 	 * @param  {String} position Позиция
+	 * @param  {Boolean} hidden  Создать скрытой
 	 */
-	this.drawPath = function(position, transparent) {
-		var pathId = this.gender + "_" + position + "_path";
-		this.path = this.animation.path(this.pathStrings[position], this.gender, pathId, transparent);
+	this.drawPath = function(position, hidden) {
+		this.path = this.animation.path(this.pathStrings[position], this.gender, hidden);
 		this.pathLength = this.path.getTotalLength() - 1;
 	};
 
@@ -471,13 +471,16 @@ function DanceAnimation(id) {
 		return arrows;
 	}
 
+	/**
+	 * Спрятать фигурки танцоров
+	 */
 	this.hideFigures = function() {
 		this.man.addClass("invisible");
 		this.woman.addClass("invisible");
 	};
 
 	/**
-	 * [initManWoman Инициализация фигур партнёра и партнёрши]
+	 * Инициализация фигур партнёра и партнёрши
 	 */
 	this.initManWoman = function() {
 		if ((!this.man) || (!this.woman)) {
@@ -509,13 +512,35 @@ function DanceAnimation(id) {
 		};
 	}(this);
 
-	// Позиционирование фигуры
+	/**
+	 * Позиционирование фигуры
+	 * @param  {Object} figure Объект фигуры танцора
+	 * @param  {Number} x      Координата центра X
+	 * @param  {Number} y      Координата центра Y
+	 * @param  {Number} angle  Угол поворота (при 0 фигура стоит вертикально)
+	 */
 	this.positionFigure = function(figure, x, y, angle) {
 		figure.transform('t' + Math.floor(x - 20) + ',' + Math.floor(y - 20) + 'r' + Math.floor(angle));
 	};
 
-	// Анимация фигуры по траектории
+	/**
+	 * Анимация фигуры по траектории
+	 * @param  {Object} self Указатель на объект анимации
+	 * @return {Function}    Функция инициализации анимации
+	 */
 	this.animateFigurePath = function(self) {
+		/**
+		 * Функция инициализации анимации
+		 * @param  {Object} figure     Фигура танцора для анимации
+		 * @param  {Number} startAngle Угол наклона фигуры относительно траектории
+		 * @param  {Object} path       Path-объект траектории движения
+		 * @param  {Number} startLen   Позиция начала движения от начала траектории
+		 * @param  {Number} stopLen    Позиция конца движения от начала траектории
+		 * @param  {Number} timeLength Время движения (мс)
+		 * @param  {Number} times      Количество тактов
+		 * @param  {Number} direction  Константа, определяющая направление движения
+		 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
+		 */
 		return 	function(figure, startAngle, path, startLen, stopLen, timeLength, times, direction, easing) {
 			var angle = startAngle;
 			if ((direction === self.DIRECTION_BACKWARD) || (direction === self.DIRECTION_FROM_END_TO_START)) {
@@ -554,6 +579,11 @@ function DanceAnimation(id) {
 		};
 	}(this);
 
+	/**
+	 * Анимация мужской фигуры по траектории
+	 * @param  {Object} self Указатель на объект анимации
+	 * @return {Function}    Функция инициализации анимации
+	 */
 	this.animateMan = function(self) {
 		return function(path, startLen, stopLen, timeLength, times, direction, startAngle) {
 			startAngle = (typeof startAngle === 'undefined') ? 90 : startAngle;
@@ -561,6 +591,11 @@ function DanceAnimation(id) {
 		};
 	}(this);
 
+	/**
+	 * Анимация женской фигуры по траектории
+	 * @param  {Object} self Указатель на объект анимации
+	 * @return {Function}    Функция инициализации анимации
+	 */
 	this.animateWoman = function(self) {
 		return function(path, startLen, stopLen, timeLength, times, direction, startAngle) {
 			startAngle = (typeof startAngle === 'undefined') ? 90 : startAngle;
@@ -568,13 +603,20 @@ function DanceAnimation(id) {
 		};
 	}(this);
 
-	this.path = function(pathStr, gender, id, transparent) {
+	/**
+	 * Создание Path-объекта траектории
+	 * @param  {String} pathStr      Описание траектории в формате SVG path
+	 * @param  {String} gender       Пол
+	 * @param  {Boolean} hidden      Создать невидимым
+	 * @return {Object}              Path-объект траектории
+	 */
+	this.path = function(pathStr, gender, hidden) {
 		var resultPath = this.svg.path(pathStr)
 				.attr({
 					id: gender + "_path_" + this.paths.length
 				})
 				.addClass("path");
-		if (transparent) {
+		if (hidden) {
 			resultPath.addClass("invisible");
 		}
 		if (gender === "man") {
@@ -596,12 +638,23 @@ function DanceAnimation(id) {
 		};
 	}(this);
 
+	/**
+	 * Установить фигуру танцора на определённую позицию
+	 * @param  {Object} figure Объект фигуры танцора
+	 * @param  {Object} coords Объект с описанием координат {x, y, angle}
+	 */
 	this.startPosFigure = function(figure, coords) {
 		this.positionFigure(figure, coords.x, coords.y, coords.angle);
 		figure.removeClass("straightBeatFigure");
 		figure.removeClass("invisible");
 	}
 
+	/**
+	 * Установить фигуры танцоров на определённые позиции
+	 * @param  {Object} leftCoords  Объект с описанием координат левой позиции {x, y, angle}
+	 * @param  {Object} rightCoords Объект с описанием координат правой позиции {x, y, angle}
+	 * @param  {String} manPosition Позиция партнёра
+	 */
 	this.startPosition = function(leftCoords, rightCoords, manPosition) {
 		this.clearPaths();
 		var self = this;
@@ -619,19 +672,12 @@ function DanceAnimation(id) {
 		}
 	}
 
+	/**
+	 * Установить фигуры танцоров на начальные позиции
+	 * @param {String} manPosition Позиция партнёра
+	 */
 	this.setAtStart = function(manPosition) {
 		this.startPosition(this.startPos.left, this.startPos.right,	manPosition);
 	};
-
-	this.getPaths = function(manPosition, leftPath, rightPath) {
-		var paths = {};
-		if (manPosition === "left") {
-			paths.manPath = this.manPath(leftPath);
-			paths.womanPath = this.womanPath(rightPath);
-		} else {
-			paths.manPath = this.manPath(rightPath);
-			paths.womanPath = this.womanPath(leftPath);
-		}
-	}
 }
 
