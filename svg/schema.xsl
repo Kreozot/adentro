@@ -16,8 +16,6 @@
 		<xsl:param name="pos" />
 		<!-- Текущая строка -->
 		<xsl:param name="line" />
-		<!-- Начальная позиция теущего блока в тактах -->
-		<xsl:param name="startPos" />
 		<!-- Ширина одного такта в пикселях -->
 		<xsl:param name="oneTimeWidth" />
 
@@ -78,7 +76,6 @@
 			<xsl:with-param name="pos" select="$pos + @times" />
 			<xsl:with-param name="line" select="$line" />
 			<xsl:with-param name="oneTimeWidth" select="$oneTimeWidth" />
-			<xsl:with-param name="startPos" select="$startPos" />
 		</xsl:apply-templates>
 	</xsl:template>
 
@@ -88,8 +85,6 @@
 		<xsl:param name="pos" />
 		<!-- Текущая строка -->
 		<xsl:param name="line" />
-		<!-- Начальная позиция теущего блока в тактах -->
-		<xsl:param name="startPos" />
 		<!-- Ширина одного такта в пикселях -->
 		<xsl:param name="oneTimeWidth" />
 
@@ -103,7 +98,6 @@
 			<xsl:with-param name="line" select="$line" />
 			<xsl:with-param name="pos" select="$pos" />
 			<xsl:with-param name="oneTimeWidth" select="$oneTimeWidth" />
-			<xsl:with-param name="startPos" select="$startPos" />
 		</xsl:apply-templates>
 	</xsl:template>
 
@@ -115,7 +109,6 @@
 		<xsl:apply-templates select="./element[1]">
 			<xsl:with-param name="pos" select="0" />
 			<xsl:with-param name="line" select="position()" />
-			<xsl:with-param name="startPos" select="0" />
 			<xsl:with-param name="oneTimeWidth" select="$oneTimeWidth" />
 		</xsl:apply-templates>
 	</xsl:template>
