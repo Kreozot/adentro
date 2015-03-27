@@ -163,16 +163,17 @@ var getLanguageLink = function(lang) {
 };
 
 /**
- * Если IE9 и ниже, то редирект на страницу, иначе - сделать pushState в History
+ * Если поддерживается History API, то pushState, иначе - редирект
  * @param  {Object} params Параметры запроса
  * @param  {String} title  Заголовок страницы
  * @param  {String} query  Фрагмент URL запроса
  */
 var pushStateOrRedirect = function(params, title, query) {
-	if (History.isInternetExplorer() && (History.getInternetExplorerMajorVersion() <= 9)) {
-		window.location.href = query;
+	if (supports_history_api) {
+		history.pushState(params, title, query);
+		loadSchemaByState();
 	} else {
-		History.pushState(params, title, query);
+		window.location.href = query;
 	}
 }
 
@@ -267,11 +268,11 @@ var showMusic = function(musicId) {
  * @return {Boolean} True если схема была загружена
  */
 var loadSchemaByState = function() {
-	var state = History.getState();
-	if ((state.data) && (state.data.schema)) {
-		context.schema = state.data.schema;
-		context.animation = state.data.animation;
-		context.music = state.data.music;
+	var state = history.state;
+	if (state.schema) {
+		context.schema = state.schema;
+		context.animation = state.animation;
+		context.music = state.music;
 		if (context.editor) {
 			loadSchemaEditorByName(context.schema, context.music);
 		} else {

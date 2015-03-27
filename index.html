@@ -44,10 +44,6 @@
 		<script type="text/javascript" src="js/thirdparty/URI.min.js"></script>
 		<script type="text/javascript" src="js/thirdparty/hopscotch.min.js"></script>
 		<!-- /build -->
-
-		<script type="text/javascript" src="js/thirdparty/history.js"></script>
-		<script type="text/javascript" src="js/thirdparty/history.adapter.jquery.js"></script>
-		<script type="text/javascript" src="js/thirdparty/history.html4.js"></script>
 		
 		<!-- build:js js/script.min.js -->
 		<script type="text/javascript" src="js/jquery-classes.js"></script>
@@ -106,6 +102,7 @@
 					</ul>
 				</li>
 				<li><a href="javascript:showSchema('HuayraMuyoj')">Huayra Muyoj</a></li>
+				<li><a href="javascript:showZapateo('Basico')" class="special">Zapateo</a></li>
 			</ul>
 			<div id="lang">
 			</div>
@@ -189,10 +186,13 @@
 						swfPath: "/js/thirdparty",
 						supplied: "mp3"
 					});
-					History.options.html4Mode = true;
-					History.Adapter.bind(window, 'statechange', loadSchemaByState);
+					window.addEventListener("popstate", function(e) {
+					    loadSchemaByState();
+					});
+					
 
 					if (!loadSchemaByUrl()) {
+						loadSchemaByState();
 						showSchema("Chacarera");
 					}
 

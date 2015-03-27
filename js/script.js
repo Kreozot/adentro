@@ -13,18 +13,31 @@ var mod = function(upVal, downVal) {
 	return modVal;
 }
 
+function supports_history_api() {
+  return !!(window.history && history.pushState);
+}
+
+/**
+ * Получить ссылку на dom объекта
+ * @param  {String} id Идентификатор объекта
+ * @return {String}    Ссылка на dom объекта
+ */
+var getObjectDom = function(id) {
+	var object = document.getElementById(id);
+	if ('contentDocument' in object) {
+		var dom = jQuery(object.contentDocument);
+		return dom;
+	} else {
+		return false;
+	}
+}
+
 /**
  * Получить ссылку на dom svg-схемы
  * @return  {String}  Ссылка на dom svg-схемы
  */
 var getSvgSchemaDom = function() {
-	var svgSchemaObject = document.getElementById('schema');
-	if ('contentDocument' in svgSchemaObject) {
-		var svgSchemaDom = jQuery(svgSchemaObject.contentDocument);
-		return svgSchemaDom;
-	} else {
-		return false;
-	}
+	return getObjectDom('schema');
 }
 
 /**
