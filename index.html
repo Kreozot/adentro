@@ -102,7 +102,7 @@
 					</ul>
 				</li>
 				<li><a href="javascript:showSchema('HuayraMuyoj')">Huayra Muyoj</a></li>
-				<li><a href="javascript:showZapateo('Basico')" class="special">Zapateo</a></li>
+				<!-- <li><a href="javascript:showZapateo('Basico')" class="special">Zapateo</a></li> -->
 			</ul>
 			<div id="lang">
 			</div>
@@ -188,11 +188,9 @@
 					});
 					window.addEventListener("popstate", function(e) {
 					    loadSchemaByState();
-					});
-					
+					});					
 
 					if (!loadSchemaByUrl()) {
-						loadSchemaByState();
 						showSchema("Chacarera");
 					}
 
