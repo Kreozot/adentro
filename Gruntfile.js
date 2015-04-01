@@ -184,7 +184,7 @@ module.exports = function(grunt) {
 					authKey: 'ftpkey'
 				},
 				src: 'build/',
-				dest: 'public_html/'
+				dest: '/'
 			}
 		},
 		jsdoc: {

@@ -152,7 +152,7 @@
 						stroke-opacity: 0;
 						stroke: red;
 						stroke-width: 3px;
-							pointer-events: none;
+						pointer-events: none;
 					}
 					.active-frame.current {
 						stroke-opacity: 1;
@@ -164,21 +164,21 @@
 					}
 
 					.element-text {
-							text-anchor: middle;
-							font-family: Geneva, Arial, Helvetica, sans-serif;
-							font-size: 8pt;
+						text-anchor: middle;
+						font-family: Geneva, Arial, Helvetica, sans-serif;
+						font-size: 8pt;
 					}
 
 					.element-text.current {
-							font-weight: bold;
+						font-weight: bold;
 					}
 
 					.times-count-text {
-							text-anchor: middle;
-							font-family: Geneva, Arial, Helvetica, sans-serif;
-							fill: #2F4F4F;
-							font-size: 8pt;
-							pointer-events: none;
+						text-anchor: middle;
+						font-family: Geneva, Arial, Helvetica, sans-serif;
+						fill: #2F4F4F;
+						font-size: 8pt;
+						pointer-events: none;
 					}
 
 					.vuelta {

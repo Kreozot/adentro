@@ -47,12 +47,16 @@
 		
 		<!-- build:js js/script.min.js -->
 		<script type="text/javascript" src="js/jquery-classes.js"></script>
+		<script type="text/javascript" src="js/loading/content_switch.js"></script>
+		<script type="text/javascript" src="js/loading/animation_loading.js"></script>
+		<script type="text/javascript" src="js/loading/info_loading.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
 		<script type="text/javascript" src="js/timing.js"></script>
 		<script type="text/javascript" src="js/timing-generator.js"></script>
 		<script type="text/javascript" src="js/navigation.js"></script>
 		<script type="text/javascript" src="js/player.js"></script>
 		<script type="text/javascript" src="js/tour.js"></script>
+		<script type="text/javascript" src="js/zapateo.js"></script>
 		<!-- /build -->
 
 		<!--<![endif]-->
@@ -102,7 +106,6 @@
 					</ul>
 				</li>
 				<li><a href="javascript:showSchema('HuayraMuyoj')">Huayra Muyoj</a></li>
-				<!-- <li><a href="javascript:showZapateo('Basico')" class="special">Zapateo</a></li> -->
 			</ul>
 			<div id="lang">
 			</div>
@@ -111,7 +114,6 @@
 		<div class="title">
 			<h1 id="danceName"></h1>
 		</div>
-		<div id="animationLinks"></div>
 
 		<div class="center">
 			<div id="jplayer" class="jp-jplayer"></div>
@@ -155,18 +157,20 @@
 		</div>
 
 		<div class="center" id="schemaDiv"></div>
-		<div class="center" id="animationDiv"></div>
-		<div class="center" id="showInfoLink"></div>
-		<div class="center" id="info"></div>
+
+		<div class="content_menu" id="content_menu"></div>
+		<div class="center" id="content"></div>
 		
 		<!-- build:js js/animation.min.js -->
+		<script type="text/javascript" src="js/animations/commons/utils.js"></script>
+		<script type="text/javascript" src="js/animations/commons/elements.js"></script>
 		<script type="text/javascript" src="js/animations/animation.js"></script>
 		<script type="text/javascript" src="js/animations/animation4.js"></script>
 		<script type="text/javascript" src="js/animations/animation_gato_style.js"></script>
 		<script type="text/javascript" src="js/animations/gato.js"></script>
 		<script type="text/javascript" src="js/animations/chacarera.js"></script>
 		<script type="text/javascript" src="js/animations/chacarera4.js"></script>
-		<script type="text/javascript" src="js/animations/chacareraCadena.js"></script>
+		<!-- <script type="text/javascript" src="js/animations/chacarera_cadena.js"></script> -->
 		<script type="text/javascript" src="js/animations/bailecito.js"></script>
 		<script type="text/javascript" src="js/animations/escondido.js"></script>
 		<script type="text/javascript" src="js/animations/remedio.js"></script>
@@ -188,7 +192,7 @@
 					});
 					window.addEventListener("popstate", function(e) {
 					    loadSchemaByState();
-					});					
+					});
 
 					if (!loadSchemaByUrl()) {
 						showSchema("Chacarera");
@@ -196,7 +200,7 @@
 
 					if ($.cookie('tourPassed_' + i18n.lng()) != "true") {
 						hopscotch.startTour(tour());
-						$.cookie('tourPassed_' + i18n.lng(), 'true', { expires: 365, path: '/' });
+						$.cookie('tourPassed_' + i18n.lng(), 'true', {expires: 365, path: '/'});
 					}
 
 					showLanguageLinks();

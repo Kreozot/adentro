@@ -176,47 +176,6 @@ var initSvgSchemaEditor = function() {
 };
 
 /**
- * Получить описание определённого класса анимации из массива
- * @param  {Object} animationClassDefs  Массив описаний классов анимаций (из navigation.js)
- * @param  {String} animationId         Идентификатор нужного класса
- * @return {Object}                     Описание класса в виде {id, name, title}
- */
-var getAnimationClassDef = function(animationClassDefs, animationId) {
-	for (var i = 0; i < animationClassDefs.length; i++) {
-		if (animationId === animationClassDefs[i].id) {
-			return animationClassDefs[i];
-		}
-	}
-	return animationClassDefs[0];
-}
-
-/**
- * Показать ссылки на варианты анимации
- * @param  {Object} animationClassDefs  Массив описаний анимаций
- * @param  {String} animationId         Идентификатор текущей анимации
- */
-var showAnimationLinks = function(animationClassDefs, animationId) {
-	var currentClassDef = getAnimationClassDef(animationClassDefs, animationId);
-
-	var getAnimationLinks = function(animationClassDefs) {
-		var result = "";
-		for (var i = 0; i < animationClassDefs.length; i++) {
-			if (animationClassDefs[i].id === currentClassDef.id) {
-				result += i18n.t(animationClassDefs[i].title);
-			} else {					
-				result += '<a href="javascript:showAnimation(\'' + animationClassDefs[i].id + '\')" data-i18n="' + animationClassDefs[i].title + '">' +
-					i18n.t(animationClassDefs[i].title) + "</a>";
-			}
-			if (i < animationClassDefs.length - 1) {
-				result += ", ";
-			}
-		}
-		return result;
-	}
-	$("#animationLinks").html(getAnimationLinks(animationClassDefs));
-}
-
-/**
  * Отобразить ссылки на музыкальные композиции
  * @param  {Object} musicIds          Массив идентификаторов композиций
  * @param  {String} currentMusicId    Идентификатор текущей композиции
@@ -229,7 +188,7 @@ var showMusicLinks = function(musicIds, currentMusicId, showEmptyTiming) {
 	}
 
 	var getMusicLinks = function() {
-		var result = 'Composition: <select id="musicSelect">';
+		var result = i18n.t("other.composition") + ': <select id="musicSelect">';
 		var count = 0;
 		for (var i = 0; i < musicIds.length; i++) {
 			if (!jQuery.isEmptyObject(music.get(musicIds[i]).schema) || showEmptyTiming) {
@@ -290,41 +249,6 @@ var showLanguageLinks = function() {
 };
 
 /**
- * Загрузка информации
- * @param  {String} infoName Имя файла с информацией (без расширения)
- */
-var loadInfo = function(infoName) {
-	$("#info").css("display", "none");
-	if (infoName) {
-		$("#info").load("info/" + infoName + ".inc", function() {
-			$("#showInfoLink").html('<a href="javascript:showInfo()">Показать информацию</a>');
-			$("#showInfoLink").css("display", "block");
-		});
-	} else {
-		$("#showInfoLink").css("display", "none");
-	}
-};
-
-/**
- * Отображение информации
- */
-var showInfo = function() {
-	$("#info").css("display", "block");
-	$("#showInfoLink").css("display", "none");
-}
-
-/**
- * Загрузка анимации
- * @param  {Object} animationClass  Класс анимации
- */
-var loadAnimation = function(animationClass) {
-	$.animation = new window[animationClass]("animation");
-	$("#animation").attr("width", $.animation.width)
-			.attr("height", $.animation.height)
-			.attr("viewBox", "0 0 " + $.animation.width + " " + $.animation.height);	
-};
-
-/**
  * Загрузка схемы
  * @param  {String} name           Название
  * @param  {String} svgName        Имя svg-файла схемы без расширения
@@ -335,23 +259,13 @@ var loadAnimation = function(animationClass) {
  * @param  {String} infoName       Имя файла с информацией (без расширения)
  */
 var loadSchema = function(name, svgName, musicIds, musicId, animationClass, animationId, infoName) {
+	// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
 	$("#danceName").html(name);
 	$("#schemaDiv").html('<object data="svg/' + svgName + '.svg" type="image/svg+xml" id="schema"></object>');
-	$("#animationDiv").html('<svg id="animation" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>');
-
-	if (typeof animationClass === 'object') {
-		showAnimationLinks(animationClass, animationId);
-		var currentClassDef = getAnimationClassDef(animationClass, animationId);
-		animationClass = currentClassDef.name;
-	} else {
-		$("#animationLinks").html("");
-	}
 
 	musicId = musicId ? musicId : musicIds[0];
 	showMusicLinks(musicIds, musicId);
 	var musicSchema = music.get(musicId);
-
-	loadInfo(infoName);
 
 	var svgobject = document.getElementById('schema');
 	$(svgobject).load(function() {
@@ -360,8 +274,20 @@ var loadSchema = function(name, svgName, musicIds, musicId, animationClass, anim
 				.unbind($.jPlayer.event.pause);
 		loadMusicSchema(musicSchema);
 		initSvgSchema();
-		
-		loadAnimation(animationClass);
+
+		ContentSwitch.clearContent();
+
+		AnimationLoader.loadAnimationBlock();	
+		if (typeof animationClass === 'object') {
+			AnimationLoader.showAnimationLinks(animationClass, animationId);
+			var currentClassDef = AnimationLoader.getAnimationClassDef(animationClass, animationId);
+			animationClass = currentClassDef.name;
+		}		
+		AnimationLoader.loadAnimation(animationClass);
+
+		InfoLoader.loadInfoBlock(infoName);
+
+		ContentSwitch.show("animation_block");
 	});
 };
 

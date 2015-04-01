@@ -12,13 +12,15 @@ var schemaParamsMap = {
 		svgName: "zamba_alegre",
 		music: ["zamba_alegre"],
 		animation: [{id: "classic", name: "ZambaAnimation", title: "animation_links.common"},
-					{id: "simple", name: "ZambaSimpleAnimation", title: "animation_links.simple"}]
+					{id: "simple", name: "ZambaSimpleAnimation", title: "animation_links.simple"}],
+		zapateo: true
 	},
 	Gato: {
 		name: "Gato",
 		svgName: "gato",
 		music: ["gato"],
-		animation: "GatoAnimation"
+		animation: "GatoAnimation",
+		zapateo: true
 	},
 	GatoCuyano: {
 		name: "Gato Cuyano",
@@ -39,7 +41,8 @@ var schemaParamsMap = {
 		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
 					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
 					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/],
-		info: "chacarera"
+		info: "chacarera",
+		zapateo: true
 	},
 	Chacarera6: {
 		name: "Chacarera on 6",
@@ -48,7 +51,8 @@ var schemaParamsMap = {
 		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
 					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
 					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/],
-		info: "chacarera"
+		info: "chacarera",
+		zapateo: true
 	},
 	ChacareraDoble: {
 		name: "Chacarera doble",
@@ -57,7 +61,8 @@ var schemaParamsMap = {
 		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
 					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
 					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/],
-		info: "chacarera"
+		info: "chacarera",
+		zapateo: true
 	},
 	ChacareraDoble6: {
 		name: "Chacarera doble on 6",
@@ -66,7 +71,8 @@ var schemaParamsMap = {
 		animation: [{id: "onTwo", name: "ChacareraAnimation", title: "animation_links.two_people"},
 					{id: "onFour", name: "Chacarera4Animation", title: "animation_links.four_people"}/*,
 					{id: "cadena", name: "ChacareraCadenaAnimation", title: "Cadena"}*/],
-		info: "chacarera"
+		info: "chacarera",
+		zapateo: true
 	},
 	Bailecito: {
 		name: "Bailecito",
@@ -78,25 +84,29 @@ var schemaParamsMap = {
 		name: "Escondido",
 		svgName: "escondido",
 		music: ["escondido"],
-		animation: "EscondidoAnimation"
+		animation: "EscondidoAnimation",
+		zapateo: true
 	},
 	Remedio: {
 		name: "Remedio",
 		svgName: "remedio",
 		music: ["remedio"],
-		animation: "RemedioAnimation"
+		animation: "RemedioAnimation",
+		zapateo: true
 	},
 	RemedioAtamisqueno: {
 		name: "Remedio Atamisqueño",
 		svgName: "remedio_atamisqueno",
 		music: ["remedio_atamisqueno"],
-		animation: "RemedioAnimation"
+		animation: "RemedioAnimation",
+		zapateo: true
 	},
 	HuayraMuyoj: {
 		name: "Huayra Muyoj",
 		svgName: "huayra_muyoj",
 		music: ["huayra_muyoj"],
-		animation: "HuayraMuyojAnimation"
+		animation: "HuayraMuyojAnimation",
+		zapateo: true
 	}
 };
 
@@ -171,7 +181,6 @@ var getLanguageLink = function(lang) {
 var pushStateOrRedirect = function(params, title, query) {
 	if (supports_history_api) {
 		history.pushState(params, title, query);
-		loadSchemaByState();
 	} else {
 		window.location.href = query;
 	}
@@ -220,6 +229,7 @@ var getContextFromUrl = function() {
 var showSchema = function(schemaId) {
 	this.pushStateOrRedirect({schema: schemaId}, 
 		schemaParamsMap.getName(schemaId) + " - Adentro", getRelativeUrl(schemaId));
+	loadSchemaByState();
 };
 
 /**
@@ -228,6 +238,7 @@ var showSchema = function(schemaId) {
  */
 var showAnimation = function(animationId) {
 	context.animation = animationId;
+
 	this.pushStateOrRedirect({schema: context.schema, animation: context.animation, music: context.music}, 
 			schemaParamsMap.getName(context.schema) + " - Adentro", 
 			getRelativeUrl(context.schema, context.animation, context.music));
@@ -235,14 +246,13 @@ var showAnimation = function(animationId) {
 	var schemaParams = schemaParamsMap[context.schema];
 	var animationClassDefs = schemaParams.animation;
 	if (typeof animationClassDefs === 'object') {
-		var animationClassDef = getAnimationClassDef(animationClassDefs, animationId);
+		var animationClassDef = AnimationLoader.getAnimationClassDef(animationClassDefs, animationId);
 		var animationClass = animationClassDef.name;
 	} else {		
 		var animationClass = animationClassDefs;
 	}
-	loadAnimation(animationClass);
-	showAnimationLinks(animationClassDefs, animationId);
-	showLanguageLinks();
+	AnimationLoader.loadAnimation(animationClass);
+	AnimationLoader.showAnimationLinks(animationClassDefs, animationId);s
 };
 
 /**
