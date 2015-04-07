@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?xml-stylesheet href="./zapateo.xsl" type="text/xsl" ?>
 
-<zapateo>
+<zapateo firstBeat="1">
 	<move length="0.5" leg="1" class="planta">Planta</move>
 	<move length="0.5" leg="2" class="planta">Planta</move>
 	<move length="1" leg="2" class="planta">Planta</move>
@@ -9,5 +9,5 @@
 	<move length="1" leg="2" class="planta">Planta</move>
 	<move length="1" leg="1" class="planta">Planta + Jump</move>
 	<move length="1" leg="2" class="planta">Planta</move>
-	<move length="1" leg="2" class="planta">Planta</move>
+	<move length="2" leg="2" class="planta">Planta</move>
 </zapateo>

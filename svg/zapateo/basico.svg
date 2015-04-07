@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?xml-stylesheet href="./zapateo.xsl" type="text/xsl" ?>
 
-<zapateo>
+<zapateo firstBeat="5">
 	<move length="1" leg="1" class="taco" visualization="taco">Taco</move>
 	<move length="1" leg="1" class="punta" visualization="punta">Punta</move>
 	<move length="1" leg="2" class="planta" visualization="planta">Planta</move>
