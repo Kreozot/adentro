@@ -250,21 +250,17 @@ var showLanguageLinks = function() {
 
 /**
  * Загрузка схемы
- * @param  {String} name           Название
- * @param  {String} svgName        Имя svg-файла схемы без расширения
- * @param  {String} musicIds       Массив идентификаторов музыкальных композиций
+ * @param  {String} schemaParams   Объект параметров схемы
  * @param  {String} musicId    	   Идентификатор музыки
- * @param  {Object} animationClass Класс анимации (или список доступных классов)
  * @param  {String} animationId    Идентификатор конкретной анимации (если в animationClass пришёл список)
- * @param  {String} infoName       Имя файла с информацией (без расширения)
  */
-var loadSchema = function(name, svgName, musicIds, musicId, animationClass, animationId, infoName) {
+var loadSchema = function(schemaParams, musicId, animationId) {
 	// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
-	$("#danceName").html(name);
-	$("#schemaDiv").html('<object data="svg/' + svgName + '.svg" type="image/svg+xml" id="schema"></object>');
+	$("#danceName").html(schemaParams.name);
+	$("#schemaDiv").html('<object data="svg/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
 
-	musicId = musicId ? musicId : musicIds[0];
-	showMusicLinks(musicIds, musicId);
+	musicId = musicId || schemaParams.music[0];
+	showMusicLinks(schemaParams.music, musicId);
 	var musicSchema = music.get(musicId);
 
 	var svgobject = document.getElementById('schema');
@@ -278,6 +274,7 @@ var loadSchema = function(name, svgName, musicIds, musicId, animationClass, anim
 		ContentSwitch.clearContent();
 
 		AnimationLoader.loadAnimationBlock();	
+		var animationClass = schemaParams.animation;
 		if (typeof animationClass === 'object') {
 			AnimationLoader.showAnimationLinks(animationClass, animationId);
 			var currentClassDef = AnimationLoader.getAnimationClassDef(animationClass, animationId);
@@ -285,7 +282,11 @@ var loadSchema = function(name, svgName, musicIds, musicId, animationClass, anim
 		}		
 		AnimationLoader.loadAnimation(animationClass);
 
-		InfoLoader.loadInfoBlock(infoName);
+		InfoLoader.loadInfoBlock(schemaParams.info);
+
+		// if (schemaParams.zapateo) {
+		// 	ZapateoLoader.loadZapateoBlock("repike");
+		// }
 
 		ContentSwitch.show("animation_block");
 	});
@@ -293,22 +294,20 @@ var loadSchema = function(name, svgName, musicIds, musicId, animationClass, anim
 
 /**
  * Загрузка редактора тайминга
- * @param  {String} name         Название
- * @param  {String} svgName      Имя svg-файла схемы без расширения
- * @param  {String} musicIds     Массив идентификаторов музыкальных композиций
- * @param  {String} musicId    	 Идентификатор музыки
+ * @param  {String} schemaParams   Объект параметров схемы
+ * @param  {String} musicId    	   Идентификатор музыки
  */
-var loadSchemaEditor = function(name, svgName, musicIds, musicId) {
-	$("#danceName").html(name + " (editor mode)");
-	$("#schemaDiv").html('<object data="svg/' + svgName + '.svg" type="image/svg+xml" id="schema"></object>');
+var loadSchemaEditor = function(schemaParams, musicId) {
+	$("#danceName").html(schemaParams.name + " (editor mode)");
+	$("#schemaDiv").html('<object data="svg/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
 	var svgobject = document.getElementById('schema');
 	$(svgobject).load(function() {
 		$(playerSelector).unbind($.jPlayer.event.timeupdate)
 				.unbind($.jPlayer.event.ended)
 				.unbind($.jPlayer.event.pause);
 
-		musicId = musicId ? musicId : musicIds[0];
-		showMusicLinks(musicIds, musicId, true);
+		musicId = musicId || schemaParams.music[0];
+		showMusicLinks(schemaParams.music, musicId, true);
 		var musicSchema = music.get(musicId);
 
 		loadMusicSchema(musicSchema);

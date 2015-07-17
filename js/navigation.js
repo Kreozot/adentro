@@ -3,8 +3,11 @@ var schemaParamsMap = {
 		name: "Zamba",
 		svgName: "zamba",
 		music: ["el_beso", "zamba_cantora"],
-		animation: [{id: "classic", name: "ZambaAnimation", title: "animation_links.common"},
-					{id: "simple", name: "ZambaSimpleAnimation", title: "animation_links.simple"}],
+		animation: [
+			{id: "classic", name: "ZambaAnimation", title: "animation_links.common"},
+			{id: "classic2", name: "Zamba2Animation", title: "animation_links.common2"},
+			{id: "simple", name: "ZambaSimpleAnimation", title: "animation_links.simple"}
+		],
 		info: "zamba"
 	},
 	ZambaAlegre: {
@@ -141,7 +144,7 @@ var loadSchemaByName = function(name, animationId, musicId) {
 	if (!schemaParams) {
 		schemaParams = schemaParamsMap.Chacarera;
 	}
-	loadSchema(schemaParams.name, schemaParams.svgName, schemaParams.music, musicId, schemaParams.animation, animationId, schemaParams.info);
+	loadSchema(schemaParams, musicId, animationId);
 	showLanguageLinks();
 };
 
@@ -155,7 +158,7 @@ var loadSchemaEditorByName = function(name, musicId) {
 	if (!schemaParams) {
 		schemaParams = schemaParamsMap.Chacarera;
 	}
-	loadSchemaEditor(schemaParams.name, schemaParams.svgName, schemaParams.music, musicId);
+	loadSchemaEditor(schemaParams, musicId);
 	showLanguageLinks();
 };
 
