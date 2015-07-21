@@ -127,14 +127,15 @@ var initSvgSchema = function() {
 
 		var timeupdateEvent = function(svgdom) {
 			return function(event) {
-				// Есле остановлено
-				if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
+				var playerStatus = event.jPlayer.status;
+				// Если остановлено
+				if ((playerStatus.paused) && (playerStatus.currentTime == 0)) {
 					hideCurrentElement(svgdom);
-				} else if ((!event.jPlayer.status.paused) && 
-						(!event.jPlayer.status.waitForPlay) && 
-						(!event.jPlayer.status.waitForLoad)) {
+				} else if ((!playerStatus.paused) && 
+						(!playerStatus.waitForPlay) && 
+						(!playerStatus.waitForLoad)) {
 					$.animation.resume();
-					var time = event.jPlayer.status.currentTime;
+					var time = playerStatus.currentTime;
 					var element = getElement(time);
 					if ($(playerSelector).data("currentElement") != element['name']) {
 						$(playerSelector).data("currentElement", element['name']);
@@ -152,7 +153,8 @@ var initSvgSchema = function() {
 		}(svgdom);
 		var pauseEvent = function(svgdom) {
 			return function(event) {
-				if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime > 0)) {
+				var playerStatus = event.jPlayer.status;
+				if ((playerStatus.paused) && (playerStatus.currentTime > 0)) {
 					$.animation.pause();
 				};
 			};
