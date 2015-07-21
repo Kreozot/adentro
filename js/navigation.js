@@ -215,7 +215,7 @@ var getContextFromUrl = function() {
 	var segments = url.segment();
 	var params = url.query(true);
 	var context = {};
-	context.schema = params.music;
+	context.schema = params.schema;
 	context.animation = params.animation;
 	//TODO: Настройка алиасов URL. Тогда можно будет сделать нормальный relative path
 	// context.schema = segments[0];
