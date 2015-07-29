@@ -125,7 +125,7 @@ module.exports = function(grunt) {
 		},
 		msxsl: {
 			build: {
-				src: 'svg/*.svg'
+				src: 'svg/**/*.svg'
 			}
 		},
 		clean: {
@@ -146,7 +146,6 @@ module.exports = function(grunt) {
 						src: [
 							'img/**/*',
 							'locales/**/*',
-							'svg/compiled/*',
 							'js/thirdparty/*.swf',
 							'js/thirdparty/history.js',
 							'js/thirdparty/history.html4.js',
@@ -259,7 +258,7 @@ module.exports = function(grunt) {
 	grunt.registerMultiTask('msxsl', 'Convert XML files with XSL stylesheet using MSXSL', 
 		processFilesWithTool(function(f) {
 			var fileName = f.split("/").pop();
-			return '"./tools/msxsl.exe" ' + f + ' svg/schema.xsl -o svg/compiled/' + fileName;
+			return '"./tools/msxsl.exe" ' + f + ' svg/schema.xsl -o build/svg/compiled/' + fileName;
 		})
 	);
 
@@ -282,4 +281,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('deploy', ['ftp-deploy:production']);
 	grunt.registerTask('docs', ['jsdoc:build']);
 
+	grunt.registerTask('test', ['build']);
 };

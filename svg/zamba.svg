@@ -10,7 +10,7 @@
 		<element class="arresto" times="16" id="arrestoDoble" visualization="arrestoDoble" manPosition="right">Arresto doble</element>
 		<bar/>
 		<element class="vuelta" times="8" id="mediaVuelta2" visualization="mediaVuelta" manPosition="right">Media vuelta</element>
-		<element class="arresto" times="8" id="arresto2" visualization="arresto" manPosition="left">Arresto</element>
+		<element class="arresto" times="8" id="arresto2" visualization="arresto2" manPosition="left">Arresto</element>
 		<element class="coronacion" times="7" id="mediaVueltaCoronacion" visualization="mediaVueltaCoronacion" manPosition="left" yOffset="true">Media vuelta y coronación</element>
 	</part>
 	<part>
@@ -21,7 +21,7 @@
 		<element class="arresto" times="16" id="arrestoDoble_2" visualization="arrestoDoble" manPosition="left">Arresto doble</element>
 		<bar/>
 		<element class="vuelta" times="8" id="mediaVuelta2_2" visualization="mediaVuelta" manPosition="left">Media vuelta</element>
-		<element class="arresto" times="8" id="arresto2_2" visualization="arresto" manPosition="right">Arresto</element>
+		<element class="arresto" times="8" id="arresto2_2" visualization="arresto2" manPosition="right">Arresto</element>
 		<element class="coronacion" times="7" id="mediaVueltaCoronacion_2" visualization="mediaVueltaCoronacion" manPosition="right" yOffset="true">Media vuelta y coronación</element>
 	</part>
 </schema>

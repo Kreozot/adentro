@@ -2,7 +2,8 @@
 	"animation_links": {
 		"two_people": "На двоих",
 		"four_people": "На четверых",
-		"common": "Обычная (усреднённая)",
+		"common": "Вариант 1",
+		"common2": "Вариант 2",
 		"simple": "Упрощённая"
 	},
 	"tour": {

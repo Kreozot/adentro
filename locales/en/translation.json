@@ -2,7 +2,8 @@
 	"animation_links": {
 		"two_people": "Two people",
 		"four_people": "Four people",
-		"common": "Common",
+		"common": "Common 1",
+		"common2": "Common 2",
 		"simple": "Simple"
 	},
 	"tour": {

@@ -338,7 +338,7 @@ var loadSchemaEditor = function(schemaParams, musicId) {
 				var currentTime = $(playerSelector).data("jPlayer").status.currentTime;
 				if (!timingGenerator.addBeat(currentTime)) {
 					var newTiming = timingGenerator.getTiming();
-					$("#animationDiv").html("<pre>" + JSON.stringify(newTiming, "", 4) + "</pre>");	
+					$("#content").html("<pre>" + JSON.stringify(newTiming, "", 4) + "</pre>");	
 				}
 			}
 		});

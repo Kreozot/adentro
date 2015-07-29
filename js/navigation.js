@@ -110,6 +110,13 @@ var schemaParamsMap = {
 		music: ["huayra_muyoj"],
 		animation: "HuayraMuyojAnimation",
 		zapateo: true
+	},
+	Huella: {
+		name: "Huella",
+		svgName: "huella",
+		music: ["hasta_tu_rancho"],
+		animation: "HuellaAnimation",
+		zapateo: true
 	}
 };
 
