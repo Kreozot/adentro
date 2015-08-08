@@ -89,7 +89,7 @@
 	</xsl:template>
 
 	<xsl:template match="zapateo">
-		<svg width="{$schemaWidth + ($xMargin * 2)}" height="{$height}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<svg width="{$schemaWidth + ($xMargin * 2)}" height="{$height}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-firstBeat="{@firstBeat}">
 			<defs>
 				<style type="text/css">
 					line {
