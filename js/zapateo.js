@@ -1,7 +1,7 @@
 function ZapateoTiming() {
 	/**
 	 * Получить список элементов текущей схемы
-	 * @return {Array} Массив описаний элементов схемы в формате [{id, beatCount}...]
+	 * @return {Object} Объект описания схемы
 	 */
 	this.getElementsList = function() {
 		var elementsList = [];
@@ -14,13 +14,31 @@ function ZapateoTiming() {
 		if ('contentDocument' in svgobject) {
 			var svgdom = jQuery(svgobject.contentDocument);
 
+			var firstBeat = $("svg", svgdom).attr("data-firstBeat");
+
 			$("rect.move", svgdom).each(function(index, element) {
 				addElement(element.dataset.pos, element.dataset.length);
 			});
 
-			return elementsList;
+			var zapateoDef = {
+				firstBeat: firstBeat,
+				elementsList: elementsList
+			};
+			return zapateoDef;
 		};
-	}
+	};
+
+	this.getTiming = function(zapateoDef, fromTime, toTime, beatCount) {
+		var oneBeatLength = (toTime - fromTime) / beatCount;
+		var result = [];
+		for (var i = 0; i < zapateoDef.elementsList.length; i++) {
+			result[i] = {
+				beginTime: fromTime + zapateoDef.pos * oneBeatLength,
+				endTime: fromTime + zapateoDef.pos * oneBeatLength + zapateoDef.length * oneBeatLength
+			};
+			zapateoDef.elementsList[i];
+		};
+	};
 
 	/**
 	 * Загрузка анимации
