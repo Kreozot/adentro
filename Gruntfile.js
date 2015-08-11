@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+	require('load-grunt-tasks')(grunt);
 
 	// Project configuration.
 	grunt.initConfig({
@@ -125,7 +126,8 @@ module.exports = function(grunt) {
 		},
 		msxsl: {
 			build: {
-				src: 'svg/**/*.svg'
+				files: {expand: true, src: ['svg/*.svg'], dest: 'svg/compiled/'},
+				schema: 'svg/schema.xsl'
 			}
 		},
 		clean: {
@@ -145,6 +147,7 @@ module.exports = function(grunt) {
 					{
 						src: [
 							'img/**/*',
+							'svg/compiled/**/*',
 							'locales/**/*',
 							'js/thirdparty/*.swf',
 							'js/thirdparty/history.js',
@@ -193,77 +196,73 @@ module.exports = function(grunt) {
 					destination: 'docs'
 				}
 			}
+		},
+		mkdir: {
+			svg: {
+				options: {
+					create: ['svg/compiled']
+				}
+			}
 		}
 	});
-
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-compress');
-	grunt.loadNpmTasks('grunt-contrib-htmlmin');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-rename');
-	grunt.loadNpmTasks('grunt-xmlmin');
-	grunt.loadNpmTasks('grunt-exec');
-	grunt.loadNpmTasks('grunt-processhtml');
-	// grunt.loadNpmTasks('grunt-ssh-deploy');
-	grunt.loadNpmTasks('grunt-ftp-deploy');
-	grunt.loadNpmTasks('grunt-jsdoc');
 
 	/**
 	 * Функция для задач обработки файлов с помощью сторонних утилит
 	 * @param  {Function} getCommandLine Функция для получения строки комманды (аргумент - путь к файлу)
 	 */
 	function processFilesWithTool(getCommandLine) {
-		return function() {
-			grunt.log.writeln('Processing started...');
-			var exec = require('child_process').exec;
-			var done = grunt.task.current.async();
+		grunt.log.writeln('Processing started...');
+		var exec = require('child_process').exec;
+		var done = this.async();
 
-			var i = 0;
-			this.files.forEach(function(file) {
-				grunt.log.writeln('Processing ' + file.src.length + ' files.');
-
-				file.src.forEach(function(f) { 
-					exec(getCommandLine(f),
-						function(error, stdout, stderr) {
-							if (stdout && (stdout.length > 0)) {
-								grunt.log.writeln('stdout: ' + stdout);
-							}
-							if (stderr && (stderr.length > 0)) {
-								grunt.log.writeln('stderr: ' + stderr);
-							}	
-							if (error !== null) {
-								grunt.log.writeln('exec error: ' + error);
-							}
-							i++;
-							grunt.log.write('+');
-							if (i >= file.src.length) {
-								done(error);
-							}
-						}
-					);
-				});
-			});
-		};
+		var i = 0;
+		var fileList = grunt.file.expand(this.data.files, this.data.files.src);
+		grunt.log.writeln('Processing ' + fileList.length + ' files.');
+		fileList.forEach(function(file) {
+			exec(getCommandLine(file),
+				function(error, stdout, stderr) {
+					if (stdout && (stdout.length > 0)) {
+						grunt.log.writeln('stdout: ' + stdout);
+					}
+					if (stderr && (stderr.length > 0)) {
+						grunt.log.writeln('stderr: ' + stderr);
+					}	
+					if (error !== null) {
+						grunt.log.writeln('exec error: ' + error);
+					}
+					i++;
+					grunt.log.write('+');
+					if (i >= fileList.length) {
+						done(error);
+					}
+				}
+			);
+		});
 	}
 
-	grunt.registerMultiTask('sox', 'Convert MP3 files to WAV using SOX', 
-		processFilesWithTool(function(f) {
+	grunt.registerMultiTask('sox', 'Convert MP3 files to WAV using SOX', function() {
+		processFilesWithTool.call(this, function(f) {
 			return '"./tools/sox.exe" ' + f + ' build/' + f;
-		})
-	);
+		});		
+	});
 
-	grunt.registerMultiTask('msxsl', 'Convert XML files with XSL stylesheet using MSXSL', 
-		processFilesWithTool(function(f) {
+	grunt.registerMultiTask('msxsl', 'Convert XML files with XSL stylesheet using MSXSL', function() {
+		var schema = this.data.schema;
+		var outputFolder = this.data.files.dest;
+		processFilesWithTool.call(this, function(f) {
 			var fileName = f.split("/").pop();
-			return '"./tools/msxsl.exe" ' + f + ' svg/schema.xsl -o build/svg/compiled/' + fileName;
-		})
-	);
+			return '"./tools/msxsl.exe" ' + f + ' ' + schema + ' -o ' + outputFolder + fileName;
+		});
+	});
+
+	grunt.registerTask('compileSvg', [
+		'mkdir:svg',
+		'msxsl'
+	]);
 
 	grunt.registerTask('build', [
-		'clean:build', 
+		'clean:build',
+		'compileSvg',
 		'uglify:build', 
 		'cssmin:build',
 		'xmlmin:build',

@@ -259,7 +259,7 @@ var showLanguageLinks = function() {
 var loadSchema = function(schemaParams, musicId, animationId) {
 	// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
 	$("#danceName").html(schemaParams.name);
-	$("#schemaDiv").html('<object data="svg/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
+	$("#schemaDiv").html('<object data="svg/compiled/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
 
 	musicId = musicId || schemaParams.music[0];
 	showMusicLinks(schemaParams.music, musicId);
