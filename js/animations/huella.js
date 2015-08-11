@@ -5,7 +5,7 @@ function HuellaAnimation(id) {
 		{left:"M 40,160 140,260 240,160 140,60 z",
 		right: "M 560,160 460,60 360,160 460,260 z"});
 
-	this.zapateoElement = new ZapateoElement(this, {
+	this.zapateoElement = new ZapateoElement(this, undefined, {
 		left: "m 40,160 320,0",
 		right: "m 560,160 -320,0"
 	});

@@ -1,15 +1,20 @@
-function ZapateoElement(animation, figure) {
-	ZapateoElement.superclass.constructor.apply(this, [animation, {}, "man", figure]);
+function ZapateoElement(animation, figure, pathStrings) {
+	ZapateoElement.superclass.constructor.apply(this, [animation, pathStrings, "man", figure]);
 
 	this.animationFunction = function(lengthMs, times) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
 		this.animation.animateFigureTime(this.figure, lengthMs, times * 6);
-	}
+	};
 
 	this.drawPath = function(position) {
 		this.animation.manPosition = position;
 		this.position = position;
-	}
+
+		if (pathStrings) {
+			this.path = this.animation.path(this.pathStrings[position], this.gender, hidden);
+			this.pathLength = this.path.getTotalLength() - 1;
+		}
+	};
 }
 extend(ZapateoElement, SingleDanceAnimationElement);
 

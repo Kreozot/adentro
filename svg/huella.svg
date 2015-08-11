@@ -4,8 +4,8 @@
 <schema>
 	<part>
 		<element class="vuelta" times="4" id="mediaVuelta" visualization="mediaVuelta" manPosition="left">Media vuelta</element>
-		<element class="giro" times="4" id="giro" visualization="giro" manPosition="left">Giro</element>
-		<element class="vuelta" times="4" id="mediaVuelta2" visualization="mediaVuelta" manPosition="left">Media vuelta</element>
+		<element class="giro" times="4" id="giro" visualization="giro" manPosition="right">Giro</element>
+		<element class="vuelta" times="4" id="mediaVuelta2" visualization="mediaVuelta" manPosition="right">Media vuelta</element>
 		<element class="giro" times="4" id="giro2" visualization="giro" manPosition="left">Giro</element>
 		<bar/>
 		<element class="zapateo" times="4" id="zapateo" visualization="zapateoZarandeo" manPosition="left" zapateo="true" yOffset="true">Zapateo / Zarandeo</element>
