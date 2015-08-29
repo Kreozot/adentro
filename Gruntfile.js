@@ -37,6 +37,10 @@ module.exports = function(grunt) {
 					],
 					'build/js/script.min.js' : [
 						'js/jquery-classes.js',
+						'js/loading/animation_loading.js',
+						'js/loading/content_switch.js',
+						'js/loading/info_loading.js',
+						// 'js/loading/zapateo_loading.js',
 						'js/script.js',
 						'js/timing.js',
 						'js/timing-generator.js',
@@ -119,17 +123,21 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		sox: {
-			convertmp3: {
-				src: 'music/*/*.mp3'
-			}
-		},
-		msxsl: {
-			build: {
-				files: {expand: true, src: ['svg/*.svg'], dest: 'svg/compiled/'},
-				schema: 'svg/schema.xsl'
-			}
-		},
+		// sox: {
+		// 	musicConvert: {
+		// 		files: {expand: true, src: ['music/*/*.mp3'], dest: 'build/'}
+		// 	}
+		// },
+		// msxsl: {
+		// 	dances: {
+		// 		files: {expand: true, src: ['svg/*.svg'], dest: 'svg/compiled/'},
+		// 		schema: 'svg/schema.xsl'
+		// 	},
+		// 	zapateo: {
+		// 		files: {expand: true, src: ['svg/zapateo/*.svg'], dest: 'svg/compiled/'},
+		// 		schema: 'svg/zapateo/zapateo.xsl'
+		// 	}
+		// },
 		clean: {
 			build: {
 				src: [
@@ -137,7 +145,7 @@ module.exports = function(grunt) {
 					'!build/music'
 				]
 			},
-			convertmp3: {
+			musicConvert: {
 				src: 'build/music/**/*'
 			}
 		},
@@ -166,7 +174,7 @@ module.exports = function(grunt) {
 				]
 			},
 			//Копирование структуры директорий в папке с музыкой
-			convertmp3: {
+			musicConvert: {
 				files: [
 					{
 						expand: true,
@@ -203,47 +211,35 @@ module.exports = function(grunt) {
 					create: ['svg/compiled']
 				}
 			}
+		},
+		command_run: {
+			dancesSvgCompile: {
+				options: {
+					getCommand: function(file, dest) {
+						var fileName = file.split("/").pop();
+						return '"./tools/msxsl.exe" ' + file + ' svg/schema.xsl -o svg/compiled/' + fileName;
+					}
+				},
+				files: [{expand: false, src: ['svg/*.svg']}],
+			},
+			zapateoSvgCompile: {
+				options: {
+					getCommand: function(file, dest) {
+						var fileName = file.split("/").pop();
+						return '"./tools/msxsl.exe" ' + file + ' svg/zapateo/zapateo.xsl -o svg/compiled/zapateo' + fileName;
+					}
+				},
+				files: [{expand: true, src: ['svg/zapateo/*.svg']}],
+			},
+			musicConvert: {
+				options: {
+					getCommand: function(file, dest) {
+						return '"./tools/sox.exe"  -V1 ' + file + ' ' + dest;
+					}
+				},
+				files: [{expand: true, src: ['music/*/*.mp3'], dest: 'build/'}],
+			}
 		}
-	});
-
-	/**
-	 * Функция для задач обработки файлов с помощью сторонних утилит
-	 * @param  {Function} getCommandLine Функция для получения строки комманды (аргумент - путь к файлу)
-	 */
-	function processFilesWithTool(getCommandLine) {
-		grunt.log.writeln('Processing started...');
-		var exec = require('child_process').exec;
-		var done = this.async();
-
-		var i = 0;
-		var fileList = grunt.file.expand(this.data.files, this.data.files.src);
-		grunt.log.writeln('Processing ' + fileList.length + ' files.');
-		fileList.forEach(function(file) {
-			exec(getCommandLine(file),
-				function(error, stdout, stderr) {
-					if (stdout && (stdout.length > 0)) {
-						grunt.log.writeln('stdout: ' + stdout);
-					}
-					if (stderr && (stderr.length > 0)) {
-						grunt.log.writeln('stderr: ' + stderr);
-					}	
-					if (error !== null) {
-						grunt.log.writeln('exec error: ' + error);
-					}
-					i++;
-					grunt.log.write('+');
-					if (i >= fileList.length) {
-						done(error);
-					}
-				}
-			);
-		});
-	}
-
-	grunt.registerMultiTask('sox', 'Convert MP3 files to WAV using SOX', function() {
-		processFilesWithTool.call(this, function(f) {
-			return '"./tools/sox.exe" ' + f + ' build/' + f;
-		});		
 	});
 
 	grunt.registerMultiTask('msxsl', 'Convert XML files with XSL stylesheet using MSXSL', function() {
@@ -257,7 +253,8 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('compileSvg', [
 		'mkdir:svg',
-		'msxsl'
+		'command_run:dancesSvgCompile',
+		'command_run:zapateoSvgCompile'
 	]);
 
 	grunt.registerTask('build', [
@@ -265,16 +262,16 @@ module.exports = function(grunt) {
 		'compileSvg',
 		'uglify:build', 
 		'cssmin:build',
-		'xmlmin:build',
+		// 'xmlmin:build', //msxsl already minify the svg's
 		'processhtml:build',
 		'htmlmin:build',
 		'concat:build',
 		'copy:build'
 	]);
-	grunt.registerTask('convertmp3', [
-		'clean:convertmp3',
-		'copy:convertmp3',
-		'sox:convertmp3'
+	grunt.registerTask('musicConvert', [
+		'clean:musicConvert',
+		'copy:musicConvert',
+		'command_run:musicConvert'
 	]);
 	grunt.registerTask('default', ['build']);
 	grunt.registerTask('deploy', ['ftp-deploy:production']);
