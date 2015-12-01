@@ -1,0 +1,9 @@
+{
+    "preset": "yandex",
+    "disallowMixedSpacesAndTabs": true,
+    "validateIndentation": "\t",
+    "maximumLineLength": 255,
+    "requireSpaceAfterLineComment": false,
+    "validateLineBreaks": false,
+  	"esnext": true
+}

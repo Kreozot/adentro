@@ -2,8 +2,14 @@
   "name": "adentro",
   "version": "1.5.0a",
   "devDependencies": {
+    "autoprefixer": "^6.1.1",
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
     "callback-loader": "^0.2.3",
     "css-loader": "^0.23.0",
+    "cssnext": "^1.8.4",
+    "expose-loader": "^0.7.1",
     "file-loader": "^0.8.5",
     "grunt": "^0.4.5",
     "grunt-command-run": "^0.1.0",
@@ -29,9 +35,12 @@
     "karma": "^0.13.15",
     "load-grunt-tasks": "^3.2.0",
     "mocha": "^2.3.4",
+    "postcss": "^5.0.12",
     "postcss-loader": "^0.8.0",
+    "precss": "^1.3.0",
     "promised-del": "^1.0.2",
     "raw-loader": "^0.5.1",
+    "require-dir": "^0.3.0",
     "should": "^7.1.1",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
@@ -43,5 +52,12 @@
   "scripts": {
     "build": "node -e \"require('grunt').tasks(['build']);\"",
     "test": "node -e \"require('grunt').tasks(['test']);\""
+  },
+  "dependencies": {
+    "hopscotch": "^0.2.5",
+    "jplayer": "^2.9.2",
+    "jquery": "^2.1.4",
+    "snapsvg": "^0.4.0",
+    "urijs": "^1.17.0"
   }
 }
