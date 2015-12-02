@@ -1,3 +1,5 @@
+var musicData = require('./musicData.js');
+
 var playerId = "jplayer";
 var playerSelector = "#" + playerId;
 
@@ -49,7 +51,7 @@ var hideCurrentElementMarkOnSchema = function(svgSchemaDom) {
 		svgSchemaDom = getSvgSchemaDom();
 	}
 	$('rect', svgSchemaDom).myRemoveClass('current');
-	$('text', svgSchemaDom).myRemoveClass('current');	
+	$('text', svgSchemaDom).myRemoveClass('current');
 }
 
 /**
@@ -82,7 +84,7 @@ var markCurrentElementOnSchema = function(element, svgSchemaDom) {
 	// Выделяем название текущего элемента
 	var textId = element + '-text';
 	$('text:not(#' + textId + ')', svgSchemaDom).myRemoveClass('current');
-	$("#" + textId, svgSchemaDom).myAddClass('current');	
+	$("#" + textId, svgSchemaDom).myAddClass('current');
 }
 
 /**
@@ -131,8 +133,8 @@ var initSvgSchema = function() {
 				// Если остановлено
 				if ((playerStatus.paused) && (playerStatus.currentTime == 0)) {
 					hideCurrentElement(svgdom);
-				} else if ((!playerStatus.paused) && 
-						(!playerStatus.waitForPlay) && 
+				} else if ((!playerStatus.paused) &&
+						(!playerStatus.waitForPlay) &&
 						(!playerStatus.waitForLoad)) {
 					$.animation.resume();
 					var time = playerStatus.currentTime;
@@ -193,12 +195,12 @@ var showMusicLinks = function(musicIds, currentMusicId, showEmptyTiming) {
 		var result = i18n.t("other.composition") + ': <select id="musicSelect">';
 		var count = 0;
 		for (var i = 0; i < musicIds.length; i++) {
-			if (!jQuery.isEmptyObject(music.get(musicIds[i]).schema) || showEmptyTiming) {
+			if (!jQuery.isEmptyObject(musicData[musicIds[i]].schema) || showEmptyTiming) {
 				if (musicIds[i] === currentMusicId) {
-					result += '<option selected="selected" value="' + musicIds[i] + '">' + 
-							music.get(musicIds[i]).title + '</option>';
+					result += '<option selected="selected" value="' + musicIds[i] + '">' +
+							musicData[musicIds[i]].title + '</option>';
 				} else {
-					result += '<option value="' + musicIds[i] + '">' + music.get(musicIds[i]).title + '</option>';
+					result += '<option value="' + musicIds[i] + '">' + musicData[musicIds[i]].title + '</option>';
 				}
 				count++;
 			}
@@ -263,7 +265,7 @@ var loadSchema = function(schemaParams, musicId, animationId) {
 
 	musicId = musicId || schemaParams.music[0];
 	showMusicLinks(schemaParams.music, musicId);
-	var musicSchema = music.get(musicId);
+	var musicSchema = musicData[musicId];
 
 	var svgobject = document.getElementById('schema');
 	$(svgobject).load(function() {
@@ -275,13 +277,13 @@ var loadSchema = function(schemaParams, musicId, animationId) {
 
 		ContentSwitch.clearContent();
 
-		AnimationLoader.loadAnimationBlock();	
+		AnimationLoader.loadAnimationBlock();
 		var animationClass = schemaParams.animation;
 		if (typeof animationClass === 'object') {
 			AnimationLoader.showAnimationLinks(animationClass, animationId);
 			var currentClassDef = AnimationLoader.getAnimationClassDef(animationClass, animationId);
 			animationClass = currentClassDef.name;
-		}		
+		}
 		AnimationLoader.loadAnimation(animationClass);
 
 		InfoLoader.loadInfoBlock(schemaParams.info);
@@ -310,7 +312,7 @@ var loadSchemaEditor = function(schemaParams, musicId) {
 
 		musicId = musicId || schemaParams.music[0];
 		showMusicLinks(schemaParams.music, musicId, true);
-		var musicSchema = music.get(musicId);
+		var musicSchema = musicData[musicId];
 
 		loadMusicSchema(musicSchema);
 		initSvgSchemaEditor();
@@ -338,9 +340,9 @@ var loadSchemaEditor = function(schemaParams, musicId) {
 				var currentTime = $(playerSelector).data("jPlayer").status.currentTime;
 				if (!timingGenerator.addBeat(currentTime)) {
 					var newTiming = timingGenerator.getTiming();
-					$("#content").html("<pre>" + JSON.stringify(newTiming, "", 4) + "</pre>");	
+					$("#content").html("<pre>" + JSON.stringify(newTiming, "", 4) + "</pre>");
 				}
 			}
 		});
-	});	
+	});
 };

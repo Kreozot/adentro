@@ -1,4 +1,5 @@
-var schemaParamsMap = require('.schemes.js');
+var schemaParamsMap = require('./schemes.js');
+var musicData = require('./musicData.js');
 
 /**
  * Текущие параметры страницы
@@ -143,7 +144,7 @@ var showMusic = function(musicId) {
 
 	var schemaParams = schemaParamsMap[context.schema];
 	var musicIds = schemaParams.music;
-	var musicSchema = music.get(musicId);
+	var musicSchema = musicData[musicId];
 	loadMusicSchema(musicSchema);
 	showMusicLinks(musicIds, musicId);
 	showLanguageLinks();
