@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'huayra_muyoj',
 	title: 'Huayra Muyoj',
-	file: require('mp3/huayra_muyoj/huayra_muyoj.mp3'),
+	file: require('mp3Files/huayra_muyoj/huayra_muyoj.mp3'),
 	schema: {
 		'#start_1': 8,
 		'esquina': 8.7,

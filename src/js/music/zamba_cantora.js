@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'zamba_cantora',
 	title: 'Abel Figueroa - Zamba Cantora',
-	file: require('mp3/zamba/zamba_cantora.mp3'),
+	file: require('mp3Files/zamba/zamba_cantora.mp3'),
 	schema: {
 		'#start_1': 2.2,
 		'vuelta': 17.5,

@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'chacarera_doble_el_olvidao',
 	title: 'Nestor Garnica - El olvidao',
-	file: require('mp3/chacarera_doble/el_olvidao.mp3'),
+	file: require('mp3Files/chacarera_doble/el_olvidao.mp3'),
 	schema: {
 		'#start_1': 3.6,
 		'avance': 19.3,

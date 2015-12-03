@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'escondido',
 	title: 'Tamara Castro - Huaico Hondo',
-	file: require('mp3/escondido/huaico_hondo.mp3'),
+	file: require('mp3Files/escondido/huaico_hondo.mp3'),
 	schema: {
 		'#start_1': 0.9,
 		'esquina1': 9.8,

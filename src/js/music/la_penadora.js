@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'la_penadora',
 	title: 'La Penadora',
-	file: require('mp3/chacarera_6/la_penadora.mp3'),
+	file: require('mp3Files/chacarera_6/la_penadora.mp3'),
 	schema: {
 		'#start_1': 1.1,
 		'avance': 10.6,

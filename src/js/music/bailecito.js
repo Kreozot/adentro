@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'bailecito',
 	title: 'Abel Figueroa - Toda la noche',
-	file: require('mp3/bailecito/toda_la_noche.mp3'),
+	file: require('mp3Files/bailecito/toda_la_noche.mp3'),
 	schema: {
 		'#start_1': 1.3,
 		'avance': 14.5,

@@ -6,16 +6,29 @@ var paths = config.paths;
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
 var cssnext = require('cssnext');
+var musicList = require('./musicList.js');
 
 var languages = ['en', 'ru'];
 
 var webpackConfig = languages.map(function (lang) {
 	return {
+        resolve: {
+            root: config.paths.root,
+            alias: {
+                'musicData': 'src/js/music',
+                'svgData': 'src/svg',
+                'animationClasses': 'src/js/animations',
+                'schemeParams': 'src/js/schemeParams',
+                'mp3Files': 'src/music'
+            }
+        },
 		entry: {
 			// Главный модуль для интерфейса и навигации
 			'main': paths.src.js + '/main.js',
 			// Музыка и анимация
-			'media': paths.src.js + '/media.js'
+			'media': paths.src.js + '/media.js',
+
+			'bailecito': 'schemeParams/bailecito'
 		},
 		output: {
 			path:  paths.dist.js,
@@ -30,14 +43,26 @@ var webpackConfig = languages.map(function (lang) {
 				{ test: /\.json$/, loader: 'json' },
 				{ test: /\.css$/, loader: 'style!css' },
 				{ test: /\.scss$/, loader: "style!css!postcss" },
-				{ test: /\.(jpe?g|png|gif)$/i, loader: 'url' }
+				{ test: /\.(jpe?g|png|gif)$/i, loader: 'url' },
+				{ test: /\.mp3$/i, loader: 'file' },
+				{ test: /\.svg$/i, loader: 'raw' }
 			]
 		},
 		postcss: function () {
 			return [autoprefixer, cssnext, precss];
 		},
 		plugins: [],
-		devtool: 'eval'
+		callbackLoader: {
+			requireMusic: function () {
+				var requires = musicList.map(function (musicId) {
+					return musicId + ': require("musicData/' + musicId + '.js");';
+				}).join('\n');
+				return '{' + requires + '}';
+			},
+			localize: function (textObj) {
+				return '"' + textObj[lang] + '"';
+			},
+		}
 	};
 });
 

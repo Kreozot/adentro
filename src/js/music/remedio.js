@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'remedio',
 	title: 'Remedio Norteño',
-	file: require('mp3/remedio/remedio_norteno.mp3'),
+	file: require('mp3Files/remedio/remedio_norteno.mp3'),
 	schema: {
 		'#start_1': 1.4,
 		'esquina1': 9.1,

@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'el_beso',
 	title: 'Abel Pintos - El Beso',
-	file: require('mp3/zamba/el_beso.mp3'),
+	file: require('mp3Files/zamba/el_beso.mp3'),
 	schema: {
 		'#start_1': 2,
 		'vuelta': 16.7,

@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'chacarera_de_un_triste',
 	title: 'Chacarera de un triste',
-	file: require('mp3/chacarera/chacarera_de_un_triste.mp3'),
+	file: require('mp3Files/chacarera/chacarera_de_un_triste.mp3'),
 	schema: {
 		'#start_1': 4.1,
 		'avance': 12.6,

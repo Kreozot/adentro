@@ -1,7 +1,5 @@
-var musicData = require('./musicData.js');
-
-var playerId = "jplayer";
-var playerSelector = "#" + playerId;
+var playerId = 'jplayer';
+var playerSelector = '#' + playerId;
 
 /**
  * Дробная часть от деления
@@ -9,11 +7,11 @@ var playerSelector = "#" + playerId;
  * @param  {Number} downVal Знаменатель
  * @return {Number}         Дробная часть от деления
  */
-var mod = function(upVal, downVal) {
+var mod = function (upVal, downVal) {
 	divVal = upVal / downVal;
 	modVal = divVal - Math.floor(divVal);
 	return modVal;
-}
+};
 
 function supports_history_api() {
   return !!(window.history && history.pushState);
@@ -24,7 +22,7 @@ function supports_history_api() {
  * @param  {String} id Идентификатор объекта
  * @return {String}    Ссылка на dom объекта
  */
-var getObjectDom = function(id) {
+var getObjectDom = function (id) {
 	var object = document.getElementById(id);
 	if ('contentDocument' in object) {
 		var dom = jQuery(object.contentDocument);
@@ -32,36 +30,36 @@ var getObjectDom = function(id) {
 	} else {
 		return false;
 	}
-}
+};
 
 /**
  * Получить ссылку на dom svg-схемы
  * @return  {String}  Ссылка на dom svg-схемы
  */
-var getSvgSchemaDom = function() {
+var getSvgSchemaDom = function () {
 	return getObjectDom('schema');
-}
+};
 
 /**
  * Спрятать отображение текущего элемента на схеме
  * @param  {String} svgSchemaDom Ссылка на dom svg-схемы
  */
-var hideCurrentElementMarkOnSchema = function(svgSchemaDom) {
+var hideCurrentElementMarkOnSchema = function (svgSchemaDom) {
 	if (!svgSchemaDom) {
 		svgSchemaDom = getSvgSchemaDom();
 	}
 	$('rect', svgSchemaDom).myRemoveClass('current');
 	$('text', svgSchemaDom).myRemoveClass('current');
-}
+};
 
 /**
  * Спрятать отображение и визуализацию текущего элемента
  * @param  {String} svgSchemaDom Ссылка на dom svg-схемы
  */
-var hideCurrentElement = function(svgSchemaDom) {
+var hideCurrentElement = function (svgSchemaDom) {
 	hideCurrentElementMarkOnSchema(svgSchemaDom);
 	$.animation.clear();
-	$(playerSelector).data("currentElement", "");
+	$(playerSelector).data('currentElement', '');
 };
 
 /**
@@ -69,7 +67,7 @@ var hideCurrentElement = function(svgSchemaDom) {
  * @param  {String} element 	  Идентификатор элемента
  * @param  {String} svgSchemaDom  Ссылка на dom svg-схемы
  */
-var markCurrentElementOnSchema = function(element, svgSchemaDom) {
+var markCurrentElementOnSchema = function (element, svgSchemaDom) {
 	if (!svgSchemaDom) {
 		svgSchemaDom = getSvgSchemaDom();
 	}
@@ -80,12 +78,12 @@ var markCurrentElementOnSchema = function(element, svgSchemaDom) {
 	// Показываем рамку вокруг текущего блока
 	var frameId = element + '-frame';
 	$('rect:not(#' + frameId + ')', svgSchemaDom).myRemoveClass('current');
-	$("#" + frameId, svgSchemaDom).myAddClass('current');
+	$('#' + frameId, svgSchemaDom).myAddClass('current');
 	// Выделяем название текущего элемента
 	var textId = element + '-text';
 	$('text:not(#' + textId + ')', svgSchemaDom).myRemoveClass('current');
-	$("#" + textId, svgSchemaDom).myAddClass('current');
-}
+	$('#' + textId, svgSchemaDom).myAddClass('current');
+};
 
 /**
  * Отображение текущего элемента
@@ -93,11 +91,11 @@ var markCurrentElementOnSchema = function(element, svgSchemaDom) {
  * @param  {Number} seconds    	  Длительность в секундах
  * @param  {String} svgSchemaDom  Ссылка на dom svg-схемы
  */
-var showCurrentElement = function(element, seconds, svgSchemaDom) {
+var showCurrentElement = function (element, seconds, svgSchemaDom) {
 	if (!svgSchemaDom) {
 		svgSchemaDom = getSvgSchemaDom();
 	}
-	if (element.split('_')[0] == "#start") {
+	if (element.split('_')[0] == '#start') {
 		// Начальное расположение
 		$.animation.setAtStart();
 		hideCurrentElementMarkOnSchema();
@@ -109,10 +107,10 @@ var showCurrentElement = function(element, seconds, svgSchemaDom) {
 
 	markCurrentElementOnSchema(element, svgSchemaDom);
 	// Запускаем соответствующую анимацию
-	var domElement = $("#" + element, svgSchemaDom);
-	var visualizationFuncName = domElement.data("visualization");
-	var manPosition = domElement.data("manposition");
-	var times = domElement.data("times");
+	var domElement = $('#' + element, svgSchemaDom);
+	var visualizationFuncName = domElement.data('visualization');
+	var manPosition = domElement.data('manposition');
+	var times = domElement.data('times');
 	if (visualizationFuncName) {
 		$.animation[visualizationFuncName](seconds, manPosition, times);
 	}
@@ -121,14 +119,14 @@ var showCurrentElement = function(element, seconds, svgSchemaDom) {
 /**
  * Иницилизация схемы
  */
-var initSvgSchema = function() {
+var initSvgSchema = function () {
 	var svgdom = getSvgSchemaDom();
 	if (svgdom) {
-		$("#schema").attr("width", $("svg", svgdom).attr("width"))
-				.attr("height", $("svg", svgdom).attr("height"));
+		$('#schema').attr('width', $('svg', svgdom).attr('width'))
+				.attr('height', $('svg', svgdom).attr('height'));
 
-		var timeupdateEvent = function(svgdom) {
-			return function(event) {
+		var timeupdateEvent = function (svgdom) {
+			return function (event) {
 				var playerStatus = event.jPlayer.status;
 				// Если остановлено
 				if ((playerStatus.paused) && (playerStatus.currentTime == 0)) {
@@ -139,22 +137,22 @@ var initSvgSchema = function() {
 					$.animation.resume();
 					var time = playerStatus.currentTime;
 					var element = getElement(time);
-					if ($(playerSelector).data("currentElement") != element['name']) {
-						$(playerSelector).data("currentElement", element['name']);
-						if (element && (element['name'].length > 0)) {
-							showCurrentElement(element['name'], element['timeLength'], svgdom);
+					if ($(playerSelector).data('currentElement') != element.name) {
+						$(playerSelector).data('currentElement', element.name);
+						if (element && (element.name.length > 0)) {
+							showCurrentElement(element.name, element.timeLength, svgdom);
 						};
 					};
 				};
 			};
 		}(svgdom);
-		var endedEvent = function(svgdom) {
-			return function(event) {
+		var endedEvent = function (svgdom) {
+			return function (event) {
 				hideCurrentElement(svgdom);
 			};
 		}(svgdom);
-		var pauseEvent = function(svgdom) {
-			return function(event) {
+		var pauseEvent = function (svgdom) {
+			return function (event) {
 				var playerStatus = event.jPlayer.status;
 				if ((playerStatus.paused) && (playerStatus.currentTime > 0)) {
 					$.animation.pause();
@@ -171,11 +169,11 @@ var initSvgSchema = function() {
 /**
  * Инициализация редактора тайминга
  */
-var initSvgSchemaEditor = function() {
+var initSvgSchemaEditor = function () {
 	var svgdom = getSvgSchemaDom();
 	if (svgdom) {
-		$("#schema").attr("width", $("svg", svgdom).attr("width"))
-				.attr("height", $("svg", svgdom).attr("height"));
+		$('#schema').attr('width', $('svg', svgdom).attr('width'))
+				.attr('height', $('svg', svgdom).attr('height'));
 	};
 };
 
@@ -185,14 +183,14 @@ var initSvgSchemaEditor = function() {
  * @param  {String} currentMusicId    Идентификатор текущей композиции
  * @param  {Boolean} showEmptyTiming  Показывать композиции, не имеющие разметки тайминга
  */
-var showMusicLinks = function(musicIds, currentMusicId, showEmptyTiming) {
+var showMusicLinks = function (musicIds, currentMusicId, showEmptyTiming) {
 	if (musicIds.length <= 1) {
-		$("#musicLinks").html("");
+		$('#musicLinks').html('');
 		return;
 	}
 
-	var getMusicLinks = function() {
-		var result = i18n.t("other.composition") + ': <select id="musicSelect">';
+	var getMusicLinks = function () {
+		var result = i18n.t('other.composition') + ': <select id="musicSelect">';
 		var count = 0;
 		for (var i = 0; i < musicIds.length; i++) {
 			if (!jQuery.isEmptyObject(musicData[musicIds[i]].schema) || showEmptyTiming) {
@@ -206,14 +204,14 @@ var showMusicLinks = function(musicIds, currentMusicId, showEmptyTiming) {
 			}
 		}
 		if (count <= 1) {
-			return "";
+			return '';
 		}
-		result += "</select>";
+		result += '</select>';
 		return result;
 	};
 
-	$("#musicLinks").html(getMusicLinks());
-	$('#musicSelect').change(function() {
+	$('#musicLinks').html(getMusicLinks());
+	$('#musicSelect').change(function () {
 		showMusic($(this).val());
 	});
 };
@@ -221,19 +219,19 @@ var showMusicLinks = function(musicIds, currentMusicId, showEmptyTiming) {
 /**
  * Показать ссылки на языки
  */
-var showLanguageLinks = function() {
+var showLanguageLinks = function () {
 	var languages = [
 		{
-			id: "ru",
-			title: "ru"
+			id: 'ru',
+			title: 'ru'
 		},
 		{
-			id: "en",
-			title: "en"
+			id: 'en',
+			title: 'en'
 		}
 	];
 
-	var getLanguageLinks = function() {
+	var getLanguageLinks = function () {
 		var result = '<nobr>';
 		for (var i = 0; i < languages.length; i++) {
 			if ((languages[i].id == i18n.lng()) || (languages[i].id == i18n.lng().substr(0, 2))) {
@@ -242,14 +240,14 @@ var showLanguageLinks = function() {
 				result += '<a href="' + getLanguageLink(languages[i].id) + '">' + languages[i].title + '</a>';
 			}
 			if (i < languages.length - 1) {
-				result += " / ";
+				result += ' / ';
 			}
 		}
 		result += '</nobr>';
 		return result;
 	};
 
-	$("#lang").html(getLanguageLinks());
+	$('#lang').html(getLanguageLinks());
 };
 
 /**
@@ -258,17 +256,17 @@ var showLanguageLinks = function() {
  * @param  {String} musicId    	   Идентификатор музыки
  * @param  {String} animationId    Идентификатор конкретной анимации (если в animationClass пришёл список)
  */
-var loadSchema = function(schemaParams, musicId, animationId) {
+var loadSchema = function (schemaParams, musicId, animationId) {
 	// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
-	$("#danceName").html(schemaParams.name);
-	$("#schemaDiv").html('<object data="svg/compiled/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
+	$('#danceName').html(schemaParams.name);
+	$('#schemaDiv').html('<object data="svg/compiled/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
 
 	musicId = musicId || schemaParams.music[0];
 	showMusicLinks(schemaParams.music, musicId);
 	var musicSchema = musicData[musicId];
 
 	var svgobject = document.getElementById('schema');
-	$(svgobject).load(function() {
+	$(svgobject).load(function () {
 		$(playerSelector).unbind($.jPlayer.event.timeupdate)
 				.unbind($.jPlayer.event.ended)
 				.unbind($.jPlayer.event.pause);
@@ -289,10 +287,10 @@ var loadSchema = function(schemaParams, musicId, animationId) {
 		InfoLoader.loadInfoBlock(schemaParams.info);
 
 		// if (schemaParams.zapateo) {
-		// 	ZapateoLoader.loadZapateoBlock("repike");
+		// 	ZapateoLoader.loadZapateoBlock('repike');
 		// }
 
-		ContentSwitch.show("animation_block");
+		ContentSwitch.show('animation_block');
 	});
 };
 
@@ -301,11 +299,11 @@ var loadSchema = function(schemaParams, musicId, animationId) {
  * @param  {String} schemaParams   Объект параметров схемы
  * @param  {String} musicId    	   Идентификатор музыки
  */
-var loadSchemaEditor = function(schemaParams, musicId) {
-	$("#danceName").html(schemaParams.name + " (editor mode)");
-	$("#schemaDiv").html('<object data="svg/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
+var loadSchemaEditor = function (schemaParams, musicId) {
+	$('#danceName').html(schemaParams.name + ' (editor mode)');
+	$('#schemaDiv').html('<object data="svg/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
 	var svgobject = document.getElementById('schema');
-	$(svgobject).load(function() {
+	$(svgobject).load(function () {
 		$(playerSelector).unbind($.jPlayer.event.timeupdate)
 				.unbind($.jPlayer.event.ended)
 				.unbind($.jPlayer.event.pause);
@@ -317,14 +315,14 @@ var loadSchemaEditor = function(schemaParams, musicId) {
 		loadMusicSchema(musicSchema);
 		initSvgSchemaEditor();
 
-		console.log("editor mode on");
-		$("#animationDiv").html('');
-		var initTiming = $(playerSelector).data("schema");
+		console.log('editor mode on');
+		$('#animationDiv').html('');
+		var initTiming = $(playerSelector).data('schema');
 		var timingGenerator = new TimingGenerator(initTiming);
 
 
-		var timeupdateEvent = function(timingGenerator) {
-			return function(event) {
+		var timeupdateEvent = function (timingGenerator) {
+			return function (event) {
 				// Если остановлено
 				if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
 					hideCurrentElementMarkOnSchema();
@@ -335,12 +333,12 @@ var loadSchemaEditor = function(schemaParams, musicId) {
 
 		$(playerSelector).bind($.jPlayer.event.timeupdate, timeupdateEvent);
 
-		$("html").keypress(function(event) {
+		$('html').keypress(function (event) {
 			if (event.which == 32) { //space
-				var currentTime = $(playerSelector).data("jPlayer").status.currentTime;
+				var currentTime = $(playerSelector).data('jPlayer').status.currentTime;
 				if (!timingGenerator.addBeat(currentTime)) {
 					var newTiming = timingGenerator.getTiming();
-					$("#content").html("<pre>" + JSON.stringify(newTiming, "", 4) + "</pre>");
+					$('#content').html('<pre>' + JSON.stringify(newTiming, '', 4) + '</pre>');
 				}
 			}
 		});

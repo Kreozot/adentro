@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'la_pockoy_y_pancha',
 	title: 'La pockoy y pancha',
-	file: require('mp3/chacarera/la_pockoy_y_pancha.mp3'),
+	file: require('mp3Files/chacarera/la_pockoy_y_pancha.mp3'),
 	schema: {
 		'#start_1': 2.6,
 		'avance': 8.1,

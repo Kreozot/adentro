@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'gato',
 	title: 'Chaqueсo Palavecino - Gatito Pa\' Don Lucas',
-	file: require('mp3/gato/gatito_pa_don_lucas.mp3'),
+	file: require('mp3Files/gato/gatito_pa_don_lucas.mp3'),
 	schema: {
 		'#start_1': 3.2,
 		'vuelta': 9.9,

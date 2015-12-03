@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'chacarera_doble_6_pampa_de_los_guanacos',
 	title: 'Los Reynoso - Pampa de los guanacos',
-	file: require('mp3/chacarera_doble_6/pampa_de_los_guanacos.mp3'),
+	file: require('mp3Files/chacarera_doble_6/pampa_de_los_guanacos.mp3'),
 	schema: {
 		'#start_1': 1.9,
 		'avance': 10,

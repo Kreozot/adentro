@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'la_baguala',
 	title: 'La Baguala',
-	file: require('mp3/chacarera_6/la_baguala.mp3'),
+	file: require('mp3Files/chacarera_6/la_baguala.mp3'),
 	schema: {
 		'#start_1': 2,
 		'avance': 10.4,

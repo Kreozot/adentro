@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'chacarera_doble_sombra_enamorada',
 	title: 'Chaqueсo Palavecino - Sombra Enamorada',
-	file: require('mp3/chacarera_doble/sombra_enamorada.mp3'),
+	file: require('mp3Files/chacarera_doble/sombra_enamorada.mp3'),
 	schema: {
 		'#start_1': 4.2,
 		'avance': 12.8,

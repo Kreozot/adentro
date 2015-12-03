@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'remedio_atamisqueno',
 	title: 'Waldo Belloso - Remedio Atamisqueño',
-	file: require('mp3/remedio_atamisqueno/remedio_atamisqueno.mp3'),
+	file: require('mp3Files/remedio_atamisqueno/remedio_atamisqueno.mp3'),
 	schema: {
 		'#start_1': 5.4,
 		'esquina1': 9.6,

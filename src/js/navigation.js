@@ -1,6 +1,3 @@
-var schemaParamsMap = require('./schemes.js');
-var musicData = require('./musicData.js');
-
 /**
  * Текущие параметры страницы
  * @type {Object}

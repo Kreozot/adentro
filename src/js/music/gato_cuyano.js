@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'gato_cuyano',
 	title: 'Anibal Arias - El Correcto',
-	file: require('mp3/gato_cuyano/el_correcto.mp3'),
+	file: require('mp3Files/gato_cuyano/el_correcto.mp3'),
 	schema: {
 		'#start_1': 4.8,
 		'vuelta': 19,

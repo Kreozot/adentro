@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'chacarera_doble_6_anorazas',
 	title: 'Anorazas',
-	file: require('mp3/chacarera_doble_6/anorazas.mp3'),
+	file: require('mp3Files/chacarera_doble_6/anorazas.mp3'),
 	schema: {
 		'#start_1': 2.2,
 		'avance': 10.1,

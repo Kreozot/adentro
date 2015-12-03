@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'caramba',
 	title: 'El Caramba',
-	file: require('mp3/caramba/el_caramba.mp3'),
+	file: require('mp3Files/caramba/el_caramba.mp3'),
 	schema: {
 		'#start_1': 1.7,
 		'giro': 11.3,

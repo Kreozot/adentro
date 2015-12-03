@@ -31,6 +31,8 @@
     "gulp": "^3.9.0",
     "gulp-open": "^1.0.0",
     "gulp-util": "^3.0.7",
+    "jscs": "^2.6.0",
+    "jscs-loader": "^0.2.0",
     "json-loader": "^0.5.4",
     "karma": "^0.13.15",
     "load-grunt-tasks": "^3.2.0",

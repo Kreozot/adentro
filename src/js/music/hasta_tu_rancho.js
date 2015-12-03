@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'hasta_tu_rancho',
 	title: 'Hasta tu Rancho',
-	file: require('mp3/huella/hasta_tu_rancho.mp3'),
+	file: require('mp3Files/huella/hasta_tu_rancho.mp3'),
 	schema: {
 		'#start_1': 4.9,
 		'mediaVuelta': 22.1,

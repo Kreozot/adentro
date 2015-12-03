@@ -2,7 +2,7 @@
 module.exports = {
 	id: 'zamba_alegre',
 	title: 'Toсo Rearte - La Zamba Alegre',
-	file: require('mp3/zamba_alegre/la_zamba_alegre.mp3'),
+	file: require('mp3Files/zamba_alegre/la_zamba_alegre.mp3'),
 	schema: {
 		'#start_1': 5.2,
 		'vuelta': 20.2,
