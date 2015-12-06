@@ -1,6 +1,8 @@
 var playerId = 'jplayer';
 var playerSelector = '#' + playerId;
 
+//TODO: Выпилить все замыкания через параметры функций
+
 /**
  * Дробная часть от деления
  * @param  {Number} upVal   Числитель
@@ -14,7 +16,7 @@ var mod = function (upVal, downVal) {
 };
 
 function supports_history_api() {
-  return !!(window.history && history.pushState);
+	return !!(window.history && history.pushState);
 }
 
 /**
@@ -235,7 +237,7 @@ var showLanguageLinks = function () {
 		var result = '<nobr>';
 		for (var i = 0; i < languages.length; i++) {
 			if ((languages[i].id == i18n.lng()) || (languages[i].id == i18n.lng().substr(0, 2))) {
-				result += languages[i].title
+				result += languages[i].title;
 			} else {
 				result += '<a href="' + getLanguageLink(languages[i].id) + '">' + languages[i].title + '</a>';
 			}
@@ -319,7 +321,6 @@ var loadSchemaEditor = function (schemaParams, musicId) {
 		$('#animationDiv').html('');
 		var initTiming = $(playerSelector).data('schema');
 		var timingGenerator = new TimingGenerator(initTiming);
-
 
 		var timeupdateEvent = function (timingGenerator) {
 			return function (event) {

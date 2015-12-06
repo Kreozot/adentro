@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xsl:stylesheet version="1.0" 
+<xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns="http://www.w3.org/2000/svg">
 
@@ -26,7 +26,7 @@
 		    	<xsl:when test="./preceding-sibling::*[1][self::bar]">
 		    		<!-- Устанавливаем отступ, равный его ширине -->
 					<xsl:value-of select="$barWidth"/>
-		    	</xsl:when>	  
+		    	</xsl:when>
 		    	<xsl:otherwise>
 					<xsl:value-of select="0"/>
 		    	</xsl:otherwise>
@@ -36,7 +36,7 @@
 		<xsl:variable name="x" select="$xMargin + $pos * $oneTimeWidth + $xOffset"/>
 		<xsl:variable name="y" select="($line - 1) * $height + 1"/>
 		<xsl:variable name="blockWidth" select="$oneTimeWidth * @times - $xOffset"/>
- 		
+
  		<rect class="element {@class}" x="{$x}" y="{$y}" width="{$blockWidth}" height="{$blockHeight}" id="{@id}" onclick="window.top.playElement('{@id}')" data-visualization="{@visualization}" data-manposition="{@manPosition}" data-times="{@times}"/>
  		<rect class="active-frame" x="{$x + 1}" y="{$y + 2}" width="{$blockWidth - 3}" height="{$blockHeight - 4}" id="{@id}-frame"/>
 
@@ -47,7 +47,7 @@
 			<xsl:choose>
 		    	<xsl:when test="not(@yOffset)">
 					<xsl:value-of select="$blockHeight + 16"/>
-		    	</xsl:when>	  
+		    	</xsl:when>
 		    	<xsl:otherwise>
 					<xsl:value-of select="$blockHeight + 32"/>
 		    	</xsl:otherwise>
@@ -59,7 +59,7 @@
 			<xsl:choose>
 		    	<xsl:when test="@textOffset">
 					<xsl:value-of select="@textOffset"/>
-		    	</xsl:when>	  
+		    	</xsl:when>
 		    	<xsl:otherwise>
 					<xsl:value-of select="0"/>
 		    	</xsl:otherwise>
@@ -94,7 +94,7 @@
 		<line class="bar" x1="{$x}" y1="{$y}" x2="{$x}" y2="{$y + $blockHeight + 1}"/>
 
 		<!-- Передаём обработчику следующий элемент -->
-		<xsl:apply-templates select="./following-sibling::*[1]">			
+		<xsl:apply-templates select="./following-sibling::*[1]">
 			<xsl:with-param name="line" select="$line" />
 			<xsl:with-param name="pos" select="$pos" />
 			<xsl:with-param name="oneTimeWidth" select="$oneTimeWidth" />
@@ -105,7 +105,7 @@
 	<xsl:template match="part">
 		<xsl:variable name="overallTimes" select="sum(./element/@times)" />
 		<xsl:variable name="oneTimeWidth" select="$schemaWidth div $overallTimes"/>
-		
+
 		<xsl:apply-templates select="./element[1]">
 			<xsl:with-param name="pos" select="0" />
 			<xsl:with-param name="line" select="position()" />
@@ -135,7 +135,7 @@
 						stroke: black;
 						stroke-width: 1px;
 						fill-opacity: 0.6;
-					}					
+					}
 
 					.element.current {
 						stroke: red;

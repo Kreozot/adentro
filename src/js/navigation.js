@@ -10,7 +10,7 @@ var context = {};
  * @param  {String} animationId  Идентификатор анимации
  * @param  {String} musicId      Идентификатор композиции
  */
-var loadSchemaByName = function(name, animationId, musicId) {
+var loadSchemaByName = function (name, animationId, musicId) {
 	var schemaParams = schemaParamsMap[name];
 	if (!schemaParams) {
 		schemaParams = schemaParamsMap.Chacarera;
@@ -24,7 +24,7 @@ var loadSchemaByName = function(name, animationId, musicId) {
  * @param  {String} name     Идентификатор схемы
  * @param  {String} musicId  Идентификатор композиции
  */
-var loadSchemaEditorByName = function(name, musicId) {
+var loadSchemaEditorByName = function (name, musicId) {
 	var schemaParams = schemaParamsMap[name];
 	if (!schemaParams) {
 		schemaParams = schemaParamsMap.Chacarera;
@@ -38,7 +38,7 @@ var loadSchemaEditorByName = function(name, musicId) {
  * @param  {String} lang Идентификатор языка
  * @return {String}      URL текущей страницы со всеми параметрами и параметром lang
  */
-var getLanguageLink = function(lang) {
+var getLanguageLink = function (lang) {
 	var uri = new URI();
 	var query = uri.query(true);
 	query.lang = lang;
@@ -52,13 +52,13 @@ var getLanguageLink = function(lang) {
  * @param  {String} title  Заголовок страницы
  * @param  {String} query  Фрагмент URL запроса
  */
-var pushStateOrRedirect = function(params, title, query) {
+var pushStateOrRedirect = function (params, title, query) {
 	if (supports_history_api) {
 		history.pushState(params, title, query);
 	} else {
 		window.location.href = query;
 	}
-}
+};
 
 /**
  * Получить относительный адрес URL для заданных параметров
@@ -67,7 +67,7 @@ var pushStateOrRedirect = function(params, title, query) {
  * @param  {String} music     Идентификатор композиции
  * @return {String}           Относительный путь URL
  */
-var getRelativeUrl = function(schema, animation, music) {
+var getRelativeUrl = function (schema, animation, music) {
 	return "?schema=" + schema +
 		(animation ? ("&animation=" + animation) : "") +
 		(music ? ("&music=" + music) : "");
@@ -75,13 +75,13 @@ var getRelativeUrl = function(schema, animation, music) {
 	// return schema +
 	// 	(animation ? ("/" + animation) : "") +
 	// 	(music ? ("?music=" + music) : "");
-}
+};
 
 /**
  * Получение параметров контекста из URL
  * @return {Object} Объект контекста
  */
-var getContextFromUrl = function() {
+var getContextFromUrl = function () {
 	var url = new URI();
 	var segments = url.segment();
 	var params = url.query(true);
@@ -94,13 +94,13 @@ var getContextFromUrl = function() {
 	context.music = params.music;
 	context.editor = params.editor;
 	return context;
-}
+};
 
 /**
  * Перейти на указанную схему по URL
  * @param  {String} schemaId Идентификатор схемы
  */
-var showSchema = function(schemaId) {
+var showSchema = function (schemaId) {
 	this.pushStateOrRedirect({schema: schemaId},
 		schemaParamsMap.getName(schemaId) + " - Adentro", getRelativeUrl(schemaId));
 	loadSchemaByState();
@@ -110,7 +110,7 @@ var showSchema = function(schemaId) {
  * Переключиться на определённую анимацию
  * @param  {Number} animationId  Идентификатор анимации
  */
-var showAnimation = function(animationId) {
+var showAnimation = function (animationId) {
 	context.animation = animationId;
 
 	this.pushStateOrRedirect({schema: context.schema, animation: context.animation, music: context.music},
@@ -133,7 +133,7 @@ var showAnimation = function(animationId) {
  * Переключиться на определённую композицию
  * @param  {Number} animationId  Идентификатор анимации
  */
-var showMusic = function(musicId) {
+var showMusic = function (musicId) {
 	context.music = musicId;
 	this.pushStateOrRedirect({schema: context.schema, animation: context.animation, music: context.music},
 			schemaParamsMap.getName(context.schema) + " - Adentro",
@@ -151,7 +151,7 @@ var showMusic = function(musicId) {
  * Загрузить схему через History
  * @return {Boolean} True если схема была загружена
  */
-var loadSchemaByState = function() {
+var loadSchemaByState = function () {
 	var state = history.state;
 	if (state.schema) {
 		context.schema = state.schema;
@@ -171,7 +171,7 @@ var loadSchemaByState = function() {
  * Загрузить схему из URL
  * @return {Boolean} True если схема была загружена
  */
-var loadSchemaByUrl = function() {
+var loadSchemaByUrl = function () {
 	context = getContextFromUrl();
 	if (context.schema) {
 		if (context.editor) {

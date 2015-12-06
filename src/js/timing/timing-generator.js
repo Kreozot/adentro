@@ -13,7 +13,7 @@ function ElementTiming(elementId, beatCount) {
 	 * @param  {Number} seconds Время в секундах
 	 * @return {Boolean} 	    false, если достигли конца элемента
 	 */
-	this.addBeat = function(seconds) {		
+	this.addBeat = function(seconds) {
 		if (this.beats.length < this.beatCount) {
 			this.beats[this.beats.length] = seconds;
 
@@ -23,7 +23,7 @@ function ElementTiming(elementId, beatCount) {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Получить среднюю длительность одной доли
 	 * @return {Number} Средняя длительность доли в секундах
@@ -56,7 +56,7 @@ function ElementTiming(elementId, beatCount) {
 		}
 		time = Math.round(time * 10) / 10;
 		return time;
-	}
+	};
 }
 
 /**
@@ -97,7 +97,7 @@ function TimingGenerator() {
 
 			return elementsList;
 		};
-	}
+	};
 
 	this.elementsList = this.getElementsList();
 	console.log(this.elementsList);
