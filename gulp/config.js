@@ -6,7 +6,8 @@ module.exports = {
 		temp: path.resolve('./frontend/temp/'),
 		src: {
 			js: path.resolve('./src/js/'),
-			schemes: path.resolve('./src/svg/'),
+			svg: path.resolve('./src/svg/'),
+			svgCompiled: path.resolve('./src/svg_compiled'),
 			music: path.resolve('./src/music/'),
 			musicData: path.resolve('./src/js/music/')
 		},
