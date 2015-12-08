@@ -26,9 +26,7 @@ function saveSvg(svgData, filename) {
 function renderAndSaveSvg(done) {
 	vo(function* () {
 		var nightmare = Nightmare({
-			show: true,
-			width: 1024,
-			height: 768
+			show: false
 		});
 
 		var svgList = getSvgList(config.paths.src.svg);
@@ -50,24 +48,25 @@ function renderAndSaveSvg(done) {
 		}
 
 		yield nightmare.end();
-		return link;
 	})(function (error, result) {
 		done();
 		if (error) {
 			return console.error(error)
 		};
-		console.log(result);
 	});
 }
 
-gulp.task('renderSvg', function () {
+gulp.task('renderSvg', ['clean-svg'], function (done) {
 	connect.server({
 		root: config.paths.src.svg,
 		port: port
 	});
 
 	mkdirp(config.paths.src.svgCompiled, function() {
-		renderAndSaveSvg(connect.serverClose)
+		renderAndSaveSvg(function() {
+			connect.serverClose();
+			done();
+		})
 	});
 });
 

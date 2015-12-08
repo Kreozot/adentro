@@ -15,3 +15,5 @@ function ChacareraAnimation(id) {
 	};
 };
 extend(ChacareraAnimation, GatoAnimation);
+
+module.exports = ChacareraAnimation;

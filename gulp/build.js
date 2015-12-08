@@ -1,3 +1,3 @@
 var gulp = require('gulp');
 
-gulp.task('build', ['build-js']);
+gulp.task('build', ['build-js', 'copy-html']);

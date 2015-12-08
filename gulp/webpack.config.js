@@ -6,7 +6,7 @@ var paths = config.paths;
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
 var cssnext = require('cssnext');
-var musicList = require('./musicList.js');
+var schemesList = require('./schemesList.js');
 
 var languages = ['en', 'ru'];
 
@@ -16,7 +16,8 @@ var webpackConfig = languages.map(function (lang) {
             root: config.paths.root,
             alias: {
                 'musicData': 'src/js/music',
-                'svgData': 'src/svg',
+                'svgData': 'src/svg_compiled',
+                'infoData': 'src/info',
                 'animationClasses': 'src/js/animations',
                 'schemeParams': 'src/js/schemeParams',
                 'mp3Files': 'src/music'
@@ -28,7 +29,15 @@ var webpackConfig = languages.map(function (lang) {
 			// Музыка и анимация
 			'media': paths.src.js + '/media.js',
 
-			'bailecito': 'schemeParams/bailecito'
+			// 'schemes': paths.src.js + '/schemes.js',
+			// 'bailecito': 'schemeParams/bailecito',
+			// 'caramba': 'schemeParams/caramba',
+			// 'chacarera': 'schemeParams/chacarera',
+			// 'chacarera_6': 'schemeParams/chacarera_6',
+			// 'chacarera_doble': 'schemeParams/chacarera_doble',
+			// 'chacarera_doble_6': 'schemeParams/chacarera_doble_6',
+			// 'escondido': 'schemeParams/escondido',
+			// 'gato': 'schemeParams/gato',
 		},
 		output: {
 			path:  paths.dist.js,
@@ -45,7 +54,9 @@ var webpackConfig = languages.map(function (lang) {
 				{ test: /\.scss$/, loader: "style!css!postcss" },
 				{ test: /\.(jpe?g|png|gif)$/i, loader: 'url' },
 				{ test: /\.mp3$/i, loader: 'file' },
-				{ test: /\.svg$/i, loader: 'raw' }
+				{ test: /\.svg$/i, loader: 'raw' },
+				{ test: /\.inc$/i, loader: 'raw' },
+				{ test: /\.swf$/i, loader: 'file' }
 			]
 		},
 		postcss: function () {
@@ -54,8 +65,14 @@ var webpackConfig = languages.map(function (lang) {
 		plugins: [],
 		callbackLoader: {
 			requireMusic: function () {
-				var requires = musicList.map(function (musicId) {
-					return musicId + ': require("musicData/' + musicId + '.js");';
+
+				var ensureList = schemesList.map(function (id) {
+					var result = 'module.exports.' + id + ' = ';
+					return '"schemeParams/' + id + '.js"';
+				}).join();
+
+				var requireList = musicList.map(function (musicId) {
+					return musicId + ': require("schemeParams/' + musicId + '.js");';
 				}).join('\n');
 				return '{' + requires + '}';
 			},
@@ -99,6 +116,7 @@ webpackConfig.push({
 		],
 		'vendor.media': [
 			'jplayer/dist/jplayer/jquery.jplayer.min.js',
+			'jplayer/dist/jplayer/jquery.jplayer.swf',
 			'snapsvg/dist/snap.svg-min.js'
 		]
 	},

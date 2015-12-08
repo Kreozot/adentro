@@ -5,10 +5,10 @@ function GatoAnimation(id) {
 	this.height = 325;
 	this.startPos = {
 		left: {x: 40, y: 160, angle: -90},
-		right: {x: 560, y: 160, angle: 90}		
+		right: {x: 560, y: 160, angle: 90}
 	};
 
-	this.giroElement = new DanceAnimationElement(this, 
+	this.giroElement = new DanceAnimationElement(this,
 		{left: "m 40,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 C 240,80 200,40 140,40 80,40 40,80 40,140 z",
 		right: "M 560,140 C 560,80 520,40 460,40 400,40 360,80 360,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 z"});
 
@@ -49,7 +49,7 @@ function GatoAnimation(id) {
 			var partTimes = times / 4;
 		} else {
 			var partSeconds = seconds / 2;
-			var partTimes = times / 2;			
+			var partTimes = times / 2;
 		}
 		this.zarandeoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, 0, 0, 0.5);
 		this.zarandeoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
@@ -71,3 +71,5 @@ function GatoAnimation(id) {
 	};
 };
 extend(GatoAnimation, DanceAnimation);
+
+module.exports = GatoAnimation;

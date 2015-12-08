@@ -4,7 +4,7 @@ var webpackConfig = require('./webpack.config.js');
 var gutil = require('gulp-util');
 var argv = require('yargs').argv;
 
-gulp.task('build-js', ['clean'], function (callback) {
+gulp.task('build-js', ['clean', 'renderSvg'], function (callback) {
     webpack(webpackConfig, function (err, stats) {
         if (err) {
             throw new gutil.PluginError('webpack', err)

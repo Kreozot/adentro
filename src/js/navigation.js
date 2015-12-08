@@ -1,3 +1,5 @@
+var schemes = require('./schemes.js');
+
 /**
  * Текущие параметры страницы
  * @type {Object}
@@ -11,9 +13,9 @@ var context = {};
  * @param  {String} musicId      Идентификатор композиции
  */
 var loadSchemaByName = function (name, animationId, musicId) {
-	var schemaParams = schemaParamsMap[name];
+	var schemaParams = schemes[name];
 	if (!schemaParams) {
-		schemaParams = schemaParamsMap.Chacarera;
+		schemaParams = schemes['chacarera'];
 	}
 	loadSchema(schemaParams, musicId, animationId);
 	showLanguageLinks();

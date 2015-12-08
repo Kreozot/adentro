@@ -11,17 +11,17 @@ function HuellaAnimation(id) {
 	});
 
 	this.giroElement1 = new DanceAnimationElement(this, {
-		left: "m 360,160 40,-40", 
+		left: "m 360,160 40,-40",
 		right: "m 240,160 -40,40"
 	});
 
 	this.giroElement2 = new DanceAnimationElement(this, {
-		left: "m 400,120 c 0,0 -100,0 -100,40 0,40 100,40 100,40", 
+		left: "m 400,120 c 0,0 -100,0 -100,40 0,40 100,40 100,40",
 		right: "m 200,200 c 0,0 100,0 100,-40 0,-40 -100,-40 -100,-40"
 	});
 
 	this.giroElement3 = new DanceAnimationElement(this, {
-		left: "m 400,200 c 0,0 -100,-40 -360,-40", 
+		left: "m 400,200 c 0,0 -100,-40 -360,-40",
 		right: "m 200,120 c 0,0 100,40 360,40"
 	});
 
@@ -36,3 +36,5 @@ function HuellaAnimation(id) {
 
 };
 extend(HuellaAnimation, GatoAnimation);
+
+module.exports = HuellaAnimation;

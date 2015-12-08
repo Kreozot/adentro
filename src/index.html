@@ -155,23 +155,6 @@
 		<div class="content_menu" id="content_menu"></div>
 		<div class="center" id="content"></div>
 
-		<!-- build:js js/animation.min.js -->
-		<script type="text/javascript" src="js/animations/commons/utils.js"></script>
-		<script type="text/javascript" src="js/animations/commons/elements.js"></script>
-		<script type="text/javascript" src="js/animations/animation.js"></script>
-		<script type="text/javascript" src="js/animations/animation4.js"></script>
-		<script type="text/javascript" src="js/animations/animation_gato_style.js"></script>
-		<script type="text/javascript" src="js/animations/gato.js"></script>
-		<script type="text/javascript" src="js/animations/chacarera.js"></script>
-		<script type="text/javascript" src="js/animations/chacarera4.js"></script>
-		<!-- <script type="text/javascript" src="js/animations/chacarera_cadena.js"></script> -->
-		<script type="text/javascript" src="js/animations/bailecito.js"></script>
-		<script type="text/javascript" src="js/animations/escondido.js"></script>
-		<script type="text/javascript" src="js/animations/remedio.js"></script>
-		<script type="text/javascript" src="js/animations/zamba.js"></script>
-		<script type="text/javascript" src="js/animations/huayra_muyoj.js"></script>
-		<script type="text/javascript" src="js/animations/huella.js"></script>
-		<!-- /build -->
 
 		<script type="text/javascript">
 			jQuery(window).load(function(){
@@ -181,21 +164,12 @@
 					debug: true,
 					fallbackLng: "ru"
 				}, function() {
-					$("#" + playerId).jPlayer({
-						swfPath: "/js/thirdparty",
-						supplied: "mp3"
-					});
 					window.addEventListener("popstate", function(e) {
 					    loadSchemaByState();
 					});
 
 					if (!loadSchemaByUrl()) {
 						showSchema("Chacarera");
-					}
-
-					if ($.cookie('tourPassed_' + i18n.lng()) != "true") {
-						hopscotch.startTour(tour());
-						$.cookie('tourPassed_' + i18n.lng(), 'true', {expires: 365, path: '/'});
 					}
 
 					showLanguageLinks();

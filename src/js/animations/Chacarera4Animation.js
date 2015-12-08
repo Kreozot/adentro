@@ -8,8 +8,8 @@ function VueltaGradientElement(animation, pathStr) {
 		}
 
 		var self = this;
-		this.animation.animations[this.animation.animations.length] = Snap.animate(startPart * this.pathLength, 
-			stopPart * this.pathLength, 
+		this.animation.animations[this.animation.animations.length] = Snap.animate(startPart * this.pathLength,
+			stopPart * this.pathLength,
 			function(value) {
 				this.lastValue = value;
 				self.drawGradientAtPoint(value);
@@ -28,7 +28,7 @@ function Chacarera4Animation(id) {
 		left1: {x: 50, y: 130, angle: -90},
 		right1: {x: 390, y: 130, angle: 90},
 		left2: {x: 50, y: 310, angle: -90},
-		right2: {x: 390, y: 310, angle: 90}	
+		right2: {x: 390, y: 310, angle: 90}
 	};
 
 	this.avanceElement = new FourDanceAnimationElement(this,
@@ -49,7 +49,7 @@ function Chacarera4Animation(id) {
 		{left: "m 50,310 c 76,130 274,132 340,0 30,-60 30,-120 0,-180",
 		right: "M 390,310 C 420,250 420,190 390,130 324,-2 116,-2 50,130"});
 
-	this.vueltaGradientElement = new VueltaGradientElement(this, 
+	this.vueltaGradientElement = new VueltaGradientElement(this,
 		"m 50,310 c 76,130 274,132 340,0 30,-60 30,-120 0,-180 C 324,-2 116,-2 50,130 20,190 20,260 50,310 z");
 
 	this.zapateoElement1 = new ZapateoElement(this, this.man);
@@ -59,7 +59,7 @@ function Chacarera4Animation(id) {
 		{left: "m 50,130 60,60 60,-60 -60,-60 z",
 		right: "m 390,130 -60,-60 -60,60 60,60 z"},
 		this.woman);
-	this.zarandeoElement2 = new ZarandeoElement(this, 
+	this.zarandeoElement2 = new ZarandeoElement(this,
 		{left: "m 50,310 60,60 60,-60 -60,-60 z",
 		right: "m 390,310 -60,-60 -60,60 60,60 z"},
 		this.woman2);
@@ -119,7 +119,7 @@ function Chacarera4Animation(id) {
 			var partTimes = times / 4;
 		} else {
 			var partSeconds = seconds / 2;
-			var partTimes = times / 2;			
+			var partTimes = times / 2;
 		}
 		this.zarandeoElement1.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, 0, 0, 0.5);
 		this.zarandeoElement1.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
@@ -143,3 +143,5 @@ function Chacarera4Animation(id) {
 	};
 };
 extend(Chacarera4Animation, Dance4Animation);
+
+module.exports = Chacarera4Animation;

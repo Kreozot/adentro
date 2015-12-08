@@ -7,5 +7,5 @@ module.exports = {
 		{id: 'classic2', animClass: require('animationClasses/Zamba2Animation'), title: 'animation_links.common2'},
 		{id: 'simple', animClass: require('animationClasses/ZambaSimpleAnimation'), title: 'animation_links.simple'}
 	],
-	info: require('infoData/zamba')
+	info: require('infoData/zamba.inc')
 };

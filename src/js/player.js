@@ -23,3 +23,9 @@ var playElement = function(element) {
 	$.animation.clear();
 	$(playerSelector).jPlayer('play', time);
 };
+
+
+$("#" + playerId).jPlayer({
+	swfPath: "",
+	supplied: "mp3"
+});

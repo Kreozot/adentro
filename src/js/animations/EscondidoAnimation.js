@@ -10,7 +10,7 @@ function EscondidoAnimation(id) {
 		bottom: {x: 390, y: 390, angle: 135}
 	};
 
-	this.giroElement = new DanceAnimationElement(this, 
+	this.giroElement = new DanceAnimationElement(this,
 		{left: "m 50,390 c 20,20 70,10 70,-30 0,-20 -20,-40 -40,-40 -40,0 -50,50 -30,70",
 		right: "m 390,50 c -20,-20 -70,-10 -70,30 0,20 20,40 40,40 40,0 50,-50 30,-70"});
 
@@ -25,11 +25,11 @@ function EscondidoAnimation(id) {
 		right: "m 390,50 -130,0 0,130 130,0 z",
 		bottom: "m 390,390 0,-130 -130,0 0,130 z"});
 
-	this.mediaVueltaElement = new DanceAnimationElement(this, 
+	this.mediaVueltaElement = new DanceAnimationElement(this,
 		{left: "m 50,390 c 30,30 160,0 250,-90 90,-90 120,-220 90,-250",
 		right: "M 390,50 C 360,20 230,50 140,140 50,230 20,360 50,390"});
 
-	this.coronacionElement = new DanceAnimationElement(this, 
+	this.coronacionElement = new DanceAnimationElement(this,
 		{left: "m 50,390 c 30,20 110,-20 150,-60 40,-40 20,-110 -20,-110 -20,0 -40,10 -40,40 0,25 20,40 40,40 40,0 60,-30 50,-60",
 		right: "m 390,50 c -30,-20 -110,20 -150,60 -40,40 -20,110 20,110 20,0 40,-10 40,-40 0,-25 -20,-40 -40,-40 -40,0 -60,30 -50,60"});
 
@@ -78,7 +78,7 @@ function EscondidoAnimation(id) {
 		this.balanceo2Element.startAnimation(partSeconds, partTimes, this.DIRECTION_STRAIGHT_FORWARD, firstPartSeconds + partSeconds, 0, 1);
 	};
 
-	this.vueltaGiro = function(seconds, manPosition, times) {		
+	this.vueltaGiro = function(seconds, manPosition, times) {
 		var firstPart = 6 / times;
 		var secondPart = 2 / times;
 
@@ -92,7 +92,7 @@ function EscondidoAnimation(id) {
 	};
 
 	this.zarandeo = function(seconds, manPosition, times) {
-		this.setAtStart(manPosition);		
+		this.setAtStart(manPosition);
 		this.clearPaths();
 		this.zarandeoElement.drawPath(getOppositePosition(manPosition));
 		if (times >= 8) {
@@ -100,7 +100,7 @@ function EscondidoAnimation(id) {
 			var partTimes = times / 4;
 		} else {
 			var partSeconds = seconds / 2;
-			var partTimes = times / 2;			
+			var partTimes = times / 2;
 		}
 		this.zarandeoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, 0, 0, 0.5);
 		this.zarandeoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
@@ -119,3 +119,5 @@ function EscondidoAnimation(id) {
 	};
 };
 extend(EscondidoAnimation, DanceAnimation);
+
+module.exports = EscondidoAnimation;
