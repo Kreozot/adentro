@@ -48,15 +48,14 @@ var webpackConfig = languages.map(function (lang) {
 				{ test: /\.js$/, exclude: /node_modules/, loader: 'jscs' }
 			],
 			loaders: [
-				{ test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
+				{ test: /\.js$/, exclude: /node_modules/, loader: 'babel?cacheDirectory&presets[]=es2015' },
 				{ test: /\.json$/, loader: 'json' },
 				{ test: /\.css$/, loader: 'style!css' },
 				{ test: /\.scss$/, loader: "style!css!postcss" },
 				{ test: /\.(jpe?g|png|gif)$/i, loader: 'url' },
-				{ test: /\.mp3$/i, loader: 'file' },
+				{ test: /\.mp3$/i, loader: 'file?name=../music/[name].[hash:6].[ext]' },
 				{ test: /\.svg$/i, loader: 'raw' },
-				{ test: /\.inc$/i, loader: 'raw' },
-				{ test: /\.swf$/i, loader: 'file' }
+				{ test: /\.inc$/i, loader: 'raw' }
 			]
 		},
 		postcss: function () {
@@ -107,6 +106,11 @@ if (argv.production) {
 }
 
 webpackConfig.push({
+	module: {
+		loaders: [
+			{ test: /\.swf$/i, loader: 'file?name=[name].[ext]' }
+		]
+	},
 	entry: {
 		// Сторонние библиотеки
 		'vendor.main': [

@@ -1,11 +1,13 @@
 var gulp = require('gulp');
 var config = require('./config.js');
+var paths = config.paths;
 var connect = require('gulp-connect');
 var Nightmare = require('nightmare');
 var vo = require('vo');
 var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
+var del = require('promised-del');
 
 var port = 8080;
 
@@ -29,7 +31,7 @@ function renderAndSaveSvg(done) {
 			show: false
 		});
 
-		var svgList = getSvgList(config.paths.src.svg);
+		var svgList = getSvgList(paths.src.svg);
 
 		for (var i = 0; i < svgList.length; i++) {
 			var svgData = yield nightmare
@@ -44,7 +46,7 @@ function renderAndSaveSvg(done) {
 					return svgData;
 				});
 
-			saveSvg(svgData, config.paths.src.svgCompiled + '/' + svgList[i]);
+			saveSvg(svgData, paths.src.svgCompiled + '/' + svgList[i]);
 		}
 
 		yield nightmare.end();
@@ -56,13 +58,17 @@ function renderAndSaveSvg(done) {
 	});
 }
 
+gulp.task('clean-svg', function() {
+    return del([paths.src.svgCompiled]);
+});
+
 gulp.task('renderSvg', ['clean-svg'], function (done) {
 	connect.server({
-		root: config.paths.src.svg,
+		root: paths.src.svg,
 		port: port
 	});
 
-	mkdirp(config.paths.src.svgCompiled, function() {
+	mkdirp(paths.src.svgCompiled, function() {
 		renderAndSaveSvg(function() {
 			connect.serverClose();
 			done();

@@ -32,4 +32,4 @@ gulp.task('webpack-dev-server', function(callback) {
         });
 });
 
-gulp.task('watch', ['webpack-dev-server']);
+// gulp.task('watch', ['webpack-dev-server']);

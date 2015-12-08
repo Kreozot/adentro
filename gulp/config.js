@@ -3,7 +3,6 @@ var path = require('path');
 module.exports = {
 	paths: {
 		root: path.resolve('./'),
-		temp: path.resolve('./frontend/temp/'),
 		src: {
 			html: path.resolve('./src/'),
 			js: path.resolve('./src/js/'),
@@ -11,7 +10,8 @@ module.exports = {
 			svgCompiled: path.resolve('./src/svg_compiled'),
 			schemes: path.resolve('./src/js/schemeParams'),
 			music: path.resolve('./src/music/'),
-			musicData: path.resolve('./src/js/music/')
+			musicData: path.resolve('./src/js/music/'),
+			styles: path.resolve('./src/styles/')
 		},
 		dist: {
 			js: path.resolve('./dist/scripts/'),
