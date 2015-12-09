@@ -1,10 +1,9 @@
 {
-    "preset": "yandex",
+    "preset": "awesome",
     "disallowMixedSpacesAndTabs": true,
     "validateIndentation": "\t",
     "maximumLineLength": 255,
     "requireSpaceAfterLineComment": false,
     "validateLineBreaks": false,
-  	"esnext": true,
-  	"disallowQuotedKeysInObjects": false
+  	"esnext": true
 }
