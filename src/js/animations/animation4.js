@@ -72,7 +72,7 @@ function FourDanceAnimationElement(animation, pathStrings1, pathStrings2) {
 			this.animation.clearPaths();
 			this.drawPath(manPosition);
 			this.startAnimation(lengthS, times, direction, 0, startPart, stopPart);		
-		}
+		};
 
 		if ((!delay) || (delay <= 0)) {
 			this.fullAnimationFunc();
@@ -119,7 +119,7 @@ function Dance4Animation(id) {
 			this.startPosFigure(this.man2, rightCoords2);
 			this.startPosFigure(this.woman2, leftCoords2);
 		}
-	}
+	};
 
 	this.setAtStart = function (manPosition) {
 		this.startPosition(this.startPos.left1, this.startPos.right1, this.startPos.left2, this.startPos.right2, manPosition);

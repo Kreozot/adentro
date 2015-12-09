@@ -181,7 +181,7 @@ function DanceAnimationElement(animation, pathStrings) {
 			this.animation.clearPaths();
 			this.drawPath(manPosition);
 			this.startAnimation(lengthS, times, direction, 0, startPart, stopPart);		
-		}
+		};
 
 		if ((!delay) || (delay <= 0)) {
 			this.fullAnimationFunc();
@@ -211,7 +211,7 @@ function RotateElement(animation, pathStrings, gender, figure, rotateAngle) {
 	this.animationFunction = function (lengthMs, times) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
 		this.animation.animateFigureTime(this.figure, lengthMs, times * 6);
-	}
+	};
 
 	this.startAnimation = function (lengthS, times, startAngle, direction, delay, startPart, stopPart) {
 		startPart = ( typeof startPart === 'undefined') ? 0 : startPart;
@@ -271,7 +271,7 @@ function RotateDanceAnimationElement(animation, pathStrings, rotateAngle) {
 			this.animation.clearPaths();
 			this.drawPath(manPosition);
 			this.startAnimation(lengthS, times, startAngleMan, startAngleWoman, direction, 0, startPart, stopPart);		
-		}
+		};
 
 		if ((!delay) || (delay <= 0)) {
 			this.fullAnimationFunc();

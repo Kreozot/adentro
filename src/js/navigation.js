@@ -128,7 +128,7 @@ var showAnimation = function (animationId) {
 		var animationClass = animationClassDefs;
 	}
 	AnimationLoader.loadAnimation(animationClass);
-	AnimationLoader.showAnimationLinks(animationClassDefs, animationId);s
+	AnimationLoader.showAnimationLinks(animationClassDefs, animationId);
 };
 
 /**

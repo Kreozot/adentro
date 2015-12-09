@@ -28,5 +28,6 @@
         "afterConsequent": true,
         "beforeAlternate": true
     },
+    "requireSemicolons": true,
     "esnext": true
 }

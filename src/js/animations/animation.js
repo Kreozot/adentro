@@ -59,7 +59,7 @@ function DanceAnimation(id) {
 		var newDur = animation.dur * percentRemain;
 		this.animations[animationIndex] = Snap.animate(animation.lastValue, animation.end, 
 			animation.set, newDur, animation.easing);
-	}
+	};
 
 	this.pause = function () {
 		this.paused = true;
@@ -85,7 +85,7 @@ function DanceAnimation(id) {
 
 	this.getGenderColor = function (gender) {
 		return gender === 'man' ? this.MAN_COLOR : this.WOMAN_COLOR;
-	}
+	};
 
 	/**
 	 * Создание фигуры танцора
@@ -121,7 +121,7 @@ function DanceAnimation(id) {
 				.transform('t' + Math.floor(x) + ',' + Math.floor(y) + 'r' + Math.floor(angle));
 		this.paths[this.paths.length] = arrows;
 		return arrows;
-	}
+	};
 
 	/**
 	 * Спрятать фигурки танцоров
@@ -299,7 +299,7 @@ function DanceAnimation(id) {
 		this.positionFigure(figure, coords.x, coords.y, coords.angle);
 		figure.removeClass('straightBeatFigure');
 		figure.removeClass('invisible');
-	}
+	};
 
 	/**
 	 * Установить фигуры танцоров на определённые позиции
@@ -322,7 +322,7 @@ function DanceAnimation(id) {
 			this.startPosFigure(this.man, rightCoords);
 			this.startPosFigure(this.woman, leftCoords);
 		}
-	}
+	};
 
 	/**
 	 * Установить фигуры танцоров на начальные позиции

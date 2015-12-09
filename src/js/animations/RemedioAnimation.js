@@ -28,7 +28,7 @@ function RemedioAnimation(id) {
 				}, timeLength, mina.linear);
 
 			self.animateFigureTime(figure, timeLength, times);
-		}
+		};
 	}(this);
 
 	this.esquina = function (seconds, manPosition, times) {
@@ -148,7 +148,7 @@ function RemedioAnimation(id) {
 		this.giroCoronacionElement.startAnimation(partSeconds, partTimes, manAngle, womanAngle, this.DIRECTION_FORWARD, 0, 0, 0.5);
 		this.contragiroCoronacionElement.startAnimation(partSeconds, partTimes, manAngle, womanAngle, this.DIRECTION_FORWARD, partSeconds, 0.5, 1);
 
-	}
+	};
 };
 extend(RemedioAnimation, EscondidoAnimation);
 

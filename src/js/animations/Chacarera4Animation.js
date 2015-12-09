@@ -14,7 +14,7 @@ function VueltaGradientElement(animation, pathStr) {
 				this.lastValue = value;
 				self.drawGradientAtPoint(value);
 			}, lengthMs, mina.linear);
-	}
+	};
 }
 extend(VueltaGradientElement, VueltaElement);
 

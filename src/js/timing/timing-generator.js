@@ -22,7 +22,7 @@ function ElementTiming(elementId, beatCount) {
 		} else {
 			return false;
 		}
-	}
+	};
 
 	/**
 	 * Получить среднюю длительность одной доли

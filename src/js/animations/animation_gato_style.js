@@ -75,7 +75,7 @@ function VueltaElement(animation, pathStr) {
 			stopPart * this.pathLength + this.startPos1, lengthMs, times, direction);
 		self.animation.animateWoman(self.path, this.startPos2, 
 			stopPart * this.pathLength + this.startPos2, lengthMs, times, direction);
-	}
+	};
 
 	this.startAnimation = function (lengthS, times, direction, delay, startPart, stopPart, full) {
 		startPart = ( typeof startPart === 'undefined') ? 0 : startPart;
@@ -112,6 +112,6 @@ function VueltaElement(animation, pathStr) {
 		}
 
 		this.drawGradientAtPoint(0);
-	}
+	};
 }
 extend(VueltaElement, DanceAnimationElement);

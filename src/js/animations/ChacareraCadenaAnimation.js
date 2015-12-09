@@ -26,7 +26,7 @@ function ChacareraCadenaAnimation(id) {
 		// this.CadenaElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 6, 5/8, 6/8);
 		// this.CadenaElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 7, 6/8, 7/8);
 		// this.CadenaElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 8, 7/8, 8/8);
-	}
+	};
 };
 extend(ChacareraCadenaAnimation, Chacarera4Animation);
 

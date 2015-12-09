@@ -57,7 +57,7 @@ var AnimationLoader = {
 				}
 			}
 			return result;
-		}
+		};
 		$('#animationLinks').html(getAnimationLinks(animationClassDefs));
 	}
 };
