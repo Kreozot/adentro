@@ -14,7 +14,7 @@ function SingleDanceAnimationElement(animation, pathStrings, gender, figure) {
 	if (figure) {
 		this.figure = figure;
 	} else {
-		this.figure = gender === "man" ? this.animation.man : this.animation.woman;
+		this.figure = gender === 'man' ? this.animation.man : this.animation.woman;
 	}
 	this.angle = 0;
 	this.easing = mina.linear;
@@ -25,7 +25,7 @@ function SingleDanceAnimationElement(animation, pathStrings, gender, figure) {
 	 * @param  {String} position Позиция
 	 * @param  {Boolean} hidden  Создать скрытой
 	 */
-	this.drawPath = function(position, hidden) {
+	this.drawPath = function (position, hidden) {
 		this.path = this.animation.path(this.pathStrings[position], this.gender, hidden);
 		this.pathLength = this.path.getTotalLength() - 1;
 	};
@@ -33,15 +33,15 @@ function SingleDanceAnimationElement(animation, pathStrings, gender, figure) {
 	/**
 	 * Отрисованы ли траектории
 	 */
-	this.isPathsDrawn = function() {
-		return this.path.type == "path";
+	this.isPathsDrawn = function () {
+		return this.path.type == 'path';
 	};
 
 	/**
 	 * Задать относительный угол разворота
 	 * @param {Number} value Значение угла
 	 */
-	this.setAngle = function(value) {
+	this.setAngle = function (value) {
 		this.angle = value;
 	};
 
@@ -53,7 +53,7 @@ function SingleDanceAnimationElement(animation, pathStrings, gender, figure) {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	this.animationFunction = function(lengthMs, times, direction, startPart, stopPart) {
+	this.animationFunction = function (lengthMs, times, direction, startPart, stopPart) {
 		this.animation.animateFigurePath(this.figure, 90 + this.angle, this.path, 
 			this.pathLength * startPart, this.pathLength * stopPart, lengthMs, times, direction, this.easing);
 	};
@@ -67,9 +67,9 @@ function SingleDanceAnimationElement(animation, pathStrings, gender, figure) {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	this.startAnimation = function(lengthS, times, direction, delay, startPart, stopPart) {
-		startPart = (typeof startPart === 'undefined') ? 0 : startPart;
-		stopPart = (typeof stopPart === 'undefined') ? 1 : stopPart;
+	this.startAnimation = function (lengthS, times, direction, delay, startPart, stopPart) {
+		startPart = ( typeof startPart === 'undefined') ? 0 : startPart;
+		stopPart = ( typeof stopPart === 'undefined') ? 1 : stopPart;
 		var self = this;
 
 		function startAnimationFunc() {
@@ -91,7 +91,7 @@ function SingleDanceAnimationElement(animation, pathStrings, gender, figure) {
 	 * @param  {String} direction 	[направление движения фигуры]
 	 * @param  {Number} delay     	[задержка в секундах]
 	 */
-	this.fullAnimation = function(lengthS, times, position, direction, delay, startPart, stopPart) {
+	this.fullAnimation = function (lengthS, times, position, direction, delay, startPart, stopPart) {
 		var self = this;
 		function fullAnimationFunc() {
 			self.animation.clearPaths();
@@ -114,14 +114,14 @@ function SingleDanceAnimationElement(animation, pathStrings, gender, figure) {
  */
 function DanceAnimationElement(animation, pathStrings) {
 	this.animation = animation;
-	this.manDanceAnimationElement = new SingleDanceAnimationElement(animation, pathStrings, "man");
-	this.womanDanceAnimationElement = new SingleDanceAnimationElement(animation, pathStrings, "woman");
+	this.manDanceAnimationElement = new SingleDanceAnimationElement(animation, pathStrings, 'man');
+	this.womanDanceAnimationElement = new SingleDanceAnimationElement(animation, pathStrings, 'woman');
 	// TODO: Сделать массив с элементами и оперировать циклами, а не отдельными элементами
 	/**
 	 * Отрисовка траекторий
 	 * @param  {String} manPosition Позиция партнёра
 	 */
-	this.drawPath = function(manPosition, transparent) {
+	this.drawPath = function (manPosition, transparent) {
 		this.animation.manPosition = manPosition;
 		this.manDanceAnimationElement.drawPath(manPosition, transparent);
 		this.womanDanceAnimationElement.drawPath(getOppositePosition(manPosition), transparent);
@@ -130,7 +130,7 @@ function DanceAnimationElement(animation, pathStrings) {
 	/**
 	 * Отрисованы ли траектории
 	 */
-	this.isPathsDrawn = function() {
+	this.isPathsDrawn = function () {
 		return (this.manDanceAnimationElement.isPathsDrawn() && this.womanDanceAnimationElement.isPathsDrawn());
 	};
 
@@ -138,7 +138,7 @@ function DanceAnimationElement(animation, pathStrings) {
 	 * Задать относительный угол разворота
 	 * @param {Number} value Значение угла
 	 */
-	this.setAngle = function(value) {
+	this.setAngle = function (value) {
 		this.manDanceAnimationElement.setAngle(value);
 		this.womanDanceAnimationElement.setAngle(value);
 	};
@@ -148,7 +148,7 @@ function DanceAnimationElement(animation, pathStrings) {
 	 * @param {Number} manValue   Значение угла для партнёра
 	 * @param {Number} womanValue Значение угла для партнёрши
 	 */
-	this.setAngles = function(manValue, womanValue) {
+	this.setAngles = function (manValue, womanValue) {
 		this.manDanceAnimationElement.setAngle(manValue);
 		this.womanDanceAnimationElement.setAngle(womanValue);
 	};
@@ -162,7 +162,7 @@ function DanceAnimationElement(animation, pathStrings) {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	this.startAnimation = function(lengthS, times, direction, delay, startPart, stopPart) {
+	this.startAnimation = function (lengthS, times, direction, delay, startPart, stopPart) {
 		this.manDanceAnimationElement.startAnimation(lengthS, times, direction, delay, startPart, stopPart);
 		this.womanDanceAnimationElement.startAnimation(lengthS, times, direction, delay, startPart, stopPart);
 	};
@@ -175,9 +175,9 @@ function DanceAnimationElement(animation, pathStrings) {
 	 * @param  {String} direction 	Направление движения фигуры
 	 * @param  {Number} delay     	Задержка в секундах
 	 */
-	this.fullAnimation = function(lengthS, times, manPosition, direction, delay, startPart, stopPart) {
+	this.fullAnimation = function (lengthS, times, manPosition, direction, delay, startPart, stopPart) {
 
-		this.fullAnimationFunc = function() {
+		this.fullAnimationFunc = function () {
 			this.animation.clearPaths();
 			this.drawPath(manPosition);
 			this.startAnimation(lengthS, times, direction, 0, startPart, stopPart);		
@@ -186,8 +186,8 @@ function DanceAnimationElement(animation, pathStrings) {
 		if ((!delay) || (delay <= 0)) {
 			this.fullAnimationFunc();
 		} else {
-			this.animation.timeouts[this.animation.timeouts.length] = new Timer(function(self) {
-				return function() {					
+			this.animation.timeouts[this.animation.timeouts.length] = new Timer( function (self) {
+				return function () {					
 					self.fullAnimationFunc();
 				};
 			}(this), delay * 1000);
@@ -208,14 +208,14 @@ function RotateElement(animation, pathStrings, gender, figure, rotateAngle) {
 
 	this.rotateAngle = rotateAngle;
 
-	this.animationFunction = function(lengthMs, times) {
+	this.animationFunction = function (lengthMs, times) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
 		this.animation.animateFigureTime(this.figure, lengthMs, times * 6);
 	}
 
-	this.startAnimation = function(lengthS, times, startAngle, direction, delay, startPart, stopPart) {
-		startPart = (typeof startPart === 'undefined') ? 0 : startPart;
-		stopPart = (typeof stopPart === 'undefined') ? 1 : stopPart;
+	this.startAnimation = function (lengthS, times, startAngle, direction, delay, startPart, stopPart) {
+		startPart = ( typeof startPart === 'undefined') ? 0 : startPart;
+		stopPart = ( typeof stopPart === 'undefined') ? 1 : stopPart;
 		var self = this;
 		function startAnimationFunc() {
 			var angle = startAngle;
@@ -229,10 +229,10 @@ function RotateElement(animation, pathStrings, gender, figure, rotateAngle) {
 			}
 
 			transformAtLength(startLen);
-			self.figure.removeClass("invisible");
+			self.figure.removeClass('invisible');
 
 			self.animation.animations[self.animation.animations.length] = Snap.animate(startLen, stopLen, 
-				function(value) {
+				function (value) {
 					this.lastValue = value;
 					transformAtLength(value);
 				}, lengthS * 1000, mina.linear);
@@ -257,17 +257,17 @@ extend(RotateElement, SingleDanceAnimationElement);
  */
 function RotateDanceAnimationElement(animation, pathStrings, rotateAngle) {
 	RotateDanceAnimationElement.superclass.constructor.apply(this, arguments);
-	this.manDanceAnimationElement = new RotateElement(animation, pathStrings, "man", undefined, rotateAngle);
-	this.womanDanceAnimationElement = new RotateElement(animation, pathStrings, "woman", undefined, rotateAngle);
+	this.manDanceAnimationElement = new RotateElement(animation, pathStrings, 'man', undefined, rotateAngle);
+	this.womanDanceAnimationElement = new RotateElement(animation, pathStrings, 'woman', undefined, rotateAngle);
 
-	this.startAnimation = function(lengthS, times, startAngleMan, startAngleWoman, direction, delay, startPart, stopPart) {
+	this.startAnimation = function (lengthS, times, startAngleMan, startAngleWoman, direction, delay, startPart, stopPart) {
 		this.manDanceAnimationElement.startAnimation(lengthS, times, startAngleMan, direction, delay, startPart, stopPart);
 		this.womanDanceAnimationElement.startAnimation(lengthS, times, startAngleWoman, direction, delay, startPart, stopPart);
 	};
 
-	this.fullAnimation = function(lengthS, times, startAngleMan, startAngleWoman, manPosition, direction, delay, startPart, stopPart) {
+	this.fullAnimation = function (lengthS, times, startAngleMan, startAngleWoman, manPosition, direction, delay, startPart, stopPart) {
 
-		this.fullAnimationFunc = function() {
+		this.fullAnimationFunc = function () {
 			this.animation.clearPaths();
 			this.drawPath(manPosition);
 			this.startAnimation(lengthS, times, startAngleMan, startAngleWoman, direction, 0, startPart, stopPart);		
@@ -276,8 +276,8 @@ function RotateDanceAnimationElement(animation, pathStrings, rotateAngle) {
 		if ((!delay) || (delay <= 0)) {
 			this.fullAnimationFunc();
 		} else {
-			this.animation.timeouts[this.animation.timeouts.length] = new Timer(function(self) {
-				return function() {					
+			this.animation.timeouts[this.animation.timeouts.length] = new Timer( function (self) {
+				return function () {					
 					self.fullAnimationFunc();
 				};
 			}(this), delay * 1000);

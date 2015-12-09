@@ -213,7 +213,7 @@ var showMusicLinks = function (musicIds, currentMusicId, showEmptyTiming) {
 	};
 
 	$('#musicLinks').html(getMusicLinks());
-	$('#musicSelect').change(function () {
+	$('#musicSelect').change( function () {
 		showMusic($(this).val());
 	});
 };
@@ -268,7 +268,7 @@ var loadSchema = function (schemaParams, musicId, animationId) {
 	var musicSchema = musicData[musicId];
 
 	var svgobject = document.getElementById('schema');
-	$(svgobject).load(function () {
+	$(svgobject).load( function () {
 		$(playerSelector).unbind($.jPlayer.event.timeupdate)
 				.unbind($.jPlayer.event.ended)
 				.unbind($.jPlayer.event.pause);
@@ -279,7 +279,7 @@ var loadSchema = function (schemaParams, musicId, animationId) {
 
 		AnimationLoader.loadAnimationBlock();
 		var animationClass = schemaParams.animation;
-		if (typeof animationClass === 'object') {
+		if ( typeof animationClass === 'object') {
 			AnimationLoader.showAnimationLinks(animationClass, animationId);
 			var currentClassDef = AnimationLoader.getAnimationClassDef(animationClass, animationId);
 			animationClass = currentClassDef.name;
@@ -305,7 +305,7 @@ var loadSchemaEditor = function (schemaParams, musicId) {
 	$('#danceName').html(schemaParams.name + ' (editor mode)');
 	$('#schemaDiv').html('<object data="svg/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
 	var svgobject = document.getElementById('schema');
-	$(svgobject).load(function () {
+	$(svgobject).load( function () {
 		$(playerSelector).unbind($.jPlayer.event.timeupdate)
 				.unbind($.jPlayer.event.ended)
 				.unbind($.jPlayer.event.pause);
@@ -334,7 +334,7 @@ var loadSchemaEditor = function (schemaParams, musicId) {
 
 		$(playerSelector).bind($.jPlayer.event.timeupdate, timeupdateEvent);
 
-		$('html').keypress(function (event) {
+		$('html').keypress( function (event) {
 			if (event.which == 32) { //space
 				var currentTime = $(playerSelector).data('jPlayer').status.currentTime;
 				if (!timingGenerator.addBeat(currentTime)) {

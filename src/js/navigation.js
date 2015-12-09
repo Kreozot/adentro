@@ -70,9 +70,9 @@ var pushStateOrRedirect = function (params, title, query) {
  * @return {String}           Относительный путь URL
  */
 var getRelativeUrl = function (schema, animation, music) {
-	return "?schema=" + schema +
-		(animation ? ("&animation=" + animation) : "") +
-		(music ? ("&music=" + music) : "");
+	return '?schema=' + schema +
+		(animation ? ('&animation=' + animation) : '') +
+		(music ? ('&music=' + music) : '');
 	//TODO: Настройка алиасов URL. Тогда можно будет сделать нормальный relative path
 	// return schema +
 	// 	(animation ? ("/" + animation) : "") +
@@ -104,7 +104,7 @@ var getContextFromUrl = function () {
  */
 var showSchema = function (schemaId) {
 	this.pushStateOrRedirect({schema: schemaId},
-		schemaParamsMap.getName(schemaId) + " - Adentro", getRelativeUrl(schemaId));
+		schemaParamsMap.getName(schemaId) + ' - Adentro', getRelativeUrl(schemaId));
 	loadSchemaByState();
 };
 
@@ -116,7 +116,7 @@ var showAnimation = function (animationId) {
 	context.animation = animationId;
 
 	this.pushStateOrRedirect({schema: context.schema, animation: context.animation, music: context.music},
-			schemaParamsMap.getName(context.schema) + " - Adentro",
+			schemaParamsMap.getName(context.schema) + ' - Adentro',
 			getRelativeUrl(context.schema, context.animation, context.music));
 
 	var schemaParams = schemaParamsMap[context.schema];
@@ -138,7 +138,7 @@ var showAnimation = function (animationId) {
 var showMusic = function (musicId) {
 	context.music = musicId;
 	this.pushStateOrRedirect({schema: context.schema, animation: context.animation, music: context.music},
-			schemaParamsMap.getName(context.schema) + " - Adentro",
+			schemaParamsMap.getName(context.schema) + ' - Adentro',
 			getRelativeUrl(context.schema, context.animation, context.music));
 
 	var schemaParams = schemaParamsMap[context.schema];

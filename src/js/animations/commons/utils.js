@@ -1,5 +1,5 @@
 function extend(Child, Parent) {
-	var F = function() { }
+	var F = function () { }
 	F.prototype = Parent.prototype;
 	Child.prototype = new F();
 	Child.prototype.constructor = Child;
@@ -18,13 +18,13 @@ function Timer(callback, delay) {
 	};
 	var paused = true, timerId, start;
 
-	this.pause = function() {
+	this.pause = function () {
 		window.clearTimeout(timerId);
 		remaining -= new Date() - start;
 		paused = true;
 	};
 
-	this.resume = function() {
+	this.resume = function () {
 		if (paused && (remaining >= 0)) {
 			paused = false;
 			start = new Date();
@@ -42,19 +42,19 @@ function Timer(callback, delay) {
  */
 function getOppositePosition(position) {
 	switch (position) {
-		case "start_left":
-			return "start_right";
-		case "start_right":
-			return "start_left";
-		case "left":
-			return "right";
-		case "right":
-			return "left";
-		case "top":
-			return "bottom";
-		case "bottom":
-			return "top";
+		case 'start_left':
+			return 'start_right';
+		case 'start_right':
+			return 'start_left';
+		case 'left':
+			return 'right';
+		case 'right':
+			return 'left';
+		case 'top':
+			return 'bottom';
+		case 'bottom':
+			return 'top';
 		default:
-			return "left";
+			return 'left';
 	}
 };

@@ -5,7 +5,16 @@
     "requireSpaceBeforeBinaryOperators": true,
     "requireSpaceAfterComma": true,
     "requireSpaceAfterKeywords": true,
-    "requireSpaceBeforeKeywords": true,
+    "requireSpaceBeforeKeywords": [
+        "else",
+        "while",
+        "catch"
+    ],
+    "validateQuoteMarks": {
+        "mark": "'",
+        "escape": true,
+        "ignoreJSX": true
+    },
     "requireSpaceBeforeObjectValues": true,
     "requireSpaceBetweenArguments": true,
     "requireSpacesInForStatement": true,

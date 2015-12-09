@@ -13,11 +13,11 @@ function ElementTiming(elementId, beatCount) {
 	 * @param  {Number} seconds Время в секундах
 	 * @return {Boolean} 	    false, если достигли конца элемента
 	 */
-	this.addBeat = function(seconds) {
+	this.addBeat = function (seconds) {
 		if (this.beats.length < this.beatCount) {
 			this.beats[this.beats.length] = seconds;
 
-			console.log(this.beats.length + " beat on " + seconds + " (" + this.elementId + ")");
+			console.log(this.beats.length + ' beat on ' + seconds + ' (' + this.elementId + ')');
 			return true;
 		} else {
 			return false;
@@ -28,9 +28,9 @@ function ElementTiming(elementId, beatCount) {
 	 * Получить среднюю длительность одной доли
 	 * @return {Number} Средняя длительность доли в секундах
 	 */
-	this.getAverageBeatTime = function() {
+	this.getAverageBeatTime = function () {
 		// Находим длительность всех долей, кроме последней
-		var beatsLen = this.beats.map(function(beat, i, beats) {
+		var beatsLen = this.beats.map( function (beat, i, beats) {
 			if (i == beats.length - 1) {
 				return 0;
 			} else {
@@ -38,7 +38,7 @@ function ElementTiming(elementId, beatCount) {
 			}
 		});
 		// Считаем сумму длительностей
-		var beatsLenSum = beatsLen.reduce(function(sum, value) {
+		var beatsLenSum = beatsLen.reduce( function (sum, value) {
 			return sum + value;
 		}, 0);
 		// Вычисляем среднюю длительность
@@ -49,7 +49,7 @@ function ElementTiming(elementId, beatCount) {
 	 * Получить время начала элемента (за пол доли до первой сильной доли)
 	 * @return {Number} Время начала элемента в секундах
 	 */
-	this.getBeginTime = function() {
+	this.getBeginTime = function () {
 		var time = this.beats[0] - this.getAverageBeatTime();
 		if (!time) {
 			time = this.beats[0];
@@ -68,7 +68,7 @@ function TimingGenerator() {
 	 * Получить список элементов текущей схемы
 	 * @return {Array} Массив описаний элементов схемы в формате [{id, beatCount}...]
 	 */
-	this.getElementsList = function() {
+	this.getElementsList = function () {
 		var elementsList = [];
 
 		function addElement(id, beatCount) {
@@ -81,19 +81,19 @@ function TimingGenerator() {
 			var currentY = 0;
 			var currentPart = 1;
 
-			$("rect.element", svgdom).each(function(index, element) {
+			$('rect.element', svgdom).each( function (index, element) {
 				// Если перешли на новую строку, добавляем паузу
 				if (element.attributes.y.value != currentY) {
 					currentY = element.attributes.y.value;
 					if (currentPart != 1) {
-						addElement("#pause_" + currentPart, 1);
+						addElement('#pause_' + currentPart, 1);
 					}
-					addElement("#start_" + currentPart, 1);
+					addElement('#start_' + currentPart, 1);
 					currentPart += 1;
 				}
 				addElement(element.id, element.dataset.times);
 			});
-			addElement("#end", 1);
+			addElement('#end', 1);
 
 			return elementsList;
 		};
@@ -108,7 +108,7 @@ function TimingGenerator() {
 	/**
 	 * Очистить информацию о тайминге
 	 */
-	this.clear = function() {
+	this.clear = function () {
 		this.elementsTiming = [];
 		this.currentElementIndex = 0;
 		this.lastTimeValue = 0;
@@ -118,9 +118,9 @@ function TimingGenerator() {
 	 * Добавить долю
 	 * @param {Number} seconds Время в секундах
 	 */
-	this.addBeat = function(seconds) {
+	this.addBeat = function (seconds) {
 		if (this.currentElementIndex >= this.elementsList.length) {
-			console.log("finish");
+			console.log('finish');
 			return false;
 		}
 		var currentElement = this.elementsList[this.currentElementIndex];
@@ -140,7 +140,7 @@ function TimingGenerator() {
 	 * Получить тайминг
 	 * @return {String} Описание тайминга в готовом для вставки формате
 	 */
-	this.getTiming = function() {
+	this.getTiming = function () {
 		var newTiming = {};
 		for (var i = 0; i < this.elementsTiming.length; i++) {
 			newTiming[this.elementsTiming[i].elementId] = this.elementsTiming[i].getBeginTime();

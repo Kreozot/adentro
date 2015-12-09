@@ -2,14 +2,14 @@ function RemedioAnimation(id) {
 	RemedioAnimation.superclass.constructor.apply(this, arguments);
 
 	this.giroCoronacionElement = new RotateDanceAnimationElement(this,
-		{left: "M 50,390 200,240",
-		right: "M 390,50 240,200"}, 360);
+		{left: 'M 50,390 200,240',
+		right: 'M 390,50 240,200'}, 360);
 	this.contragiroCoronacionElement = new RotateDanceAnimationElement(this,
-		{left: "M 50,390 200,240",
-		right: "M 390,50 240,200"}, -360);
+		{left: 'M 50,390 200,240',
+		right: 'M 390,50 240,200'}, -360);
 
-	this.rotateFigure = function(self) {
-		return 	function(figure, seconds, times, x, y, startAngle, endAngle) {
+	this.rotateFigure = function (self) {
+		return function (figure, seconds, times, x, y, startAngle, endAngle) {
 			var timeLength = seconds * 1000;
 			var angle = startAngle - endAngle;
 			if (angle > 360) {
@@ -21,7 +21,7 @@ function RemedioAnimation(id) {
 			var angleSpeed = angle / timeLength;
 
 			self.animations[self.animations.length] = Snap.animate(0, timeLength,
-				function(value) {
+				function (value) {
 					this.lastValue = value;
 
 					self.positionFigure(figure, x, y, startAngle - angleSpeed * value);
@@ -31,41 +31,41 @@ function RemedioAnimation(id) {
 		}
 	}(this);
 
-	this.esquina = function(seconds, manPosition, times) {
+	this.esquina = function (seconds, manPosition, times) {
 		this.clearPaths();
 		var leftPaths = {
-			esquinaPath: "m 50,390 c 0,0 90,-70 90,-170 C 140,120 50,50 50,50",
+			esquinaPath: 'm 50,390 c 0,0 90,-70 90,-170 C 140,120 50,50 50,50',
 			angle: 225
 		};
 		var topPaths = {
-			esquinaPath: "m 50,50 c 0,0 70,90 170,90 100,0 170,-90 170,-90",
+			esquinaPath: 'm 50,50 c 0,0 70,90 170,90 100,0 170,-90 170,-90',
 			angle: 315
 		};
 		var rightPaths = {
-			esquinaPath: "m 390,50 c 0,0 -90,70 -90,170 0,100 90,170 90,170",
+			esquinaPath: 'm 390,50 c 0,0 -90,70 -90,170 0,100 90,170 90,170',
 			angle: 45
 		};
 		var bottomPaths = {
-			esquinaPath: "m 390,390 c 0,0 -70,-90 -170,-90 -100,0 -170,90 -170,90",
+			esquinaPath: 'm 390,390 c 0,0 -70,-90 -170,-90 -100,0 -170,90 -170,90',
 			angle: 135
 		};
 		var manPaths = {};
 		var womanPaths = {};
 
 		switch (manPosition) {
-			case "left":
+			case 'left':
 				manPaths = leftPaths;
 				womanPaths = rightPaths;
 				break;
-			case "top":
+			case 'top':
 				manPaths = topPaths;
 				womanPaths = bottomPaths;
 				break;
-			case "right":
+			case 'right':
 				manPaths = rightPaths;
 				womanPaths = leftPaths;
 				break;
-			case "bottom":
+			case 'bottom':
 				manPaths = bottomPaths;
 				womanPaths = topPaths;
 				break;
@@ -79,7 +79,7 @@ function RemedioAnimation(id) {
 		var manEsquinaPath = this.manPath(manPaths.esquinaPath);
 		var womanEsquinaPath = this.womanPath(womanPaths.esquinaPath);
 
-		if ((manPosition == "left") || (manPosition == "right")) {
+		if ((manPosition == 'left') || (manPosition == 'right')) {
 			this.initRotateIcon(50, 50, -45, false);
 			this.initRotateIcon(390, 390, -45, false);
 		} else {
@@ -97,8 +97,8 @@ function RemedioAnimation(id) {
 		self.animateFigurePath(self.woman, 90, womanEsquinaPath, 0, womanEsquinaPath.getTotalLength() - 1,
 			timeLength * 3 / 4, times * 3 / 4);
 
-		this.timeouts[this.timeouts.length] = new Timer(function(self) {
-			return function() {
+		this.timeouts[this.timeouts.length] = new Timer( function (self) {
+			return function () {
 				manMovePoint = manEsquinaPath.getPointAtLength(manEsquinaPath.getTotalLength() - 1);
 				womanMovePoint = womanEsquinaPath.getPointAtLength(womanEsquinaPath.getTotalLength() - 1);
 
@@ -110,7 +110,7 @@ function RemedioAnimation(id) {
 		}(this), timeLength * 3 / 4);
 	};
 
-	this.zapateoZarandeo = function(seconds, manPosition, times) {
+	this.zapateoZarandeo = function (seconds, manPosition, times) {
 		this.clearPaths();
 		this.zarandeoElement.drawPath(getOppositePosition(manPosition));
 		if (times >= 8) {
@@ -131,7 +131,7 @@ function RemedioAnimation(id) {
 		this.zapateoElement.startAnimation(seconds, times);
 	};
 
-	this.giroContragiroCoronacion = function(seconds, manPosition, times) {
+	this.giroContragiroCoronacion = function (seconds, manPosition, times) {
 		this.clearPaths();
 		var partSeconds = seconds / 2;
 		var partTimes = times / 2;

@@ -1,12 +1,12 @@
 function ZapateoElement(animation, figure, pathStrings) {
-	ZapateoElement.superclass.constructor.apply(this, [animation, pathStrings, "man", figure]);
+	ZapateoElement.superclass.constructor.apply(this, [animation, pathStrings, 'man', figure]);
 
-	this.animationFunction = function(lengthMs, times) {
+	this.animationFunction = function (lengthMs, times) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
 		this.animation.animateFigureTime(this.figure, lengthMs, times * 6);
 	};
 
-	this.drawPath = function(position) {
+	this.drawPath = function (position) {
 		this.animation.manPosition = position;
 		this.position = position;
 
@@ -19,7 +19,7 @@ function ZapateoElement(animation, figure, pathStrings) {
 extend(ZapateoElement, SingleDanceAnimationElement);
 
 function ZarandeoElement(animation, pathStrings, figure) {
-	ZarandeoElement.superclass.constructor.apply(this, [animation, pathStrings, "woman", figure]);
+	ZarandeoElement.superclass.constructor.apply(this, [animation, pathStrings, 'woman', figure]);
 }
 extend(ZarandeoElement, SingleDanceAnimationElement);
 
@@ -28,13 +28,13 @@ function VueltaElement(animation, pathStr) {
 	this.pathStr = pathStr;
 	this.g = {};
 
-	this.setColors = function(leftColor, rightColor) {
+	this.setColors = function (leftColor, rightColor) {
 		this.leftColor = leftColor;
 		this.rightColor = rightColor;
-		this.gColors = leftColor + "-" + rightColor;
+		this.gColors = leftColor + '-' + rightColor;
 	};
 
-	this.drawGradientAtPoint = function(value) {
+	this.drawGradientAtPoint = function (value) {
 		var value2 = value + this.halfLength;
 		if (value2 > this.pathLength) {
 			value2 = value2 - this.pathLength;
@@ -51,13 +51,13 @@ function VueltaElement(animation, pathStr) {
 			});
 			this.path.attr({stroke: this.g});
 		} else {
-			this.g = this.animation.svg.gradient("L(" + movePoint1.x + ", " + movePoint1.y + ", " + 
-				movePoint2.x + ", " + movePoint2.y + ")" + this.gColors);
+			this.g = this.animation.svg.gradient('L(' + movePoint1.x + ', ' + movePoint1.y + ', ' + 
+				movePoint2.x + ', ' + movePoint2.y + ')' + this.gColors);
 			this.path.attr({stroke: this.g});
 		}	
 	};
 
-	this.animationFunction = function(lengthMs, times, direction, startPart, stopPart) {
+	this.animationFunction = function (lengthMs, times, direction, startPart, stopPart) {
 		//Если идём из начала в конец, то инвертируем цвета градиента
 		if (startPart > stopPart) {
 			this.setColors(this.rightColor, this.leftColor);
@@ -66,7 +66,7 @@ function VueltaElement(animation, pathStr) {
 		var self = this;
 		this.animation.animations[this.animation.animations.length] = Snap.animate(startPart * this.pathLength, 
 			stopPart * this.pathLength, 
-			function(value) {
+			function (value) {
 				this.lastValue = value;
 				self.drawGradientAtPoint(value);
 			}, lengthMs, mina.linear);
@@ -77,9 +77,9 @@ function VueltaElement(animation, pathStr) {
 			stopPart * this.pathLength + this.startPos2, lengthMs, times, direction);
 	}
 
-	this.startAnimation = function(lengthS, times, direction, delay, startPart, stopPart, full) {
-		startPart = (typeof startPart === 'undefined') ? 0 : startPart;
-		stopPart = (typeof stopPart === 'undefined') ? 1 : stopPart;
+	this.startAnimation = function (lengthS, times, direction, delay, startPart, stopPart, full) {
+		startPart = ( typeof startPart === 'undefined') ? 0 : startPart;
+		stopPart = ( typeof stopPart === 'undefined') ? 1 : stopPart;
 		var self = this;
 
 		function startAnimationFunc() {
@@ -93,7 +93,7 @@ function VueltaElement(animation, pathStr) {
 		}
 	};
 
-	this.drawPath = function(manPosition) {
+	this.drawPath = function (manPosition) {
 		this.g = {};
 		this.animation.manPosition = manPosition;
 		this.path = this.animation.path(pathStr);
@@ -101,7 +101,7 @@ function VueltaElement(animation, pathStr) {
 		this.gradientOffset = this.pathLength / 6;
 		this.halfLength = this.pathLength / 2;
 
-		if (manPosition === "left") {
+		if (manPosition === 'left') {
 			this.startPos1 = 0;
 			this.startPos2 = this.halfLength;
 			this.setColors(this.animation.MAN_COLOR, this.animation.WOMAN_COLOR);

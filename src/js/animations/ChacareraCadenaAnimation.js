@@ -3,15 +3,15 @@ function ChacareraCadenaAnimation(id) {
 
 
 	this.CadenaElement = new FourDanceAnimationElement(this,
-		{left: "m 50,130 c 0,30 170,30 170,30 l 200,0 0,120 -400,0 c 0,0 0,0 0,-60 0,-60 30,-90 30,-90",
-		right: "m 390,130 c 0,-30 -170,-30 -170,-30 l -140,0 0,240 280,0 c 0,0 0,-60 0,-120 0,-60 30,-90 30,-90"},
-		{left: "m 50,310 c 0,30 170,30 170,30 l 140,0 0,-240 -280,0 c 0,0 0,60 0,120 0,60 -30,90 -30,90",
-		right: "m 390,310 c 0,-30 -170,-30 -170,-30 l -200,0 0,-120 400,0 c 0,0 0,0 0,60 0,60 -30,90 -30,90"});
+		{left: 'm 50,130 c 0,30 170,30 170,30 l 200,0 0,120 -400,0 c 0,0 0,0 0,-60 0,-60 30,-90 30,-90',
+		right: 'm 390,130 c 0,-30 -170,-30 -170,-30 l -140,0 0,240 280,0 c 0,0 0,-60 0,-120 0,-60 30,-90 30,-90'},
+		{left: 'm 50,310 c 0,30 170,30 170,30 l 140,0 0,-240 -280,0 c 0,0 0,60 0,120 0,60 -30,90 -30,90',
+		right: 'm 390,310 c 0,-30 -170,-30 -170,-30 l -200,0 0,-120 400,0 c 0,0 0,0 0,60 0,60 -30,90 -30,90'});
 
-	this.CadenaVisualPath = "m 50,310 340,0 0,-180 -340,0 z";
+	this.CadenaVisualPath = 'm 50,310 340,0 0,-180 -340,0 z';
 
-	this.vuelta = function(seconds, manPosition, times) {
-		this.CadenaPath = this.path(this.CadenaVisualPath, "black");
+	this.vuelta = function (seconds, manPosition, times) {
+		this.CadenaPath = this.path(this.CadenaVisualPath, 'black');
 
 		this.CadenaElement.drawPath(manPosition, true);
 		this.CadenaElement.startAnimation(seconds, times);

@@ -1,6 +1,7 @@
 {
     "preset": "awesome",
     "disallowMixedSpacesAndTabs": true,
+    "disallowQuotedKeysInObjects": false,
     "validateIndentation": "\t",
     "maximumLineLength": 255,
     "requireSpaceAfterLineComment": false,
