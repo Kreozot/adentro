@@ -4,7 +4,7 @@ var paths = config.paths;
 var del = require('promised-del');
 
 gulp.task('clean-html', function() {
-    return del([config.paths.dist.html] + '/*.html');
+    return del(config.paths.dist.html + '/*.html');
 });
 
 gulp.task('copy-html', ['clean-html'], function () {
@@ -13,5 +13,5 @@ gulp.task('copy-html', ['clean-html'], function () {
 });
 
 gulp.task('watch-html', ['connect', 'copy-html'], function() {
-    return gulp.watch(paths.src.html, ['copy-html']);
+    return gulp.watch(paths.src.html + '/*.html', ['copy-html']);
 });

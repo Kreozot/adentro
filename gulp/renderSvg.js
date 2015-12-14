@@ -11,7 +11,7 @@ var del = require('promised-del');
 
 //TODO: оформить в виде loader-а с кешированием
 
-var port = 8080;
+var port = 8081;
 
 function getSvgList(dir) {
 	var files = fs.readdirSync(dir);

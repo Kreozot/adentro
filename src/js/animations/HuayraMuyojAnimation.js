@@ -124,7 +124,7 @@ function HuayraMuyojAnimation(id) {
 		var arrows2 = this.initRotateIcon(390, 135, 0, false);
 		var arrows1_2 = this.initRotateIcon(50, 220, 0, true).removeClass('rotationArrows').addClass('invisible');
 		var arrows2_2 = this.initRotateIcon(390, 220, 0, true).removeClass('rotationArrows').addClass('invisible');
-		this.timeouts[this.timeouts.length] = new Timer( function () {
+		this.timeouts[this.timeouts.length] = new Timer(function () {
 			arrows1.removeClass('rotationArrows').addClass('invisible');
 			arrows2.removeClass('rotationArrows').addClass('invisible');
 			arrows1_2.addClass('rotationArrows').removeClass('invisible');

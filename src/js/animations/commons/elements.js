@@ -68,8 +68,8 @@ function SingleDanceAnimationElement(animation, pathStrings, gender, figure) {
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
 	this.startAnimation = function (lengthS, times, direction, delay, startPart, stopPart) {
-		startPart = ( typeof startPart === 'undefined') ? 0 : startPart;
-		stopPart = ( typeof stopPart === 'undefined') ? 1 : stopPart;
+		startPart = (typeof startPart === 'undefined') ? 0 : startPart;
+		stopPart = (typeof stopPart === 'undefined') ? 1 : stopPart;
 		var self = this;
 
 		function startAnimationFunc() {
@@ -186,7 +186,7 @@ function DanceAnimationElement(animation, pathStrings) {
 		if ((!delay) || (delay <= 0)) {
 			this.fullAnimationFunc();
 		} else {
-			this.animation.timeouts[this.animation.timeouts.length] = new Timer( function (self) {
+			this.animation.timeouts[this.animation.timeouts.length] = new Timer(function (self) {
 				return function () {					
 					self.fullAnimationFunc();
 				};
@@ -214,8 +214,8 @@ function RotateElement(animation, pathStrings, gender, figure, rotateAngle) {
 	};
 
 	this.startAnimation = function (lengthS, times, startAngle, direction, delay, startPart, stopPart) {
-		startPart = ( typeof startPart === 'undefined') ? 0 : startPart;
-		stopPart = ( typeof stopPart === 'undefined') ? 1 : stopPart;
+		startPart = (typeof startPart === 'undefined') ? 0 : startPart;
+		stopPart = (typeof stopPart === 'undefined') ? 1 : stopPart;
 		var self = this;
 		function startAnimationFunc() {
 			var angle = startAngle;
@@ -276,7 +276,7 @@ function RotateDanceAnimationElement(animation, pathStrings, rotateAngle) {
 		if ((!delay) || (delay <= 0)) {
 			this.fullAnimationFunc();
 		} else {
-			this.animation.timeouts[this.animation.timeouts.length] = new Timer( function (self) {
+			this.animation.timeouts[this.animation.timeouts.length] = new Timer(function (self) {
 				return function () {					
 					self.fullAnimationFunc();
 				};

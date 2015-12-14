@@ -30,7 +30,7 @@ function ElementTiming(elementId, beatCount) {
 	 */
 	this.getAverageBeatTime = function () {
 		// Находим длительность всех долей, кроме последней
-		var beatsLen = this.beats.map( function (beat, i, beats) {
+		var beatsLen = this.beats.map(function (beat, i, beats) {
 			if (i == beats.length - 1) {
 				return 0;
 			} else {
@@ -38,7 +38,7 @@ function ElementTiming(elementId, beatCount) {
 			}
 		});
 		// Считаем сумму длительностей
-		var beatsLenSum = beatsLen.reduce( function (sum, value) {
+		var beatsLenSum = beatsLen.reduce(function (sum, value) {
 			return sum + value;
 		}, 0);
 		// Вычисляем среднюю длительность
@@ -81,7 +81,7 @@ function TimingGenerator() {
 			var currentY = 0;
 			var currentPart = 1;
 
-			$('rect.element', svgdom).each( function (index, element) {
+			$('rect.element', svgdom).each(function (index, element) {
 				// Если перешли на новую строку, добавляем паузу
 				if (element.attributes.y.value != currentY) {
 					currentY = element.attributes.y.value;

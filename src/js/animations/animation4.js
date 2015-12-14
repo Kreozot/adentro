@@ -77,7 +77,7 @@ function FourDanceAnimationElement(animation, pathStrings1, pathStrings2) {
 		if ((!delay) || (delay <= 0)) {
 			this.fullAnimationFunc();
 		} else {
-			this.animation.timeouts[this.animation.timeouts.length] = new Timer( function (self) {
+			this.animation.timeouts[this.animation.timeouts.length] = new Timer(function (self) {
 				return function () {					
 					self.fullAnimationFunc();
 				};

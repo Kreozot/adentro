@@ -114,14 +114,14 @@ webpackConfig.push({
 	entry: {
 		// Сторонние библиотеки
 		'vendor.main': [
-			'expose?$!expose?jQuery!jquery/dist/jquery.min.js',
+			'expose?$!expose?jQuery!jquery/dist/jquery.js',
 			'hopscotch',
-			'urijs/src/URI.min.js'
+			'urijs/src/URI.js'
 		],
 		'vendor.media': [
 			'jplayer/dist/jplayer/jquery.jplayer.min.js',
 			'jplayer/dist/jplayer/jquery.jplayer.swf',
-			'snapsvg/dist/snap.svg-min.js'
+			'snapsvg/dist/snap.svg.js'
 		]
 	},
 	output: {

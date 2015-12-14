@@ -1,5 +1,6 @@
 {
     "disallowMixedSpacesAndTabs": true,
+    "disallowSpacesInsideParentheses": true,
     "validateIndentation": "\t",
     "requireSpaceAfterBinaryOperators": true,
     "requireSpaceBeforeBinaryOperators": true,
@@ -29,5 +30,6 @@
         "beforeAlternate": true
     },
     "requireSemicolons": true,
+    "requireLineFeedAtFileEnd": true,
     "esnext": true
 }

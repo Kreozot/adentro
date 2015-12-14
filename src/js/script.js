@@ -127,40 +127,34 @@ var initSvgSchema = function () {
 		$('#schema').attr('width', $('svg', svgdom).attr('width'))
 				.attr('height', $('svg', svgdom).attr('height'));
 
-		var timeupdateEvent = function (svgdom) {
-			return function (event) {
-				var playerStatus = event.jPlayer.status;
-				// Если остановлено
-				if ((playerStatus.paused) && (playerStatus.currentTime == 0)) {
-					hideCurrentElement(svgdom);
-				} else if ((!playerStatus.paused) &&
-						(!playerStatus.waitForPlay) &&
-						(!playerStatus.waitForLoad)) {
-					$.animation.resume();
-					var time = playerStatus.currentTime;
-					var element = getElement(time);
-					if ($(playerSelector).data('currentElement') != element.name) {
-						$(playerSelector).data('currentElement', element.name);
-						if (element && (element.name.length > 0)) {
-							showCurrentElement(element.name, element.timeLength, svgdom);
-						};
+		var timeupdateEvent = function (event) {
+			var playerStatus = event.jPlayer.status;
+			// Если остановлено
+			if ((playerStatus.paused) && (playerStatus.currentTime == 0)) {
+				hideCurrentElement(svgdom);
+			} else if ((!playerStatus.paused) &&
+					(!playerStatus.waitForPlay) &&
+					(!playerStatus.waitForLoad)) {
+				$.animation.resume();
+				var time = playerStatus.currentTime;
+				var element = getElement(time);
+				if ($(playerSelector).data('currentElement') != element.name) {
+					$(playerSelector).data('currentElement', element.name);
+					if (element && (element.name.length > 0)) {
+						showCurrentElement(element.name, element.timeLength, svgdom);
 					};
 				};
 			};
-		}(svgdom);
-		var endedEvent = function (svgdom) {
-			return function (event) {
-				hideCurrentElement(svgdom);
+		};
+		var endedEvent = function (event) {
+			hideCurrentElement(svgdom);
+		};
+		var pauseEvent = function (event) {
+			var playerStatus = event.jPlayer.status;
+			if ((playerStatus.paused) && (playerStatus.currentTime > 0)) {
+				$.animation.pause();
 			};
-		}(svgdom);
-		var pauseEvent = function (svgdom) {
-			return function (event) {
-				var playerStatus = event.jPlayer.status;
-				if ((playerStatus.paused) && (playerStatus.currentTime > 0)) {
-					$.animation.pause();
-				};
-			};
-		}(svgdom);
+		};
 
 		$(playerSelector).bind($.jPlayer.event.timeupdate, timeupdateEvent)
 				.bind($.jPlayer.event.ended, endedEvent)
@@ -213,7 +207,7 @@ var showMusicLinks = function (musicIds, currentMusicId, showEmptyTiming) {
 	};
 
 	$('#musicLinks').html(getMusicLinks());
-	$('#musicSelect').change( function () {
+	$('#musicSelect').change(function () {
 		showMusic($(this).val());
 	});
 };
@@ -268,7 +262,7 @@ var loadSchema = function (schemaParams, musicId, animationId) {
 	var musicSchema = musicData[musicId];
 
 	var svgobject = document.getElementById('schema');
-	$(svgobject).load( function () {
+	$(svgobject).load(function () {
 		$(playerSelector).unbind($.jPlayer.event.timeupdate)
 				.unbind($.jPlayer.event.ended)
 				.unbind($.jPlayer.event.pause);
@@ -279,7 +273,7 @@ var loadSchema = function (schemaParams, musicId, animationId) {
 
 		AnimationLoader.loadAnimationBlock();
 		var animationClass = schemaParams.animation;
-		if ( typeof animationClass === 'object') {
+		if (typeof animationClass === 'object') {
 			AnimationLoader.showAnimationLinks(animationClass, animationId);
 			var currentClassDef = AnimationLoader.getAnimationClassDef(animationClass, animationId);
 			animationClass = currentClassDef.name;
@@ -305,7 +299,7 @@ var loadSchemaEditor = function (schemaParams, musicId) {
 	$('#danceName').html(schemaParams.name + ' (editor mode)');
 	$('#schemaDiv').html('<object data="svg/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
 	var svgobject = document.getElementById('schema');
-	$(svgobject).load( function () {
+	$(svgobject).load(function () {
 		$(playerSelector).unbind($.jPlayer.event.timeupdate)
 				.unbind($.jPlayer.event.ended)
 				.unbind($.jPlayer.event.pause);
@@ -322,19 +316,17 @@ var loadSchemaEditor = function (schemaParams, musicId) {
 		var initTiming = $(playerSelector).data('schema');
 		var timingGenerator = new TimingGenerator(initTiming);
 
-		var timeupdateEvent = function (timingGenerator) {
-			return function (event) {
-				// Если остановлено
-				if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
-					hideCurrentElementMarkOnSchema();
-					timingGenerator.clear();
-				}
-			};
-		}(timingGenerator);
+		var timeupdateEvent = function (event) {
+			// Если остановлено
+			if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
+				hideCurrentElementMarkOnSchema();
+				timingGenerator.clear();
+			}
+		};
 
 		$(playerSelector).bind($.jPlayer.event.timeupdate, timeupdateEvent);
 
-		$('html').keypress( function (event) {
+		$('html').keypress(function (event) {
 			if (event.which == 32) { //space
 				var currentTime = $(playerSelector).data('jPlayer').status.currentTime;
 				if (!timingGenerator.addBeat(currentTime)) {

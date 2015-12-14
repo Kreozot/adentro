@@ -78,8 +78,8 @@ function VueltaElement(animation, pathStr) {
 	};
 
 	this.startAnimation = function (lengthS, times, direction, delay, startPart, stopPart, full) {
-		startPart = ( typeof startPart === 'undefined') ? 0 : startPart;
-		stopPart = ( typeof stopPart === 'undefined') ? 1 : stopPart;
+		startPart = (typeof startPart === 'undefined') ? 0 : startPart;
+		stopPart = (typeof stopPart === 'undefined') ? 1 : stopPart;
 		var self = this;
 
 		function startAnimationFunc() {

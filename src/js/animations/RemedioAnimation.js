@@ -97,7 +97,7 @@ function RemedioAnimation(id) {
 		self.animateFigurePath(self.woman, 90, womanEsquinaPath, 0, womanEsquinaPath.getTotalLength() - 1,
 			timeLength * 3 / 4, times * 3 / 4);
 
-		this.timeouts[this.timeouts.length] = new Timer( function (self) {
+		this.timeouts[this.timeouts.length] = new Timer(function (self) {
 			return function () {
 				manMovePoint = manEsquinaPath.getPointAtLength(manEsquinaPath.getTotalLength() - 1);
 				womanMovePoint = womanEsquinaPath.getPointAtLength(womanEsquinaPath.getTotalLength() - 1);

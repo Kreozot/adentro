@@ -16,7 +16,7 @@ function ZapateoTiming() {
 
 			var firstBeat = $('svg', svgdom).attr('data-firstBeat');
 
-			$('rect.move', svgdom).each( function (index, element) {
+			$('rect.move', svgdom).each(function (index, element) {
 				addElement(element.dataset.pos, element.dataset.length);
 			});
 

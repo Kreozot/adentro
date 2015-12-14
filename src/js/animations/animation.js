@@ -199,7 +199,7 @@ function DanceAnimation(id) {
 				angle = -angle;
 			}
 
-			easing = ( typeof easing === 'undefined') ? mina.linear : easing;
+			easing = (typeof easing === 'undefined') ? mina.linear : easing;
 
 			var pathLength = path.getTotalLength();
 
@@ -238,7 +238,7 @@ function DanceAnimation(id) {
 	 */
 	this.animateMan = function (self) {
 		return function (path, startLen, stopLen, timeLength, times, direction, startAngle) {
-			startAngle = ( typeof startAngle === 'undefined') ? 90 : startAngle;
+			startAngle = (typeof startAngle === 'undefined') ? 90 : startAngle;
 			self.animateFigurePath(self.man, startAngle, path, startLen, stopLen, timeLength, times, direction);
 		};
 	}(this);
@@ -250,7 +250,7 @@ function DanceAnimation(id) {
 	 */
 	this.animateWoman = function (self) {
 		return function (path, startLen, stopLen, timeLength, times, direction, startAngle) {
-			startAngle = ( typeof startAngle === 'undefined') ? 90 : startAngle;
+			startAngle = (typeof startAngle === 'undefined') ? 90 : startAngle;
 			self.animateFigurePath(self.woman, startAngle, path, startLen, stopLen, timeLength, times, direction);
 		};
 	}(this);
