@@ -21,6 +21,6 @@ gulp.task('build-js', ['clean-js', 'renderSvg'], function (callback) {
     });
 });
 
-gulp.task('watch-js', ['connect'], function() {
+gulp.task('watch-js', ['connect', 'build-js'], function() {
     return gulp.watch(paths.src.js, ['build-js']);
 });

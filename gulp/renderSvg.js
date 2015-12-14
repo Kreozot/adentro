@@ -9,6 +9,8 @@ var path = require('path');
 var mkdirp = require('mkdirp');
 var del = require('promised-del');
 
+//TODO: оформить в виде loader-а с кешированием
+
 var port = 8080;
 
 function getSvgList(dir) {

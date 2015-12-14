@@ -25,6 +25,6 @@ gulp.task('build-styles', ['clean-styles'], function () {
 		.pipe(gulp.dest(paths.dist.styles));
 });
 
-gulp.task('watch-styles', ['connect'], function() {
+gulp.task('watch-styles', ['connect', 'build-styles'], function() {
     return gulp.watch(stylesSrc, ['build-styles']);
 });

@@ -12,6 +12,6 @@ gulp.task('copy-html', ['clean-html'], function () {
 		.pipe(gulp.dest(paths.dist.html));
 });
 
-gulp.task('watch-html', ['connect'], function() {
+gulp.task('watch-html', ['connect', 'copy-html'], function() {
     return gulp.watch(paths.src.html, ['copy-html']);
 });
