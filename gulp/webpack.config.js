@@ -54,7 +54,7 @@ var webpackConfig = languages.map(function (lang) {
 				{ test: /\.scss$/, loader: "style!css!postcss" },
 				{ test: /\.(jpe?g|png|gif)$/i, loader: 'url' },
 				{ test: /\.mp3$/i, loader: 'file?name=../music/[name].[hash:6].[ext]' },
-				{ test: /\.svg$/i, loader: 'raw' },
+				{ test: /\.svg$/i, exclude: /svg\.js/, loader: 'raw' },
 				{ test: /\.inc$/i, loader: 'raw' }
 			]
 		},
@@ -121,7 +121,7 @@ webpackConfig.push({
 		'vendor.media': [
 			'jplayer/dist/jplayer/jquery.jplayer.min.js',
 			'jplayer/dist/jplayer/jquery.jplayer.swf',
-			'snapsvg/dist/snap.svg.js'
+			'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
 		]
 	},
 	output: {

@@ -33,6 +33,7 @@
     "gulp-open": "^1.0.0",
     "gulp-postcss": "^6.0.1",
     "gulp-util": "^3.0.7",
+    "imports-loader": "^0.6.5",
     "jscs": "^2.6.0",
     "jscs-loader": "^0.2.0",
     "jscs-preset-awesome": "^1.0.2",
