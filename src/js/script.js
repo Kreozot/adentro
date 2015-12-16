@@ -45,7 +45,6 @@ var getSvgSchemaDom = function () {
 	return getObjectDom('schema');
 };
 
-
 class Adentro {
 
 	constructor () {

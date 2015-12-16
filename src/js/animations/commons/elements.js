@@ -19,7 +19,6 @@ function SingleDanceAnimationElement(animation, pathStrings, gender, figure) {
 	this.angle = 0;
 	this.easing = mina.linear;
 
-	
 	/**
 	 * Отрисовка траектории
 	 * @param  {String} position Позиция

@@ -86,7 +86,6 @@ function FourDanceAnimationElement(animation, pathStrings1, pathStrings2) {
 	};
 }
 
-
 function Dance4Animation(id) {
 	Dance4Animation.superclass.constructor.apply(this, arguments);
 

@@ -1,7 +1,6 @@
 function ChacareraCadenaAnimation(id) {
 	ChacareraCadenaAnimation.superclass.constructor.apply(this, arguments);
 
-
 	this.CadenaElement = new FourDanceAnimationElement(this,
 		{left: 'm 50,130 c 0,30 170,30 170,30 l 200,0 0,120 -400,0 c 0,0 0,0 0,-60 0,-60 30,-90 30,-90',
 		right: 'm 390,130 c 0,-30 -170,-30 -170,-30 l -140,0 0,240 280,0 c 0,0 0,-60 0,-120 0,-60 30,-90 30,-90'},

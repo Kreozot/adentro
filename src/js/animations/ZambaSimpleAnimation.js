@@ -9,7 +9,6 @@ function ZambaSimpleAnimation(id) {
 		{left: 'm 40,160 230,0',
 		right: 'm 560,160 -230,0'});
 
-
 	this.mediaVuelta = function (seconds, manPosition, times) {
 		this.mediaVueltaElement.setAngle(-45);
 		this.mediaVueltaElement.fullAnimation(seconds, times, manPosition);

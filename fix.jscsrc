@@ -1,6 +1,7 @@
 {
     "disallowMixedSpacesAndTabs": true,
     "disallowSpacesInsideParentheses": true,
+    "disallowMultipleLineBreaks": true,
     "validateIndentation": "\t",
     "requireSpaceAfterBinaryOperators": true,
     "requireSpaceBeforeBinaryOperators": true,
