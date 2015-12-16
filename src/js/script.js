@@ -1,7 +1,10 @@
-var playerId = 'jplayer';
-var playerSelector = '#' + playerId;
+import Navigation from './navigation.js';
+import Player from './player.js';
+import ContentSwitch from './loading/content_switch.js';
+import AnimationLoader from './loading/animation_loading.js';
+import InfoLoader from './loading/info_loading.js';
 
-//TODO: Выпилить все замыкания через параметры функций
+var playerSelector = '#jplayer';
 
 /**
  * Дробная часть от деления
@@ -42,298 +45,313 @@ var getSvgSchemaDom = function () {
 	return getObjectDom('schema');
 };
 
-/**
- * Спрятать отображение текущего элемента на схеме
- * @param  {String} svgSchemaDom Ссылка на dom svg-схемы
- */
-var hideCurrentElementMarkOnSchema = function (svgSchemaDom) {
-	if (!svgSchemaDom) {
-		svgSchemaDom = getSvgSchemaDom();
-	}
-	$('rect', svgSchemaDom).myRemoveClass('current');
-	$('text', svgSchemaDom).myRemoveClass('current');
-};
 
-/**
- * Спрятать отображение и визуализацию текущего элемента
- * @param  {String} svgSchemaDom Ссылка на dom svg-схемы
- */
-var hideCurrentElement = function (svgSchemaDom) {
-	hideCurrentElementMarkOnSchema(svgSchemaDom);
-	$.animation.clear();
-	$(playerSelector).data('currentElement', '');
-};
+class Adentro {
 
-/**
- * Выделение текущего элемента на SVG-схеме
- * @param  {String} element 	  Идентификатор элемента
- * @param  {String} svgSchemaDom  Ссылка на dom svg-схемы
- */
-var markCurrentElementOnSchema = function (element, svgSchemaDom) {
-	if (!svgSchemaDom) {
-		svgSchemaDom = getSvgSchemaDom();
-	}
-	if (element[0] == '#') {
-		//Пропускаем обработку служебных меток
-		return;
-	}
-	// Показываем рамку вокруг текущего блока
-	var frameId = element + '-frame';
-	$('rect:not(#' + frameId + ')', svgSchemaDom).myRemoveClass('current');
-	$('#' + frameId, svgSchemaDom).myAddClass('current');
-	// Выделяем название текущего элемента
-	var textId = element + '-text';
-	$('text:not(#' + textId + ')', svgSchemaDom).myRemoveClass('current');
-	$('#' + textId, svgSchemaDom).myAddClass('current');
-};
-
-/**
- * Отображение текущего элемента
- * @param  {String} element 	  Идентификатор элемента
- * @param  {Number} seconds    	  Длительность в секундах
- * @param  {String} svgSchemaDom  Ссылка на dom svg-схемы
- */
-var showCurrentElement = function (element, seconds, svgSchemaDom) {
-	if (!svgSchemaDom) {
-		svgSchemaDom = getSvgSchemaDom();
-	}
-	if (element.split('_')[0] == '#start') {
-		// Начальное расположение
-		$.animation.setAtStart();
-		hideCurrentElementMarkOnSchema();
-		return;
-	} else if (element[0] == '#') {
-		//Пропускаем обработку служебных меток
-		return;
+	constructor () {
+		this.navigation = new Navigation();
+		this.player = new Player();
 	}
 
-	markCurrentElementOnSchema(element, svgSchemaDom);
-	// Запускаем соответствующую анимацию
-	var domElement = $('#' + element, svgSchemaDom);
-	var visualizationFuncName = domElement.data('visualization');
-	var manPosition = domElement.data('manposition');
-	var times = domElement.data('times');
-	if (visualizationFuncName) {
-		$.animation[visualizationFuncName](seconds, manPosition, times);
+	/**
+	 * Спрятать отображение текущего элемента на схеме
+	 * @param  {String} svgSchemaDom Ссылка на dom svg-схемы
+	 */
+	hideCurrentElementMarkOnSchema (svgSchemaDom) {
+		if (!svgSchemaDom) {
+			svgSchemaDom = getSvgSchemaDom();
+		}
+		$('rect', svgSchemaDom).myRemoveClass('current');
+		$('text', svgSchemaDom).myRemoveClass('current');
 	}
-};
 
-/**
- * Иницилизация схемы
- */
-var initSvgSchema = function () {
-	var svgdom = getSvgSchemaDom();
-	if (svgdom) {
-		$('#schema').attr('width', $('svg', svgdom).attr('width'))
-				.attr('height', $('svg', svgdom).attr('height'));
+	/**
+	 * Спрятать отображение и визуализацию текущего элемента
+	 * @param  {String} svgSchemaDom Ссылка на dom svg-схемы
+	 */
+	hideCurrentElement (svgSchemaDom) {
+		this.hideCurrentElementMarkOnSchema(svgSchemaDom);
+		$.animation.clear();
+		$(playerSelector).data('currentElement', '');
+	}
 
-		var timeupdateEvent = function (event) {
-			var playerStatus = event.jPlayer.status;
-			// Если остановлено
-			if ((playerStatus.paused) && (playerStatus.currentTime == 0)) {
-				hideCurrentElement(svgdom);
-			} else if ((!playerStatus.paused) &&
-					(!playerStatus.waitForPlay) &&
-					(!playerStatus.waitForLoad)) {
-				$.animation.resume();
-				var time = playerStatus.currentTime;
-				var element = getElement(time);
-				if ($(playerSelector).data('currentElement') != element.name) {
-					$(playerSelector).data('currentElement', element.name);
-					if (element && (element.name.length > 0)) {
-						showCurrentElement(element.name, element.timeLength, svgdom);
+	/**
+	 * Выделение текущего элемента на SVG-схеме
+	 * @param  {String} element 	  Идентификатор элемента
+	 * @param  {String} svgSchemaDom  Ссылка на dom svg-схемы
+	 */
+	markCurrentElementOnSchema (element, svgSchemaDom) {
+		if (!svgSchemaDom) {
+			svgSchemaDom = getSvgSchemaDom();
+		}
+		if (element[0] == '#') {
+			//Пропускаем обработку служебных меток
+			return;
+		}
+		// Показываем рамку вокруг текущего блока
+		var frameId = element + '-frame';
+		$('rect:not(#' + frameId + ')', svgSchemaDom).myRemoveClass('current');
+		$('#' + frameId, svgSchemaDom).myAddClass('current');
+		// Выделяем название текущего элемента
+		var textId = element + '-text';
+		$('text:not(#' + textId + ')', svgSchemaDom).myRemoveClass('current');
+		$('#' + textId, svgSchemaDom).myAddClass('current');
+	}
+
+	/**
+	 * Отображение текущего элемента
+	 * @param  {String} element 	  Идентификатор элемента
+	 * @param  {Number} seconds    	  Длительность в секундах
+	 * @param  {String} svgSchemaDom  Ссылка на dom svg-схемы
+	 */
+	showCurrentElement (element, seconds, svgSchemaDom) {
+		if (!svgSchemaDom) {
+			svgSchemaDom = getSvgSchemaDom();
+		}
+		if (element.split('_')[0] == '#start') {
+			// Начальное расположение
+			$.animation.setAtStart();
+			this.hideCurrentElementMarkOnSchema();
+			return;
+		} else if (element[0] == '#') {
+			//Пропускаем обработку служебных меток
+			return;
+		}
+
+		this.markCurrentElementOnSchema(element, svgSchemaDom);
+		// Запускаем соответствующую анимацию
+		var domElement = $('#' + element, svgSchemaDom);
+		var visualizationFuncName = domElement.data('visualization');
+		var manPosition = domElement.data('manposition');
+		var times = domElement.data('times');
+		if (visualizationFuncName) {
+			$.animation[visualizationFuncName](seconds, manPosition, times);
+		}
+	}
+
+	/**
+	 * Иницилизация схемы
+	 */
+	initSvgSchema () {
+		var svgdom = getSvgSchemaDom();
+		if (svgdom) {
+			$('#schema').attr('width', $('svg', svgdom).attr('width'))
+					.attr('height', $('svg', svgdom).attr('height'));
+
+			var timeupdateEvent = function (event) {
+				var playerStatus = event.jPlayer.status;
+				// Если остановлено
+				if ((playerStatus.paused) && (playerStatus.currentTime == 0)) {
+					hideCurrentElement(svgdom);
+				} else if ((!playerStatus.paused) &&
+						(!playerStatus.waitForPlay) &&
+						(!playerStatus.waitForLoad)) {
+					$.animation.resume();
+					var time = playerStatus.currentTime;
+					var element = getElement(time);
+					if ($(playerSelector).data('currentElement') != element.name) {
+						$(playerSelector).data('currentElement', element.name);
+						if (element && (element.name.length > 0)) {
+							showCurrentElement(element.name, element.timeLength, svgdom);
+						};
 					};
 				};
 			};
-		};
-		var endedEvent = function (event) {
-			hideCurrentElement(svgdom);
-		};
-		var pauseEvent = function (event) {
-			var playerStatus = event.jPlayer.status;
-			if ((playerStatus.paused) && (playerStatus.currentTime > 0)) {
-				$.animation.pause();
+			var endedEvent = event => {
+				this.hideCurrentElement(svgdom);
 			};
-		};
+			var pauseEvent = event => {
+				let playerStatus = event.jPlayer.status;
+				if ((playerStatus.paused) && (playerStatus.currentTime > 0)) {
+					$.animation.pause();
+				};
+			};
 
-		$(playerSelector).bind($.jPlayer.event.timeupdate, timeupdateEvent)
+			$(playerSelector)
+				.bind($.jPlayer.event.timeupdate, timeupdateEvent)
 				.bind($.jPlayer.event.ended, endedEvent)
 				.bind($.jPlayer.event.pause, pauseEvent);
-	};
-};
-
-/**
- * Инициализация редактора тайминга
- */
-var initSvgSchemaEditor = function () {
-	var svgdom = getSvgSchemaDom();
-	if (svgdom) {
-		$('#schema').attr('width', $('svg', svgdom).attr('width'))
-				.attr('height', $('svg', svgdom).attr('height'));
-	};
-};
-
-/**
- * Отобразить ссылки на музыкальные композиции
- * @param  {Object} musicIds          Массив идентификаторов композиций
- * @param  {String} currentMusicId    Идентификатор текущей композиции
- * @param  {Boolean} showEmptyTiming  Показывать композиции, не имеющие разметки тайминга
- */
-var showMusicLinks = function (musicIds, currentMusicId, showEmptyTiming) {
-	if (musicIds.length <= 1) {
-		$('#musicLinks').html('');
-		return;
+		};
 	}
 
-	var getMusicLinks = function () {
-		var result = i18n.t('other.composition') + ': <select id="musicSelect">';
-		var count = 0;
-		for (var i = 0; i < musicIds.length; i++) {
-			if (!jQuery.isEmptyObject(musicData[musicIds[i]].schema) || showEmptyTiming) {
-				if (musicIds[i] === currentMusicId) {
-					result += '<option selected="selected" value="' + musicIds[i] + '">' +
-							musicData[musicIds[i]].title + '</option>';
-				} else {
-					result += '<option value="' + musicIds[i] + '">' + musicData[musicIds[i]].title + '</option>';
+	/**
+	 * Инициализация редактора тайминга
+	 */
+	initSvgSchemaEditor () {
+		var svgdom = getSvgSchemaDom();
+		if (svgdom) {
+			$('#schema')
+				.attr('width', $('svg', svgdom).attr('width'))
+				.attr('height', $('svg', svgdom).attr('height'));
+		};
+	}
+
+	/**
+	 * Отобразить ссылки на музыкальные композиции
+	 * @param  {Object} musicIds          Массив идентификаторов композиций
+	 * @param  {String} currentMusicId    Идентификатор текущей композиции
+	 * @param  {Boolean} showEmptyTiming  Показывать композиции, не имеющие разметки тайминга
+	 */
+	showMusicLinks (musicIds, currentMusicId, showEmptyTiming) {
+		if (musicIds.length <= 1) {
+			$('#musicLinks').html('');
+			return;
+		}
+
+		var getMusicLinks = function () {
+			var result = i18n.t('other.composition') + ': <select id="musicSelect">';
+			var count = 0;
+			for (var i = 0; i < musicIds.length; i++) {
+				if (!jQuery.isEmptyObject(musicData[musicIds[i]].schema) || showEmptyTiming) {
+					if (musicIds[i] === currentMusicId) {
+						result += '<option selected="selected" value="' + musicIds[i] + '">' +
+								musicData[musicIds[i]].title + '</option>';
+					} else {
+						result += '<option value="' + musicIds[i] + '">' + musicData[musicIds[i]].title + '</option>';
+					}
+					count++;
 				}
-				count++;
 			}
-		}
-		if (count <= 1) {
-			return '';
-		}
-		result += '</select>';
-		return result;
-	};
-
-	$('#musicLinks').html(getMusicLinks());
-	$('#musicSelect').change(function () {
-		showMusic($(this).val());
-	});
-};
-
-/**
- * Показать ссылки на языки
- */
-var showLanguageLinks = function () {
-	var languages = [
-		{
-			id: 'ru',
-			title: 'ru'
-		},
-		{
-			id: 'en',
-			title: 'en'
-		}
-	];
-
-	var getLanguageLinks = function () {
-		var result = '<nobr>';
-		for (var i = 0; i < languages.length; i++) {
-			if ((languages[i].id == i18n.lng()) || (languages[i].id == i18n.lng().substr(0, 2))) {
-				result += languages[i].title;
-			} else {
-				result += '<a href="' + getLanguageLink(languages[i].id) + '">' + languages[i].title + '</a>';
+			if (count <= 1) {
+				return '';
 			}
-			if (i < languages.length - 1) {
-				result += ' / ';
-			}
-		}
-		result += '</nobr>';
-		return result;
-	};
-
-	$('#lang').html(getLanguageLinks());
-};
-
-/**
- * Загрузка схемы
- * @param  {String} schemaParams   Объект параметров схемы
- * @param  {String} musicId    	   Идентификатор музыки
- * @param  {String} animationId    Идентификатор конкретной анимации (если в animationClass пришёл список)
- */
-var loadSchema = function (schemaParams, musicId, animationId) {
-	// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
-	$('#danceName').html(schemaParams.name);
-	$('#schemaDiv').html('<object data="svg/compiled/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
-
-	musicId = musicId || schemaParams.music[0];
-	showMusicLinks(schemaParams.music, musicId);
-	var musicSchema = musicData[musicId];
-
-	var svgobject = document.getElementById('schema');
-	$(svgobject).load(function () {
-		$(playerSelector).unbind($.jPlayer.event.timeupdate)
-				.unbind($.jPlayer.event.ended)
-				.unbind($.jPlayer.event.pause);
-		loadMusicSchema(musicSchema);
-		initSvgSchema();
-
-		ContentSwitch.clearContent();
-
-		AnimationLoader.loadAnimationBlock();
-		var animationClass = schemaParams.animation;
-		if (typeof animationClass === 'object') {
-			AnimationLoader.showAnimationLinks(animationClass, animationId);
-			var currentClassDef = AnimationLoader.getAnimationClassDef(animationClass, animationId);
-			animationClass = currentClassDef.name;
-		}
-		AnimationLoader.loadAnimation(animationClass);
-
-		InfoLoader.loadInfoBlock(schemaParams.info);
-
-		// if (schemaParams.zapateo) {
-		// 	ZapateoLoader.loadZapateoBlock('repike');
-		// }
-
-		ContentSwitch.show('animation_block');
-	});
-};
-
-/**
- * Загрузка редактора тайминга
- * @param  {String} schemaParams   Объект параметров схемы
- * @param  {String} musicId    	   Идентификатор музыки
- */
-var loadSchemaEditor = function (schemaParams, musicId) {
-	$('#danceName').html(schemaParams.name + ' (editor mode)');
-	$('#schemaDiv').html('<object data="svg/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
-	var svgobject = document.getElementById('schema');
-	$(svgobject).load(function () {
-		$(playerSelector).unbind($.jPlayer.event.timeupdate)
-				.unbind($.jPlayer.event.ended)
-				.unbind($.jPlayer.event.pause);
-
-		musicId = musicId || schemaParams.music[0];
-		showMusicLinks(schemaParams.music, musicId, true);
-		var musicSchema = musicData[musicId];
-
-		loadMusicSchema(musicSchema);
-		initSvgSchemaEditor();
-
-		console.log('editor mode on');
-		$('#animationDiv').html('');
-		var initTiming = $(playerSelector).data('schema');
-		var timingGenerator = new TimingGenerator(initTiming);
-
-		var timeupdateEvent = function (event) {
-			// Если остановлено
-			if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
-				hideCurrentElementMarkOnSchema();
-				timingGenerator.clear();
-			}
+			result += '</select>';
+			return result;
 		};
 
-		$(playerSelector).bind($.jPlayer.event.timeupdate, timeupdateEvent);
+		$('#musicLinks').html(getMusicLinks());
+		$('#musicSelect').change(function () {
+			showMusic($(this).val());
+		});
+	}
 
-		$('html').keypress(function (event) {
-			if (event.which == 32) { //space
-				var currentTime = $(playerSelector).data('jPlayer').status.currentTime;
-				if (!timingGenerator.addBeat(currentTime)) {
-					var newTiming = timingGenerator.getTiming();
-					$('#content').html('<pre>' + JSON.stringify(newTiming, '', 4) + '</pre>');
+	/**
+	 * Показать ссылки на языки
+	 */
+	showLanguageLinks () {
+		var languages = [
+			{
+				id: 'ru',
+				title: 'ru'
+			},
+			{
+				id: 'en',
+				title: 'en'
+			}
+		];
+
+		var getLanguageLinks = function () {
+			var result = '<nobr>';
+			for (var i = 0; i < languages.length; i++) {
+				if ((languages[i].id == i18n.lng()) || (languages[i].id == i18n.lng().substr(0, 2))) {
+					result += languages[i].title;
+				} else {
+					result += '<a href="' + getLanguageLink(languages[i].id) + '">' + languages[i].title + '</a>';
+				}
+				if (i < languages.length - 1) {
+					result += ' / ';
 				}
 			}
+			result += '</nobr>';
+			return result;
+		};
+
+		$('#lang').html(getLanguageLinks());
+	}
+
+	/**
+	 * Загрузка схемы
+	 * @param  {String} schemaParams   Объект параметров схемы
+	 * @param  {String} musicId    	   Идентификатор музыки
+	 * @param  {String} animationId    Идентификатор конкретной анимации (если в animationClass пришёл список)
+	 */
+	loadSchema (schemaParams, musicId, animationId) {
+		// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
+		$('#danceName').html(schemaParams.name);
+		$('#schemaDiv').html('<object data="svg/compiled/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
+
+		musicId = musicId || schemaParams.music[0];
+		this.showMusicLinks(schemaParams.music, musicId);
+		var musicSchema = musicData[musicId];
+
+		var svgobject = document.getElementById('schema');
+		$(svgobject).load(function () {
+			$(playerSelector).unbind($.jPlayer.event.timeupdate)
+				.unbind($.jPlayer.event.ended)
+				.unbind($.jPlayer.event.pause);
+			this.player.loadMusicSchema(musicSchema);
+			this.initSvgSchema();
+
+			ContentSwitch.clearContent();
+
+			AnimationLoader.loadAnimationBlock();
+			var animationClass = schemaParams.animation;
+			if (typeof animationClass === 'object') {
+				AnimationLoader.showAnimationLinks(animationClass, animationId);
+				var currentClassDef = AnimationLoader.getAnimationClassDef(animationClass, animationId);
+				animationClass = currentClassDef.name;
+			}
+			AnimationLoader.loadAnimation(animationClass);
+
+			InfoLoader.loadInfoBlock(schemaParams.info);
+
+			// if (schemaParams.zapateo) {
+			// 	ZapateoLoader.loadZapateoBlock('repike');
+			// }
+
+			ContentSwitch.show('animation_block');
 		});
-	});
-};
+	}
+
+	/**
+	 * Загрузка редактора тайминга
+	 * @param  {String} schemaParams   Объект параметров схемы
+	 * @param  {String} musicId    	   Идентификатор музыки
+	 */
+	loadSchemaEditor (schemaParams, musicId) {
+		$('#danceName').html(schemaParams.name + ' (editor mode)');
+		$('#schemaDiv').html('<object data="svg/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
+		var svgobject = document.getElementById('schema');
+		$(svgobject).load(function () {
+			$(playerSelector).unbind($.jPlayer.event.timeupdate)
+				.unbind($.jPlayer.event.ended)
+				.unbind($.jPlayer.event.pause);
+
+			musicId = musicId || schemaParams.music[0];
+			this.showMusicLinks(schemaParams.music, musicId, true);
+			var musicSchema = musicData[musicId];
+
+			this.player.loadMusicSchema(musicSchema);
+			this.initSvgSchemaEditor();
+
+			console.log('editor mode on');
+			$('#animationDiv').html('');
+			var initTiming = $(playerSelector).data('schema');
+			var timingGenerator = new TimingGenerator(initTiming);
+
+			var timeupdateEvent = function (event) {
+				// Если остановлено
+				if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
+					hideCurrentElementMarkOnSchema();
+					timingGenerator.clear();
+				}
+			};
+
+			$(playerSelector).bind($.jPlayer.event.timeupdate, timeupdateEvent);
+
+			$('html').keypress(function (event) {
+				if (event.which == 32) { //space
+					var currentTime = $(playerSelector).data('jPlayer').status.currentTime;
+					if (!timingGenerator.addBeat(currentTime)) {
+						var newTiming = timingGenerator.getTiming();
+						$('#content').html('<pre>' + JSON.stringify(newTiming, '', 4) + '</pre>');
+					}
+				}
+			});
+		});
+	}
+
+}
+
+global.Adentro = Adentro;
+export default Adentro;

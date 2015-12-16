@@ -127,22 +127,24 @@
 		<script src="scripts/vendor.main.js"></script>
 		<script src="scripts/vendor.media.js"></script>
 		<script type="text/javascript">
-			$(window).load(function(){
+			$(window).load(function () {
 				// i18n.init({
 				// 	detectLngQS: "lang",
 				// 	cookieName: "lang",
 				// 	debug: true,
 				// 	fallbackLng: "ru"
 				// }, function() {
-					window.addEventListener("popstate", function(e) {
-					    loadSchemaByState();
+					window.addEventListener("popstate", function (e) {
+					    adentro.navigation.loadSchemaByState();
 					});
 
-					if (!loadSchemaByUrl()) {
-						showSchema("Chacarera");
+					var adentro = new Adentro();
+
+					if (!adentro.navigation.loadSchemaByUrl()) {
+						adentro.navigation.showSchema("Chacarera");
 					}
 
-					showLanguageLinks();
+					// showLanguageLinks();
 				// });
 			});
 		</script>

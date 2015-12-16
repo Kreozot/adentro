@@ -17,7 +17,7 @@ var AnimationLoader = {
 		$.animation = new window[animationClass]('animation');
 		$('#animation').attr('width', $.animation.width)
 				.attr('height', $.animation.height)
-				.attr('viewBox', '0 0 ' + $.animation.width + ' ' + $.animation.height);	
+				.attr('viewBox', '0 0 ' + $.animation.width + ' ' + $.animation.height);
 	},
 
 	/**
@@ -48,7 +48,7 @@ var AnimationLoader = {
 			for (var i = 0; i < animationClassDefs.length; i++) {
 				if (animationClassDefs[i].id === currentClassDef.id) {
 					result += i18n.t(animationClassDefs[i].title);
-				} else {					
+				} else {
 					result += '<a href="javascript:showAnimation(\'' + animationClassDefs[i].id + '\')" data-i18n="' + animationClassDefs[i].title + '">' +
 						i18n.t(animationClassDefs[i].title) + '</a>';
 				}
@@ -61,3 +61,5 @@ var AnimationLoader = {
 		$('#animationLinks').html(getAnimationLinks(animationClassDefs));
 	}
 };
+
+export default AnimationLoader;
