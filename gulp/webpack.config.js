@@ -10,6 +10,8 @@ var schemesList = require('./schemesList.js');
 
 var languages = ['en', 'ru'];
 
+//TODO: use sizzle or another $-lib instead f jquery in main.js
+
 var webpackConfig = languages.map(function (lang) {
 	return {
         resolve: {
@@ -115,10 +117,10 @@ webpackConfig.push({
 		// Сторонние библиотеки
 		'vendor.main': [
 			'expose?$!expose?jQuery!jquery/dist/jquery.js',
-			'hopscotch'
-		],
-		'vendor.media': [
-			'jplayer/dist/jplayer/jquery.jplayer.min.js',
+			'hopscotch',
+		// ],
+		// 'vendor.media': [
+			'jplayer/dist/jplayer/jquery.jplayer.js',
 			'jplayer/dist/jplayer/jquery.jplayer.swf',
 			'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
 		]
@@ -126,7 +128,15 @@ webpackConfig.push({
 	output: {
 		path:  paths.dist.js,
 		filename: '[name].js'
-	}
+	},
+	plugins: [
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			jQuery: 'jquery',
+			'global.$': 'jquery',
+			'global.jQuery': 'jquery'
+		})
+	]
 });
 
 module.exports = webpackConfig;

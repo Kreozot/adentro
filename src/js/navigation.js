@@ -2,8 +2,12 @@ var schemes = require('./schemes.js');
 var URI = require('urijs/src/URI.js');
 import AnimationLoader from './loading/animation_loading.js';
 
+function supports_history_api() {
+	return !!(window.history && history.pushState);
+}
+
 class Navigation {
-	constructor (main) {
+	constructor(main) {
 		this.context = {};
 		this.main = main;
 	}
@@ -14,7 +18,7 @@ class Navigation {
 	 * @param  {String} animationId  Идентификатор анимации
 	 * @param  {String} musicId      Идентификатор композиции
 	 */
-	loadSchemaByName (name, animationId, musicId) {
+	loadSchemaByName(name, animationId, musicId) {
 		var schemaParams = schemes[name];
 		if (!schemaParams) {
 			schemaParams = schemes['chacarera'];
@@ -28,10 +32,10 @@ class Navigation {
 	 * @param  {String} name     Идентификатор схемы
 	 * @param  {String} musicId  Идентификатор композиции
 	 */
-	loadSchemaEditorByName (name, musicId) {
-		var schemaParams = schemaParamsMap[name];
+	loadSchemaEditorByName(name, musicId) {
+		var schemaParams = schemes[name];
 		if (!schemaParams) {
-			schemaParams = schemaParamsMap.Chacarera;
+			schemaParams = schemes['chacarera'];
 		}
 		this.main.loadSchemaEditor(schemaParams, musicId);
 		this.main.showLanguageLinks();
@@ -57,7 +61,7 @@ class Navigation {
 	 * @param  {String} query  Фрагмент URL запроса
 	 */
 	pushStateOrRedirect (params, title, query) {
-		if (supports_history_api) {
+		if (supports_history_api()) {
 			history.pushState(params, title, query);
 		} else {
 			window.location.href = query;
@@ -106,7 +110,7 @@ class Navigation {
 	 */
 	showSchema (schemaId) {
 		this.pushStateOrRedirect({schema: schemaId},
-			schemaParamsMap.getName(schemaId) + ' - Adentro', this.getRelativeUrl(schemaId));
+			schemes[schemaId].name + ' - Adentro', this.getRelativeUrl(schemaId));
 		this.loadSchemaByState();
 	}
 
@@ -115,13 +119,16 @@ class Navigation {
 	 * @param  {Number} animationId  Идентификатор анимации
 	 */
 	showAnimation (animationId) {
-		context.animation = animationId;
+		this.context.animation = animationId;
 
-		this.pushStateOrRedirect({schema: context.schema, animation: context.animation, music: context.music},
-				schemaParamsMap.getName(context.schema) + ' - Adentro',
-				this.getRelativeUrl(context.schema, context.animation, context.music));
+		this.pushStateOrRedirect({
+				schema: this.context.schema,
+				animation: this.context.animation,
+				music: this.context.music
+			}, schemes[this.context.schema].name + ' - Adentro',
+			this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
 
-		var schemaParams = schemaParamsMap[context.schema];
+		var schemaParams = schemes[this.context.schema];
 		var animationClassDefs = schemaParams.animation;
 		if (typeof animationClassDefs === 'object') {
 			var animationClassDef = AnimationLoader.getAnimationClassDef(animationClassDefs, animationId);
@@ -138,12 +145,15 @@ class Navigation {
 	 * @param  {Number} animationId  Идентификатор анимации
 	 */
 	showMusic (musicId) {
-		context.music = musicId;
-		this.pushStateOrRedirect({schema: context.schema, animation: context.animation, music: context.music},
-				schemaParamsMap.getName(context.schema) + ' - Adentro',
-				this.getRelativeUrl(context.schema, context.animation, context.music));
+		this.context.music = musicId;
+		this.pushStateOrRedirect({
+				schema: this.context.schema,
+				animation: this.context.animation,
+				music: this.context.music
+			}, schemes[this.context.schema].name + ' - Adentro',
+			this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
 
-		var schemaParams = schemaParamsMap[context.schema];
+		var schemaParams = schemes[this.context.schema];
 		var musicIds = schemaParams.music;
 		var musicSchema = musicData[musicId];
 		this.main.player.loadMusicSchema(musicSchema);
@@ -158,13 +168,13 @@ class Navigation {
 	loadSchemaByState () {
 		var state = history.state;
 		if (state.schema) {
-			context.schema = state.schema;
-			context.animation = state.animation;
-			context.music = state.music;
-			if (context.editor) {
-				this.loadSchemaEditorByName(context.schema, context.music);
+			this.context.schema = state.schema;
+			this.context.animation = state.animation;
+			this.context.music = state.music;
+			if (this.context.editor) {
+				this.loadSchemaEditorByName(this.context.schema, this.context.music);
 			} else {
-				this.loadSchemaByName(context.schema, context.animation, context.music);
+				this.loadSchemaByName(this.context.schema, this.context.animation, this.context.music);
 			}
 			return true;
 		}
@@ -176,7 +186,7 @@ class Navigation {
 	 * @return {Boolean} True если схема была загружена
 	 */
 	loadSchemaByUrl () {
-		context = this.getContextFromUrl();
+		let context = this.getContextFromUrl();
 		if (context.schema) {
 			if (context.editor) {
 				this.loadSchemaEditorByName(context.schema, context.music);

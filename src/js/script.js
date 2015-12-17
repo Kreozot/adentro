@@ -48,8 +48,8 @@ var getSvgSchemaDom = function () {
 class Adentro {
 
 	constructor () {
-		this.navigation = new Navigation();
-		this.player = new Player();
+		this.navigation = new Navigation(this);
+		this.player = new Player(this);
 	}
 
 	/**
