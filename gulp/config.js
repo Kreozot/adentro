@@ -14,7 +14,7 @@ module.exports = {
 			styles: path.resolve('./src/styles')
 		},
 		dist: {
-			js: path.resolve('./dist/scripts'),
+			js: path.resolve('./dist'),
 			styles: path.resolve('./dist/styles'),
 			html: path.resolve('./dist')
 		}

@@ -23,7 +23,9 @@ class Navigation {
 		if (!schemaParams) {
 			schemaParams = schemes['chacarera'];
 		}
-		this.main.loadSchema(schemaParams, musicId, animationId);
+		schemaParams(scheme => {
+			this.main.loadSchema(scheme, musicId, animationId);
+		});
 		this.main.showLanguageLinks();
 	}
 
@@ -37,7 +39,9 @@ class Navigation {
 		if (!schemaParams) {
 			schemaParams = schemes['chacarera'];
 		}
-		this.main.loadSchemaEditor(schemaParams, musicId);
+		schemaParams(scheme => {
+			this.main.loadSchemaEditor(scheme, musicId);
+		});
 		this.main.showLanguageLinks();
 	}
 
@@ -129,15 +133,17 @@ class Navigation {
 			this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
 
 		var schemaParams = schemes[this.context.schema];
-		var animationClassDefs = schemaParams.animation;
-		if (typeof animationClassDefs === 'object') {
-			var animationClassDef = AnimationLoader.getAnimationClassDef(animationClassDefs, animationId);
-			var animationClass = animationClassDef.name;
-		} else {
-			var animationClass = animationClassDefs;
-		}
-		AnimationLoader.loadAnimation(animationClass);
-		AnimationLoader.showAnimationLinks(animationClassDefs, animationId);
+		schemaParams(function (scheme) {
+			var animationClassDefs = scheme.animation;
+			if (typeof animationClassDefs === 'object') {
+				var animationClassDef = AnimationLoader.getAnimationClassDef(animationClassDefs, animationId);
+				var animationClass = animationClassDef.name;
+			} else {
+				var animationClass = animationClassDefs;
+			}
+			AnimationLoader.loadAnimation(animationClass);
+			AnimationLoader.showAnimationLinks(animationClassDefs, animationId);
+		});
 	}
 
 	/**
@@ -154,10 +160,12 @@ class Navigation {
 			this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
 
 		var schemaParams = schemes[this.context.schema];
-		var musicIds = schemaParams.music;
-		var musicSchema = musicData[musicId];
-		this.main.player.loadMusicSchema(musicSchema);
-		this.main.showMusicLinks(musicIds, musicId);
+		schemaParams(function (scheme) {
+			var musicIds = schemaParams.music;
+			var musicSchema = musicData[musicId];
+			this.main.player.loadMusicSchema(musicSchema);
+			this.main.showMusicLinks(musicIds, musicId);
+		});
 		this.main.showLanguageLinks();
 	}
 

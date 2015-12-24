@@ -14,22 +14,22 @@ var languages = ['en', 'ru'];
 
 var webpackConfig = languages.map(function (lang) {
 	return {
-        resolve: {
-            root: config.paths.root,
-            alias: {
-                'musicData': 'src/js/music',
-                'svgData': 'src/svg_compiled',
-                'infoData': 'src/info',
-                'animationClasses': 'src/js/animations',
-                'schemeParams': 'src/js/schemeParams',
-                'mp3Files': 'src/music'
-            }
-        },
+		resolve: {
+			root: config.paths.root,
+			alias: {
+				musicData: 'src/js/music',
+				svgData: 'src/svg_compiled',
+				infoData: 'src/info',
+				animationClasses: 'src/js/animations',
+				schemeParams: 'src/js/schemeParams',
+				mp3Files: 'src/music'
+			}
+		},
 		entry: {
 			// Главный модуль для интерфейса и навигации
-			'main': paths.src.js + '/main.js',
+			main: paths.src.js + '/main.js',
 			// Музыка и анимация
-			'media': paths.src.js + '/media.js',
+			media: paths.src.js + '/media.js',
 
 			// 'schemes': paths.src.js + '/schemes.js',
 			// 'bailecito': 'schemeParams/bailecito',
@@ -50,7 +50,7 @@ var webpackConfig = languages.map(function (lang) {
 				{ test: /\.js$/, exclude: /node_modules/, loader: 'jscs' }
 			],
 			loaders: [
-				{ test: /\.js$/, exclude: /node_modules/, loader: 'babel?cacheDirectory&presets[]=es2015' },
+				{ test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&presets[]=es2015' },
 				{ test: /\.json$/, loader: 'json' },
 				{ test: /\.css$/, loader: 'style!css' },
 				{ test: /\.scss$/, loader: "style!css!postcss" },
@@ -79,7 +79,7 @@ var webpackConfig = languages.map(function (lang) {
 			},
 			localize: function (textObj) {
 				return '"' + textObj[lang] + '"';
-			},
+			}
 		}
 	};
 });

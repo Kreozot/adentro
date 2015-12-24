@@ -187,30 +187,29 @@ class Adentro {
 
 	/**
 	 * Отобразить ссылки на музыкальные композиции
-	 * @param  {Object} musicIds          Массив идентификаторов композиций
+	 * @param  {Object} musicData          Массив идентификаторов композиций
 	 * @param  {String} currentMusicId    Идентификатор текущей композиции
 	 * @param  {Boolean} showEmptyTiming  Показывать композиции, не имеющие разметки тайминга
 	 */
-	showMusicLinks (musicIds, currentMusicId, showEmptyTiming) {
-		if (musicIds.length <= 1) {
+	showMusicLinks (musicData, currentMusicId, showEmptyTiming) {
+		if (musicData.length <= 1) {
 			$('#musicLinks').html('');
 			return;
 		}
 
 		var getMusicLinks = function () {
-			var result = i18n.t('other.composition') + ': <select id="musicSelect">';
+			var result = localize({ru: 'Композиция', en: 'Composition'}) + ': <select id="musicSelect">';
 			var count = 0;
-			for (var i = 0; i < musicIds.length; i++) {
-				if (!jQuery.isEmptyObject(musicData[musicIds[i]].schema) || showEmptyTiming) {
-					if (musicIds[i] === currentMusicId) {
-						result += '<option selected="selected" value="' + musicIds[i] + '">' +
-								musicData[musicIds[i]].title + '</option>';
+			musicData.forEach(musicDataEntry => {
+				if (!$.isEmptyObject(musicDataEntry.schema) || showEmptyTiming) {
+					if (musicDataEntry === currentMusicId) {
+						result += `<option selected="selected" value="${musicDataEntry.id}">${musicDataEntry.title}</option>`;
 					} else {
-						result += '<option value="' + musicIds[i] + '">' + musicData[musicIds[i]].title + '</option>';
+						result += `<option value="${musicDataEntry.id}">${musicDataEntry.title}</option>`;
 					}
 					count++;
 				}
-			}
+			});
 			if (count <= 1) {
 				return '';
 			}
@@ -239,18 +238,21 @@ class Adentro {
 			}
 		];
 
-		var getLanguageLinks = function () {
-			var result = '<nobr>';
-			for (var i = 0; i < languages.length; i++) {
-				if ((languages[i].id == i18n.lng()) || (languages[i].id == i18n.lng().substr(0, 2))) {
-					result += languages[i].title;
+		const isCurrentLang = lang => {
+				// if ((lang.id == i18n.lng()) || (lang.id == i18n.lng().substr(0, 2))) {
+			return false;
+		}
+
+		const getLanguageLinks = () => {
+			let result = '<nobr>';
+			result += languages.map(lang => {
+				// TODO: Починить переключение языков
+				if (isCurrentLang(lang)) {
+					return lang.title;
 				} else {
-					result += '<a href="' + getLanguageLink(languages[i].id) + '">' + languages[i].title + '</a>';
+					return `<a href="${this.navigation.getLanguageLink(lang.id)}">${lang.title}</a>`;
 				}
-				if (i < languages.length - 1) {
-					result += ' / ';
-				}
-			}
+			}).join(' / ');
 			result += '</nobr>';
 			return result;
 		};
@@ -267,11 +269,11 @@ class Adentro {
 	loadSchema (schemaParams, musicId, animationId) {
 		// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
 		$('#danceName').html(schemaParams.name);
-		$('#schemaDiv').html('<object data="svg/compiled/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
+		$('#schemaDiv').html(`<object data="${schemaParams.svgName}" type="image/svg+xml" id="schema"></object>`);
 
 		musicId = musicId || schemaParams.music[0];
 		this.showMusicLinks(schemaParams.music, musicId);
-		var musicSchema = musicData[musicId];
+		var musicSchema = schemaParams.music.filter(data => data.id === musicId)[0];
 
 		var svgobject = document.getElementById('schema');
 		$(svgobject).load(function () {
@@ -309,16 +311,15 @@ class Adentro {
 	 */
 	loadSchemaEditor (schemaParams, musicId) {
 		$('#danceName').html(schemaParams.name + ' (editor mode)');
-		$('#schemaDiv').html('<object data="svg/' + schemaParams.svgName + '.svg" type="image/svg+xml" id="schema"></object>');
-		var svgobject = document.getElementById('schema');
-		$(svgobject).load(function () {
+		$('#schemaDiv').html(`<object data="${schemaParams.svgName}" type="image/svg+xml" id="schema"></object>`);
+		$('#schema').load(function () {
 			$(playerSelector).unbind($.jPlayer.event.timeupdate)
 				.unbind($.jPlayer.event.ended)
 				.unbind($.jPlayer.event.pause);
 
 			musicId = musicId || schemaParams.music[0];
 			this.showMusicLinks(schemaParams.music, musicId, true);
-			var musicSchema = musicData[musicId];
+			var musicSchema = schemaParams.music.filter(data => data.id === musicId)[0];
 
 			this.player.loadMusicSchema(musicSchema);
 			this.initSvgSchemaEditor();

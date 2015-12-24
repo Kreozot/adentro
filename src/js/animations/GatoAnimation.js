@@ -1,47 +1,52 @@
-function GatoAnimation(id) {
-	GatoAnimation.superclass.constructor.apply(this, arguments);
+import DanceAnimation from './animation.js';
 
-	this.width = 600;
-	this.height = 325;
-	this.startPos = {
-		left: {x: 40, y: 160, angle: -90},
-		right: {x: 560, y: 160, angle: 90}
-	};
+class GatoAnimation extends DanceAnimation {
+	constructor(id) {
+		super(id);
 
-	this.giroElement = new DanceAnimationElement(this,
-		{left: 'm 40,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 C 240,80 200,40 140,40 80,40 40,80 40,140 z',
-		right: 'M 560,140 C 560,80 520,40 460,40 400,40 360,80 360,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 z'});
+		this.width = 600;
+		this.height = 325;
+		this.startPos = {
+			left: {x: 40, y: 160, angle: -90},
+			right: {x: 560, y: 160, angle: 90}
+		};
 
-	this.mediaVueltaElement = new DanceAnimationElement(this,
-		{left: 'm 40,160 c 0,50 120,120 260,120 140,0 260,-70 260,-120',
-		right: 'M 560,160 C 560,110 440,40 300,40 160,40 40,110 40,160'});
+		this.giroElement = new DanceAnimationElement(this,
+			{left: 'm 40,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 C 240,80 200,40 140,40 80,40 40,80 40,140 z',
+			right: 'M 560,140 C 560,80 520,40 460,40 400,40 360,80 360,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 z'});
 
-	this.coronacionElement = new DanceAnimationElement(this,
-		{left: 'm 40,160 c 0,40 120,60 160,60 40,0 80,-20 80,-60 0,-25 -15,-40 -40,-40 -25,0 -40,15 -40,40 0,25 15,40 40,40 25,0 40,-20 50,-40',
-		right: 'm 560,160 c 0,-40 -120,-60 -160,-60 -40,0 -80,20 -80,60 0,25 15,40 40,40 25,0 40,-15 40,-40 0,-25 -15,-40 -40,-40 -25,0 -40,20 -50,40'});
+		this.mediaVueltaElement = new DanceAnimationElement(this,
+			{left: 'm 40,160 c 0,50 120,120 260,120 140,0 260,-70 260,-120',
+			right: 'M 560,160 C 560,110 440,40 300,40 160,40 40,110 40,160'});
 
-	this.zapateoElement = new ZapateoElement(this);
+		this.coronacionElement = new DanceAnimationElement(this,
+			{left: 'm 40,160 c 0,40 120,60 160,60 40,0 80,-20 80,-60 0,-25 -15,-40 -40,-40 -25,0 -40,15 -40,40 0,25 15,40 40,40 25,0 40,-20 50,-40',
+			right: 'm 560,160 c 0,-40 -120,-60 -160,-60 -40,0 -80,20 -80,60 0,25 15,40 40,40 25,0 40,-15 40,-40 0,-25 -15,-40 -40,-40 -25,0 -40,20 -50,40'});
 
-	this.zarandeoElement = new ZarandeoElement(this,
-		{left: 'M 40,160 140,260 240,160 140,60 z',
-		right: 'M 560,160 460,60 360,160 460,260 z'});
+		this.zapateoElement = new ZapateoElement(this);
 
-	this.vueltaElement = new VueltaElement(this,
-		'm 45,150 c 0,45 105,105 255,105 150,0 255,-60 255,-105 C 555,105 450,45 300,45 150,45 45,105 45,150 z');
+		this.zarandeoElement = new ZarandeoElement(this,
+			{left: 'M 40,160 140,260 240,160 140,60 z',
+			right: 'M 560,160 460,60 360,160 460,260 z'});
 
-	this.vuelta = function (seconds, manPosition, times) {
+		this.vueltaElement = new VueltaElement(this,
+			'm 45,150 c 0,45 105,105 255,105 150,0 255,-60 255,-105 C 555,105 450,45 300,45 150,45 45,105 45,150 z');
+
+	}
+
+	vuelta(seconds, manPosition, times) {
 		this.vueltaElement.fullAnimation(seconds, times, manPosition);
-	};
+	}
 
-	this.giro = function (seconds, manPosition, times) {
+	giro(seconds, manPosition, times) {
 		this.giroElement.fullAnimation(seconds, times, manPosition);
-	};
+	}
 
-	this.contraGiro = function (seconds, manPosition, times) {
+	contraGiro(seconds, manPosition, times) {
 		this.giroElement.fullAnimation(seconds, times, manPosition, this.DIRECTION_BACKWARD, 0, 1, 0);
-	};
+	}
 
-	this.zapateoZarandeo = function (seconds, manPosition, times) {
+	zapateoZarandeo(seconds, manPosition, times) {
 		this.clearPaths();
 		this.zarandeoElement.drawPath(getOppositePosition(manPosition));
 		if (times >= 8) {
@@ -60,16 +65,15 @@ function GatoAnimation(id) {
 
 		this.zapateoElement.drawPath(manPosition);
 		this.zapateoElement.startAnimation(seconds, times);
-	};
+	}
 
-	this.mediaVuelta = function (seconds, manPosition, times) {
+	mediaVuelta(seconds, manPosition, times) {
 		this.mediaVueltaElement.fullAnimation(seconds, times, manPosition);
-	};
+	}
 
-	this.coronacion = function (seconds, manPosition, times) {
+	coronacion(seconds, manPosition, times) {
 		this.coronacionElement.fullAnimation(seconds, times, manPosition);
-	};
+	}
 };
-extend(GatoAnimation, DanceAnimation);
 
 module.exports = GatoAnimation;
