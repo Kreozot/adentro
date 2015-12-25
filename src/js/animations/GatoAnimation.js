@@ -1,6 +1,8 @@
 import DanceAnimation from './animation.js';
+import {DanceAnimationElement} from './commons/elements.js';
+import {ZapateoElement, ZarandeoElement, VueltaElement} from './animation_gato_style.js';
 
-class GatoAnimation extends DanceAnimation {
+export default class GatoAnimation extends DanceAnimation {
 	constructor(id) {
 		super(id);
 
@@ -75,5 +77,3 @@ class GatoAnimation extends DanceAnimation {
 		this.coronacionElement.fullAnimation(seconds, times, manPosition);
 	}
 };
-
-module.exports = GatoAnimation;

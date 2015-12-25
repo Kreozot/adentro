@@ -1,4 +1,4 @@
-var ContentSwitch = {
+let contentSwitch = {
 	/**
 	 * Очистить содержимое страницы
 	 */
@@ -13,7 +13,7 @@ var ContentSwitch = {
 	 * @param {String} title     Заголовок ссылки
 	 */
 	addLink: function (block_id, title) {
-		$('#content_menu').append('<a href="javascript:ContentSwitch.show(\'' + block_id +
+		$('#content_menu').append('<a href="javascript:contentSwitch.show(\'' + block_id +
 			'\');" class="content_link" id="' + block_id + '_link">' + title + '</a>');
 	},
 
@@ -49,3 +49,6 @@ var ContentSwitch = {
 		this.addLink(id, title);
 	}
 };
+
+global.contentSwitch = contentSwitch;
+export default contentSwitch;

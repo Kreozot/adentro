@@ -30,21 +30,12 @@ var webpackConfig = languages.map(function (lang) {
 			main: paths.src.js + '/main.js',
 			// Музыка и анимация
 			media: paths.src.js + '/media.js',
-
-			// 'schemes': paths.src.js + '/schemes.js',
-			// 'bailecito': 'schemeParams/bailecito',
-			// 'caramba': 'schemeParams/caramba',
-			// 'chacarera': 'schemeParams/chacarera',
-			// 'chacarera_6': 'schemeParams/chacarera_6',
-			// 'chacarera_doble': 'schemeParams/chacarera_doble',
-			// 'chacarera_doble_6': 'schemeParams/chacarera_doble_6',
-			// 'escondido': 'schemeParams/escondido',
-			// 'gato': 'schemeParams/gato',
 		},
 		output: {
 			path:  paths.dist.js,
 			filename: '[name].' + lang + '.js'
 		},
+		devtool: 'source-map',
 		module: {
 			preLoaders: [
 				{ test: /\.js$/, exclude: /node_modules/, loader: 'jscs' }
@@ -55,7 +46,7 @@ var webpackConfig = languages.map(function (lang) {
 				{ test: /\.css$/, loader: 'style!css' },
 				{ test: /\.scss$/, loader: "style!css!postcss" },
 				{ test: /\.(jpe?g|png|gif)$/i, loader: 'url' },
-				{ test: /\.mp3$/i, loader: 'file?name=../music/[name].[hash:6].[ext]' },
+				{ test: /\.mp3$/i, loader: 'file?path=../dist&name=music/[name].[hash:6].[ext]' },
 				{ test: /\.svg$/i, exclude: /svg\.js/, loader: 'raw' },
 				{ test: /\.inc$/i, loader: 'raw' }
 			]

@@ -1,8 +1,9 @@
 import Navigation from './navigation.js';
 import Player from './player.js';
-import ContentSwitch from './loading/content_switch.js';
-import AnimationLoader from './loading/animation_loading.js';
-import InfoLoader from './loading/info_loading.js';
+import contentSwitch from './loading/content_switch.js';
+import animationLoader from './loading/animation_loading.js';
+import infoLoader from './loading/info_loading.js';
+import {getElement} from './timing/timing.js';
 
 var playerSelector = '#jplayer';
 
@@ -42,7 +43,7 @@ var getObjectDom = function (id) {
  * @return  {String}  Ссылка на dom svg-схемы
  */
 var getSvgSchemaDom = function () {
-	return getObjectDom('schema');
+	return $('#schemaDiv svg');//getObjectDom('schema');
 };
 
 class Adentro {
@@ -60,8 +61,8 @@ class Adentro {
 		if (!svgSchemaDom) {
 			svgSchemaDom = getSvgSchemaDom();
 		}
-		$('rect', svgSchemaDom).myRemoveClass('current');
-		$('text', svgSchemaDom).myRemoveClass('current');
+		$('rect', svgSchemaDom).removeClass('current');
+		$('text', svgSchemaDom).removeClass('current');
 	}
 
 	/**
@@ -89,12 +90,12 @@ class Adentro {
 		}
 		// Показываем рамку вокруг текущего блока
 		var frameId = element + '-frame';
-		$('rect:not(#' + frameId + ')', svgSchemaDom).myRemoveClass('current');
-		$('#' + frameId, svgSchemaDom).myAddClass('current');
+		$('rect:not(#' + frameId + ')', svgSchemaDom).removeClass('current');
+		$('#' + frameId, svgSchemaDom).addClass('current');
 		// Выделяем название текущего элемента
 		var textId = element + '-text';
-		$('text:not(#' + textId + ')', svgSchemaDom).myRemoveClass('current');
-		$('#' + textId, svgSchemaDom).myAddClass('current');
+		$('text:not(#' + textId + ')', svgSchemaDom).removeClass('current');
+		$('#' + textId, svgSchemaDom).addClass('current');
 	}
 
 	/**
@@ -132,13 +133,14 @@ class Adentro {
 	 * Иницилизация схемы
 	 */
 	initSvgSchema () {
-		var svgdom = getSvgSchemaDom();
+		const svgdom = getSvgSchemaDom();
+		let $player = $(playerSelector);
 		if (svgdom) {
-			$('#schema').attr('width', $('svg', svgdom).attr('width'))
-					.attr('height', $('svg', svgdom).attr('height'));
+			// $('#schema').attr('width', $('svg', svgdom).attr('width'))
+			// 		.attr('height', $('svg', svgdom).attr('height'));
 
-			var timeupdateEvent = function (event) {
-				var playerStatus = event.jPlayer.status;
+			const timeupdateEvent = event => {
+				const playerStatus = event.jPlayer.status;
 				// Если остановлено
 				if ((playerStatus.paused) && (playerStatus.currentTime == 0)) {
 					hideCurrentElement(svgdom);
@@ -146,20 +148,20 @@ class Adentro {
 						(!playerStatus.waitForPlay) &&
 						(!playerStatus.waitForLoad)) {
 					$.animation.resume();
-					var time = playerStatus.currentTime;
-					var element = getElement(time);
-					if ($(playerSelector).data('currentElement') != element.name) {
-						$(playerSelector).data('currentElement', element.name);
+					const time = playerStatus.currentTime;
+					const element = getElement($player.data('schema'), time);
+					if ($player.data('currentElement') != element.name) {
+						$player.data('currentElement', element.name);
 						if (element && (element.name.length > 0)) {
-							showCurrentElement(element.name, element.timeLength, svgdom);
+							this.showCurrentElement(element.name, element.timeLength, svgdom);
 						};
 					};
 				};
 			};
-			var endedEvent = event => {
+			const endedEvent = event => {
 				this.hideCurrentElement(svgdom);
 			};
-			var pauseEvent = event => {
+			const pauseEvent = event => {
 				let playerStatus = event.jPlayer.status;
 				if ((playerStatus.paused) && (playerStatus.currentTime > 0)) {
 					$.animation.pause();
@@ -177,7 +179,7 @@ class Adentro {
 	 * Инициализация редактора тайминга
 	 */
 	initSvgSchemaEditor () {
-		var svgdom = getSvgSchemaDom();
+		const svgdom = getSvgSchemaDom();
 		if (svgdom) {
 			$('#schema')
 				.attr('width', $('svg', svgdom).attr('width'))
@@ -271,37 +273,36 @@ class Adentro {
 		$('#danceName').html(schemaParams.name);
 		$('#schemaDiv').html(schemaParams.svgName);
 
-		musicId = musicId || schemaParams.music[0];
+		musicId = musicId || schemaParams.music[0].id;
 		this.showMusicLinks(schemaParams.music, musicId);
 		var musicSchema = schemaParams.music.filter(data => data.id === musicId)[0];
 
-		var svgobject = document.getElementById('schema');
-		$(svgobject).load(function () {
-			$(playerSelector).unbind($.jPlayer.event.timeupdate)
-				.unbind($.jPlayer.event.ended)
-				.unbind($.jPlayer.event.pause);
-			this.player.loadMusicSchema(musicSchema);
-			this.initSvgSchema();
+		$(playerSelector)
+			.unbind($.jPlayer.event.timeupdate)
+			.unbind($.jPlayer.event.ended)
+			.unbind($.jPlayer.event.pause);
+		this.player.loadMusicSchema(musicSchema);
+		this.initSvgSchema();
 
-			ContentSwitch.clearContent();
+		contentSwitch.clearContent();
 
-			AnimationLoader.loadAnimationBlock();
-			var animationClass = schemaParams.animation;
-			if (typeof animationClass === 'object') {
-				AnimationLoader.showAnimationLinks(animationClass, animationId);
-				var currentClassDef = AnimationLoader.getAnimationClassDef(animationClass, animationId);
-				animationClass = currentClassDef.name;
-			}
-			AnimationLoader.loadAnimation(animationClass);
+		animationLoader.loadAnimationBlock();
+		var animationClass = schemaParams.animation;
+		if (typeof animationClass === 'object') {
+			animationId = animationId ? animationId : animationClass[0].id;
+			animationLoader.showAnimationLinks(animationClass, animationId);
+			var currentClassDef = animationLoader.getAnimationClassDef(animationClass, animationId);
+			animationClass = currentClassDef.animClass;
+		}
+		animationLoader.loadAnimation(animationClass);
 
-			InfoLoader.loadInfoBlock(schemaParams.info);
+		infoLoader.loadInfoBlock(schemaParams.info);
 
-			// if (schemaParams.zapateo) {
-			// 	ZapateoLoader.loadZapateoBlock('repike');
-			// }
+		// if (schemaParams.zapateo) {
+		// 	ZapateoLoader.loadZapateoBlock('repike');
+		// }
 
-			ContentSwitch.show('animation_block');
-		});
+		contentSwitch.show('animation_block');
 	}
 
 	/**
@@ -312,46 +313,46 @@ class Adentro {
 	loadSchemaEditor (schemaParams, musicId) {
 		$('#danceName').html(schemaParams.name + ' (editor mode)');
 		$('#schemaDiv').html(schemaParams.svgName);
-		$('#schema').load(function () {
-			$(playerSelector).unbind($.jPlayer.event.timeupdate)
-				.unbind($.jPlayer.event.ended)
-				.unbind($.jPlayer.event.pause);
 
-			musicId = musicId || schemaParams.music[0];
-			this.showMusicLinks(schemaParams.music, musicId, true);
-			var musicSchema = schemaParams.music.filter(data => data.id === musicId)[0];
+		$(playerSelector).unbind($.jPlayer.event.timeupdate)
+			.unbind($.jPlayer.event.ended)
+			.unbind($.jPlayer.event.pause);
 
-			this.player.loadMusicSchema(musicSchema);
-			this.initSvgSchemaEditor();
+		musicId = musicId || schemaParams.music[0].id;
+		this.showMusicLinks(schemaParams.music, musicId, true);
+		var musicSchema = schemaParams.music.filter(data => data.id === musicId)[0];
 
-			console.log('editor mode on');
-			$('#animationDiv').html('');
-			var initTiming = $(playerSelector).data('schema');
-			var timingGenerator = new TimingGenerator(initTiming);
+		this.player.loadMusicSchema(musicSchema);
+		this.initSvgSchemaEditor();
 
-			var timeupdateEvent = function (event) {
-				// Если остановлено
-				if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
-					hideCurrentElementMarkOnSchema();
-					timingGenerator.clear();
+		console.log('editor mode on');
+		$('#animationDiv').html('');
+		var initTiming = $(playerSelector).data('schema');
+		var timingGenerator = new TimingGenerator(initTiming);
+
+		var timeupdateEvent = function (event) {
+			// Если остановлено
+			if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
+				hideCurrentElementMarkOnSchema();
+				timingGenerator.clear();
+			}
+		};
+
+		$(playerSelector).bind($.jPlayer.event.timeupdate, timeupdateEvent);
+
+		$('html').keypress(function (event) {
+			if (event.which == 32) { //space
+				var currentTime = $(playerSelector).data('jPlayer').status.currentTime;
+				if (!timingGenerator.addBeat(currentTime)) {
+					var newTiming = timingGenerator.getTiming();
+					$('#content').html('<pre>' + JSON.stringify(newTiming, '', 4) + '</pre>');
 				}
-			};
-
-			$(playerSelector).bind($.jPlayer.event.timeupdate, timeupdateEvent);
-
-			$('html').keypress(function (event) {
-				if (event.which == 32) { //space
-					var currentTime = $(playerSelector).data('jPlayer').status.currentTime;
-					if (!timingGenerator.addBeat(currentTime)) {
-						var newTiming = timingGenerator.getTiming();
-						$('#content').html('<pre>' + JSON.stringify(newTiming, '', 4) + '</pre>');
-					}
-				}
-			});
+			}
 		});
 	}
 
 }
 
-global.Adentro = Adentro;
+global.adentro = new Adentro();
+global.playElement = adentro.player.playElement;
 export default Adentro;

@@ -1,6 +1,7 @@
 import GatoAnimation from './GatoAnimation.js';
+import {DanceAnimationElement} from './commons/elements.js';
 
-class ChacareraAnimation extends GatoAnimation  {
+export default class ChacareraAnimation extends GatoAnimation  {
 	constructor(id) {
 		super(id);
 		this.avanceElement = new DanceAnimationElement(this,
@@ -17,5 +18,3 @@ class ChacareraAnimation extends GatoAnimation  {
 		this.avanceElement.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
 	}
 };
-
-module.exports = ChacareraAnimation;

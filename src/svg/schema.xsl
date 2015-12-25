@@ -37,7 +37,7 @@
 		<xsl:variable name="y" select="($line - 1) * $height + 1"/>
 		<xsl:variable name="blockWidth" select="$oneTimeWidth * @times - $xOffset"/>
 
- 		<rect class="element {@class}" x="{$x}" y="{$y}" width="{$blockWidth}" height="{$blockHeight}" id="{@id}" onclick="window.top.playElement('{@id}')" data-visualization="{@visualization}" data-manposition="{@manPosition}" data-times="{@times}"/>
+ 		<rect class="element {@class}" x="{$x}" y="{$y}" width="{$blockWidth}" height="{$blockHeight}" id="{@id}" onclick="playElement('{@id}')" data-visualization="{@visualization}" data-manposition="{@manPosition}" data-times="{@times}"/>
  		<rect class="active-frame" x="{$x + 1}" y="{$y + 2}" width="{$blockWidth - 3}" height="{$blockHeight - 4}" id="{@id}-frame"/>
 
     	<text class="times-count-text" x="{$x + ($blockWidth div 2)}" y="{$y + $blockHeight div 2 + 4}"><xsl:value-of select="@times"/></text>

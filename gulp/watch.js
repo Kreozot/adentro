@@ -11,7 +11,7 @@ gulp.task('connect', ['build'], function (done) {
 	done();
 });
 
-gulp.task('watch', ['watch-js', 'watch-html', 'watch-styles'], function () {
+gulp.task('watch', ['watch-js', 'watch-html'], function () {
 	gulp.src(__filename)
 		.pipe(open({uri: 'http://localhost:' + config.devServer.port}));
 });

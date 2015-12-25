@@ -102,7 +102,7 @@ export class VueltaElement extends DanceAnimationElement {
 	drawPath(manPosition) {
 		this.g = {};
 		this.animation.manPosition = manPosition;
-		this.path = this.animation.path(pathStr);
+		this.path = this.animation.path(this.pathStr);
 		this.pathLength = this.path.getTotalLength();
 		this.gradientOffset = this.pathLength / 6;
 		this.halfLength = this.pathLength / 2;

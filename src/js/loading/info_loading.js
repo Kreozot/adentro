@@ -1,13 +1,15 @@
-var InfoLoader = {
+import contentSwitch from './content_switch.js';
+
+let infoLoader = {
 	/**
 	 * Загрузка информации
-	 * @param  {String} infoName Имя файла с информацией (без расширения)
+	 * @param  {String} info HTML с информацией
 	 */
-	loadInfoBlock: function (infoName) {
-		if (infoName) {
-			$.get('info/' + infoName + '.inc', function (data) {
-				ContentSwitch.addBlock('info', i18n.t('content_links.info'), data);
-			});
-		};
+	loadInfoBlock: function (info) {
+		if (info) {
+			contentSwitch.addBlock('info', localize({ru: 'Информация', en: 'Information'}), info);
+		}
 	}
 };
+
+export default infoLoader;

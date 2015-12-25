@@ -1,12 +1,14 @@
-var AnimationLoader = {
+import contentSwitch from './content_switch.js';
+
+let animationLoader = {
 	/**
 	 * Загрузка блока анимации
 	 */
 	loadAnimationBlock: function () {
-		ContentSwitch.addBlock('animation_block', i18n.t('content_links.animation'),
-			'<div id="animationLinks"></div>' +
-			'<svg id="animation" preserveAspectRatio="xMidYMid meet" ' +
-			'xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>');
+		contentSwitch.addBlock('animation_block', localize({ru: 'Хореография', en: 'Choreography'}),
+			`<div id="animationLinks"></div>
+			<svg id="animation" preserveAspectRatio="xMidYMid meet"
+			xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>`);
 	},
 
 	/**
@@ -14,7 +16,7 @@ var AnimationLoader = {
 	 * @param  {Object} animationClass  Класс анимации
 	 */
 	loadAnimation: function (animationClass) {
-		$.animation = new window[animationClass]('animation');
+		$.animation = new animationClass('animation');
 		$('#animation').attr('width', $.animation.width)
 				.attr('height', $.animation.height)
 				.attr('viewBox', '0 0 ' + $.animation.width + ' ' + $.animation.height);
@@ -27,12 +29,8 @@ var AnimationLoader = {
 	 * @return {Object}                     Описание класса в виде {id, name, title}
 	 */
 	getAnimationClassDef: function (animationClassDefs, animationId) {
-		for (var i = 0; i < animationClassDefs.length; i++) {
-			if (animationId === animationClassDefs[i].id) {
-				return animationClassDefs[i];
-			}
-		}
-		return animationClassDefs[0];
+		let animationClass = animationClassDefs.filter(animationClassDef => animationClassDef.id === animationId);
+		return animationClass[0] || animationClassDefs[0];
 	},
 
 	/**
@@ -47,10 +45,10 @@ var AnimationLoader = {
 			var result = '';
 			for (var i = 0; i < animationClassDefs.length; i++) {
 				if (animationClassDefs[i].id === currentClassDef.id) {
-					result += i18n.t(animationClassDefs[i].title);
+					result += animationClassDefs[i].title;
 				} else {
-					result += '<a href="javascript:showAnimation(\'' + animationClassDefs[i].id + '\')" data-i18n="' + animationClassDefs[i].title + '">' +
-						i18n.t(animationClassDefs[i].title) + '</a>';
+					result += '<a href="javascript:showAnimation(\'' + animationClassDefs[i].id + '\')">' +
+						animationClassDefs[i].title + '</a>';
 				}
 				if (i < animationClassDefs.length - 1) {
 					result += ', ';
@@ -62,4 +60,4 @@ var AnimationLoader = {
 	}
 };
 
-export default AnimationLoader;
+export default animationLoader;

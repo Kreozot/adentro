@@ -4,9 +4,10 @@
  * @param  {Number} time Позиция музыки в секундах
  * @return {String}      Идентификатор нужного элемента
  */
-var getElement = function (scheme, time) {
+export let getElement = function (scheme, time) {
 	// schema = $(playerSelector).data('schema');
 	var nearestElement = {name: '', time: -1};
+	//TODO: Заменить jquery each на нативные foreach
 	jQuery.each(scheme, function (key, value) {
 		if (((time - value) >= 0) && ((time - value) < (time - nearestElement.time))) {
 			nearestElement.name = key;
@@ -24,5 +25,3 @@ var getElement = function (scheme, time) {
 	});
 	return nearestElement;
 };
-
-module.exports = getElement;

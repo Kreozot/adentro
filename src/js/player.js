@@ -19,8 +19,8 @@ class Player {
 	 * @param  {String} element Идентификатор элемента
 	 */
 	playElement (element) {
-		schema = $(playerSelector).data('schema');
-		time = schema[element];
+		const schema = $(playerSelector).data('schema');
+		const time = schema[element];
 		$.animation.clear();
 		$(playerSelector).jPlayer('play', time);
 	}
