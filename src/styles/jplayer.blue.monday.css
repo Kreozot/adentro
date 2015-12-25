@@ -14,7 +14,7 @@
 div.jp-audio {
 	/* Edit the font-size to counteract inherited font sizing.
 	* Eg. 1.25em = 1 / 0.8em */
-	
+
 	font-size: 1.25em; /* 1.25em for testing in site pages */ /* No parent CSS that can effect the size in the demos ZIP */
 	font-family: Verdana, Arial, sans-serif;
 	line-height: 1.6;
@@ -69,17 +69,17 @@ a.jp-play, a.jp-pause {
 	height: 40px;
 }
 a.jp-play {
-	background: url("../img/jplayer.blue.monday.jpg") 0 0 no-repeat;
+	background: url("./img/jplayer.blue.monday.png") 0 0 no-repeat;
 }
 a.jp-play:hover {
-	background: url("../img/jplayer.blue.monday.jpg") -41px 0 no-repeat;
+	background: url("./img/jplayer.blue.monday.png") -41px 0 no-repeat;
 }
 a.jp-pause {
-	background: url("../img/jplayer.blue.monday.jpg") 0 -42px no-repeat;
+	background: url("./img/jplayer.blue.monday.png") 0 -42px no-repeat;
 	display: none;
 }
 a.jp-pause:hover {
-	background: url("../img/jplayer.blue.monday.jpg") -41px -42px no-repeat;
+	background: url("./img/jplayer.blue.monday.png") -41px -42px no-repeat;
 }
 a.jp-stop, a.jp-previous, a.jp-next {
 	width: 28px;
@@ -87,11 +87,11 @@ a.jp-stop, a.jp-previous, a.jp-next {
 	margin-top: 6px;
 }
 a.jp-stop {
-	background: url("../img/jplayer.blue.monday.jpg") 0 -83px no-repeat;
+	background: url("./img/jplayer.blue.monday.png") 0 -83px no-repeat;
 	margin-left: 10px;
 }
 a.jp-stop:hover {
-	background: url("../img/jplayer.blue.monday.jpg") -29px -83px no-repeat;
+	background: url("./img/jplayer.blue.monday.png") -29px -83px no-repeat;
 }
 
 /* @end */
@@ -111,20 +111,20 @@ div.jp-audio div.jp-type-single div.jp-progress {
 	width: 286px;
 }
 div.jp-seek-bar {
-	background: url("../img/jplayer.blue.monday.jpg") 0 -202px repeat-x;
+	background: url("./img/jplayer.blue.monday.png") 0 -202px repeat-x;
 	width: 0px;
 	height: 100%;
 	cursor: pointer;
 }
 div.jp-play-bar {
-	background: url("../img/jplayer.blue.monday.jpg") 0 -218px repeat-x;
+	background: url("./img/jplayer.blue.monday.png") 0 -218px repeat-x;
 	width: 0px;
 	height: 100%;
 }
 
 /* The seeking class is added/removed inside jPlayer */
 div.jp-seeking-bg {
-	background: url("../img/jplayer.blue.monday.seeking.gif");
+	background: url("./img/jplayer.blue.monday.seeking.gif");
 }
 
 /* @end */
@@ -143,28 +143,28 @@ div.jp-audio a.jp-volume-max {
 	margin-left: 56px;
 }
 a.jp-mute {
-	background: url("../img/jplayer.blue.monday.jpg") 0 -170px no-repeat;
+	background: url("./img/jplayer.blue.monday.png") 0 -170px no-repeat;
 }
 a.jp-mute:hover {
-	background: url("../img/jplayer.blue.monday.jpg") -19px -170px no-repeat;
+	background: url("./img/jplayer.blue.monday.png") -19px -170px no-repeat;
 }
 a.jp-unmute {
-	background: url("../img/jplayer.blue.monday.jpg") -60px -170px no-repeat;
+	background: url("./img/jplayer.blue.monday.png") -60px -170px no-repeat;
 	display: none;
 }
 a.jp-unmute:hover {
-	background: url("../img/jplayer.blue.monday.jpg") -79px -170px no-repeat;
+	background: url("./img/jplayer.blue.monday.png") -79px -170px no-repeat;
 }
 a.jp-volume-max {
-	background: url("../img/jplayer.blue.monday.jpg") 0 -186px no-repeat;
+	background: url("./img/jplayer.blue.monday.png") 0 -186px no-repeat;
 }
 a.jp-volume-max:hover {
-	background: url("../img/jplayer.blue.monday.jpg") -19px -186px no-repeat;
+	background: url("./img/jplayer.blue.monday.png") -19px -186px no-repeat;
 }
 div.jp-volume-bar {
 	position: absolute;
 	overflow: hidden;
-	background: url("../img/jplayer.blue.monday.jpg") 0 -250px repeat-x;
+	background: url("./img/jplayer.blue.monday.png") 0 -250px repeat-x;
 	width: 46px;
 	height: 5px;
 	cursor: pointer;
@@ -174,7 +174,7 @@ div.jp-audio div.jp-volume-bar {
 	left: 428px;
 }
 div.jp-volume-bar-value {
-	background: url("../img/jplayer.blue.monday.jpg") 0 -256px repeat-x;
+	background: url("./img/jplayer.blue.monday.png") 0 -256px repeat-x;
 	width: 0px;
 	height: 5px;
 }

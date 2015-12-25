@@ -84,6 +84,27 @@ var webpackConfig = languages.map(function (lang) {
 	};
 });
 
+webpackConfig.push({
+	module: {
+		loaders: [
+			{ test: /\.css$/, loader: 'style!css' },
+			{ test: /\.scss$/, loader: "style!css!postcss" },
+			{ test: /\.(jpe?g|png|gif)$/i, loader: 'url' },
+		]
+	},
+	entry: {
+		styles: paths.src.js + '/styles.js',
+	},
+	output: {
+		path:  paths.dist.js,
+		filename: '[name].js'
+	},
+	plugins: [],
+	postcss: function () {
+		return [autoprefixer/*, cssnext, precss*/];
+	}
+});
+
 // Минификация при сборке в продакшн
 if (argv.production) {
 	gutil.log('Production mode');

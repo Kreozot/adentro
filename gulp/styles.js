@@ -5,10 +5,10 @@ var del = require('promised-del');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
+var postcssImport = require('postcss-import');
 
 var stylesSrc = [
-	paths.src.styles + '/menu.css',
-	paths.src.styles + '/danceschema.css'
+	paths.src.styles + '/main.css'
 ];
 
 gulp.task('clean-styles', function() {
@@ -18,6 +18,7 @@ gulp.task('clean-styles', function() {
 gulp.task('build-styles', ['clean-styles'], function () {
 	var postcssProcessors = [
 		// precss(),
+		postcssImport(),
 		autoprefixer({
 			browsers: ['> 1%', 'IE 9', 'Firefox > 20']
 		})

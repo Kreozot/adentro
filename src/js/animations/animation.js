@@ -1,3 +1,5 @@
+require('../../styles/animation.css');
+
 /**
  * Объект анимации
  * @param {String} id DOM-идентификатор SVG-объекта
