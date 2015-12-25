@@ -1,17 +1,9 @@
-function extend(Child, Parent) {
-	var F = function () { };
-	F.prototype = Parent.prototype;
-	Child.prototype = new F();
-	Child.prototype.constructor = Child;
-	Child.superclass = Parent.prototype;
-}
-
 /**
  * Таймер
  * @param {Function} callback Функция
  * @param {Number}   delay    Задержка в мс
  */
-function Timer(callback, delay) {
+export function Timer(callback, delay) {
 	var remaining = delay;
 	if (!remaining) {
 		remaining = 0;
@@ -40,7 +32,7 @@ function Timer(callback, delay) {
  * @param  {String} position Позиция
  * @return {String}          Позиция, противоположная указанной
  */
-function getOppositePosition(position) {
+export function getOppositePosition(position) {
 	switch (position) {
 		case 'start_left':
 			return 'start_right';
@@ -57,4 +49,15 @@ function getOppositePosition(position) {
 		default:
 			return 'left';
 	}
+};
+
+/**
+ * Дробная часть от деления
+ * @param  {Number} upVal   Числитель
+ * @param  {Number} downVal Знаменатель
+ * @return {Number}         Дробная часть от деления
+ */
+export function mod(upVal, downVal) {
+	const divVal = upVal / downVal;
+	return divVal - Math.floor(divVal);
 };

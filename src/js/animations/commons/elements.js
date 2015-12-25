@@ -1,3 +1,4 @@
+import {getOppositePosition, Timer} from './utils.js';
 
 /**
  * Одиночная анимация

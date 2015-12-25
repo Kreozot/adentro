@@ -7,18 +7,6 @@ import {getElement} from './timing/timing.js';
 
 var playerSelector = '#jplayer';
 
-/**
- * Дробная часть от деления
- * @param  {Number} upVal   Числитель
- * @param  {Number} downVal Знаменатель
- * @return {Number}         Дробная часть от деления
- */
-var mod = function (upVal, downVal) {
-	divVal = upVal / downVal;
-	modVal = divVal - Math.floor(divVal);
-	return modVal;
-};
-
 function supports_history_api() {
 	return !!(window.history && history.pushState);
 }
@@ -143,7 +131,7 @@ class Adentro {
 				const playerStatus = event.jPlayer.status;
 				// Если остановлено
 				if ((playerStatus.paused) && (playerStatus.currentTime == 0)) {
-					hideCurrentElement(svgdom);
+					this.hideCurrentElement(svgdom);
 				} else if ((!playerStatus.paused) &&
 						(!playerStatus.waitForPlay) &&
 						(!playerStatus.waitForLoad)) {
@@ -330,17 +318,17 @@ class Adentro {
 		var initTiming = $(playerSelector).data('schema');
 		var timingGenerator = new TimingGenerator(initTiming);
 
-		var timeupdateEvent = function (event) {
+		var timeupdateEvent = event => {
 			// Если остановлено
 			if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
-				hideCurrentElementMarkOnSchema();
+				this.hideCurrentElementMarkOnSchema();
 				timingGenerator.clear();
 			}
 		};
 
 		$(playerSelector).bind($.jPlayer.event.timeupdate, timeupdateEvent);
 
-		$('html').keypress(function (event) {
+		$('html').keypress(event => {
 			if (event.which == 32) { //space
 				var currentTime = $(playerSelector).data('jPlayer').status.currentTime;
 				if (!timingGenerator.addBeat(currentTime)) {

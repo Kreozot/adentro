@@ -14,7 +14,7 @@ export class ZapateoElement extends SingleDanceAnimationElement {
 		this.animation.manPosition = position;
 		this.position = position;
 
-		if (pathStrings) {
+		if (this.pathStrings) {
 			this.path = this.animation.path(this.pathStrings[position], this.gender, hidden);
 			this.pathLength = this.path.getTotalLength() - 1;
 		}
@@ -46,8 +46,8 @@ export class VueltaElement extends DanceAnimationElement {
 			value2 = value2 - this.pathLength;
 		}
 
-		movePoint1 = this.path.getPointAtLength(value + this.gradientOffset);
-		movePoint2 = this.path.getPointAtLength(value2 + this.gradientOffset);
+		const movePoint1 = this.path.getPointAtLength(value + this.gradientOffset);
+		const movePoint2 = this.path.getPointAtLength(value2 + this.gradientOffset);
 		if (this.g.type === 'linearGradient') {
 			this.g.attr({
 				x1: movePoint1.x,
