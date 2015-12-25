@@ -1,16 +1,18 @@
-function Zamba2Animation(id) {
-	ZambaSimpleAnimation.superclass.constructor.apply(this, arguments);
+export default class Zamba2Animation extends ZambaAnimation {
+	constructor(id) {
+		super(id);
 
-	this.coronacionElement = new DanceAnimationElement(this,
-		{left: 'm 40,160 230,0',
-		right: 'm 560,160 -230,0'});
+		this.coronacionElement = new DanceAnimationElement(this,
+			{left: 'm 40,160 230,0',
+			right: 'm 560,160 -230,0'});
+	}
 
-	this.vuelta = function (seconds, manPosition, times) {
+	vuelta(seconds, manPosition, times) {
 		this.vueltaElement.setAngle(-45);
 		this.vueltaElement.fullAnimation(seconds, times, manPosition);
-	};
+	}
 
-	this.arresto = function (seconds, manPosition, times) {
+	arresto(seconds, manPosition, times) {
 		var partSeconds = seconds / 2;
 		var partTimes = times / 2;
 
@@ -18,9 +20,9 @@ function Zamba2Animation(id) {
 		this.mediaVueltaToArrestoElement.drawPath(manPosition);
 		this.mediaVueltaToArrestoElement.startAnimation(partSeconds, partTimes);
 		this.mediaVueltaToArrestoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds, 1, 0);
-	};
+	}
 
-	this.mediaVueltaCoronacion = function (seconds, manPosition, times) {
+	mediaVueltaCoronacion(seconds, manPosition, times) {
 		var firstPart = 4 / times;
 		var secondPart = 3 / times;
 		this.mediaVueltaElement.setAngle(-45);
@@ -31,8 +33,5 @@ function Zamba2Animation(id) {
 		this.mediaVueltaElement.startAnimation(seconds * firstPart, times * firstPart);
 		manPosition = (manPosition === 'left') ? 'right' : 'left';
 		this.coronacionElement.startAnimation(seconds * secondPart, times * secondPart, this.DIRECTION_FORWARD, seconds * firstPart);
-	};
-};
-extend(Zamba2Animation, ZambaAnimation);
-
-module.exports = Zamba2Animation;
+	}
+}
