@@ -43,17 +43,15 @@ let animationLoader = {
 
 		var getAnimationLinks = function (animationClassDefs) {
 			var result = '';
-			for (var i = 0; i < animationClassDefs.length; i++) {
-				if (animationClassDefs[i].id === currentClassDef.id) {
-					result += animationClassDefs[i].title;
+			result += animationClassDefs.map(animationClassDef => {
+				if (animationClassDef.id === currentClassDef.id) {
+					return animationClassDef.title;
 				} else {
-					result += '<a href="javascript:showAnimation(\'' + animationClassDefs[i].id + '\')">' +
-						animationClassDefs[i].title + '</a>';
+					return `<a href="javascript:showAnimation('${animationClassDef.id}')">
+						${animationClassDef.title}
+						</a>`;
 				}
-				if (i < animationClassDefs.length - 1) {
-					result += ', ';
-				}
-			}
+			}).join(', ');
 			return result;
 		};
 		$('#animationLinks').html(getAnimationLinks(animationClassDefs));
