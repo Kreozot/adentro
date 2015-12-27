@@ -12,21 +12,6 @@ function supports_history_api() {
 }
 
 /**
- * Получить ссылку на dom объекта
- * @param  {String} id Идентификатор объекта
- * @return {String}    Ссылка на dom объекта
- */
-var getObjectDom = function (id) {
-	var object = document.getElementById(id);
-	if ('contentDocument' in object) {
-		var dom = jQuery(object.contentDocument);
-		return dom;
-	} else {
-		return false;
-	}
-};
-
-/**
  * Получить ссылку на dom svg-схемы
  * @return  {String}  Ссылка на dom svg-схемы
  */
@@ -342,5 +327,6 @@ class Adentro {
 }
 
 global.adentro = new Adentro();
-global.playElement = adentro.player.playElement;
+global.playElement = element => adentro.player.playElement(element);
+global.showSchema = schemaId => adentro.navigation.showSchema(schemaId);
 export default Adentro;

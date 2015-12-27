@@ -1,5 +1,5 @@
-import {Dance4Animation} from './animation4.js';
-import {VueltaElement} from './animation_gato_style.js';
+import {Dance4Animation, FourDanceAnimationElement} from './commons/animation4.js';
+import {ZapateoElement, ZarandeoElement, VueltaElement} from './commons/animation_gato_style.js';
 
 export class VueltaGradientElement extends VueltaElement {
 	constructor(animation, pathStr) {

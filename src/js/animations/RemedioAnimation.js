@@ -1,3 +1,6 @@
+import {RotateDanceAnimationElement} from './commons/elements.js';
+import {getOppositePosition} from './commons/utils.js';
+
 export default class RemedioAnimation extends EscondidoAnimation {
 	constructor(id) {
 		super(id);
@@ -50,8 +53,8 @@ export default class RemedioAnimation extends EscondidoAnimation {
 			esquinaPath: 'm 390,390 c 0,0 -70,-90 -170,-90 -100,0 -170,90 -170,90',
 			angle: 135
 		};
-		var manPaths = {};
-		var womanPaths = {};
+		var manPaths;
+		var womanPaths;
 
 		switch (manPosition) {
 			case 'left':

@@ -1,7 +1,7 @@
-import DanceAnimation from './animation.js';
+import DanceAnimation from './commons/animation.js';
 import {DanceAnimationElement} from './commons/elements.js';
 import {getOppositePosition} from './commons/utils.js';
-import {ZapateoElement, ZarandeoElement, VueltaElement} from './animation_gato_style.js';
+import {ZapateoElement, ZarandeoElement, VueltaElement} from './commons/animation_gato_style.js';
 
 export default class GatoAnimation extends DanceAnimation {
 	constructor(id) {

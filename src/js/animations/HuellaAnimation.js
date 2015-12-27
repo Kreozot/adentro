@@ -1,3 +1,6 @@
+import {DanceAnimationElement} from './commons/elements.js';
+import {ZapateoElement, ZarandeoElement} from './commons/animation_gato_style.js';
+
 export default class HuellaAnimation extends GatoAnimation {
 	constructor(id) {
 		super(id);

@@ -72,10 +72,9 @@ export class SingleDanceAnimationElement {
 	startAnimation(lengthS, times, direction, delay, startPart, stopPart) {
 		startPart = (typeof startPart === 'undefined') ? 0 : startPart;
 		stopPart = (typeof stopPart === 'undefined') ? 1 : stopPart;
-		var self = this;
 
-		function startAnimationFunc() {
-			self.animationFunction(lengthS * 1000, times, direction, startPart, stopPart);
+		const startAnimationFunc = () => {
+			this.animationFunction(lengthS * 1000, times, direction, startPart, stopPart);
 		}
 
 		if ((!delay) || (delay <= 0)) {
@@ -94,11 +93,10 @@ export class SingleDanceAnimationElement {
 	 * @param  {Number} delay     	[задержка в секундах]
 	 */
 	fullAnimation(lengthS, times, position, direction, delay, startPart, stopPart) {
-		var self = this;
-		function fullAnimationFunc() {
-			self.animation.clearPaths();
-			self.drawPath(position);
-			self.startAnimation(lengthS, times, direction, 0, startPart, stopPart);
+		const fullAnimationFunc = () => {
+			this.animation.clearPaths();
+			this.drawPath(position);
+			this.startAnimation(lengthS, times, direction, 0, startPart, stopPart);
 		}
 
 		if ((!delay) || (delay <= 0)) {
@@ -180,17 +178,16 @@ export class DanceAnimationElement {
 	 * @param  {Number} delay     	Задержка в секундах
 	 */
 	fullAnimation(lengthS, times, manPosition, direction, delay, startPart, stopPart) {
-
-		this.fullAnimationFunc = function () {
+		const fullAnimationFunc = () => {
 			this.animation.clearPaths();
 			this.drawPath(manPosition);
 			this.startAnimation(lengthS, times, direction, 0, startPart, stopPart);
 		};
 
 		if ((!delay) || (delay <= 0)) {
-			this.fullAnimationFunc();
+			fullAnimationFunc();
 		} else {
-			this.animation.timeouts.push(new Timer(this.fullAnimationFunc, delay * 1000));
+			this.animation.timeouts.push(new Timer(fullAnimationFunc, delay * 1000));
 		}
 	}
 }
@@ -271,16 +268,16 @@ export class RotateDanceAnimationElement extends DanceAnimationElement {
 
 	fullAnimation(lengthS, times, startAngleMan, startAngleWoman, manPosition, direction, delay, startPart, stopPart) {
 
-		this.fullAnimationFunc = function () {
+		const fullAnimationFunc = () => {
 			this.animation.clearPaths();
 			this.drawPath(manPosition);
 			this.startAnimation(lengthS, times, startAngleMan, startAngleWoman, direction, 0, startPart, stopPart);
 		};
 
 		if ((!delay) || (delay <= 0)) {
-			this.fullAnimationFunc();
+			fullAnimationFunc();
 		} else {
-			this.animation.timeouts.push(new Timer(this.fullAnimationFunc, delay * 1000));
+			this.animation.timeouts.push(new Timer(fullAnimationFunc, delay * 1000));
 		}
 	}
 }

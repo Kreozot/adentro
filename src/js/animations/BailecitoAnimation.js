@@ -1,3 +1,6 @@
+import GatoAnimation from './GatoAnimation.js';
+import {DanceAnimationElement} from './commons/elements.js';
+
 class BailecitoAvanceRetrocesoElement extends DanceAnimationElement {
 	constructor() {
 		super();

@@ -6,7 +6,7 @@ function supports_history_api() {
 	return !!(window.history && history.pushState);
 }
 
-class Navigation {
+export default class Navigation {
 	constructor(main) {
 		this.context = {};
 		this.main = main;
@@ -50,7 +50,7 @@ class Navigation {
 	 * @param  {String} lang Идентификатор языка
 	 * @return {String}      URL текущей страницы со всеми параметрами и параметром lang
 	 */
-	getLanguageLink (lang) {
+	getLanguageLink(lang) {
 		var uri = new URI();
 		var query = uri.query(true);
 		query.lang = lang;
@@ -64,7 +64,7 @@ class Navigation {
 	 * @param  {String} title  Заголовок страницы
 	 * @param  {String} query  Фрагмент URL запроса
 	 */
-	pushStateOrRedirect (params, title, query) {
+	pushStateOrRedirect(params, title, query) {
 		if (supports_history_api()) {
 			history.pushState(params, title, query);
 		} else {
@@ -79,7 +79,7 @@ class Navigation {
 	 * @param  {String} music     Идентификатор композиции
 	 * @return {String}           Относительный путь URL
 	 */
-	getRelativeUrl (schema, animation, music) {
+	getRelativeUrl(schema, animation, music) {
 		return '?schema=' + schema +
 			(animation ? ('&animation=' + animation) : '') +
 			(music ? ('&music=' + music) : '');
@@ -93,7 +93,7 @@ class Navigation {
 	 * Получение параметров контекста из URL
 	 * @return {Object} Объект контекста
 	 */
-	getContextFromUrl () {
+	getContextFromUrl() {
 		var url = new URI();
 		var segments = url.segment();
 		var params = url.query(true);
@@ -112,7 +112,7 @@ class Navigation {
 	 * Перейти на указанную схему по URL
 	 * @param  {String} schemaId Идентификатор схемы
 	 */
-	showSchema (schemaId) {
+	showSchema(schemaId) {
 		this.pushStateOrRedirect({schema: schemaId},
 			schemes[schemaId].name + ' - Adentro', this.getRelativeUrl(schemaId));
 		this.loadSchemaByState();
@@ -122,7 +122,7 @@ class Navigation {
 	 * Переключиться на определённую анимацию
 	 * @param  {Number} animationId  Идентификатор анимации
 	 */
-	showAnimation (animationId) {
+	showAnimation(animationId) {
 		this.context.animation = animationId;
 
 		this.pushStateOrRedirect({
@@ -150,7 +150,7 @@ class Navigation {
 	 * Переключиться на определённую композицию
 	 * @param  {Number} animationId  Идентификатор анимации
 	 */
-	showMusic (musicId) {
+	showMusic(musicId) {
 		this.context.music = musicId;
 		this.pushStateOrRedirect({
 				schema: this.context.schema,
@@ -173,7 +173,7 @@ class Navigation {
 	 * Загрузить схему через History
 	 * @return {Boolean} True если схема была загружена
 	 */
-	loadSchemaByState () {
+	loadSchemaByState() {
 		var state = history.state;
 		if (state.schema) {
 			this.context.schema = state.schema;
@@ -193,7 +193,7 @@ class Navigation {
 	 * Загрузить схему из URL
 	 * @return {Boolean} True если схема была загружена
 	 */
-	loadSchemaByUrl () {
+	loadSchemaByUrl() {
 		let context = this.getContextFromUrl();
 		if (context.schema) {
 			if (context.editor) {
@@ -207,5 +207,3 @@ class Navigation {
 	}
 
 }
-
-export default Navigation;

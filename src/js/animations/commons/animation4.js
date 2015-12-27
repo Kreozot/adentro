@@ -1,4 +1,6 @@
 import DanceAnimation from './animation.js';
+import {SingleDanceAnimationElement, DanceAnimationElement} from './elements.js';
+import {Timer} from './utils.js';
 /**
  * [DanceAnimationElement анимация на четверых]
  * @param {[Object]} animation   [объект анимации]
@@ -70,20 +72,16 @@ export class FourDanceAnimationElement {
 	 * @param  {[Number]} delay     	[задержка в секундах]
 	 */
 	fullAnimation(lengthS, times, manPosition, direction, delay, startPart, stopPart) {
-		this.fullAnimationFunc = function () {
+		const fullAnimationFunc = () => {
 			this.animation.clearPaths();
 			this.drawPath(manPosition);
 			this.startAnimation(lengthS, times, direction, 0, startPart, stopPart);
 		};
 
 		if ((!delay) || (delay <= 0)) {
-			this.fullAnimationFunc();
+			fullAnimationFunc();
 		} else {
-			this.animation.timeouts[this.animation.timeouts.length] = new Timer(function (self) {
-				return function () {
-					self.fullAnimationFunc();
-				};
-			}(this), delay * 1000);
+			this.animation.timeouts[this.animation.timeouts.length] = new Timer(fullAnimationFunc, delay * 1000);
 		}
 	}
 }

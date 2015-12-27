@@ -1,4 +1,5 @@
-import {SingleDanceAnimationElement, DanceAnimationElement} from './commons/elements.js';
+import {SingleDanceAnimationElement, DanceAnimationElement} from './elements.js';
+import {Timer} from './utils.js';
 
 export class ZapateoElement extends SingleDanceAnimationElement {
 	constructor(animation, figure, pathStrings) {
@@ -86,10 +87,9 @@ export class VueltaElement extends DanceAnimationElement {
 	startAnimation(lengthS, times, direction, delay, startPart, stopPart, full) {
 		startPart = (typeof startPart === 'undefined') ? 0 : startPart;
 		stopPart = (typeof stopPart === 'undefined') ? 1 : stopPart;
-		var self = this;
 
-		function startAnimationFunc() {
-			self.animationFunction(lengthS * 1000, times, direction, startPart, stopPart);
+		const startAnimationFunc = () => {
+			this.animationFunction(lengthS * 1000, times, direction, startPart, stopPart);
 		}
 
 		if ((!delay) || (delay <= 0)) {

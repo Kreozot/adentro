@@ -1,5 +1,5 @@
-require('../../styles/animation.css');
-import {mod} from './commons/utils.js';
+require('../../../styles/animation.css');
+import {mod} from './utils.js';
 
 /**
  * Объект анимации

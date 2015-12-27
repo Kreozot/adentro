@@ -1,3 +1,6 @@
+import {DanceAnimationElement} from './commons/elements.js';
+import {getOppositePosition} from './commons/utils.js';
+
 export default class ZambaAnimation extends GatoAnimation {
 	constructor(id) {
 		super(id);
