@@ -1,3 +1,4 @@
+import ZambaAnimation from './ZambaAnimation.js';
 import {DanceAnimationElement} from './commons/elements.js';
 
 export default class ZambaSimpleAnimation extends ZambaAnimation {

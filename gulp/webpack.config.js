@@ -56,17 +56,15 @@ var webpackConfig = languages.map(function (lang) {
 		},
 		plugins: [],
 		callbackLoader: {
-			requireMusic: function () {
+			requireSchemes: function () {
 
-				var ensureList = schemesList.map(function (id) {
-					var result = 'module.exports.' + id + ' = ';
-					return '"schemeParams/' + id + '.js"';
-				}).join();
-
-				var requireList = musicList.map(function (musicId) {
-					return musicId + ': require("schemeParams/' + musicId + '.js");';
-				}).join('\n');
-				return '{' + requires + '}';
+				return '{' + schemesList.map(function (id) {
+					return id + ': function (callback) {' +
+						'require.ensure([\'schemeParams/' + id + '.js\'], function (require) {' +
+							'callback(require(\'schemeParams/' + id + '.js\'));' +
+						'});' +
+					'}';
+				}).join(',\n') + '}';
 			},
 			localize: function (textObj) {
 				return '"' + textObj[lang] + '"';

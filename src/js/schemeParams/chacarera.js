@@ -11,7 +11,7 @@ module.exports = {
 		animClass: require('animationClasses/Chacarera4Animation').default,
 		title: localize({ru: 'На двоих', en: 'On two people'})
 	}/*,
-				{id: 'cadena', animClass: require('animationClasses/ChacareraCadenaAnimation'), title: 'Cadena'}*/],
+				{id: 'cadena', animClass: require('animationClasses/ChacareraCadenaAnimation').default, title: 'Cadena'}*/],
 	info: require('infoData/chacarera.inc'),
 	zapateo: true
 };

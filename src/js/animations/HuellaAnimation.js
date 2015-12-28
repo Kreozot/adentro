@@ -1,3 +1,4 @@
+import GatoAnimation from './GatoAnimation.js';
 import {DanceAnimationElement} from './commons/elements.js';
 import {ZapateoElement, ZarandeoElement} from './commons/animation_gato_style.js';
 

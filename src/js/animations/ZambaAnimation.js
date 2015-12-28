@@ -1,3 +1,4 @@
+import GatoAnimation from './GatoAnimation.js';
 import {DanceAnimationElement} from './commons/elements.js';
 import {getOppositePosition} from './commons/utils.js';
 

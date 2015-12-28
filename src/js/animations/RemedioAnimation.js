@@ -1,3 +1,4 @@
+import EscondidoAnimation from './EscondidoAnimation.js';
 import {RotateDanceAnimationElement} from './commons/elements.js';
 import {getOppositePosition} from './commons/utils.js';
 

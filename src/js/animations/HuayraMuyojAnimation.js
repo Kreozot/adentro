@@ -1,3 +1,4 @@
+import DanceAnimation from './commons/animation.js';
 import {DanceAnimationElement, RotateDanceAnimationElement} from './commons/elements.js';
 import {ZapateoElement, ZarandeoElement} from './commons/animation_gato_style.js';
 import {getOppositePosition} from './commons/utils.js';
