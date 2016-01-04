@@ -1,6 +1,6 @@
 import DanceAnimation from './commons/animation.js';
-import {DanceAnimationElement} from './commons/elements.js';
-import {getOppositePosition} from './commons/utils.js';
+import {DanceAnimationElement, RotateDanceAnimationElement} from './commons/elements.js';
+import {getOppositePosition, Timer} from './commons/utils.js';
 import {ZapateoElement, ZarandeoElement, VueltaElement} from './commons/animation_gato_style.js';
 
 export default class EscondidoAnimation extends DanceAnimation {
@@ -56,11 +56,11 @@ export default class EscondidoAnimation extends DanceAnimation {
 			bottom: 'M 50,390 70,410 50,390'});
 	}
 
-	esquina(seconds, manPosition, times) {
+	esquina(seconds, manPosition, beats) {
 		this.clearPaths();
 		var partSeconds = seconds / 4;
 		var firstPartSeconds = partSeconds * 2;
-		var partTimes = times / 4;
+		var partBeats = beats / 4;
 		var manAngle = this.startPos[manPosition].angle;
 		var womanAngle = this.startPos[getOppositePosition(manPosition)].angle;
 		this.esquinaElement.drawPath(manPosition);
@@ -80,48 +80,44 @@ export default class EscondidoAnimation extends DanceAnimation {
 		this.balanceo1Element.easing = mina.easeout;
 		this.balanceo2Element.easing = mina.easeout;
 
-		this.esquinaElement.startAnimation(firstPartSeconds, partTimes * 2, manAngle, womanAngle);
-		this.balanceo1Element.startAnimation(partSeconds, partTimes, this.DIRECTION_STRAIGHT_FORWARD, firstPartSeconds, 0, 1);
-		this.balanceo2Element.startAnimation(partSeconds, partTimes, this.DIRECTION_STRAIGHT_FORWARD, firstPartSeconds + partSeconds, 0, 1);
+		this.esquinaElement.startAnimation(firstPartSeconds, partBeats * 2, manAngle, womanAngle);
+		this.balanceo1Element.startAnimation(partSeconds, partBeats, this.DIRECTION_STRAIGHT_FORWARD, firstPartSeconds, 0, 1);
+		this.balanceo2Element.startAnimation(partSeconds, partBeats, this.DIRECTION_STRAIGHT_FORWARD, firstPartSeconds + partSeconds, 0, 1);
 	}
 
-	vueltaGiro(seconds, manPosition, times) {
-		var firstPart = 6 / times;
-		var secondPart = 2 / times;
+	vueltaGiro(seconds, manPosition, beats) {
+		const firstPart = 6 / beats;
+		const secondPart = 2 / beats;
 
-		this.vueltaElement.fullAnimation(seconds * firstPart, times * firstPart, manPosition);
-		this.giroElement.fullAnimation(seconds * secondPart, times * secondPart, manPosition, this.DIRECTION_FORWARD, seconds * firstPart);
+		this.vueltaElement.fullAnimation(seconds * firstPart, beats * firstPart, manPosition);
+		this.giroElement.fullAnimation(seconds * secondPart, beats * secondPart, manPosition, this.DIRECTION_FORWARD, seconds * firstPart);
 	}
 
-	zapateo(seconds, manPosition, times) {
+	zapateo(seconds, manPosition, beats) {
 		this.setAtStart(manPosition);
-		this.zapateoElement.fullAnimation(seconds, times, manPosition);
+		this.zapateoElement.fullAnimation(seconds, beats, manPosition);
 	}
 
-	zarandeo(seconds, manPosition, times) {
+	zarandeo(seconds, manPosition, beats) {
 		this.setAtStart(manPosition);
 		this.clearPaths();
 		this.zarandeoElement.drawPath(getOppositePosition(manPosition));
-		if (times >= 8) {
-			var partSeconds = seconds / 4;
-			var partTimes = times / 4;
-		} else {
-			var partSeconds = seconds / 2;
-			var partTimes = times / 2;
-		}
-		this.zarandeoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, 0, 0, 0.5);
-		this.zarandeoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
-		if (times >= 8) {
-			this.zarandeoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 2, 0, 0.5);
-			this.zarandeoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
+		const parts = beats >= 8 ? 4 : 2;
+		const partSeconds = seconds / parts;
+		const partBeats = beats / parts;
+		this.zarandeoElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5);
+		this.zarandeoElement.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
+		if (beats >= 8) {
+			this.zarandeoElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 2, 0, 0.5);
+			this.zarandeoElement.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
 		}
 	}
 
-	mediaVuelta(seconds, manPosition, times) {
-		this.mediaVueltaElement.fullAnimation(seconds, times, manPosition);
+	mediaVuelta(seconds, manPosition, beats) {
+		this.mediaVueltaElement.fullAnimation(seconds, beats, manPosition);
 	}
 
-	coronacion(seconds, manPosition, times) {
-		this.coronacionElement.fullAnimation(seconds, times, manPosition);
+	coronacion(seconds, manPosition, beats) {
+		this.coronacionElement.fullAnimation(seconds, beats, manPosition);
 	}
 };

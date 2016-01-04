@@ -6,9 +6,9 @@ export class ZapateoElement extends SingleDanceAnimationElement {
 		super(animation, pathStrings, 'man', figure);
 	}
 
-	animationFunction(lengthMs, times) {
+	animationFunction(lengthMs, beats) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
-		this.animation.animateFigureTime(this.figure, lengthMs, times * 6);
+		this.animation.animateFigureTime(this.figure, lengthMs, beats * 6);
 	}
 
 	drawPath(position) {
@@ -64,7 +64,7 @@ export class VueltaElement extends DanceAnimationElement {
 		}
 	}
 
-	animationFunction(lengthMs, times, direction, startPart, stopPart) {
+	animationFunction(lengthMs, beats, direction, startPart, stopPart) {
 		//Если идём из начала в конец, то инвертируем цвета градиента
 		if (startPart > stopPart) {
 			this.setColors(this.rightColor, this.leftColor);
@@ -79,17 +79,17 @@ export class VueltaElement extends DanceAnimationElement {
 			}, lengthMs, mina.linear);
 
 		self.animation.animateMan(self.path, this.startPos1,
-			stopPart * this.pathLength + this.startPos1, lengthMs, times, direction);
+			stopPart * this.pathLength + this.startPos1, lengthMs, beats, direction);
 		self.animation.animateWoman(self.path, this.startPos2,
-			stopPart * this.pathLength + this.startPos2, lengthMs, times, direction);
+			stopPart * this.pathLength + this.startPos2, lengthMs, beats, direction);
 	}
 
-	startAnimation(lengthS, times, direction, delay, startPart, stopPart, full) {
+	startAnimation(lengthS, beats, direction, delay, startPart, stopPart, full) {
 		startPart = startPart || 0;
 		stopPart = stopPart || 1;
 
 		const startAnimationFunc = () => {
-			this.animationFunction(lengthS * 1000, times, direction, startPart, stopPart);
+			this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
 		}
 
 		if ((!delay) || (delay <= 0)) {

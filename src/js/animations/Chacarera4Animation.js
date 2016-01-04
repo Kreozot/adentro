@@ -6,7 +6,7 @@ export class VueltaGradientElement extends VueltaElement {
 		super(animation, pathStr);
 	}
 
-	animationFunction(lengthMs, times, direction, startPart, stopPart) {
+	animationFunction(lengthMs, beats, direction, startPart, stopPart) {
 		//Если идём из начала в конец, то инвертируем цвета градиента
 		if (startPart > stopPart) {
 			this.setColors(this.rightColor, this.leftColor);
@@ -76,75 +76,71 @@ export class Chacarera4Animation extends Dance4Animation {
 			right: 'm 390,310 c 0,-25 -70,-40 -100,-40 -30,0 -55,20 -55,40 0,15 10,25 25,25 15,0 25,-10 25,-25 0,-15 -10,-25 -25,-25 -15,0 -25,5 -30,20'});
 	}
 
-	avance(seconds, manPosition, times) {
+	avance(seconds, manPosition, beats) {
 		this.clearPaths();
 		this.avanceElement.drawPath(manPosition);
 		const partSeconds = seconds / 2;
-		const partTimes = times / 2;
-		this.avanceElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, 0, 0, 0.5);
-		this.avanceElement.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
+		const partBeats = beats / 2;
+		this.avanceElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5);
+		this.avanceElement.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
 	}
 
-	giro(seconds, manPosition, times) {
-		this.giroElement.fullAnimation(seconds, times, manPosition);
+	giro(seconds, manPosition, beats) {
+		this.giroElement.fullAnimation(seconds, beats, manPosition);
 	}
 
-	contraGiro(seconds, manPosition, times) {
-		this.giroElement.fullAnimation(seconds, times, manPosition, this.DIRECTION_BACKWARD, 0, 1, 0);
+	contraGiro(seconds, manPosition, beats) {
+		this.giroElement.fullAnimation(seconds, beats, manPosition, this.DIRECTION_BACKWARD, 0, 1, 0);
 	}
 
-	vuelta(seconds, manPosition, times) {
+	vuelta(seconds, manPosition, beats) {
 		this.clearPaths();
 		this.vueltaGradientElement.drawPath(manPosition);
-		this.vueltaGradientElement.startAnimation(seconds, times);
+		this.vueltaGradientElement.startAnimation(seconds, beats);
 
 		const partSeconds = seconds / 2;
-		const partTimes = times / 2;
+		const partBeats = beats / 2;
 
 		this.mediaVueltaElement.drawPath(manPosition, true);
-		this.mediaVueltaElement.startAnimation(partSeconds, partTimes);
+		this.mediaVueltaElement.startAnimation(partSeconds, partBeats);
 		this.mediaVueltaElement.drawPath(getOppositePosition(manPosition), true);
-		this.mediaVueltaElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds);
+		this.mediaVueltaElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds);
 	}
 
-	mediaVuelta(seconds, manPosition, times) {
+	mediaVuelta(seconds, manPosition, beats) {
 		this.clearPaths();
 		this.vueltaGradientElement.drawPath(manPosition);
-		this.vueltaGradientElement.startAnimation(seconds, times, this.DIRECTION_FORWARD, 0, 0, 0.5);
+		this.vueltaGradientElement.startAnimation(seconds, beats, this.DIRECTION_FORWARD, 0, 0, 0.5);
 
 		this.mediaVueltaElement.drawPath(manPosition, true);
-		this.mediaVueltaElement.startAnimation(seconds, times);
+		this.mediaVueltaElement.startAnimation(seconds, beats);
 	}
 
-	zapateoZarandeo(seconds, manPosition, times) {
+	zapateoZarandeo(seconds, manPosition, beats) {
 		this.clearPaths();
 		this.zarandeoElement1.drawPath(getOppositePosition(manPosition));
 		this.zarandeoElement2.drawPath(getOppositePosition(manPosition));
-		if (times >= 8) {
-			const partSeconds = seconds / 4;
-			const partTimes = times / 4;
-		} else {
-			const partSeconds = seconds / 2;
-			const partTimes = times / 2;
-		}
-		this.zarandeoElement1.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, 0, 0, 0.5);
-		this.zarandeoElement1.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
-		this.zarandeoElement2.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, 0, 0, 0.5);
-		this.zarandeoElement2.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
-		if (times >= 8) {
-			this.zarandeoElement1.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 2, 0, 0.5);
-			this.zarandeoElement1.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
-			this.zarandeoElement2.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 2, 0, 0.5);
-			this.zarandeoElement2.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
+		const parts = beats >= 8 ? 4 : 2;
+		const partSeconds = seconds / parts;
+		const partBeats = beats / parts;
+		this.zarandeoElement1.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5);
+		this.zarandeoElement1.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
+		this.zarandeoElement2.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5);
+		this.zarandeoElement2.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
+		if (beats >= 8) {
+			this.zarandeoElement1.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 2, 0, 0.5);
+			this.zarandeoElement1.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
+			this.zarandeoElement2.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 2, 0, 0.5);
+			this.zarandeoElement2.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
 		}
 
 		this.zapateoElement1.drawPath(manPosition + 1);
 		this.zapateoElement2.drawPath(manPosition + 2);
-		this.zapateoElement1.startAnimation(seconds, times);
-		this.zapateoElement2.startAnimation(seconds, times);
+		this.zapateoElement1.startAnimation(seconds, beats);
+		this.zapateoElement2.startAnimation(seconds, beats);
 	}
 
-	coronacion(seconds, manPosition, times) {
-		this.coronacionElement.fullAnimation(seconds, times, manPosition);
+	coronacion(seconds, manPosition, beats) {
+		this.coronacionElement.fullAnimation(seconds, beats, manPosition);
 	}
 };

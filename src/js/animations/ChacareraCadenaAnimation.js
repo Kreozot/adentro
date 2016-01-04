@@ -13,21 +13,21 @@ export default class ChacareraCadenaAnimation extends Chacarera4Animation {
 		this.CadenaVisualPath = 'm 50,310 340,0 0,-180 -340,0 z';
 	}
 
-	vuelta(seconds, manPosition, times) {
+	vuelta(seconds, manPosition, beats) {
 		this.CadenaPath = this.path(this.CadenaVisualPath, 'black');
 
 		this.CadenaElement.drawPath(manPosition, true);
-		this.CadenaElement.startAnimation(seconds, times);
+		this.CadenaElement.startAnimation(seconds, beats);
 
 		var partSeconds = seconds / 8;
-		var partTimes = times / 8;
-		// this.CadenaElement.startAnimation(partSeconds * 2, partTimes * 2, this.DIRECTION_FORWARD, partSeconds * 0, 0, 1/6);
-		// this.CadenaElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 2, 1/6, 2/6);
-		// this.CadenaElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 3, 2/8, 3/8);
-		// this.CadenaElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 4, 3/8, 4/8);
-		// this.CadenaElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 5, 4/8, 5/8);
-		// this.CadenaElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 6, 5/8, 6/8);
-		// this.CadenaElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 7, 6/8, 7/8);
-		// this.CadenaElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 8, 7/8, 8/8);
+		var partBeats = beats / 8;
+		// this.CadenaElement.startAnimation(partSeconds * 2, partBeats * 2, this.DIRECTION_FORWARD, partSeconds * 0, 0, 1/6);
+		// this.CadenaElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 2, 1/6, 2/6);
+		// this.CadenaElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 3, 2/8, 3/8);
+		// this.CadenaElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 4, 3/8, 4/8);
+		// this.CadenaElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 5, 4/8, 5/8);
+		// this.CadenaElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 6, 5/8, 6/8);
+		// this.CadenaElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 7, 6/8, 7/8);
+		// this.CadenaElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 8, 7/8, 8/8);
 	}
 }

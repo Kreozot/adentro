@@ -50,32 +50,32 @@ export class FourDanceAnimationElement {
 	/**
 	 * [startAnimation Запуск анимации]
 	 * @param  {[Number]} lengthS   [длительность в секундах]
-	 * @param  {[Number]} times     [количество тактов]
+	 * @param  {[Number]} beats     [количество тактов]
 	 * @param  {[String]} direction [направление движения фигуры]
 	 * @param  {[Number]} delay     [задержка в секундах]
 	 * @param  {[Number]} startPart [позиция начала (0-1 относительно траектории)]
 	 * @param  {[Number]} stopPart  [позиция конца (0-1 относительно траектории)]
 	 */
-	startAnimation(lengthS, times, direction, delay, startPart, stopPart) {
-		this.man1DanceAnimationElement.startAnimation(lengthS, times, direction, delay, startPart, stopPart);
-		this.woman1DanceAnimationElement.startAnimation(lengthS, times, direction, delay, startPart, stopPart);
-		this.man2DanceAnimationElement.startAnimation(lengthS, times, direction, delay, startPart, stopPart);
-		this.woman2DanceAnimationElement.startAnimation(lengthS, times, direction, delay, startPart, stopPart);
+	startAnimation(lengthS, beats, direction, delay, startPart, stopPart) {
+		this.man1DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
+		this.woman1DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
+		this.man2DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
+		this.woman2DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
 	}
 
 	/**
 	 * [fullAnimation Полный цикл анимации]
 	 * @param  {[Number]} lengthS    	[длительность в секундах]
-	 * @param  {[Number]} times     	[количество тактов]
+	 * @param  {[Number]} beats     	[количество тактов]
 	 * @param  {[String]} manPosition   [начальная позиция партнёра]
 	 * @param  {[String]} direction 	[направление движения фигуры]
 	 * @param  {[Number]} delay     	[задержка в секундах]
 	 */
-	fullAnimation(lengthS, times, manPosition, direction, delay, startPart, stopPart) {
+	fullAnimation(lengthS, beats, manPosition, direction, delay, startPart, stopPart) {
 		const fullAnimationFunc = () => {
 			this.animation.clearPaths();
 			this.drawPath(manPosition);
-			this.startAnimation(lengthS, times, direction, 0, startPart, stopPart);
+			this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
 		};
 
 		if ((!delay) || (delay <= 0)) {

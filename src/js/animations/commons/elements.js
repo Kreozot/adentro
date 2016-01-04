@@ -50,31 +50,31 @@ export class SingleDanceAnimationElement {
 	/**
 	 * Инициализация анимации
 	 * @param  {Number} lengthMs  Длина в милисекундах
-	 * @param  {Number} times     Количество тактов
+	 * @param  {Number} beats     Количество тактов
 	 * @param  {String} direction Направление движения
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	animationFunction(lengthMs, times, direction, startPart, stopPart) {
+	animationFunction(lengthMs, beats, direction, startPart, stopPart) {
 		this.animation.animateFigurePath(this.figure, 90 + this.angle, this.path,
-			this.pathLength * startPart, this.pathLength * stopPart, lengthMs, times, direction, this.easing);
+			this.pathLength * startPart, this.pathLength * stopPart, lengthMs, beats, direction, this.easing);
 	}
 
 	/**
 	 * Запуск анимации
 	 * @param  {Number} lengthS   Длительность в секундах
-	 * @param  {Number} times     Количество тактов
+	 * @param  {Number} beats     Количество тактов
 	 * @param  {String} direction Направление движения фигуры
 	 * @param  {Number} delay     Задержка в секундах
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	startAnimation(lengthS, times, direction, delay, startPart, stopPart) {
+	startAnimation(lengthS, beats, direction, delay, startPart, stopPart) {
 		startPart = (typeof startPart === 'undefined') ? 0 : startPart;
 		stopPart = (typeof stopPart === 'undefined') ? 1 : stopPart;
 
 		const startAnimationFunc = () => {
-			this.animationFunction(lengthS * 1000, times, direction, startPart, stopPart);
+			this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
 		}
 
 		if ((!delay) || (delay <= 0)) {
@@ -87,16 +87,16 @@ export class SingleDanceAnimationElement {
 	/**
 	 * [fullAnimation Полный цикл анимации]
 	 * @param  {Number} lengthS    	[длительность в секундах]
-	 * @param  {Number} times     	[количество тактов]
+	 * @param  {Number} beats     	[количество тактов]
 	 * @param  {String} manPosition   [начальная позиция партнёра]
 	 * @param  {String} direction 	[направление движения фигуры]
 	 * @param  {Number} delay     	[задержка в секундах]
 	 */
-	fullAnimation(lengthS, times, position, direction, delay, startPart, stopPart) {
+	fullAnimation(lengthS, beats, position, direction, delay, startPart, stopPart) {
 		const fullAnimationFunc = () => {
 			this.animation.clearPaths();
 			this.drawPath(position);
-			this.startAnimation(lengthS, times, direction, 0, startPart, stopPart);
+			this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
 		}
 
 		if ((!delay) || (delay <= 0)) {
@@ -158,30 +158,30 @@ export class DanceAnimationElement {
 	/**
 	 * Запуск анимации
 	 * @param  {Number} lengthS   Длительность в секундах
-	 * @param  {Number} times     Количество тактов
+	 * @param  {Number} beats     Количество тактов
 	 * @param  {String} direction Направление движения фигуры
 	 * @param  {Number} delay     Задержка в секундах
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	startAnimation(lengthS, times, direction, delay, startPart, stopPart) {
-		this.manDanceAnimationElement.startAnimation(lengthS, times, direction, delay, startPart, stopPart);
-		this.womanDanceAnimationElement.startAnimation(lengthS, times, direction, delay, startPart, stopPart);
+	startAnimation(lengthS, beats, direction, delay, startPart, stopPart) {
+		this.manDanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
+		this.womanDanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
 	}
 
 	/**
 	 * Полный цикл анимации
 	 * @param  {Number} lengthS    	Длительность в секундах
-	 * @param  {Number} times     	Количество тактов
+	 * @param  {Number} beats     	Количество тактов
 	 * @param  {String} manPosition Начальная позиция партнёра
 	 * @param  {String} direction 	Направление движения фигуры
 	 * @param  {Number} delay     	Задержка в секундах
 	 */
-	fullAnimation(lengthS, times, manPosition, direction, delay, startPart, stopPart) {
+	fullAnimation(lengthS, beats, manPosition, direction, delay, startPart, stopPart) {
 		const fullAnimationFunc = () => {
 			this.animation.clearPaths();
 			this.drawPath(manPosition);
-			this.startAnimation(lengthS, times, direction, 0, startPart, stopPart);
+			this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
 		};
 
 		if ((!delay) || (delay <= 0)) {
@@ -207,23 +207,23 @@ export class RotateElement extends SingleDanceAnimationElement {
 		this.rotateAngle = rotateAngle;
 	}
 
-	animationFunction(lengthMs, times) {
+	animationFunction(lengthMs, beats) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
-		this.animation.animateFigureTime(this.figure, lengthMs, times * 6);
+		this.animation.animateFigureTime(this.figure, lengthMs, beats * 6);
 	}
 
-	startAnimation(lengthS, times, startAngle, direction, delay, startPart, stopPart) {
-		startPart = (typeof startPart === 'undefined') ? 0 : startPart;
-		stopPart = (typeof stopPart === 'undefined') ? 1 : stopPart;
+	startAnimation(lengthS, beats, startAngle, direction, delay, startPart, stopPart) {
+		startPart = startPart || 0;
+		stopPart = stopPart || 1;
 
 		const startAnimationFunc = () => {
-			var angle = startAngle;
-			var startLen = this.pathLength * startPart;
-			var stopLen = this.pathLength * stopPart;
-			var angleSpeed = rotateAngle / (stopLen - startLen);
+			const angle = startAngle;
+			const startLen = this.pathLength * startPart;
+			const stopLen = this.pathLength * stopPart;
+			const angleSpeed = this.rotateAngle / (stopLen - startLen);
 
 			const transformAtLength = (length) => {
-				movePoint = this.path.getPointAtLength(length);
+				const movePoint = this.path.getPointAtLength(length);
 				this.animation.positionFigure(this.figure, movePoint.x, movePoint.y, angle - angleSpeed * (length - startLen));
 			}
 
@@ -236,7 +236,7 @@ export class RotateElement extends SingleDanceAnimationElement {
 					transformAtLength(value);
 				}, lengthS * 1000, mina.linear);
 
-			this.animation.animateFigureTime(this.figure, lengthS * 1000, times);
+			this.animation.animateFigureTime(this.figure, lengthS * 1000, beats);
 		}
 
 		if ((!delay) || (delay <= 0)) {
@@ -261,17 +261,17 @@ export class RotateDanceAnimationElement extends DanceAnimationElement {
 		this.womanDanceAnimationElement = new RotateElement(animation, pathStrings, 'woman', undefined, rotateAngle);
 	}
 
-	startAnimation(lengthS, times, startAngleMan, startAngleWoman, direction, delay, startPart, stopPart) {
-		this.manDanceAnimationElement.startAnimation(lengthS, times, startAngleMan, direction, delay, startPart, stopPart);
-		this.womanDanceAnimationElement.startAnimation(lengthS, times, startAngleWoman, direction, delay, startPart, stopPart);
+	startAnimation(lengthS, beats, startAngleMan, startAngleWoman, direction, delay, startPart, stopPart) {
+		this.manDanceAnimationElement.startAnimation(lengthS, beats, startAngleMan, direction, delay, startPart, stopPart);
+		this.womanDanceAnimationElement.startAnimation(lengthS, beats, startAngleWoman, direction, delay, startPart, stopPart);
 	}
 
-	fullAnimation(lengthS, times, startAngleMan, startAngleWoman, manPosition, direction, delay, startPart, stopPart) {
+	fullAnimation(lengthS, beats, startAngleMan, startAngleWoman, manPosition, direction, delay, startPart, stopPart) {
 
 		const fullAnimationFunc = () => {
 			this.animation.clearPaths();
 			this.drawPath(manPosition);
-			this.startAnimation(lengthS, times, startAngleMan, startAngleWoman, direction, 0, startPart, stopPart);
+			this.startAnimation(lengthS, beats, startAngleMan, startAngleWoman, direction, 0, startPart, stopPart);
 		};
 
 		if ((!delay) || (delay <= 0)) {

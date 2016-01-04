@@ -61,8 +61,8 @@
     "yargs": "^3.30.0"
   },
   "scripts": {
-    "build": "node -e \"require('grunt').tasks(['build']);\"",
-    "test": "node -e \"require('grunt').tasks(['test']);\"",
+    "build": "gulp",
+    "test": "gulp",
     "codestylefix": "jscs src/js --fix --config=fix.jscsrc"
   },
   "dependencies": {

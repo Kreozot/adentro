@@ -26,20 +26,20 @@ export default class ZambaAnimation extends GatoAnimation {
 		this.arresto2 = this.arresto;
 	}
 
-	vuelta(seconds, manPosition, times) {
-		var partSeconds = seconds / 2;
-		var partTimes = times / 2;
+	vuelta(seconds, manPosition, beats) {
+		const partSeconds = seconds / 2;
+		const partBeats = beats / 2;
 
 		this.clearPaths();
 		this.mediaVueltaElement.setAngle(-45);
 		this.mediaVueltaToArrestoElement.setAngle(-45);
 		this.mediaVueltaElement.drawPath(manPosition);
 		this.mediaVueltaToArrestoElement.drawPath((manPosition === 'left') ? 'right' : 'left');
-		this.mediaVueltaElement.startAnimation(partSeconds, partTimes);
-		this.mediaVueltaToArrestoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds);
+		this.mediaVueltaElement.startAnimation(partSeconds, partBeats);
+		this.mediaVueltaToArrestoElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds);
 	}
 
-	zapateoZarandeo(seconds, manPosition, times) {
+	zapateoZarandeo(seconds, manPosition, beats) {
 		this.clearPaths();
 		this.zarandeoElement.drawPath(getOppositePosition(manPosition));
 		var partSeconds = seconds * 2 / 7;
@@ -49,43 +49,43 @@ export default class ZambaAnimation extends GatoAnimation {
 		this.zarandeoElement.startAnimation(partSeconds, 2, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
 
 		this.zapateoElement.drawPath(manPosition);
-		this.zapateoElement.startAnimation(seconds, times);
+		this.zapateoElement.startAnimation(seconds, beats);
 	}
 
-	mediaVuelta(seconds, manPosition, times) {
+	mediaVuelta(seconds, manPosition, beats) {
 		this.mediaVueltaToArrestoElement.setAngle(-45);
-		this.mediaVueltaToArrestoElement.fullAnimation(seconds, times, manPosition);
+		this.mediaVueltaToArrestoElement.fullAnimation(seconds, beats, manPosition);
 	}
 
-	arresto(seconds, manPosition, times) {
-		var partSeconds = seconds / 2;
-		var partTimes = times / 2;
+	arresto(seconds, manPosition, beats) {
+		const partSeconds = seconds / 2;
+		const partBeats = beats / 2;
 
 		this.clearPaths();
 		this.arrestoElement.setAngle(45);
 		this.arrestoBackElement.setAngle(-45);
 		this.arrestoElement.drawPath(manPosition);
 		this.arrestoBackElement.drawPath(manPosition);
-		this.arrestoElement.startAnimation(partSeconds, partTimes);
-		this.arrestoBackElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds);
+		this.arrestoElement.startAnimation(partSeconds, partBeats);
+		this.arrestoBackElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds);
 	}
 
-	arrestoDoble(seconds, manPosition, times) {
-		var partSeconds = seconds / 4;
-		var partTimes = times / 4;
+	arrestoDoble(seconds, manPosition, beats) {
+		const partSeconds = seconds / 4;
+		const partBeats = beats / 4;
 
 		this.clearPaths();
 		this.arrestoElement.setAngle(45);
 		this.arrestoBackElement.setAngle(-45);
 		this.arrestoElement.drawPath(manPosition);
 		this.arrestoBackElement.drawPath(manPosition);
-		this.arrestoElement.startAnimation(partSeconds, partTimes);
-		this.arrestoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_BACKWARD, partSeconds, 1, 0);
-		this.arrestoElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 2);
-		this.arrestoBackElement.startAnimation(partSeconds, partTimes, this.DIRECTION_FORWARD, partSeconds * 3);
+		this.arrestoElement.startAnimation(partSeconds, partBeats);
+		this.arrestoElement.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 1, 0);
+		this.arrestoElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 2);
+		this.arrestoBackElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 3);
 	}
 
-	mediaVueltaCoronacion(seconds, manPosition, times) {
-		this.mediaVueltaCoronacionElement.fullAnimation(seconds, times, manPosition);
+	mediaVueltaCoronacion(seconds, manPosition, beats) {
+		this.mediaVueltaCoronacionElement.fullAnimation(seconds, beats, manPosition);
 	}
 }

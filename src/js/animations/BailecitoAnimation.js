@@ -5,15 +5,15 @@ class BailecitoAvanceRetrocesoElement extends DanceAnimationElement {
 	constructor(animation, pathStrings) {
 		super(animation, pathStrings);
 
-		this.manDanceAnimationElement.animationFunction = function (lengthMs, times, direction, startPart, stopPart) {
+		this.manDanceAnimationElement.animationFunction = function (lengthMs, beats, direction, startPart, stopPart) {
 			this.animation.animateFigurePath(this.figure, -90, this.path,
 				this.pathLength * startPart, this.pathLength * stopPart,
-				lengthMs, times, this.animation.DIRECTION_STRAIGHT_FORWARD);
+				lengthMs, beats, this.animation.DIRECTION_STRAIGHT_FORWARD);
 		};
-		this.womanDanceAnimationElement.animationFunction = function (lengthMs, times, direction, startPart, stopPart) {
+		this.womanDanceAnimationElement.animationFunction = function (lengthMs, beats, direction, startPart, stopPart) {
 			this.animation.animateFigurePath(this.figure, 90, this.path,
 				this.pathLength * startPart, this.pathLength * stopPart,
-				lengthMs, times, this.animation.DIRECTION_STRAIGHT_FORWARD);
+				lengthMs, beats, this.animation.DIRECTION_STRAIGHT_FORWARD);
 		};
 	}
 }
@@ -30,19 +30,19 @@ export default class BailecitoAnimation extends GatoAnimation {
 			right: 'm 40,160 c 0,0 0,40 40,40 40,0 220,0 220,0 l 260,0'});
 	}
 
-	avance1(seconds, manPosition, times) {
-		this.avanceRetrocesoElement1.fullAnimation(seconds, times, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 0, 1);
+	avance1(seconds, manPosition, beats) {
+		this.avanceRetrocesoElement1.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 0, 1);
 	}
 
-	retroceso2(seconds, manPosition, times) {
-		this.avanceRetrocesoElement1.fullAnimation(seconds, times, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 1, 0);
+	retroceso2(seconds, manPosition, beats) {
+		this.avanceRetrocesoElement1.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 1, 0);
 	}
 
-	retroceso1(seconds, manPosition, times) {
-		this.avanceRetrocesoElement2.fullAnimation(seconds, times, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 0, 1);
+	retroceso1(seconds, manPosition, beats) {
+		this.avanceRetrocesoElement2.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 0, 1);
 	}
 
-	avance2(seconds, manPosition, times) {
-		this.avanceRetrocesoElement2.fullAnimation(seconds, times, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 1, 0);
+	avance2(seconds, manPosition, beats) {
+		this.avanceRetrocesoElement2.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 1, 0);
 	}
 }

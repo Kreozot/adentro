@@ -4,11 +4,10 @@
  * @param {Number}   delay    Задержка в мс
  */
 export function Timer(callback, delay) {
-	var remaining = delay;
-	if (!remaining) {
-		remaining = 0;
-	};
-	var paused = true, timerId, start;
+	var remaining = delay || 0;
+	var paused = true;
+	var timerId;
+	var start;
 
 	this.pause = function () {
 		window.clearTimeout(timerId);

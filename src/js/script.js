@@ -96,9 +96,9 @@ class Adentro {
 		var domElement = $('#' + element, svgSchemaDom);
 		var visualizationFuncName = domElement.data('visualization');
 		var manPosition = domElement.data('manposition');
-		var times = domElement.data('times');
+		var beats = domElement.data('times');
 		if (visualizationFuncName) {
-			$.animation[visualizationFuncName](seconds, manPosition, times);
+			$.animation[visualizationFuncName](seconds, manPosition, beats);
 		}
 	}
 

@@ -30,13 +30,13 @@ export default class HuellaAnimation extends GatoAnimation {
 		});
 	}
 
-	giroMano(seconds, manPosition, times) {
+	giroMano(seconds, manPosition, beats) {
 	}
 
-	contraGiroMano(seconds, manPosition, times) {
+	contraGiroMano(seconds, manPosition, beats) {
 	}
 
-	mediaContraVuelta(seconds, manPosition, times) {
+	mediaContraVuelta(seconds, manPosition, beats) {
 	}
 
 }
