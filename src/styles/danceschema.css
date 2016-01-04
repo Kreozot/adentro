@@ -9,10 +9,10 @@ div.center {
 	margin-right: auto;
 	text-align: center;
 }
-
+/*
 ul#css3menu1 {
 	display: table-cell;
-}
+}*/
 
 div#logo {
 	display: table-cell;
@@ -50,14 +50,14 @@ div#animationLinks {
 	text-align: center;
 	display: block;
 	margin-left: auto;
-	margin-right: auto;	
+	margin-right: auto;
 }
 
-div#musicLinks {	
+div#musicLinks {
 	margin-top: 5px;
 }
 
-div#musicLinks select {	
+div#musicLinks select {
 	width: 300px;
 	text-align: center;
 }
@@ -74,7 +74,7 @@ div.title {
 	text-align: center;
 }
 
-div.title h1 {	
+div.title h1 {
 	font-size: 24px;
 }
 
@@ -102,7 +102,7 @@ div#content {
 a.content_link {
 	color: #111111;
 	font-size: 13px;
-	font-family: Verdana, Arial, Helvetica, sans-serif;	
+	font-family: Verdana, Arial, Helvetica, sans-serif;
 	text-decoration: none;
 	background-color: #eeeeee;
 	border: 1px solid #aaaaaa;

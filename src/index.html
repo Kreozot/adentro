@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html xmlns:svg="http://www.w3.org/2000/svg">
 	<head>
 		<meta charset="utf-8"/>
@@ -13,52 +12,10 @@
 		<!--<![endif]-->
 	</head>
 	<body>
-
 		<!--[if gt IE 8]><!-->
 		<div class="center" id="navigation">
 			<div id="logo"></div>
-			<ul id="css3menu1">
-				<li>
-					<a><span>Chacarera</span></a>
-					<ul>
-						<li>
-							<a href="javascript:showSchema('chacarera')"><span>Chacarera simple</span></a>
-							<ul>
-								<li><a href="javascript:showSchema('chacarera_6')">Chacarera simple on 6</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="javascript:showSchema('chacarera_doble')"><span>Chacarera doble</span></a>
-							<ul>
-								<li><a href="javascript:showSchema('Chacarera_doble_6')">Chacarera doble on 6</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:showSchema('zamba')"><span>Zamba</span></a>
-					<ul>
-						<li><a href="javascript:showSchema('zamba_alegre')">Zamba Alegre</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:showSchema('gato')"><span>Gato</span></a>
-					<ul>
-						<li><a href="javascript:showSchema('gato_cuyano')">Gato Cuyano</a></li>
-					</ul>
-				</li>
-				<li><a href="javascript:showSchema('caramba')">Caramba</a></li>
-				<li><a href="javascript:showSchema('bailecito')">Bailecito</a></li>
-				<li><a href="javascript:showSchema('escondido')">Escondido</a></li>
-				<li>
-					<a href="javascript:showSchema('remedio')"><span>Remedio</span></a>
-					<ul>
-						<li><a href="javascript:showSchema('remedio_atamisqueno')">Remedio Atamisqueno</a></li>
-					</ul>
-				</li>
-				<li><a href="javascript:showSchema('huayra_muyoj')">Huayra Muyoj</a></li>
-				<li><a href="javascript:showSchema('huella')">Huella</a></li>
-			</ul>
+			<include src="html/menu.html"></include>
 			<div id="lang">
 			</div>
 		</div>
@@ -68,43 +25,7 @@
 		</div>
 
 		<div class="center">
-			<div id="jplayer" class="jp-jplayer"></div>
-			<div id="jp_container_1" class="jp-audio">
-				<div class="jp-type-single">
-					<div class="jp-gui jp-interface">
-						<ul class="jp-controls">
-							<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
-							<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
-							<li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
-							<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
-							<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
-							<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
-						</ul>
-						<div class="jp-progress">
-							<div class="jp-seek-bar">
-								<div class="jp-play-bar"></div>
-								<div class="jp-details">
-									<ul>
-										<li><span class="jp-title"></span></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="jp-volume-bar">
-							<div class="jp-volume-bar-value"></div>
-						</div>
-						<div class="jp-time-holder">
-							<div class="jp-current-time"></div>
-							<div class="jp-duration"></div>
-						</div>
-					</div>
-					<div class="jp-no-solution">
-						<span>Update Required</span>
-						To play the media you will need to either update your browser to a recent version or update your
-						<a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
-					</div>
-				</div>
-			</div>
+			<include src="html/player.html"></include>
 			<div class="center" id="musicLinks"></div>
 		</div>
 
@@ -114,43 +35,27 @@
 		<div class="center" id="content"></div>
 
 		<script src="vendor.main.js"></script>
-		<!-- <script src="vendor.media.js"></script> -->
 		<script src="main.ru.js"></script>
 		<script type="text/javascript">
 			$(window).load(function () {
-				// i18n.init({
-				// 	detectLngQS: "lang",
-				// 	cookieName: "lang",
-				// 	debug: true,
-				// 	fallbackLng: "ru"
-				// }, function() {
-					// var adentro = new Adentro();
+				window.addEventListener("popstate", function (e) {
+				    adentro.navigation.loadSchemaByState();
+				});
 
-					window.addEventListener("popstate", function (e) {
-					    adentro.navigation.loadSchemaByState();
-					});
-
-					if (!adentro.navigation.loadSchemaByUrl()) {
-						adentro.navigation.showSchema("chacarera");
-					}
-
-					// showLanguageLinks();
-				// });
+				if (!adentro.navigation.loadSchemaByUrl()) {
+					adentro.navigation.showSchema("chacarera");
+				}
 			});
 		</script>
 
 		<div class="footer center">
-			<div class="social">
-				<a class="facebook" href="http://www.facebook.com/adentro.ru" title="Facebook" target="blank"></a>
-				<a class="twitter" href="http://twitter.com/adentro_ru" title="Twitter" target="blank"></a>
-				<a class="gitlab" href="https://gitlab.com/Kreozot/adentro" title="Gitlab (sources)" target="blank"></a>
-			</div>
+			<include src="html/social.html"></include>
 			<div class="footerinfo">
-			<!-- build:template
-				Adentro <%= version %>.
-			/build -->
-			Created by Sergey Sharov.
+				Adentro <span class="version"></span>. Created by Sergey Sharov.
 			</div>
+			<script>
+				$('.version').text($('.version').data('version'));
+			</script>
 		</div>
 		<!--<![endif]-->
 	</body>
