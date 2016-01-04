@@ -85,8 +85,8 @@ export class VueltaElement extends DanceAnimationElement {
 	}
 
 	startAnimation(lengthS, times, direction, delay, startPart, stopPart, full) {
-		startPart = (typeof startPart === 'undefined') ? 0 : startPart;
-		stopPart = (typeof stopPart === 'undefined') ? 1 : stopPart;
+		startPart = startPart || 0;
+		stopPart = stopPart || 1;
 
 		const startAnimationFunc = () => {
 			this.animationFunction(lengthS * 1000, times, direction, startPart, stopPart);

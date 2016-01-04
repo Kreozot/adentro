@@ -101,13 +101,13 @@ export default class DanceAnimation {
 	 * @return {Object}            Path-объект иконки
 	 */
 	initRotateIcon(x, y, angle, clockwise) {
-		if (clockwise) {
-			var arrows = this.svg.path('m -15.9,-19.4 c 0.4,1.6 -2.4,2.7 -3.2,4.3 -7.8,9.5 -6.7,24.8 2.6,33 2.5,2.3 5.5,4 8.7,5.2 0.5,-1.9 1.9,-4.2 -0.9,-4.5 C -18.8,14.2 -23.5,1 -18.4,-8.9 c 1.1,-2.4 2.8,-4.5 4.7,-6.3 1.3,1.6 3,7.9 4,6.4 1.4,-4.2 2.7,-8.3 4,-12.5 -4.3,-1.1 -8.6,-2.3 -13,-3.4 0.9,1.8 1.8,3.6 2.7,5.3 z m 22.7,0 C 17.4,-16 23.4,-3.1 19.2,7.2 18.1,10.3 16.2,12.9 13.9,15.2 12.5,13.6 10.9,7.3 9.8,8.8 8.4,13 7,17.1 5.7,21.3 c 4.3,1.1 8.6,2.3 13,3.4 -0.4,-2.3 -4.4,-5.3 -1.9,-7 9.4,-8.5 10.2,-24.4 1.5,-33.8 -2.8,-3.2 -6.5,-5.6 -10.5,-6.9 -0.4,1.2 -0.7,2.5 -1,3.7 z');
-		} else {
-			var arrows = this.svg.path('m -15.9,19.4 c 0.4,-1.6 -2.4,-2.7 -3.2,-4.3 -7.8,-9.5 -6.7,-24.8 2.6,-33 2.5,-2.3 5.5,-4 8.7,-5.2 0.5,1.9 1.9,4.2 -0.9,4.5 -10.2,4.4 -14.9,17.6 -9.8,27.5 1.1,2.4 2.8,4.5 4.7,6.3 1.3,-1.6 3,-7.9 4,-6.4 1.4,4.2 2.7,8.3 4,12.5 -4.3,1.1 -8.6,2.3 -13,3.4 0.9,-1.8 1.8,-3.6 2.7,-5.3 z M 6.8,19.4 C 17.4,16 23.4,3.1 19.2,-7.2 c -1.1,-3 -3,-5.7 -5.4,-8 -1.3,1.6 -3,7.9 -4,6.4 -1.4,-4.2 -2.7,-8.3 -4,-12.5 4.3,-1.1 8.6,-2.3 13,-3.4 -0.4,2.3 -4.4,5.3 -1.9,7 9.4,8.5 10.2,24.4 1.5,33.8 -2.8,3.2 -6.5,5.6 -10.5,6.9 -0.4,-1.2 -0.7,-2.5 -1,-3.7 z');
-		}
+		var arrows = this.svg.path(clockwise
+			? 'm -15.9,-19.4 c 0.4,1.6 -2.4,2.7 -3.2,4.3 -7.8,9.5 -6.7,24.8 2.6,33 2.5,2.3 5.5,4 8.7,5.2 0.5,-1.9 1.9,-4.2 -0.9,-4.5 C -18.8,14.2 -23.5,1 -18.4,-8.9 c 1.1,-2.4 2.8,-4.5 4.7,-6.3 1.3,1.6 3,7.9 4,6.4 1.4,-4.2 2.7,-8.3 4,-12.5 -4.3,-1.1 -8.6,-2.3 -13,-3.4 0.9,1.8 1.8,3.6 2.7,5.3 z m 22.7,0 C 17.4,-16 23.4,-3.1 19.2,7.2 18.1,10.3 16.2,12.9 13.9,15.2 12.5,13.6 10.9,7.3 9.8,8.8 8.4,13 7,17.1 5.7,21.3 c 4.3,1.1 8.6,2.3 13,3.4 -0.4,-2.3 -4.4,-5.3 -1.9,-7 9.4,-8.5 10.2,-24.4 1.5,-33.8 -2.8,-3.2 -6.5,-5.6 -10.5,-6.9 -0.4,1.2 -0.7,2.5 -1,3.7 z'
+			: 'm -15.9,19.4 c 0.4,-1.6 -2.4,-2.7 -3.2,-4.3 -7.8,-9.5 -6.7,-24.8 2.6,-33 2.5,-2.3 5.5,-4 8.7,-5.2 0.5,1.9 1.9,4.2 -0.9,4.5 -10.2,4.4 -14.9,17.6 -9.8,27.5 1.1,2.4 2.8,4.5 4.7,6.3 1.3,-1.6 3,-7.9 4,-6.4 1.4,4.2 2.7,8.3 4,12.5 -4.3,1.1 -8.6,2.3 -13,3.4 0.9,-1.8 1.8,-3.6 2.7,-5.3 z M 6.8,19.4 C 17.4,16 23.4,3.1 19.2,-7.2 c -1.1,-3 -3,-5.7 -5.4,-8 -1.3,1.6 -3,7.9 -4,6.4 -1.4,-4.2 -2.7,-8.3 -4,-12.5 4.3,-1.1 8.6,-2.3 13,-3.4 -0.4,2.3 -4.4,5.3 -1.9,7 9.4,8.5 10.2,24.4 1.5,33.8 -2.8,3.2 -6.5,5.6 -10.5,6.9 -0.4,-1.2 -0.7,-2.5 -1,-3.7 z');
 		arrows.addClass('rotationArrows')
-				.transform('t' + Math.floor(x) + ',' + Math.floor(y) + 'r' + Math.floor(angle));
+				.transform(`t${x},${y}r${angle}`);
+				// .transform('t' + Math.floor(x) + ',' + Math.floor(y) + 'r' + Math.floor(angle));
+				// TODO: Сравнить производительность
 		this.paths[this.paths.length] = arrows;
 		return arrows;
 	}
@@ -157,7 +157,9 @@ export default class DanceAnimation {
 	 * @param  {Number} angle  Угол поворота (при 0 фигура стоит вертикально)
 	 */
 	positionFigure(figure, x, y, angle) {
-		figure.transform('t' + Math.floor(x - 20) + ',' + Math.floor(y - 20) + 'r' + Math.floor(angle));
+		figure.transform(`t${x - 20},${y - 20}r${angle}`);
+		// figure.transform('t' + Math.floor(x - 20) + ',' + Math.floor(y - 20) + 'r' + Math.floor(angle));
+		// TODO: Сравнить проивзодительность
 	}
 
 	/**
@@ -172,13 +174,11 @@ export default class DanceAnimation {
 	 * @param  {Number} direction  Константа, определяющая направление движения
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
-	animateFigurePath(figure, startAngle, path, startLen, stopLen, timeLength, times, direction, easing) {
+	animateFigurePath(figure, startAngle, path, startLen, stopLen, timeLength, times, direction = this.DIRECTION_FORWARD, easing = mina.linear) {
 		let angle = startAngle;
 		if ((direction === this.DIRECTION_BACKWARD) || (direction === this.DIRECTION_FROM_END_TO_START)) {
 			angle = -angle;
 		}
-
-		easing = (typeof easing === 'undefined') ? mina.linear : easing;
 
 		const pathLength = path.getTotalLength();
 
@@ -212,8 +212,7 @@ export default class DanceAnimation {
 	/**
 	 * Анимация мужской фигуры по траектории
 	 */
-	animateMan(path, startLen, stopLen, timeLength, times, direction, startAngle) {
-		startAngle = startAngle || 90;
+	animateMan(path, startLen, stopLen, timeLength, times, direction, startAngle = 90) {
 		this.animateFigurePath(this.man, startAngle, path, startLen, stopLen, timeLength, times, direction);
 	}
 
@@ -221,8 +220,7 @@ export default class DanceAnimation {
 	 * Анимация женской фигуры по траектории
 	 * @return {Function}    Функция инициализации анимации
 	 */
-	animateWoman(path, startLen, stopLen, timeLength, times, direction, startAngle) {
-		startAngle = startAngle || 90;
+	animateWoman(path, startLen, stopLen, timeLength, times, direction, startAngle = 90) {
 		this.animateFigurePath(this.woman, startAngle, path, startLen, stopLen, timeLength, times, direction);
 	}
 
