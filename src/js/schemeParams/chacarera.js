@@ -10,8 +10,9 @@ module.exports = {
 			id: 'onFour',
 			animClass: require('animationClasses/Chacarera4Animation').default,
 			title: localize({ru: 'На четверых', en: 'On four people'})
-		}/*,
-				{id: 'cadena', animClass: require('animationClasses/ChacareraCadenaAnimation').default, title: 'Cadena'}*/
+		}
+		/*,
+						{id: 'cadena', animClass: require('animationClasses/ChacareraCadenaAnimation').default, title: 'Cadena'}*/
 	],
 	info: require('infoData/chacarera.inc'),
 	zapateo: true

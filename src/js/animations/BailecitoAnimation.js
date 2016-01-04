@@ -2,8 +2,8 @@ import GatoAnimation from './GatoAnimation.js';
 import {DanceAnimationElement} from './commons/elements.js';
 
 class BailecitoAvanceRetrocesoElement extends DanceAnimationElement {
-	constructor() {
-		super();
+	constructor(animation, pathStrings) {
+		super(animation, pathStrings);
 
 		this.manDanceAnimationElement.animationFunction = function (lengthMs, times, direction, startPart, stopPart) {
 			this.animation.animateFigurePath(this.figure, -90, this.path,
@@ -19,7 +19,7 @@ class BailecitoAvanceRetrocesoElement extends DanceAnimationElement {
 }
 
 export default class BailecitoAnimation extends GatoAnimation {
-	constructor() {
+	constructor(id) {
 		super(id);
 
 		this.avanceRetrocesoElement1 = new BailecitoAvanceRetrocesoElement(this,
