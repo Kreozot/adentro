@@ -12,6 +12,20 @@ export default class Navigation {
 		this.main = main;
 	}
 
+	updateMenu(currentSchemeId) {
+		var navigation = this;
+		$('.menu-item')
+			.removeClass('menu-item--current')
+			.off('click')
+			.on('click', function (element) {
+				var schemeId = $(this).data('scheme');
+				navigation.showSchema(schemeId);
+			});
+		$('.menu-item[data-scheme=' + currentSchemeId + ']')
+			.addClass('menu-item--current')
+			.off('click');
+	}
+
 	/**
 	 * Загрузить схему
 	 * @param  {String} name         Идентификатор схемы
@@ -26,6 +40,8 @@ export default class Navigation {
 		schemaParams(scheme => {
 			this.main.loadSchema(scheme, musicId, animationId);
 		});
+
+		this.updateMenu(name);
 		this.main.showLanguageLinks();
 	}
 

@@ -8,7 +8,10 @@ var del = require('promised-del');
 var argv = require('yargs').argv;
 
 gulp.task('clean-js', function() {
-    return del([paths.dist.js] + '/**/*.js');
+    return del([
+        paths.dist.js + '/**/*.js',
+        paths.dist.js + '/**/*.js.map'
+    ]);
 });
 
 gulp.task('build-js', ['clean-js', 'renderSvg'], function (callback) {

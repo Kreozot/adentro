@@ -117,6 +117,16 @@ a.content_link.active {
 	background-color: #dddddd;
 }
 
+.menu-item {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.menu-item--current {
+	cursor: default;
+	text-decoration: none;
+}
+
 .footer {
 	font-size: 11px;
 	color: #222222;

@@ -243,6 +243,7 @@ class Adentro {
 	 */
 	loadSchema (schemaParams, musicId, animationId) {
 		// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
+
 		$('#danceName').html(schemaParams.name);
 		$('#schemaDiv').html(schemaParams.svgName);
 
@@ -328,5 +329,4 @@ class Adentro {
 
 global.adentro = new Adentro();
 global.playElement = element => adentro.player.playElement(element);
-global.showSchema = schemaId => adentro.navigation.showSchema(schemaId);
 export default Adentro;

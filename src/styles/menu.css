@@ -51,7 +51,8 @@ ul#css3menu1 a {
 	display: block;
 	vertical-align: middle;
 	text-align: left;
-	font: 14px Open Sans, Arial, sans-serif;
+	font-family: Open Sans, Arial, sans-serif;
+	font-size: 14px;
 	color: #000000;
 	padding: 10px;
 	background-color: #bbb;
@@ -67,7 +68,8 @@ ul#css3menu1 ul a {
 	padding: 10px;
 	background-color: #ccc;
 	border-width: 0;
-	font: 14px Open Sans, Arial, sans-serif;
+	font-family: Open Sans, Arial, sans-serif;
+	font-size: 14px;
 	color: #000;
 }
 ul#css3menu1 li a:hover, ul#css3menu1 li a.pressed {

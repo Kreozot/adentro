@@ -54,7 +54,11 @@ var webpackConfig = languages.map(function (lang) {
 		postcss: function () {
 			return [autoprefixer, cssnext, precss];
 		},
-		plugins: [],
+		plugins: [
+			new webpack.optimize.CommonsChunkPlugin({
+				children: true
+			})
+		],
 		callbackLoader: {
 			requireSchemes: function () {
 

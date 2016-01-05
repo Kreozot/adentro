@@ -32,5 +32,5 @@ gulp.task('process-html', ['clean-html'], function () {
 });
 
 gulp.task('watch-html', ['connect', 'process-html'], function () {
-    return gulp.watch(paths.src.html + '/*.html', ['process-html']);
+    return gulp.watch([paths.src.html + '/*.html', paths.src.html + '/html/*.html'], ['process-html']);
 });
