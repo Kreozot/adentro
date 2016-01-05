@@ -35,8 +35,9 @@ class Adentro {
 		if (!svgSchemaDom) {
 			svgSchemaDom = getSvgSchemaDom();
 		}
-		$('rect', svgSchemaDom).removeClass('current');
-		$('text', svgSchemaDom).removeClass('current');
+		Snap.selectAll('text.current, rect.current').forEach(function (elem) {
+			elem.removeClass('current');
+		});
 	}
 
 	/**
@@ -58,18 +59,22 @@ class Adentro {
 		if (!svgSchemaDom) {
 			svgSchemaDom = getSvgSchemaDom();
 		}
-		if (element[0] == '#') {
+		if (element[0] === '#') {
 			//Пропускаем обработку служебных меток
 			return;
 		}
 		// Показываем рамку вокруг текущего блока
-		var frameId = element + '-frame';
-		$('rect:not(#' + frameId + ')', svgSchemaDom).removeClass('current');
-		$('#' + frameId, svgSchemaDom).addClass('current');
+		const frameId = element + '-frame';
+		Snap.selectAll('rect.current:not(#' + frameId + ')').forEach(function (elem) {
+			elem.removeClass('current');
+		})
+		Snap('#' + frameId).addClass('current');
 		// Выделяем название текущего элемента
-		var textId = element + '-text';
-		$('text:not(#' + textId + ')', svgSchemaDom).removeClass('current');
-		$('#' + textId, svgSchemaDom).addClass('current');
+		const textId = element + '-text';
+		Snap.selectAll('text.current:not(#' + textId + ')').forEach(function (elem) {
+			elem.removeClass('current');
+		})
+		Snap('#' + textId).addClass('current');
 	}
 
 	/**
@@ -82,22 +87,22 @@ class Adentro {
 		if (!svgSchemaDom) {
 			svgSchemaDom = getSvgSchemaDom();
 		}
-		if (element.split('_')[0] == '#start') {
+		if (element.split('_')[0] === '#start') {
 			// Начальное расположение
 			$.animation.setAtStart();
 			this.hideCurrentElementMarkOnSchema();
 			return;
-		} else if (element[0] == '#') {
+		} else if (element[0] === '#') {
 			//Пропускаем обработку служебных меток
 			return;
 		}
 
 		this.markCurrentElementOnSchema(element, svgSchemaDom);
 		// Запускаем соответствующую анимацию
-		var domElement = $('#' + element, svgSchemaDom);
-		var visualizationFuncName = domElement.data('visualization');
-		var manPosition = domElement.data('manposition');
-		var beats = domElement.data('times');
+		const domElement = $('#' + element, svgSchemaDom);
+		const visualizationFuncName = domElement.data('visualization');
+		const manPosition = domElement.data('manposition');
+		const beats = domElement.data('times');
 		if (visualizationFuncName) {
 			$.animation[visualizationFuncName](seconds, manPosition, beats);
 		}
@@ -173,7 +178,7 @@ class Adentro {
 			return;
 		}
 
-		var getMusicLinks = function () {
+		const getMusicLinks = function () {
 			var result = localize({ru: 'Композиция', en: 'Composition'}) + ': <select id="musicSelect">';
 			var count = 0;
 			musicData.forEach(musicDataEntry => {
@@ -264,7 +269,7 @@ class Adentro {
 		if (typeof animationClass === 'object') {
 			animationId = animationId ? animationId : animationClass[0].id;
 			animationLoader.showAnimationLinks(animationClass, animationId);
-			var currentClassDef = animationLoader.getAnimationClassDef(animationClass, animationId);
+			let currentClassDef = animationLoader.getAnimationClassDef(animationClass, animationId);
 			animationClass = currentClassDef.animClass;
 		}
 		animationLoader.loadAnimation(animationClass);
@@ -300,10 +305,10 @@ class Adentro {
 
 		console.log('editor mode on');
 		$('#animationDiv').html('');
-		var initTiming = $(playerSelector).data('schema');
-		var timingGenerator = new TimingGenerator(initTiming);
+		const initTiming = $(playerSelector).data('schema');
+		const timingGenerator = new TimingGenerator(initTiming);
 
-		var timeupdateEvent = event => {
+		const timeupdateEvent = event => {
 			// Если остановлено
 			if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
 				this.hideCurrentElementMarkOnSchema();
@@ -315,9 +320,9 @@ class Adentro {
 
 		$('html').keypress(event => {
 			if (event.which == 32) { //space
-				var currentTime = $(playerSelector).data('jPlayer').status.currentTime;
+				const currentTime = $(playerSelector).data('jPlayer').status.currentTime;
 				if (!timingGenerator.addBeat(currentTime)) {
-					var newTiming = timingGenerator.getTiming();
+					const newTiming = timingGenerator.getTiming();
 					$('#content').html('<pre>' + JSON.stringify(newTiming, '', 4) + '</pre>');
 				}
 			}
