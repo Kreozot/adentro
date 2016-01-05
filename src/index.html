@@ -34,8 +34,8 @@
 		<div class="content_menu" id="content_menu"></div>
 		<div class="center" id="content"></div>
 
-		<script src="vendor.main.js"></script>
-		<script src="main.ru.js"></script>
+		<script src="vendor.js"></script>
+		<script src="main.js"></script>
 		<script type="text/javascript">
 			$(window).load(function () {
 				window.addEventListener("popstate", function (e) {
@@ -45,6 +45,8 @@
 				if (!adentro.navigation.loadSchemaByUrl()) {
 					adentro.navigation.showSchema("chacarera");
 				}
+
+				tour.startFirstTime();
 			});
 		</script>
 

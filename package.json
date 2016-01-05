@@ -69,6 +69,7 @@
     "codestylefix": "jscs src/js --fix --config=fix.jscsrc"
   },
   "dependencies": {
+    "cookie_js": "^1.0.0",
     "hopscotch": "^0.2.5",
     "jplayer": "^2.9.2",
     "jquery": "^2.1.4",

@@ -99,10 +99,6 @@ export default class Navigation {
 		return '?schema=' + schema +
 			(animation ? ('&animation=' + animation) : '') +
 			(music ? ('&music=' + music) : '');
-		//TODO: Настройка алиасов URL. Тогда можно будет сделать нормальный relative path
-		// return schema +
-		// 	(animation ? ("/" + animation) : "") +
-		// 	(music ? ("?music=" + music) : "");
 	}
 
 	/**
@@ -115,10 +111,9 @@ export default class Navigation {
 		var params = url.query(true);
 		var context = {};
 		context.schema = params.schema;
+		context.lang = params.lang || 'ru';
+		this.main.lang = context.lang;
 		context.animation = params.animation;
-		//TODO: Настройка алиасов URL. Тогда можно будет сделать нормальный relative path
-		// context.schema = segments[0];
-		// context.animation = segments[1];
 		context.music = params.music;
 		context.editor = params.editor;
 		return context;

@@ -10,10 +10,8 @@ var schemesList = require('./schemesList.js');
 
 var languages = ['en', 'ru'];
 
-//TODO: use sizzle or another $-lib instead f jquery in main.js
-
-var webpackConfig = languages.map(function (lang) {
-	return {
+var webpackConfig = [
+	{
 		resolve: {
 			root: config.paths.root,
 			alias: {
@@ -28,12 +26,10 @@ var webpackConfig = languages.map(function (lang) {
 		entry: {
 			// Главный модуль для интерфейса и навигации
 			main: paths.src.js + '/main.js',
-			// Музыка и анимация
-			media: paths.src.js + '/media.js',
 		},
 		output: {
 			path:  paths.dist.js,
-			filename: '[name].' + lang + '.js'
+			filename: '[name].js'
 		},
 		devtool: 'source-map',
 		module: {
@@ -61,7 +57,6 @@ var webpackConfig = languages.map(function (lang) {
 		],
 		callbackLoader: {
 			requireSchemes: function () {
-
 				return '{' + schemesList.map(function (id) {
 					return id + ': function (callback) {' +
 						'require.ensure([\'schemeParams/' + id + '.js\'], function (require) {' +
@@ -69,13 +64,10 @@ var webpackConfig = languages.map(function (lang) {
 						'});' +
 					'}';
 				}).join(',\n') + '}';
-			},
-			localize: function (textObj) {
-				return '"' + textObj[lang] + '"';
 			}
 		}
-	};
-});
+	}
+];
 
 webpackConfig.push({
 	module: {
@@ -129,11 +121,8 @@ webpackConfig.push({
 	},
 	entry: {
 		// Сторонние библиотеки
-		'vendor.main': [
+		'vendor': [
 			'expose?$!expose?jQuery!jquery/dist/jquery.js',
-			'hopscotch',
-		// ],
-		// 'vendor.media': [
 			'jplayer/dist/jplayer/jquery.jplayer.js',
 			'jplayer/dist/jplayer/jquery.jplayer.swf',
 			'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
