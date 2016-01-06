@@ -4,6 +4,7 @@ module.exports = {
 	paths: {
 		root: path.resolve('.'),
 		src: {
+			tests: path.resolve('./test'),
 			html: path.resolve('./src'),
 			js: path.resolve('./src/js'),
 			svg: path.resolve('./src/svg'),

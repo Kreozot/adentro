@@ -33,10 +33,7 @@ export default class Navigation {
 	 * @param  {String} musicId      Идентификатор композиции
 	 */
 	loadSchemaByName(name, animationId, musicId) {
-		var schemaParams = schemes[name];
-		if (!schemaParams) {
-			schemaParams = schemes['chacarera'];
-		}
+		var schemaParams = schemes[name] || schemes.chacarera;
 		schemaParams(scheme => {
 			this.main.loadSchema(scheme, musicId, animationId);
 		});
@@ -51,10 +48,7 @@ export default class Navigation {
 	 * @param  {String} musicId  Идентификатор композиции
 	 */
 	loadSchemaEditorByName(name, musicId) {
-		var schemaParams = schemes[name];
-		if (!schemaParams) {
-			schemaParams = schemes['chacarera'];
-		}
+		var schemaParams = schemes[name] || schemes.chacarera;
 		schemaParams(scheme => {
 			this.main.loadSchemaEditor(scheme, musicId);
 		});

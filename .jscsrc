@@ -3,7 +3,7 @@
     "disallowMixedSpacesAndTabs": true,
     "disallowQuotedKeysInObjects": false,
     "validateIndentation": "\t",
-    "maximumLineLength": 255,
+    "maximumLineLength": 1024,
     "requireSpaceAfterLineComment": false,
     "validateLineBreaks": false,
   	"esnext": true

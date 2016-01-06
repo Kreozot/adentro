@@ -90,7 +90,7 @@ export class VueltaElement extends DanceAnimationElement {
 
 		const startAnimationFunc = () => {
 			this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
-		}
+		};
 
 		if ((!delay) || (delay <= 0)) {
 			startAnimationFunc();

@@ -138,7 +138,7 @@ export default class DanceAnimation {
 		const length = timeLength;
 		const oneTimeLength = length / beats;
 		this.animations[this.animations.length] = Snap.animate(0, length,
-			function(value) { //this - animation element
+			function (value) { //this - animation element
 				this.lastValue = value;
 				// Если дробная часть от деления текущей позиции на длину такта достаточно близка к единице, значит сейчас сильная доля
 				if (mod(value, oneTimeLength) > 0.8) {
@@ -192,13 +192,13 @@ export default class DanceAnimation {
 			} else {
 				this.positionFigure(figure, movePoint.x, movePoint.y, movePoint.alpha + angle);
 			}
-		}
+		};
 
 		transformAtLength(startLen);
 		figure.removeClass('invisible');
 
 		this.animations[this.animations.length] = Snap.animate(startLen, stopLen,
-			function(value) { //this - animation element
+			function (value) { //this - animation element
 				this.lastValue = value;
 				if (direction === this.DIRECTION_FROM_END_TO_START) {
 					value = startLen + stopLen - value;

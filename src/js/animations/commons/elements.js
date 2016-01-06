@@ -75,7 +75,7 @@ export class SingleDanceAnimationElement {
 
 		const startAnimationFunc = () => {
 			this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
-		}
+		};
 
 		if ((!delay) || (delay <= 0)) {
 			startAnimationFunc();
@@ -97,7 +97,7 @@ export class SingleDanceAnimationElement {
 			this.animation.clearPaths();
 			this.drawPath(position);
 			this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
-		}
+		};
 
 		if ((!delay) || (delay <= 0)) {
 			fullAnimationFunc();
@@ -225,7 +225,7 @@ export class RotateElement extends SingleDanceAnimationElement {
 			const transformAtLength = (length) => {
 				const movePoint = this.path.getPointAtLength(length);
 				this.animation.positionFigure(this.figure, movePoint.x, movePoint.y, angle - angleSpeed * (length - startLen));
-			}
+			};
 
 			transformAtLength(startLen);
 			this.figure.removeClass('invisible');
@@ -237,7 +237,7 @@ export class RotateElement extends SingleDanceAnimationElement {
 				}, lengthS * 1000, mina.linear);
 
 			this.animation.animateFigureTime(this.figure, lengthS * 1000, beats);
-		}
+		};
 
 		if ((!delay) || (delay <= 0)) {
 			startAnimationFunc();

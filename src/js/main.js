@@ -9,7 +9,7 @@ import Tour from './tour.js';
 var playerSelector = '#jplayer';
 
 function supports_history_api() {
-	return !!(window.history && history.pushState);
+	return Boolean(window.history && history.pushState);
 }
 
 /**
@@ -67,13 +67,13 @@ class Adentro {
 		const frameId = element + '-frame';
 		Snap.selectAll('rect.current:not(#' + frameId + ')').forEach(function (elem) {
 			elem.removeClass('current');
-		})
+		});
 		Snap('#' + frameId).addClass('current');
 		// Выделяем название текущего элемента
 		const textId = element + '-text';
 		Snap.selectAll('text.current:not(#' + textId + ')').forEach(function (elem) {
 			elem.removeClass('current');
-		})
+		});
 		Snap('#' + textId).addClass('current');
 	}
 
@@ -221,7 +221,7 @@ class Adentro {
 
 		const isCurrentLang = lang => {
 			return (lang.id === this.lang);
-		}
+		};
 
 		const getLanguageLinks = () => {
 			let result = '<nobr>';
