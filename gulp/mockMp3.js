@@ -6,21 +6,28 @@ var config = require('./config.js');
 var Promise = require('bluebird');
 var fs = Promise.promisifyAll(require('fs'));
 
+/**
+ * Получение списка mp3-композиций для подмены
+ * @return {Promise} Promise, возвращающий массив объектов {dir, file}
+ */
 function getMp3List() {
 	var mp3Regexp = /require\('mp3Files\/([\S]+)\/([\S]+.mp3)'\)/;
 
 	return fs.readdirAsync(config.paths.src.musicData)
+		// Получаем список полных путей файлов описания композиций
 		.map(function (filename) {
 			return config.paths.src.musicData + '/' + filename;
 		})
-		.filter(function (filename) {
-			return fs.statAsync(filename)
+		// Фильтруем только то, что является файлами
+		.filter(function (filepath) {
+			return fs.statAsync(filepath)
 				.then(function (stat) {
 					return stat.isFile();
 				});
 		})
-		.map(function (filename) {
-			return fs.readFileAsync(filename)
+		// Получаем из файлов описания названия файлов и папок композиций
+		.map(function (filepath) {
+			return fs.readFileAsync(filepath)
 				.then(function (data) {
 					var match = mp3Regexp.exec(data);
 					return {

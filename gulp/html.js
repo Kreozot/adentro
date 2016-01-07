@@ -9,28 +9,36 @@ var posthtmlExtendAttrs = require('posthtml-extend-attrs');
 var version = require('../package.json').version;
 
 gulp.task('clean-html', function () {
-    return del(config.paths.dist.html + '/*.html');
+	return del([
+		config.paths.dist.html + '/*.html',
+		config.paths.dist.html + '/favicon.ico'
+	]);
 });
 
-gulp.task('process-html', ['clean-html'], function () {
-    return gulp.src(paths.src.html + '/*.html')
-        .pipe(posthtml([
-        	posthtmlInclude({
-        		root: paths.src.html,
-        		encoding: 'utf-8'
-        	}),
-        	posthtmlDoctype({doctype: 'HTML 5'}),
-        	posthtmlExtendAttrs({
-        		attrsTree: {
-        			'.version': {
-        				'data-version': version
-        			}
-        		}
-        	})
-        ]))
-        .pipe(gulp.dest(paths.dist.html));
+gulp.task('copy-favicon', ['clean-html'], function () {
+	return gulp.src(paths.src.html + '/favicon.ico')
+		.pipe(gulp.dest(paths.dist.html));
+});
+
+gulp.task('process-html', ['clean-html', 'copy-favicon'], function () {
+	return gulp.src(paths.src.html + '/*.html')
+		.pipe(posthtml([
+			posthtmlInclude({
+				root: paths.src.html,
+				encoding: 'utf-8'
+			}),
+			posthtmlDoctype({doctype: 'HTML 5'}),
+			posthtmlExtendAttrs({
+				attrsTree: {
+					'.version': {
+						'data-version': version
+					}
+				}
+			})
+		]))
+		.pipe(gulp.dest(paths.dist.html));
 });
 
 gulp.task('watch-html', ['connect', 'process-html'], function () {
-    return gulp.watch([paths.src.html + '/*.html', paths.src.html + '/html/*.html'], ['process-html']);
+	return gulp.watch([paths.src.html + '/*.html', paths.src.html + '/html/*.html'], ['process-html']);
 });
