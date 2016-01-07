@@ -48,7 +48,7 @@ function renderAndSaveSvg(done) {
 					return svgData;
 				});
 
-			saveSvg(svgData, paths.src.svgCompiled + '/' + svgList[i]);
+			saveSvg(svgData, paths.temp.svgCompiled + '/' + svgList[i]);
 		}
 
 		yield nightmare.end();
@@ -61,7 +61,7 @@ function renderAndSaveSvg(done) {
 }
 
 gulp.task('clean-svg', function() {
-    return del([paths.src.svgCompiled]);
+    return del([paths.temp.svgCompiled]);
 });
 
 gulp.task('renderSvg', ['clean-svg'], function (done) {
@@ -70,7 +70,7 @@ gulp.task('renderSvg', ['clean-svg'], function (done) {
 		port: port
 	});
 
-	mkdirp(paths.src.svgCompiled, function() {
+	mkdirp(paths.temp.svgCompiled, function() {
 		renderAndSaveSvg(function() {
 			connect.serverClose();
 			done();

@@ -8,19 +8,17 @@ var precss = require('precss');
 var cssnext = require('cssnext');
 var schemesList = require('./schemesList.js');
 
-var languages = ['en', 'ru'];
-
 var webpackConfig = [
 	{
 		resolve: {
-			root: config.paths.root,
+			root: paths.root,
 			alias: {
 				musicData: 'src/js/music',
-				svgData: 'src/svg_compiled',
+				svgData: paths.temp.svgCompiled,
 				infoData: 'src/info',
 				animationClasses: 'src/js/animations',
 				schemeParams: 'src/js/schemeParams',
-				mp3Files: 'src/music'
+				mp3Files: argv.mockmp3 ? paths.temp.mp3Mock : 'src/music'
 			}
 		},
 		entry: {

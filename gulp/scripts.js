@@ -10,11 +10,17 @@ var argv = require('yargs').argv;
 gulp.task('clean-js', function() {
     return del([
         paths.dist.js + '/**/*.js',
-        paths.dist.js + '/**/*.js.map'
+        paths.dist.js + '/**/*.js.map',
+        paths.dist.js + '/**/*.mp3'
     ]);
 });
 
-gulp.task('build-js', ['clean-js', 'renderSvg'], function (callback) {
+var buildDeps = ['clean-js', 'renderSvg'];
+if (argv.mockmp3) {
+    buildDeps.push('mock-mp3');
+}
+
+gulp.task('build-js', buildDeps, function (callback) {
     webpack(webpackConfig, function (err, stats) {
         if (err) {
             throw new gutil.PluginError('webpack', err)

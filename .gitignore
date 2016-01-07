@@ -3,5 +3,6 @@
 /music
 /dist
 /src/music
-/src/svg_compiled
 /*.log
+/mp3_mock
+/svg_compiled
