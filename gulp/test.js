@@ -10,6 +10,6 @@ gulp.task('test', ['connect'], function () {
 			process.exit(1);
 		})
 		.once('end', function () {
-			process.exit(1);
+			process.exit();
 		});
 });
