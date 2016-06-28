@@ -4,7 +4,7 @@ let contentSwitch = {
 	 */
 	clearContent: function () {
 		$('#content').empty();
-		$('#content_menu').empty();
+		$('#content_menu').empty().hide();
 	},
 
 	/**
@@ -15,6 +15,9 @@ let contentSwitch = {
 	addLink: function (block_id, title) {
 		$('#content_menu').append('<a href="javascript:contentSwitch.show(\'' + block_id +
 			'\');" class="content_link" id="' + block_id + '_link">' + title + '</a>');
+		if ($('#content_menu > a').length > 1) {
+			$('#content_menu').show();
+		}
 	},
 
 	/**

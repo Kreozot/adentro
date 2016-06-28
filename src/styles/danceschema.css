@@ -125,6 +125,7 @@ a.content_link.active {
 .menu-item--current {
 	cursor: default;
 	text-decoration: none;
+	font-weight: bolder;
 }
 
 .footer {
