@@ -120,7 +120,9 @@ export default class DanceAnimation {
 	 */
 	hideFigures() {
 		this.man.addClass('invisible');
+		this.man.angle = null;
 		this.woman.addClass('invisible');
+		this.woman.angle = null;
 	}
 
 	/**
