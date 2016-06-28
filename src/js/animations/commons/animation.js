@@ -1,8 +1,8 @@
 require('../../../styles/animation.css');
-import {mod} from './utils.js';
+import {mod, normalizeAngle} from './utils.js';
 
 const FIGURE_ANGLE_TICK = 25;
-const FIGURE_ANGLE_SPEED = 10;
+const FIGURE_ANGLE_SPEED = 5;
 
 /**
  * Объект анимации
@@ -160,35 +160,22 @@ export default class DanceAnimation {
 	 * @param  {Number} angle  Угол поворота (при 0 фигура стоит вертикально)
 	 */
 	positionFigure(figure, x, y, angle) {
-		// if (angle > 360) {
-		// 	angle = 360 - angle;
-		// }
-		// if (angle < 0) {
-		// 	angle = 360 + angle;
-		// }
-		// if (!figure.angle) {
-		// 	figure.angle = angle;
-		// }
-		// var angleDiff = figure.angle - angle;
-		// if (Math.abs(angleDiff) > FIGURE_ANGLE_TICK) {
-		// 	if (angleDiff > 180) {
-		// 		figure.angle = figure.angle + FIGURE_ANGLE_SPEED;
-		// 	} else {
-		// 		figure.angle = figure.angle - FIGURE_ANGLE_SPEED;
-		// 	}
-		// } else {
-		// 	figure.angle = angle;
-		// }
-		// if (figure.angle > 180) {
-		// 	figure.angle = 360 - figure.angle;
-		// }
-		// if (figure.angle < -180) {
-		// 	figure.angle = 360 + figure.angle;
-		// }
-		// console.log(`${figure.angle} - ${angle}`);
-		figure.transform(`t${x - 20},${y - 20}r${angle}`);
-		// figure.transform('t' + Math.floor(x - 20) + ',' + Math.floor(y - 20) + 'r' + Math.floor(angle));
-		// TODO: Сравнить проивзодительность
+		angle = normalizeAngle(angle);
+		if (!figure.angle) {
+			figure.angle = angle;
+		}
+		var angleDiff = figure.angle - angle;
+		if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) && (Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
+			if ((angleDiff > 180) || ((angleDiff < 0) && (angleDiff > -180))) {
+				figure.angle = figure.angle + FIGURE_ANGLE_SPEED;
+			} else {
+				figure.angle = figure.angle - FIGURE_ANGLE_SPEED;
+			}
+		} else {
+			figure.angle = angle;
+		}
+		figure.angle = normalizeAngle(figure.angle);
+		figure.transform(`t${x - 20},${y - 20}r${Math.floor(figure.angle)}`);
 	}
 
 	/**
