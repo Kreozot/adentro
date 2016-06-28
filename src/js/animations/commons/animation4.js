@@ -3,9 +3,9 @@ import {SingleDanceAnimationElement, DanceAnimationElement} from './elements.js'
 import {Timer} from './utils.js';
 /**
  * [DanceAnimationElement анимация на четверых]
- * @param {[Object]} animation   [объект анимации]
- * @param {[Object]} pathStrings1 [строковое описание траекторий первой пары в формате [позиция: траектория, ...]]
- * @param {[Object]} pathStrings2 [строковое описание траекторий второй пары в формате [позиция: траектория, ...]]
+ * @param {Object} animation   [объект анимации]
+ * @param {Object} pathStrings1 [строковое описание траекторий первой пары в формате [позиция: траектория, ...]]
+ * @param {Object} pathStrings2 [строковое описание траекторий второй пары в формате [позиция: траектория, ...]]
  */
 export class FourDanceAnimationElement {
 	constructor(animation, pathStrings1, pathStrings2) {
@@ -18,7 +18,7 @@ export class FourDanceAnimationElement {
 
 	/**
 	 * [drawPath отрисовка траекторий]
-	 * @param  {[String]} manPosition [позиция партнёра]
+	 * @param  {String} manPosition [позиция партнёра]
 	 */
 	drawPath(manPosition, transparent) {
 		this.animation.manPosition = manPosition;
@@ -29,7 +29,7 @@ export class FourDanceAnimationElement {
 	}
 
 	/**
-	 * [isPathsDrawn Отрисованы ли траектории]
+	 * isPathsDrawn Отрисованы ли траектории
 	 */
 	isPathsDrawn() {
 		return (this.man1DanceAnimationElement.isPathsDrawn() && this.woman1DanceAnimationElement.isPathsDrawn() &&
@@ -37,8 +37,8 @@ export class FourDanceAnimationElement {
 	}
 
 	/**
-	 * [setAngle Задать относительный угол разворота]
-	 * @param {[Number]} value [значение угла]
+	 * setAngle Задать относительный угол разворота
+	 * @param {Number} value значение угла
 	 */
 	setAngle(value) {
 		this.man1DanceAnimationElement.setAngle(value);
@@ -48,13 +48,13 @@ export class FourDanceAnimationElement {
 	}
 
 	/**
-	 * [startAnimation Запуск анимации]
-	 * @param  {[Number]} lengthS   [длительность в секундах]
-	 * @param  {[Number]} beats     [количество тактов]
-	 * @param  {[String]} direction [направление движения фигуры]
-	 * @param  {[Number]} delay     [задержка в секундах]
-	 * @param  {[Number]} startPart [позиция начала (0-1 относительно траектории)]
-	 * @param  {[Number]} stopPart  [позиция конца (0-1 относительно траектории)]
+	 * startAnimation Запуск анимации
+	 * @param  {Number} lengthS   длительность в секундах
+	 * @param  {Number} beats     количество тактов
+	 * @param  {String} direction направление движения фигуры
+	 * @param  {Number} delay     задержка в секундах
+	 * @param  {Number} startPart позиция начала (0-1 относительно траектории)
+	 * @param  {Number} stopPart  позиция конца (0-1 относительно траектории)
 	 */
 	startAnimation(lengthS, beats, direction, delay, startPart, stopPart) {
 		this.man1DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
@@ -64,12 +64,12 @@ export class FourDanceAnimationElement {
 	}
 
 	/**
-	 * [fullAnimation Полный цикл анимации]
-	 * @param  {[Number]} lengthS    	[длительность в секундах]
-	 * @param  {[Number]} beats     	[количество тактов]
-	 * @param  {[String]} manPosition   [начальная позиция партнёра]
-	 * @param  {[String]} direction 	[направление движения фигуры]
-	 * @param  {[Number]} delay     	[задержка в секундах]
+	 * fullAnimation Полный цикл анимации
+	 * @param  {Number} lengthS    	длительность в секундах
+	 * @param  {Number} beats     	количество тактов
+	 * @param  {String} manPosition   начальная позиция партнёра
+	 * @param  {String} direction 	направление движения фигуры
+	 * @param  {Number} delay     	задержка в секундах
 	 */
 	fullAnimation(lengthS, beats, manPosition, direction, delay, startPart, stopPart) {
 		const fullAnimationFunc = () => {

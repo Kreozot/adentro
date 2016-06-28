@@ -5,6 +5,5 @@
     "validateIndentation": "\t",
     "maximumLineLength": 1024,
     "requireSpaceAfterLineComment": false,
-    "validateLineBreaks": false,
-  	"esnext": true
+    "validateLineBreaks": false
 }

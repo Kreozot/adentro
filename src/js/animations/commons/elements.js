@@ -85,12 +85,12 @@ export class SingleDanceAnimationElement {
 	}
 
 	/**
-	 * [fullAnimation Полный цикл анимации]
-	 * @param  {Number} lengthS    	[длительность в секундах]
-	 * @param  {Number} beats     	[количество тактов]
-	 * @param  {String} manPosition   [начальная позиция партнёра]
-	 * @param  {String} direction 	[направление движения фигуры]
-	 * @param  {Number} delay     	[задержка в секундах]
+	 * fullAnimation Полный цикл анимации
+	 * @param  {Number} lengthS    	длительность в секундах
+	 * @param  {Number} beats     	количество тактов
+	 * @param  {String} manPosition   начальная позиция партнёра
+	 * @param  {String} direction 	направление движения фигуры
+	 * @param  {Number} delay     	задержка в секундах
 	 */
 	fullAnimation(lengthS, beats, position, direction, delay, startPart, stopPart) {
 		const fullAnimationFunc = () => {

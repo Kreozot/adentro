@@ -1,6 +1,9 @@
 require('../../../styles/animation.css');
 import {mod} from './utils.js';
 
+const FIGURE_ANGLE_TICK = 25;
+const FIGURE_ANGLE_SPEED = 10;
+
 /**
  * Объект анимации
  * @param {String} id DOM-идентификатор SVG-объекта
@@ -49,7 +52,7 @@ export default class DanceAnimation {
 		};
 	}
 
-	restartAnimation(animation) {
+	restartAnimation(animation, animationIndex) {
 		if (!animation.lastValue) {
 			animation.lastValue = 0;
 		}
@@ -68,7 +71,7 @@ export default class DanceAnimation {
 	resume() {
 		if (this.paused) {
 			this.paused = false;
-			this.animations.forEach(animation => this.restartAnimation(animation));
+			this.animations.forEach((animation, index) => this.restartAnimation(animation, index));
 			this.timeouts.forEach(timeout => timeout.resume());
 		};
 	}
@@ -83,13 +86,15 @@ export default class DanceAnimation {
 	 * @return {Object}        Polyline-объект танцора
 	 */
 	initFigure(gender) {
-		return this.svg.polyline('0,0 20,40 40,0')
+		var figure = this.svg.polyline('0,0 20,40 40,0')
 			.attr({
 				id: gender + '_figure'
 			})
 			.addClass('invisible')
 			.addClass('figure')
 			.addClass(gender === 'man' ? 'manFigure' : 'womanFigure');
+		figure.angle = null;
+		return figure;
 	}
 
 	/**
@@ -106,8 +111,6 @@ export default class DanceAnimation {
 			: 'm -15.9,19.4 c 0.4,-1.6 -2.4,-2.7 -3.2,-4.3 -7.8,-9.5 -6.7,-24.8 2.6,-33 2.5,-2.3 5.5,-4 8.7,-5.2 0.5,1.9 1.9,4.2 -0.9,4.5 -10.2,4.4 -14.9,17.6 -9.8,27.5 1.1,2.4 2.8,4.5 4.7,6.3 1.3,-1.6 3,-7.9 4,-6.4 1.4,4.2 2.7,8.3 4,12.5 -4.3,1.1 -8.6,2.3 -13,3.4 0.9,-1.8 1.8,-3.6 2.7,-5.3 z M 6.8,19.4 C 17.4,16 23.4,3.1 19.2,-7.2 c -1.1,-3 -3,-5.7 -5.4,-8 -1.3,1.6 -3,7.9 -4,6.4 -1.4,-4.2 -2.7,-8.3 -4,-12.5 4.3,-1.1 8.6,-2.3 13,-3.4 -0.4,2.3 -4.4,5.3 -1.9,7 9.4,8.5 10.2,24.4 1.5,33.8 -2.8,3.2 -6.5,5.6 -10.5,6.9 -0.4,-1.2 -0.7,-2.5 -1,-3.7 z');
 		arrows.addClass('rotationArrows')
 				.transform(`t${x},${y}r${angle}`);
-				// .transform('t' + Math.floor(x) + ',' + Math.floor(y) + 'r' + Math.floor(angle));
-				// TODO: Сравнить производительность
 		this.paths[this.paths.length] = arrows;
 		return arrows;
 	}
@@ -157,6 +160,32 @@ export default class DanceAnimation {
 	 * @param  {Number} angle  Угол поворота (при 0 фигура стоит вертикально)
 	 */
 	positionFigure(figure, x, y, angle) {
+		// if (angle > 360) {
+		// 	angle = 360 - angle;
+		// }
+		// if (angle < 0) {
+		// 	angle = 360 + angle;
+		// }
+		// if (!figure.angle) {
+		// 	figure.angle = angle;
+		// }
+		// var angleDiff = figure.angle - angle;
+		// if (Math.abs(angleDiff) > FIGURE_ANGLE_TICK) {
+		// 	if (angleDiff > 180) {
+		// 		figure.angle = figure.angle + FIGURE_ANGLE_SPEED;
+		// 	} else {
+		// 		figure.angle = figure.angle - FIGURE_ANGLE_SPEED;
+		// 	}
+		// } else {
+		// 	figure.angle = angle;
+		// }
+		// if (figure.angle > 180) {
+		// 	figure.angle = 360 - figure.angle;
+		// }
+		// if (figure.angle < -180) {
+		// 	figure.angle = 360 + figure.angle;
+		// }
+		// console.log(`${figure.angle} - ${angle}`);
 		figure.transform(`t${x - 20},${y - 20}r${angle}`);
 		// figure.transform('t' + Math.floor(x - 20) + ',' + Math.floor(y - 20) + 'r' + Math.floor(angle));
 		// TODO: Сравнить проивзодительность
@@ -263,6 +292,7 @@ export default class DanceAnimation {
 	 * @param  {Object} coords Объект с описанием координат {x, y, angle}
 	 */
 	startPosFigure(figure, coords) {
+		figure.angle = null;
 		this.positionFigure(figure, coords.x, coords.y, coords.angle);
 		figure.removeClass('straightBeatFigure');
 		figure.removeClass('invisible');
