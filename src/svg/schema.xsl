@@ -206,7 +206,7 @@
 					}
 
 					.zarandeo {
-						fill: #CCFF33;
+						fill: #F6CF75;
 					}
 
 					.giro {
