@@ -1,4 +1,5 @@
 import {getOppositePosition, Timer} from './utils.js';
+var objectAssign = require('object-assign');
 
 /**
  * Одиночная анимация
@@ -28,6 +29,7 @@ export class SingleDanceAnimationElement {
 	 * @param  {Boolean} hidden  Создать скрытой
 	 */
 	drawPath(position, hidden) {
+		this.position = position;
 		this.path = this.animation.path(this.pathStrings[position], this.gender, hidden);
 		this.pathLength = this.path.getTotalLength() - 1;
 	}
@@ -69,10 +71,16 @@ export class SingleDanceAnimationElement {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	startAnimation(lengthS, beats, direction, delay, startPart, stopPart) {
-		startPart = (typeof startPart === 'undefined') ? 0 : startPart;
-		stopPart = (typeof stopPart === 'undefined') ? 1 : stopPart;
-
+	startAnimation(lengthS, beats, direction, delay, startPart = 0, stopPart = 1) {
+		if (typeof lengthS === 'object') {
+			const params = objectAssign(lengthS);
+			lengthS = params.lengthS;
+			beats = params.beats;
+			direction = params.direction;
+			delay = params.delay;
+			startPart = params.startPart;
+			stopPart = params.stopPart;
+		}
 		const startAnimationFunc = () => {
 			this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
 		};

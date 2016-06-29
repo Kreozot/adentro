@@ -11,23 +11,23 @@
 		<element class="zapateo" times="4" id="zapateo" visualization="zapateoZarandeo" manPosition="left" zapateo="true" yOffset="true">Zapateo / Zarandeo</element>
 		<element class="giro" times="4" id="giroMano" visualization="giroMano" manPosition="left">Giro + mano derecha</element>
 		<element class="zapateo" times="4" id="zapateo2" visualization="zapateoZarandeo" manPosition="left" zapateo="true" yOffset="true">Zapateo / Zarandeo</element>
-		<element class="giro" times="4" id="contraGiroMano" visualization="contraGiroMano" manPosition="left">Giro + mano izq</element>
+		<element class="giro" times="4" id="contraGiroMano" visualization="contraGiroMano" manPosition="left">Contragiro + mano izq</element>
 		<bar/>
 		<element class="vuelta" times="4" id="mediaContraVuelta" visualization="mediaContraVuelta" manPosition="left" yOffset="true">Media contra vuelta</element>
 		<element class="coronacion" times="4" id="coronacion" visualization="coronacion" manPosition="right">Giro y coronación</element>
 	</part>
 	<part>
-		<element class="vuelta" times="4" id="mediaVuelta_2" visualization="mediaVuelta" manPosition="left">Media vuelta</element>
-		<element class="giro" times="4" id="giro_2" visualization="giro" manPosition="left">Giro</element>
-		<element class="vuelta" times="4" id="mediaVuelta2_2" visualization="mediaVuelta" manPosition="left">Media vuelta</element>
-		<element class="giro" times="4" id="giro2_2" visualization="giro" manPosition="left">Giro</element>
+		<element class="vuelta" times="4" id="mediaVuelta_2" visualization="mediaVuelta" manPosition="right">Media vuelta</element>
+		<element class="giro" times="4" id="giro_2" visualization="giro" manPosition="right">Giro</element>
+		<element class="vuelta" times="4" id="mediaVuelta2_2" visualization="mediaVuelta" manPosition="right">Media vuelta</element>
+		<element class="giro" times="4" id="giro2_2" visualization="giro" manPosition="right">Giro</element>
 		<bar/>
-		<element class="zapateo" times="4" id="zapateo_2" visualization="zapateoZarandeo" manPosition="left" zapateo="true" yOffset="true">Zapateo / Zarandeo</element>
-		<element class="giro" times="4" id="giroMano_2" visualization="giroMano" manPosition="left">Giro + mano derecha</element>
-		<element class="zapateo" times="4" id="zapateo2_2" visualization="zapateoZarandeo" manPosition="left" zapateo="true" yOffset="true">Zapateo / Zarandeo</element>
-		<element class="giro" times="4" id="contraGiroMano_2" visualization="contraGiroMano" manPosition="left">Giro + mano izq</element>
+		<element class="zapateo" times="4" id="zapateo_2" visualization="zapateoZarandeo" manPosition="right" zapateo="true" yOffset="true">Zapateo / Zarandeo</element>
+		<element class="giro" times="4" id="giroMano_2" visualization="giroMano" manPosition="right">Giro + mano derecha</element>
+		<element class="zapateo" times="4" id="zapateo2_2" visualization="zapateoZarandeo" manPosition="right" zapateo="true" yOffset="true">Zapateo / Zarandeo</element>
+		<element class="giro" times="4" id="contraGiroMano_2" visualization="contraGiroMano" manPosition="right">Contragiro + mano izq</element>
 		<bar/>
-		<element class="vuelta" times="4" id="mediaContraVuelta_2" visualization="mediaContraVuelta" manPosition="left" yOffset="true">Media contra vuelta</element>
-		<element class="coronacion" times="4" id="coronacion_2" visualization="coronacion" manPosition="right">Giro y coronación</element>
+		<element class="vuelta" times="4" id="mediaContraVuelta_2" visualization="mediaContraVuelta" manPosition="right" yOffset="true">Media contra vuelta</element>
+		<element class="coronacion" times="4" id="coronacion_2" visualization="coronacion" manPosition="left">Giro y coronación</element>
 	</part>
 </schema>

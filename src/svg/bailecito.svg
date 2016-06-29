@@ -15,16 +15,16 @@
 		<element class="coronacion" times="4" id="coronacion" visualization="coronacion" manPosition="right">Giro y coronación</element>
 	</part>
 	<part>
-		<element class="avance" times="4" id="avance_2" visualization="avance1" manPosition="left">Avance</element>
-		<element class="avance" times="4" id="retroceso_2" visualization="retroceso1" manPosition="left">Retroceso</element>
-		<element class="avance" times="4" id="avance2_2" visualization="avance2" manPosition="left">Avance</element>
-		<element class="avance" times="4" id="retroceso2_2" visualization="retroceso2" manPosition="left">Retroceso</element>
+		<element class="avance" times="4" id="avance_2" visualization="avance1" manPosition="right">Avance</element>
+		<element class="avance" times="4" id="retroceso_2" visualization="retroceso1" manPosition="right">Retroceso</element>
+		<element class="avance" times="4" id="avance2_2" visualization="avance2" manPosition="right">Avance</element>
+		<element class="avance" times="4" id="retroceso2_2" visualization="retroceso2" manPosition="right">Retroceso</element>
 		<bar/>
-		<element class="giro" times="4" id="giro_2" visualization="giro" manPosition="left">Giro</element>
-		<element class="giro" times="4" id="contraGiro_2" visualization="contraGiro" manPosition="left">Contra giro</element>
+		<element class="giro" times="4" id="giro_2" visualization="giro" manPosition="right">Giro</element>
+		<element class="giro" times="4" id="contraGiro_2" visualization="contraGiro" manPosition="right">Contra giro</element>
 		<bar/>
-		<element class="vuelta" times="4" id="mediaVuelta_2" visualization="mediaVuelta" manPosition="left">Media vuelta</element>
-		<element class="coronacion" times="4" id="coronacion_2" visualization="coronacion" manPosition="right">Giro y coronación</element>
+		<element class="vuelta" times="4" id="mediaVuelta_2" visualization="mediaVuelta" manPosition="right">Media vuelta</element>
+		<element class="coronacion" times="4" id="coronacion_2" visualization="coronacion" manPosition="left">Giro y coronación</element>
 	</part>
 	<part>
 		<element class="avance" times="4" id="avance_3" visualization="avance1" manPosition="left">Avance</element>

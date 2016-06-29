@@ -6,12 +6,14 @@ class BailecitoAvanceRetrocesoElement extends DanceAnimationElement {
 		super(animation, pathStrings);
 
 		this.manDanceAnimationElement.animationFunction = function (lengthMs, beats, direction, startPart, stopPart) {
-			this.animation.animateFigurePath(this.figure, -90, this.path,
+			var angle = this.position === 'left' ? -90 : 90;
+			this.animation.animateFigurePath(this.figure, angle, this.path,
 				this.pathLength * startPart, this.pathLength * stopPart,
 				lengthMs, beats, this.animation.DIRECTION_STRAIGHT_FORWARD);
 		};
 		this.womanDanceAnimationElement.animationFunction = function (lengthMs, beats, direction, startPart, stopPart) {
-			this.animation.animateFigurePath(this.figure, 90, this.path,
+			var angle = this.position === 'left' ? -90 : 90;
+			this.animation.animateFigurePath(this.figure, angle, this.path,
 				this.pathLength * startPart, this.pathLength * stopPart,
 				lengthMs, beats, this.animation.DIRECTION_STRAIGHT_FORWARD);
 		};

@@ -1,6 +1,6 @@
 import DanceAnimation from './animation.js';
 import {SingleDanceAnimationElement, DanceAnimationElement} from './elements.js';
-import {Timer} from './utils.js';
+import {Timer, getOppositePosition} from './utils.js';
 /**
  * [DanceAnimationElement анимация на четверых]
  * @param {Object} animation   [объект анимации]

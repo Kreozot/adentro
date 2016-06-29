@@ -6,12 +6,17 @@ export class ZapateoElement extends SingleDanceAnimationElement {
 		super(animation, pathStrings, 'man', figure);
 	}
 
-	animationFunction(lengthMs, beats) {
+	animationFunction(lengthMs, beats, direction, startPart, stopPart) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
-		this.animation.animateFigureTime(this.figure, lengthMs, beats * 6);
+		if (this.pathStrings) {
+			this.animation.animateFigurePath(this.figure, 90 + this.angle, this.path,
+				this.pathLength * startPart, this.pathLength * stopPart, lengthMs, beats * 6, direction, this.easing);
+		} else {
+			this.animation.animateFigureTime(this.figure, lengthMs, beats * 6);
+		}
 	}
 
-	drawPath(position) {
+	drawPath(position, hidden) {
 		this.animation.manPosition = position;
 		this.position = position;
 

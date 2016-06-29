@@ -197,6 +197,9 @@ export default class DanceAnimation {
 		if ((direction === this.DIRECTION_BACKWARD) || (direction === this.DIRECTION_FROM_END_TO_START)) {
 			angle = -angle;
 		}
+		if (!path) {
+			throw new 'path is not drawn yet';
+		}
 
 		const pathLength = path.getTotalLength();
 
@@ -296,9 +299,7 @@ export default class DanceAnimation {
 	startPosition(leftCoords, rightCoords, manPosition) {
 		this.clearPaths();
 
-		if (!manPosition) {
-			manPosition = this.manPosition;
-		}
+		manPosition = manPosition || this.manPosition;
 
 		if (manPosition === 'left') {
 			this.startPosFigure(this.man, leftCoords);
