@@ -115,7 +115,7 @@
 
 	<!-- Схема -->
 	<xsl:template match="schema">
-		<svg width="{$schemaWidth + ($xMargin * 2)}" height="{$height * count(/schema/part)}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<svg width="{$schemaWidth + ($xMargin * 2)}" height="{$height * count(/schema/part)}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" overflow="hidden">
 			<defs>
 				<style type="text/css">
 					line {
@@ -171,6 +171,14 @@
 
 					.element-text.current {
 						font-weight: bold;
+					}
+
+					.element-text .man {
+						fill: blue;
+					}
+
+					.element-text .woman {
+						fill: darkmagenta;
 					}
 
 					.times-count-text {

@@ -6,20 +6,20 @@
 		<element class="vuelta" times="8" id="vuelta" visualization="vuelta" manPosition="left">Vuelta entera</element>
 		<element class="giro" times="4" id="giro" visualization="giro" manPosition="left">Giro</element>
 		<bar/>
-		<element class="zapateo" times="8" id="zapateo" visualization="zapateoZarandeo" manPosition="left">Zapateo / Zarandeo</element>
+		<element class="zapateo" times="8" id="zapateo" visualization="zapateoZarandeo" manPosition="left"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
 		<element class="vuelta" times="4" id="mediaVuelta" visualization="mediaVuelta" manPosition="left">Media vuelta</element>
 		<bar/>
-		<element class="zapateo" times="8" id="zapateo2" visualization="zapateoZarandeo" manPosition="right">Zapateo / Zarandeo</element>
+		<element class="zapateo" times="8" id="zapateo2" visualization="zapateoZarandeo" manPosition="right"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
 		<element class="coronacion" times="4" id="coronacion" visualization="coronacion" manPosition="right">Giro y coronación</element>
 	</part>
 	<part>
 		<element class="vuelta" times="8" id="vuelta_2" visualization="vuelta" manPosition="right">Vuelta entera</element>
 		<element class="giro" times="4" id="giro_2" visualization="giro" manPosition="right">Giro</element>
 		<bar/>
-		<element class="zapateo" times="8" id="zapateo_2" visualization="zapateoZarandeo" manPosition="right">Zapateo / Zarandeo</element>
+		<element class="zapateo" times="8" id="zapateo_2" visualization="zapateoZarandeo" manPosition="right"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
 		<element class="vuelta" times="4" id="mediaVuelta_2" visualization="mediaVuelta" manPosition="right">Media vuelta</element>
 		<bar/>
-		<element class="zapateo" times="8" id="zapateo2_2" visualization="zapateoZarandeo" manPosition="left">Zapateo / Zarandeo</element>
+		<element class="zapateo" times="8" id="zapateo2_2" visualization="zapateoZarandeo" manPosition="left"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
 		<element class="coronacion" times="4" id="coronacion_2" visualization="coronacion" manPosition="left">Giro y coronación</element>
 	</part>
 </schema>

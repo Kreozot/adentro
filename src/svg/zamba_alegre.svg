@@ -7,7 +7,7 @@
 		<element class="arresto" times="15" id="arrestoDoble" visualization="arrestoDoble" manPosition="right">Arresto doble</element>
 		<bar/>
 		<element class="vuelta" times="8" id="vueltaGato" visualization="vueltaGato" manPosition="left">Vuelta entera (gato)</element>
-		<element class="zapateo" times="7" id="zapateo" visualization="zapateoZarandeo" manPosition="right" yOffset="true">Zapateo / Zarandeo</element>
+		<element class="zapateo" times="7" id="zapateo" visualization="zapateoZarandeo" manPosition="right" yOffset="true"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
 		<bar/>
 		<element class="vuelta" times="8" id="mediaVuelta" visualization="mediaVuelta" manPosition="right">Media vuelta</element>
 		<element class="arresto" times="8" id="arresto" visualization="arresto" manPosition="left">Arresto</element>
@@ -18,7 +18,7 @@
 		<element class="arresto" times="15" id="arrestoDoble_2" visualization="arrestoDoble" manPosition="right">Arresto doble</element>
 		<bar/>
 		<element class="vuelta" times="8" id="vueltaGato_2" visualization="vueltaGato" manPosition="left">Vuelta entera (gato)</element>
-		<element class="zapateo" times="7" id="zapateo_2" visualization="zapateoZarandeo" manPosition="right" yOffset="true">Zapateo / Zarandeo</element>
+		<element class="zapateo" times="7" id="zapateo_2" visualization="zapateoZarandeo" manPosition="right" yOffset="true"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
 		<bar/>
 		<element class="vuelta" times="8" id="mediaVuelta_2" visualization="mediaVuelta" manPosition="right">Media vuelta</element>
 		<element class="arresto" times="8" id="arresto_2" visualization="arresto" manPosition="left">Arresto</element>
