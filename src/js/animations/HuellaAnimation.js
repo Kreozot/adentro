@@ -63,6 +63,16 @@ export default class HuellaAnimation extends GatoAnimation {
 			left: 'm 40,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 C 240,80 200,40 140,40 80,40 40,80 40,140 z',
 			right: 'M 560,140 C 560,80 520,40 460,40 400,40 360,80 360,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 z'
 		}, 'woman', this.woman);
+
+		this.mediaContraVueltaManElement = new SingleDanceAnimationElement(this, {
+			left: 'M 560,160 C 560,110 440,40 300,40 160,40 40,110 40,160',
+			right: 'm 40,160 c 0,50 120,120 260,120 140,0 260,-70 260,-120'
+		}, 'man', this.man);
+
+		this.mediaContraVueltaWomanElement = new SingleDanceAnimationElement(this, {
+			left: 'M 560,160 C 560,110 440,40 300,40 160,40 40,110 40,160',
+			right: 'm 40,160 c 0,50 120,120 260,120 140,0 260,-70 260,-120'
+		}, 'woman', this.woman);
 	}
 
 	giroMano(seconds, manPosition, beats) {
@@ -94,6 +104,11 @@ export default class HuellaAnimation extends GatoAnimation {
 	}
 
 	mediaContraVuelta(seconds, manPosition, beats) {
+		this.clearPaths();
+		this.mediaContraVueltaManElement.drawPath(manPosition);
+		this.mediaContraVueltaWomanElement.drawPath(getOppositePosition(manPosition));
+		this.mediaContraVueltaManElement.startAnimation(seconds, beats, this.DIRECTION_FORWARD, 0, 1, 0);
+		this.mediaContraVueltaWomanElement.startAnimation(seconds, beats, this.DIRECTION_BACKWARD, 0, 1, 0);
 	}
 
 }

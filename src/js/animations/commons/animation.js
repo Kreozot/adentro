@@ -2,7 +2,7 @@ require('../../../styles/animation.css');
 import {mod, normalizeAngle} from './utils.js';
 
 const FIGURE_ANGLE_TICK = 25;
-const FIGURE_ANGLE_SPEED = 5;
+const FIGURE_ANGLE_SPEED = 3;
 
 /**
  * Объект анимации
