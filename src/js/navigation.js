@@ -165,11 +165,11 @@ export default class Navigation {
 			this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
 
 		var schemaParams = schemes[this.context.schema];
-		schemaParams(function (scheme) {
-			var musicIds = schemaParams.music;
-			var musicSchema = musicData[musicId];
+		schemaParams(scheme => {
+			const musicData = scheme.music;
+			const musicSchema = musicData.filter(music => music.id === musicId)[0];
 			this.main.player.loadMusicSchema(musicSchema);
-			this.main.showMusicLinks(musicIds, musicId);
+			this.main.showMusicLinks(musicData, musicId);
 		});
 		this.main.showLanguageLinks();
 	}
