@@ -142,7 +142,7 @@ export default class Navigation {
 			var animationClassDefs = scheme.animation;
 			if (typeof animationClassDefs === 'object') {
 				var animationClassDef = AnimationLoader.getAnimationClassDef(animationClassDefs, animationId);
-				var animationClass = animationClassDef.name;
+				var animationClass = animationClassDef.animClass;
 			} else {
 				var animationClass = animationClassDefs;
 			}
@@ -200,6 +200,7 @@ export default class Navigation {
 	 */
 	loadSchemaByUrl() {
 		let context = this.getContextFromUrl();
+		this.context = context;
 		if (context.schema) {
 			if (context.editor) {
 				this.loadSchemaEditorByName(context.schema, context.music);

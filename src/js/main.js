@@ -337,6 +337,7 @@ class Adentro {
 
 global.adentro = new Adentro();
 global.playElement = element => adentro.player.playElement(element);
+global.showAnimation = animation => adentro.navigation.showAnimation(animation);
 global.localize = textObj => adentro.localize(textObj);
 global.tour = new Tour();
 export default Adentro;

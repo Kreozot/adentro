@@ -168,7 +168,7 @@ export default class DanceAnimation {
 		}
 		var angleDiff = figure.angle - angle;
 		if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) && (Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
-			if ((angleDiff > 180) || ((angleDiff < 0) && (angleDiff > -180))) {
+			if ((angleDiff > 190) || ((angleDiff < 0) && (angleDiff > -180))) {
 				figure.angle = figure.angle + FIGURE_ANGLE_SPEED;
 			} else {
 				figure.angle = figure.angle - FIGURE_ANGLE_SPEED;
