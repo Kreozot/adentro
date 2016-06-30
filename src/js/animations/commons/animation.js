@@ -193,6 +193,7 @@ export default class DanceAnimation {
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
 	animateFigurePath(figure, startAngle, path, startLen, stopLen, timeLength, beats, direction = this.DIRECTION_FORWARD, easing = mina.linear) {
+		figure.node.parentNode.appendChild(figure.node);
 		let angle = startAngle;
 		if ((direction === this.DIRECTION_BACKWARD) || (direction === this.DIRECTION_FROM_END_TO_START)) {
 			angle = -angle;
