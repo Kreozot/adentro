@@ -26,23 +26,23 @@ var webpackConfig = [
 			main: paths.src.js + '/main.js',
 		},
 		output: {
-			path:  paths.dist.js,
+			path: paths.dist.js,
 			filename: '[name].js'
 		},
 		devtool: 'source-map',
 		module: {
 			preLoaders: [
-				{ test: /\.js$/, exclude: /node_modules/, loader: 'jscs' }
+				{test: /\.js$/, exclude: /node_modules/, loader: 'jscs'}
 			],
 			loaders: [
-				{ test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&presets[]=es2015' },
-				{ test: /\.json$/, loader: 'json' },
-				{ test: /\.css$/, loader: 'style!css' },
-				{ test: /\.scss$/, loader: "style!css!postcss" },
-				{ test: /\.(jpe?g|png|gif)$/i, loader: 'url' },
-				{ test: /\.mp3$/i, loader: 'file?path=../dist&name=music/[name].[hash:6].[ext]' },
-				{ test: /\.svg$/i, exclude: /svg\.js/, loader: 'raw' },
-				{ test: /\.inc$/i, loader: 'raw' }
+				{test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&presets[]=es2015'},
+				{test: /\.json$/, loader: 'json'},
+				{test: /\.css$/, loader: 'style!css'},
+				{test: /\.scss$/, loader: 'style!css!postcss'},
+				{test: /\.(jpe?g|png|gif)$/i, loader: 'url'},
+				{test: /\.mp3$/i, loader: 'file?path=../dist&name=music/[name].[hash:6].[ext]'},
+				{test: /\.svg$/i, exclude: /svg\.js/, loader: 'raw'},
+				{test: /\.inc$/i, loader: 'raw'}
 			]
 		},
 		postcss: function () {
@@ -70,16 +70,16 @@ var webpackConfig = [
 webpackConfig.push({
 	module: {
 		loaders: [
-			{ test: /\.css$/, loader: 'style!css' },
-			{ test: /\.scss$/, loader: "style!css!postcss" },
-			{ test: /\.(jpe?g|png|gif)$/i, loader: 'url' },
+			{test: /\.css$/, loader: 'style!css'},
+			{test: /\.scss$/, loader: 'style!css!postcss'},
+			{test: /\.(jpe?g|png|gif)$/i, loader: 'url'},
 		]
 	},
 	entry: {
 		styles: paths.src.js + '/styles.js',
 	},
 	output: {
-		path:  paths.dist.js,
+		path: paths.dist.js,
 		filename: '[name].js'
 	},
 	plugins: [],
@@ -114,7 +114,7 @@ if (argv.production) {
 webpackConfig.push({
 	module: {
 		loaders: [
-			{ test: /\.swf$/i, loader: 'file?name=[name].[ext]' }
+			{test: /\.swf$/i, loader: 'file?name=[name].[ext]'}
 		]
 	},
 	entry: {
@@ -127,7 +127,7 @@ webpackConfig.push({
 		]
 	},
 	output: {
-		path:  paths.dist.js,
+		path: paths.dist.js,
 		filename: '[name].js'
 	},
 	plugins: [
