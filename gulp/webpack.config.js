@@ -41,7 +41,7 @@ var webpackConfig = [
 				{test: /\.scss$/, loader: 'style!css!postcss'},
 				{test: /\.(jpe?g|png|gif)$/i, loader: 'url'},
 				{test: /\.mp3$/i, loader: 'file?path=../dist&name=music/[name].[hash:6].[ext]'},
-				{test: /\.svg$/i, exclude: /svg\.js/, loader: 'raw'},
+				{test: /\.svg$/i, loader: 'raw'},
 				{test: /\.inc$/i, loader: 'raw'}
 			]
 		},
