@@ -4,6 +4,7 @@ import contentSwitch from './loading/content_switch.js';
 import animationLoader from './loading/animation_loading.js';
 import infoLoader from './loading/info_loading.js';
 import {getElement} from './timing/timing.js';
+import TimingGenerator from './timing/timing-generator.js';
 import Tour from './tour.js';
 
 var playerSelector = '#jplayer';
@@ -307,8 +308,8 @@ class Adentro {
 
 		console.log('editor mode on');
 		$('#animationDiv').html('');
-		const initTiming = $(playerSelector).data('schema');
-		const timingGenerator = new TimingGenerator(initTiming);
+		// const initTiming = $(playerSelector).data('schema');
+		const timingGenerator = new TimingGenerator();
 
 		const timeupdateEvent = event => {
 			// Если остановлено
@@ -342,5 +343,6 @@ global.playElement = element => adentro.player.playElement(element);
 global.showAnimation = animation => adentro.navigation.showAnimation(animation);
 global.showMusic = music => adentro.navigation.showMusic(music);
 global.localize = textObj => adentro.localize(textObj);
+global.markCurrentElementOnSchema = elem => adentro.markCurrentElementOnSchema(elem);
 global.tour = new Tour();
 export default Adentro;
