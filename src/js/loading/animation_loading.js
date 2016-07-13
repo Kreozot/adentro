@@ -16,6 +16,9 @@ let animationLoader = {
 	 * @param  {Object} animationClass  Класс анимации
 	 */
 	loadAnimation: function (animationClass) {
+		if ($.animation) {
+			$.animation.clear();
+		}
 		$.animation = new animationClass('animation');
 		$('#animation').attr('width', $.animation.width)
 				.attr('height', $.animation.height)

@@ -1,5 +1,6 @@
 import {Dance4Animation, FourDanceAnimationElement} from './commons/animation4.js';
 import {ZapateoElement, ZarandeoElement, VueltaElement} from './commons/animation_gato_style.js';
+import {getOppositePosition} from './commons/utils.js';
 
 export class VueltaGradientElement extends VueltaElement {
 	constructor(animation, pathStr) {
@@ -22,7 +23,7 @@ export class VueltaGradientElement extends VueltaElement {
 	}
 }
 
-export class Chacarera4Animation extends Dance4Animation {
+export default class Chacarera4Animation extends Dance4Animation {
 	constructor(id) {
 		super(id);
 
