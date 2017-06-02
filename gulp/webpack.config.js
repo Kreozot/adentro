@@ -31,9 +31,6 @@ var webpackConfig = [
 		},
 		devtool: 'source-map',
 		module: {
-			preLoaders: [
-				{test: /\.js$/, exclude: /node_modules/, loader: 'jscs'}
-			],
 			loaders: [
 				{test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&presets[]=es2015'},
 				{test: /\.json$/, loader: 'json'},
@@ -56,11 +53,11 @@ var webpackConfig = [
 		callbackLoader: {
 			requireSchemes: function () {
 				return '{' + schemesList.map(function (id) {
-					return id + ': function (callback) {' +
-						'require.ensure([\'schemeParams/' + id + '.js\'], function (require) {' +
-							'callback(require(\'schemeParams/' + id + '.js\'));' +
-						'});' +
-					'}';
+					return `${id}: function (callback) {
+						require.ensure(['schemeParams/${id}.js'], function (require) {
+							callback(require('schemeParams/${id}.js'));
+						});
+					}`;
 				}).join(',\n') + '}';
 			}
 		}
@@ -95,6 +92,8 @@ if (argv.production) {
 	webpackConfig = webpackConfig.map(function (config) {
 		config.plugins.push(
 			new webpack.optimize.UglifyJsPlugin({
+				sourceMap: false,
+				comments: false,
 				compress: {
 					warnings: false
 				},
@@ -104,6 +103,12 @@ if (argv.production) {
 				mangle: {
 					except: ['$', 'exports', 'require']
 				}
+			})
+		);
+		config.plugins.push(
+			new webpack.DefinePlugin({
+				'process.env.NODE_ENV': '"production"',
+				'process.env.BLUEBIRD_WARNINGS': 0,
 			})
 		);
 		config.devtool = 'source-map';
@@ -119,7 +124,7 @@ webpackConfig.push({
 	},
 	entry: {
 		// Сторонние библиотеки
-		'vendor': [
+		vendor: [
 			'expose?$!expose?jQuery!jquery/dist/jquery.js',
 			'jplayer/dist/jplayer/jquery.jplayer.js',
 			'jplayer/dist/jplayer/jquery.jplayer.swf',

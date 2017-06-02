@@ -9,12 +9,11 @@ let contentSwitch = {
 
 	/**
 	 * Добавить ссылку на блок
-	 * @param {String} block_id  Идентификатор блока
+	 * @param {String} blockId  Идентификатор блока
 	 * @param {String} title     Заголовок ссылки
 	 */
-	addLink: function (block_id, title) {
-		$('#content_menu').append('<a href="javascript:contentSwitch.show(\'' + block_id +
-			'\');" class="content_link" id="' + block_id + '_link">' + title + '</a>');
+	addLink: function (blockId, title) {
+		$('#content_menu').append(`<a href="javascript:contentSwitch.show('${blockId}');" class="content_link" id="${blockId}_link">${title}</a>`);
 		if ($('#content_menu > a').length > 1) {
 			$('#content_menu').show();
 		}
@@ -22,23 +21,23 @@ let contentSwitch = {
 
 	/**
 	 * Добавить содержимое блока
-	 * @param {String} block_id Идентификатор блока
+	 * @param {String} blockId Идентификатор блока
 	 * @param {String} content  Содержимое блока
 	 */
-	addContent: function (block_id, content) {
-		$('#content').append('<div id="' + block_id + '">' + content + '</div>');
-		$('#' + block_id).hide();
+	addContent: function (blockId, content) {
+		$('#content').append(`<div id="${blockId}">${content}</div>`);
+		$('#' + blockId).hide();
 	},
 
 	/**
 	 * Показать блок
-	 * @param  {String} block_id Идентификатор блока
+	 * @param  {String} blockId Идентификатор блока
 	 */
-	show: function (block_id) {
-		$('#content > div:not(#' + block_id + ')').hide();
-		$('#' + block_id).show();
-		$('#content_menu > a:not(#' + block_id + '_link)').removeClass('active');
-		$('#' + block_id + '_link').addClass('active');
+	show: function (blockId) {
+		$(`#content > div:not(#${blockId})`).hide();
+		$(`#${blockId}`).show();
+		$(`#content_menu > a:not(#${blockId}_link)`).removeClass('active');
+		$(`#${blockId}_link`).addClass('active');
 	},
 
 	/**
