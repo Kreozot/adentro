@@ -1,9 +1,9 @@
 var schemes = require('./schemes.js');
 var URI = require('urijs/src/URI.js');
-import AnimationLoader from './loading/animation_loading.js';
+import AnimationLoader from './loading/animation_loading';
 
 function supports_history_api() {
-	return !!(window.history && history.pushState);
+	return Boolean(window.history && history.pushState);
 }
 
 export default class Navigation {
@@ -131,10 +131,10 @@ export default class Navigation {
 		this.context.animation = animationId;
 
 		this.pushStateOrRedirect({
-				schema: this.context.schema,
-				animation: this.context.animation,
-				music: this.context.music
-			}, schemes[this.context.schema].name + ' - Adentro',
+			schema: this.context.schema,
+			animation: this.context.animation,
+			music: this.context.music
+		}, schemes[this.context.schema].name + ' - Adentro',
 			this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
 
 		var schemaParams = schemes[this.context.schema];
@@ -158,10 +158,10 @@ export default class Navigation {
 	showMusic(musicId) {
 		this.context.music = musicId;
 		this.pushStateOrRedirect({
-				schema: this.context.schema,
-				animation: this.context.animation,
-				music: this.context.music
-			}, schemes[this.context.schema].name + ' - Adentro',
+			schema: this.context.schema,
+			animation: this.context.animation,
+			music: this.context.music
+		}, schemes[this.context.schema].name + ' - Adentro',
 			this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
 
 		var schemaParams = schemes[this.context.schema];

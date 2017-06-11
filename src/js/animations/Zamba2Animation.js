@@ -1,11 +1,12 @@
-import ZambaAnimation from './ZambaAnimation.js';
-import {DanceAnimationElement} from './commons/elements.js';
+import ZambaAnimation from './ZambaAnimation';
+import PairElement from './commons/elements/double/PairElement';
+import {getOppositePosition} from './commons/utils';
 
 export default class Zamba2Animation extends ZambaAnimation {
 	constructor(id) {
 		super(id);
 
-		this.coronacionElement = new DanceAnimationElement(this,
+		this.coronacionElement = new PairElement(this,
 			{left: 'm 40,160 230,0',
 			right: 'm 560,160 -230,0'});
 	}
@@ -32,9 +33,9 @@ export default class Zamba2Animation extends ZambaAnimation {
 
 		this.clearPaths();
 		this.mediaVueltaElement.drawPath(manPosition);
-		this.coronacionElement.drawPath((manPosition === 'left') ? 'right' : 'left');
+		this.coronacionElement.drawPath(getOppositePosition(manPosition));
 		this.mediaVueltaElement.startAnimation(seconds * firstPart, beats * firstPart);
-		manPosition = (manPosition === 'left') ? 'right' : 'left';
+		manPosition = getOppositePosition(manPosition);
 		this.coronacionElement.startAnimation(seconds * secondPart, beats * secondPart, this.DIRECTION_FORWARD, seconds * firstPart);
 	}
 }

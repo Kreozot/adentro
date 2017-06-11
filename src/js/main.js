@@ -1,11 +1,11 @@
-import Navigation from './navigation.js';
-import Player from './player.js';
-import contentSwitch from './loading/content_switch.js';
-import animationLoader from './loading/animation_loading.js';
-import infoLoader from './loading/info_loading.js';
-import {getElement} from './timing/timing.js';
-import TimingGenerator from './timing/timing-generator.js';
-import Tour from './tour.js';
+import Navigation from './navigation';
+import Player from './player';
+import contentSwitch from './loading/content_switch';
+import animationLoader from './loading/animation_loading';
+import infoLoader from './loading/info_loading';
+import {getElement} from './timing/timing';
+import TimingGenerator from './timing/timing-generator';
+import Tour from './tour';
 
 var playerSelector = '#jplayer';
 
@@ -23,7 +23,7 @@ var getSvgSchemaDom = function () {
 
 class Adentro {
 
-	constructor () {
+	constructor() {
 		this.navigation = new Navigation(this);
 		this.player = new Player(this);
 	}
@@ -32,7 +32,7 @@ class Adentro {
 	 * Спрятать отображение текущего элемента на схеме
 	 * @param  {String} svgSchemaDom Ссылка на dom svg-схемы
 	 */
-	hideCurrentElementMarkOnSchema (svgSchemaDom) {
+	hideCurrentElementMarkOnSchema(svgSchemaDom) {
 		if (!svgSchemaDom) {
 			svgSchemaDom = getSvgSchemaDom();
 		}
@@ -45,7 +45,7 @@ class Adentro {
 	 * Спрятать отображение и визуализацию текущего элемента
 	 * @param  {String} svgSchemaDom Ссылка на dom svg-схемы
 	 */
-	hideCurrentElement (svgSchemaDom) {
+	hideCurrentElement(svgSchemaDom) {
 		this.hideCurrentElementMarkOnSchema(svgSchemaDom);
 		$.animation.clear();
 		$(playerSelector).data('currentElement', '');
@@ -56,7 +56,7 @@ class Adentro {
 	 * @param  {String} element 	  Идентификатор элемента
 	 * @param  {String} svgSchemaDom  Ссылка на dom svg-схемы
 	 */
-	markCurrentElementOnSchema (element, svgSchemaDom) {
+	markCurrentElementOnSchema(element, svgSchemaDom) {
 		if (!svgSchemaDom) {
 			svgSchemaDom = getSvgSchemaDom();
 		}
@@ -84,7 +84,7 @@ class Adentro {
 	 * @param  {Number} seconds    	  Длительность в секундах
 	 * @param  {String} svgSchemaDom  Ссылка на dom svg-схемы
 	 */
-	showCurrentElement (element, seconds, svgSchemaDom) {
+	showCurrentElement(element, seconds, svgSchemaDom) {
 		if (!svgSchemaDom) {
 			svgSchemaDom = getSvgSchemaDom();
 		}
@@ -112,7 +112,7 @@ class Adentro {
 	/**
 	 * Иницилизация схемы
 	 */
-	initSvgSchema () {
+	initSvgSchema() {
 		const svgdom = getSvgSchemaDom();
 		let $player = $(playerSelector);
 		if (svgdom) {
@@ -134,9 +134,9 @@ class Adentro {
 						$player.data('currentElement', element.name);
 						if (element && (element.name.length > 0)) {
 							this.showCurrentElement(element.name, element.timeLength, svgdom);
-						};
-					};
-				};
+						}
+					}
+				}
 			};
 			const endedEvent = event => {
 				this.hideCurrentElement(svgdom);
@@ -145,26 +145,26 @@ class Adentro {
 				let playerStatus = event.jPlayer.status;
 				if ((playerStatus.paused) && (playerStatus.currentTime > 0)) {
 					$.animation.pause();
-				};
+				}
 			};
 
 			$(playerSelector)
 				.bind($.jPlayer.event.timeupdate, timeupdateEvent)
 				.bind($.jPlayer.event.ended, endedEvent)
 				.bind($.jPlayer.event.pause, pauseEvent);
-		};
+		}
 	}
 
 	/**
 	 * Инициализация редактора тайминга
 	 */
-	initSvgSchemaEditor () {
+	initSvgSchemaEditor() {
 		const svgdom = getSvgSchemaDom();
 		if (svgdom) {
 			$('#schema')
 				.attr('width', $('svg', svgdom).attr('width'))
 				.attr('height', $('svg', svgdom).attr('height'));
-		};
+		}
 	}
 
 	/**
@@ -173,7 +173,7 @@ class Adentro {
 	 * @param  {String} currentMusicId    Идентификатор текущей композиции
 	 * @param  {Boolean} showEmptyTiming  Показывать композиции, не имеющие разметки тайминга
 	 */
-	showMusicLinks (musicData, currentMusicId, showEmptyTiming) {
+	showMusicLinks(musicData, currentMusicId, showEmptyTiming) {
 		if (musicData.length <= 1) {
 			$('#musicLinks').html('');
 			return;
@@ -210,7 +210,7 @@ class Adentro {
 	/**
 	 * Показать ссылки на языки
 	 */
-	showLanguageLinks () {
+	showLanguageLinks() {
 		var languages = [
 			{
 				id: 'ru',
@@ -248,7 +248,7 @@ class Adentro {
 	 * @param  {String} musicId    	   Идентификатор музыки
 	 * @param  {String} animationId    Идентификатор конкретной анимации (если в animationClass пришёл список)
 	 */
-	loadSchema (schemaParams, musicId, animationId) {
+	loadSchema(schemaParams, musicId, animationId) {
 		// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
 
 		$('#danceName').html(schemaParams.name);
@@ -291,7 +291,7 @@ class Adentro {
 	 * @param  {String} schemaParams   Объект параметров схемы
 	 * @param  {String} musicId    	   Идентификатор музыки
 	 */
-	loadSchemaEditor (schemaParams, musicId) {
+	loadSchemaEditor(schemaParams, musicId) {
 		$('#danceName').html(schemaParams.name + ' (editor mode)');
 		$('#schemaDiv').html(schemaParams.svgName);
 

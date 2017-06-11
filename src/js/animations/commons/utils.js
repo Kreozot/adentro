@@ -20,11 +20,17 @@ export function Timer(callback, delay) {
 			paused = false;
 			start = new Date();
 			timerId = window.setTimeout(callback, remaining);
-		};
+		}
 	};
 
 	this.resume();
 }
+
+const positions = [
+	['start_left', 'start_right'],
+	['left', 'right'],
+	['top', 'bottom']
+];
 
 /**
  * Получение противоположной позиции
@@ -32,23 +38,17 @@ export function Timer(callback, delay) {
  * @return {String}          Позиция, противоположная указанной
  */
 export function getOppositePosition(position) {
-	switch (position) {
-		case 'start_left':
-			return 'start_right';
-		case 'start_right':
-			return 'start_left';
-		case 'left':
-			return 'right';
-		case 'right':
-			return 'left';
-		case 'top':
-			return 'bottom';
-		case 'bottom':
-			return 'top';
-		default:
-			return 'left';
+	for (var i = 0; i < positions.length; i++) {
+		const pair = positions[i];
+		if (position === pair[0]) {
+			return pair[1];
+		}
+		if (position === pair[1]) {
+			return pair[0];
+		}
 	}
-};
+	return 'left';
+}
 
 /**
  * Дробная часть от деления
@@ -59,7 +59,7 @@ export function getOppositePosition(position) {
 export function mod(upVal, downVal) {
 	const divVal = upVal / downVal;
 	return divVal - Math.floor(divVal);
-};
+}
 
 // Транспонирует угол в промежуток от 0 до 360
 export function normalizeAngle(angle) {

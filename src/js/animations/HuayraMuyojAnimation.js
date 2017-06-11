@@ -1,7 +1,9 @@
-import DanceAnimation from './commons/animation.js';
-import {DanceAnimationElement, RotateDanceAnimationElement} from './commons/elements.js';
-import {ZapateoElement, ZarandeoElement} from './commons/animation_gato_style.js';
-import {getOppositePosition, Timer} from './commons/utils.js';
+import DanceAnimation from './commons/DanceAnimation';
+import PairElement from './commons/elements/double/PairElement';
+import RotatePairElement from './commons/elements/double/RotatePairElement';
+import ZapateoElement from './commons/elements/single/ZapateoElement';
+import ZarandeoElement from './commons/elements/single/ZarandeoElement';
+import {getOppositePosition, Timer} from './commons/utils';
 
 export default class HuayraMuyojAnimation extends DanceAnimation {
 	constructor(id) {
@@ -18,31 +20,31 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 			bottom: {x: 390, y: 390, angle: 135}
 		};
 
-		this.esquinaStartElement = new RotateDanceAnimationElement(this,
+		this.esquinaStartElement = new RotatePairElement(this,
 			{left: 'M 50,220 50,50',
 			right: 'm 390,220 0,170'}, 315);
 
-		this.esquinaEndElement = new RotateDanceAnimationElement(this,
+		this.esquinaEndElement = new RotatePairElement(this,
 			{left: 'M 50,390 50,220',
 			right: 'M 390,50 390,220'}, 315);
 
-		this.contraGiroEndElement = new RotateDanceAnimationElement(this,
+		this.contraGiroEndElement = new RotatePairElement(this,
 			{left: 'm 50,220 1,1',
 			right: 'm 390,220 1,1'}, -315);
 
-		this.contraGiroElement = new RotateDanceAnimationElement(this,
+		this.contraGiroElement = new RotatePairElement(this,
 			{left: 'M 50,50 200,200',
 			top: 'M 390,50 240,200',
 			right: 'M 390,390 240,240',
 			bottom: 'M 50,390 200,240'}, -540);
 
-		this.regresoElement = new DanceAnimationElement(this,
+		this.regresoElement = new PairElement(this,
 			{left: 'M 200,240 50,390',
 			top: 'M 200,200 50,50',
 			right: 'M 240,200 390,50',
 			bottom: 'M 240,240 390,390'});
 
-		this.giroElement = new RotateDanceAnimationElement(this,
+		this.giroElement = new RotatePairElement(this,
 			{left: 'm 50,390 1,1',
 			top: 'm 50,50 1,1',
 			right: 'm 390,50 1,1',
@@ -56,17 +58,17 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 			right: 'm 390,50 -130,0 0,130 130,0 z',
 			bottom: 'm 390,390 0,-130 -130,0 0,130 z'});
 
-		this.esquinaElement = new RotateDanceAnimationElement(this,
+		this.esquinaElement = new RotatePairElement(this,
 			{left: 'M 50,390 50,50',
 			top: 'm 50,50 340,0',
 			right: 'm 390,50 0,340',
 			bottom: 'M 390,390 50,390'}, 270);
 
-		this.avanceElement = new DanceAnimationElement(this,
+		this.avanceElement = new PairElement(this,
 			{left: 'm 50,220 70,0',
 			right: 'm 390,220 -70,0'});
 
-		this.coronacionElement = new RotateDanceAnimationElement(this,
+		this.coronacionElement = new RotatePairElement(this,
 			{left: 'm 50,220 140,0',
 			right: 'm 390,220 -140,0'}, 360);
 	}

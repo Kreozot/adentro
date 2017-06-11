@@ -1,7 +1,7 @@
-import GatoAnimation from './GatoAnimation.js';
-import {DanceAnimationElement} from './commons/elements.js';
+import GatoAnimation from './GatoAnimation';
+import PairElement from './commons/elements/double/PairElement';
 
-class BailecitoAvanceRetrocesoElement extends DanceAnimationElement {
+class BailecitoAvanceRetrocesoElement extends PairElement {
 	constructor(animation, pathStrings) {
 		super(animation, pathStrings);
 

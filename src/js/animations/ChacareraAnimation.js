@@ -1,10 +1,10 @@
-import GatoAnimation from './GatoAnimation.js';
-import {DanceAnimationElement} from './commons/elements.js';
+import GatoAnimation from './GatoAnimation';
+import PairElement from './commons/elements/double/PairElement';
 
-export default class ChacareraAnimation extends GatoAnimation  {
+export default class ChacareraAnimation extends GatoAnimation {
 	constructor(id) {
 		super(id);
-		this.avanceElement = new DanceAnimationElement(this,
+		this.avanceElement = new PairElement(this,
 			{left: 'M 40,160 140,260 240,160 140,60 z',
 			right: 'M 560,160 460,60 360,160 460,260 z'});
 	}
@@ -17,4 +17,4 @@ export default class ChacareraAnimation extends GatoAnimation  {
 		this.avanceElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5);
 		this.avanceElement.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
 	}
-};
+}

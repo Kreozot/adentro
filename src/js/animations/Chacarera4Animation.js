@@ -1,6 +1,9 @@
-import {Dance4Animation, FourDanceAnimationElement} from './commons/animation4.js';
-import {ZapateoElement, ZarandeoElement, VueltaElement} from './commons/animation_gato_style.js';
-import {getOppositePosition} from './commons/utils.js';
+import QuatroElement from './commons/elements/quatro/QuatroElement';
+import Dance4Animation from './commons/Dance4Animation';
+import ZapateoElement from './commons/elements/single/ZapateoElement';
+import ZarandeoElement from './commons/elements/single/ZarandeoElement';
+import VueltaElement from './commons/elements/double/VueltaElement';
+import {getOppositePosition} from './commons/utils';
 
 export class VueltaGradientElement extends VueltaElement {
 	constructor(animation, pathStr) {
@@ -37,19 +40,19 @@ export default class Chacarera4Animation extends Dance4Animation {
 			right2: {x: 390, y: 310, angle: 90}
 		};
 
-		this.avanceElement = new FourDanceAnimationElement(this,
+		this.avanceElement = new QuatroElement(this,
 			{left: 'm 50,130 60,60 60,-60 -60,-60 z',
 			right: 'm 390,130 -60,-60 -60,60 60,60 z'},
 			{left: 'm 50,310 60,60 60,-60 -60,-60 z',
 			right: 'm 390,310 -60,-60 -60,60 60,60 z'});
 
-		this.giroElement = new FourDanceAnimationElement(this,
+		this.giroElement = new QuatroElement(this,
 			{left: 'm 50,130 c 0,35 25,60 60,60 35,0 60,-25 60,-60 0,-35 -25,-60 -60,-60 -35,0 -60,25 -60,60 z',
 			right: 'm 390,130 c 0,-35 -25,-60 -60,-60 -35,0 -60,25 -60,60 0,35 25,60 60,60 35,0 60,-25 60,-60 z'},
 			{left: 'm 50,310 c 0,35 25,60 60,60 35,0 60,-25 60,-60 0,-35 -25,-60 -60,-60 -35,0 -60,25 -60,60 z',
 			right: 'm 390,310 c 0,-35 -25,-60 -60,-60 -35,0 -60,25 -60,60 0,35 25,60 60,60 35,0 60,-25 60,-60 z'});
 
-		this.mediaVueltaElement = new FourDanceAnimationElement(this,
+		this.mediaVueltaElement = new QuatroElement(this,
 			{left: 'm 50,130 c -30,60 -30,120 0,180 66,132 274,132 340,0',
 			right: 'M 390,130 C 314,0 116,-2 50,130 20,190 20,250 50,310'},
 			{left: 'm 50,310 c 76,130 274,132 340,0 30,-60 30,-120 0,-180',
@@ -70,7 +73,7 @@ export default class Chacarera4Animation extends Dance4Animation {
 			right: 'm 390,310 -60,-60 -60,60 60,60 z'},
 			this.woman2);
 
-		this.coronacionElement = new FourDanceAnimationElement(this,
+		this.coronacionElement = new QuatroElement(this,
 			{left: 'm 50,130 c 0,25 70,40 100,40 30,0 55,-20 55,-40 0,-15 -10,-25 -25,-25 -15,0 -25,10 -25,25 0,15 10,25 25,25 15,0 25,-5 30,-20',
 			right: 'm 390,130 c 0,-25 -70,-40 -100,-40 -30,0 -55,20 -55,40 0,15 10,25 25,25 15,0 25,-10 25,-25 0,-15 -10,-25 -25,-25 -15,0 -25,5 -30,20'},
 			{left: 'm 50,310 c 0,25 70,40 100,40 30,0 55,-20 55,-40 0,-15 -10,-25 -25,-25 -15,0 -25,10 -25,25 0,15 10,25 25,25 15,0 25,-5 30,-20',
@@ -144,4 +147,4 @@ export default class Chacarera4Animation extends Dance4Animation {
 	coronacion(seconds, manPosition, beats) {
 		this.coronacionElement.fullAnimation(seconds, beats, manPosition);
 	}
-};
+}

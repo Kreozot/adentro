@@ -1,4 +1,4 @@
-import contentSwitch from './content_switch.js';
+import contentSwitch from './content_switch';
 
 let lapateoLoader = {
 	loadZapateoBlock: function (svgName) {

@@ -1,15 +1,15 @@
-import EscondidoAnimation from './EscondidoAnimation.js';
-import {RotateDanceAnimationElement} from './commons/elements.js';
-import {getOppositePosition, Timer} from './commons/utils.js';
+import EscondidoAnimation from './EscondidoAnimation';
+import RotatePairElement from './commons/elements/double/RotatePairElement';
+import {getOppositePosition, Timer} from './commons/utils';
 
 export default class RemedioAnimation extends EscondidoAnimation {
 	constructor(id) {
 		super(id);
 
-		this.giroCoronacionElement = new RotateDanceAnimationElement(this,
+		this.giroCoronacionElement = new RotatePairElement(this,
 			{left: 'M 50,390 200,240',
 			right: 'M 390,50 240,200'}, 360);
-		this.contragiroCoronacionElement = new RotateDanceAnimationElement(this,
+		this.contragiroCoronacionElement = new RotatePairElement(this,
 			{left: 'M 50,390 200,240',
 			right: 'M 390,50 240,200'}, -360);
 	}

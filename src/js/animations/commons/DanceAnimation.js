@@ -1,5 +1,5 @@
 require('../../../styles/animation.css');
-import {mod, normalizeAngle} from './utils.js';
+import {mod, normalizeAngle} from './utils';
 
 const FIGURE_ANGLE_TICK = 25;
 const FIGURE_ANGLE_SPEED = 3;
@@ -10,7 +10,7 @@ const FIGURE_ANGLE_SPEED = 3;
  */
 export default class DanceAnimation {
 	constructor(id) {
-		this.svg = Snap('#' + id);
+		this.svg = new Snap('#' + id);
 
 		this.timeouts = [];
 		this.animations = [];
@@ -32,12 +32,12 @@ export default class DanceAnimation {
 		this.paths.forEach(path => path.remove());
 		while (this.paths.length > 0) {
 			this.paths.pop();
-		};
+		}
 
 		this.animations.forEach(animation => animation.stop());
 		while (this.animations.length > 0) {
 			this.animations.pop();
-		};
+		}
 	}
 
 	clear() {
@@ -49,7 +49,7 @@ export default class DanceAnimation {
 		this.timeouts.forEach(timeout => timeout.pause());
 		while (this.timeouts.length > 0) {
 			this.timeouts.pop();
-		};
+		}
 	}
 
 	restartAnimation(animation, animationIndex) {
@@ -73,7 +73,7 @@ export default class DanceAnimation {
 			this.paused = false;
 			this.animations.forEach((animation, index) => this.restartAnimation(animation, index));
 			this.timeouts.forEach(timeout => timeout.resume());
-		};
+		}
 	}
 
 	getGenderColor(gender) {

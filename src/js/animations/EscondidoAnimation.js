@@ -1,7 +1,10 @@
-import DanceAnimation from './commons/animation.js';
-import {DanceAnimationElement, RotateDanceAnimationElement} from './commons/elements.js';
-import {getOppositePosition, Timer} from './commons/utils.js';
-import {ZapateoElement, ZarandeoElement, VueltaElement} from './commons/animation_gato_style.js';
+import DanceAnimation from './commons/DanceAnimation';
+import PairElement from './commons/elements/single/PairElement';
+import RotatePairElement from './commons/elements/double/RotatePairElement';
+import ZapateoElement from './commons/elements/single/ZapateoElement';
+import ZarandeoElement from './commons/elements/single/ZarandeoElement';
+import VueltaElement from './commons/elements/double/VueltaElement';
+import {getOppositePosition, Timer} from './commons/utils';
 
 export default class EscondidoAnimation extends DanceAnimation {
 	constructor(id) {
@@ -16,7 +19,7 @@ export default class EscondidoAnimation extends DanceAnimation {
 			bottom: {x: 390, y: 390, angle: 135}
 		};
 
-		this.giroElement = new DanceAnimationElement(this,
+		this.giroElement = new PairElement(this,
 			{left: 'm 50,390 c 20,20 70,10 70,-30 0,-20 -20,-40 -40,-40 -40,0 -50,50 -30,70',
 			right: 'm 390,50 c -20,-20 -70,-10 -70,30 0,20 20,40 40,40 40,0 50,-50 30,-70'});
 
@@ -31,25 +34,25 @@ export default class EscondidoAnimation extends DanceAnimation {
 			right: 'm 390,50 -130,0 0,130 130,0 z',
 			bottom: 'm 390,390 0,-130 -130,0 0,130 z'});
 
-		this.mediaVueltaElement = new DanceAnimationElement(this,
+		this.mediaVueltaElement = new PairElement(this,
 			{left: 'm 50,390 c 30,30 160,0 250,-90 90,-90 120,-220 90,-250',
 			right: 'M 390,50 C 360,20 230,50 140,140 50,230 20,360 50,390'});
 
-		this.coronacionElement = new DanceAnimationElement(this,
+		this.coronacionElement = new PairElement(this,
 			{left: 'm 50,390 c 30,20 110,-20 150,-60 40,-40 20,-110 -20,-110 -20,0 -40,10 -40,40 0,25 20,40 40,40 40,0 60,-30 50,-60',
 			right: 'm 390,50 c -30,-20 -110,20 -150,60 -40,40 -20,110 20,110 20,0 40,-10 40,-40 0,-25 -20,-40 -40,-40 -40,0 -60,30 -50,60'});
 
-		this.esquinaElement = new RotateDanceAnimationElement(this,
+		this.esquinaElement = new RotatePairElement(this,
 			{left: 'M 50,390 50,50',
 			top: 'm 50,50 340,0',
 			right: 'm 390,50 0,340',
 			bottom: 'M 390,390 50,390'}, 270);
-		this.balanceo1Element = new DanceAnimationElement(this,
+		this.balanceo1Element = new PairElement(this,
 			{left: 'M 50,50 70,30 50,50',
 			top: 'M 390,50 410,70 390,50',
 			right: 'm 390,390 -20,20 20,-20',
 			bottom: 'M 50,390 30,370 50,390'});
-		this.balanceo2Element = new DanceAnimationElement(this,
+		this.balanceo2Element = new PairElement(this,
 			{left: 'M 50,50 30,70 50,50',
 			top: 'M 390,50 370,30 390,50',
 			right: 'm 390,390 20,-20 -20,20',
@@ -120,4 +123,4 @@ export default class EscondidoAnimation extends DanceAnimation {
 	coronacion(seconds, manPosition, beats) {
 		this.coronacionElement.fullAnimation(seconds, beats, manPosition);
 	}
-};
+}

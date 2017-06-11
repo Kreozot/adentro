@@ -1,24 +1,24 @@
-import GatoAnimation from './GatoAnimation.js';
-import {DanceAnimationElement} from './commons/elements.js';
-import {getOppositePosition} from './commons/utils.js';
+import GatoAnimation from './GatoAnimation';
+import PairElement from './commons/elements/double/PairElement';
+import {getOppositePosition} from './commons/utils';
 
 export default class ZambaAnimation extends GatoAnimation {
 	constructor(id) {
 		super(id);
 
-		this.mediaVueltaToArrestoElement = new DanceAnimationElement(this,
+		this.mediaVueltaToArrestoElement = new PairElement(this,
 			{left: 'm 40,160 c 0,40 160,80 240,80 110,0 110,-130 20,-130',
 			right: 'M 560,160 C 560,120 400,80 320,80 210,80 210,210 300,210'});
 
-		this.arrestoElement = new DanceAnimationElement(this,
+		this.arrestoElement = new PairElement(this,
 			{left: 'm 300,210 c -30,0 -50,-20 -50,-50 0,-30 20,-50 50,-50',
 			right: 'm 300,110 c 30,0 50,20 50,50 0,30 -20,50 -50,50'});
 
-		this.arrestoBackElement = new DanceAnimationElement(this,
+		this.arrestoBackElement = new PairElement(this,
 			{left: 'M 300,110 C 240,90 40,120 40,160',
 			right: 'm 300,210 c 60,20 260,-10 260,-50'});
 
-		this.mediaVueltaCoronacionElement = new DanceAnimationElement(this,
+		this.mediaVueltaCoronacionElement = new PairElement(this,
 			{left: 'm 40,160 c 0,40 160,100 260,100 180,0 100,-200 20,-120',
 			right: 'M 560,160 C 560,120 400,60 300,60 120,60 200,260 280,180'});
 
@@ -34,7 +34,7 @@ export default class ZambaAnimation extends GatoAnimation {
 		this.mediaVueltaElement.setAngle(-45);
 		this.mediaVueltaToArrestoElement.setAngle(-45);
 		this.mediaVueltaElement.drawPath(manPosition);
-		this.mediaVueltaToArrestoElement.drawPath((manPosition === 'left') ? 'right' : 'left');
+		this.mediaVueltaToArrestoElement.drawPath(getOppositePosition(manPosition));
 		this.mediaVueltaElement.startAnimation(partSeconds, partBeats);
 		this.mediaVueltaToArrestoElement.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds);
 	}

@@ -1,9 +1,11 @@
-import GatoAnimation from './GatoAnimation.js';
-import {DanceAnimationElement, SingleDanceAnimationElement} from './commons/elements.js';
-import {getOppositePosition} from './commons/utils.js';
-import {ZapateoElement, ZarandeoElement} from './commons/animation_gato_style.js';
+import GatoAnimation from './GatoAnimation';
+import SingleElement from './commons/elements/single/SingleElement';
+import PairElement from './commons/elements/double/PairElement';
+import ZapateoElement from './commons/elements/single/ZapateoElement';
+import ZarandeoElement from './commons/elements/single/ZarandeoElement';
+import {getOppositePosition} from './commons/utils';
 
-class HuellaManAnimationElement extends SingleDanceAnimationElement {
+class HuellaManAnimationElement extends SingleElement {
 	constructor(animation, pathStrings, gender, figure) {
 		super(animation, pathStrings, gender, figure);
 
@@ -19,7 +21,7 @@ class HuellaManAnimationElement extends SingleDanceAnimationElement {
 export default class HuellaAnimation extends GatoAnimation {
 	constructor(id) {
 		super(id);
-		this.avanceElement = new DanceAnimationElement(this, {
+		this.avanceElement = new PairElement(this, {
 			left: 'M 40,160 140,260 240,160 140,60 z',
 			right: 'M 560,160 460,60 360,160 460,260 z'
 		});
@@ -59,17 +61,17 @@ export default class HuellaAnimation extends GatoAnimation {
 			right: 'm 200,200 c 0,0 100,-40 360,-40'
 		}, 'man', this.man);
 
-		this.womanGiroElement = new SingleDanceAnimationElement(this, {
+		this.womanGiroElement = new SingleElement(this, {
 			left: 'm 40,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 C 240,80 200,40 140,40 80,40 40,80 40,140 z',
 			right: 'M 560,140 C 560,80 520,40 460,40 400,40 360,80 360,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 z'
 		}, 'woman', this.woman);
 
-		this.mediaContraVueltaManElement = new SingleDanceAnimationElement(this, {
+		this.mediaContraVueltaManElement = new SingleElement(this, {
 			left: 'M 560,160 C 560,110 440,40 300,40 160,40 40,110 40,160',
 			right: 'm 40,160 c 0,50 120,120 260,120 140,0 260,-70 260,-120'
 		}, 'man', this.man);
 
-		this.mediaContraVueltaWomanElement = new SingleDanceAnimationElement(this, {
+		this.mediaContraVueltaWomanElement = new SingleElement(this, {
 			left: 'M 560,160 C 560,110 440,40 300,40 160,40 40,110 40,160',
 			right: 'm 40,160 c 0,50 120,120 260,120 140,0 260,-70 260,-120'
 		}, 'woman', this.woman);

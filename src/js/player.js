@@ -6,7 +6,7 @@ class Player {
 	 * Загрузить музыку и тайминг
 	 * @param  {Object} musicDef Описание композиции
 	 */
-	loadMusicSchema (musicDef) {
+	loadMusicSchema(musicDef) {
 		$(playerSelector).jPlayer('setMedia', {
 			title: musicDef.title,
 			mp3: musicDef.file
@@ -18,7 +18,7 @@ class Player {
 	 * Воспроизвести музыку с момента определённого элемента в хореографии
 	 * @param  {String} element Идентификатор элемента
 	 */
-	playElement (element) {
+	playElement(element) {
 		const schema = $(playerSelector).data('schema');
 		const time = schema[element];
 		$.animation.clear();
