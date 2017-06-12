@@ -21,8 +21,8 @@ let animationLoader = {
 		}
 		$.animation = new animationClass('animation');
 		$('#animation').attr('width', $.animation.width)
-				.attr('height', $.animation.height)
-				.attr('viewBox', '0 0 ' + $.animation.width + ' ' + $.animation.height);
+			.attr('height', $.animation.height)
+			.attr('viewBox', '0 0 ' + $.animation.width + ' ' + $.animation.height);
 	},
 
 	/**
@@ -42,17 +42,15 @@ let animationLoader = {
 	 * @param  {String} animationId         Идентификатор текущей анимации
 	 */
 	showAnimationLinks: function (animationClassDefs, animationId) {
-		var currentClassDef = this.getAnimationClassDef(animationClassDefs, animationId);
+		const currentClassDef = this.getAnimationClassDef(animationClassDefs, animationId);
 
-		var getAnimationLinks = function (animationClassDefs) {
+		const getAnimationLinks = function (animationClassDefs) {
 			var result = '';
 			result += animationClassDefs.map(animationClassDef => {
 				if (animationClassDef.id === currentClassDef.id) {
 					return animationClassDef.title;
 				} else {
-					return `<a href="javascript:showAnimation('${animationClassDef.id}')">
-						${animationClassDef.title}
-						</a>`;
+					return `<a href="javascript:showAnimation('${animationClassDef.id}')">${animationClassDef.title}</a>`;
 				}
 			}).join(', ');
 			return result;

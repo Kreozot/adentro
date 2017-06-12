@@ -47,8 +47,8 @@ function ZapateoTiming() {
 	var loadAnimation = function (animationClass) {
 		$.animation = new window[animationClass]('animation');
 		$('#animation').attr('width', $.animation.width)
-				.attr('height', $.animation.height)
-				.attr('viewBox', '0 0 ' + $.animation.width + ' ' + $.animation.height);
+			.attr('height', $.animation.height)
+			.attr('viewBox', '0 0 ' + $.animation.width + ' ' + $.animation.height);
 	};
 
 	/**
@@ -59,9 +59,9 @@ function ZapateoTiming() {
 		var svgdom = getObjectDom('zapateo');
 		if (svgdom) {
 			$('#zapateo').attr('width', $('svg', svgdom).attr('width'))
-					.attr('height', $('svg', svgdom).attr('height'));
+				.attr('height', $('svg', svgdom).attr('height'));
 
-			var timeupdateEvent = function (svgdom) {
+			var timeupdateEvent = (function (svgdom) {
 				return function (event) {
 					// Есле остановлено
 					if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
@@ -80,23 +80,23 @@ function ZapateoTiming() {
 						}
 					}
 				};
-			}(svgdom);
-			var endedEvent = function (svgdom) {
+			}(svgdom));
+			var endedEvent = (function (svgdom) {
 				return function (event) {
 					hideCurrentElement(svgdom);
 				};
-			}(svgdom);
-			var pauseEvent = function (svgdom) {
+			}(svgdom));
+			var pauseEvent = (function (svgdom) {
 				return function (event) {
 					if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime > 0)) {
 						$.animation.pause();
-					};
+					}
 				};
-			}(svgdom);
+			}(svgdom));
 
 			$(playerSelector).bind($.jPlayer.event.timeupdate, timeupdateEvent)
-					.bind($.jPlayer.event.ended, endedEvent)
-					.bind($.jPlayer.event.pause, pauseEvent);
-		};
+				.bind($.jPlayer.event.ended, endedEvent)
+				.bind($.jPlayer.event.pause, pauseEvent);
+		}
 	};
 }

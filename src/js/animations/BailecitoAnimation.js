@@ -26,10 +26,10 @@ export default class BailecitoAnimation extends GatoAnimation {
 
 		this.avanceRetrocesoElement1 = new BailecitoAvanceRetrocesoElement(this,
 			{left: 'm 40,160 c 0,0 0,40 40,40 140,0 400,0 440,0 40,0 40,-40 40,-40',
-			right: 'm 560,160 c 0,0 0,-40 -40,-40 -140,0 -400,0 -440,0 -40,0 -40,40 -40,40'});
+				right: 'm 560,160 c 0,0 0,-40 -40,-40 -140,0 -400,0 -440,0 -40,0 -40,40 -40,40'});
 		this.avanceRetrocesoElement2 = new BailecitoAvanceRetrocesoElement(this,
 			{left: 'm 560,160 c 0,0 0,-40 -40,-40 -40,0 -220,0 -220,0 l -260,0',
-			right: 'm 40,160 c 0,0 0,40 40,40 40,0 220,0 220,0 l 260,0'});
+				right: 'm 40,160 c 0,0 0,40 40,40 40,0 220,0 220,0 l 260,0'});
 	}
 
 	avance1(seconds, manPosition, beats) {

@@ -135,7 +135,7 @@ export default class Navigation {
 			animation: this.context.animation,
 			music: this.context.music
 		}, schemes[this.context.schema].name + ' - Adentro',
-			this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
+		this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
 
 		var schemaParams = schemes[this.context.schema];
 		schemaParams(function (scheme) {
@@ -162,7 +162,7 @@ export default class Navigation {
 			animation: this.context.animation,
 			music: this.context.music
 		}, schemes[this.context.schema].name + ' - Adentro',
-			this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
+		this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
 
 		var schemaParams = schemes[this.context.schema];
 		schemaParams(scheme => {

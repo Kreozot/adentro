@@ -8,10 +8,10 @@ export default class RemedioAnimation extends EscondidoAnimation {
 
 		this.giroCoronacionElement = new RotatePairElement(this,
 			{left: 'M 50,390 200,240',
-			right: 'M 390,50 240,200'}, 360);
+				right: 'M 390,50 240,200'}, 360);
 		this.contragiroCoronacionElement = new RotatePairElement(this,
 			{left: 'M 50,390 200,240',
-			right: 'M 390,50 240,200'}, -360);
+				right: 'M 390,50 240,200'}, -360);
 	}
 
 	rotateFigure(figure, seconds, beats, x, y, startAngle, endAngle) {

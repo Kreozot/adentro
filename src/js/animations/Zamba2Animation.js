@@ -8,7 +8,7 @@ export default class Zamba2Animation extends ZambaAnimation {
 
 		this.coronacionElement = new PairElement(this,
 			{left: 'm 40,160 230,0',
-			right: 'm 560,160 -230,0'});
+				right: 'm 560,160 -230,0'});
 	}
 
 	vuelta(seconds, manPosition, beats) {

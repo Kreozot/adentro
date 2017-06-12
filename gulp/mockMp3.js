@@ -34,12 +34,12 @@ function getMp3List() {
 						dir: match[1],
 						file: match[2]
 					};
-				})
-		})
+				});
+		});
 }
 
-gulp.task('clean-mp3-mock', function() {
-    return del([config.paths.temp.mp3Mock]);
+gulp.task('clean-mp3-mock', function () {
+	return del([config.paths.temp.mp3Mock]);
 });
 
 gulp.task('mock-mp3', ['clean-mp3-mock'], function () {
@@ -55,4 +55,4 @@ gulp.task('mock-mp3', ['clean-mp3-mock'], function () {
 			});
 			return merged;
 		});
-})
+});

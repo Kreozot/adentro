@@ -6,7 +6,7 @@ export default class ChacareraAnimation extends GatoAnimation {
 		super(id);
 		this.avanceElement = new PairElement(this,
 			{left: 'M 40,160 140,260 240,160 140,60 z',
-			right: 'M 560,160 460,60 360,160 460,260 z'});
+				right: 'M 560,160 460,60 360,160 460,260 z'});
 	}
 
 	avance(seconds, manPosition, beats) {

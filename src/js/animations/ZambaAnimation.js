@@ -8,19 +8,19 @@ export default class ZambaAnimation extends GatoAnimation {
 
 		this.mediaVueltaToArrestoElement = new PairElement(this,
 			{left: 'm 40,160 c 0,40 160,80 240,80 110,0 110,-130 20,-130',
-			right: 'M 560,160 C 560,120 400,80 320,80 210,80 210,210 300,210'});
+				right: 'M 560,160 C 560,120 400,80 320,80 210,80 210,210 300,210'});
 
 		this.arrestoElement = new PairElement(this,
 			{left: 'm 300,210 c -30,0 -50,-20 -50,-50 0,-30 20,-50 50,-50',
-			right: 'm 300,110 c 30,0 50,20 50,50 0,30 -20,50 -50,50'});
+				right: 'm 300,110 c 30,0 50,20 50,50 0,30 -20,50 -50,50'});
 
 		this.arrestoBackElement = new PairElement(this,
 			{left: 'M 300,110 C 240,90 40,120 40,160',
-			right: 'm 300,210 c 60,20 260,-10 260,-50'});
+				right: 'm 300,210 c 60,20 260,-10 260,-50'});
 
 		this.mediaVueltaCoronacionElement = new PairElement(this,
 			{left: 'm 40,160 c 0,40 160,100 260,100 180,0 100,-200 20,-120',
-			right: 'M 560,160 C 560,120 400,60 300,60 120,60 200,260 280,180'});
+				right: 'M 560,160 C 560,120 400,60 300,60 120,60 200,260 280,180'});
 
 		this.vueltaGato = this.vuelta;
 		this.arresto2 = this.arresto;
