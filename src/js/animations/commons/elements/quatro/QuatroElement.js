@@ -1,4 +1,4 @@
-import {Timer, getOppositePosition} from '../utils';
+import {Timer, getOppositePosition} from 'animationClasses/commons/utils';
 import SingleElement from '../single/SingleElement';
 
 /**

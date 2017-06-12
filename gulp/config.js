@@ -8,9 +8,9 @@ module.exports = {
 			html: path.resolve('./src'),
 			js: path.resolve('./src/js'),
 			svg: path.resolve('./src/svg'),
-			schemes: path.resolve('./src/js/schemeParams'),
+			schemes: path.resolve('./src/music'),
 			music: path.resolve('./src/music'),
-			musicData: path.resolve('./src/js/music'),
+			musicData: path.resolve('./src/music'),
 			styles: path.resolve('./src/styles')
 		},
 		temp: {

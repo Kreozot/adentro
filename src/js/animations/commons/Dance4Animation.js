@@ -1,5 +1,5 @@
 import DanceAnimation from './DanceAnimation';
-import PairElement from './double/PairElement';
+import PairElement from './elements/double/PairElement';
 
 export default class Dance4Animation extends DanceAnimation {
 	constructor(id) {

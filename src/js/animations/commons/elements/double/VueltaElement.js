@@ -1,4 +1,4 @@
-import {Timer} from '../utils';
+import {Timer} from 'animationClasses/commons/utils';
 import PairElement from './PairElement';
 
 export default class VueltaElement extends PairElement {

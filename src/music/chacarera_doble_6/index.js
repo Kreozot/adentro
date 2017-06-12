@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'Chacarera doble on 6',
 	svgName: require('./scheme.svg'),
-	music: [require('./music/chacarera_doble_6_pampa_de_los_guanacos'), require('./music/chacarera_doble_6_anorazas')],
+	music: [require('./music/pampa_de_los_guanacos'), require('./music/anorazas')],
 	animation: [{
 		id: 'onTwo',
 		animClass: require('animationClasses/ChacareraAnimation').default,

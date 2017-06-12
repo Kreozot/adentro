@@ -13,11 +13,12 @@ var webpackConfig = [
 		resolve: {
 			root: paths.root,
 			alias: {
-				musicData: 'src/js/music',
+				musicData: 'src/music',
 				svgData: paths.temp.svgCompiled,
 				infoData: 'src/info',
 				animationClasses: 'src/js/animations',
-				schemeParams: 'src/js/schemeParams',
+				schemeParams: 'src/music',
+				styles: 'src/styles',
 				mp3Files: argv.mockmp3 ? paths.temp.mp3Mock : 'src/music'
 			}
 		},
@@ -34,6 +35,7 @@ var webpackConfig = [
 			loaders: [
 				{test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&presets[]=es2015'},
 				{test: /\.json$/, loader: 'json'},
+				{test: /\.yaml$/, loader: 'json!yaml'},
 				{test: /\.css$/, loader: 'style!css'},
 				{test: /\.scss$/, loader: 'style!css!postcss'},
 				{test: /\.(jpe?g|png|gif)$/i, loader: 'url'},
@@ -46,20 +48,15 @@ var webpackConfig = [
 			return [autoprefixer, cssnext, precss];
 		},
 		plugins: [
-			new webpack.optimize.CommonsChunkPlugin({
-				children: true
-			})
+			new webpack.optimize.CommonsChunkPlugin({children: true})
 		],
 		callbackLoader: {
-			requireSchemes: function () {
-				return '{' + schemesList.map(function (id) {
-					return `${id}: function (callback) {
-						require.ensure(['schemeParams/${id}.js'], function (require) {
-							callback(require('schemeParams/${id}.js'));
-						});
-					}`;
-				}).join(',\n') + '}';
-			}
+			requireSchemes: () => '{' + schemesList.map(id => `${id}: function (callback) {
+					require.ensure(['schemeParams/${id}'], function (require) {
+						callback(require('schemeParams/${id}'));
+					});
+				}`
+			).join(',\n') + '}'
 		}
 	}
 ];

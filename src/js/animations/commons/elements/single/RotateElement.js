@@ -1,4 +1,4 @@
-import {Timer} from '../utils';
+import {Timer} from 'animationClasses/commons/utils';
 import SingleElement from './SingleElement';
 
 /**

@@ -1,5 +1,5 @@
 import DanceAnimation from './commons/DanceAnimation';
-import PairElement from './commons/elements/single/PairElement';
+import PairElement from './commons/elements/double/PairElement';
 import RotatePairElement from './commons/elements/double/RotatePairElement';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
