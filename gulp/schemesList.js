@@ -1,8 +1,6 @@
-var fs = require('fs');
-var path = require('path');
-var config = require('./config.js');
-
+const path = require('path');
 const FileHound = require('filehound');
+const config = require('./config.js');
 
 module.exports = FileHound.create()
 	.paths(config.paths.src.schemes)

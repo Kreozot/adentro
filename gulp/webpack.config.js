@@ -1,12 +1,14 @@
-var webpack = require('webpack');
-var gutil = require('gulp-util');
-var argv = require('yargs').argv;
-var config = require('./config.js');
-var paths = config.paths;
-var autoprefixer = require('autoprefixer');
-var precss = require('precss');
-var cssnext = require('cssnext');
-var schemesList = require('./schemesList.js');
+const webpack = require('webpack');
+const gutil = require('gulp-util');
+const argv = require('yargs').argv;
+const config = require('./config.js');
+const paths = config.paths;
+const autoprefixer = require('autoprefixer');
+const precss = require('precss');
+const cssnext = require('cssnext');
+// const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
+const Visualizer = require('webpack-visualizer-plugin');
+const schemesList = require('./schemesList.js');
 
 var webpackConfig = [
 	{
@@ -48,13 +50,21 @@ var webpackConfig = [
 			return [autoprefixer, cssnext, precss];
 		},
 		plugins: [
-			new webpack.optimize.CommonsChunkPlugin({children: true})
+			new webpack.optimize.CommonsChunkPlugin({
+				children: true,
+				minChunks: 3,
+				// name: 'commons'
+			}),
+			// new StatsWriterPlugin({
+			// 	filename: 'main.stats.json'
+			// })
+			new Visualizer()
 		],
 		callbackLoader: {
 			requireSchemes: () => '{' + schemesList.map(id => `${id}: function (callback) {
 					require.ensure(['schemeParams/${id}'], function (require) {
 						callback(require('schemeParams/${id}'));
-					});
+					}, '${id}');
 				}`
 			).join(',\n') + '}'
 		}

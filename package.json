@@ -63,6 +63,8 @@
     "json-loader": "^0.5.4",
     "snapsvg": "^0.4.0",
     "urijs": "^1.17.0",
+    "webpack-stats-plugin": "^0.1.5",
+    "webpack-visualizer-plugin": "^0.1.11",
     "yaml-loader": "^0.4.0"
   }
 }
