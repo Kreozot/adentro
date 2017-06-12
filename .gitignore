@@ -2,7 +2,7 @@
 /build
 /music
 /dist
-/src/music
+/src/music/**/*.mp3
 /*.log
 /mp3_mock
 /svg_compiled

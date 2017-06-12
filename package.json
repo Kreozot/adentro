@@ -22,10 +22,6 @@
     "gulp-rename": "^1.2.2",
     "gulp-util": "^3.0.7",
     "imports-loader": "^0.6.5",
-    "jscs": "^2.6.0",
-    "jscs-loader": "^0.2.0",
-    "jscs-preset-awesome": "^1.0.2",
-    "json-loader": "^0.5.4",
     "karma": "^0.13.15",
     "load-grunt-tasks": "^3.2.0",
     "merge-stream": "^1.0.0",
@@ -59,10 +55,12 @@
   },
   "dependencies": {
     "cookie_js": "^1.0.0",
+    "gulp-file-cache": "^0.0.1",
     "hopscotch": "^0.2.5",
     "jplayer": "^2.9.2",
     "jquery": "^2.1.4",
     "snapsvg": "^0.4.0",
-    "urijs": "^1.17.0"
+    "urijs": "^1.17.0",
+    "yaml-loader": "^0.4.0"
   }
 }

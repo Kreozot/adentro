@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet href="../schema.xsl" type="text/xsl" ?>
+
+<schema>
+	<part>
+		<element class="esquina" times="4" id="esquina1" visualization="esquina" manPosition="left">Esquina y medio giro</element>
+		<element class="zapateo" times="4" id="zapateoZarandeo1" visualization="zapateoZarandeo" manPosition="top" yOffset="true"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
+		<element class="esquina" times="4" id="esquina2" visualization="esquina" manPosition="top">Esquina y medio giro</element>
+		<element class="zapateo" times="4" id="zapateoZarandeo2" visualization="zapateoZarandeo" manPosition="right" yOffset="true"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
+		<element class="esquina" times="4" id="esquina3" visualization="esquina" manPosition="right">Esquina y medio giro</element>
+		<element class="zapateo" times="4" id="zapateoZarandeo3" visualization="zapateoZarandeo" manPosition="bottom" yOffset="true"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
+		<element class="esquina" times="4" id="esquina4" visualization="esquina" manPosition="bottom">Esquina y medio giro</element>
+		<element class="zapateo" times="4" id="zapateoZarandeo4" visualization="zapateoZarandeo" manPosition="left" yOffset="true"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
+		<bar/>
+		<element class="vuelta" times="8" id="vuelta" visualization="vueltaGiro" manPosition="left">Vuelta entera y giro</element>
+		<element class="zapateo" times="8" id="zapateoZarandeo5" visualization="zapateoZarandeo" manPosition="left"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
+		<bar/>
+		<element class="vuelta" times="4" id="mediaVuelta" visualization="mediaVuelta" manPosition="left">Media vuelta</element>
+		<element class="coronacion" times="4" id="coronacion" visualization="giroContragiroCoronacion" manPosition="right" yOffset="true">Giro y contra y coronación</element>
+	</part>
+	<part>
+		<element class="esquina" times="4" id="esquina1_2" visualization="esquina" manPosition="right">Esquina y medio giro</element>
+		<element class="zapateo" times="4" id="zapateoZarandeo1_2" visualization="zapateoZarandeo" manPosition="bottom" yOffset="true"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
+		<element class="esquina" times="4" id="esquina2_2" visualization="esquina" manPosition="bottom">Esquina y medio giro</element>
+		<element class="zapateo" times="4" id="zapateoZarandeo2_2" visualization="zapateoZarandeo" manPosition="left" yOffset="true"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
+		<element class="esquina" times="4" id="esquina3_2" visualization="esquina" manPosition="left">Esquina y medio giro</element>
+		<element class="zapateo" times="4" id="zapateoZarandeo3_2" visualization="zapateoZarandeo" manPosition="top" yOffset="true"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
+		<element class="esquina" times="4" id="esquina4_2" visualization="esquina" manPosition="top">Esquina y medio giro</element>
+		<element class="zapateo" times="4" id="zapateoZarandeo4_2" visualization="zapateoZarandeo" manPosition="right" yOffset="true"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
+		<bar/>
+		<element class="vuelta" times="8" id="vuelta_2" visualization="vueltaGiro" manPosition="right">Vuelta entera y giro</element>
+		<element class="zapateo" times="8" id="zapateoZarandeo5_2" visualization="zapateoZarandeo" manPosition="right"><tspan class="man">Zapateo</tspan> / <tspan class="woman">Zarandeo</tspan></element>
+		<bar/>
+		<element class="vuelta" times="4" id="mediaVuelta_2" visualization="mediaVuelta" manPosition="right">Media vuelta</element>
+		<element class="coronacion" times="4" id="coronacion_2" visualization="giroContragiroCoronacion" manPosition="left" yOffset="true">Giro y contra y coronación</element>
+	</part>
+</schema>
