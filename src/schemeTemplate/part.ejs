@@ -1,0 +1,21 @@
+<%
+	let barRendered = false;
+	const beatsCount = elements.reduce((sum, element) => {
+		if (element.times) {
+			sum += element.times;
+		}
+		return sum;
+	}, 0);
+	const oneTimeWidth = config.schemaWidth / beatsCount;
+	let pos = 0;
+	elements.forEach((element) => {
+		if (element.bar) {
+			%><%- include('./bar', Object.assign({}, config, {pos, line, oneTimeWidth})) %><%
+			barRendered = true;
+		} else {
+			%><%- include('./element', Object.assign({}, config, {pos, line, oneTimeWidth, element, barRendered})) %><%
+			barRendered = false;
+			pos += element.times;
+		}
+	});
+%>

@@ -9,6 +9,13 @@ const cssnext = require('cssnext');
 // const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 const Visualizer = require('webpack-visualizer-plugin');
 const schemesList = require('./schemesList.js');
+const ejs = require('ejs');
+const fs = require('fs');
+const path = require('path');
+const yaml = require('js-yaml');
+const schemeTemplate = ejs.compile(String(fs.readFileSync('./src/schemeTemplate/scheme.ejs')), {
+	filename: path.resolve('./src/schemeTemplate/scheme.ejs')
+});
 
 var webpackConfig = [
 	{
@@ -20,6 +27,7 @@ var webpackConfig = [
 				infoData: 'src/info',
 				animationClasses: 'src/js/animations',
 				schemeParams: 'src/music',
+				schemeTemplate: 'src/schemeTemplate',
 				styles: 'src/styles',
 				mp3Files: argv.mockmp3 ? paths.temp.mp3Mock : 'src/music'
 			}
@@ -52,21 +60,25 @@ var webpackConfig = [
 		plugins: [
 			new webpack.optimize.CommonsChunkPlugin({
 				children: true,
-				minChunks: 3,
-				// name: 'commons'
+				minChunks: 3
 			}),
 			// new StatsWriterPlugin({
 			// 	filename: 'main.stats.json'
 			// })
-			new Visualizer()
+			// new Visualizer()
 		],
 		callbackLoader: {
-			requireSchemes: () => '{' + schemesList.map(id => `${id}: function (callback) {
-					require.ensure(['schemeParams/${id}'], function (require) {
-						callback(require('schemeParams/${id}'));
-					}, '${id}');
-				}`
-			).join(',\n') + '}'
+			requireSchemes: () => '{' + schemesList.map(id => {
+				return `${id}: function (callback) {
+						require.ensure(['schemeParams/${id}'], function (require) {
+							callback(require('schemeParams/${id}'));
+						}, '${id}');
+					}`;
+			}).join(',\n') + '}',
+			compileSchemeTemplate: id => {
+				const scheme = yaml.safeLoad(fs.readFileSync(`./src/music/${id}/scheme.yaml`));
+				return `\`${schemeTemplate({scheme})}\``;
+			}
 		}
 	}
 ];

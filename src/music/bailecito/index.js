@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'Bailecito',
-	svgName: require('./scheme.svg'),
+	svgName: compileSchemeTemplate('bailecito'),
 	music: [require('./music/toda_la_noche')],
 	animation: require('animationClasses/BailecitoAnimation').default
 };

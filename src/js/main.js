@@ -7,22 +7,15 @@ import {getElement} from './timing/timing';
 import TimingGenerator from './timing/timing-generator';
 import Tour from './tour';
 
-var playerSelector = '#jplayer';
-
-function supports_history_api() {
-	return Boolean(window.history && history.pushState);
-}
+const playerSelector = '#jplayer';
 
 /**
  * Получить ссылку на dom svg-схемы
  * @return  {String}  Ссылка на dom svg-схемы
  */
-var getSvgSchemaDom = function () {
-	return $('#schemaDiv svg');//getObjectDom('schema');
-};
+const getSvgSchemaDom = () => $('#schemaDiv svg');
 
 class Adentro {
-
 	constructor() {
 		this.navigation = new Navigation(this);
 		this.player = new Player(this);
@@ -335,7 +328,6 @@ class Adentro {
 	localize(textObj) {
 		return textObj[this.lang];
 	}
-
 }
 
 global.adentro = new Adentro();

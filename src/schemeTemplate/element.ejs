@@ -1,0 +1,48 @@
+<%
+	({id, title, visualization, manPosition, times, textOffset = 0, yOffset, class: className} = element);
+	// Смещение элемента после разделителя части
+	const xOffset = barRendered ? barWidth : 0;
+
+	const x = xMargin + pos * oneTimeWidth + xOffset;
+	const y = (line - 1) * height + 1;
+	const blockWidth = oneTimeWidth * times - xOffset;
+%>
+
+<rect class="element <%= className %>"
+	x="<%= x %>"
+	y="<%= y %>"
+	width="<%= blockWidth %>"
+	height="<%= blockHeight %>"
+	id="<%= id %>"
+	onclick="playElement('<%= id %>')"
+	data-visualization="<%= visualization %>"
+	data-manposition="<%= manPosition %>"
+	data-times="<%= times %>"/>
+
+<rect class="active-frame"
+	x="<%= x + 1 %>"
+	y="<%= y + 2 %>"
+	width="<%= blockWidth - 3 %>"
+	height="<%= blockHeight - 4 %>"
+	id="<%= id %>-frame"/>
+
+<text class="times-count-text"
+	x="<%= x + (blockWidth / 2) %>"
+	y="<%= y + blockHeight / 2 + 4 %>"><%= times %></text>
+
+<%
+// Отступ по вертикали для подписи
+const textTop = yOffset ? blockHeight + 32 : blockHeight + 16;
+%>
+
+<% if (yOffset) { %>
+	<line class="text-line"
+		x1="<%= x + (blockWidth / 2) %>"
+		y1="<%= y + blockHeight + 3 %>"
+		x2="<%= x + (blockWidth / 2) %>"
+		y2="<%= y + textTop - 11 %>" />
+<% } %>
+<text class="element-text"
+	x="<%= x + (blockWidth / 2) + textOffset %>"
+	y="<%= y + textTop %>"
+	id="<%= id %>-text"><%= title %></text>
