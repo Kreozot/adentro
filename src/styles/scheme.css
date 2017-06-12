@@ -1,0 +1,106 @@
+line {
+	shape-rendering: crispEdges;
+}
+
+rect {
+	shape-rendering: crispEdges;
+}
+
+.text-line {
+	stroke: black;
+	stroke-width: 1px;
+}
+
+.element {
+	stroke: black;
+	stroke-width: 1px;
+	fill-opacity: 0.6;
+}
+
+.element.current {
+	stroke: red;
+	stroke-width: 2px;
+}
+
+.element:hover {
+	fill-opacity: 1;
+	cursor: pointer;
+}
+
+.active-frame {
+	fill-opacity: 0;
+	stroke-opacity: 0;
+	stroke: red;
+	stroke-width: 3px;
+	pointer-events: none;
+}
+.active-frame.current {
+	stroke-opacity: 1;
+}
+
+.bar {
+	stroke: black;
+	stroke-width: 3px;
+}
+
+.element-text {
+	text-anchor: middle;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+}
+
+.element-text.current {
+	font-weight: bold;
+}
+
+.element-text .man {
+	fill: blue;
+}
+
+.element-text .woman {
+	fill: darkmagenta;
+}
+
+.times-count-text {
+	text-anchor: middle;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	fill: #2F4F4F;
+	font-size: 8pt;
+	pointer-events: none;
+}
+
+.vuelta {
+	fill: #75F6E9;
+}
+
+.coronacion {
+	fill: #BD9DFF;
+}
+
+.arresto {
+	fill: #A0F675;
+}
+
+.zapateo {
+	fill: #F6CF75;
+}
+
+.zarandeo {
+	fill: #F6CF75;
+}
+
+.giro {
+	fill: #00EE00;
+}
+
+.avance {
+	fill: #3399FF;
+}
+
+.esquina {
+	fill: #4488ff;
+}
+
+.regreso {
+	fill: #99aaee;
+}

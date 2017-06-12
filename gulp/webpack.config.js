@@ -13,6 +13,7 @@ const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
+const htmlmin = require('html-minifier');
 const schemeTemplate = ejs.compile(String(fs.readFileSync('./src/schemeTemplate/scheme.ejs')), {
 	filename: path.resolve('./src/schemeTemplate/scheme.ejs')
 });
@@ -77,7 +78,10 @@ var webpackConfig = [
 			}).join(',\n') + '}',
 			compileSchemeTemplate: id => {
 				const scheme = yaml.safeLoad(fs.readFileSync(`./src/music/${id}/scheme.yaml`));
-				return `\`${schemeTemplate({scheme})}\``;
+				const svgSource = htmlmin.minify(schemeTemplate({scheme}), {
+					collapseWhitespace: true
+				});
+				return `\`${svgSource}\``;
 			}
 		}
 	}

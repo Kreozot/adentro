@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'Chacarera doble',
-	svgName: require('./scheme.svg'),
+	svg: require('./scheme.svg'),
 	music: [require('./music/el_olvidao'), require('./music/sombra_enamorada')],
 	animation: [{
 		id: 'onTwo',

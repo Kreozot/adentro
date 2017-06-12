@@ -60,6 +60,7 @@
     "filehound": "^1.16.1",
     "gulp-file-cache": "^0.0.1",
     "hopscotch": "^0.2.5",
+    "html-minifier": "^3.5.2",
     "jplayer": "^2.9.2",
     "jquery": "^2.1.4",
     "json-loader": "^0.5.4",

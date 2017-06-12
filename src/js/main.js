@@ -245,7 +245,7 @@ class Adentro {
 		// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
 
 		$('#danceName').html(schemaParams.name);
-		$('#schemaDiv').html(schemaParams.svgName);
+		$('#schemaDiv').html(schemaParams.svg);
 
 		musicId = musicId || schemaParams.music[0].id;
 		this.showMusicLinks(schemaParams.music, musicId);
@@ -286,7 +286,7 @@ class Adentro {
 	 */
 	loadSchemaEditor(schemaParams, musicId) {
 		$('#danceName').html(schemaParams.name + ' (editor mode)');
-		$('#schemaDiv').html(schemaParams.svgName);
+		$('#schemaDiv').html(schemaParams.svg);
 
 		$(playerSelector).unbind($.jPlayer.event.timeupdate)
 			.unbind($.jPlayer.event.ended)
