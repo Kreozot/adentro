@@ -237,19 +237,19 @@ class Adentro {
 
 	/**
 	 * Загрузка схемы
-	 * @param  {String} schemaParams   Объект параметров схемы
+	 * @param  {String} schemeParams   Объект параметров схемы
 	 * @param  {String} musicId    	   Идентификатор музыки
 	 * @param  {String} animationId    Идентификатор конкретной анимации (если в animationClass пришёл список)
 	 */
-	loadSchema(schemaParams, musicId, animationId) {
+	loadSchema(schemeParams, musicId, animationId) {
 		// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
 
-		$('#danceName').html(schemaParams.name);
-		$('#schemaDiv').html(schemaParams.svg);
+		$('#danceName').html(schemeParams.name);
+		$('#schemaDiv').html(schemeParams.svg);
 
-		musicId = musicId || schemaParams.music[0].id;
-		this.showMusicLinks(schemaParams.music, musicId);
-		var musicSchema = schemaParams.music.filter(data => data.id === musicId)[0];
+		musicId = musicId || schemeParams.music[0].id;
+		this.showMusicLinks(schemeParams.music, musicId);
+		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
 
 		$(playerSelector)
 			.unbind($.jPlayer.event.timeupdate)
@@ -261,7 +261,7 @@ class Adentro {
 		contentSwitch.clearContent();
 
 		animationLoader.loadAnimationBlock();
-		var animationClass = schemaParams.animation;
+		let animationClass = schemeParams.animation;
 		if (typeof animationClass === 'object') {
 			animationId = animationId ? animationId : animationClass[0].id;
 			animationLoader.showAnimationLinks(animationClass, animationId);
@@ -270,31 +270,27 @@ class Adentro {
 		}
 		animationLoader.loadAnimation(animationClass);
 
-		infoLoader.loadInfoBlock(schemaParams.info);
-
-		// if (schemaParams.zapateo) {
-		// 	ZapateoLoader.loadZapateoBlock('repike');
-		// }
+		infoLoader.loadInfoBlock(schemeParams.info);
 
 		contentSwitch.show('animation_block');
 	}
 
 	/**
 	 * Загрузка редактора тайминга
-	 * @param  {String} schemaParams   Объект параметров схемы
+	 * @param  {String} schemeParams   Объект параметров схемы
 	 * @param  {String} musicId    	   Идентификатор музыки
 	 */
-	loadSchemaEditor(schemaParams, musicId) {
-		$('#danceName').html(schemaParams.name + ' (editor mode)');
-		$('#schemaDiv').html(schemaParams.svg);
+	loadSchemaEditor(schemeParams, musicId) {
+		$('#danceName').html(schemeParams.name + ' (editor mode)');
+		$('#schemaDiv').html(schemeParams.svg);
 
 		$(playerSelector).unbind($.jPlayer.event.timeupdate)
 			.unbind($.jPlayer.event.ended)
 			.unbind($.jPlayer.event.pause);
 
-		musicId = musicId || schemaParams.music[0].id;
-		this.showMusicLinks(schemaParams.music, musicId, true);
-		var musicSchema = schemaParams.music.filter(data => data.id === musicId)[0];
+		musicId = musicId || schemeParams.music[0].id;
+		this.showMusicLinks(schemeParams.music, musicId, true);
+		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
 
 		this.player.loadMusicSchema(musicSchema);
 		this.initSvgSchemaEditor();

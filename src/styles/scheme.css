@@ -1,11 +1,3 @@
-line {
-	shape-rendering: crispEdges;
-}
-
-rect {
-	shape-rendering: crispEdges;
-}
-
 .text-line {
 	stroke: black;
 	stroke-width: 1px;

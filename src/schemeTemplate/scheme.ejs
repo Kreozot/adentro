@@ -2,14 +2,26 @@
 const config = {
 	xMargin: 50,
 	schemaWidth: 800,
-	height: 60,
+	lineHeight: 60,
 	blockHeight: 20,
 	barWidth: 3
 };
+const fullWidth = config.schemaWidth + (config.xMargin * 2);
+const fullHeight = config.lineHeight * scheme.length;
+const ratio = fullHeight / fullWidth * 100;
 %>
 
-<svg width="<%= config.schemaWidth + (config.xMargin * 2) %>" height="<%= config.height * scheme.length %>" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" overflow="hidden">
-	<% scheme.forEach((elements, line) => { %>
-		<%- include('part', {config, elements, line: line + 1}); %>
-	<% }); %>
-</svg>
+<div class="scheme-container" style="padding-bottom: <%= ratio %>%;">
+	<svg
+		class="scheme-svg"
+		width="100%"
+		height="100%"
+		viewBox="0 0 <%= fullWidth %> <%= fullHeight %>"
+		xmlns="http://www.w3.org/2000/svg"
+		xmlns:xlink="http://www.w3.org/1999/xlink"
+		overflow="hidden">
+		<% scheme.forEach((elements, line) => { %>
+			<%- include('part', {config, elements, line: line + 1}); %>
+		<% }); %>
+	</svg>
+</div>

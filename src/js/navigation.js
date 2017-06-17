@@ -33,8 +33,8 @@ export default class Navigation {
 	 * @param  {String} musicId      Идентификатор композиции
 	 */
 	loadSchemaByName(name, animationId, musicId) {
-		var schemaParams = schemes[name] || schemes.chacarera;
-		schemaParams(scheme => {
+		const schemeParams = schemes[name] || schemes.chacarera;
+		schemeParams(scheme => {
 			this.main.loadSchema(scheme, musicId, animationId);
 		});
 

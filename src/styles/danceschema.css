@@ -3,7 +3,8 @@ body {
 }
 
 div.center {
-	width: 900px;
+	width: 100%;
+	max-width: 1000px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -162,4 +163,17 @@ a.content_link.active {
 
 .github {
 	background: url('../img/github.png') no-repeat 0 top;
+}
+
+.scheme-container {
+	position: relative;
+	width: 100%;
+	height: 0;
+	padding: 0;
+}
+
+.scheme-svg {
+	position: absolute;
+	left: 0;
+	top: 0;
 }
