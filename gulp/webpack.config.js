@@ -55,7 +55,7 @@ var webpackConfig = [
 			]
 		},
 		postcss: function () {
-			return [autoprefixer, cssnext, precss];
+			return [cssnano, autoprefixer, cssnext, precss];
 		},
 		plugins: [
 			new webpack.optimize.CommonsChunkPlugin({
@@ -102,7 +102,7 @@ webpackConfig.push({
 	},
 	plugins: [],
 	postcss: function () {
-		return [autoprefixer, cssnext, precss];
+		return [cssnano, autoprefixer, cssnext, precss];
 	}
 });
 

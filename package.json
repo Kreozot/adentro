@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "cookie_js": "^1.0.0",
+    "cssnano": "^3.10.0",
     "ejs": "^2.5.6",
     "ejs-compiled-loader": "^2.2.0",
     "eslint": "^4.0.0",
