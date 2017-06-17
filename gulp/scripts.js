@@ -15,7 +15,7 @@ gulp.task('clean-js', function () {
 	]);
 });
 
-var buildDeps = ['clean-js', 'renderSvg'];
+var buildDeps = ['clean-js'];
 if (argv.mockmp3) {
 	buildDeps.push('mock-mp3');
 }

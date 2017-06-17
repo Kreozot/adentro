@@ -16,7 +16,7 @@
 		<!--[if gt IE 8]><!-->
 		<div class="center" id="navigation">
 			<div id="logo"></div>
-			<include src="html/menu.html"></include>
+			<%- include('index/menu.ejs', {}); %>
 			<div id="lang">
 			</div>
 		</div>
@@ -26,7 +26,7 @@
 		</div>
 
 		<div class="center">
-			<include src="html/player.html"></include>
+			<%- include('index/player.ejs', {}); %>
 			<div class="center" id="musicLinks"></div>
 		</div>
 
@@ -37,28 +37,12 @@
 
 		<script src="vendor.js"></script>
 		<script src="main.js"></script>
-		<script type="text/javascript">
-			$(window).load(function () {
-				window.addEventListener("popstate", function (e) {
-				    adentro.navigation.loadSchemaByState();
-				});
-
-				if (!adentro.navigation.loadSchemaByUrl()) {
-					adentro.navigation.showSchema("chacarera");
-				}
-
-				tour.startFirstTime();
-			});
-		</script>
 
 		<div class="footer center">
-			<include src="html/social.html"></include>
+			<%- include('index/social.ejs', {}); %>
 			<div class="footerinfo">
-				Adentro <span class="version"></span>. Created by Sergey Sharov.
+				Adentro <%= version %>. Created by Sergey Sharov.
 			</div>
-			<script>
-				$('.version').text($('.version').data('version'));
-			</script>
 		</div>
 		<!--<![endif]-->
 	</body>

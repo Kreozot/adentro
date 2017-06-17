@@ -6,7 +6,7 @@ var config = require('./config.js');
 var paths = config.paths;
 var gutil = require('gulp-util');
 
-gulp.task('webpack-dev-server', function(callback) {
+gulp.task('webpack-dev-server', function (callback) {
     var url = 'http://' + config.devServer.host + ':' + config.devServer.port;
 
     webpackConfig = webpackConfig.map(function (config) {
@@ -22,7 +22,7 @@ gulp.task('webpack-dev-server', function(callback) {
     new WebpackDevServer(compiler, {
             contentBase: config.paths.dist.js
         })
-        .listen(config.devServer.port, config.devServer.host, function(err) {
+        .listen(config.devServer.port, config.devServer.host, function (err) {
             if (err) {
                 throw new gutil.PluginError('webpack-dev-server', err);
             }

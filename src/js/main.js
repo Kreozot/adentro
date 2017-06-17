@@ -334,3 +334,15 @@ global.localize = textObj => adentro.localize(textObj);
 global.markCurrentElementOnSchema = elem => adentro.markCurrentElementOnSchema(elem);
 global.tour = new Tour();
 export default Adentro;
+
+$(window).load(function () {
+	window.addEventListener('popstate', function (e) {
+		adentro.navigation.loadSchemaByState();
+	});
+
+	if (!adentro.navigation.loadSchemaByUrl()) {
+		adentro.navigation.showSchema('chacarera');
+	}
+
+	tour.startFirstTime();
+});

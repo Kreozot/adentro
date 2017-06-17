@@ -1,35 +1,35 @@
-ul#css3menu1, ul#css3menu1 ul {
+#dance-menu, #dance-menu ul {
 	margin: 0;
 	list-style: none;
 	padding: 0;
 	background-color: #dedede;
 }
-ul#css3menu1 ul {
+#dance-menu ul {
 	display: none;
 	position: absolute;
 	left: 0;
 	top: 100%;
 	background-color: #ccc;
 }
-ul#css3menu1 li:hover>* {
+#dance-menu li:hover>* {
 	display: block;
 }
-ul#css3menu1 li {
+#dance-menu li {
 	position: relative;
 	display: block;
 	white-space: nowrap;
 	font-size: 0;
 	float: left;
 }
-ul#css3menu1 li:hover {
+#dance-menu li:hover {
 	z-index: 1;
 }
-ul#css3menu1 ul ul {
+#dance-menu ul ul {
 	position: absolute;
 	left: 100%;
 	top: 0;
 }
-ul#css3menu1 {
+#dance-menu {
 	font-size: 0;
 	z-index: 999;
 	position: relative;
@@ -38,16 +38,16 @@ ul#css3menu1 {
 	padding: 0;
 	*display: inline;
 }
-* html ul#css3menu1 li a {
+* html #dance-menu li a {
 	display: inline-block;
 }
-ul#css3menu1>li {
+#dance-menu>li {
 	margin: 0;
 }
-ul#css3menu1 a:active, ul#css3menu1 a:focus {
+#dance-menu a:active, #dance-menu a:focus {
 	outline-style: none;
 }
-ul#css3menu1 a {
+#dance-menu a {
 	display: block;
 	vertical-align: middle;
 	text-align: left;
@@ -60,10 +60,10 @@ ul#css3menu1 a {
 	border-style: solid;
 	border-color: #aaa;
 }
-ul#css3menu1 ul li {
+#dance-menu ul li {
 	float: none;
 }
-ul#css3menu1 ul a {
+#dance-menu ul a {
 	text-align: left;
 	padding: 10px;
 	background-color: #ccc;
@@ -72,11 +72,11 @@ ul#css3menu1 ul a {
 	font-size: 14px;
 	color: #000;
 }
-ul#css3menu1 li a:hover, ul#css3menu1 li a.pressed {
+#dance-menu li a:hover, #dance-menu li a.pressed {
 	background-color: #aaa;
 	color: #000000;
 }
-ul#css3menu1 span {
+#dance-menu span {
 	display: block;
 	overflow: visible;
 	background-position: right center;
@@ -84,6 +84,6 @@ ul#css3menu1 span {
 	background-image: url("../img/arrowsub.png");
 	padding-right: 12px;
 }
-ul#css3menu1>li>a>span {
+#dance-menu>li>a>span {
     background-image: url("../img/arrowsub_vert.png");
 }

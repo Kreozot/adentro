@@ -5,7 +5,8 @@ module.exports = {
 		root: path.resolve('.'),
 		src: {
 			tests: path.resolve('./test'),
-			html: path.resolve('./src'),
+			templates: path.resolve('./src/templates'),
+			static: path.resolve('./src/static'),
 			js: path.resolve('./src/js'),
 			svg: path.resolve('./src/svg'),
 			schemes: path.resolve('./src/music'),

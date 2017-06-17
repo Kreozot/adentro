@@ -47,8 +47,7 @@ var webpackConfig = [
 				{test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&presets[]=es2015'},
 				{test: /\.json$/, loader: 'json'},
 				{test: /\.yaml$/, loader: 'json!yaml'},
-				{test: /\.css$/, loader: 'style!css'},
-				{test: /\.scss$/, loader: 'style!css!postcss'},
+				{test: /\.css$/, loader: 'style!css!postcss'},
 				{test: /\.(jpe?g|png|gif)$/i, loader: 'url'},
 				{test: /\.mp3$/i, loader: 'file?path=../dist&name=music/[name].[hash:6].[ext]'},
 				{test: /\.svg$/i, loader: 'raw'},
@@ -90,8 +89,7 @@ var webpackConfig = [
 webpackConfig.push({
 	module: {
 		loaders: [
-			{test: /\.css$/, loader: 'style!css'},
-			{test: /\.scss$/, loader: 'style!css!postcss'},
+			{test: /\.css$/, loader: 'style!css!postcss'},
 			{test: /\.(jpe?g|png|gif)$/i, loader: 'url'},
 		]
 	},
@@ -104,40 +102,9 @@ webpackConfig.push({
 	},
 	plugins: [],
 	postcss: function () {
-		return [autoprefixer/*, cssnext, precss*/];
+		return [autoprefixer, cssnext, precss];
 	}
 });
-
-// Минификация при сборке в продакшн
-if (argv.production) {
-	gutil.log('Production mode');
-
-	webpackConfig = webpackConfig.map(function (config) {
-		config.plugins.push(
-			new webpack.optimize.UglifyJsPlugin({
-				sourceMap: false,
-				comments: false,
-				compress: {
-					warnings: false
-				},
-				exclude: [
-					/min\.js/i
-				],
-				mangle: {
-					except: ['$', 'exports', 'require']
-				}
-			})
-		);
-		config.plugins.push(
-			new webpack.DefinePlugin({
-				'process.env.NODE_ENV': '"production"',
-				'process.env.BLUEBIRD_WARNINGS': 0,
-			})
-		);
-		config.devtool = 'source-map';
-		return config;
-	});
-}
 
 webpackConfig.push({
 	module: {
@@ -167,5 +134,36 @@ webpackConfig.push({
 		})
 	]
 });
+
+// Минификация при сборке в продакшн
+if (argv.production) {
+	gutil.log('Production mode');
+
+	webpackConfig = webpackConfig.map(config => {
+		config.plugins.push(
+			new webpack.optimize.UglifyJsPlugin({
+				sourceMap: false,
+				comments: false,
+				compress: {
+					warnings: false
+				},
+				exclude: [
+					/min\.js/i
+				],
+				mangle: {
+					except: ['$', 'exports', 'require']
+				}
+			})
+		);
+		config.plugins.push(
+			new webpack.DefinePlugin({
+				'process.env.NODE_ENV': '"production"',
+				'process.env.BLUEBIRD_WARNINGS': 0,
+			})
+		);
+		config.devtool = 'source-map';
+		return config;
+	});
+}
 
 module.exports = webpackConfig;

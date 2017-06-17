@@ -1,44 +1,45 @@
-var gulp = require('gulp');
-var config = require('./config.js');
-var paths = config.paths;
-var del = require('promised-del');
-var posthtml = require('gulp-posthtml');
-var posthtmlInclude = require('posthtml-include');
-var posthtmlDoctype = require('posthtml-doctype');
-var posthtmlExtendAttrs = require('posthtml-extend-attrs');
-var version = require('../package.json').version;
+const gulp = require('gulp');
+const config = require('./config.js');
+const paths = config.paths;
+const del = require('promised-del');
+const posthtml = require('gulp-posthtml');
+const ejs = require('gulp-ejs');
+const gutil = require('gulp-util');
+const version = require('../package.json').version;
+const rename = require('gulp-rename');
 
 gulp.task('clean-html', function () {
 	return del([
-		config.paths.dist.html + '/*.html',
-		config.paths.dist.html + '/favicon.ico'
+		config.paths.dist.html + '/*.html'
 	]);
 });
 
-gulp.task('copy-favicon', ['clean-html'], function () {
-	return gulp.src(paths.src.html + '/favicon.ico')
+gulp.task('copy-static', ['clean-html'], function () {
+	return gulp.src(paths.static + '/**/*')
 		.pipe(gulp.dest(paths.dist.html));
 });
 
-gulp.task('process-html', ['clean-html', 'copy-favicon'], function () {
-	return gulp.src(paths.src.html + '/*.html')
+gulp.task('process-html', ['clean-html', 'copy-static'], function () {
+	return gulp.src(paths.src.templates + '/*.ejs')
+		.pipe(ejs({
+			version
+		}).on('error', gutil.log))
 		.pipe(posthtml([
-			posthtmlInclude({
-				root: paths.src.html,
-				encoding: 'utf-8'
-			}),
-			posthtmlDoctype({doctype: 'HTML 5'}),
-			posthtmlExtendAttrs({
-				attrsTree: {
-					'.version': {
-						'data-version': version
-					}
-				}
+			require('htmlnano')({
+				removeEmptyAttributes: false,
+				removeRedundantAttributes: false,
+				collapseWhitespace: 'conservative',
+				mergeStyles: false,
+				mergeScripts: false,
+				minifyJs: false
 			})
 		]))
+		.pipe(rename({
+			extname: '.html'
+		}))
 		.pipe(gulp.dest(paths.dist.html));
 });
 
 gulp.task('watch-html', ['connect', 'process-html'], function () {
-	return gulp.watch([paths.src.html + '/*.html', paths.src.html + '/html/*.html'], ['process-html']);
+	return gulp.watch([paths.templates + '/**/*.ejs'], ['process-html']);
 });
