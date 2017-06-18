@@ -1,11 +1,11 @@
-var gulp = require('gulp');
-var config = require('./config.js');
-var paths = config.paths;
-var webpack = require('webpack');
-var webpackConfig = require('./webpack.config.js');
-var gutil = require('gulp-util');
-var del = require('promised-del');
-var argv = require('yargs').argv;
+const gulp = require('gulp');
+const config = require('./config.js');
+const paths = config.paths;
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config.js');
+const gutil = require('gulp-util');
+const del = require('promised-del');
+const argv = require('yargs').argv;
 
 gulp.task('clean-js', function () {
 	return del([
@@ -15,7 +15,7 @@ gulp.task('clean-js', function () {
 	]);
 });
 
-var buildDeps = ['clean-js'];
+const buildDeps = ['clean-js'];
 if (argv.mockmp3) {
 	buildDeps.push('mock-mp3');
 }

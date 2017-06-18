@@ -1,0 +1,15 @@
+$S:     480px;
+$M:     768px;
+$L:     1170px;
+
+@define-mixin media $canvas {
+	@if $canvas == S {
+		@media only screen and (max-width: $S) { @mixin-content; }
+	}
+	@else if $canvas == M {
+		@media only screen and (max-width: $M) { @mixin-content; }
+	}
+	@else if $canvas == L {
+		@media only screen and (max-width: $L) { @mixin-content; }
+	}
+}

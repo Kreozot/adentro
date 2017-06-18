@@ -1,12 +1,14 @@
 const gulp = require('gulp');
 const config = require('./config.js');
 const paths = config.paths;
+const fs = require('fs');
 const del = require('promised-del');
 const posthtml = require('gulp-posthtml');
 const ejs = require('gulp-ejs');
 const gutil = require('gulp-util');
 const version = require('../package.json').version;
 const rename = require('gulp-rename');
+const yaml = require('js-yaml');
 
 gulp.task('clean-html', function () {
 	return del([
@@ -22,7 +24,8 @@ gulp.task('copy-static', ['clean-html'], function () {
 gulp.task('process-html', ['clean-html', 'copy-static'], function () {
 	return gulp.src(paths.src.templates + '/*.ejs')
 		.pipe(ejs({
-			version
+			version,
+			menuItems: yaml.safeLoad(fs.readFileSync(`./src/config/menu.yaml`))
 		}).on('error', gutil.log))
 		.pipe(posthtml([
 			require('htmlnano')({

@@ -1,16 +1,16 @@
-var should = require("should");
-var Nightmare = require('nightmare');
-var vo = require('vo');
-var config = require('../gulp/config.js');
+const should = require('should');
+const Nightmare = require('nightmare');
+const vo = require('vo');
+const config = require('../gulp/config.js');
 require('mocha-generators').install();
 
-describe("Adentro", function () {
+describe('Adentro', function () {
 	this.timeout(120000);
 
 	it('should not breaks nowhere', function* () {
-		var nightmare = Nightmare({
-				//show: true
-			})
+		const nightmare = new Nightmare({
+			//show: true
+		})
 			.on('page-error', function (error, stacktrace) {
 				console.log(error + (stacktrace || ''));
 				throw 'Error! ' + error;
@@ -18,7 +18,7 @@ describe("Adentro", function () {
 		var schemes = yield nightmare
 			.goto('http://localhost:' + config.devServer.port)
 			.evaluate(function () {
-				return $('.menu-item').map(function() {
+				return $('.menu-item').map(function () {
 					return $(this).data('scheme');
 				}).get();
 			});
@@ -28,7 +28,7 @@ describe("Adentro", function () {
 				.click('.menu-item[data-scheme="' + schemes[i] + '"]')
 				.wait(1000)
 				.evaluate(function () {
-					return $('.element').map(function() {
+					return $('.element').map(function () {
 						return $(this).attr('id');
 					}).get();
 				});
@@ -38,11 +38,11 @@ describe("Adentro", function () {
 					.click('#' + elems[j])
 					.wait(100)
 					.evaluate(function () {
-						return $('.element').map(function() {
+						return $('.element').map(function () {
 							return $(this).attr('id');
 						}).get();
 					});
-			};
-		};
+			}
+		}
 	});
 });

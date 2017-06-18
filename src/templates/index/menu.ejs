@@ -1,44 +1,27 @@
-<ul id="dance-menu">
-	<%# items.forEach(item => { %>
-	<li>
-		<a title="Чакарера"><span>Chacarera</span></a>
-		<ul>
-			<li>
-				<a class="menu-item" data-scheme="chacarera" title="Чакарера симпле"><span>Chacarera simple</span></a>
-				<ul>
-					<li><a class="menu-item" data-scheme="chacarera_6" title="Чакарера симпле на 6">Chacarera simple on 6</a></li>
-				</ul>
-			</li>
-			<li>
-				<a class="menu-item" data-scheme="chacarera_doble" title="Чакарера добле"><span>Chacarera doble</span></a>
-				<ul>
-					<li><a class="menu-item" data-scheme="chacarera_doble_6" title="Чакарера добле на 6">Chacarera doble on 6</a></li>
-				</ul>
-			</li>
-		</ul>
-	</li>
-	<li>
-		<a class="menu-item" data-scheme="zamba" title="Самба"><span>Zamba</span></a>
-		<ul>
-			<li><a class="menu-item" data-scheme="zamba_alegre" title="Самба алегре">Zamba Alegre</a></li>
-		</ul>
-	</li>
-	<li>
-		<a class="menu-item" data-scheme="gato" title="Гато"><span>Gato</span></a>
-		<ul>
-			<li><a class="menu-item" data-scheme="gato_cuyano" title="Гато кужано">Gato Cuyano</a></li>
-		</ul>
-	</li>
-	<li><a class="menu-item" data-scheme="caramba" title="Карамба">Caramba</a></li>
-	<li><a class="menu-item" data-scheme="bailecito" title="Байлесито">Bailecito</a></li>
-	<li><a class="menu-item" data-scheme="escondido" title="Эскондидо">Escondido</a></li>
-	<li>
-		<a class="menu-item" data-scheme="remedio" title="Ремедио"><span>Remedio</span></a>
-		<ul>
-			<li><a class="menu-item" data-scheme="remedio_atamisqueno" title="Ремедио атамискеньо">Remedio Atamisqueno</a></li>
-		</ul>
-	</li>
-	<li><a class="menu-item" data-scheme="huayra_muyoj" title="Уайра мужо">Huayra Muyoj</a></li>
-	<li><a class="menu-item" data-scheme="huella" title="Уэжа">Huella</a></li>
-	<%# }); %>
-</ul>
+<% function addLink(item) { %>
+	<% if (item.scheme) { %>
+		<a data-scheme="<%- item.scheme %>"><%- item.title %></a>
+	<% } else { %>
+		<%- item.title %>
+	<% } %>
+<% } %>
+
+<% function addItems(items, level = 1) { %>
+	<ul>
+	<% items.forEach(item => { %>
+		<li className="dance-menu__item dance-menu__item--<% level %>" title="<%- item.titleRu %>">
+			<%
+				addLink(item);
+
+				if (item.children) {
+					addItems(item.children, level + 1);
+				}
+			%>
+		</li>
+	<% }); %>
+	</ul>
+<% } %>
+
+<nav class="dance-menu">
+	<% addItems(menuItems); %>
+</nav>

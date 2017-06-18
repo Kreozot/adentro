@@ -14,36 +14,43 @@
 	</head>
 	<body>
 		<!--[if gt IE 8]><!-->
-		<div class="center" id="navigation">
+		<header>
 			<div id="logo"></div>
-			<%- include('index/menu.ejs', {}); %>
 			<div id="lang">
 			</div>
-		</div>
+		</header>
+		<main>
+			<div class="sidebar">
+				<%- include('index/menu.ejs', {menuItems}); %>
+			</div>
 
-		<div class="title">
-			<h1 id="danceName"></h1>
-		</div>
+			<div class="center" id="navigation">
+			</div>
 
-		<div class="center">
-			<%- include('index/player.ejs', {}); %>
-			<div class="center" id="musicLinks"></div>
-		</div>
+			<div class="title">
+				<h1 id="danceName"></h1>
+			</div>
 
-		<div class="center" id="schemaDiv"></div>
+			<div class="center">
+				<%- include('index/player.ejs', {}); %>
+				<div class="center" id="musicLinks"></div>
+			</div>
 
-		<div class="content_menu" id="content_menu"></div>
-		<div class="center" id="content"></div>
+			<div class="center" id="schemaDiv"></div>
+
+			<div class="content_menu" id="content_menu"></div>
+			<div class="center" id="content"></div>
+
+			<div class="footer center">
+				<%- include('index/social.ejs', {}); %>
+				<div class="footerinfo">
+					Adentro <%= version %>. Created by Sergey Sharov.
+				</div>
+			</div>
+		</main>
 
 		<script src="vendor.js"></script>
 		<script src="main.js"></script>
-
-		<div class="footer center">
-			<%- include('index/social.ejs', {}); %>
-			<div class="footerinfo">
-				Adentro <%= version %>. Created by Sergey Sharov.
-			</div>
-		</div>
 		<!--<![endif]-->
 	</body>
 </html>

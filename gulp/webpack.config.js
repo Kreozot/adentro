@@ -3,9 +3,6 @@ const gutil = require('gulp-util');
 const argv = require('yargs').argv;
 const config = require('./config.js');
 const paths = config.paths;
-const autoprefixer = require('autoprefixer');
-const precss = require('precss');
-const cssnext = require('cssnext');
 // const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 const Visualizer = require('webpack-visualizer-plugin');
 const schemesList = require('./schemesList.js');
@@ -17,6 +14,13 @@ const htmlmin = require('html-minifier');
 const schemeTemplate = ejs.compile(String(fs.readFileSync('./src/schemeTemplate/scheme.ejs')), {
 	filename: path.resolve('./src/schemeTemplate/scheme.ejs')
 });
+
+const postcssPlugins = [
+	require('cssnano')(),
+	require('autoprefixer')(),
+	require('postcss-cssnext')(),
+	require('precss')()
+];
 
 var webpackConfig = [
 	{
@@ -47,7 +51,7 @@ var webpackConfig = [
 				{test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&presets[]=es2015'},
 				{test: /\.json$/, loader: 'json'},
 				{test: /\.yaml$/, loader: 'json!yaml'},
-				{test: /\.css$/, loader: 'style!css!postcss'},
+				{test: /\.s?css$/, loader: 'style!css!postcss'},
 				{test: /\.(jpe?g|png|gif)$/i, loader: 'url'},
 				{test: /\.mp3$/i, loader: 'file?path=../dist&name=music/[name].[hash:6].[ext]'},
 				{test: /\.svg$/i, loader: 'raw'},
@@ -55,7 +59,7 @@ var webpackConfig = [
 			]
 		},
 		postcss: function () {
-			return [cssnano, autoprefixer, cssnext, precss];
+			return postcssPlugins;
 		},
 		plugins: [
 			new webpack.optimize.CommonsChunkPlugin({
@@ -89,7 +93,7 @@ var webpackConfig = [
 webpackConfig.push({
 	module: {
 		loaders: [
-			{test: /\.css$/, loader: 'style!css!postcss'},
+			{test: /\.s?css$/, loader: 'style!css!postcss'},
 			{test: /\.(jpe?g|png|gif)$/i, loader: 'url'},
 		]
 	},
@@ -102,7 +106,7 @@ webpackConfig.push({
 	},
 	plugins: [],
 	postcss: function () {
-		return [cssnano, autoprefixer, cssnext, precss];
+		return postcssPlugins;
 	}
 });
 
