@@ -9,7 +9,7 @@
 <% function addItems(items, level = 1) { %>
 	<ul>
 	<% items.forEach(item => { %>
-		<li className="dance-menu__item dance-menu__item--<% level %>" title="<%- item.titleRu %>">
+		<li class="dance-menu__item dance-menu__item--<%= level %>" title="<%- item.titleRu %>">
 			<%
 				addLink(item);
 

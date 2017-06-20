@@ -44,5 +44,5 @@ gulp.task('process-html', ['clean-html', 'copy-static'], function () {
 });
 
 gulp.task('watch-html', ['connect', 'process-html'], function () {
-	return gulp.watch([paths.templates + '/**/*.ejs'], ['process-html']);
+	return gulp.watch([paths.src.templates + '/**/*.ejs'], ['process-html']);
 });

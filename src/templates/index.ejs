@@ -14,40 +14,38 @@
 	</head>
 	<body>
 		<!--[if gt IE 8]><!-->
-		<header>
+		<header class="header">
 			<div id="logo"></div>
 			<div id="lang">
 			</div>
 		</header>
-		<main>
+		<main class="main">
 			<div class="sidebar">
 				<%- include('index/menu.ejs', {menuItems}); %>
 			</div>
 
-			<div class="center" id="navigation">
-			</div>
-
-			<div class="title">
-				<h1 id="danceName"></h1>
-			</div>
-
-			<div class="center">
-				<%- include('index/player.ejs', {}); %>
-				<div class="center" id="musicLinks"></div>
-			</div>
-
-			<div class="center" id="schemaDiv"></div>
-
-			<div class="content_menu" id="content_menu"></div>
-			<div class="center" id="content"></div>
-
-			<div class="footer center">
-				<%- include('index/social.ejs', {}); %>
-				<div class="footerinfo">
-					Adentro <%= version %>. Created by Sergey Sharov.
+			<div class="content">
+				<div id="navigation">
 				</div>
+
+				<h1 id="danceName" class="title"></h1>
+
+				<%- include('index/player.ejs', {}); %>
+				<div id="musicLinks"></div>
+
+				<div class="scheme-wrapper" id="schemaDiv"></div>
+
+				<div class="content_menu" id="content_menu"></div>
+				<div id="content" class="animation-wrapper"></div>
 			</div>
 		</main>
+
+		<footer class="footer">
+			<%- include('index/social.ejs', {}); %>
+			<div class="footerinfo">
+				Adentro <%= version %>. Created by Sergey Sharov.
+			</div>
+		</footer>
 
 		<script src="vendor.js"></script>
 		<script src="main.js"></script>

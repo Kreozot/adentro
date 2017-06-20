@@ -336,6 +336,12 @@ global.tour = new Tour();
 export default Adentro;
 
 $(window).load(function () {
+	$.attrHooks['viewbox'] = {
+		set: function (elem, value, name) {
+			elem.setAttributeNS(null, 'viewBox', String(value));
+			return value;
+		}
+	};
 	window.addEventListener('popstate', function (e) {
 		adentro.navigation.loadSchemaByState();
 	});

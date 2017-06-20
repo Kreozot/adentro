@@ -1,4 +1,4 @@
 require('../styles/menu.scss');
-require('../styles/danceschema.css');
-require('../styles/scheme.css');
-require('../styles/jplayer.blue.monday.css');
+require('../styles/main.scss');
+require('../styles/scheme.scss');
+require('../styles/player.scss');

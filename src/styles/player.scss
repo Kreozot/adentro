@@ -11,7 +11,7 @@
 * Skin Version:4.4 (jPlayer 2.6.0)
 * Date:1st April 2014 */
 
-div.jp-audio {
+.jp-audio {
 	/* Edit the font-size to counteract inherited font sizing.
 	* Eg. 1.25em = 1 / 0.8em */
 
@@ -21,109 +21,93 @@ div.jp-audio {
 	color: #666;
 	border: 1px solid #009be3;
 	background-color: #eee;
-}
-div.jp-audio {
-	width: 520px;
+	max-width: 600px;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }
-div.jp-interface {
-	position: relative;
+.jp-interface {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
 	background-color: #eee;
 	width: 100%;
+	padding: 10px;
+
+	& > * {
+		margin: 3px;
+	}
 }
-div.jp-audio div.jp-type-single div.jp-interface {
-	height: 60px;
+.jp-type-single {
+	width: 100%;
+	display: flex;
 }
 
 /* @group CONTROLS */
-div.jp-controls-holder {
-	clear: both;
-	width: 540px;
-	margin: 0 auto;
-	position: relative;
-	overflow: hidden;
-	top: -8px; /* This negative value depends on the size of the text in jp-currentTime and jp-duration */
-}
-div.jp-interface ul.jp-controls {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-}
-div.jp-audio ul.jp-controls {
-	width: 480px;
-	padding: 10px 20px 0 20px;
-}
-div.jp-interface ul.jp-controls li {
+
+.jp-control {
 	display: inline;
 	float: left;
-}
-div.jp-interface ul.jp-controls a {
 	display: block;
 	overflow: hidden;
 	text-indent: -9999px;
 }
-a.jp-play, a.jp-pause {
+.jp-play, .jp-pause {
 	width: 40px;
 	height: 40px;
 }
-a.jp-play {
+.jp-play {
 	background: url("./img/jplayer.blue.monday.png") 0 0 no-repeat;
 }
-a.jp-play:hover {
+.jp-play:hover {
 	background: url("./img/jplayer.blue.monday.png") -41px 0 no-repeat;
 }
-a.jp-pause {
+.jp-pause {
 	background: url("./img/jplayer.blue.monday.png") 0 -42px no-repeat;
 	display: none;
 }
-a.jp-pause:hover {
+.jp-pause:hover {
 	background: url("./img/jplayer.blue.monday.png") -41px -42px no-repeat;
 }
-a.jp-stop, a.jp-previous, a.jp-next {
+.jp-stop, .jp-previous, .jp-next {
 	width: 28px;
 	height: 28px;
-	margin-top: 6px;
 }
-a.jp-stop {
+.jp-stop {
 	background: url("./img/jplayer.blue.monday.png") 0 -83px no-repeat;
-	margin-left: 10px;
 }
-a.jp-stop:hover {
+.jp-stop:hover {
 	background: url("./img/jplayer.blue.monday.png") -29px -83px no-repeat;
 }
 
 /* @end */
 /* @group progress bar */
 
-div.jp-progress {
+.player__progress-wrapper {
+	flex-grow: 1;
+	margin: 0.5em 10px 0;
+}
+.jp-progress {
 	overflow: hidden;
 	background-color: #ddd;
-}
-div.jp-audio div.jp-progress {
-	position: absolute;
-	top: 22px;
 	height: 15px;
 }
-div.jp-audio div.jp-type-single div.jp-progress {
-	left: 110px;
-	width: 286px;
-}
-div.jp-seek-bar {
+.jp-seek-bar {
+	position: relative;
 	background: url("./img/jplayer.blue.monday.png") 0 -202px repeat-x;
 	width: 0px;
 	height: 100%;
 	cursor: pointer;
 }
-div.jp-play-bar {
+.jp-play-bar {
 	background: url("./img/jplayer.blue.monday.png") 0 -218px repeat-x;
 	width: 0px;
 	height: 100%;
 }
 
 /* The seeking class is added/removed inside jPlayer */
-div.jp-seeking-bg {
+.jp-seeking-bg {
 	background: url("./img/jplayer.blue.monday.seeking.gif");
 }
 
@@ -131,16 +115,9 @@ div.jp-seeking-bg {
 /* @group volume controls */
 
 
-a.jp-mute, a.jp-unmute, a.jp-volume-max {
+.jp-mute, .jp-unmute, .jp-volume-max {
 	width: 18px;
 	height: 15px;
-	margin-top: 12px;
-}
-div.jp-audio div.jp-type-single a.jp-mute, div.jp-audio div.jp-type-single a.jp-unmute {
-	margin-left: 310px;
-}
-div.jp-audio a.jp-volume-max {
-	margin-left: 56px;
 }
 a.jp-mute {
 	background: url("./img/jplayer.blue.monday.png") 0 -170px no-repeat;
@@ -162,16 +139,11 @@ a.jp-volume-max:hover {
 	background: url("./img/jplayer.blue.monday.png") -19px -186px no-repeat;
 }
 div.jp-volume-bar {
-	position: absolute;
 	overflow: hidden;
 	background: url("./img/jplayer.blue.monday.png") 0 -250px repeat-x;
 	width: 46px;
 	height: 5px;
 	cursor: pointer;
-}
-div.jp-audio div.jp-volume-bar {
-	top: 27px;
-	left: 428px;
 }
 div.jp-volume-bar-value {
 	background: url("./img/jplayer.blue.monday.png") 0 -256px repeat-x;
@@ -182,17 +154,11 @@ div.jp-volume-bar-value {
 /* @end */
 /* @group current time and duration */
 
-div.jp-audio div.jp-time-holder {
-	position: absolute;
-	top: 40px;
-}
-div.jp-audio div.jp-type-single div.jp-time-holder {
-	left: 110px;
-	width: 286px;
+.jp-time-holder {
+	font-size: .48em;
 }
 div.jp-current-time, div.jp-duration {
 	width: 60px;
-	font-size: .48em;
 }
 div.jp-current-time {
 	float: left;
@@ -243,20 +209,20 @@ div.jp-jplayer {
 /* @group TOGGLES */
 /* The audio toggles are nested inside jp-time-holder */
 
-ul.jp-toggles {
+.jp-toggles {
 	list-style-type: none;
 	padding: 0;
 	margin: 0 auto;
 	overflow: hidden;
 }
-div.jp-audio .jp-type-single ul.jp-toggles {
+div.jp-audio .jp-type-single .jp-toggles {
 	width: 25px;
 }
-ul.jp-toggles li {
+.jp-toggles li {
 	display: block;
 	float: right;
 }
-ul.jp-toggles li a {
+.jp-toggles li a {
 	display: block;
 	width: 25px;
 	height: 18px;

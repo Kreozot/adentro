@@ -1,10 +1,7 @@
 @import 'mixins/_media.scss';
 
 .sidebar {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 200px;
+	min-width: 200px;
 
 	@mixin media S {
 		width: 100%;
@@ -19,6 +16,27 @@
 	}
 
 	@mixin media M {
-		width: 100px;
+		min-width: 120px;
+	}
+}
+
+.dance-menu {
+	padding: 5%;
+
+	li {
+
+	}
+
+	&__item {
+		margin: 5%;
+
+		&--1 {
+			margin-left: 10%;
+
+		}
+
+		&--2 {
+
+		}
 	}
 }

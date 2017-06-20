@@ -7,21 +7,25 @@ let animationLoader = {
 	loadAnimationBlock: function () {
 		contentSwitch.addBlock('animation_block', localize({ru: 'Хореография', en: 'Choreography'}),
 			`<div id="animationLinks"></div>
-			<svg id="animation" preserveAspectRatio="xMidYMid meet"
-			xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>`);
+			<div class="svg-container animation-container">
+				<svg id="animation" class="stretch-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" overflow="hidden"></svg>
+			</div>`);
 	},
 
 	/**
 	 * Загрузка анимации
-	 * @param  {Object} animationClass  Класс анимации
+	 * @param  {Object} AnimationClass  Класс анимации
 	 */
-	loadAnimation: function (animationClass) {
+	loadAnimation: function (AnimationClass) {
 		if ($.animation) {
 			$.animation.clear();
 		}
-		$.animation = new animationClass('animation');
-		$('#animation').attr('width', $.animation.width)
-			.attr('height', $.animation.height)
+		$.animation = new AnimationClass('animation');
+		const ratio = $.animation.height / $.animation.width * 100;
+		$('.animation-container').css('padding-bottom', ratio + '%');
+		$('#animation')
+			.attr('width', '100%')
+			.attr('height', '100%')
 			.attr('viewBox', '0 0 ' + $.animation.width + ' ' + $.animation.height);
 	},
 
