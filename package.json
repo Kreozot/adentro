@@ -52,7 +52,7 @@
     "codestylefix": "jscs src/js --fix --config=fix.jscsrc"
   },
   "dependencies": {
-    "cookie_js": "^1.0.0",
+    "cookie_js": "^1.2.2",
     "cssnano": "^3.10.0",
     "ejs": "^2.5.6",
     "ejs-compiled-loader": "^2.2.0",
@@ -66,7 +66,7 @@
     "jplayer": "^2.9.2",
     "jquery": "^2.1.4",
     "json-loader": "^0.5.4",
-    "lost": "^8.0.0",
+    "plyr": "^2.0.13",
     "postcss-cssnext": "^2.11.0",
     "postcss-custom-media": "^6.0.0",
     "precss": "^1.4.0",

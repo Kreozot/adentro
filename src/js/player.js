@@ -1,17 +1,54 @@
-var playerId = 'jplayer';
-var playerSelector = '#' + playerId;
+import plyr from 'plyr';
+require('plyr/dist/plyr.css');
+const $player = $('#player');
 
-class Player {
+export default class Player {
+	constructor(adentro) {
+		this.adentro = adentro;
+		this.player = plyr.setup({})[0];
+		this.scheme = [];
+
+		this.player.on('timeupdate', event => {
+			const player = event.detail.plyr;
+			// Если остановлено
+			if ((this.player.isPaused()) && (this.player.getCurrentTime() == 0)) {
+				this.hideCurrentElement(svgdom);
+			} else {
+				$.animation.resume();
+				const time = this.player.getCurrentTime();
+				const element = getElement(this.scheme, time);
+				if (this.currentElement != element.name) {
+					this.currentElement = element.name;
+					if (element.name) {
+						this.adentro.showCurrentElement(element.name, element.timeLength, svgdom);
+					}
+				}
+			}
+		});
+		this.player.on('ended', event => {
+			this.hideCurrentElement(svgdom);
+		});
+		this.player.on('pause', event => {
+			const player = event.detail.plyr;
+			if ((player.isPaused()) && (player.getCurrentTime() == 0)) {
+				$.animation.pause();
+			}
+		});
+	}
 	/**
 	 * Загрузить музыку и тайминг
 	 * @param  {Object} musicDef Описание композиции
 	 */
 	loadMusicSchema(musicDef) {
-		$(playerSelector).jPlayer('setMedia', {
+		this.player.source({
+			type: 'audio',
 			title: musicDef.title,
-			mp3: musicDef.file
+			sources: [{
+				src: musicDef.file,
+				type: 'audio/mp3'
+			}]
 		});
-		$(playerSelector).data('schema', musicDef.schema);
+		this.scheme = musicDef.schema;
 	}
 
 	/**
@@ -19,16 +56,9 @@ class Player {
 	 * @param  {String} element Идентификатор элемента
 	 */
 	playElement(element) {
-		const schema = $(playerSelector).data('schema');
-		const time = schema[element];
+		const time = this.scheme[element];
 		$.animation.clear();
-		$(playerSelector).jPlayer('play', time);
+		this.player.seek(time);
+		this.player.play();
 	}
 }
-
-$('#' + playerId).jPlayer({
-	swfPath: '',
-	supplied: 'mp3'
-});
-
-export default Player;

@@ -7,7 +7,7 @@ import {getElement} from './timing/timing';
 import TimingGenerator from './timing/timing-generator';
 import Tour from './tour';
 
-const playerSelector = '#jplayer';
+const playerSelector = '#player';
 
 /**
  * Получить ссылку на dom svg-схемы
@@ -106,46 +106,10 @@ class Adentro {
 	 * Иницилизация схемы
 	 */
 	initSvgSchema() {
-		const svgdom = getSvgSchemaDom();
-		let $player = $(playerSelector);
-		if (svgdom) {
-			// $('#schema').attr('width', $('svg', svgdom).attr('width'))
-			// 		.attr('height', $('svg', svgdom).attr('height'));
-
-			const timeupdateEvent = event => {
-				const playerStatus = event.jPlayer.status;
-				// Если остановлено
-				if ((playerStatus.paused) && (playerStatus.currentTime == 0)) {
-					this.hideCurrentElement(svgdom);
-				} else if ((!playerStatus.paused) &&
-						(!playerStatus.waitForPlay) &&
-						(!playerStatus.waitForLoad)) {
-					$.animation.resume();
-					const time = playerStatus.currentTime;
-					const element = getElement($player.data('schema'), time);
-					if ($player.data('currentElement') != element.name) {
-						$player.data('currentElement', element.name);
-						if (element && (element.name.length > 0)) {
-							this.showCurrentElement(element.name, element.timeLength, svgdom);
-						}
-					}
-				}
-			};
-			const endedEvent = event => {
-				this.hideCurrentElement(svgdom);
-			};
-			const pauseEvent = event => {
-				let playerStatus = event.jPlayer.status;
-				if ((playerStatus.paused) && (playerStatus.currentTime > 0)) {
-					$.animation.pause();
-				}
-			};
-
-			$(playerSelector)
-				.bind($.jPlayer.event.timeupdate, timeupdateEvent)
-				.bind($.jPlayer.event.ended, endedEvent)
-				.bind($.jPlayer.event.pause, pauseEvent);
-		}
+		// const svgdom = getSvgSchemaDom();
+		// let $player = $(playerSelector);
+		// if (svgdom) {
+		// }
 	}
 
 	/**
