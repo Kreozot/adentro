@@ -3,17 +3,10 @@ import Player from './player';
 import contentSwitch from './loading/content_switch';
 import animationLoader from './loading/animation_loading';
 import infoLoader from './loading/info_loading';
-import {getElement} from './timing/timing';
 import TimingGenerator from './timing/timing-generator';
 import Tour from './tour';
 
 const playerSelector = '#player';
-
-/**
- * Получить ссылку на dom svg-схемы
- * @return  {String}  Ссылка на dom svg-схемы
- */
-const getSvgSchemaDom = () => $('#schemaDiv svg');
 
 class Adentro {
 	constructor() {
@@ -23,12 +16,8 @@ class Adentro {
 
 	/**
 	 * Спрятать отображение текущего элемента на схеме
-	 * @param  {String} svgSchemaDom Ссылка на dom svg-схемы
 	 */
-	hideCurrentElementMarkOnSchema(svgSchemaDom) {
-		if (!svgSchemaDom) {
-			svgSchemaDom = getSvgSchemaDom();
-		}
+	hideCurrentElementMarkOnSchema() {
 		Snap.selectAll('text.current, rect.current').forEach(function (elem) {
 			elem.removeClass('current');
 		});
@@ -36,10 +25,9 @@ class Adentro {
 
 	/**
 	 * Спрятать отображение и визуализацию текущего элемента
-	 * @param  {String} svgSchemaDom Ссылка на dom svg-схемы
 	 */
-	hideCurrentElement(svgSchemaDom) {
-		this.hideCurrentElementMarkOnSchema(svgSchemaDom);
+	hideCurrentElement() {
+		this.hideCurrentElementMarkOnSchema();
 		$.animation.clear();
 		$(playerSelector).data('currentElement', '');
 	}
@@ -47,12 +35,8 @@ class Adentro {
 	/**
 	 * Выделение текущего элемента на SVG-схеме
 	 * @param  {String} element 	  Идентификатор элемента
-	 * @param  {String} svgSchemaDom  Ссылка на dom svg-схемы
 	 */
-	markCurrentElementOnSchema(element, svgSchemaDom) {
-		if (!svgSchemaDom) {
-			svgSchemaDom = getSvgSchemaDom();
-		}
+	markCurrentElementOnSchema(element) {
 		if (element[0] === '#') {
 			//Пропускаем обработку служебных меток
 			return;
@@ -75,12 +59,8 @@ class Adentro {
 	 * Отображение текущего элемента
 	 * @param  {String} element 	  Идентификатор элемента
 	 * @param  {Number} seconds    	  Длительность в секундах
-	 * @param  {String} svgSchemaDom  Ссылка на dom svg-схемы
 	 */
-	showCurrentElement(element, seconds, svgSchemaDom) {
-		if (!svgSchemaDom) {
-			svgSchemaDom = getSvgSchemaDom();
-		}
+	showCurrentElement(element, seconds) {
 		if (element.split('_')[0] === '#start') {
 			// Начальное расположение
 			$.animation.setAtStart();
@@ -91,36 +71,14 @@ class Adentro {
 			return;
 		}
 
-		this.markCurrentElementOnSchema(element, svgSchemaDom);
+		this.markCurrentElementOnSchema(element);
 		// Запускаем соответствующую анимацию
-		const domElement = $('#' + element, svgSchemaDom);
+		const domElement = $('#' + element);
 		const visualizationFuncName = domElement.data('visualization');
 		const manPosition = domElement.data('manposition');
 		const beats = domElement.data('times');
 		if (visualizationFuncName) {
 			$.animation[visualizationFuncName](seconds, manPosition, beats);
-		}
-	}
-
-	/**
-	 * Иницилизация схемы
-	 */
-	initSvgSchema() {
-		// const svgdom = getSvgSchemaDom();
-		// let $player = $(playerSelector);
-		// if (svgdom) {
-		// }
-	}
-
-	/**
-	 * Инициализация редактора тайминга
-	 */
-	initSvgSchemaEditor() {
-		const svgdom = getSvgSchemaDom();
-		if (svgdom) {
-			$('#schema')
-				.attr('width', $('svg', svgdom).attr('width'))
-				.attr('height', $('svg', svgdom).attr('height'));
 		}
 	}
 
@@ -168,7 +126,7 @@ class Adentro {
 	 * Показать ссылки на языки
 	 */
 	showLanguageLinks() {
-		var languages = [
+		const languages = [
 			{
 				id: 'ru',
 				title: 'ru'
@@ -214,13 +172,13 @@ class Adentro {
 		musicId = musicId || schemeParams.music[0].id;
 		this.showMusicLinks(schemeParams.music, musicId);
 		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
-
-		$(playerSelector)
-			.unbind($.jPlayer.event.timeupdate)
-			.unbind($.jPlayer.event.ended)
-			.unbind($.jPlayer.event.pause);
+		//
+		// $(playerSelector)
+		// 	.unbind($.jPlayer.event.timeupdate)
+		// 	.unbind($.jPlayer.event.ended)
+		// 	.unbind($.jPlayer.event.pause);
 		this.player.loadMusicSchema(musicSchema);
-		this.initSvgSchema();
+		this.player.initEvents();
 
 		contentSwitch.clearContent();
 

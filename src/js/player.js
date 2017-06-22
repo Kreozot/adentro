@@ -1,32 +1,36 @@
 import plyr from 'plyr';
 require('plyr/dist/plyr.css');
 const $player = $('#player');
+import {getElement} from './timing/timing';
 
 export default class Player {
 	constructor(adentro) {
 		this.adentro = adentro;
 		this.player = plyr.setup({})[0];
 		this.scheme = [];
+		this.currentElement = null;
+	}
 
+	initEvents() {
 		this.player.on('timeupdate', event => {
 			const player = event.detail.plyr;
 			// Если остановлено
 			if ((this.player.isPaused()) && (this.player.getCurrentTime() == 0)) {
-				this.hideCurrentElement(svgdom);
+				this.adentro.hideCurrentElement();
 			} else {
 				$.animation.resume();
 				const time = this.player.getCurrentTime();
 				const element = getElement(this.scheme, time);
-				if (this.currentElement != element.name) {
+				if (this.currentElement !== element.name) {
 					this.currentElement = element.name;
 					if (element.name) {
-						this.adentro.showCurrentElement(element.name, element.timeLength, svgdom);
+						this.adentro.showCurrentElement(element.name, element.timeLength);
 					}
 				}
 			}
 		});
 		this.player.on('ended', event => {
-			this.hideCurrentElement(svgdom);
+			this.adentro.hideCurrentElement();
 		});
 		this.player.on('pause', event => {
 			const player = event.detail.plyr;
@@ -35,6 +39,7 @@ export default class Player {
 			}
 		});
 	}
+
 	/**
 	 * Загрузить музыку и тайминг
 	 * @param  {Object} musicDef Описание композиции
