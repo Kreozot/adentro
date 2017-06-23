@@ -6,7 +6,9 @@ import {getElement} from './timing/timing';
 export default class Player {
 	constructor(adentro) {
 		this.adentro = adentro;
-		this.player = plyr.setup({})[0];
+		this.player = plyr.setup({
+			iconUrl: '/plyr.svg'
+		})[0];
 		this.scheme = [];
 		this.currentElement = null;
 	}
