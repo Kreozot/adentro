@@ -1,5 +1,5 @@
-var schemes = require('./schemes.js');
-var URI = require('urijs/src/URI.js');
+const schemes = require('./schemes.js');
+const URI = require('urijs/src/URI.js');
 import AnimationLoader from './loading/animation_loading';
 
 function supports_history_api() {
@@ -10,20 +10,22 @@ export default class Navigation {
 	constructor(main) {
 		this.context = {};
 		this.main = main;
+
+		const self = this;
+		$('.dance-menu__link')
+			.on('click', function () {
+				const schemeId = $(this).data('scheme');
+				if (self.currentScheme !== schemeId) {
+					self.showSchema(schemeId);
+				}
+			});
 	}
 
 	updateMenu(currentSchemeId) {
-		var navigation = this;
-		$('.menu-item')
-			.removeClass('menu-item--current')
-			.off('click')
-			.on('click', function (element) {
-				var schemeId = $(this).data('scheme');
-				navigation.showSchema(schemeId);
-			});
-		$('.menu-item[data-scheme=' + currentSchemeId + ']')
-			.addClass('menu-item--current')
-			.off('click');
+		$(`.dance-menu__link:not([data-scheme=${currentSchemeId}])`)
+			.removeClass('dance-menu__link--current');
+		$(`.dance-menu__link[data-scheme=${currentSchemeId}]`)
+			.addClass('dance-menu__link--current');
 	}
 
 	/**
@@ -48,7 +50,7 @@ export default class Navigation {
 	 * @param  {String} musicId  Идентификатор композиции
 	 */
 	loadSchemaEditorByName(name, musicId) {
-		var schemaParams = schemes[name] || schemes.chacarera;
+		const schemaParams = schemes[name] || schemes.chacarera;
 		schemaParams(scheme => {
 			this.main.loadSchemaEditor(scheme, musicId);
 		});
@@ -61,10 +63,10 @@ export default class Navigation {
 	 * @return {String}      URL текущей страницы со всеми параметрами и параметром lang
 	 */
 	getLanguageLink(lang) {
-		var uri = new URI();
-		var query = uri.query(true);
+		const uri = new URI();
+		const query = uri.query(true);
 		query.lang = lang;
-		var newQuery = URI.buildQuery(query);
+		const newQuery = URI.buildQuery(query);
 		return uri.query(newQuery).build();
 	}
 
@@ -100,10 +102,10 @@ export default class Navigation {
 	 * @return {Object} Объект контекста
 	 */
 	getContextFromUrl() {
-		var url = new URI();
-		var segments = url.segment();
-		var params = url.query(true);
-		var context = {};
+		const url = new URI();
+		const segments = url.segment();
+		const params = url.query(true);
+		const context = {};
 		context.schema = params.schema;
 		context.lang = params.lang || 'ru';
 		this.main.lang = context.lang;
@@ -137,14 +139,15 @@ export default class Navigation {
 		}, schemes[this.context.schema].name + ' - Adentro',
 		this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
 
-		var schemaParams = schemes[this.context.schema];
+		const schemaParams = schemes[this.context.schema];
 		schemaParams(function (scheme) {
-			var animationClassDefs = scheme.animation;
+			const animationClassDefs = scheme.animation;
+			let animationClass;
 			if (typeof animationClassDefs === 'object') {
-				var animationClassDef = AnimationLoader.getAnimationClassDef(animationClassDefs, animationId);
-				var animationClass = animationClassDef.animClass;
+				const animationClassDef = AnimationLoader.getAnimationClassDef(animationClassDefs, animationId);
+				animationClass = animationClassDef.animClass;
 			} else {
-				var animationClass = animationClassDefs;
+				animationClass = animationClassDefs;
 			}
 			AnimationLoader.loadAnimation(animationClass);
 			AnimationLoader.showAnimationLinks(animationClassDefs, animationId);
@@ -164,7 +167,7 @@ export default class Navigation {
 		}, schemes[this.context.schema].name + ' - Adentro',
 		this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
 
-		var schemaParams = schemes[this.context.schema];
+		const schemaParams = schemes[this.context.schema];
 		schemaParams(scheme => {
 			const musicData = scheme.music;
 			const musicSchema = musicData.filter(music => music.id === musicId)[0];
@@ -179,7 +182,7 @@ export default class Navigation {
 	 * @return {Boolean} True если схема была загружена
 	 */
 	loadSchemaByState() {
-		var state = history.state;
+		const state = history.state;
 		if (state.schema) {
 			this.context.schema = state.schema;
 			this.context.animation = state.animation;

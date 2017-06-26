@@ -23,20 +23,29 @@
 .dance-menu {
 	padding: 5%;
 
-	li {
-
-	}
-
 	&__item {
 		margin: 5%;
+		list-style-type: none;
 
 		&--1 {
-			margin-left: 10%;
-
 		}
 
 		&--2 {
+			margin-left: 15%;
+		}
+	}
 
+	&__link {
+		cursor: pointer;
+		text-decoration: underline;
+
+		&--current {
+			color: red;
+			font-weight: bold;
+		}
+
+		&:hover {
+			color: orange;
 		}
 	}
 }

@@ -4,8 +4,8 @@ const $player = $('#player');
 import {getElement} from './timing/timing';
 
 export default class Player {
-	constructor(adentro) {
-		this.adentro = adentro;
+	constructor(main) {
+		this.main = main;
 		this.player = plyr.setup({
 			iconUrl: '/plyr.svg'
 		})[0];
@@ -18,7 +18,7 @@ export default class Player {
 			const player = event.detail.plyr;
 			// Если остановлено
 			if ((this.player.isPaused()) && (this.player.getCurrentTime() == 0)) {
-				this.adentro.hideCurrentElement();
+				this.main.hideCurrentElement();
 			} else {
 				$.animation.resume();
 				const time = this.player.getCurrentTime();
@@ -26,13 +26,13 @@ export default class Player {
 				if (this.currentElement !== element.name) {
 					this.currentElement = element.name;
 					if (element.name) {
-						this.adentro.showCurrentElement(element.name, element.timeLength);
+						this.main.showCurrentElement(element.name, element.timeLength);
 					}
 				}
 			}
 		});
 		this.player.on('ended', event => {
-			this.adentro.hideCurrentElement();
+			this.main.hideCurrentElement();
 		});
 		this.player.on('pause', event => {
 			const player = event.detail.plyr;

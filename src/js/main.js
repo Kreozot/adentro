@@ -258,6 +258,7 @@ global.tour = new Tour();
 export default Adentro;
 
 $(window).load(function () {
+	// Хак для корректной простановки параметра viewBox в SVG через jQuery
 	$.attrHooks['viewbox'] = {
 		set: function (elem, value, name) {
 			elem.setAttributeNS(null, 'viewBox', String(value));

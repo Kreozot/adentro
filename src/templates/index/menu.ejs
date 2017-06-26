@@ -1,24 +1,30 @@
-<% function addLink(item) { %>
-	<% if (item.scheme) { %>
-		<a data-scheme="<%- item.scheme %>"><%- item.title %></a>
-	<% } else { %>
+<% function addItem(item, level) { %>
+	<li class="dance-menu__item dance-menu__item--<%= level %>">
 		<%- item.title %>
+	</li>
+<% } %>
+
+<% function addLink(item, level) { %>
+	<% if (item.scheme) { %>
+		<a class="dance-menu__link" data-scheme="<%- item.scheme %>" title="<%- item.titleRu %>">
+		<% addItem(item, level) %>
+		</a>
+	<% } else { %>
+		<% addItem(item, level) %>
 	<% } %>
 <% } %>
 
 <% function addItems(items, level = 1) { %>
 	<ul>
-	<% items.forEach(item => { %>
-		<li class="dance-menu__item dance-menu__item--<%= level %>" title="<%- item.titleRu %>">
-			<%
-				addLink(item);
+	<%
+		items.forEach(item => {
+			addLink(item, level);
 
-				if (item.children) {
-					addItems(item.children, level + 1);
-				}
-			%>
-		</li>
-	<% }); %>
+			if (item.children) {
+				addItems(item.children, level + 1);
+			}
+		});
+	%>
 	</ul>
 <% } %>
 

@@ -17,7 +17,7 @@ gulp.task('clean-html', function () {
 });
 
 gulp.task('copy-static', ['clean-html'], function () {
-	return gulp.src(paths.static + '/**/*')
+	return gulp.src(paths.src.static + '/**/*')
 		.pipe(gulp.dest(paths.dist.html));
 });
 
