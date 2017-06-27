@@ -130,16 +130,14 @@ export default class Navigation {
 	 * @param  {Number} animationId  Идентификатор анимации
 	 */
 	showAnimation(animationId) {
+		const {schema, animation, music} = this.context;
 		this.context.animation = animationId;
 
-		this.pushStateOrRedirect({
-			schema: this.context.schema,
-			animation: this.context.animation,
-			music: this.context.music
-		}, schemes[this.context.schema].name + ' - Adentro',
-		this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
+		this.pushStateOrRedirect({schema, animation, music},
+			`A / ${schemes[schema].name}`,
+			this.getRelativeUrl(schema, animation, music));
 
-		const schemaParams = schemes[this.context.schema];
+		const schemaParams = schemes[schema];
 		schemaParams(function (scheme) {
 			const animationClassDefs = scheme.animation;
 			let animationClass;
