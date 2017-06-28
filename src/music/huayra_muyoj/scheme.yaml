@@ -2,12 +2,12 @@
   - {times: 4, manPosition: left, class: esquina, id: esquina, visualization: esquinaStart, title: Esquina y contragiro}
   - {times: 4, manPosition: top, class: regreso, id: regreso, visualization: regreso, title: Regreso, yOffset: true}
   - {times: 2, manPosition: top, class: giro, id: giro, visualization: giro, title: Giro}
-  - {times: 8, manPosition: top, class: zapateo, id: zapateoZarandeo, visualization: zapateoZarandeo, title: "Zapateo / Zarandeo"}
+  - {times: 8, manPosition: top, class: zapateo, id: zapateoZarandeo, visualization: zapateoZarandeo, title: "$m[Zapateo] / $w[Zarandeo]"}
   - bar: true
   - {times: 4, manPosition: top, class: esquina, id: esquina2, visualization: esquina, title: Esquina y contragiro}
   - {times: 4, manPosition: right, class: regreso, id: regreso2, visualization: regreso, title: Regreso, yOffset: true}
   - {times: 2, manPosition: right, class: giro, id: giro2, visualization: giro, title: Giro}
-  - {times: 8, manPosition: right, class: zapateo, id: zapateoZarandeo2, visualization: zapateoZarandeo, title: "Zapateo / Zarandeo"}
+  - {times: 8, manPosition: right, class: zapateo, id: zapateoZarandeo2, visualization: zapateoZarandeo, title: "$m[Zapateo] / $w[Zarandeo]"}
   - bar: true
   - {times: 4, manPosition: right, class: esquina, id: esquina3, visualization: esquinaEnd, title: Esquina y contragiro}
   - {times: 2, manPosition: right, class: avance, id: avance, visualization: avance, title: Avance y retroceso, yOffset: true}
@@ -16,12 +16,12 @@
   - {times: 4, manPosition: right, class: esquina, id: esquina_2, visualization: esquinaStart, title: Esquina y contragiro}
   - {times: 4, manPosition: bottom, class: regreso, id: regreso_2, visualization: regreso, title: Regreso, yOffset: true}
   - {times: 2, manPosition: bottom, class: giro, id: giro_2, visualization: giro, title: Giro}
-  - {times: 8, manPosition: bottom, class: zapateo, id: zapateoZarandeo_2, visualization: zapateoZarandeo, title: "Zapateo / Zarandeo"}
+  - {times: 8, manPosition: bottom, class: zapateo, id: zapateoZarandeo_2, visualization: zapateoZarandeo, title: "$m[Zapateo] / $w[Zarandeo]"}
   - bar: true
   - {times: 4, manPosition: bottom, class: esquina, id: esquina2_2, visualization: esquina, title: Esquina y contragiro}
   - {times: 4, manPosition: left, class: regreso, id: regreso2_2, visualization: regreso, title: Regreso, yOffset: true}
   - {times: 2, manPosition: left, class: giro, id: giro2_2, visualization: giro, title: Giro}
-  - {times: 8, manPosition: left, class: zapateo, id: zapateoZarandeo2_2, visualization: zapateoZarandeo, title: "Zapateo / Zarandeo"}
+  - {times: 8, manPosition: left, class: zapateo, id: zapateoZarandeo2_2, visualization: zapateoZarandeo, title: "$m[Zapateo] / $w[Zarandeo]"}
   - bar: true
   - {times: 4, manPosition: left, class: esquina, id: esquina3_2, visualization: esquinaEnd, title: Esquina y contragiro}
   - {times: 2, manPosition: left, class: avance, id: avance_2, visualization: avance, title: Avance y retroceso, yOffset: true}
