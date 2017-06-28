@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'Huayra Muyoj',
-	svg: require('./scheme.svg'),
+	svg: compileSchemeTemplate('huayra_muyoj'),
 	music: [require('./music/huayra_muyoj')],
 	animation: require('animationClasses/HuayraMuyojAnimation').default,
 	zapateo: true

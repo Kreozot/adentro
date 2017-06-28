@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'Caramba',
-	svg: require('./scheme.svg'),
+	svg: compileSchemeTemplate('caramba'),
 	music: [require('./music/el_caramba')],
 	animation: require('animationClasses/GatoAnimation').default
 };

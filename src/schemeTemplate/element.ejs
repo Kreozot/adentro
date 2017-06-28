@@ -45,4 +45,7 @@ const textTop = yOffset ? blockHeight + 32 : blockHeight + 16;
 <text class="element-text"
 	x="<%= x + (blockWidth / 2) + textOffset %>"
 	y="<%= y + textTop %>"
-	id="<%= id %>-text"><%= title %></text>
+	id="<%= id %>-text"><%- title
+		.replace(/\$m\[([^\]]+)\]/g, `<tspan class="element-text--man">$1</tspan>`) 
+		.replace(/\$w\[([^\]]+)\]/g, `<tspan class="element-text--woman">$1</tspan>`)
+	%></text>

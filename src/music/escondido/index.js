@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'Escondido',
-	svg: require('./scheme.svg'),
+	svg: compileSchemeTemplate('escondido'),
 	music: [require('./music/huaico_hondo')],
 	animation: require('animationClasses/EscondidoAnimation').default,
 	zapateo: true

@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'Gato',
-	svg: require('./scheme.svg'),
+	svg: compileSchemeTemplate('gato'),
 	music: [require('./music/gatito_pa_don_lucas')],
 	animation: require('animationClasses/GatoAnimation').default,
 	zapateo: true

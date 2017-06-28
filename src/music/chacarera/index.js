@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'Chacarera',
-	svg: require('./scheme.svg'),
+	svg: compileSchemeTemplate('chacarera'),
 	music: [require('./music/la_pockoy_y_pancha'), require('./music/chacarera_de_un_triste')],
 	animation: [{
 		id: 'onTwo',

@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'Zamba Alegre',
-	svg: require('./scheme.svg'),
+	svg: compileSchemeTemplate('zamba_alegre'),
 	music: [require('./music/la_zamba_alegre')],
 	animation: [{
 		id: 'classic',
