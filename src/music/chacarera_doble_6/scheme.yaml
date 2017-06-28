@@ -1,0 +1,31 @@
+---
+-
+  - {times: 4, manPosition: left, class: avance, id: avance, visualization: avance, title: Avance y retroceso}
+  - {times: 4, manPosition: left, class: avance, id: avance2, visualization: avance, title: Avance y retroceso, yOffset: true}
+  - {times: 4, manPosition: left, class: giro, id: giro, visualization: giro, title: Giro}
+  - {times: 6, manPosition: left, class: vuelta, id: vuelta, visualization: vuelta, title: Vuelta entera}
+  - bar: true
+  - {times: 8, manPosition: left, class: zapateo, id: zapateo, visualization: zapateoZarandeo, title: "Zapateo / Zarandeo"}
+  - {times: 4, manPosition: left, class: giro, id: giro2, visualization: giro, title: Giro}
+  - {times: 6, manPosition: left, class: vuelta, id: vuelta2, visualization: vuelta, title: Vuelta entera}
+  - bar: true
+  - {times: 8, manPosition: left, class: zapateo, id: zapateo2, visualization: zapateoZarandeo, title: "Zapateo / Zarandeo"}
+  - {times: 4, manPosition: left, class: giro, id: giro3, visualization: giro, title: Giro}
+  - {times: 4, manPosition: left, class: vuelta, id: mediaVuelta, visualization: mediaVuelta, title: Media vuelta}
+  - {times: 4, manPosition: right, class: zapateo, id: zapateo3, visualization: zapateoZarandeo, title: "Zapateo / Zarandeo", yOffset: true}
+  - {times: 4, manPosition: right, class: coronacion, id: coronacion, visualization: coronacion, title: Giro y coronación}
+-
+  - {times: 4, manPosition: right, class: avance, id: avance_2, visualization: avance, title: Avance y retroceso}
+  - {times: 4, manPosition: right, class: avance, id: avance2_2, visualization: avance, title: Avance y retroceso, yOffset: true}
+  - {times: 4, manPosition: right, class: giro, id: giro_2, visualization: giro, title: Giro}
+  - {times: 6, manPosition: right, class: vuelta, id: vuelta_2, visualization: vuelta, title: Vuelta entera}
+  - bar: true
+  - {times: 8, manPosition: right, class: zapateo, id: zapateo_2, visualization: zapateoZarandeo, title: "Zapateo / Zarandeo"}
+  - {times: 4, manPosition: right, class: giro, id: giro2_2, visualization: giro, title: Giro}
+  - {times: 6, manPosition: right, class: vuelta, id: vuelta2_2, visualization: vuelta, title: Vuelta entera}
+  - bar: true
+  - {times: 8, manPosition: right, class: zapateo, id: zapateo2_2, visualization: zapateoZarandeo, title: "Zapateo / Zarandeo"}
+  - {times: 4, manPosition: right, class: giro, id: giro3_2, visualization: giro, title: Giro}
+  - {times: 4, manPosition: right, class: vuelta, id: mediaVuelta_2, visualization: mediaVuelta, title: Media vuelta}
+  - {times: 4, manPosition: left, class: zapateo, id: zapateo3_2, visualization: zapateoZarandeo, title: "Zapateo / Zarandeo", yOffset: true}
+  - {times: 4, manPosition: left, class: coronacion, id: coronacion_2, visualization: coronacion, title: Giro y coronación}
