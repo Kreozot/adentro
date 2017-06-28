@@ -42,9 +42,12 @@
 		&--current {
 			color: red;
 			font-weight: bold;
+			text-decoration: none;
+			cursor: default;
+			pointer-events: none;
 		}
 
-		&:hover {
+		&:hover:not(&--current) {
 			color: orange;
 		}
 	}

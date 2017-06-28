@@ -1,4 +1,4 @@
-import cookie from 'cookie_js';
+import {cookie} from 'cookie_js';
 
 export default class Tour {
 	startFirstTime() {

@@ -42,17 +42,17 @@ class Adentro {
 			return;
 		}
 		// Показываем рамку вокруг текущего блока
-		const frameId = element + '-frame';
-		Snap.selectAll('rect.current:not(#' + frameId + ')').forEach(function (elem) {
+		const frameId = `${element}-frame`;
+		Snap.selectAll(`rect.current:not(#${frameId})`).forEach(function (elem) {
 			elem.removeClass('current');
 		});
-		Snap('#' + frameId).addClass('current');
+		Snap(`#${frameId}`).addClass('current');
 		// Выделяем название текущего элемента
-		const textId = element + '-text';
-		Snap.selectAll('text.current:not(#' + textId + ')').forEach(function (elem) {
+		const textId = `${element}-text`;
+		Snap.selectAll(`text.current:not(#${textId})`).forEach(function (elem) {
 			elem.removeClass('current');
 		});
-		Snap('#' + textId).addClass('current');
+		Snap(`#${textId}`).addClass('current');
 	}
 
 	/**
@@ -95,7 +95,7 @@ class Adentro {
 		}
 
 		const getMusicLinks = function () {
-			var result = localize({ru: 'Композиция', en: 'Composition'}) + ': <select id="musicSelect">';
+			var result = `${localize({ru: 'Композиция', en: 'Composition'})}: <select id="musicSelect">`;
 			var count = 0;
 			musicData.forEach(musicDataEntry => {
 				if (!$.isEmptyObject(musicDataEntry.schema) || showEmptyTiming) {
@@ -135,7 +135,10 @@ class Adentro {
 				id: 'en',
 				title: 'en'
 			}
-		];
+		].map(lang => {
+			lang.url = this.navigation.getLanguageLink(lang.id);
+			return lang;
+		});
 
 		const isCurrentLang = lang => {
 			return (lang.id === this.lang);

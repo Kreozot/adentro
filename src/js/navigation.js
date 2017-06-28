@@ -2,9 +2,7 @@ const schemes = require('./schemes.js');
 const URI = require('urijs/src/URI.js');
 import AnimationLoader from './loading/animation_loading';
 
-function supports_history_api() {
-	return Boolean(window.history && history.pushState);
-}
+const supportsHistoryApi = Boolean(window.history && history.pushState);
 
 export default class Navigation {
 	constructor(main) {
@@ -77,7 +75,8 @@ export default class Navigation {
 	 * @param  {String} query  Фрагмент URL запроса
 	 */
 	pushStateOrRedirect(params, title, query) {
-		if (supports_history_api()) {
+		document.title = title;
+		if (supportsHistoryApi) {
 			history.pushState(params, title, query);
 		} else {
 			window.location.href = query;
@@ -120,9 +119,22 @@ export default class Navigation {
 	 * @param  {String} schemaId Идентификатор схемы
 	 */
 	showSchema(schemaId) {
-		this.pushStateOrRedirect({schema: schemaId},
-			schemes[schemaId].name + ' - Adentro', this.getRelativeUrl(schemaId));
+		this.context.schema = schemaId;
+		this.context.animation = undefined;
+		this.context.music = undefined;
+		this.updateUrl();
 		this.loadSchemaByState();
+	}
+
+	/**
+	 * Обновить URL в соответствии с текущим контекстом
+	 */
+	updateUrl() {
+		const {schema, animation, music} = this.context;
+
+		this.pushStateOrRedirect({schema, animation, music},
+			`¡A! ${schemes[schema].name}`,
+			this.getRelativeUrl(schema, animation, music));
 	}
 
 	/**
@@ -130,12 +142,8 @@ export default class Navigation {
 	 * @param  {Number} animationId  Идентификатор анимации
 	 */
 	showAnimation(animationId) {
-		const {schema, animation, music} = this.context;
 		this.context.animation = animationId;
-
-		this.pushStateOrRedirect({schema, animation, music},
-			`A / ${schemes[schema].name}`,
-			this.getRelativeUrl(schema, animation, music));
+		this.updateUrl();
 
 		const schemaParams = schemes[schema];
 		schemaParams(function (scheme) {
@@ -158,12 +166,7 @@ export default class Navigation {
 	 */
 	showMusic(musicId) {
 		this.context.music = musicId;
-		this.pushStateOrRedirect({
-			schema: this.context.schema,
-			animation: this.context.animation,
-			music: this.context.music
-		}, schemes[this.context.schema].name + ' - Adentro',
-		this.getRelativeUrl(this.context.schema, this.context.animation, this.context.music));
+		this.updateUrl();
 
 		const schemaParams = schemes[this.context.schema];
 		schemaParams(scheme => {
