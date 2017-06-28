@@ -1,5 +1,5 @@
 import {Timer} from 'animationClasses/commons/utils';
-import RotateElement from '../single/RotateElement';
+import PairElement from './PairElement';
 
 /**
  * Парная анимация для продвижения с вращением
