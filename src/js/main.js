@@ -209,7 +209,7 @@ class Adentro {
 	 */
 	loadSchemaEditor(schemeParams, musicId) {
 		$('#danceName').html(schemeParams.name + ' (editor mode)');
-		$('#schemaDiv').html(schemeParams.svg);
+		$('#schemaDiv').html(schemeTemplate({scheme: schemeParams.scheme}));
 
 		$(playerSelector).unbind($.jPlayer.event.timeupdate)
 			.unbind($.jPlayer.event.ended)
