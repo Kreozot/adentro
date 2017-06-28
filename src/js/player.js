@@ -20,7 +20,7 @@ export default class Player {
 			if ((this.player.isPaused()) && (this.player.getCurrentTime() == 0)) {
 				this.main.hideCurrentElement();
 			} else {
-				$.animation.resume();
+				this.main.animationLoader.animation.resume();
 				const time = this.player.getCurrentTime();
 				const element = getElement(this.scheme, time);
 				if (this.currentElement !== element.name) {
@@ -37,7 +37,7 @@ export default class Player {
 		this.player.on('pause', event => {
 			const player = event.detail.plyr;
 			if ((player.isPaused()) && (player.getCurrentTime() == 0)) {
-				$.animation.pause();
+				this.main.animationLoader.animation.pause();
 			}
 		});
 	}
@@ -64,7 +64,7 @@ export default class Player {
 	 */
 	playElement(element) {
 		const time = this.scheme[element];
-		$.animation.clear();
+		this.main.animationLoader.animation.clear();
 		this.player.seek(time);
 		this.player.play();
 	}

@@ -1,6 +1,5 @@
 const schemes = require('./schemes.js');
 const URI = require('urijs/src/URI.js');
-import AnimationLoader from './loading/animation_loading';
 
 const supportsHistoryApi = Boolean(window.history && history.pushState);
 
@@ -146,17 +145,17 @@ export default class Navigation {
 		this.updateUrl();
 
 		const schemaParams = schemes[schema];
-		schemaParams(function (scheme) {
+		schemaParams(scheme => {
 			const animationClassDefs = scheme.animation;
 			let animationClass;
 			if (typeof animationClassDefs === 'object') {
-				const animationClassDef = AnimationLoader.getAnimationClassDef(animationClassDefs, animationId);
+				const animationClassDef = this.main.animationLoader.getAnimationClassDef(animationClassDefs, animationId);
 				animationClass = animationClassDef.animClass;
 			} else {
 				animationClass = animationClassDefs;
 			}
-			AnimationLoader.loadAnimation(animationClass);
-			AnimationLoader.showAnimationLinks(animationClassDefs, animationId);
+			this.main.animationLoader.loadAnimation(animationClass);
+			this.main.animationLoader.showAnimationLinks(animationClassDefs, animationId);
 		});
 	}
 

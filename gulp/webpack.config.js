@@ -49,6 +49,7 @@ var webpackConfig = [
 		module: {
 			loaders: [
 				{test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&presets[]=es2015'},
+				{test: /\.ejs$/, loader: 'ejs-compiled'},
 				{test: /\.json$/, loader: 'json'},
 				{test: /\.yaml$/, loader: 'json!yaml'},
 				{test: /\.s?css$/, loader: 'style!css!postcss'},
@@ -60,6 +61,11 @@ var webpackConfig = [
 		},
 		postcss: function () {
 			return postcssPlugins;
+		},
+		'ejs-compiled-loader': {
+			htmlmin: false,
+			compileDebug: true,
+			beautify: false
 		},
 		plugins: [
 			new webpack.optimize.CommonsChunkPlugin({
@@ -79,13 +85,6 @@ var webpackConfig = [
 						}, '${id}');
 					}`;
 			}).join(',\n') + '}',
-			compileSchemeTemplate: id => {
-				const scheme = yaml.safeLoad(fs.readFileSync(`./src/music/${id}/scheme.yaml`));
-				const svgSource = htmlmin.minify(schemeTemplate({scheme}), {
-					collapseWhitespace: true
-				});
-				return `\`${svgSource}\``;
-			}
 		}
 	}
 ];

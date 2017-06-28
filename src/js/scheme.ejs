@@ -1,0 +1,113 @@
+<%
+const config = {
+	xMargin: 50,
+	schemaWidth: 800,
+	lineHeight: 60,
+	blockHeight: 20,
+	barWidth: 3
+};
+const fullWidth = config.schemaWidth + (config.xMargin * 2);
+const fullHeight = config.lineHeight * scheme.length;
+const ratio = fullHeight / fullWidth * 100;
+
+function renderBar(pos, line, oneTimeWidth) {
+	const x = config.xMargin + pos * oneTimeWidth + 1;
+	const y = (line - 1) * config.lineHeight + 1;
+	%>
+	<line class="bar" x1="<%= x %>" y1="<%= y %>" x2="<%= x %>" y2="<%= y + config.blockHeight + 1 %>"/>
+	<%
+}
+
+function renderElement(pos, line, oneTimeWidth, element, barRendered) {
+	({id, title, visualization, manPosition, times, textOffset = 0, yOffset, class: className} = element);
+	// Смещение элемента после разделителя части
+	const xOffset = barRendered ? config.barWidth : 0;
+
+	const x = config.xMargin + pos * oneTimeWidth + xOffset;
+	const y = (line - 1) * config.lineHeight + 1;
+	const blockWidth = oneTimeWidth * times - xOffset;
+%>
+
+<rect class="element <%= className %>"
+	x="<%= x %>"
+	y="<%= y %>"
+	width="<%= blockWidth %>"
+	height="<%= config.blockHeight %>"
+	id="<%= id %>"
+	onclick="playElement('<%= id %>')"
+	data-visualization="<%= visualization %>"
+	data-manposition="<%= manPosition %>"
+	data-times="<%= times %>"/>
+
+<rect class="active-frame"
+	x="<%= x + 1 %>"
+	y="<%= y + 2 %>"
+	width="<%= blockWidth - 3 %>"
+	height="<%= config.blockHeight - 4 %>"
+	id="<%= id %>-frame"/>
+
+<text class="times-count-text"
+	x="<%= x + (blockWidth / 2) %>"
+	y="<%= y + config.blockHeight / 2 + 4 %>"><%= times %></text>
+
+<%
+// Отступ по вертикали для подписи
+const textTop = yOffset ? config.blockHeight + 32 : config.blockHeight + 16;
+%>
+
+<% if (yOffset) { %>
+	<line class="text-line"
+		x1="<%= x + (blockWidth / 2) %>"
+		y1="<%= y + config.blockHeight + 3 %>"
+		x2="<%= x + (blockWidth / 2) %>"
+		y2="<%= y + textTop - 11 %>" />
+<% } %>
+<text class="element-text"
+	x="<%= x + (blockWidth / 2) + textOffset %>"
+	y="<%= y + textTop %>"
+	id="<%= id %>-text"><%- title
+		.replace(/\$m\[([^\]]+)\]/g, `<tspan class="element-text--man">$1</tspan>`)
+		.replace(/\$w\[([^\]]+)\]/g, `<tspan class="element-text--woman">$1</tspan>`)
+	%></text>
+<%
+}
+
+function renderPart(config, elements, line) {
+	let barRendered = false;
+	const beatsCount = elements.reduce((sum, element) => {
+		if (element.times) {
+			sum += element.times;
+		}
+		return sum;
+	}, 0);
+	const oneTimeWidth = config.schemaWidth / beatsCount;
+	let pos = 0;
+	elements.forEach((element) => {
+		if (element.bar) {
+			renderBar(pos, line, oneTimeWidth);
+			barRendered = true;
+		} else {
+			renderElement(pos, line, oneTimeWidth, element, barRendered);
+			barRendered = false;
+			pos += element.times;
+		}
+	});
+}
+%>
+
+<div class="svg-container" style="padding-bottom: <%= ratio %>%;">
+	<svg
+		class="stretch-svg"
+		width="100%"
+		height="100%"
+		viewBox="0 0 <%= fullWidth %> <%= fullHeight %>"
+		xmlns="http://www.w3.org/2000/svg"
+		xmlns:xlink="http://www.w3.org/1999/xlink"
+		overflow="hidden">
+		<%
+		scheme.forEach((elements, line) => {
+			renderPart(config, elements, line + 1);
+		});
+		%>
+	</svg>
+</div>

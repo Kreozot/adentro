@@ -1,10 +1,11 @@
 import Navigation from './navigation';
 import Player from './player';
 import contentSwitch from './loading/content_switch';
-import animationLoader from './loading/animation_loading';
+import AnimationLoader from './loading/AnimationLoader';
 import infoLoader from './loading/info_loading';
 import TimingGenerator from './timing/timing-generator';
 import Tour from './tour';
+import schemeTemplate from './scheme.ejs';
 
 const playerSelector = '#player';
 
@@ -12,6 +13,7 @@ class Adentro {
 	constructor() {
 		this.navigation = new Navigation(this);
 		this.player = new Player(this);
+		this.animationLoader = new AnimationLoader(this);
 	}
 
 	/**
@@ -28,7 +30,7 @@ class Adentro {
 	 */
 	hideCurrentElement() {
 		this.hideCurrentElementMarkOnSchema();
-		$.animation.clear();
+		this.animationLoader.animation.clear();
 		$(playerSelector).data('currentElement', '');
 	}
 
@@ -63,7 +65,7 @@ class Adentro {
 	showCurrentElement(element, seconds) {
 		if (element.split('_')[0] === '#start') {
 			// Начальное расположение
-			$.animation.setAtStart();
+			this.animationLoader.animation.setAtStart();
 			this.hideCurrentElementMarkOnSchema();
 			return;
 		} else if (element[0] === '#') {
@@ -78,7 +80,7 @@ class Adentro {
 		const manPosition = domElement.data('manposition');
 		const beats = domElement.data('times');
 		if (visualizationFuncName) {
-			$.animation[visualizationFuncName](seconds, manPosition, beats);
+			this.animationLoader.animation[visualizationFuncName](seconds, manPosition, beats);
 		}
 	}
 
@@ -170,7 +172,7 @@ class Adentro {
 		// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
 
 		$('#danceName').html(schemeParams.name);
-		$('#schemaDiv').html(schemeParams.svg);
+		$('#schemaDiv').html(schemeTemplate({scheme: schemeParams.scheme}));
 
 		musicId = musicId || schemeParams.music[0].id;
 		this.showMusicLinks(schemeParams.music, musicId);
@@ -185,15 +187,15 @@ class Adentro {
 
 		contentSwitch.clearContent();
 
-		animationLoader.loadAnimationBlock();
+		this.animationLoader.loadAnimationBlock();
 		let animationClass = schemeParams.animation;
 		if (typeof animationClass === 'object') {
 			animationId = animationId ? animationId : animationClass[0].id;
-			animationLoader.showAnimationLinks(animationClass, animationId);
-			let currentClassDef = animationLoader.getAnimationClassDef(animationClass, animationId);
+			this.animationLoader.showAnimationLinks(animationClass, animationId);
+			let currentClassDef = this.animationLoader.getAnimationClassDef(animationClass, animationId);
 			animationClass = currentClassDef.animClass;
 		}
-		animationLoader.loadAnimation(animationClass);
+		this.animationLoader.loadAnimation(animationClass);
 
 		infoLoader.loadInfoBlock(schemeParams.info);
 
