@@ -14,8 +14,7 @@ export default class Player {
 	}
 
 	initEvents() {
-		this.player.on('timeupdate', event => {
-			const player = event.detail.plyr;
+		this.player.on('timeupdate', () => {
 			// Если остановлено
 			if ((this.player.isPaused()) && (this.player.getCurrentTime() == 0)) {
 				this.main.hideCurrentElement();
@@ -31,12 +30,11 @@ export default class Player {
 				}
 			}
 		});
-		this.player.on('ended', event => {
+		this.player.on('ended', () => {
 			this.main.hideCurrentElement();
 		});
-		this.player.on('pause', event => {
-			const player = event.detail.plyr;
-			if ((player.isPaused()) && (player.getCurrentTime() == 0)) {
+		this.player.on('pause', () => {
+			if ((this.player.isPaused()) && (this.player.getCurrentTime() !== 0)) {
 				this.main.animationLoader.animation.pause();
 			}
 		});
