@@ -33,6 +33,7 @@ gulp.task('build-js', buildDeps, function (callback) {
 gulp.task('watch-js', ['connect', 'build-js'], function () {
 	return gulp.watch([
 		paths.src.js + '/**/*',
+		paths.src.music + '/**/*',
 		paths.src.styles + '/**/*',
 		paths.root + '/webpack.config.js',
 		paths.root + '/schemesList.js'

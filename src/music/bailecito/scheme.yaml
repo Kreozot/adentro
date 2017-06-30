@@ -9,7 +9,7 @@
   - {class: giro, times: 4, id: contraGiro, visualization: contraGiro, manPosition: left, title: Contra giro}
   - bar: true
   - {class: vuelta, times: 4, id: mediaVuelta, visualization: mediaVuelta, manPosition: left, title: Media vuelta}
-  - {class: coronacion, times: 4, id: coronacion, visualization: coronacion_3, manPosition: right, title: Giro y coronación}
+  - {class: coronacion, times: 4, id: coronacion, visualization: coronacion_3, manPosition: right, title: Giro->y coronación}
 -
   - {class: avance, times: 4, id: avance_2, visualization: avance1, manPosition: right, title: Avance}
   - {class: avance, times: 4, id: retroceso_2, visualization: retroceso1, manPosition: right, title: Retroceso}
@@ -20,7 +20,7 @@
   - {class: giro, times: 4, id: contraGiro_2, visualization: contraGiro, manPosition: right, title: Contra giro}
   - bar: true
   - {class: vuelta, times: 4, id: mediaVuelta_2, visualization: mediaVuelta, manPosition: right, title: Media vuelta}
-  - {class: coronacion, times: 4, id: coronacion_2, visualization: coronacion_3, manPosition: left, title: Giro y coronación}
+  - {class: coronacion, times: 4, id: coronacion_2, visualization: coronacion_3, manPosition: left, title: Giro->y coronación}
 -
   - {class: avance, times: 4, id: avance_3, visualization: avance1, manPosition: left, title: Avance}
   - {class: avance, times: 4, id: retroceso_3, visualization: retroceso1, manPosition: left, title: Retroceso}

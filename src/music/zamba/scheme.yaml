@@ -8,7 +8,7 @@
   - bar: true
   - {times: 8, manPosition: right, class: vuelta, id: mediaVuelta2, visualization: mediaVuelta, title: Media vuelta}
   - {times: 8, manPosition: left, class: arresto, id: arresto2, visualization: arresto2, title: Arresto}
-  - {times: 7, manPosition: left, class: coronacion, id: mediaVueltaCoronacion, visualization: mediaVueltaCoronacion, title: Media vuelta y coronación, yOffset: true}
+  - {times: 7, manPosition: left, class: coronacion, id: mediaVueltaCoronacion, visualization: mediaVueltaCoronacion, title: Media vuelta->y coronación}
 -
   - {times: 16, manPosition: right, class: vuelta, id: vuelta_2, visualization: vuelta, title: Vuelta entera}
   - {times: 8, manPosition: right, class: arresto, id: arresto_2, visualization: arresto, title: Arresto}
@@ -18,4 +18,4 @@
   - bar: true
   - {times: 8, manPosition: left, class: vuelta, id: mediaVuelta2_2, visualization: mediaVuelta, title: Media vuelta}
   - {times: 8, manPosition: right, class: arresto, id: arresto2_2, visualization: arresto2, title: Arresto}
-  - {times: 7, manPosition: right, class: coronacion, id: mediaVueltaCoronacion_2, visualization: mediaVueltaCoronacion, title: Media vuelta y coronación, yOffset: true}
+  - {times: 7, manPosition: right, class: coronacion, id: mediaVueltaCoronacion_2, visualization: mediaVueltaCoronacion, title: Media vuelta->y coronación}

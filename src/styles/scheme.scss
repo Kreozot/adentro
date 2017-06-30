@@ -38,7 +38,7 @@
 .element-text {
 	text-anchor: middle;
 	font-family: Geneva, Arial, Helvetica, sans-serif;
-	font-size: 8pt;
+	font-size: 10pt;
 }
 
 .element-text.current {
@@ -50,14 +50,14 @@
 }
 
 .element-text--woman {
-	fill: darkmagenta;
+	fill: rgb(182, 26, 172);
 }
 
 .times-count-text {
 	text-anchor: middle;
 	font-family: Geneva, Arial, Helvetica, sans-serif;
 	fill: #2F4F4F;
-	font-size: 8pt;
+	font-size: 9pt;
 	pointer-events: none;
 }
 

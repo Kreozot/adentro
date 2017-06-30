@@ -1,14 +1,17 @@
 <%
+// Есть ли необходимость в выносах текста
+const usesTextLines = scheme.some(part => part.some(element => element.yOffset));
 const config = {
 	xMargin: 50,
 	schemaWidth: 800,
-	lineHeight: 60,
+	lineHeight: usesTextLines ? 80 : 60,
 	blockHeight: 20,
 	barWidth: 3
 };
 const fullWidth = config.schemaWidth + (config.xMargin * 2);
 const fullHeight = config.lineHeight * scheme.length;
 const ratio = fullHeight / fullWidth * 100;
+let clusterStartPos = 0;
 
 function renderBar(pos, line, oneTimeWidth) {
 	const x = config.xMargin + pos * oneTimeWidth + 1;
@@ -18,62 +21,79 @@ function renderBar(pos, line, oneTimeWidth) {
 	<%
 }
 
-function renderElement(pos, line, oneTimeWidth, element, barRendered) {
+function renderElement(pos, line, oneTimeWidth, element, prevElement, nextElement) {
 	({id, title, visualization, manPosition, times, textOffset = 0, yOffset, class: className} = element);
-	// Смещение элемента после разделителя части
-	const xOffset = barRendered ? config.barWidth : 0;
 
-	const x = config.xMargin + pos * oneTimeWidth + xOffset;
+	let x = config.xMargin + pos * oneTimeWidth;
+	if (prevElement.bar) {
+		x++;
+	}
 	const y = (line - 1) * config.lineHeight + 1;
-	const blockWidth = oneTimeWidth * times - xOffset;
+	let blockWidth = oneTimeWidth * times;
+	if (prevElement.bar || nextElement.bar) {
+		blockWidth--;
+	}
+
+	const sameElement = element.title === nextElement.title;
 %>
 
-<rect class="element <%= className %>"
-	x="<%= x %>"
-	y="<%= y %>"
-	width="<%= blockWidth %>"
-	height="<%= config.blockHeight %>"
-	id="<%= id %>"
-	onclick="playElement('<%= id %>')"
-	data-visualization="<%= visualization %>"
-	data-manposition="<%= manPosition %>"
-	data-times="<%= times %>"/>
+	<rect class="element <%= className %>"
+		x="<%= x %>"
+		y="<%= y %>"
+		width="<%= blockWidth %>"
+		height="<%= config.blockHeight %>"
+		id="<%= id %>"
+		onclick="playElement('<%= id %>')"
+		data-visualization="<%= visualization %>"
+		data-manposition="<%= manPosition %>"
+		data-times="<%= times %>"/>
 
-<rect class="active-frame"
-	x="<%= x + 1 %>"
-	y="<%= y + 2 %>"
-	width="<%= blockWidth - 3 %>"
-	height="<%= config.blockHeight - 4 %>"
-	id="<%= id %>-frame"/>
+	<rect class="active-frame"
+		x="<%= x + 1 %>"
+		y="<%= y + 2 %>"
+		width="<%= blockWidth - 3 %>"
+		height="<%= config.blockHeight - 4 %>"
+		id="<%= id %>-frame"/>
 
-<text class="times-count-text"
-	x="<%= x + (blockWidth / 2) %>"
-	y="<%= y + config.blockHeight / 2 + 4 %>"><%= times %></text>
+	<text class="times-count-text"
+		x="<%= x + (blockWidth / 2) %>"
+		y="<%= y + config.blockHeight / 2 + 5 %>"><%= times %></text>
 
-<%
-// Отступ по вертикали для подписи
-const textTop = yOffset ? config.blockHeight + 32 : config.blockHeight + 16;
-%>
+	<%
+	if (!sameElement) {
+		// Отступ по вертикали для подписи
+		const textTop = yOffset ? config.blockHeight + 48 : config.blockHeight + 16;
+		let textX = x + (blockWidth / 2);
+		if (clusterStartPos < pos) {
+			const clusterX = config.xMargin + clusterStartPos * oneTimeWidth;
+			const clusterWidth = oneTimeWidth * (pos - clusterStartPos + times);
+			textX = clusterX + clusterWidth / 2;
+		}
+		const textY = y + textTop;
+	%>
 
-<% if (yOffset) { %>
-	<line class="text-line"
-		x1="<%= x + (blockWidth / 2) %>"
-		y1="<%= y + config.blockHeight + 3 %>"
-		x2="<%= x + (blockWidth / 2) %>"
-		y2="<%= y + textTop - 11 %>" />
-<% } %>
-<text class="element-text"
-	x="<%= x + (blockWidth / 2) + textOffset %>"
-	y="<%= y + textTop %>"
-	id="<%= id %>-text"><%- title
-		.replace(/\$m\[([^\]]+)\]/g, `<tspan class="element-text--man">$1</tspan>`)
-		.replace(/\$w\[([^\]]+)\]/g, `<tspan class="element-text--woman">$1</tspan>`)
-	%></text>
-<%
+		<% if (yOffset) { %>
+			<line class="text-line"
+				x1="<%= textX %>"
+				y1="<%= y + config.blockHeight + 3 %>"
+				x2="<%= textX %>"
+				y2="<%= y + textTop - 11 %>" />
+		<% } %>
+
+		<text class="element-text"
+			x="<%= textX + textOffset %>"
+			y="<%= textY %>"
+			id="<%= id %>-text"><%- title
+				.replace(/\$m\[([^\]]+)\]/g, `<tspan class="element-text--man">$1</tspan>`)
+				.replace(/\$w\[([^\]]+)\]/g, `<tspan class="element-text--woman">$1</tspan>`)
+				.replace(/->(.+)/g, `<tspan dy="14" x="${textX + textOffset}">$1</tspan>`)
+			%></text>
+	<%
+		clusterStartPos = pos + times;
+	}
 }
 
 function renderPart(config, elements, line) {
-	let barRendered = false;
 	const beatsCount = elements.reduce((sum, element) => {
 		if (element.times) {
 			sum += element.times;
@@ -82,13 +102,15 @@ function renderPart(config, elements, line) {
 	}, 0);
 	const oneTimeWidth = config.schemaWidth / beatsCount;
 	let pos = 0;
-	elements.forEach((element) => {
+	clusterStartPos = 0;
+	elements.forEach((element, index) => {
 		if (element.bar) {
 			renderBar(pos, line, oneTimeWidth);
-			barRendered = true;
 		} else {
-			renderElement(pos, line, oneTimeWidth, element, barRendered);
-			barRendered = false;
+			const nextElement = (index + 1 < elements.length) ? elements[index + 1] : {};
+			const prevElement = (index > 0) ? elements[index - 1] : {};
+
+			renderElement(pos, line, oneTimeWidth, element, prevElement, nextElement);
 			pos += element.times;
 		}
 	});

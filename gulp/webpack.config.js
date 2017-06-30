@@ -11,9 +11,6 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 const htmlmin = require('html-minifier');
-const schemeTemplate = ejs.compile(String(fs.readFileSync('./src/schemeTemplate/scheme.ejs')), {
-	filename: path.resolve('./src/schemeTemplate/scheme.ejs')
-});
 
 const postcssPlugins = [
 	require('cssnano')(),
