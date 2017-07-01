@@ -34,6 +34,7 @@ export default class Navigation {
 	loadSchemaByName(name, animationId, musicId) {
 		const schemeParams = schemes[name] || schemes.chacarera;
 		schemeParams(scheme => {
+			document.title = `${scheme.name} - ¡Adentro!`;
 			this.main.loadSchema(scheme, musicId, animationId);
 		});
 
@@ -73,10 +74,9 @@ export default class Navigation {
 	 * @param  {String} title  Заголовок страницы
 	 * @param  {String} query  Фрагмент URL запроса
 	 */
-	pushStateOrRedirect(params, title, query) {
-		document.title = title;
+	pushStateOrRedirect(params, query) {
 		if (supportsHistoryApi) {
-			history.pushState(params, title, query);
+			history.pushState(params, null, query);
 		} else {
 			window.location.href = query;
 		}
@@ -131,9 +131,7 @@ export default class Navigation {
 	updateUrl() {
 		const {schema, animation, music} = this.context;
 
-		this.pushStateOrRedirect({schema, animation, music},
-			`${schemes[schema].name} - ¡Adentro!`,
-			this.getRelativeUrl(schema, animation, music));
+		this.pushStateOrRedirect({schema, animation, music}, this.getRelativeUrl(schema, animation, music));
 	}
 
 	/**
