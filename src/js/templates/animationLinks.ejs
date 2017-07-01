@@ -1,0 +1,5 @@
+<div class="animation-links">
+<% animationClassDefs.forEach(animationClassDef => { %>
+	<a class="animation-links__link link <%= animationClassDef.id === currentAnimationId ? 'link--current' : '' %>" data-animationId="<%= animationClassDef.id %>"><%= animationClassDef.title %></a>
+<% }); %>
+</div>

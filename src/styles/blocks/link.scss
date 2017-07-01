@@ -1,0 +1,18 @@
+.link {
+	cursor: pointer;
+	text-decoration: underline;
+	transition: color 0.3s, text-decoration-color 0.3s, -webkit-text-decoration-color 0.3s;
+
+	&:hover:not(&--current) {
+		color: black;
+		-webkit-text-decoration-color: #0094FF;
+		text-decoration-color: #0094FF;
+	}
+
+	&--current {
+		color: #0094FF;
+		text-decoration: none;
+		cursor: default;
+		pointer-events: none;
+	}
+}

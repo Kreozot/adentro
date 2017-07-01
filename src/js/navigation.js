@@ -132,7 +132,7 @@ export default class Navigation {
 		const {schema, animation, music} = this.context;
 
 		this.pushStateOrRedirect({schema, animation, music},
-			`¡A! ${schemes[schema].name}`,
+			`${schemes[schema].name} - ¡Adentro!`,
 			this.getRelativeUrl(schema, animation, music));
 	}
 

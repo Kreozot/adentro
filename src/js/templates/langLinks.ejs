@@ -1,0 +1,5 @@
+<div class="lang-links">
+<% languages.forEach(lang => { %>
+	<a class="lang-links__link link <%= lang.isCurrent ? 'link--current' : '' %>" href="<%= lang.url %>"><%= lang.title %></a>
+<% }); %>
+</div>
