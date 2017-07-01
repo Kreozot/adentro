@@ -1,13 +1,14 @@
 @import 'mixins/_media.scss';
 
 .sidebar {
+	position: relative;
 	min-width: 200px;
 
 	@mixin media S {
 		width: 100%;
 		opacity: 0;
 		visibility: hidden;
-		transition: opacity 0.2s 0s, visibility 0s 0.2s;
+		transition: opacity 0.3s 0s, visibility 0s 0.3s;
 
 		&--visible {
 			visibility: visible;

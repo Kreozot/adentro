@@ -1,26 +1,22 @@
 ---
-- title: Chacarera
-  children:
-  - title: Chacarera Simple
-    scheme: chacarera
-    titleRu: Чакарера симпле
-  - title: Chacarera Doble
-    scheme: chacarera_doble
-    titleRu: Чакарера добле
+- title: Chacarera Simple
+  scheme: chacarera
+  titleRu: Чакарера симпле
+- title: Chacarera Doble
+  scheme: chacarera_doble
+  titleRu: Чакарера добле
 - title: Zamba
   scheme: zamba
   titleRu: Самба
-  children:
-  - title: Zamba Alegre
-    scheme: zamba_alegre
-    titleRu: Самба алегре
+- title: Zamba Alegre
+  scheme: zamba_alegre
+  titleRu: Самба алегре
 - title: Gato
   scheme: gato
   titleRu: Гато
-  children:
-  - title: Gato Cuyano
-    scheme: gato_cuyano
-    titleRu: Гато кужано
+- title: Gato Cuyano
+  scheme: gato_cuyano
+  titleRu: Гато кужано
 - title: Caramba
   scheme: caramba
   titleRu: Карамба
@@ -33,10 +29,9 @@
 - title: Remedio
   scheme: remedio
   titleRu: Ремедио
-  children:
-  - title: Remedio Atamisqueño
-    scheme: remedio_atamisqueno
-    titleRu: Ремедио атамискеньо
+- title: Remedio Atamisqueño
+  scheme: remedio_atamisqueno
+  titleRu: Ремедио атамискеньо
 - title: Huayra Muyoj
   scheme: huayra_muyoj
   titleRu: Уайра мужох

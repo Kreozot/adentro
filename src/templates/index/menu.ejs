@@ -29,5 +29,5 @@
 <% } %>
 
 <nav class="dance-menu">
-	<% addItems(menuItems); %>
+	<% addItems(menuItems.sort((a, b) => a.title.localeCompare(b.title))); %>
 </nav>

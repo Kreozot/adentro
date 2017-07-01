@@ -31,4 +31,4 @@
   - {class: giro, times: 4, id: contraGiro_3, visualization: contraGiro, manPosition: left, title: Contra giro}
   - bar: true
   - {class: vuelta, times: 4, id: mediaVuelta_3, visualization: mediaVuelta, manPosition: left, title: Media vuelta}
-  - {class: coronacion, times: 4, id: coronacion_3, visualization: coronacion_3, manPosition: right, title: Giro y coronación}
+  - {class: coronacion, times: 4, id: coronacion_3, visualization: coronacion_3, manPosition: right, title: Giro->y coronación}

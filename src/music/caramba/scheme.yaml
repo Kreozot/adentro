@@ -1,11 +1,11 @@
 ---
 -
   - {times: 4, manPosition: left, class: giro, id: giro, visualization: giro, title: Giro}
-  - {times: 4, manPosition: left, class: giro, id: contraGiro, visualization: contraGiro, title: Contra giro}
+  - {times: 4, manPosition: left, class: giro, id: contraGiro, visualization: contraGiro, title: Contra->giro}
   - {times: 4, manPosition: left, class: vuelta, id: mediaVuelta, visualization: mediaVuelta, title: Media vuelta}
   - {times: 4, manPosition: right, class: giro, id: giro2, visualization: giro, title: Giro}
   - bar: true
-  - {times: 4, manPosition: right, class: giro, id: contraGiro2, visualization: contraGiro, title: Contra giro}
+  - {times: 4, manPosition: right, class: giro, id: contraGiro2, visualization: contraGiro, title: Contra->giro}
   - {times: 4, manPosition: right, class: giro, id: giro3, visualization: giro, title: Giro}
   - {times: 4, manPosition: right, class: vuelta, id: mediaVuelta2, visualization: mediaVuelta, title: Media vuelta}
   - {times: 4, manPosition: left, class: giro, id: giro4, visualization: giro, title: Giro}
@@ -14,11 +14,11 @@
   - {times: 3, manPosition: right, class: coronacion, id: coronacion, visualization: coronacion, title: Giro->y coronación}
 -
   - {times: 4, manPosition: right, class: giro, id: giro_2, visualization: giro, title: Giro}
-  - {times: 4, manPosition: right, class: giro, id: contraGiro_2, visualization: contraGiro, title: Contra giro}
+  - {times: 4, manPosition: right, class: giro, id: contraGiro_2, visualization: contraGiro, title: Contra->giro}
   - {times: 4, manPosition: right, class: vuelta, id: mediaVuelta_2, visualization: mediaVuelta, title: Media vuelta}
   - {times: 4, manPosition: left, class: giro, id: giro2_2, visualization: giro, title: Giro}
   - bar: true
-  - {times: 4, manPosition: left, class: giro, id: contraGiro2_2, visualization: contraGiro, title: Contra giro}
+  - {times: 4, manPosition: left, class: giro, id: contraGiro2_2, visualization: contraGiro, title: Contra->giro}
   - {times: 4, manPosition: left, class: giro, id: giro3_2, visualization: giro, title: Giro}
   - {times: 4, manPosition: left, class: vuelta, id: mediaVuelta2_2, visualization: mediaVuelta, title: Media vuelta}
   - {times: 4, manPosition: right, class: giro, id: giro4_2, visualization: giro, title: Giro}

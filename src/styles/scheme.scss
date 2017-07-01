@@ -1,5 +1,5 @@
 .text-line {
-	stroke: gray;
+	stroke: #939393;
 	stroke-width: 1px;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .element-text.current {
-	font-weight: bold;
+	text-decoration: underline;
 }
 
 .element-text--man {

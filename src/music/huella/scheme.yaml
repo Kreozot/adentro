@@ -5,23 +5,23 @@
   - {times: 4, manPosition: right, class: vuelta, id: mediaVuelta2, visualization: mediaVuelta, title: Media vuelta}
   - {times: 4, manPosition: left, class: giro, id: giro2, visualization: giro, title: Giro}
   - bar: true
-  - {times: 4, manPosition: left, class: zapateo, id: zapateo, visualization: zapateoZarandeo, title: "$m[Zapateo] /->$w[Zarandeo]"}
+  - {times: 4, manPosition: left, class: zapateo, id: zapateo, visualization: zapateoZarandeo, title: "$m[Zapateo] / $w[Zarandeo]", yOffset: true}
   - {times: 4, manPosition: left, class: giro, id: giroMano, visualization: giroMano, title: "$w[Giro] +->$m[mano derecha]"}
-  - {times: 4, manPosition: left, class: zapateo, id: zapateo2, visualization: zapateoZarandeo, title: "$m[Zapateo] /->$w[Zarandeo]"}
+  - {times: 4, manPosition: left, class: zapateo, id: zapateo2, visualization: zapateoZarandeo, title: "$m[Zapateo] / $w[Zarandeo]", yOffset: true}
   - {times: 4, manPosition: left, class: giro, id: contraGiroMano, visualization: contraGiroMano, title: "$w[Contragiro] +->$m[mano izq]"}
   - bar: true
-  - {times: 4, manPosition: left, class: vuelta, id: mediaContraVuelta, visualization: mediaContraVuelta, title: Media->contra vuelta}
-  - {times: 4, manPosition: right, class: coronacion, id: coronacion, visualization: coronacion, title: Giro->y coronación, textOffset: 10}
+  - {times: 4, manPosition: left, class: vuelta, id: mediaContraVuelta, visualization: mediaContraVuelta, title: Media contra vuelta, yOffset: true}
+  - {times: 4, manPosition: right, class: coronacion, id: coronacion, visualization: coronacion, title: Giro->y coronación}
 -
   - {times: 4, manPosition: right, class: vuelta, id: mediaVuelta_2, visualization: mediaVuelta, title: Media vuelta}
   - {times: 4, manPosition: right, class: giro, id: giro_2, visualization: giro, title: Giro}
   - {times: 4, manPosition: right, class: vuelta, id: mediaVuelta2_2, visualization: mediaVuelta, title: Media vuelta}
   - {times: 4, manPosition: right, class: giro, id: giro2_2, visualization: giro, title: Giro}
   - bar: true
-  - {times: 4, manPosition: right, class: zapateo, id: zapateo_2, visualization: zapateoZarandeo, title: "$m[Zapateo] /->$w[Zarandeo]"}
+  - {times: 4, manPosition: right, class: zapateo, id: zapateo_2, visualization: zapateoZarandeo, title: "$m[Zapateo] / $w[Zarandeo]", yOffset: true}
   - {times: 4, manPosition: right, class: giro, id: giroMano_2, visualization: giroMano, title: "$w[Giro] +->$m[mano derecha]"}
-  - {times: 4, manPosition: right, class: zapateo, id: zapateo2_2, visualization: zapateoZarandeo, title: "$m[Zapateo] /->$w[Zarandeo]"}
+  - {times: 4, manPosition: right, class: zapateo, id: zapateo2_2, visualization: zapateoZarandeo, title: "$m[Zapateo] / $w[Zarandeo]", yOffset: true}
   - {times: 4, manPosition: right, class: giro, id: contraGiroMano_2, visualization: contraGiroMano, title: "$w[Contragiro] +->$m[mano izq]"}
   - bar: true
-  - {times: 4, manPosition: right, class: vuelta, id: mediaContraVuelta_2, visualization: mediaContraVuelta, title: Media->contra vuelta}
-  - {times: 4, manPosition: left, class: coronacion, id: coronacion_2, visualization: coronacion, title: Giro->y coronación, textOffset: 10}
+  - {times: 4, manPosition: right, class: vuelta, id: mediaContraVuelta_2, visualization: mediaContraVuelta, title: Media contra vuelta, yOffset: true}
+  - {times: 4, manPosition: left, class: coronacion, id: coronacion_2, visualization: coronacion, title: Giro->y coronación}

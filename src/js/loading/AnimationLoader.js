@@ -1,4 +1,5 @@
 import contentSwitch from './content_switch';
+import animationLinksTemplate from '../templates/animationLinks.ejs';
 
 export default class AnimationLoader {
 	constructor(main) {
@@ -48,22 +49,9 @@ export default class AnimationLoader {
 	/**
 	 * Показать ссылки на варианты анимации
 	 * @param  {Object} animationClassDefs  Массив описаний анимаций
-	 * @param  {String} animationId         Идентификатор текущей анимации
+	 * @param  {String} currentAnimationId         Идентификатор текущей анимации
 	 */
-	showAnimationLinks(animationClassDefs, animationId) {
-		const currentClassDef = this.getAnimationClassDef(animationClassDefs, animationId);
-
-		const getAnimationLinks = function (animationClassDefs) {
-			var result = '';
-			result += animationClassDefs.map(animationClassDef => {
-				if (animationClassDef.id === currentClassDef.id) {
-					return animationClassDef.title;
-				} else {
-					return `<a href="javascript:showAnimation('${animationClassDef.id}')">${animationClassDef.title}</a>`;
-				}
-			}).join(', ');
-			return result;
-		};
-		$('#animationLinks').html(getAnimationLinks(animationClassDefs));
+	showAnimationLinks(animationClassDefs, currentAnimationId) {
+		$('#animationLinks').html(animationLinksTemplate({animationClassDefs, currentAnimationId}));
 	}
 }

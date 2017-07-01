@@ -8,18 +8,6 @@ let contentSwitch = {
 	},
 
 	/**
-	 * Добавить ссылку на блок
-	 * @param {String} blockId  Идентификатор блока
-	 * @param {String} title     Заголовок ссылки
-	 */
-	addLink: function (blockId, title) {
-		$('#content_menu').append(`<a href="javascript:contentSwitch.show('${blockId}');" class="content_link" id="${blockId}_link">${title}</a>`);
-		if ($('#content_menu > a').length > 1) {
-			$('#content_menu').show();
-		}
-	},
-
-	/**
 	 * Добавить содержимое блока
 	 * @param {String} blockId Идентификатор блока
 	 * @param {String} content  Содержимое блока
@@ -48,9 +36,7 @@ let contentSwitch = {
 	 */
 	addBlock: function (id, title, content) {
 		this.addContent(id, content);
-		this.addLink(id, title);
 	}
 };
 
-global.contentSwitch = contentSwitch;
 export default contentSwitch;

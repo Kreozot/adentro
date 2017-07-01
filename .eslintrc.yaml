@@ -6,22 +6,12 @@ parserOptions:
   ecmaFeatures:
     experimentalObjectRestSpread: true
 rules:
-  curly:
-  - 2
-  - all
-  keyword-spacing:
-  - 2
-  - {}
+  curly: [2, all]
+  keyword-spacing: [2, {}]
   no-with: 2
-  brace-style:
-  - 2
-  - 1tbs
-  - allowSingleLine: true
+  brace-style: [2, 1tbs, {allowSingleLine: true}]
   no-multi-spaces: 2
-  space-unary-ops:
-  - 2
-  - words: false
-    nonwords: false
+  space-unary-ops: [2, {words: false, nonwords: false}]
   space-infix-ops: 2
   one-var: 0
   space-in-parens:
@@ -67,10 +57,7 @@ rules:
   no-mixed-spaces-and-tabs: 2
   no-trailing-spaces: 2
   linebreak-style: 0
-  indent:
-  - 1
-  - tab
-  - SwitchCase: 1
+  indent: [1, tab, {SwitchCase: 1}]
   semi:
   - 2
   - always

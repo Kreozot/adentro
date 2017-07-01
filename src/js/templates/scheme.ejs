@@ -62,7 +62,7 @@ function renderElement(pos, line, oneTimeWidth, element, prevElement, nextElemen
 	<%
 	if (!sameElement) {
 		// Отступ по вертикали для подписи
-		const textTop = yOffset ? config.blockHeight + 48 : config.blockHeight + 16;
+		const textTop = yOffset ? config.blockHeight + 50 : config.blockHeight + 16;
 		let textX = x + (blockWidth / 2);
 		if (clusterStartPos < pos) {
 			const clusterX = config.xMargin + clusterStartPos * oneTimeWidth;
@@ -75,9 +75,9 @@ function renderElement(pos, line, oneTimeWidth, element, prevElement, nextElemen
 		<% if (yOffset) { %>
 			<line class="text-line"
 				x1="<%= textX %>"
-				y1="<%= y + config.blockHeight + 3 %>"
+				y1="<%= y + config.blockHeight + 4 %>"
 				x2="<%= textX %>"
-				y2="<%= y + textTop - 12 %>" />
+				y2="<%= y + textTop - 14 %>" />
 		<% } %>
 
 		<text class="element-text"

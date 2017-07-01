@@ -2,12 +2,12 @@ import Navigation from './navigation';
 import Player from './player';
 import contentSwitch from './loading/content_switch';
 import AnimationLoader from './loading/AnimationLoader';
-import infoLoader from './loading/info_loading';
 import TimingGenerator from './timing/timing-generator';
 import Tour from './tour';
 
 import schemeTemplate from './templates/scheme.ejs';
 import musicLinksTemplate from './templates/musicLinks.ejs';
+import langLinksTemplate from './templates/langLinks.ejs';
 
 const playerSelector = '#player';
 
@@ -115,38 +115,20 @@ class Adentro {
 	 * Показать ссылки на языки
 	 */
 	showLanguageLinks() {
-		const languages = [
-			{
-				id: 'ru',
-				title: 'ru'
-			},
-			{
-				id: 'en',
-				title: 'en'
-			}
-		].map(lang => {
+		const languages = [{
+			id: 'ru',
+			title: 'ru'
+		},
+		{
+			id: 'en',
+			title: 'en'
+		}].map(lang => {
 			lang.url = this.navigation.getLanguageLink(lang.id);
+			lang.isCurrent = lang.id === this.lang;
 			return lang;
 		});
 
-		const isCurrentLang = lang => {
-			return (lang.id === this.lang);
-		};
-
-		const getLanguageLinks = () => {
-			let result = '<nobr>';
-			result += languages.map(lang => {
-				if (isCurrentLang(lang)) {
-					return lang.title;
-				} else {
-					return `<a href="${this.navigation.getLanguageLink(lang.id)}">${lang.title}</a>`;
-				}
-			}).join(' / ');
-			result += '</nobr>';
-			return result;
-		};
-
-		$('#lang').html(getLanguageLinks());
+		$('#lang').html(langLinksTemplate({languages}));
 	}
 
 	/**
@@ -156,19 +138,13 @@ class Adentro {
 	 * @param  {String} animationId    Идентификатор конкретной анимации (если в animationClass пришёл список)
 	 */
 	loadSchema(schemeParams, musicId, animationId) {
-		// TODO: Сделать загрузку анимации, информации и сапатео как отдельные блоки (в блоке content + ссылки в content_menu)
-
 		$('#danceName').html(schemeParams.name);
 		$('#schemaDiv').html(schemeTemplate({scheme: schemeParams.scheme}));
 
 		musicId = musicId || schemeParams.music[0].id;
 		this.showMusicLinks(schemeParams.music, musicId);
 		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
-		//
-		// $(playerSelector)
-		// 	.unbind($.jPlayer.event.timeupdate)
-		// 	.unbind($.jPlayer.event.ended)
-		// 	.unbind($.jPlayer.event.pause);
+
 		this.player.loadMusicSchema(musicSchema);
 		this.player.initEvents();
 
@@ -183,8 +159,6 @@ class Adentro {
 			animationClass = currentClassDef.animClass;
 		}
 		this.animationLoader.loadAnimation(animationClass);
-
-		infoLoader.loadInfoBlock(schemeParams.info);
 
 		contentSwitch.show('animation_block');
 	}
