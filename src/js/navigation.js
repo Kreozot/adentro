@@ -142,7 +142,7 @@ export default class Navigation {
 		this.context.animation = animationId;
 		this.updateUrl();
 
-		const schemaParams = schemes[schema];
+		const schemaParams = schemes[this.context.schema];
 		schemaParams(scheme => {
 			const animationClassDefs = scheme.animation;
 			let animationClass;

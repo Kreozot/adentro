@@ -52,6 +52,11 @@ export default class AnimationLoader {
 	 * @param  {String} currentAnimationId         Идентификатор текущей анимации
 	 */
 	showAnimationLinks(animationClassDefs, currentAnimationId) {
+		const navigation = this.main.navigation;
 		$('#animationLinks').html(animationLinksTemplate({animationClassDefs, currentAnimationId}));
+		$('.animation-links__link').on('click', function () {
+			const animationId = $(this).data('animation-id');
+			navigation.showAnimation(animationId);
+		});
 	}
 }
