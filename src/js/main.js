@@ -51,12 +51,6 @@ class Adentro {
 			elem.removeClass('current');
 		});
 		Snap(`#${frameId}`).addClass('current');
-		// Выделяем название текущего элемента
-		const textId = `${element}-text`;
-		Snap.selectAll(`text.current:not(#${textId})`).forEach(function (elem) {
-			elem.removeClass('current');
-		});
-		Snap(`#${textId}`).addClass('current');
 	}
 
 	/**
