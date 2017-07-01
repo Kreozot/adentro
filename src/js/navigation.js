@@ -20,9 +20,9 @@ export default class Navigation {
 
 	updateMenu(currentSchemeId) {
 		$(`.dance-menu__link:not([data-scheme=${currentSchemeId}])`)
-			.removeClass('dance-menu__link--current');
+			.removeClass('link--current');
 		$(`.dance-menu__link[data-scheme=${currentSchemeId}]`)
-			.addClass('dance-menu__link--current');
+			.addClass('link--current');
 	}
 
 	/**

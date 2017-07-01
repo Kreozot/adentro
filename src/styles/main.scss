@@ -1,10 +1,10 @@
 body {
 	margin-top: 0px;
+	font-family: Verdana, sans-serif;
 }
 
-#logo {
-	display: table-cell;
-	width: 50px;
+.logo {
+	margin: 10px;
 }
 
 #lang {
@@ -38,13 +38,16 @@ body {
 	display: block;
 }
 
-#musicLinks {
-	margin-top: 5px;
+.music-links {
+	margin-top: 10px;
 }
 
-#musicLinks select {
-	width: 300px;
-	text-align: center;
+.music-links__text {
+	font-size: 13px;
+}
+
+.music-links__select {
+
 }
 
 ul {
@@ -52,7 +55,15 @@ ul {
 }
 
 .title {
+	margin-top: 27px;
 	font-size: 24px;
+	font-family: Negotiate, sans-serif;
+	font-weight: normal;
+	color: #939393;
+
+	&:first-letter {
+		color: #0094ff;
+	}
 }
 
 #info {
@@ -182,4 +193,23 @@ a.content_link.active {
 .scheme-wrapper, .animation-wrapper {
 	width: 100%;
 	max-width: 900px;
+}
+
+.link {
+	cursor: pointer;
+	text-decoration: underline;
+	transition: color 0.3s, text-decoration-color 0.3s, -webkit-text-decoration-color 0.3s;
+
+	&:hover:not(&--current) {
+		color: black;
+		-webkit-text-decoration-color: #0094FF;
+		text-decoration-color: #0094FF;
+	}
+
+	&--current {
+		color: #0094FF;
+		text-decoration: none;
+		cursor: default;
+		pointer-events: none;
+	}
 }

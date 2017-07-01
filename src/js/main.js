@@ -5,7 +5,9 @@ import AnimationLoader from './loading/AnimationLoader';
 import infoLoader from './loading/info_loading';
 import TimingGenerator from './timing/timing-generator';
 import Tour from './tour';
-import schemeTemplate from './scheme.ejs';
+
+import schemeTemplate from './templates/scheme.ejs';
+import musicLinksTemplate from './templates/musicLinks.ejs';
 
 const playerSelector = '#player';
 
@@ -93,35 +95,20 @@ class Adentro {
 	showMusicLinks(musicData, currentMusicId, showEmptyTiming) {
 		if (musicData.length <= 1) {
 			$('#musicLinks').html('');
-			return;
-		}
+		} else {
+			const navigation = this.navigation;
 
-		const getMusicLinks = function () {
-			var result = `${localize({ru: 'Композиция', en: 'Composition'})}: <select id="musicSelect">`;
-			var count = 0;
-			musicData.forEach(musicDataEntry => {
-				if (!$.isEmptyObject(musicDataEntry.schema) || showEmptyTiming) {
-					if (musicDataEntry.id === currentMusicId) {
-						result += `<option selected="selected" value="${musicDataEntry.id}">${musicDataEntry.title}</option>`;
-					} else {
-						result += `<option value="${musicDataEntry.id}">${musicDataEntry.title}</option>`;
-					}
-					count++;
+			$('#musicLinks').html(musicLinksTemplate({
+				musicData,
+				currentMusicId,
+				text: {
+					composition: localize({ru: 'Композиция', en: 'Composition'})
 				}
+			}));
+			$('#musicSelect').change(function () {
+				navigation.showMusic($(this).val());
 			});
-			if (count <= 1) {
-				return '';
-			}
-			result += '</select>';
-			return result;
-		};
-
-		const navigation = this.navigation;
-
-		$('#musicLinks').html(getMusicLinks());
-		$('#musicSelect').change(function () {
-			navigation.showMusic($(this).val());
-		});
+		}
 	}
 
 	/**

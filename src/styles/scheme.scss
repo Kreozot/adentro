@@ -1,5 +1,5 @@
 .text-line {
-	stroke: black;
+	stroke: gray;
 	stroke-width: 1px;
 }
 
@@ -7,6 +7,7 @@
 	stroke: black;
 	stroke-width: 1px;
 	fill-opacity: 0.6;
+	transition: fill-opacity 0.3s;
 }
 
 .element.current {
@@ -25,6 +26,7 @@
 	stroke: red;
 	stroke-width: 3px;
 	pointer-events: none;
+	transition: stroke-opacity 0.3s;
 }
 .active-frame.current {
 	stroke-opacity: 1;
@@ -37,7 +39,7 @@
 
 .element-text {
 	text-anchor: middle;
-	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-family: Verdana, sans-serif;
 	font-size: 10pt;
 }
 
@@ -55,7 +57,7 @@
 
 .times-count-text {
 	text-anchor: middle;
-	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-family: Verdana, sans-serif;
 	fill: #2F4F4F;
 	font-size: 9pt;
 	pointer-events: none;

@@ -3,7 +3,9 @@
 		<meta charset="utf-8"/>
 		<meta name="description" content="Проект по визуализации хореографии аргентинских народных танцев. Argentina folk dances visualization project."/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Adentro</title>
+		<title>¡Adentro!</title>
+		<link rel='icon' href='favicon.ico?2' type='image/x-icon'>
+		<link rel="stylesheet" href="font.css">
 		<!--[if lte IE 8]>
 		<meta http-equiv="refresh" content="0; url=old_browser.html" />
 		<![endif]-->
@@ -15,12 +17,12 @@
 	<body>
 		<!--[if gt IE 8]><!-->
 		<header class="header">
-			<div id="logo"></div>
-			<div id="lang">
-			</div>
 		</header>
 		<main class="main">
 			<div class="sidebar">
+				<div class="logo"><img src="logo.svg"></div>
+				<div id="lang">
+				</div>
 				<%- include('index/menu.ejs', {menuItems}); %>
 			</div>
 
@@ -33,7 +35,7 @@
 				<div>
 					<%- include('index/player.ejs', {}); %>
 				</div>
-				<div id="musicLinks"></div>
+				<div id="musicLinks" class="music-links"></div>
 
 				<div class="scheme-wrapper" id="schemaDiv"></div>
 
