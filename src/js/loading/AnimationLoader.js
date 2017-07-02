@@ -2,6 +2,9 @@ import contentSwitch from './content_switch';
 import animationLinksTemplate from '../templates/animationLinks.ejs';
 import animationBlockTemplate from '../templates/animationBlock.ejs';
 
+const minAnimationWidth = 600;
+const maxAnimationHeight = 325;
+
 export default class AnimationLoader {
 	constructor(main) {
 		this.main = main;
@@ -25,7 +28,7 @@ export default class AnimationLoader {
 			this.animation.clear();
 		}
 		this.animation = new AnimationClass('animation');
-		const ratio = this.animation.height / this.animation.width * 100;
+		const ratio = Math.min(maxAnimationHeight, this.animation.height) / Math.max(minAnimationWidth, this.animation.width) * 100;
 		$('.animation-container').css('padding-bottom', ratio + '%');
 		$('#animation')
 			.attr('width', '100%')
