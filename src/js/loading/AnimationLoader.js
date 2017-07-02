@@ -54,7 +54,13 @@ export default class AnimationLoader {
 	 */
 	showAnimationLinks(animationClassDefs, currentAnimationId) {
 		const navigation = this.main.navigation;
-		$('#animationLinks').html(animationLinksTemplate({animationClassDefs, currentAnimationId}));
+		$('#animationLinks').html(animationLinksTemplate({
+			animationClassDefs,
+			currentAnimationId,
+			text: {
+				variations: localize({ru: 'Вариации', en: 'Variations'})
+			}
+		}));
 		$('.animation-links__link').on('click', function () {
 			const animationId = $(this).data('animation-id');
 			navigation.showAnimation(animationId);

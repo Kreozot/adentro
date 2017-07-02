@@ -35,10 +35,10 @@ body {
 	margin-top: 10px;
 }
 
-#animationLinks {
-	margin-top: -10px;
+.animation-links {
+	margin: 10px 0 20px;
 	text-align: center;
-	display: block;
+	color: #939393;
 }
 
 .music-links {
@@ -129,6 +129,8 @@ a.content_link.active {
 	justify-content: center;
 	align-items: center;
 	width: 100%;
+    border-top: #DDD solid 1px;
+    padding-top: 10px;
 
 	&__info {
 		margin-left: 10px;
