@@ -1,0 +1,26 @@
+.social {
+	&__link {
+		width: 16px;
+		height: 16px;
+		font-size: 0;
+
+		& + & {
+			margin-left: 10px;
+		}
+	}
+
+	&__icon {
+		width: 16px;
+		height: 16px;
+
+		path {
+			fill: #939393;
+		}
+
+		&:hover, &:active {
+			path {
+				fill: #0094FF;
+			}
+		}
+	}
+}

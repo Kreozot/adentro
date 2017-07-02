@@ -124,38 +124,15 @@ a.content_link.active {
 
 .footer {
 	font-size: 11px;
-	color: #222222;
-    font-family: 'Open Sans', sans-serif;
-    vertical-align: middle;
-}
+	color: #939393;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 
-.footerinfo {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.social {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
-}
-
-.social a {
-	width: 24px;
-	height: 24px;
-    display: inline-block;
-}
-
-.facebook {
-	background: url('../img/facebook.png') no-repeat 0 top;
-}
-
-.twitter {
-	background: url('../img/twitter.png') no-repeat 0 top;
-}
-
-.github {
-	background: url('../img/github.png') no-repeat 0 top;
+	&__info {
+		margin-left: 10px;
+	}
 }
 
 .svg-container {
@@ -186,10 +163,6 @@ a.content_link.active {
 	width: 100%;
 }
 
-.footer {
-	display: flex;
-}
-
 .content {
 	display: flex;
 	width: 100%;
@@ -204,3 +177,4 @@ a.content_link.active {
 }
 
 @import 'blocks/link.scss';
+@import 'blocks/social-links.scss';

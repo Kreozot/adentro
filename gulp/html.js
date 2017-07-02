@@ -34,7 +34,8 @@ gulp.task('process-html', ['clean-html', 'copy-static'], function () {
 				collapseWhitespace: 'conservative',
 				mergeStyles: false,
 				mergeScripts: false,
-				minifyJs: false
+				minifyJs: false,
+				minifySvg: false
 			})
 		]))
 		.pipe(rename({
