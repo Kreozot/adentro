@@ -87,22 +87,18 @@ class Adentro {
 	 * @param  {Boolean} showEmptyTiming  Показывать композиции, не имеющие разметки тайминга
 	 */
 	showMusicLinks(musicData, currentMusicId, showEmptyTiming) {
-		if (musicData.length <= 1) {
-			$('#musicLinks').html('');
-		} else {
-			const navigation = this.navigation;
+		const navigation = this.navigation;
 
-			$('#musicLinks').html(musicLinksTemplate({
-				musicData,
-				currentMusicId,
-				text: {
-					composition: localize({ru: 'Композиция', en: 'Composition'})
-				}
-			}));
-			$('#musicSelect').change(function () {
-				navigation.showMusic($(this).val());
-			});
-		}
+		$('#musicLinks').html(musicLinksTemplate({
+			musicData,
+			currentMusicId,
+			text: {
+				composition: localize({ru: 'Композиция', en: 'Composition'})
+			}
+		}));
+		$('#musicSelect').change(function () {
+			navigation.showMusic($(this).val());
+		});
 	}
 
 	/**
@@ -210,8 +206,6 @@ class Adentro {
 
 global.adentro = new Adentro();
 global.playElement = element => adentro.player.playElement(element);
-global.showAnimation = animation => adentro.navigation.showAnimation(animation);
-global.showMusic = music => adentro.navigation.showMusic(music);
 global.localize = textObj => adentro.localize(textObj);
 global.markCurrentElementOnSchema = elem => adentro.markCurrentElementOnSchema(elem);
 global.tour = new Tour();

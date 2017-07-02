@@ -169,6 +169,7 @@ export default class Navigation {
 		schemaParams(scheme => {
 			const musicData = scheme.music;
 			const musicSchema = musicData.filter(music => music.id === musicId)[0];
+			// модифицировать схему
 			this.main.player.loadMusicSchema(musicSchema);
 			this.main.showMusicLinks(musicData, musicId);
 		});

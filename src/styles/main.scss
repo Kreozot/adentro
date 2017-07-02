@@ -45,12 +45,17 @@ body {
 	margin-top: 10px;
 }
 
+.music-links__text,
+.music-links__select {
+	font-size: 12px;
+}
+
 .music-links__text {
-	font-size: 13px;
+	color: #939393;
 }
 
 .music-links__select {
-
+	color: #434343;
 }
 
 ul {

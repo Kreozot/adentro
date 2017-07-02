@@ -1,5 +1,6 @@
 import contentSwitch from './content_switch';
 import animationLinksTemplate from '../templates/animationLinks.ejs';
+import animationBlockTemplate from '../templates/animationBlock.ejs';
 
 export default class AnimationLoader {
 	constructor(main) {
@@ -12,10 +13,7 @@ export default class AnimationLoader {
 	 */
 	loadAnimationBlock() {
 		contentSwitch.addBlock('animation_block', localize({ru: 'Хореография', en: 'Choreography'}),
-			`<div id="animationLinks"></div>
-			<div class="svg-container animation-container">
-				<svg id="animation" class="stretch-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" overflow="hidden"></svg>
-			</div>`);
+			animationBlockTemplate());
 	}
 
 	/**
