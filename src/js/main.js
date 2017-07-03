@@ -121,6 +121,10 @@ class Adentro {
 		$('#lang').html(langLinksTemplate({languages}));
 	}
 
+	modifyScheme(schemeMod) {
+		$('#schemaDiv').html(schemeTemplate({scheme: {...schemeParams.scheme, ...schemeMod}}));
+	}
+
 	/**
 	 * Загрузка схемы
 	 * @param  {String} schemeParams   Объект параметров схемы

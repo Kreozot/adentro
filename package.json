@@ -52,6 +52,7 @@
     "codestylefix": "jscs src/js --fix --config=fix.jscsrc"
   },
   "dependencies": {
+    "babel-preset-stage-2": "^6.24.1",
     "cookie_js": "^1.2.2",
     "cssnano": "^3.10.0",
     "ejs": "^2.5.6",
