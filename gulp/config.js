@@ -9,6 +9,7 @@ module.exports = {
 			static: path.resolve('./src/static'),
 			js: path.resolve('./src/js'),
 			svg: path.resolve('./src/svg'),
+			animationSvg: path.resolve('./src/js/animations/svg'),
 			schemes: path.resolve('./src/music'),
 			music: path.resolve('./src/music'),
 			musicData: path.resolve('./src/music'),

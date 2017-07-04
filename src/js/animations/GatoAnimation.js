@@ -17,7 +17,7 @@ export default class GatoAnimation extends DanceAnimation {
 		};
 
 		this.giroElement = new PairElement(this,
-			{left: 'm 40,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 C 240,80 200,40 140,40 80,40 40,80 40,140 z',
+			{left: getSvgPath('gato.svg', 'path3766'),
 				right: 'M 560,140 C 560,80 520,40 460,40 400,40 360,80 360,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 z'});
 
 		this.mediaVueltaElement = new PairElement(this,

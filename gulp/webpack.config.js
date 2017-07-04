@@ -11,6 +11,7 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 const htmlmin = require('html-minifier');
+const cheerio = require('cheerio');
 
 const postcssPlugins = [
 	require('cssnano')(),
@@ -82,6 +83,11 @@ var webpackConfig = [
 						}, '${id}');
 					}`;
 			}).join(',\n') + '}',
+			getSvgPath: (svgFile, id) => {
+				const svg = fs.readFileSync(path.join(paths.src.animationSvg, svgFile));
+				const $ = cheerio.load(svg);
+				return `'${$('#' + id).attr('d')}'`;
+			}
 		}
 	}
 ];
