@@ -1,7 +1,12 @@
 module.exports = {
 	name: 'Chacarera doble',
 	scheme: require('./scheme.yaml'),
-	music: [require('./music/el_olvidao'), require('./music/sombra_enamorada')],
+	music: [
+		require('./music/el_olvidao'),
+		require('./music/sombra_enamorada'),
+		require('./music/pampa_de_los_guanacos'),
+		require('./music/anorazas')
+	],
 	animation: [{
 		id: 'onTwo',
 		animClass: require('animationClasses/ChacareraAnimation').default,

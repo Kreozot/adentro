@@ -121,8 +121,16 @@ class Adentro {
 		$('#lang').html(langLinksTemplate({languages}));
 	}
 
-	modifyScheme(schemeMod) {
-		$('#schemaDiv').html(schemeTemplate({scheme: {...schemeParams.scheme, ...schemeMod}}));
+	renderScheme(scheme, schemeMods = {}) {
+		const modElementIds = Object.keys(schemeMods);
+		const modScheme = scheme.map(part => part.map(element => {
+			const elementModId = modElementIds.find(modElement => modElement === element.id);
+			if (elementModId) {
+				return {...element, ...schemeMods[elementModId]};
+			}
+			return element;
+		}));
+		$('#schemaDiv').html(schemeTemplate({scheme: modScheme}));
 	}
 
 	/**
@@ -133,11 +141,12 @@ class Adentro {
 	 */
 	loadSchema(schemeParams, musicId, animationId) {
 		$('#danceName').html(schemeParams.name);
-		$('#schemaDiv').html(schemeTemplate({scheme: schemeParams.scheme}));
 
 		musicId = musicId || schemeParams.music[0].id;
 		this.showMusicLinks(schemeParams.music, musicId);
 		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
+
+		this.renderScheme(schemeParams.scheme, musicSchema.schemeMods);
 
 		this.player.loadMusicSchema(musicSchema);
 		this.player.initEvents();
@@ -164,7 +173,6 @@ class Adentro {
 	 */
 	loadSchemaEditor(schemeParams, musicId) {
 		$('#danceName').html(schemeParams.name + ' (editor mode)');
-		$('#schemaDiv').html(schemeTemplate({scheme: schemeParams.scheme}));
 
 		$(playerSelector).unbind($.jPlayer.event.timeupdate)
 			.unbind($.jPlayer.event.ended)
@@ -173,6 +181,8 @@ class Adentro {
 		musicId = musicId || schemeParams.music[0].id;
 		this.showMusicLinks(schemeParams.music, musicId, true);
 		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
+
+		this.renderScheme(schemeParams.scheme, musicSchema.schemeMods);
 
 		this.player.loadMusicSchema(musicSchema);
 		this.initSvgSchemaEditor();

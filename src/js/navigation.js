@@ -32,25 +32,24 @@ export default class Navigation {
 	 * @param  {String} musicId      Идентификатор композиции
 	 */
 	loadSchemaByName(name, animationId, musicId) {
-		const schemeParams = schemes[name] || schemes.chacarera;
-		schemeParams(scheme => {
-			document.title = `${scheme.name} - ¡Adentro!`;
-			this.main.loadSchema(scheme, musicId, animationId);
+		const getSchemeParams = schemes[name] || schemes.chacarera;
+		getSchemeParams(schemeParams => {
+			document.title = `${schemeParams.name} - ¡Adentro!`;
+			this.main.loadSchema(schemeParams, musicId, animationId);
 		});
 
 		this.updateMenu(name);
 		this.main.showLanguageLinks();
 	}
-
 	/**
 	 * Загрузить редактор тайминга
 	 * @param  {String} name     Идентификатор схемы
 	 * @param  {String} musicId  Идентификатор композиции
 	 */
 	loadSchemaEditorByName(name, musicId) {
-		const schemaParams = schemes[name] || schemes.chacarera;
-		schemaParams(scheme => {
-			this.main.loadSchemaEditor(scheme, musicId);
+		const getSchemeParams = schemes[name] || schemes.chacarera;
+		getSchemeParams(schemeParams => {
+			this.main.loadSchemaEditor(schemeParams, musicId);
 		});
 		this.main.showLanguageLinks();
 	}
@@ -142,9 +141,9 @@ export default class Navigation {
 		this.context.animation = animationId;
 		this.updateUrl();
 
-		const schemaParams = schemes[this.context.schema];
-		schemaParams(scheme => {
-			const animationClassDefs = scheme.animation;
+		const getSchemeParams = schemes[this.context.schema];
+		getSchemeParams(schemeParams => {
+			const animationClassDefs = schemeParams.animation;
 			let animationClass;
 			if (typeof animationClassDefs === 'object') {
 				const animationClassDef = this.main.animationLoader.getAnimationClassDef(animationClassDefs, animationId);
@@ -165,13 +164,14 @@ export default class Navigation {
 		this.context.music = musicId;
 		this.updateUrl();
 
-		const schemaParams = schemes[this.context.schema];
-		schemaParams(scheme => {
-			const musicData = scheme.music;
+		const getSchemeParams = schemes[this.context.schema];
+		getSchemeParams(schemeParams => {
+			const musicData = schemeParams.music;
 			const musicSchema = musicData.filter(music => music.id === musicId)[0];
-			// модифицировать схему
 			this.main.player.loadMusicSchema(musicSchema);
 			this.main.showMusicLinks(musicData, musicId);
+
+			this.main.renderScheme(schemeParams.scheme, musicSchema.schemeMods);
 		});
 		this.main.showLanguageLinks();
 	}

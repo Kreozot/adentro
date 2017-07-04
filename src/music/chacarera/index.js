@@ -1,7 +1,12 @@
 module.exports = {
 	name: 'Chacarera',
 	scheme: require('./scheme.yaml'),
-	music: [require('./music/la_pockoy_y_pancha'), require('./music/chacarera_de_un_triste')],
+	music: [
+		require('./music/la_pockoy_y_pancha'),
+		require('./music/chacarera_de_un_triste'),
+		require('./music/la_baguala'),
+		require('./music/la_penadora')
+	],
 	animation: [{
 		id: 'onTwo',
 		animClass: require('animationClasses/ChacareraAnimation').default,
