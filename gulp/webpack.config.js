@@ -84,8 +84,11 @@ var webpackConfig = [
 					}`;
 			}).join(',\n') + '}',
 			getSvgPath: (svgFile, id) => {
-				const svg = fs.readFileSync(path.join(paths.src.animationSvg, svgFile));
-				const $ = cheerio.load(svg);
+				const svg = String(fs.readFileSync(path.join(paths.src.animationSvg, svgFile)));
+				const $ = cheerio.load(svg, {
+					xmlMode: true,
+					decodeEntities: true
+				});
 				return `'${$('#' + id).attr('d')}'`;
 			}
 		}

@@ -17,12 +17,12 @@ export default class GatoAnimation extends DanceAnimation {
 		};
 
 		this.giroElement = new PairElement(this,
-			{left: getSvgPath('gato.svg', 'path3766'),
-				right: 'M 560,140 C 560,80 520,40 460,40 400,40 360,80 360,140 c 0,60 40,100 100,100 60,0 100,-40 100,-100 z'});
+			{left: getSvgPath('gato.svg', 'giro_left'),
+				right: getSvgPath('gato.svg', 'giro_right')});
 
 		this.mediaVueltaElement = new PairElement(this,
-			{left: 'm 40,160 c 0,50 120,120 260,120 140,0 260,-70 260,-120',
-				right: 'M 560,160 C 560,110 440,40 300,40 160,40 40,110 40,160'});
+			{left: getSvgPath('gato.svg', 'media_vuelta_left'),
+				right: getSvgPath('gato.svg', 'media_vuelta_right')});
 
 		this.coronacionElement = new PairElement(this,
 			{left: 'm 40,160 c 0,40 120,60 160,60 40,0 80,-20 80,-60 0,-25 -15,-40 -40,-40 -25,0 -40,15 -40,40 0,25 15,40 40,40 25,0 40,-20 50,-40',
