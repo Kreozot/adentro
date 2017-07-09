@@ -1,4 +1,4 @@
-require('styles/animation.css');
+require('styles/animation.scss');
 import {mod, normalizeAngle} from 'animationClasses/commons/utils';
 
 const FIGURE_ANGLE_TICK = 25;
@@ -57,9 +57,9 @@ export default class DanceAnimation {
 			animation.lastValue = 0;
 		}
 		const percentRemain = (animation.end - animation.lastValue) / animation.end;
-		const newDur = animation.dur * percentRemain;
+		const newDuration = animation.dur * percentRemain;
 		this.animations[animationIndex] = Snap.animate(animation.lastValue, animation.end,
-			animation.set, newDur, animation.easing);
+			animation.set, newDuration, animation.easing);
 	}
 
 	pause() {
@@ -92,7 +92,7 @@ export default class DanceAnimation {
 			})
 			.addClass('invisible')
 			.addClass('figure')
-			.addClass(gender === 'man' ? 'manFigure' : 'womanFigure');
+			.addClass(gender === 'man' ? 'figure--man' : 'figure--woman');
 		figure.angle = null;
 		return figure;
 	}
@@ -109,7 +109,7 @@ export default class DanceAnimation {
 		const arrows = this.svg.path(clockwise
 			? 'm -15.9,-19.4 c 0.4,1.6 -2.4,2.7 -3.2,4.3 -7.8,9.5 -6.7,24.8 2.6,33 2.5,2.3 5.5,4 8.7,5.2 0.5,-1.9 1.9,-4.2 -0.9,-4.5 C -18.8,14.2 -23.5,1 -18.4,-8.9 c 1.1,-2.4 2.8,-4.5 4.7,-6.3 1.3,1.6 3,7.9 4,6.4 1.4,-4.2 2.7,-8.3 4,-12.5 -4.3,-1.1 -8.6,-2.3 -13,-3.4 0.9,1.8 1.8,3.6 2.7,5.3 z m 22.7,0 C 17.4,-16 23.4,-3.1 19.2,7.2 18.1,10.3 16.2,12.9 13.9,15.2 12.5,13.6 10.9,7.3 9.8,8.8 8.4,13 7,17.1 5.7,21.3 c 4.3,1.1 8.6,2.3 13,3.4 -0.4,-2.3 -4.4,-5.3 -1.9,-7 9.4,-8.5 10.2,-24.4 1.5,-33.8 -2.8,-3.2 -6.5,-5.6 -10.5,-6.9 -0.4,1.2 -0.7,2.5 -1,3.7 z'
 			: 'm -15.9,19.4 c 0.4,-1.6 -2.4,-2.7 -3.2,-4.3 -7.8,-9.5 -6.7,-24.8 2.6,-33 2.5,-2.3 5.5,-4 8.7,-5.2 0.5,1.9 1.9,4.2 -0.9,4.5 -10.2,4.4 -14.9,17.6 -9.8,27.5 1.1,2.4 2.8,4.5 4.7,6.3 1.3,-1.6 3,-7.9 4,-6.4 1.4,4.2 2.7,8.3 4,12.5 -4.3,1.1 -8.6,2.3 -13,3.4 0.9,-1.8 1.8,-3.6 2.7,-5.3 z M 6.8,19.4 C 17.4,16 23.4,3.1 19.2,-7.2 c -1.1,-3 -3,-5.7 -5.4,-8 -1.3,1.6 -3,7.9 -4,6.4 -1.4,-4.2 -2.7,-8.3 -4,-12.5 4.3,-1.1 8.6,-2.3 13,-3.4 -0.4,2.3 -4.4,5.3 -1.9,7 9.4,8.5 10.2,24.4 1.5,33.8 -2.8,3.2 -6.5,5.6 -10.5,6.9 -0.4,-1.2 -0.7,-2.5 -1,-3.7 z');
-		arrows.addClass('rotationArrows')
+		arrows.addClass('rotation-arrows')
 			.transform(`t${x},${y}r${angle}`);
 		this.paths[this.paths.length] = arrows;
 		return arrows;
@@ -147,9 +147,9 @@ export default class DanceAnimation {
 				this.lastValue = value;
 				// Если дробная часть от деления текущей позиции на длину такта достаточно близка к единице, значит сейчас сильная доля
 				if (mod(value, oneTimeLength) > 0.8) {
-					figure.addClass('straightBeatFigure');
+					figure.addClass('figure--straight-beat');
 				} else {
-					figure.removeClass('straightBeatFigure');
+					figure.removeClass('figure--straight-beat');
 				}
 			}, timeLength, mina.linear);
 	}
@@ -254,19 +254,22 @@ export default class DanceAnimation {
 	 * @return {Object}              Path-объект траектории
 	 */
 	path(pathStr, gender, hidden) {
-		var resultPath = this.svg.path(pathStr)
+		const resultPath = this.svg.path(pathStr)
 			.attr({
-				id: gender + '_path_' + this.paths.length
+				id: `${gender}_path_${this.paths.length}`
 			})
 			.addClass('path');
+
 		if (hidden) {
 			resultPath.addClass('invisible');
 		}
+
 		if (gender === 'man') {
-			resultPath.addClass('manPath');
+			resultPath.addClass('path--man');
 		} else if (gender === 'woman') {
-			resultPath.addClass('womanPath');
+			resultPath.addClass('path--woman');
 		}
+
 		this.paths[this.paths.length] = resultPath;
 		return resultPath;
 	}
@@ -287,7 +290,7 @@ export default class DanceAnimation {
 	startPosFigure(figure, coords) {
 		figure.angle = null;
 		this.positionFigure(figure, coords.x, coords.y, coords.angle);
-		figure.removeClass('straightBeatFigure');
+		figure.removeClass('figure--straight-beat');
 		figure.removeClass('invisible');
 	}
 

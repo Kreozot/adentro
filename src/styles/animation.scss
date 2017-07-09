@@ -2,13 +2,13 @@
 	stroke-width: 2px;
 	stroke: black;
 }
-.manFigure {
+.figure--man {
 	fill: blue;
 }
-.womanFigure {
+.figure--woman {
 	fill: darkmagenta;
 }
-.straightBeatFigure {
+.figure--straight-beat {
 	stroke-width: 5px;
 	stroke: red;
 }
@@ -19,10 +19,10 @@
 	stroke-miterlimit: 10;
 	stroke-dasharray: 9px 9px;
 }
-.manPath {
+.path--man {
 	stroke: blue;
 }
-.womanPath {
+.path--woman {
 	stroke: darkmagenta;
 }
 
@@ -30,7 +30,7 @@
 	opacity: 0;
 }
 
-.rotationArrows {	
+.rotation-arrows {	
 	fill: black;
 	opacity: 0.2;
 }

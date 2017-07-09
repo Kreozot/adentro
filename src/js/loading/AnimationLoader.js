@@ -33,7 +33,7 @@ export default class AnimationLoader {
 		$('#animation')
 			.attr('width', '100%')
 			.attr('height', '100%')
-			.attr('viewBox', '0 0 ' + this.animation.width + ' ' + this.animation.height);
+			.attr('viewBox', `0 0 ${this.animation.width} ${this.animation.height}`);
 	}
 
 	/**

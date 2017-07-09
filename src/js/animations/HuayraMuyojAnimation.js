@@ -143,13 +143,13 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 
 		const arrows1 = this.initRotateIcon(50, 305, 0, false);
 		const arrows2 = this.initRotateIcon(390, 135, 0, false);
-		const arrows1_2 = this.initRotateIcon(50, 220, 0, true).removeClass('rotationArrows').addClass('invisible');
-		const arrows2_2 = this.initRotateIcon(390, 220, 0, true).removeClass('rotationArrows').addClass('invisible');
+		const arrows1_2 = this.initRotateIcon(50, 220, 0, true).removeClass('rotation-arrows').addClass('invisible');
+		const arrows2_2 = this.initRotateIcon(390, 220, 0, true).removeClass('rotation-arrows').addClass('invisible');
 		this.timeouts[this.timeouts.length] = new Timer(function () {
-			arrows1.removeClass('rotationArrows').addClass('invisible');
-			arrows2.removeClass('rotationArrows').addClass('invisible');
-			arrows1_2.addClass('rotationArrows').removeClass('invisible');
-			arrows2_2.addClass('rotationArrows').removeClass('invisible');
+			arrows1.removeClass('rotation-arrows').addClass('invisible');
+			arrows2.removeClass('rotation-arrows').addClass('invisible');
+			arrows1_2.addClass('rotation-arrows').removeClass('invisible');
+			arrows2_2.addClass('rotation-arrows').removeClass('invisible');
 		}, partSeconds * 1000);
 
 		this.elements.esquinaEnd.startAnimation(partSeconds, partBeats, manAngle, womanAngle);
