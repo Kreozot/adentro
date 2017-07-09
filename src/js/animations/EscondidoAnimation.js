@@ -48,24 +48,24 @@ export default class EscondidoAnimation extends DanceAnimation {
 			}),
 
 			esquina: new RotatePairElement(this, {
-				left: esquina_left,
-				top: esquina_top,
-				right: esquina_right,
-				bottom: esquina_bottom
+				left: escondido.esquina_left,
+				top: escondido.esquina_top,
+				right: escondido.esquina_right,
+				bottom: escondido.esquina_bottom
 			}, 270),
 
 			balanceo1: new PairElement(this, {
-				left: balanceo_left,
-				top: balanceo_top,
-				right: balanceo_right,
-				bottom: balanceo_bottom
+				left: escondido.balanceo_left,
+				top: escondido.balanceo_top,
+				right: escondido.balanceo_right,
+				bottom: escondido.balanceo_bottom
 			}),
 
 			balanceo2: new PairElement(this, {
-				left: balanceo2_left,
-				top: balanceo2_top,
-				right: balanceo2_right,
-				bottom: balanceo2_bottom
+				left: escondido.balanceo2_left,
+				top: escondido.balanceo2_top,
+				right: escondido.balanceo2_right,
+				bottom: escondido.balanceo2_bottom
 			})
 		};
 	}
