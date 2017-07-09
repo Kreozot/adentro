@@ -7,7 +7,7 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 		super(id);
 
 		this.elements = {
-			arresto2: this.elements.arresto,
+			...this.elements,
 
 			arrestoSimple: new PairElement(this, {
 				left: 'm 40,160 c 0,40 80,80 160,80 80,0 160,-40 160,-80 0,-40 -80,-80 -160,-80 -80,0 -160,40 -160,80 z',
@@ -19,6 +19,9 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 				right: 'm 560,160 -230,0'
 			})
 		};
+
+		this.vueltaGato = this.vuelta;
+		this.arresto2 = this.arresto;
 	}
 
 	mediaVuelta(seconds, manPosition, beats) {

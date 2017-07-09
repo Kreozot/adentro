@@ -7,10 +7,6 @@ module.exports = {
 		animClass: require('animationClasses/ZambaAnimation').default,
 		title: localize({ru: 'Вариант 1', en: 'Variant 1'})
 	}, {
-		id: 'classic2',
-		animClass: require('animationClasses/Zamba2Animation').default,
-		title: localize({ru: 'Вариант 2', en: 'Variant 2'})
-	}, {
 		id: 'simple',
 		animClass: require('animationClasses/ZambaSimpleAnimation').default,
 		title: localize({ru: 'Упрощённая', en: 'Simplified'})

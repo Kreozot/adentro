@@ -8,8 +8,6 @@ export default class ZambaAnimation extends GatoAnimation {
 
 		this.elements = {
 			...this.elements,
-			vueltaGato: this.elements.vuelta,
-			arresto2: this.elements.arresto,
 
 			mediaVueltaToArresto: new PairElement(this, {
 				left: 'm 40,160 c 0,40 160,80 240,80 110,0 110,-130 20,-130',
@@ -31,6 +29,9 @@ export default class ZambaAnimation extends GatoAnimation {
 				right: 'M 560,160 C 560,120 400,60 300,60 120,60 200,260 280,180'
 			})
 		};
+
+		this.vueltaGato = this.vuelta;
+		this.arresto2 = this.arresto;
 	}
 
 	vuelta(seconds, manPosition, beats) {
