@@ -1,5 +1,6 @@
 import GatoAnimation from './GatoAnimation';
 import PairElement from './commons/elements/double/PairElement';
+import {bailecito} from './svg/svg';
 
 class BailecitoAvanceRetrocesoElement extends PairElement {
 	constructor(animation, pathStrings) {
@@ -28,13 +29,13 @@ export default class BailecitoAnimation extends GatoAnimation {
 			...this.elements,
 
 			avanceRetroceso1: new BailecitoAvanceRetrocesoElement(this, {
-				left: 'm 40,160 c 0,0 0,40 40,40 140,0 400,0 440,0 40,0 40,-40 40,-40',
-				right: 'm 560,160 c 0,0 0,-40 -40,-40 -140,0 -400,0 -440,0 -40,0 -40,40 -40,40'
+				left: bailecito.avance_retroceso_1_left,
+				right: bailecito.avance_retroceso_1_right
 			}),
 
 			avanceRetroceso2: new BailecitoAvanceRetrocesoElement(this, {
-				left: 'm 560,160 c 0,0 0,-40 -40,-40 -40,0 -220,0 -220,0 l -260,0',
-				right: 'm 40,160 c 0,0 0,40 40,40 40,0 220,0 220,0 l 260,0'
+				left: bailecito.avance_retroceso_2_left,
+				right: bailecito.avance_retroceso_2_right
 			})
 		};
 	}

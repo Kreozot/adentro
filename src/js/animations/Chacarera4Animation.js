@@ -4,6 +4,7 @@ import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import VueltaElement from './commons/elements/double/VueltaElement';
 import {getOppositePosition} from './commons/utils';
+import {escondido} from './svg/svg';
 
 class VueltaGradientElement extends VueltaElement {
 	constructor(animation, pathStr) {
@@ -42,52 +43,51 @@ export default class Chacarera4Animation extends Dance4Animation {
 
 		this.elements = {
 			avance: new QuatroElement(this, {
-				left: 'm 50,130 60,60 60,-60 -60,-60 z',
-				right: 'm 390,130 -60,-60 -60,60 60,60 z'
+				left: escondido.avance_1_left,
+				right: escondido.avance_1_right
 			}, {
-				left: 'm 50,310 60,60 60,-60 -60,-60 z',
-				right: 'm 390,310 -60,-60 -60,60 60,60 z'
+				left: escondido.avance_2_left,
+				right: escondido.avance_2_right
 			}),
 
 			giro: new QuatroElement(this, {
-				left: 'm 50,130 c 0,35 25,60 60,60 35,0 60,-25 60,-60 0,-35 -25,-60 -60,-60 -35,0 -60,25 -60,60 z',
-				right: 'm 390,130 c 0,-35 -25,-60 -60,-60 -35,0 -60,25 -60,60 0,35 25,60 60,60 35,0 60,-25 60,-60 z'
+				left: escondido.giro_1_left,
+				right: escondido.giro_1_right
 			}, {
-				left: 'm 50,310 c 0,35 25,60 60,60 35,0 60,-25 60,-60 0,-35 -25,-60 -60,-60 -35,0 -60,25 -60,60 z',
-				right: 'm 390,310 c 0,-35 -25,-60 -60,-60 -35,0 -60,25 -60,60 0,35 25,60 60,60 35,0 60,-25 60,-60 z'
+				left: escondido.giro_2_left,
+				right: escondido.giro_2_right
 			}),
 
 			mediaVuelta: new QuatroElement(this, {
-				left: 'm 50,130 c -30,60 -30,120 0,180 66,132 274,132 340,0',
-				right: 'M 390,130 C 314,0 116,-2 50,130 20,190 20,250 50,310'
+				left: escondido.media_vuelta_1_left,
+				right: escondido.media_vuelta_1_right
 			}, {
-				left: 'm 50,310 c 76,130 274,132 340,0 30,-60 30,-120 0,-180',
-				right: 'M 390,310 C 420,250 420,190 390,130 324,-2 116,-2 50,130'
+				left: escondido.media_vuelta_2_left,
+				right: escondido.media_vuelta_2_right
 			}),
 
-			vueltaGradient: new VueltaGradientElement(this,
-				'm 50,310 c 76,130 274,132 340,0 30,-60 30,-120 0,-180 C 324,-2 116,-2 50,130 20,190 20,260 50,310 z'),
+			vueltaGradient: new VueltaGradientElement(this, escondido.vuelta_all),
 
 			zapateo1: new ZapateoElement(this, this.man),
 
 			zapateo2: new ZapateoElement(this, this.man2),
 
 			zarandeo1: new ZarandeoElement(this, {
-				left: 'm 50,130 60,60 60,-60 -60,-60 z',
-				right: 'm 390,130 -60,-60 -60,60 60,60 z'
+				left: escondido.avance_1_left,
+				right: escondido.avance_1_right
 			}, this.woman),
 
 			zarandeo2: new ZarandeoElement(this, {
-				left: 'm 50,310 60,60 60,-60 -60,-60 z',
-				right: 'm 390,310 -60,-60 -60,60 60,60 z'
+				left: escondido.avance_2_left,
+				right: escondido.avance_2_right
 			}, this.woman2),
 
 			coronacion: new QuatroElement(this, {
-				left: 'm 50,130 c 0,25 70,40 100,40 30,0 55,-20 55,-40 0,-15 -10,-25 -25,-25 -15,0 -25,10 -25,25 0,15 10,25 25,25 15,0 25,-5 30,-20',
-				right: 'm 390,130 c 0,-25 -70,-40 -100,-40 -30,0 -55,20 -55,40 0,15 10,25 25,25 15,0 25,-10 25,-25 0,-15 -10,-25 -25,-25 -15,0 -25,5 -30,20'
+				left: escondido.coronacion_1_left,
+				right: escondido.coronacion_1_right
 			}, {
-				left: 'm 50,310 c 0,25 70,40 100,40 30,0 55,-20 55,-40 0,-15 -10,-25 -25,-25 -15,0 -25,10 -25,25 0,15 10,25 25,25 15,0 25,-5 30,-20',
-				right: 'm 390,310 c 0,-25 -70,-40 -100,-40 -30,0 -55,20 -55,40 0,15 10,25 25,25 15,0 25,-10 25,-25 0,-15 -10,-25 -25,-25 -15,0 -25,5 -30,20'
+				left: escondido.coronacion_2_left,
+				right: escondido.coronacion_2_right
 			})
 		};
 	}

@@ -104,27 +104,19 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:0.92476457px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 390,50 -130,0 0,130 130,0 z"
-       id="zarandeo_right"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       id="zarandeo_right" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.92476457px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 390,390 0,-130 -130,0 0,130 z"
-       id="zarandeo_bottom"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       id="zarandeo_bottom" />
     <path
-       inkscape:connector-curvature="0"
        id="zarandeo_left"
        d="m 50,390 130,0 0,-130 -130,0 z"
-       style="fill:none;stroke:#000000;stroke-width:0.92476457px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
-       sodipodi:nodetypes="ccccc" />
+       style="fill:none;stroke:#000000;stroke-width:0.92476457px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     <path
-       inkscape:connector-curvature="0"
        id="zarandeo_top"
        d="m 50,50 0,130 130,0 0,-130 z"
-       style="fill:none;stroke:#000000;stroke-width:0.92476457px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
-       sodipodi:nodetypes="ccccc" />
+       style="fill:none;stroke:#000000;stroke-width:0.92476457px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -132,17 +124,13 @@
      inkscape:label="mediavuelta"
      style="display:none">
     <path
-       sodipodi:nodetypes="csc"
-       inkscape:connector-curvature="0"
        id="media_vuelta_right"
        d="M 390,50 C 360,20 230,50 140,140 50,230 20,360 50,390"
        style="fill:none;stroke:#000000;stroke-width:0.63556314px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.63556314px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 50,390 c 30,30 160,0 250,-90 90,-90 120,-220 90,-250"
-       id="media_vuelta_left"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="csc" />
+       id="media_vuelta_left" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -153,11 +141,9 @@
        style="fill:none;stroke:#000000;stroke-width:0.92476457px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 50,390 c 30,20 110,-20 150,-60 40,-40 20,-110 -20,-110 -20,0 -40,10 -40,40 0,25 20,40 40,40 40,0 60,-30 50,-60"
        id="coronacion_left"
-       inkscape:connector-curvature="0"
        sodipodi:nodetypes="cssccc" />
     <path
        sodipodi:nodetypes="cssccc"
-       inkscape:connector-curvature="0"
        id="coronacion_right"
        d="m 390,50 c -30,-20 -110,20 -150,60 -40,40 -20,110 20,110 20,0 40,-10 40,-40 0,-25 -20,-40 -40,-40 -40,0 -60,30 -50,60"
        style="fill:none;stroke:#000000;stroke-width:0.92476457px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
@@ -220,13 +206,11 @@
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.20454544"
        d="m 220,50 c 0,340 0,340 0,340"
        id="path3091"
-       inkscape:connector-curvature="0"
        transform="translate(0,-120)" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.20454544"
        d="m 50,220 c 340,0 340,0 340,0"
        id="path3093"
-       inkscape:connector-curvature="0"
        transform="translate(0,-120)" />
     <path
        sodipodi:type="arc"
@@ -272,13 +256,11 @@
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.23181817"
        d="m 50,130 c 340,0 340,0 340,0"
        id="path3871"
-       inkscape:connector-curvature="0"
        transform="translate(0,-120)" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.23181817"
        d="m 50,310 c 340,0 340,0 340,0"
        id="path3873"
-       inkscape:connector-curvature="0"
        transform="translate(0,-120)" />
   </g>
   <g
@@ -290,27 +272,19 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:0.42422557px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 50,130 c 0,30 80,70 170,70 90,0 170,-40 170,-70"
-       id="path2987-2-4"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="csc" />
+       id="path2987-2-4" />
     <path
-       sodipodi:nodetypes="csc"
-       inkscape:connector-curvature="0"
        id="path3827-0"
        d="M 390,130 C 390,100 310,60 220,60 130,60 50,100 50,130"
        style="fill:none;stroke:#000000;stroke-width:0.42422557px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     <path
-       sodipodi:nodetypes="csc"
-       inkscape:connector-curvature="0"
        id="path3906"
        d="m 50,310 c 0,30 80,70 170,70 90,0 170,-40 170,-70"
        style="fill:none;stroke:#000000;stroke-width:0.42422557px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.42422557px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 390,310 c 0,-30 -80,-70 -170,-70 -90,0 -170,40 -170,70"
-       id="path3908"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="csc" />
+       id="path3908" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -335,9 +309,7 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 50,310 c 76,130 274,132 340,0 30,-60 30,-120 0,-180 C 324,-2 116,-2 50,130 20,190 20,260 50,310 z"
-       id="path3991"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="sssss" />
+       id="vuelta_all" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -345,17 +317,13 @@
      inkscape:label="chacarera 4 - mediaVuelta#1"
      style="display:none">
     <path
-       sodipodi:nodetypes="csc"
-       inkscape:connector-curvature="0"
-       id="pathL2R1"
+       id="media_vuelta_2_left"
        d="m 50,310 c 76,130 274,132 340,0 30,-60 30,-120 0,-180"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 390,130 C 314,0 116,-2 50,130 20,190 20,250 50,310"
-       id="pathR1L2"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="csc" />
+       id="media_vuelta_1_right" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -364,17 +332,13 @@
      sodipodi:insensitive="true"
      style="display:none">
     <path
-       sodipodi:nodetypes="csc"
-       inkscape:connector-curvature="0"
-       id="pathR2L1"
+       id="media_vuelta_2_right"
        d="M 390,310 C 420,250 420,190 390,130 324,-2 116,-2 50,130"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 50,130 c -30,60 -30,120 0,180 66,132 274,132 340,0"
-       id="pathL1R2"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="csc" />
+       id="media_vuelta_1_left" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -385,37 +349,27 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 50,130 c 0,30 80,70 170,70 90,0 170,-40 170,-70 0,-30 -80,-70 -170,-70 -90,0 -170,40 -170,70 z"
-       id="path3911"
-       inkscape:connector-curvature="0" />
+       id="path3911" />
     <path
-       inkscape:connector-curvature="0"
        id="path3913"
        d="m 50,310 c 0,30 80,70 170,70 90,0 170,-40 170,-70 0,-30 -80,-70 -170,-70 -90,0 -170,40 -170,70 z"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.63944221px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 50,130 c 0,30 70,40 100,40 30,0 53,-15 53,-40 0,-16 -10,-25 -25,-25 -16,0 -25,10 -25,25 0,16 10,25 25,25 16,0 22,-5 32,-25"
-       id="path3830-9"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cssccsc" />
+       id="path3830-9" />
     <path
-       sodipodi:nodetypes="cssccsc"
-       inkscape:connector-curvature="0"
        id="path3934"
        d="m 390,130 c 0,-30 -70,-40 -100,-40 -30,0 -53,15 -53,40 0,16 10,25 25,25 16,0 25,-10 25,-25 0,-16 -10,-25 -25,-25 -16,0 -22,5 -32,25"
        style="fill:none;stroke:#000000;stroke-width:0.63944221px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     <path
-       sodipodi:nodetypes="cssccsc"
-       inkscape:connector-curvature="0"
        id="path3936"
        d="m 50,310 c 0,30 70,40 100,40 30,0 53,-15 53,-40 0,-16 -10,-25 -25,-25 -16,0 -25,10 -25,25 0,16 10,25 25,25 16,0 22,-5 32,-25"
        style="fill:none;stroke:#000000;stroke-width:0.63944221px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.63944221px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 390,310 c 0,-30 -70,-40 -100,-40 -30,0 -53,15 -53,40 0,16 10,25 25,25 16,0 25,-10 25,-25 0,-16 -10,-25 -25,-25 -16,0 -22,5 -32,25"
-       id="path3938"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cssccsc" />
+       id="path3938" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -426,27 +380,19 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5970149px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 50,130 c 0,35 25,60 60,60 35,0 60,-25 60,-60 0,-35 -25,-60 -60,-60 -35,0 -60,25 -60,60 z"
-       id="path3766"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="sssss" />
+       id="giro_1_left" />
     <path
-       sodipodi:nodetypes="sssss"
-       inkscape:connector-curvature="0"
-       id="path3970"
+       id="giro_1_right"
        d="m 390,130 c 0,-35 -25,-60 -60,-60 -35,0 -60,25 -60,60 0,35 25,60 60,60 35,0 60,-25 60,-60 z"
        style="fill:none;stroke:#000000;stroke-width:0.5970149px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     <path
-       sodipodi:nodetypes="sssss"
-       inkscape:connector-curvature="0"
-       id="path3972"
+       id="giro_2_left"
        d="m 50,310 c 0,35 25,60 60,60 35,0 60,-25 60,-60 0,-35 -25,-60 -60,-60 -35,0 -60,25 -60,60 z"
        style="fill:none;stroke:#000000;stroke-width:0.5970149px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5970149px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 390,310 c 0,-35 -25,-60 -60,-60 -35,0 -60,25 -60,60 0,35 25,60 60,60 35,0 60,-25 60,-60 z"
-       id="path3974"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="sssss" />
+       id="giro_2_right" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -457,23 +403,19 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 50,130 60,60 60,-60 -60,-60 z"
-       id="path3977"
-       inkscape:connector-curvature="0" />
+       id="avance_1_left" />
     <path
-       inkscape:connector-curvature="0"
-       id="path3979"
+       id="avance_1_right"
        d="m 390,130 -60,-60 -60,60 60,60 z"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
-       inkscape:connector-curvature="0"
-       id="path3981"
+       id="avance_2_left"
        d="m 50,310 60,60 60,-60 -60,-60 z"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 390,310 -60,-60 -60,60 60,60 z"
-       id="path3983"
-       inkscape:connector-curvature="0" />
+       id="avance_2_right" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -483,27 +425,19 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:0.63745022px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 50,130 c 0,25 70,40 100,40 30,0 55,-20 55,-40 0,-15 -10,-25 -25,-25 -15,0 -25,10 -25,25 0,15 10,25 25,25 15,0 25,-5 30,-20"
-       id="path3830-1"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cssccsc" />
+       id="coronacion_1_left" />
     <path
-       sodipodi:nodetypes="cssccsc"
-       inkscape:connector-curvature="0"
-       id="path3158"
+       id="coronacion_1_right"
        d="m 390,130 c 0,-25 -70,-40 -100,-40 -30,0 -55,20 -55,40 0,15 10,25 25,25 15,0 25,-10 25,-25 0,-15 -10,-25 -25,-25 -15,0 -25,5 -30,20"
        style="fill:none;stroke:#000000;stroke-width:0.63745022px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     <path
-       sodipodi:nodetypes="cssccsc"
-       inkscape:connector-curvature="0"
-       id="path3160"
+       id="coronacion_2_left"
        d="m 50,310 c 0,25 70,40 100,40 30,0 55,-20 55,-40 0,-15 -10,-25 -25,-25 -15,0 -25,10 -25,25 0,15 10,25 25,25 15,0 25,-5 30,-20"
        style="fill:none;stroke:#000000;stroke-width:0.63745022px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.63745022px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 390,310 c 0,-25 -70,-40 -100,-40 -30,0 -55,20 -55,40 0,15 10,25 25,25 15,0 25,-10 25,-25 0,-15 -10,-25 -25,-25 -15,0 -25,5 -30,20"
-       id="path3162"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cssccsc" />
+       id="coronacion_2_right" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -514,17 +448,14 @@
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 50,310 c 0,30 170,30 170,30 l 140,0 0,-240 -280,0 c 0,0 0,60 0,120 0,60 -30,90 -30,90"
        id="pathL2"
-       inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccsc" />
     <path
        sodipodi:nodetypes="cccccsc"
-       inkscape:connector-curvature="0"
        id="pathR1"
        d="m 390,130 c 0,-30 -170,-30 -170,-30 l -140,0 0,240 280,0 c 0,0 0,-60 0,-120 0,-60 30,-90 30,-90"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        sodipodi:nodetypes="cccccsc"
-       inkscape:connector-curvature="0"
        id="pathL1"
        d="m 50,130 c 0,30 170,30 170,30 l 200,0 0,120 -400,0 c 0,0 0,0 0,-60 0,-60 30,-90 30,-90"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
@@ -532,14 +463,11 @@
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 390,310 c 0,-30 -170,-30 -170,-30 l -200,0 0,-120 400,0 c 0,0 0,0 0,60 0,60 -30,90 -30,90"
        id="pathR2"
-       inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccsc" />
     <path
        style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 50,310 340,0 0,-180 -340,0 z"
-       id="pathEtalon"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       id="pathEtalon" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -549,27 +477,19 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 50,390 c 0,0 90,-70 90,-170 C 140,120 50,50 50,50"
-       id="path3907"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
+       id="path3907" />
     <path
-       sodipodi:nodetypes="ccc"
-       inkscape:connector-curvature="0"
        id="path3097"
        d="m 50,50 c 0,0 70,90 170,90 100,0 170,-90 170,-90"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
-       sodipodi:nodetypes="ccc"
-       inkscape:connector-curvature="0"
        id="path3099"
        d="m 390,50 c 0,0 -90,70 -90,170 0,100 90,170 90,170"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 390,390 c 0,0 -70,-90 -170,-90 -100,0 -170,90 -170,90"
-       id="path3101"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
+       id="path3101" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -579,63 +499,51 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 50,390 50,50"
-       id="esquina_left"
-       inkscape:connector-curvature="0" />
+       id="esquina_left" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 50,50 70,30 50,50"
-       id="balanceo_left"
-       inkscape:connector-curvature="0" />
+       id="balanceo_left" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 50,50 30,70 50,50"
-       id="balanceo2_left"
-       inkscape:connector-curvature="0" />
+       id="balanceo2_left" />
     <path
-       inkscape:connector-curvature="0"
        id="esquina_top"
        d="m 50,50 340,0"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
-       inkscape:connector-curvature="0"
        id="balanceo_top"
        d="M 390,50 410,70 390,50"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
-       inkscape:connector-curvature="0"
        id="balanceo2_top"
        d="M 390,50 370,30 390,50"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
-       inkscape:connector-curvature="0"
        id="esquina_right"
        d="m 390,50 0,340"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
-       inkscape:connector-curvature="0"
        id="balanceo_right"
        d="m 390,390 -20,20 20,-20"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
-       inkscape:connector-curvature="0"
        id="balanceo2_right"
        d="m 390,390 20,-20 -20,20"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 390,390 50,390"
-       id="esquina_bottom"
-       inkscape:connector-curvature="0" />
+       id="esquina_bottom" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 50,390 30,370 50,390"
-       id="balanceo_bottom"
-       inkscape:connector-curvature="0" />
+       id="balanceo_bottom" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 50,390 70,410 50,390"
-       id="balanceo2_bottom"
-       inkscape:connector-curvature="0" />
+       id="balanceo2_bottom" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -644,15 +552,11 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 50,390 210,230"
-       id="path3086"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       id="path3086" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 390,50 230,210"
-       id="path3088"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       id="path3088" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -660,20 +564,14 @@
      inkscape:label="vuelta"
      style="display:none">
     <path
-       sodipodi:nodetypes="csccc"
-       inkscape:connector-curvature="0"
        id="vuelta"
        d="m 50,390 c 30,30 160,0 250,-90 C 390,210 420,80 390,50 360,20 230,50 140,140 50,230 20,360 50,390 z"
        style="fill:none;stroke:#000000;stroke-width:0.63556314px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 50,390 c 20,20 70,10 70,-30 0,-20 -20,-40 -40,-40 -40,0 -50,50 -30,70"
-       id="giro_left"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cssc" />
+       id="giro_left" />
     <path
-       sodipodi:nodetypes="cssc"
-       inkscape:connector-curvature="0"
        id="giro_right"
        d="m 390,50 c -20,-20 -70,-10 -70,30 0,20 20,40 40,40 40,0 50,-50 30,-70"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />

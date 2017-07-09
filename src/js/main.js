@@ -179,6 +179,7 @@ class Adentro {
 	loadSchemaEditor(schemeParams, musicId) {
 		$('#danceName').html(schemeParams.name + ' (editor mode)');
 
+		// TODO: Заменить на plyr
 		$(playerSelector).unbind($.jPlayer.event.timeupdate)
 			.unbind($.jPlayer.event.ended)
 			.unbind($.jPlayer.event.pause);
