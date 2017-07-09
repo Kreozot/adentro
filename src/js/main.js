@@ -76,7 +76,12 @@ class Adentro {
 		const manPosition = domElement.data('manposition');
 		const beats = domElement.data('times');
 		if (visualizationFuncName) {
-			this.animationLoader.animation[visualizationFuncName](seconds, manPosition, beats);
+			const visualizationFunc = this.animationLoader.animation[visualizationFuncName].bind(this.animationLoader.animation);
+			if (visualizationFunc) {
+				visualizationFunc(seconds, manPosition, beats);
+			} else {
+				throw `Не найдена функция анимации ${visualizationFuncName}`;
+			}
 		}
 	}
 

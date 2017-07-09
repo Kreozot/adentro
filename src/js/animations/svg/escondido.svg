@@ -152,13 +152,13 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:0.92476457px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 50,390 c 30,20 110,-20 150,-60 40,-40 20,-110 -20,-110 -20,0 -40,10 -40,40 0,25 20,40 40,40 40,0 60,-30 50,-60"
-       id="path3830"
+       id="coronacion_left"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cssccc" />
     <path
        sodipodi:nodetypes="cssccc"
        inkscape:connector-curvature="0"
-       id="path3902"
+       id="coronacion_right"
        d="m 390,50 c -30,-20 -110,20 -150,60 -40,40 -20,110 20,110 20,0 40,-10 40,-40 0,-25 -20,-40 -40,-40 -40,0 -60,30 -50,60"
        style="fill:none;stroke:#000000;stroke-width:0.92476457px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
   </g>
@@ -579,62 +579,62 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 50,390 50,50"
-       id="path3916"
+       id="esquina_left"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 50,50 70,30 50,50"
-       id="path3920"
+       id="balanceo_left"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 50,50 30,70 50,50"
-       id="path3922"
+       id="balanceo2_left"
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
-       id="path3012"
+       id="esquina_top"
        d="m 50,50 340,0"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        inkscape:connector-curvature="0"
-       id="path3014"
+       id="balanceo_top"
        d="M 390,50 410,70 390,50"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        inkscape:connector-curvature="0"
-       id="path3016"
+       id="balanceo2_top"
        d="M 390,50 370,30 390,50"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        inkscape:connector-curvature="0"
-       id="path3026"
+       id="esquina_right"
        d="m 390,50 0,340"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        inkscape:connector-curvature="0"
-       id="path3028"
+       id="balanceo_right"
        d="m 390,390 -20,20 20,-20"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        inkscape:connector-curvature="0"
-       id="path3030"
+       id="balanceo2_right"
        d="m 390,390 20,-20 -20,20"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 390,390 50,390"
-       id="path3040"
+       id="esquina_bottom"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 50,390 30,370 50,390"
-       id="path3042"
+       id="balanceo_bottom"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 50,390 70,410 50,390"
-       id="path3044"
+       id="balanceo2_bottom"
        inkscape:connector-curvature="0" />
   </g>
   <g
