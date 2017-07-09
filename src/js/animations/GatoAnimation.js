@@ -16,26 +16,29 @@ export default class GatoAnimation extends DanceAnimation {
 			right: {x: 560, y: 160, angle: 90}
 		};
 
-		this.giroElement = new PairElement(this,
-			{left: getSvgPath('gato.svg', 'giro_left'),
-				right: getSvgPath('gato.svg', 'giro_right')});
+		this.giroElement = new PairElement(this, {
+			left: getSvgPath('gato.svg', 'giro_left'),
+			right: getSvgPath('gato.svg', 'giro_right')
+		});
 
-		this.mediaVueltaElement = new PairElement(this,
-			{left: getSvgPath('gato.svg', 'media_vuelta_left'),
-				right: getSvgPath('gato.svg', 'media_vuelta_right')});
+		this.mediaVueltaElement = new PairElement(this, {
+			left: getSvgPath('gato.svg', 'media_vuelta_left'),
+			right: getSvgPath('gato.svg', 'media_vuelta_right')
+		});
 
-		this.coronacionElement = new PairElement(this,
-			{left: 'm 40,160 c 0,40 120,60 160,60 40,0 80,-20 80,-60 0,-25 -15,-40 -40,-40 -25,0 -40,15 -40,40 0,25 15,40 40,40 25,0 40,-20 50,-40',
-				right: 'm 560,160 c 0,-40 -120,-60 -160,-60 -40,0 -80,20 -80,60 0,25 15,40 40,40 25,0 40,-15 40,-40 0,-25 -15,-40 -40,-40 -25,0 -40,20 -50,40'});
+		this.coronacionElement = new PairElement(this, {
+			left: getSvgPath('gato.svg', 'coronacion_left'),
+			right: getSvgPath('gato.svg', 'coronacion_right')
+		});
 
 		this.zapateoElement = new ZapateoElement(this);
 
-		this.zarandeoElement = new ZarandeoElement(this,
-			{left: 'M 40,160 140,260 240,160 140,60 z',
-				right: 'M 560,160 460,60 360,160 460,260 z'});
+		this.zarandeoElement = new ZarandeoElement(this, {
+			left: getSvgPath('gato.svg', 'zarandeo_left'),
+			right: getSvgPath('gato.svg', 'zarandeo_right')
+		});
 
-		this.vueltaElement = new VueltaElement(this,
-			'm 45,150 c 0,45 105,105 255,105 150,0 255,-60 255,-105 C 555,105 450,45 300,45 150,45 45,105 45,150 z');
+		this.vueltaElement = new VueltaElement(this, getSvgPath('vuelta.svg', 'vuelta'));
 
 	}
 

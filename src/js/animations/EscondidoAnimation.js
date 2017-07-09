@@ -19,44 +19,50 @@ export default class EscondidoAnimation extends DanceAnimation {
 			bottom: {x: 390, y: 390, angle: 135}
 		};
 
-		this.giroElement = new PairElement(this,
-			{left: 'm 50,390 c 20,20 70,10 70,-30 0,-20 -20,-40 -40,-40 -40,0 -50,50 -30,70',
-				right: 'm 390,50 c -20,-20 -70,-10 -70,30 0,20 20,40 40,40 40,0 50,-50 30,-70'});
+		this.giroElement = new PairElement(this, {
+			left: getSvgPath('escondido.svg', 'giro_left'),
+			right: getSvgPath('escondido.svg', 'giro_right')
+		});
 
-		this.vueltaElement = new VueltaElement(this,
-			'm 50,390 c 30,30 160,0 250,-90 C 390,210 420,80 390,50 360,20 230,50 140,140 50,230 20,360 50,390 z');
+		this.vueltaElement = new VueltaElement(this, getSvgPath('escondido.svg', 'vuelta'));
 
 		this.zapateoElement = new ZapateoElement(this);
 
-		this.zarandeoElement = new ZarandeoElement(this,
-			{left: 'm 50,390 130,0 0,-130 -130,0 z',
-				top: 'm 50,50 0,130 130,0 0,-130 z',
-				right: 'm 390,50 -130,0 0,130 130,0 z',
-				bottom: 'm 390,390 0,-130 -130,0 0,130 z'});
+		this.zarandeoElement = new ZarandeoElement(this, {
+			left: getSvgPath('escondido.svg', 'zarandeo_left'),
+			top: getSvgPath('escondido.svg', 'zarandeo_top'),
+			right: getSvgPath('escondido.svg', 'zarandeo_right'),
+			bottom: getSvgPath('escondido.svg', 'zarandeo_bottom')
+		});
 
-		this.mediaVueltaElement = new PairElement(this,
-			{left: 'm 50,390 c 30,30 160,0 250,-90 90,-90 120,-220 90,-250',
-				right: 'M 390,50 C 360,20 230,50 140,140 50,230 20,360 50,390'});
+		this.mediaVueltaElement = new PairElement(this, {
+			left: getSvgPath('escondido.svg', 'media_vuelta_left'),
+			right: getSvgPath('escondido.svg', 'media_vuelta_right')
+		});
 
-		this.coronacionElement = new PairElement(this,
-			{left: 'm 50,390 c 30,20 110,-20 150,-60 40,-40 20,-110 -20,-110 -20,0 -40,10 -40,40 0,25 20,40 40,40 40,0 60,-30 50,-60',
-				right: 'm 390,50 c -30,-20 -110,20 -150,60 -40,40 -20,110 20,110 20,0 40,-10 40,-40 0,-25 -20,-40 -40,-40 -40,0 -60,30 -50,60'});
+		this.coronacionElement = new PairElement(this, {
+			left: 'm 50,390 c 30,20 110,-20 150,-60 40,-40 20,-110 -20,-110 -20,0 -40,10 -40,40 0,25 20,40 40,40 40,0 60,-30 50,-60',
+			right: 'm 390,50 c -30,-20 -110,20 -150,60 -40,40 -20,110 20,110 20,0 40,-10 40,-40 0,-25 -20,-40 -40,-40 -40,0 -60,30 -50,60'
+		});
 
-		this.esquinaElement = new RotatePairElement(this,
-			{left: 'M 50,390 50,50',
-				top: 'm 50,50 340,0',
-				right: 'm 390,50 0,340',
-				bottom: 'M 390,390 50,390'}, 270);
-		this.balanceo1Element = new PairElement(this,
-			{left: 'M 50,50 70,30 50,50',
-				top: 'M 390,50 410,70 390,50',
-				right: 'm 390,390 -20,20 20,-20',
-				bottom: 'M 50,390 30,370 50,390'});
-		this.balanceo2Element = new PairElement(this,
-			{left: 'M 50,50 30,70 50,50',
-				top: 'M 390,50 370,30 390,50',
-				right: 'm 390,390 20,-20 -20,20',
-				bottom: 'M 50,390 70,410 50,390'});
+		this.esquinaElement = new RotatePairElement(this, {
+			left: 'M 50,390 50,50',
+			top: 'm 50,50 340,0',
+			right: 'm 390,50 0,340',
+			bottom: 'M 390,390 50,390'
+		}, 270);
+		this.balanceo1Element = new PairElement(this, {
+			left: 'M 50,50 70,30 50,50',
+			top: 'M 390,50 410,70 390,50',
+			right: 'm 390,390 -20,20 20,-20',
+			bottom: 'M 50,390 30,370 50,390'
+		});
+		this.balanceo2Element = new PairElement(this, {
+			left: 'M 50,50 30,70 50,50',
+			top: 'M 390,50 370,30 390,50',
+			right: 'm 390,390 20,-20 -20,20',
+			bottom: 'M 50,390 70,410 50,390'
+		});
 	}
 
 	esquina(seconds, manPosition, beats) {

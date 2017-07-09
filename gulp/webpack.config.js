@@ -89,7 +89,12 @@ var webpackConfig = [
 					xmlMode: true,
 					decodeEntities: true
 				});
-				return `'${$('#' + id).attr('d')}'`;
+				const pathD = $('#' + id).attr('d');
+				if (pathD) {
+					return `'${pathD}'`;
+				} else {
+					throw `path с идентификатором ${id} не найден в файле ${svgFile}`;
+				}
 			}
 		}
 	}
