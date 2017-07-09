@@ -83,18 +83,18 @@ var webpackConfig = [
 						}, '${id}');
 					}`;
 			}).join(',\n') + '}',
-			getSvgPath: (svgFile, id) => {
+			getSvgPaths: svgFile => {
 				const svg = String(fs.readFileSync(path.join(paths.src.animationSvg, svgFile)));
 				const $ = cheerio.load(svg, {
 					xmlMode: true,
 					decodeEntities: true
 				});
-				const pathD = $('#' + id).attr('d');
-				if (pathD) {
-					return `'${pathD}'`;
-				} else {
-					throw `path с идентификатором ${id} не найден в файле ${svgFile}`;
-				}
+				let result = {};
+				$('path').each((i, pathTag) => {
+					const $pathTag = $(pathTag);
+					result[$pathTag.attr('id')] = $pathTag.attr('d');
+				});
+				return JSON.stringify(result);
 			}
 		}
 	}

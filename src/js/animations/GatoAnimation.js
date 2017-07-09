@@ -4,6 +4,7 @@ import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import VueltaElement from './commons/elements/double/VueltaElement';
 import {getOppositePosition} from './commons/utils';
+import {gato, vuelta} from './svg/svg';
 
 export default class GatoAnimation extends DanceAnimation {
 	constructor(id) {
@@ -17,28 +18,28 @@ export default class GatoAnimation extends DanceAnimation {
 		};
 
 		this.giroElement = new PairElement(this, {
-			left: getSvgPath('gato.svg', 'giro_left'),
-			right: getSvgPath('gato.svg', 'giro_right')
+			left: gato.giro_left,
+			right: gato.giro_right
 		});
 
 		this.mediaVueltaElement = new PairElement(this, {
-			left: getSvgPath('gato.svg', 'media_vuelta_left'),
-			right: getSvgPath('gato.svg', 'media_vuelta_right')
+			left: gato.media_vuelta_left,
+			right: gato.media_vuelta_right
 		});
 
 		this.coronacionElement = new PairElement(this, {
-			left: getSvgPath('gato.svg', 'coronacion_left'),
-			right: getSvgPath('gato.svg', 'coronacion_right')
+			left: gato.coronacion_left,
+			right: gato.coronacion_right
 		});
 
 		this.zapateoElement = new ZapateoElement(this);
 
 		this.zarandeoElement = new ZarandeoElement(this, {
-			left: getSvgPath('gato.svg', 'zarandeo_left'),
-			right: getSvgPath('gato.svg', 'zarandeo_right')
+			left: gato.zarandeo_left,
+			right: gato.zarandeo_right
 		});
 
-		this.vueltaElement = new VueltaElement(this, getSvgPath('vuelta.svg', 'vuelta'));
+		this.vueltaElement = new VueltaElement(this, vuelta.vuelta);
 
 	}
 

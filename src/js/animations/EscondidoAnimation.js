@@ -5,6 +5,7 @@ import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import VueltaElement from './commons/elements/double/VueltaElement';
 import {getOppositePosition, Timer} from './commons/utils';
+import {escondido} from './svg/svg';
 
 export default class EscondidoAnimation extends DanceAnimation {
 	constructor(id) {
@@ -20,24 +21,24 @@ export default class EscondidoAnimation extends DanceAnimation {
 		};
 
 		this.giroElement = new PairElement(this, {
-			left: getSvgPath('escondido.svg', 'giro_left'),
-			right: getSvgPath('escondido.svg', 'giro_right')
+			left: escondido.giro_left,
+			right: escondido.giro_right
 		});
 
-		this.vueltaElement = new VueltaElement(this, getSvgPath('escondido.svg', 'vuelta'));
+		this.vueltaElement = new VueltaElement(this, escondido.vuelta);
 
 		this.zapateoElement = new ZapateoElement(this);
 
 		this.zarandeoElement = new ZarandeoElement(this, {
-			left: getSvgPath('escondido.svg', 'zarandeo_left'),
-			top: getSvgPath('escondido.svg', 'zarandeo_top'),
-			right: getSvgPath('escondido.svg', 'zarandeo_right'),
-			bottom: getSvgPath('escondido.svg', 'zarandeo_bottom')
+			left: escondido.zarandeo_left,
+			top: escondido.zarandeo_top,
+			right: escondido.zarandeo_right,
+			bottom: escondido.zarandeo_bottom
 		});
 
 		this.mediaVueltaElement = new PairElement(this, {
-			left: getSvgPath('escondido.svg', 'media_vuelta_left'),
-			right: getSvgPath('escondido.svg', 'media_vuelta_right')
+			left: escondido.media_vuelta_left,
+			right: escondido.media_vuelta_right
 		});
 
 		this.coronacionElement = new PairElement(this, {
