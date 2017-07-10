@@ -95,6 +95,14 @@ var webpackConfig = [
 					result[$pathTag.attr('id')] = $pathTag.attr('d');
 				});
 				return JSON.stringify(result);
+			},
+			getSvgElement: (svgFile, selector) => {
+				const svg = String(fs.readFileSync(path.join(paths.src.animationSvg, svgFile)));
+				const $ = cheerio.load(svg, {
+					xmlMode: true,
+					decodeEntities: true
+				});
+				return `\`${$.html(selector)}\``;
 			}
 		}
 	}

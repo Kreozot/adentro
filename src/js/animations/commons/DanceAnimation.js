@@ -4,6 +4,11 @@ import {mod, normalizeAngle} from 'animationClasses/commons/utils';
 const FIGURE_ANGLE_TICK = 25;
 const FIGURE_ANGLE_SPEED = 3;
 
+const figuresSvg = {
+	man: getSvgElement('figures.svg', '#man'),
+	woman: getSvgElement('figures.svg', '#woman'),
+};
+
 /**
  * Объект анимации
  * @param {String} id DOM-идентификатор SVG-объекта
@@ -76,23 +81,25 @@ export default class DanceAnimation {
 		}
 	}
 
-	getGenderColor(gender) {
-		return gender === 'man' ? this.MAN_COLOR : this.WOMAN_COLOR;
-	}
-
 	/**
 	 * Создание фигуры танцора
 	 * @param  {String} gender Пол
-	 * @return {Object}        Polyline-объект танцора
+	 * @return {Object}        SVG-объект танцора
 	 */
 	initFigure(gender) {
-		var figure = this.svg.polyline('0,0 20,40 40,0')
+		const figureSvg = Snap.parse(figuresSvg[gender]);
+		this.svg.append(figureSvg);
+		const figure = this.svg.g(
+			this.svg.select('#' + gender)
+				.attr({id: gender + '_figure-inner', display: 'block'})
+		);
+		figure
 			.attr({
 				id: gender + '_figure'
 			})
 			.addClass('invisible')
 			.addClass('figure')
-			.addClass(gender === 'man' ? 'figure--man' : 'figure--woman');
+			.addClass('figure--' + gender);
 		figure.angle = null;
 		return figure;
 	}
