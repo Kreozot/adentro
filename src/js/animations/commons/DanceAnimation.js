@@ -142,23 +142,54 @@ export default class DanceAnimation {
 		}
 	}
 
+	static animateLeg(figure, legStr, stepDuration, stepsLeft) {
+		const oppositeLegStr = legStr === 'left' ? 'right' : 'left';
+		if (stepsLeft < 1) {
+			return;
+		}
+		Snap.animate(0, 20, function (value) {
+			// debugger;
+
+			this.lastValue = this.lastValue || 0;
+			const leg1 = figure.select('.leg--' + legStr);
+			const leg2 = figure.select('.leg--' + oppositeLegStr);
+			const transform1 = leg1.transform().localMatrix;
+			const transform2 = leg2.transform().localMatrix;
+			transform1.translate(0, value - this.lastValue);
+			transform2.translate(0, this.lastValue - value);
+			leg1.transform(transform1.toTransformString());
+			leg2.transform(transform2.toTransformString());
+
+			this.lastValue = value;
+		}, stepDuration, mina.linear, () => DanceAnimation.animateLeg(figure, oppositeLegStr, stepDuration, stepsLeft - 1));
+	}
+
 	/**
 	 * Анимация фигур в такт
+	 * @param  {Ojbect} figure     Объект фигуры
+	 * @param  {Number} timeLength Длительность отрезка
+	 * @param  {Number} beats      Количество тактов отрезка
 	 */
 	animateFigureTime(figure, timeLength, beats) {
+		DanceAnimation.animateLeg(figure, 'right', timeLength / beats / 3, beats * 3);
+		// const length = timeLength;
+		// const oneTimeLength = length / beats;
+		// Snap.animate(0, length)
+
 		// Пульсация в такт
-		const length = timeLength;
-		const oneTimeLength = length / beats;
-		this.animations[this.animations.length] = Snap.animate(0, length,
-			function (value) { //this - animation element
-				this.lastValue = value;
-				// Если дробная часть от деления текущей позиции на длину такта достаточно близка к единице, значит сейчас сильная доля
-				if (mod(value, oneTimeLength) > 0.8) {
-					figure.addClass('figure--straight-beat');
-				} else {
-					figure.removeClass('figure--straight-beat');
-				}
-			}, timeLength, mina.linear);
+		// const length = timeLength;
+		// const oneTimeLength = length / beats;
+		// this.animations[this.animations.length] = Snap.animate(0, length,
+		// 	function (value) { //this - animation element
+		// 		this.lastValue = value;
+		// 		debugger;
+		// 		// Если дробная часть от деления текущей позиции на длину такта достаточно близка к единице, значит сейчас сильная доля
+		// 		if (mod(value, oneTimeLength) > 0.8) {
+		// 			figure.addClass('figure--straight-beat');
+		// 		} else {
+		// 			figure.removeClass('figure--straight-beat');
+		// 		}
+		// 	}, timeLength, mina.linear);
 	}
 
 	/**
