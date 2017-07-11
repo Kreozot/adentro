@@ -3,6 +3,7 @@ import {mod, normalizeAngle} from 'animationClasses/commons/utils';
 
 const FIGURE_ANGLE_TICK = 25;
 const FIGURE_ANGLE_SPEED = 3;
+const FIGURE_STEP_AMPLITUDE = 26;
 
 const figuresSvg = {
 	man: getSvgElement('figures.svg', '#man'),
@@ -142,26 +143,24 @@ export default class DanceAnimation {
 		}
 	}
 
-	static animateLeg(figure, legStr, stepDuration, stepsLeft) {
+	animateLeg(figure, legStr, value) {
+		figure.select('.leg--' + legStr)
+			.transform(`translate(0, ${value})`);
+	}
+
+	animateLegs(figure, legStr, stepDuration, stepsLeft) {
+		const self = this;
 		const oppositeLegStr = legStr === 'left' ? 'right' : 'left';
 		if (stepsLeft < 1) {
 			return;
 		}
-		Snap.animate(0, 20, function (value) {
-			// debugger;
-
-			this.lastValue = this.lastValue || 0;
-			const leg1 = figure.select('.leg--' + legStr);
-			const leg2 = figure.select('.leg--' + oppositeLegStr);
-			const transform1 = leg1.transform().localMatrix;
-			const transform2 = leg2.transform().localMatrix;
-			transform1.translate(0, value - this.lastValue);
-			transform2.translate(0, this.lastValue - value);
-			leg1.transform(transform1.toTransformString());
-			leg2.transform(transform2.toTransformString());
-
+		this.animations[this.animations.length] = Snap.animate(-FIGURE_STEP_AMPLITUDE / 2, FIGURE_STEP_AMPLITUDE / 2, function (value) {
+			self.animateLeg(figure, legStr, value);
+			self.animateLeg(figure, oppositeLegStr, -value);
 			this.lastValue = value;
-		}, stepDuration, mina.linear, () => DanceAnimation.animateLeg(figure, oppositeLegStr, stepDuration, stepsLeft - 1));
+		}, stepDuration, mina.linear, () => {
+			self.animateLegs(figure, oppositeLegStr, stepDuration, stepsLeft - 1);
+		});
 	}
 
 	/**
@@ -171,7 +170,7 @@ export default class DanceAnimation {
 	 * @param  {Number} beats      Количество тактов отрезка
 	 */
 	animateFigureTime(figure, timeLength, beats) {
-		DanceAnimation.animateLeg(figure, 'right', timeLength / beats / 3, beats * 3);
+		this.animateLegs(figure, 'right', timeLength / beats / 3, beats * 3);
 		// const length = timeLength;
 		// const oneTimeLength = length / beats;
 		// Snap.animate(0, length)
