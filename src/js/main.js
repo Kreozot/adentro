@@ -11,6 +11,8 @@ import langLinksTemplate from './templates/langLinks.ejs';
 
 const playerSelector = '#player';
 
+const KEY_SPACE = 32;
+
 class Adentro {
 	constructor() {
 		this.navigation = new Navigation(this);
@@ -22,7 +24,7 @@ class Adentro {
 	 * Спрятать отображение текущего элемента на схеме
 	 */
 	hideCurrentElementMarkOnSchema() {
-		Snap.selectAll('text.current, rect.current').forEach(function (elem) {
+		Snap.selectAll('text.current, rect.current').forEach(elem => {
 			elem.removeClass('current');
 		});
 	}
@@ -33,7 +35,6 @@ class Adentro {
 	hideCurrentElement() {
 		this.hideCurrentElementMarkOnSchema();
 		this.animationLoader.animation.clear();
-		$(playerSelector).data('currentElement', '');
 	}
 
 	/**
@@ -179,11 +180,6 @@ class Adentro {
 	loadSchemaEditor(schemeParams, musicId) {
 		$('#danceName').html(schemeParams.name + ' (editor mode)');
 
-		// TODO: Заменить на plyr
-		$(playerSelector).unbind($.jPlayer.event.timeupdate)
-			.unbind($.jPlayer.event.ended)
-			.unbind($.jPlayer.event.pause);
-
 		musicId = musicId || schemeParams.music[0].id;
 		this.showMusicLinks(schemeParams.music, musicId, true);
 		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
@@ -191,27 +187,14 @@ class Adentro {
 		this.renderScheme(schemeParams.scheme, musicSchema.schemeMods);
 
 		this.player.loadMusicSchema(musicSchema);
-		this.initSvgSchemaEditor();
 
 		console.log('editor mode on');
 		$('#animationDiv').html('');
-		// const initTiming = $(playerSelector).data('schema');
 		const timingGenerator = new TimingGenerator();
 
-		const timeupdateEvent = event => {
-			// Если остановлено
-			if ((event.jPlayer.status.paused) && (event.jPlayer.status.currentTime == 0)) {
-				this.hideCurrentElementMarkOnSchema();
-				timingGenerator.clear();
-			}
-		};
-
-		$(playerSelector).bind($.jPlayer.event.timeupdate, timeupdateEvent);
-
 		$('html').keypress(event => {
-			if (event.which == 32) { //space
-				const currentTime = $(playerSelector).data('jPlayer').status.currentTime;
-				if (!timingGenerator.addBeat(currentTime)) {
+			if (event.which == KEY_SPACE) {
+				if (!timingGenerator.addBeat(this.player.currentTime)) {
 					const newTiming = timingGenerator.getTiming();
 					$('#content').html('<pre>' + JSON.stringify(newTiming, '', 4) + '</pre>');
 				}

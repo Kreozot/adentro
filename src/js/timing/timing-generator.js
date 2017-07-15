@@ -19,7 +19,7 @@ class ElementTiming {
 		if (this.beats.length < this.beatCount) {
 			this.beats[this.beats.length] = seconds;
 
-			console.log(this.beats.length + ' beat on ' + seconds + ' (' + this.elementId + ')');
+			console.log(`${this.beats.length} beat on ${seconds} (${this.elementId})`);
 			return true;
 		} else {
 			return false;
@@ -32,7 +32,7 @@ class ElementTiming {
 	 */
 	getAverageBeatTime() {
 		// Находим длительность всех долей, кроме последней
-		var beatsLen = this.beats.map(function (beat, i, beats) {
+		var beatsLen = this.beats.map((beat, i, beats) => {
 			if (i == beats.length - 1) {
 				return 0;
 			} else {
@@ -40,9 +40,7 @@ class ElementTiming {
 			}
 		});
 		// Считаем сумму длительностей
-		var beatsLenSum = beatsLen.reduce(function (sum, value) {
-			return sum + value;
-		}, 0);
+		var beatsLenSum = beatsLen.reduce((sum, value) => sum + value, 0);
 		// Вычисляем среднюю длительность
 		return beatsLenSum / (this.beatCount - 1);
 	}
@@ -78,17 +76,15 @@ export default class TimingGenerator {
 	 * @return {Array} Массив описаний элементов схемы в формате [{id, beatCount}...]
 	 */
 	getElementsList() {
-		var elementsList = [];
+		const elementsList = [];
 
 		function addElement(id, beatCount) {
 			elementsList[elementsList.length] = {id: id, beatCount: beatCount};
 		}
 
-		// var svgobject = document.getElementById('schema');
-		// if (svgobject.contentDocument) {
-		var svgdom = jQuery('#schemaDiv svg');
-		var currentY = 0;
-		var currentPart = 1;
+		const svgdom = jQuery('#schemaDiv svg');
+		let currentY = 0;
+		let currentPart = 1;
 
 		$('rect.element', svgdom).each(function (index, element) {
 			// Если перешли на новую строку, добавляем паузу
@@ -105,7 +101,6 @@ export default class TimingGenerator {
 		addElement('#end', 1);
 
 		return elementsList;
-		// }
 	}
 
 	/**

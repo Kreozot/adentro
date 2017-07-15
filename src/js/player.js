@@ -32,6 +32,7 @@ export default class Player {
 		});
 		this.player.on('ended', () => {
 			this.main.hideCurrentElement();
+			this.currentElement = null;
 		});
 		this.player.on('pause', () => {
 			if ((this.player.isPaused()) && (this.player.getCurrentTime() !== 0)) {
@@ -65,5 +66,9 @@ export default class Player {
 		this.main.animationLoader.animation.clear();
 		this.player.seek(time);
 		this.player.play();
+	}
+
+	get currentTime() {
+		return this.player.getCurrentTime();
 	}
 }
