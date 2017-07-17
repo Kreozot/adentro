@@ -2,7 +2,7 @@ import Navigation from './navigation';
 import Player from './player';
 import contentSwitch from './loading/content_switch';
 import AnimationLoader from './loading/AnimationLoader';
-import TimingGenerator from './timing/timing-generator';
+import TimingGenerator from './timing/TimingGenerator';
 import Tour from './tour';
 
 import schemeTemplate from './templates/scheme.ejs';
@@ -137,6 +137,12 @@ class Adentro {
 			return element;
 		}));
 		$('#schemaDiv').html(schemeTemplate({scheme: modScheme}));
+
+		const player = this.player;
+		$('.element').on('click', function () {
+			const id = $(this).attr('id');
+			player.playElement(id);
+		});
 	}
 
 	/**
@@ -190,13 +196,13 @@ class Adentro {
 
 		console.log('editor mode on');
 		$('#animationDiv').html('');
-		const timingGenerator = new TimingGenerator();
+		const timingGenerator = new TimingGenerator(this);
 
 		$('html').keypress(event => {
 			if (event.which == KEY_SPACE) {
 				if (!timingGenerator.addBeat(this.player.currentTime)) {
 					const newTiming = timingGenerator.getTiming();
-					$('#content').html('<pre>' + JSON.stringify(newTiming, '', 4) + '</pre>');
+					$('#content').html(`<pre>${newTiming}</pre>`);
 				}
 			}
 		});
@@ -208,9 +214,7 @@ class Adentro {
 }
 
 global.adentro = new Adentro();
-global.playElement = element => adentro.player.playElement(element);
 global.localize = textObj => adentro.localize(textObj);
-global.markCurrentElementOnSchema = elem => adentro.markCurrentElementOnSchema(elem);
 global.tour = new Tour();
 export default Adentro;
 

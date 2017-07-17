@@ -5,7 +5,6 @@
  * @return {String}      Идентификатор нужного элемента
  */
 export const getElement = function (scheme, time) {
-	// schema = $(playerSelector).data('schema');
 	const nearestElement = {name: '', time: -1};
 	for (let key in scheme) {
 		if (scheme.hasOwnProperty(key)) {
