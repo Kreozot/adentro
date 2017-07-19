@@ -45,15 +45,15 @@ export default class GatoAnimation extends DanceAnimation {
 	}
 
 	vuelta(seconds, manPosition, beats) {
-		this.elements.vuelta.fullAnimation(seconds, beats, manPosition);
+		return this.elements.vuelta.fullAnimation(seconds, beats, manPosition);
 	}
 
 	giro(seconds, manPosition, beats) {
-		this.elements.giro.fullAnimation(seconds, beats, manPosition);
+		return this.elements.giro.fullAnimation(seconds, beats, manPosition);
 	}
 
 	contraGiro(seconds, manPosition, beats) {
-		this.elements.giro.fullAnimation(seconds, beats, manPosition, this.DIRECTION_BACKWARD, 0, 1, 0);
+		return this.elements.giro.fullAnimation(seconds, beats, manPosition, this.DIRECTION_BACKWARD, 0, 1, 0);
 	}
 
 	zapateoZarandeo(seconds, manPosition, beats) {

@@ -21,7 +21,9 @@ export default class ChacareraAnimation extends GatoAnimation {
 		this.elements.avance.drawPath(manPosition);
 		const partSeconds = seconds / 2;
 		const partBeats = beats / 2;
-		this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5);
-		this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
+		return this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
+			.then(() => {
+				return this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1);
+			});
 	}
 }

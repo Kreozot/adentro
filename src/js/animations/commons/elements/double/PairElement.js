@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 import {getOppositePosition, Timer} from 'animationClasses/commons/utils';
 import SingleElement from '../single/SingleElement';
 
@@ -59,8 +60,10 @@ export default class PairElement {
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
 	startAnimation(lengthS, beats, direction, delay, startPart, stopPart) {
-		this.manDanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
-		this.womanDanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
+		return Promise.all([
+			this.manDanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart),
+			this.womanDanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart)
+		]);
 	}
 
 	/**
@@ -75,13 +78,15 @@ export default class PairElement {
 		const fullAnimationFunc = () => {
 			this.animation.clearPaths();
 			this.drawPath(manPosition);
-			this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
+			return this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
 		};
 
 		if ((!delay) || (delay <= 0)) {
-			fullAnimationFunc();
+			return fullAnimationFunc();
 		} else {
-			this.animation.timeouts.push(new Timer(fullAnimationFunc, delay * 1000));
+			return new Promise(resolve => {
+				this.animation.timeouts.push(new Timer(() => fullAnimationFunc().then(resolve), delay * 1000));
+			});
 		}
 	}
 }

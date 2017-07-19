@@ -13,6 +13,18 @@ export default class Player {
 		this.currentElement = null;
 	}
 
+	getAndShowCurrentElement() {
+		const time = this.player.getCurrentTime();
+		const element = getElement(this.scheme, time);
+		if (this.currentElement !== element.name) {
+			console.log('next', element.name);
+			this.currentElement = element.name;
+			if (element.name) {
+				this.main.showCurrentElement(element.name, element.timeLength);
+			}
+		}
+	}
+
 	initEvents() {
 		this.player.on('timeupdate', () => {
 			// Если остановлено
@@ -20,14 +32,7 @@ export default class Player {
 				this.main.hideCurrentElement();
 			} else {
 				this.main.animationLoader.animation.resume();
-				const time = this.player.getCurrentTime();
-				const element = getElement(this.scheme, time);
-				if (this.currentElement !== element.name) {
-					this.currentElement = element.name;
-					if (element.name) {
-						this.main.showCurrentElement(element.name, element.timeLength);
-					}
-				}
+				this.getAndShowCurrentElement();
 			}
 		});
 		this.player.on('ended', () => {

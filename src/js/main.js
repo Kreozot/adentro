@@ -79,7 +79,15 @@ class Adentro {
 		if (visualizationFuncName) {
 			const visualizationFunc = this.animationLoader.animation[visualizationFuncName];
 			if (visualizationFunc) {
-				visualizationFunc.call(this.animationLoader.animation, seconds, manPosition, beats);
+				const result = visualizationFunc.call(this.animationLoader.animation, seconds, manPosition, beats);
+				if (result) {
+					result
+						.delay(50)
+						.then(() => {
+							console.log('after animation');
+							this.player.getAndShowCurrentElement();
+						});
+				}
 			} else {
 				throw `Не найдена функция анимации ${visualizationFuncName}`;
 			}

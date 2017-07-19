@@ -1,3 +1,5 @@
+import Promise from 'bluebird';
+
 require('styles/animation.scss');
 import {mod, normalizeAngle} from 'animationClasses/commons/utils';
 
@@ -255,23 +257,25 @@ export default class DanceAnimation {
 		transformAtLength(startLen);
 		figure.removeClass('invisible');
 
-		this.animations[this.animations.length] = Snap.animate(startLen, stopLen,
-			function (value) { //this - animation element
-				this.lastValue = value;
-				if (direction === this.DIRECTION_FROM_END_TO_START) {
-					value = startLen + stopLen - value;
-				}
-				transformAtLength(value);
-			}, timeLength, easing);
+		return new Promise(resolve => {
+			this.animations[this.animations.length] = Snap.animate(startLen, stopLen,
+				function (value) { //this - animation element
+					this.lastValue = value;
+					if (direction === this.DIRECTION_FROM_END_TO_START) {
+						value = startLen + stopLen - value;
+					}
+					transformAtLength(value);
+				}, timeLength, easing, resolve);
 
-		this.animateFigureTime(figure, timeLength, beats);
+			this.animateFigureTime(figure, timeLength, beats);
+		});
 	}
 
 	/**
 	 * Анимация мужской фигуры по траектории
 	 */
 	animateMan(path, startLen, stopLen, timeLength, beats, direction, startAngle = 90) {
-		this.animateFigurePath(this.man, startAngle, path, startLen, stopLen, timeLength, beats, direction);
+		return this.animateFigurePath(this.man, startAngle, path, startLen, stopLen, timeLength, beats, direction);
 	}
 
 	/**
@@ -279,7 +283,7 @@ export default class DanceAnimation {
 	 * @return {Function}    Функция инициализации анимации
 	 */
 	animateWoman(path, startLen, stopLen, timeLength, beats, direction, startAngle = 90) {
-		this.animateFigurePath(this.woman, startAngle, path, startLen, stopLen, timeLength, beats, direction);
+		return this.animateFigurePath(this.woman, startAngle, path, startLen, stopLen, timeLength, beats, direction);
 	}
 
 	/**
@@ -288,7 +292,6 @@ export default class DanceAnimation {
 	 * @return {Object}              Path-объект траектории
 	 */
 	createPath(pathStr) {
-		console.log('create', pathStr);
 		const resultPath = this.svg.path(pathStr)
 			.addClass('path')
 			.addClass('invisible');

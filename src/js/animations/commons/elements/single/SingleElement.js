@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 import {Timer} from 'animationClasses/commons/utils';
 const objectAssign = require('object-assign');
 
@@ -69,7 +70,7 @@ export default class SingleElement {
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
 	animationFunction(lengthMs, beats, direction, startPart, stopPart) {
-		this.animation.animateFigurePath(this.figure, 90 + this.angle, this.path,
+		return this.animation.animateFigurePath(this.figure, 90 + this.angle, this.path,
 			this.pathLength * startPart, this.pathLength * stopPart, lengthMs, beats, direction, this.easing);
 	}
 
@@ -93,13 +94,15 @@ export default class SingleElement {
 			stopPart = params.stopPart;
 		}
 		const startAnimationFunc = () => {
-			this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
+			return this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
 		};
 
 		if ((!delay) || (delay <= 0)) {
-			startAnimationFunc();
+			return startAnimationFunc();
 		} else {
-			this.animation.timeouts.push(new Timer(startAnimationFunc, delay * 1000));
+			return new Promise(resolve => {
+				this.animation.timeouts.push(new Timer(() => startAnimationFunc().then(resolve), delay * 1000));
+			});
 		}
 	}
 
