@@ -21,6 +21,17 @@ export default class SingleElement {
 		}
 		this.angle = 0;
 		this.easing = mina.linear;
+
+		// Загружаем path в кеш
+		if (pathStrings) {
+			if (typeof pathStrings === 'string') {
+				this.animation.createPath(pathStrings);
+			} else {
+				Object.keys(pathStrings).forEach(position => {
+					this.animation.createPath(pathStrings[position]);
+				});
+			}
+		}
 	}
 
 	/**

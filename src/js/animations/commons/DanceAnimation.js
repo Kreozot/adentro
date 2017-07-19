@@ -32,13 +32,12 @@ export default class DanceAnimation {
 		this.DIRECTION_STRAIGHT_FORWARD = 2;
 		this.DIRECTION_FROM_END_TO_START = 3;
 		this.initManWoman();
+		this.pathCache = {};
+		this.pathLengths = new Map();
 	}
 
 	clearPaths() {
-		this.paths.forEach(path => path.remove());
-		while (this.paths.length > 0) {
-			this.paths.pop();
-		}
+		this.paths.forEach(path => path.addClass('invisible'));
 
 		this.animations.forEach(animation => animation.stop());
 		while (this.animations.length > 0) {
@@ -239,7 +238,7 @@ export default class DanceAnimation {
 			throw new 'path is not drawn yet';
 		}
 
-		const pathLength = path.getTotalLength();
+		const pathLength = this.pathLengths.get(path);
 
 		const transformAtLength = length => {
 			if (length > pathLength) {
@@ -284,6 +283,21 @@ export default class DanceAnimation {
 	}
 
 	/**
+	 * СОздать path-объект и полоить его в кеш
+	 * @param  {String} pathStr      Описание траектории в формате SVG path
+	 * @return {Object}              Path-объект траектории
+	 */
+	createPath(pathStr) {
+		console.log('create', pathStr);
+		const resultPath = this.svg.path(pathStr)
+			.addClass('path')
+			.addClass('invisible');
+		this.pathCache[pathStr] = resultPath;
+		this.pathLengths.set(resultPath, resultPath.getTotalLength());
+		return resultPath;
+	}
+
+	/**
 	 * Создание Path-объекта траектории
 	 * @param  {String} pathStr      Описание траектории в формате SVG path
 	 * @param  {String} gender       Пол
@@ -291,14 +305,12 @@ export default class DanceAnimation {
 	 * @return {Object}              Path-объект траектории
 	 */
 	path(pathStr, gender, hidden) {
-		const resultPath = this.svg.path(pathStr)
-			.attr({
-				id: `${gender}_path_${this.paths.length}`
-			})
-			.addClass('path');
+		const resultPath = this.pathCache[pathStr] || this.createPath(pathStr);
 
 		if (hidden) {
 			resultPath.addClass('invisible');
+		} else {
+			resultPath.removeClass('invisible');
 		}
 
 		if (gender === 'man') {
