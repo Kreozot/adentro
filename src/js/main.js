@@ -9,8 +9,6 @@ import schemeTemplate from './templates/scheme.ejs';
 import musicLinksTemplate from './templates/musicLinks.ejs';
 import langLinksTemplate from './templates/langLinks.ejs';
 
-const playerSelector = '#player';
-
 const KEY_SPACE = 32;
 
 class Adentro {
@@ -97,9 +95,8 @@ class Adentro {
 	 * Отобразить ссылки на музыкальные композиции
 	 * @param  {Object} musicData          Массив информации о композициях
 	 * @param  {String} currentMusicId    Идентификатор текущей композиции
-	 * @param  {Boolean} showEmptyTiming  Показывать композиции, не имеющие разметки тайминга
 	 */
-	showMusicLinks(musicData, currentMusicId, showEmptyTiming) {
+	showMusicLinks(musicData, currentMusicId) {
 		const navigation = this.navigation;
 
 		$('#musicLinks').html(musicLinksTemplate({
@@ -228,12 +225,12 @@ export default Adentro;
 $(window).load(function () {
 	// Хак для корректной простановки параметра viewBox в SVG через jQuery
 	$.attrHooks['viewbox'] = {
-		set: function (elem, value, name) {
+		set: (elem, value) => {
 			elem.setAttributeNS(null, 'viewBox', String(value));
 			return value;
 		}
 	};
-	window.addEventListener('popstate', function (e) {
+	window.addEventListener('popstate', () => {
 		adentro.navigation.loadSchemaByState();
 	});
 

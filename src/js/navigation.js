@@ -100,7 +100,6 @@ export default class Navigation {
 	 */
 	getContextFromUrl() {
 		const url = new URI();
-		const segments = url.segment();
 		const params = url.query(true);
 		const context = {};
 		context.schema = params.schema;

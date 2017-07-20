@@ -1,6 +1,5 @@
 import plyr from 'plyr';
 require('plyr/dist/plyr.css');
-const $player = $('#player');
 import {getElement} from './timing/timing';
 
 export default class Player {
@@ -17,7 +16,6 @@ export default class Player {
 		const time = this.player.getCurrentTime();
 		const element = getElement(this.scheme, time);
 		if (this.currentElement !== element.name) {
-			console.log('next', element.name);
 			this.currentElement = element.name;
 			if (element.name) {
 				this.main.showCurrentElement(element.name, element.timeLength);
