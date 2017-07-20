@@ -1,6 +1,7 @@
+import Promise from 'bluebird';
 import EscondidoAnimation from './EscondidoAnimation';
 import RotatePairElement from './commons/elements/double/RotatePairElement';
-import {getOppositePosition, Timer} from './commons/utils';
+import {getOppositePosition} from './commons/utils';
 
 export default class RemedioAnimation extends EscondidoAnimation {
 	constructor(id) {
@@ -33,14 +34,16 @@ export default class RemedioAnimation extends EscondidoAnimation {
 		const angleSpeed = angle / timeLength;
 
 		let self = this;
-		this.animations[this.animations.length] = Snap.animate(0, timeLength,
-			function (value) {
-				this.lastValue = value;
+		return new Promise(resolve => {
+			this.animations[this.animations.length] = Snap.animate(0, timeLength,
+				function (value) {
+					this.lastValue = value;
 
-				self.positionFigure(figure, x, y, startAngle - angleSpeed * value);
-			}, timeLength, mina.linear);
+					self.positionFigure(figure, x, y, startAngle - angleSpeed * value);
+				}, timeLength, mina.linear, resolve);
 
-		this.animateFigureTime(figure, timeLength, beats);
+			this.animateFigureTime(figure, timeLength, beats);
+		});
 	}
 
 	esquina(seconds, manPosition, beats) {
@@ -102,21 +105,16 @@ export default class RemedioAnimation extends EscondidoAnimation {
 		this.initManWoman();
 
 		const timeLength = seconds * 1000;
+		const manMovePoint = manEsquinaPath.getPointAtLength(manEsquinaPath.getTotalLength() - 1);
+		const womanMovePoint = womanEsquinaPath.getPointAtLength(womanEsquinaPath.getTotalLength() - 1);
 
-		this.animateFigurePath(this.man, 90, manEsquinaPath, 0, manEsquinaPath.getTotalLength() - 1,
-			timeLength * 3 / 4, beats * 3 / 4);
-		this.animateFigurePath(this.woman, 90, womanEsquinaPath, 0, womanEsquinaPath.getTotalLength() - 1,
-			timeLength * 3 / 4, beats * 3 / 4);
-
-		this.timeouts[this.timeouts.length] = new Timer(() => {
-			const manMovePoint = manEsquinaPath.getPointAtLength(manEsquinaPath.getTotalLength() - 1);
-			const womanMovePoint = womanEsquinaPath.getPointAtLength(womanEsquinaPath.getTotalLength() - 1);
-
-			this.rotateFigure(this.man, seconds / 4, beats / 4,
-				manMovePoint.x, manMovePoint.y, manMovePoint.alpha + 90, manPaths.angle - 270);
-			this.rotateFigure(this.woman, seconds / 4, beats / 4,
-				womanMovePoint.x, womanMovePoint.y, womanMovePoint.alpha + 90, womanPaths.angle - 270);
-		}, timeLength * 3 / 4);
+		return Promise.all([
+			this.animateFigurePath(this.man, 90, manEsquinaPath, 0, manEsquinaPath.getTotalLength() - 1, timeLength * 3 / 4, beats * 3 / 4),
+			this.animateFigurePath(this.woman, 90, womanEsquinaPath, 0, womanEsquinaPath.getTotalLength() - 1, timeLength * 3 / 4, beats * 3 / 4)
+		]).then(() => Promise.all([
+			this.rotateFigure(this.man, seconds / 4, beats / 4, manMovePoint.x, manMovePoint.y, manMovePoint.alpha + 90, manPaths.angle - 270),
+			this.rotateFigure(this.woman, seconds / 4, beats / 4, womanMovePoint.x, womanMovePoint.y, womanMovePoint.alpha + 90, womanPaths.angle - 270)
+		]));
 	}
 
 	zapateoZarandeo(seconds, manPosition, beats) {

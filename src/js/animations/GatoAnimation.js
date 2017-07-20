@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 import DanceAnimation from './commons/DanceAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
@@ -62,22 +63,26 @@ export default class GatoAnimation extends DanceAnimation {
 		const parts = beats >= 8 ? 4 : 2;
 		const partSeconds = seconds / parts;
 		const partBeats = beats / parts;
-		this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5);
-		this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
+
+		let zarandeoPromise = this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
+			.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
 		if (beats >= 8) {
-			this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 2, 0, 0.5);
-			this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
+			zarandeoPromise = zarandeoPromise
+				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5))
+				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
 		}
 
 		this.elements.zapateo.drawPath(manPosition);
-		this.elements.zapateo.startAnimation(seconds, beats);
+		const zapateoPromise = this.elements.zapateo.startAnimation(seconds, beats);
+
+		return Promise.all([zarandeoPromise, zapateoPromise]);
 	}
 
 	mediaVuelta(seconds, manPosition, beats) {
-		this.elements.mediaVuelta.fullAnimation(seconds, beats, manPosition);
+		return this.elements.mediaVuelta.fullAnimation(seconds, beats, manPosition);
 	}
 
 	coronacion(seconds, manPosition, beats) {
-		this.elements.coronacion.fullAnimation(seconds, beats, manPosition);
+		return this.elements.coronacion.fullAnimation(seconds, beats, manPosition);
 	}
 }

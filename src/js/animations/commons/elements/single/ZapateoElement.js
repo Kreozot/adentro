@@ -8,10 +8,10 @@ export default class ZapateoElement extends SingleElement {
 	animationFunction(lengthMs, beats, direction, startPart, stopPart) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
 		if (this.pathStrings) {
-			this.animation.animateFigurePath(this.figure, 90 + this.angle, this.path,
+			return this.animation.animateFigurePath(this.figure, 90 + this.angle, this.path,
 				this.pathLength * startPart, this.pathLength * stopPart, lengthMs, beats * 6, direction, this.easing);
 		} else {
-			this.animation.animateFigureTime(this.figure, lengthMs, beats * 6);
+			return this.animation.animateFigureTime(this.figure, lengthMs, beats * 6);
 		}
 	}
 

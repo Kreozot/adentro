@@ -84,7 +84,6 @@ class Adentro {
 					result
 						.delay(50)
 						.then(() => {
-							console.log('after animation');
 							this.player.getAndShowCurrentElement();
 						});
 				}

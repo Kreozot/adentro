@@ -1,4 +1,5 @@
-import {Timer, getOppositePosition} from 'animationClasses/commons/utils';
+import Promise from 'bluebird';
+import {getOppositePosition} from 'animationClasses/commons/utils';
 import SingleElement from '../single/SingleElement';
 
 /**
@@ -32,8 +33,10 @@ export default class QuatroElement {
 	 * isPathsDrawn Отрисованы ли траектории
 	 */
 	isPathsDrawn() {
-		return (this.man1DanceAnimationElement.isPathsDrawn() && this.woman1DanceAnimationElement.isPathsDrawn() &&
-			this.man2DanceAnimationElement.isPathsDrawn() && this.woman2DanceAnimationElement.isPathsDrawn());
+		return (this.man1DanceAnimationElement.isPathsDrawn() &&
+			this.woman1DanceAnimationElement.isPathsDrawn() &&
+			this.man2DanceAnimationElement.isPathsDrawn() &&
+			this.woman2DanceAnimationElement.isPathsDrawn());
 	}
 
 	/**
@@ -57,10 +60,12 @@ export default class QuatroElement {
 	 * @param  {Number} stopPart  позиция конца (0-1 относительно траектории)
 	 */
 	startAnimation(lengthS, beats, direction, delay, startPart, stopPart) {
-		this.man1DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
-		this.woman1DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
-		this.man2DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
-		this.woman2DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart);
+		return Promise.all([
+			this.man1DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart),
+			this.woman1DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart),
+			this.man2DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart),
+			this.woman2DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart)
+		]);
 	}
 
 	/**
@@ -72,16 +77,8 @@ export default class QuatroElement {
 	 * @param  {Number} delay     	задержка в секундах
 	 */
 	fullAnimation(lengthS, beats, manPosition, direction, delay, startPart, stopPart) {
-		const fullAnimationFunc = () => {
-			this.animation.clearPaths();
-			this.drawPath(manPosition);
-			this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
-		};
-
-		if ((!delay) || (delay <= 0)) {
-			fullAnimationFunc();
-		} else {
-			this.animation.timeouts[this.animation.timeouts.length] = new Timer(fullAnimationFunc, delay * 1000);
-		}
+		this.animation.clearPaths();
+		this.drawPath(manPosition);
+		return this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
 	}
 }

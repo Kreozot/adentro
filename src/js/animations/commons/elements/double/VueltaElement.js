@@ -1,4 +1,4 @@
-import {Timer} from 'animationClasses/commons/utils';
+import Promise from 'bluebird';
 import PairElement from './PairElement';
 
 export default class VueltaElement extends PairElement {
@@ -31,8 +31,7 @@ export default class VueltaElement extends PairElement {
 			});
 			this.path.attr({stroke: this.g});
 		} else {
-			this.g = this.animation.svg.gradient('L(' + movePoint1.x + ', ' + movePoint1.y + ', ' +
-				movePoint2.x + ', ' + movePoint2.y + ')' + this.gColors);
+			this.g = this.animation.svg.gradient(`L(${movePoint1.x}, ${movePoint1.y}, ${movePoint2.x}, ${movePoint2.y})${this.gColors}`);
 			this.path.attr({stroke: this.g});
 		}
 	}
@@ -43,33 +42,28 @@ export default class VueltaElement extends PairElement {
 			this.setColors(this.rightColor, this.leftColor);
 		}
 
-		var self = this;
-		this.animation.animations[this.animation.animations.length] = Snap.animate(startPart * this.pathLength,
-			stopPart * this.pathLength,
-			function (value) {
-				this.lastValue = value;
-				self.drawGradientAtPoint(value);
-			}, lengthMs, mina.linear);
+		const self = this;
+		const gradientAnimationPromise = new Promise(resolve => {
+			this.animation.animations[this.animation.animations.length] = Snap.animate(startPart * this.pathLength,
+				stopPart * this.pathLength,
+				function (value) {
+					this.lastValue = value;
+					self.drawGradientAtPoint(value);
+				}, lengthMs, mina.linear, resolve);
+		});
 
-		self.animation.animateMan(self.path, this.startPos1,
-			stopPart * this.pathLength + this.startPos1, lengthMs, beats, direction);
-		self.animation.animateWoman(self.path, this.startPos2,
-			stopPart * this.pathLength + this.startPos2, lengthMs, beats, direction);
+		return Promise.all([
+			gradientAnimationPromise,
+			this.animation.animateMan(this.path, this.startPos1, stopPart * this.pathLength + this.startPos1, lengthMs, beats, direction),
+			this.animation.animateWoman(this.path, this.startPos2, stopPart * this.pathLength + this.startPos2, lengthMs, beats, direction)
+		]);
 	}
 
-	startAnimation(lengthS, beats, direction, delay, startPart, stopPart, full) {
+	startAnimation(lengthS, beats, direction, delay, startPart, stopPart) {
 		startPart = startPart || 0;
 		stopPart = stopPart || 1;
 
-		const startAnimationFunc = () => {
-			this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
-		};
-
-		if ((!delay) || (delay <= 0)) {
-			startAnimationFunc();
-		} else {
-			this.animation.timeouts[this.animation.timeouts.length] = new Timer(startAnimationFunc, delay * 1000);
-		}
+		return this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
 	}
 
 	drawPath(manPosition) {

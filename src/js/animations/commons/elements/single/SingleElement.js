@@ -1,7 +1,3 @@
-import Promise from 'bluebird';
-import {Timer} from 'animationClasses/commons/utils';
-const objectAssign = require('object-assign');
-
 /**
  * Одиночная анимация
  * @param {Object} animation   Объект анимации
@@ -85,7 +81,7 @@ export default class SingleElement {
 	 */
 	startAnimation(lengthS, beats, direction, delay, startPart = 0, stopPart = 1) {
 		if (typeof lengthS === 'object') {
-			const params = objectAssign(lengthS);
+			const params = {...lengthS};
 			lengthS = params.lengthS;
 			beats = params.beats;
 			direction = params.direction;
@@ -93,17 +89,8 @@ export default class SingleElement {
 			startPart = params.startPart;
 			stopPart = params.stopPart;
 		}
-		const startAnimationFunc = () => {
-			return this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
-		};
 
-		if ((!delay) || (delay <= 0)) {
-			return startAnimationFunc();
-		} else {
-			return new Promise(resolve => {
-				this.animation.timeouts.push(new Timer(() => startAnimationFunc().then(resolve), delay * 1000));
-			});
-		}
+		return this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
 	}
 
 	/**
@@ -115,16 +102,8 @@ export default class SingleElement {
 	 * @param  {Number} delay     	задержка в секундах
 	 */
 	fullAnimation(lengthS, beats, position, direction, delay, startPart, stopPart) {
-		const fullAnimationFunc = () => {
-			this.animation.clearPaths();
-			this.drawPath(position);
-			this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
-		};
-
-		if ((!delay) || (delay <= 0)) {
-			fullAnimationFunc();
-		} else {
-			this.animation.timeouts.push(new Timer(fullAnimationFunc, delay * 1000));
-		}
+		this.animation.clearPaths();
+		this.drawPath(position);
+		return this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
 	}
 }

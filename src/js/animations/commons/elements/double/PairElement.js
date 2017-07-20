@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-import {getOppositePosition, Timer} from 'animationClasses/commons/utils';
+import {getOppositePosition} from 'animationClasses/commons/utils';
 import SingleElement from '../single/SingleElement';
 
 /**
@@ -75,18 +75,8 @@ export default class PairElement {
 	 * @param  {Number} delay     	Задержка в секундах
 	 */
 	fullAnimation(lengthS, beats, manPosition, direction, delay, startPart, stopPart) {
-		const fullAnimationFunc = () => {
-			this.animation.clearPaths();
-			this.drawPath(manPosition);
-			return this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
-		};
-
-		if ((!delay) || (delay <= 0)) {
-			return fullAnimationFunc();
-		} else {
-			return new Promise(resolve => {
-				this.animation.timeouts.push(new Timer(() => fullAnimationFunc().then(resolve), delay * 1000));
-			});
-		}
+		this.animation.clearPaths();
+		this.drawPath(manPosition);
+		return this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
 	}
 }

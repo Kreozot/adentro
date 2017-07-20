@@ -22,8 +22,6 @@ export default class ChacareraAnimation extends GatoAnimation {
 		const partSeconds = seconds / 2;
 		const partBeats = beats / 2;
 		return this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
-			.then(() => {
-				return this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1);
-			});
+			.then(() => this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
 	}
 }

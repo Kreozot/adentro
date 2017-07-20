@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 
 require('styles/animation.scss');
-import {mod, normalizeAngle} from 'animationClasses/commons/utils';
+import {normalizeAngle} from 'animationClasses/commons/utils';
 
 const FIGURE_ANGLE_TICK = 25;
 const FIGURE_ANGLE_SPEED = 3;
@@ -65,8 +65,10 @@ export default class DanceAnimation {
 		}
 		const percentRemain = (animation.end - animation.lastValue) / animation.end;
 		const newDuration = animation.dur * percentRemain;
-		this.animations[animationIndex] = Snap.animate(animation.lastValue, animation.end,
-			animation.set, newDuration, animation.easing);
+		return new Promise(resolve => {
+			this.animations[animationIndex] = Snap.animate(animation.lastValue, animation.end,
+				animation.set, newDuration, animation.easing, resolve);
+		});
 	}
 
 	pause() {
@@ -78,8 +80,10 @@ export default class DanceAnimation {
 	resume() {
 		if (this.paused) {
 			this.paused = false;
-			this.animations.forEach((animation, index) => this.restartAnimation(animation, index));
 			this.timeouts.forEach(timeout => timeout.resume());
+			return Promise.all(this.animations.map((animation, index) => this.restartAnimation(animation, index)));
+		} else {
+			return Promise.resolve();
 		}
 	}
 

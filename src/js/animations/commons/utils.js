@@ -1,31 +1,3 @@
-/**
- * Таймер
- * @param {Function} callback Функция
- * @param {Number}   delay    Задержка в мс
- */
-export function Timer(callback, delay) {
-	var remaining = delay || 0;
-	var paused = true;
-	var timerId;
-	var start;
-
-	this.pause = function () {
-		window.clearTimeout(timerId);
-		remaining -= new Date() - start;
-		paused = true;
-	};
-
-	this.resume = function () {
-		if (paused && (remaining >= 0)) {
-			paused = false;
-			start = new Date();
-			timerId = window.setTimeout(callback, remaining);
-		}
-	};
-
-	this.resume();
-}
-
 const positions = [
 	['start_left', 'start_right'],
 	['left', 'right'],

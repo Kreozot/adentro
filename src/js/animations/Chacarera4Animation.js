@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 import QuatroElement from './commons/elements/quatro/QuatroElement';
 import Dance4Animation from './commons/Dance4Animation';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
@@ -97,16 +98,17 @@ export default class Chacarera4Animation extends Dance4Animation {
 		this.elements.avance.drawPath(manPosition);
 		const partSeconds = seconds / 2;
 		const partBeats = beats / 2;
-		this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5);
-		this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
+
+		return this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
+			.then(() => this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
 	}
 
 	giro(seconds, manPosition, beats) {
-		this.elements.giro.fullAnimation(seconds, beats, manPosition);
+		return this.elements.giro.fullAnimation(seconds, beats, manPosition);
 	}
 
 	contraGiro(seconds, manPosition, beats) {
-		this.elements.giro.fullAnimation(seconds, beats, manPosition, this.DIRECTION_BACKWARD, 0, 1, 0);
+		return this.elements.giro.fullAnimation(seconds, beats, manPosition, this.DIRECTION_BACKWARD, 0, 1, 0);
 	}
 
 	vuelta(seconds, manPosition, beats) {
@@ -117,6 +119,7 @@ export default class Chacarera4Animation extends Dance4Animation {
 		const partSeconds = seconds / 2;
 		const partBeats = beats / 2;
 
+		// TODO: Promise
 		this.elements.mediaVuelta.drawPath(manPosition, true);
 		this.elements.mediaVuelta.startAnimation(partSeconds, partBeats);
 		this.elements.mediaVuelta.drawPath(getOppositePosition(manPosition), true);
@@ -128,6 +131,7 @@ export default class Chacarera4Animation extends Dance4Animation {
 		this.elements.vueltaGradient.drawPath(manPosition);
 		this.elements.vueltaGradient.startAnimation(seconds, beats, this.DIRECTION_FORWARD, 0, 0, 0.5);
 
+		// TODO: Promise
 		this.elements.mediaVuelta.drawPath(manPosition, true);
 		this.elements.mediaVuelta.startAnimation(seconds, beats);
 	}
@@ -139,24 +143,36 @@ export default class Chacarera4Animation extends Dance4Animation {
 		const parts = beats >= 8 ? 4 : 2;
 		const partSeconds = seconds / parts;
 		const partBeats = beats / parts;
-		this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5);
-		this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
-		this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5);
-		this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
+
+		let zarandeoPromise = Promise.all([
+			this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5),
+			this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
+		]).then(() => Promise.all([
+			this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1),
+			this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1)
+		]));
 		if (beats >= 8) {
-			this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 2, 0, 0.5);
-			this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
-			this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 2, 0, 0.5);
-			this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
+			zarandeoPromise = zarandeoPromise
+				.then(() => Promise.all([
+					this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5),
+					this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
+				])).then(() => Promise.all([
+					this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1),
+					this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1)
+				]));
 		}
 
 		this.elements.zapateo1.drawPath(manPosition + 1);
 		this.elements.zapateo2.drawPath(manPosition + 2);
-		this.elements.zapateo1.startAnimation(seconds, beats);
-		this.elements.zapateo2.startAnimation(seconds, beats);
+		const zapateoPromise = Promise.all([
+			this.elements.zapateo1.startAnimation(seconds, beats),
+			this.elements.zapateo2.startAnimation(seconds, beats)
+		]);
+
+		return Promise.all([zarandeoPromise, zapateoPromise]);
 	}
 
 	coronacion(seconds, manPosition, beats) {
-		this.elements.coronacion.fullAnimation(seconds, beats, manPosition);
+		return this.elements.coronacion.fullAnimation(seconds, beats, manPosition);
 	}
 }

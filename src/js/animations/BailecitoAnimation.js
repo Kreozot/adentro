@@ -41,18 +41,18 @@ export default class BailecitoAnimation extends GatoAnimation {
 	}
 
 	avance1(seconds, manPosition, beats) {
-		this.elements.avanceRetroceso1.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 0, 1);
+		return this.elements.avanceRetroceso1.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 0, 1);
 	}
 
 	retroceso2(seconds, manPosition, beats) {
-		this.elements.avanceRetroceso1.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 1, 0);
+		return this.elements.avanceRetroceso1.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 1, 0);
 	}
 
 	retroceso1(seconds, manPosition, beats) {
-		this.elements.avanceRetroceso2.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 0, 1);
+		return this.elements.avanceRetroceso2.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 0, 1);
 	}
 
 	avance2(seconds, manPosition, beats) {
-		this.elements.avanceRetroceso2.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 1, 0);
+		return this.elements.avanceRetroceso2.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 0, 1, 0);
 	}
 }

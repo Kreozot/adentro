@@ -2,7 +2,6 @@ import GatoAnimation from './GatoAnimation';
 import SingleElement from './commons/elements/single/SingleElement';
 import PairElement from './commons/elements/double/PairElement';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
-import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import {getOppositePosition} from './commons/utils';
 
 class HuellaManAnimationElement extends SingleElement {

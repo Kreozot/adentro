@@ -1,9 +1,10 @@
+import Promise from 'bluebird';
 import DanceAnimation from './commons/DanceAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import RotatePairElement from './commons/elements/double/RotatePairElement';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
-import {getOppositePosition, Timer} from './commons/utils';
+import {getOppositePosition} from './commons/utils';
 
 export default class HuayraMuyojAnimation extends DanceAnimation {
 	constructor(id) {
@@ -103,8 +104,8 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 		this.initRotateIcon(125, 125, -45, true);
 		this.initRotateIcon(315, 315, -45, true);
 
-		this.elements.esquinaStart.startAnimation(partSeconds, partBeats, manAngle, womanAngle);
-		this.elements.contraGiro.startAnimation(partSeconds, partBeats, manAngle - 315, womanAngle - 315, this.DIRECTION_FORWARD, partSeconds);
+		return this.elements.esquinaStart.startAnimation(partSeconds, partBeats, manAngle, womanAngle)
+			.then(() => this.elements.contraGiro.startAnimation(partSeconds, partBeats, manAngle - 315, womanAngle - 315));
 	}
 
 	esquina(seconds, manPosition, beats) {
@@ -128,8 +129,8 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 			this.initRotateIcon(125, 315, 45, true);
 		}
 
-		this.elements.esquina.startAnimation(partSeconds, partBeats, manAngle, womanAngle);
-		this.elements.contraGiro.startAnimation(partSeconds, partBeats, manAngle - 270, womanAngle - 270, this.DIRECTION_FORWARD, partSeconds);
+		return this.elements.esquina.startAnimation(partSeconds, partBeats, manAngle, womanAngle)
+			.then(() => this.elements.contraGiro.startAnimation(partSeconds, partBeats, manAngle - 270, womanAngle - 270));
 	}
 
 	esquinaEnd(seconds, manPosition, beats) {
@@ -145,42 +146,41 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 		const arrows2 = this.initRotateIcon(390, 135, 0, false);
 		const arrows1_2 = this.initRotateIcon(50, 220, 0, true).removeClass('rotation-arrows').addClass('invisible');
 		const arrows2_2 = this.initRotateIcon(390, 220, 0, true).removeClass('rotation-arrows').addClass('invisible');
-		this.timeouts[this.timeouts.length] = new Timer(function () {
-			arrows1.removeClass('rotation-arrows').addClass('invisible');
-			arrows2.removeClass('rotation-arrows').addClass('invisible');
-			arrows1_2.addClass('rotation-arrows').removeClass('invisible');
-			arrows2_2.addClass('rotation-arrows').removeClass('invisible');
-		}, partSeconds * 1000);
 
-		this.elements.esquinaEnd.startAnimation(partSeconds, partBeats, manAngle, womanAngle);
-		this.elements.contraGiroEnd.startAnimation(partSeconds, partBeats, manAngle - 270, womanAngle - 270, this.DIRECTION_FORWARD, partSeconds);
+		return this.elements.esquinaEnd.startAnimation(partSeconds, partBeats, manAngle, womanAngle)
+			.then(() => {
+				arrows1.removeClass('rotation-arrows').addClass('invisible');
+				arrows2.removeClass('rotation-arrows').addClass('invisible');
+				arrows1_2.addClass('rotation-arrows').removeClass('invisible');
+				arrows2_2.addClass('rotation-arrows').removeClass('invisible');
+				return this.elements.contraGiroEnd.startAnimation(partSeconds, partBeats, manAngle - 270, womanAngle - 270);
+			});
 	}
 
 	avance(seconds, manPosition, beats) {
 		this.clearPaths();
 		const partSeconds = seconds / 2;
 		const partBeats = beats / 2;
-		const manAngle = this.startPos['start_' + manPosition].angle;
-		const womanAngle = this.startPos[getOppositePosition('start_' + manPosition)].angle;
 		this.elements.avance.drawPath(manPosition);
 
-		this.elements.avance.startAnimation(partSeconds, partBeats);
-		this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds, 1, 0);
+		return this.elements.avance.startAnimation(partSeconds, partBeats)
+			.then(() => this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 1, 0));
 	}
 
 	regreso(seconds, manPosition, beats) {
-		this.elements.regreso.fullAnimation(seconds, beats, manPosition);
+		return this.elements.regreso.fullAnimation(seconds, beats, manPosition);
 	}
 
 	giro(seconds, manPosition, beats) {
-		this.elements.giro.fullAnimation(seconds, beats,
-			this.startPos[manPosition].angle - 180,
-			this.startPos[getOppositePosition(manPosition)].angle - 180,
-			manPosition);
 		this.initRotateIcon(this.startPos[manPosition].x,
 			this.startPos[manPosition].y, -45, false);
 		this.initRotateIcon(this.startPos[getOppositePosition(manPosition)].x,
 			this.startPos[getOppositePosition(manPosition)].y, -45, false);
+
+		return this.elements.giro.fullAnimation(seconds, beats,
+			this.startPos[manPosition].angle - 180,
+			this.startPos[getOppositePosition(manPosition)].angle - 180,
+			manPosition);
 	}
 
 	zapateoZarandeo(seconds, manPosition, beats) {
@@ -189,23 +189,28 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 		const parts = beats >= 8 ? 4 : 2;
 		const partSeconds = seconds / parts;
 		const partBeats = beats / parts;
-		this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5);
-		this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
+
+		let zarandeoPromise = this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
+			.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
 		if (beats >= 8) {
-			this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 2, 0, 0.5);
-			this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
+			zarandeoPromise = zarandeoPromise
+				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5))
+				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
 		}
 
 		this.elements.zapateo.drawPath(manPosition);
-		this.elements.zapateo.startAnimation(seconds, beats);
+		const zapateoPromise = this.elements.zapateo.startAnimation(seconds, beats);
+
+		return Promise.all([zarandeoPromise, zapateoPromise]);
 	}
 
 	coronacion(seconds, manPosition, beats) {
-		this.elements.coronacion.fullAnimation(seconds, beats,
+		this.initRotateIcon(120, 220, 90, false);
+		this.initRotateIcon(320, 220, 90, false);
+
+		return this.elements.coronacion.fullAnimation(seconds, beats,
 			this.startPos['start_' + manPosition].angle,
 			this.startPos[getOppositePosition('start_' + manPosition)].angle,
 			manPosition);
-		this.initRotateIcon(120, 220, 90, false);
-		this.initRotateIcon(320, 220, 90, false);
 	}
 }

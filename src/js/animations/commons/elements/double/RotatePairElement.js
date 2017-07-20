@@ -1,4 +1,4 @@
-import {Timer} from 'animationClasses/commons/utils';
+import Promise from 'bluebird';
 import PairElement from './PairElement';
 import RotateElement from '../single/RotateElement';
 
@@ -17,22 +17,15 @@ export default class RotatePairElement extends PairElement {
 	}
 
 	startAnimation(lengthS, beats, startAngleMan, startAngleWoman, direction, delay, startPart, stopPart) {
-		this.manDanceAnimationElement.startAnimation(lengthS, beats, startAngleMan, direction, delay, startPart, stopPart);
-		this.womanDanceAnimationElement.startAnimation(lengthS, beats, startAngleWoman, direction, delay, startPart, stopPart);
+		return Promise.all([
+			this.manDanceAnimationElement.startAnimation(lengthS, beats, startAngleMan, direction, delay, startPart, stopPart),
+			this.womanDanceAnimationElement.startAnimation(lengthS, beats, startAngleWoman, direction, delay, startPart, stopPart)
+		]);
 	}
 
 	fullAnimation(lengthS, beats, startAngleMan, startAngleWoman, manPosition, direction, delay, startPart, stopPart) {
-
-		const fullAnimationFunc = () => {
-			this.animation.clearPaths();
-			this.drawPath(manPosition);
-			this.startAnimation(lengthS, beats, startAngleMan, startAngleWoman, direction, 0, startPart, stopPart);
-		};
-
-		if ((!delay) || (delay <= 0)) {
-			fullAnimationFunc();
-		} else {
-			this.animation.timeouts.push(new Timer(fullAnimationFunc, delay * 1000));
-		}
+		this.animation.clearPaths();
+		this.drawPath(manPosition);
+		return this.startAnimation(lengthS, beats, startAngleMan, startAngleWoman, direction, 0, startPart, stopPart);
 	}
 }

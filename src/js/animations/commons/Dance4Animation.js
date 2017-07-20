@@ -1,5 +1,4 @@
 import DanceAnimation from './DanceAnimation';
-import PairElement from './elements/double/PairElement';
 
 export default class Dance4Animation extends DanceAnimation {
 	constructor(id) {
@@ -18,7 +17,6 @@ export default class Dance4Animation extends DanceAnimation {
 
 	startPosition(leftCoords1, rightCoords1, leftCoords2, rightCoords2, manPosition) {
 		this.clearPaths();
-		var self = this;
 
 		if (!manPosition) {
 			manPosition = this.manPosition;
