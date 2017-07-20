@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 import GatoAnimation from './GatoAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import {getOppositePosition} from './commons/utils';
@@ -43,26 +44,31 @@ export default class ZambaAnimation extends GatoAnimation {
 		this.elements.mediaVueltaToArresto.setAngle(-45);
 		this.elements.mediaVuelta.drawPath(manPosition);
 		this.elements.mediaVueltaToArresto.drawPath(getOppositePosition(manPosition));
-		this.elements.mediaVuelta.startAnimation(partSeconds, partBeats);
-		this.elements.mediaVueltaToArresto.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds);
+
+		return this.elements.mediaVuelta.startAnimation(partSeconds, partBeats)
+			.then(() => this.elements.mediaVueltaToArresto.startAnimation(partSeconds, partBeats));
 	}
 
 	zapateoZarandeo(seconds, manPosition, beats) {
 		this.clearPaths();
 		this.elements.zarandeo.drawPath(getOppositePosition(manPosition));
-		var partSeconds = seconds * 2 / 7;
-		this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_FORWARD, 0, 0, 0.5);
-		this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_BACKWARD, partSeconds, 0.5, 1);
-		this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_FORWARD, partSeconds * 2, 0, 0.5);
-		this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_BACKWARD, partSeconds * 3, 0.5, 1);
+		const partSeconds = seconds * 2 / 7;
+
+		const zarandeoPromise = this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_FORWARD, 0, 0, 0.5)
+			.then(() => this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_BACKWARD, 0, 0.5, 1))
+			.then(() => this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_FORWARD, 0, 0, 0.5))
+			.then(() => this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_BACKWARD, 0, 0.5, 1));
 
 		this.elements.zapateo.drawPath(manPosition);
-		this.elements.zapateo.startAnimation(seconds, beats);
+
+		const zapateoPromise = this.elements.zapateo.startAnimation(seconds, beats);
+
+		return Promise.all([zarandeoPromise, zapateoPromise]);
 	}
 
 	mediaVuelta(seconds, manPosition, beats) {
 		this.elements.mediaVueltaToArresto.setAngle(-45);
-		this.elements.mediaVueltaToArresto.fullAnimation(seconds, beats, manPosition);
+		return this.elements.mediaVueltaToArresto.fullAnimation(seconds, beats, manPosition);
 	}
 
 	arresto(seconds, manPosition, beats) {
@@ -74,8 +80,9 @@ export default class ZambaAnimation extends GatoAnimation {
 		this.elements.arrestoBack.setAngle(-45);
 		this.elements.arresto.drawPath(manPosition);
 		this.elements.arrestoBack.drawPath(manPosition);
-		this.elements.arresto.startAnimation(partSeconds, partBeats);
-		this.elements.arrestoBack.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds);
+
+		return this.elements.arresto.startAnimation(partSeconds, partBeats)
+			.then(() => this.elements.arrestoBack.startAnimation(partSeconds, partBeats));
 	}
 
 	arrestoDoble(seconds, manPosition, beats) {
@@ -87,13 +94,14 @@ export default class ZambaAnimation extends GatoAnimation {
 		this.elements.arrestoBack.setAngle(-45);
 		this.elements.arresto.drawPath(manPosition);
 		this.elements.arrestoBack.drawPath(manPosition);
-		this.elements.arresto.startAnimation(partSeconds, partBeats);
-		this.elements.arresto.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 1, 0);
-		this.elements.arresto.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 2);
-		this.elements.arrestoBack.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 3);
+
+		return this.elements.arresto.startAnimation(partSeconds, partBeats)
+			.then(() => this.elements.arresto.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 1, 0))
+			.then(() => this.elements.arresto.startAnimation(partSeconds, partBeats))
+			.then(() => this.elements.arrestoBack.startAnimation(partSeconds, partBeats));
 	}
 
 	mediaVueltaCoronacion(seconds, manPosition, beats) {
-		this.elements.mediaVueltaCoronacion.fullAnimation(seconds, beats, manPosition);
+		return this.elements.mediaVueltaCoronacion.fullAnimation(seconds, beats, manPosition);
 	}
 }

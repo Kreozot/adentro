@@ -26,17 +26,17 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 
 	mediaVuelta(seconds, manPosition, beats) {
 		this.elements.mediaVuelta.setAngle(-45);
-		this.elements.mediaVuelta.fullAnimation(seconds, beats, manPosition);
+		return this.elements.mediaVuelta.fullAnimation(seconds, beats, manPosition);
 	}
 
 	vuelta(seconds, manPosition, beats) {
 		this.elements.vuelta.setAngle(-45);
-		this.elements.vuelta.fullAnimation(seconds, beats, manPosition);
+		return this.elements.vuelta.fullAnimation(seconds, beats, manPosition);
 	}
 
 	arresto(seconds, manPosition, beats) {
 		this.elements.arrestoSimple.setAngle(-45);
-		this.elements.arrestoSimple.fullAnimation(seconds, beats, manPosition);
+		return this.elements.arrestoSimple.fullAnimation(seconds, beats, manPosition);
 	}
 
 	arrestoDoble(seconds, manPosition, beats) {
@@ -51,10 +51,10 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 		this.elements.arresto.drawPath(manPosition);
 		this.elements.arrestoBack.drawPath(manPosition);
 
-		this.elements.mediaVueltaToArresto.startAnimation(partSeconds, partBeats);
-		this.elements.arresto.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, partSeconds, 1, 0);
-		this.elements.arresto.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 2);
-		this.elements.arrestoBack.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds * 3);
+		return this.elements.mediaVueltaToArresto.startAnimation(partSeconds, partBeats)
+			.then(() => this.elements.arresto.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 1, 0))
+			.then(() => this.elements.arresto.startAnimation(partSeconds, partBeats))
+			.then(() => this.elements.arrestoBack.startAnimation(partSeconds, partBeats));
 	}
 
 	mediaVueltaCoronacion(seconds, manPosition, beats) {
@@ -65,8 +65,8 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 		this.clearPaths();
 		this.elements.mediaVuelta.drawPath(manPosition);
 		this.elements.coronacion.drawPath(getOppositePosition(manPosition));
-		this.elements.mediaVuelta.startAnimation(seconds * firstPart, beats * firstPart);
-		manPosition = getOppositePosition(manPosition);
-		this.elements.coronacion.startAnimation(seconds * secondPart, beats * secondPart, this.DIRECTION_FORWARD, seconds * firstPart);
+
+		return this.elements.mediaVuelta.startAnimation(seconds * firstPart, beats * firstPart)
+			.then(() => this.elements.coronacion.startAnimation(seconds * secondPart, beats * secondPart));
 	}
 }
