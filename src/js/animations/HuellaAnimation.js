@@ -9,8 +9,8 @@ class HuellaManAnimationElement extends SingleElement {
 		super(animation, pathStrings, gender, figure);
 
 		this.animationFunction = function (lengthMs, beats, direction, startPart, stopPart) {
-			var angle = this.position === 'left' ? -90 : 90;
-			this.animation.animateFigurePath(this.figure, angle, this.path,
+			const angle = this.position === 'left' ? -90 : 90;
+			return this.animation.animateFigurePath(this.figure, angle, this.path,
 				this.pathLength * startPart, this.pathLength * stopPart,
 				lengthMs, beats, this.animation.DIRECTION_STRAIGHT_FORWARD);
 		};
@@ -120,8 +120,10 @@ export default class HuellaAnimation extends GatoAnimation {
 		this.elements.mediaContraVueltaMan.drawPath(manPosition);
 		this.elements.mediaContraVueltaWoman.drawPath(getOppositePosition(manPosition));
 
-		return this.elements.mediaContraVueltaMan.startAnimation(seconds, beats, this.DIRECTION_FORWARD, 1, 0)
-			.then(() => this.elements.mediaContraVueltaWoman.startAnimation(seconds, beats, this.DIRECTION_BACKWARD, 1, 0));
+		return Promise.all([
+			this.elements.mediaContraVueltaMan.startAnimation(seconds, beats, this.DIRECTION_FORWARD, 1, 0),
+			this.elements.mediaContraVueltaWoman.startAnimation(seconds, beats, this.DIRECTION_BACKWARD, 1, 0)
+		]);
 	}
 
 }
