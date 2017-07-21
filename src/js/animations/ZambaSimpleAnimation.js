@@ -52,7 +52,7 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 		this.elements.arrestoBack.drawPath(manPosition);
 
 		return this.elements.mediaVueltaToArresto.startAnimation(partSeconds, partBeats)
-			.then(() => this.elements.arresto.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 1, 0))
+			.then(() => this.elements.arresto.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 1, 0))
 			.then(() => this.elements.arresto.startAnimation(partSeconds, partBeats))
 			.then(() => this.elements.arrestoBack.startAnimation(partSeconds, partBeats));
 	}

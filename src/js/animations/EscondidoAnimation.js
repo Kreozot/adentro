@@ -120,12 +120,12 @@ export default class EscondidoAnimation extends DanceAnimation {
 		const partSeconds = seconds / parts;
 		const partBeats = beats / parts;
 
-		const zarandeoPromise = this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
-			.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
+		const zarandeoPromise = this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5)
+			.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1));
 		if (beats >= 8) {
 			zarandeoPromise
-				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5))
-				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
+				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5))
+				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1));
 		}
 
 		return zarandeoPromise;

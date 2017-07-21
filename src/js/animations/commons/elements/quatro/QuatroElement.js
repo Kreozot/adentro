@@ -51,20 +51,14 @@ export default class QuatroElement {
 	}
 
 	/**
-	 * startAnimation Запуск анимации
-	 * @param  {Number} lengthS   длительность в секундах
-	 * @param  {Number} beats     количество тактов
-	 * @param  {String} direction направление движения фигуры
-	 * @param  {Number} delay     задержка в секундах
-	 * @param  {Number} startPart позиция начала (0-1 относительно траектории)
-	 * @param  {Number} stopPart  позиция конца (0-1 относительно траектории)
+	 * startAnimation Запуск анимации элементов
 	 */
-	startAnimation(lengthS, beats, direction, delay, startPart, stopPart) {
+	startAnimation() {
 		return Promise.all([
-			this.man1DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart),
-			this.woman1DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart),
-			this.man2DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart),
-			this.woman2DanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart)
+			this.man1DanceAnimationElement.startAnimation(...arguments),
+			this.woman1DanceAnimationElement.startAnimation(...arguments),
+			this.man2DanceAnimationElement.startAnimation(...arguments),
+			this.woman2DanceAnimationElement.startAnimation(...arguments)
 		]);
 	}
 
@@ -74,11 +68,10 @@ export default class QuatroElement {
 	 * @param  {Number} beats     	количество тактов
 	 * @param  {String} manPosition   начальная позиция партнёра
 	 * @param  {String} direction 	направление движения фигуры
-	 * @param  {Number} delay     	задержка в секундах
 	 */
-	fullAnimation(lengthS, beats, manPosition, direction, delay, startPart, stopPart) {
+	fullAnimation(lengthS, beats, manPosition, direction, startPart, stopPart) {
 		this.animation.clearPaths();
 		this.drawPath(manPosition);
-		return this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
+		return this.startAnimation(lengthS, beats, direction, startPart, stopPart);
 	}
 }

@@ -99,8 +99,8 @@ export default class Chacarera4Animation extends Dance4Animation {
 		const partSeconds = seconds / 2;
 		const partBeats = beats / 2;
 
-		return this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
-			.then(() => this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
+		return this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5)
+			.then(() => this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1));
 	}
 
 	giro(seconds, manPosition, beats) {
@@ -108,7 +108,7 @@ export default class Chacarera4Animation extends Dance4Animation {
 	}
 
 	contraGiro(seconds, manPosition, beats) {
-		return this.elements.giro.fullAnimation(seconds, beats, manPosition, this.DIRECTION_BACKWARD, 0, 1, 0);
+		return this.elements.giro.fullAnimation(seconds, beats, manPosition, this.DIRECTION_BACKWARD, 1, 0);
 	}
 
 	vuelta(seconds, manPosition, beats) {
@@ -129,7 +129,7 @@ export default class Chacarera4Animation extends Dance4Animation {
 	mediaVuelta(seconds, manPosition, beats) {
 		this.clearPaths();
 		this.elements.vueltaGradient.drawPath(manPosition);
-		this.elements.vueltaGradient.startAnimation(seconds, beats, this.DIRECTION_FORWARD, 0, 0, 0.5);
+		this.elements.vueltaGradient.startAnimation(seconds, beats, this.DIRECTION_FORWARD, 0, 0.5);
 
 		// TODO: Promise
 		this.elements.mediaVuelta.drawPath(manPosition, true);
@@ -145,20 +145,20 @@ export default class Chacarera4Animation extends Dance4Animation {
 		const partBeats = beats / parts;
 
 		let zarandeoPromise = Promise.all([
-			this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5),
-			this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
+			this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5),
+			this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5)
 		]).then(() => Promise.all([
-			this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1),
-			this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1)
+			this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1),
+			this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1)
 		]));
 		if (beats >= 8) {
 			zarandeoPromise = zarandeoPromise
 				.then(() => Promise.all([
-					this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5),
-					this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
+					this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5),
+					this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5)
 				])).then(() => Promise.all([
-					this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1),
-					this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1)
+					this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1),
+					this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1)
 				]));
 		}
 

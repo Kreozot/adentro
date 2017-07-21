@@ -126,12 +126,12 @@ export default class RemedioAnimation extends EscondidoAnimation {
 		const partSeconds = seconds / parts;
 		const partBeats = beats / parts;
 
-		let zarandeoPromise = this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
-			.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
+		let zarandeoPromise = this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5)
+			.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1));
 		if (beats >= 8) {
 			zarandeoPromise = zarandeoPromise
-				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5))
-				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
+				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5))
+				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1));
 		}
 
 		this.elements.zapateo.drawPath(manPosition);
@@ -154,7 +154,7 @@ export default class RemedioAnimation extends EscondidoAnimation {
 		this.initRotateIcon(162, 277, 45, true);
 		this.initRotateIcon(277, 162, 45, true);
 
-		return this.elements.giroCoronacion.startAnimation(partSeconds, partBeats, manAngle, womanAngle, this.DIRECTION_FORWARD, 0, 0, 0.5)
-			.then(() => this.elements.contragiroCoronacion.startAnimation(partSeconds, partBeats, manAngle, womanAngle, this.DIRECTION_FORWARD, 0, 0.5, 1));
+		return this.elements.giroCoronacion.startAnimation(partSeconds, partBeats, manAngle, womanAngle, this.DIRECTION_FORWARD, 0, 0.5)
+			.then(() => this.elements.contragiroCoronacion.startAnimation(partSeconds, partBeats, manAngle, womanAngle, this.DIRECTION_FORWARD, 0.5, 1));
 	}
 }

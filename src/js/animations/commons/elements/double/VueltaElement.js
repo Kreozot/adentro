@@ -59,10 +59,7 @@ export default class VueltaElement extends PairElement {
 		]);
 	}
 
-	startAnimation(lengthS, beats, direction, delay, startPart, stopPart) {
-		startPart = startPart || 0;
-		stopPart = stopPart || 1;
-
+	startAnimation(lengthS, beats, direction, startPart = 0, stopPart = 1) {
 		return this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
 	}
 

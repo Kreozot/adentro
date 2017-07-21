@@ -75,21 +75,10 @@ export default class SingleElement {
 	 * @param  {Number} lengthS   Длительность в секундах
 	 * @param  {Number} beats     Количество тактов
 	 * @param  {String} direction Направление движения фигуры
-	 * @param  {Number} delay     Задержка в секундах
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	startAnimation(lengthS, beats, direction, delay, startPart = 0, stopPart = 1) {
-		if (typeof lengthS === 'object') {
-			const params = {...lengthS};
-			lengthS = params.lengthS;
-			beats = params.beats;
-			direction = params.direction;
-			delay = params.delay;
-			startPart = params.startPart;
-			stopPart = params.stopPart;
-		}
-
+	startAnimation(lengthS, beats, direction, startPart = 0, stopPart = 1) {
 		return this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
 	}
 
@@ -99,11 +88,12 @@ export default class SingleElement {
 	 * @param  {Number} beats     	количество тактов
 	 * @param  {String} manPosition   начальная позиция партнёра
 	 * @param  {String} direction 	направление движения фигуры
-	 * @param  {Number} delay     	задержка в секундах
+	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
+	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	fullAnimation(lengthS, beats, position, direction, delay, startPart, stopPart) {
+	fullAnimation(lengthS, beats, position, direction, startPart, stopPart) {
 		this.animation.clearPaths();
 		this.drawPath(position);
-		return this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
+		return this.startAnimation(lengthS, beats, direction, startPart, stopPart);
 	}
 }

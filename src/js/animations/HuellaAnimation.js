@@ -89,10 +89,13 @@ export default class HuellaAnimation extends GatoAnimation {
 		this.elements.manGiro3.drawPath(manPosition);
 		const partSeconds = seconds / 4;
 		const partBeats = beats / 4;
-		this.elements.womanGiro.startAnimation(seconds, beats);
-		this.elements.manGiro1.startAnimation(partSeconds, partBeats, this.DIRECTION_STRAIGHT_FORWARD, 0);
-		this.elements.manGiro2.startAnimation(partSeconds * 2, partBeats * 2, this.DIRECTION_STRAIGHT_FORWARD, partSeconds);
-		this.elements.manGiro3.startAnimation(partSeconds, partBeats, this.DIRECTION_STRAIGHT_FORWARD, partSeconds * 3);
+
+		const womanPromise = this.elements.womanGiro.startAnimation(seconds, beats);
+		const manPromise = this.elements.manGiro1.startAnimation(partSeconds, partBeats, this.DIRECTION_STRAIGHT_FORWARD)
+			.then(() => this.elements.manGiro2.startAnimation(partSeconds * 2, partBeats * 2, this.DIRECTION_STRAIGHT_FORWARD))
+			.then(() => this.elements.manGiro3.startAnimation(partSeconds, partBeats, this.DIRECTION_STRAIGHT_FORWARD));
+
+		return Promise.all([womanPromise, manPromise]);
 	}
 
 	contraGiroMano(seconds, manPosition, beats) {
@@ -103,18 +106,22 @@ export default class HuellaAnimation extends GatoAnimation {
 		this.elements.manGiro3_contra.drawPath(manPosition);
 		const partSeconds = seconds / 4;
 		const partBeats = beats / 4;
-		this.elements.womanGiro.startAnimation(seconds, beats, this.DIRECTION_BACKWARD, 0, 1, 0);
-		this.elements.manGiro1_contra.startAnimation(partSeconds, partBeats, this.DIRECTION_STRAIGHT_FORWARD, 0);
-		this.elements.manGiro2_contra.startAnimation(partSeconds * 2, partBeats * 2, this.DIRECTION_STRAIGHT_FORWARD, partSeconds);
-		this.elements.manGiro3_contra.startAnimation(partSeconds, partBeats, this.DIRECTION_STRAIGHT_FORWARD, partSeconds * 3);
+
+		const womanPromise = this.elements.womanGiro.startAnimation(seconds, beats, this.DIRECTION_BACKWARD, 1, 0);
+		const manPromise = this.elements.manGiro1_contra.startAnimation(partSeconds, partBeats, this.DIRECTION_STRAIGHT_FORWARD)
+			.then(() => this.elements.manGiro2_contra.startAnimation(partSeconds * 2, partBeats * 2, this.DIRECTION_STRAIGHT_FORWARD))
+			.then(() => this.elements.manGiro3_contra.startAnimation(partSeconds, partBeats, this.DIRECTION_STRAIGHT_FORWARD));
+
+		return Promise.all([womanPromise, manPromise]);
 	}
 
 	mediaContraVuelta(seconds, manPosition, beats) {
 		this.clearPaths();
 		this.elements.mediaContraVueltaMan.drawPath(manPosition);
 		this.elements.mediaContraVueltaWoman.drawPath(getOppositePosition(manPosition));
-		this.elements.mediaContraVueltaMan.startAnimation(seconds, beats, this.DIRECTION_FORWARD, 0, 1, 0);
-		this.elements.mediaContraVueltaWoman.startAnimation(seconds, beats, this.DIRECTION_BACKWARD, 0, 1, 0);
+
+		return this.elements.mediaContraVueltaMan.startAnimation(seconds, beats, this.DIRECTION_FORWARD, 1, 0)
+			.then(() => this.elements.mediaContraVueltaWoman.startAnimation(seconds, beats, this.DIRECTION_BACKWARD, 1, 0));
 	}
 
 }

@@ -51,18 +51,12 @@ export default class PairElement {
 	}
 
 	/**
-	 * Запуск анимации
-	 * @param  {Number} lengthS   Длительность в секундах
-	 * @param  {Number} beats     Количество тактов
-	 * @param  {String} direction Направление движения фигуры
-	 * @param  {Number} delay     Задержка в секундах
-	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
-	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
+	 * Запуск анимации элементов
 	 */
-	startAnimation(lengthS, beats, direction, delay, startPart, stopPart) {
+	startAnimation() {
 		return Promise.all([
-			this.manDanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart),
-			this.womanDanceAnimationElement.startAnimation(lengthS, beats, direction, delay, startPart, stopPart)
+			this.manDanceAnimationElement.startAnimation(...arguments),
+			this.womanDanceAnimationElement.startAnimation(...arguments)
 		]);
 	}
 
@@ -72,11 +66,10 @@ export default class PairElement {
 	 * @param  {Number} beats     	Количество тактов
 	 * @param  {String} manPosition Начальная позиция партнёра
 	 * @param  {String} direction 	Направление движения фигуры
-	 * @param  {Number} delay     	Задержка в секундах
 	 */
-	fullAnimation(lengthS, beats, manPosition, direction, delay, startPart, stopPart) {
+	fullAnimation(lengthS, beats, manPosition, direction, startPart, stopPart) {
 		this.animation.clearPaths();
 		this.drawPath(manPosition);
-		return this.startAnimation(lengthS, beats, direction, 0, startPart, stopPart);
+		return this.startAnimation(lengthS, beats, direction, startPart, stopPart);
 	}
 }

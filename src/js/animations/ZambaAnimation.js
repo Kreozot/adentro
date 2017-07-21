@@ -54,10 +54,10 @@ export default class ZambaAnimation extends GatoAnimation {
 		this.elements.zarandeo.drawPath(getOppositePosition(manPosition));
 		const partSeconds = seconds * 2 / 7;
 
-		const zarandeoPromise = this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_FORWARD, 0, 0, 0.5)
-			.then(() => this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_BACKWARD, 0, 0.5, 1))
-			.then(() => this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_FORWARD, 0, 0, 0.5))
-			.then(() => this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_BACKWARD, 0, 0.5, 1));
+		const zarandeoPromise = this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_FORWARD, 0, 0.5)
+			.then(() => this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_BACKWARD, 0.5, 1))
+			.then(() => this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_FORWARD, 0, 0.5))
+			.then(() => this.elements.zarandeo.startAnimation(partSeconds, 2, this.DIRECTION_BACKWARD, 0.5, 1));
 
 		this.elements.zapateo.drawPath(manPosition);
 
@@ -96,7 +96,7 @@ export default class ZambaAnimation extends GatoAnimation {
 		this.elements.arrestoBack.drawPath(manPosition);
 
 		return this.elements.arresto.startAnimation(partSeconds, partBeats)
-			.then(() => this.elements.arresto.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 1, 0))
+			.then(() => this.elements.arresto.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 1, 0))
 			.then(() => this.elements.arresto.startAnimation(partSeconds, partBeats))
 			.then(() => this.elements.arrestoBack.startAnimation(partSeconds, partBeats));
 	}

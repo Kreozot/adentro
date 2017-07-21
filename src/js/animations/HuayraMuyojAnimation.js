@@ -164,7 +164,7 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 		this.elements.avance.drawPath(manPosition);
 
 		return this.elements.avance.startAnimation(partSeconds, partBeats)
-			.then(() => this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 1, 0));
+			.then(() => this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 1, 0));
 	}
 
 	regreso(seconds, manPosition, beats) {
@@ -190,12 +190,12 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 		const partSeconds = seconds / parts;
 		const partBeats = beats / parts;
 
-		let zarandeoPromise = this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5)
-			.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
+		let zarandeoPromise = this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5)
+			.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1));
 		if (beats >= 8) {
 			zarandeoPromise = zarandeoPromise
-				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0, 0.5))
-				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0, 0.5, 1));
+				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5))
+				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1));
 		}
 
 		this.elements.zapateo.drawPath(manPosition);
