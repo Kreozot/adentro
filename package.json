@@ -72,7 +72,7 @@
     "postcss-cssnext": "^2.11.0",
     "postcss-custom-media": "^6.0.0",
     "precss": "^1.4.0",
-    "snapsvg": "^0.4.0",
+    "snapsvg": "^0.5.1",
     "urijs": "^1.17.0",
     "webpack-stats-plugin": "^0.1.5",
     "webpack-visualizer-plugin": "^0.1.11",

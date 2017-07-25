@@ -6,11 +6,15 @@ import {normalizeAngle} from 'animationClasses/commons/utils';
 const FIGURE_ANGLE_TICK = 25;
 const FIGURE_ANGLE_SPEED = 3;
 const FIGURE_STEP_AMPLITUDE = 26;
+const FIGURE_WIDTH = 20;
+const FIGURE_HEIGHT = 20;
 
 const figuresSvg = {
 	man: getSvgElement('figures.svg', '#man'),
 	woman: getSvgElement('figures.svg', '#woman'),
 };
+const figureWidthHalf = FIGURE_WIDTH / 2;
+const figureHeightHalf = FIGURE_HEIGHT / 2;
 
 /**
  * Объект анимации
@@ -20,7 +24,6 @@ export default class DanceAnimation {
 	constructor(id) {
 		this.svg = new Snap('#' + id);
 
-		this.timeouts = [];
 		this.animations = [];
 		this.paths = [];
 		this.paused = false;
@@ -52,38 +55,17 @@ export default class DanceAnimation {
 		this.hideFigures();
 		this.clearPaths();
 		this.manPosition = 'left';
-
-		this.timeouts.forEach(timeout => timeout.pause());
-		while (this.timeouts.length > 0) {
-			this.timeouts.pop();
-		}
-	}
-
-	restartAnimation(animation, animationIndex) {
-		if (!animation.lastValue) {
-			animation.lastValue = 0;
-		}
-		const percentRemain = (animation.end - animation.lastValue) / animation.end;
-		const newDuration = animation.dur * percentRemain;
-		return new Promise(resolve => {
-			this.animations[animationIndex] = Snap.animate(animation.lastValue, animation.end,
-				animation.set, newDuration, animation.easing, resolve);
-		});
 	}
 
 	pause() {
 		this.paused = true;
-		this.timeouts.forEach(timeout => timeout.pause());
 		this.animations.forEach(animation => animation.pause());
 	}
 
 	resume() {
 		if (this.paused) {
 			this.paused = false;
-			this.timeouts.forEach(timeout => timeout.resume());
-			return Promise.all(this.animations.map((animation, index) => this.restartAnimation(animation, index)));
-		} else {
-			return Promise.resolve();
+			this.animations.forEach(animation => animation.resume());
 		}
 	}
 
@@ -208,7 +190,7 @@ export default class DanceAnimation {
 		if (!figure.angle) {
 			figure.angle = angle;
 		}
-		var angleDiff = figure.angle - angle;
+		const angleDiff = figure.angle - angle;
 		if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) && (Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
 			if ((angleDiff > 190) || ((angleDiff < 0) && (angleDiff > -180))) {
 				figure.angle = figure.angle + FIGURE_ANGLE_SPEED;
@@ -219,7 +201,7 @@ export default class DanceAnimation {
 			figure.angle = angle;
 		}
 		figure.angle = normalizeAngle(figure.angle);
-		figure.transform(`t${x - 20},${y - 20}r${Math.floor(figure.angle)}`);
+		figure.transform(`t${x - figureWidthHalf},${y - figureHeightHalf}r${Math.floor(figure.angle)}`);
 	}
 
 	/**
