@@ -66,7 +66,7 @@ export default class SingleElement {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	animationFunction(lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1) {
+	animationFunction({lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1}) {
 		return this.animation.animateFigurePath(this.figure, 90 + this.angle, this.path,
 			this.pathLength * startPart, this.pathLength * stopPart, lengthMs, beats, direction, this.easing);
 	}
@@ -79,9 +79,8 @@ export default class SingleElement {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	startAnimation(options) {
-		const {lengthS, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1} = options;
-		return this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
+	startAnimation({lengthS, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1}) {
+		return this.animationFunction({lengthMs: lengthS * 1000, beats, direction, startPart, stopPart});
 	}
 
 	/**

@@ -37,7 +37,7 @@ export default class VueltaElement extends PairElement {
 		}
 	}
 
-	animationFunction(lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1) {
+	animationFunction({lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1}) {
 		//Если идём из начала в конец, то инвертируем цвета градиента
 		if (startPart > stopPart) {
 			this.setColors(this.rightColor, this.leftColor);
@@ -60,9 +60,8 @@ export default class VueltaElement extends PairElement {
 		]);
 	}
 
-	startAnimation(options) {
-		const {lengthS, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1} = options;
-		return this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
+	startAnimation({lengthS, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1}) {
+		return this.animationFunction({lengthMs: lengthS * 1000, beats, direction, startPart, stopPart});
 	}
 
 	drawPath(manPosition) {

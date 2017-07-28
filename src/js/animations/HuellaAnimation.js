@@ -10,7 +10,7 @@ class HuellaManAnimationElement extends SingleElement {
 	constructor(animation, pathStrings, gender, figure) {
 		super(animation, pathStrings, gender, figure);
 
-		this.animationFunction = function (lengthMs, beats, direction, startPart, stopPart) {
+		this.animationFunction = function ({lengthMs, beats, startPart, stopPart}) {
 			const angle = this.position === 'left' ? -90 : 90;
 			return this.animation.animateFigurePath(this.figure, angle, this.path,
 				this.pathLength * startPart, this.pathLength * stopPart,

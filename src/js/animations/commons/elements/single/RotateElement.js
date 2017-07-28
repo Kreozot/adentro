@@ -16,7 +16,7 @@ export default class RotateElement extends SingleElement {
 		this.rotateAngle = rotateAngle;
 	}
 
-	animationFunction(lengthMs, beats) {
+	animationFunction({lengthMs, beats}) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
 		return this.animation.animateFigureTime(this.figure, lengthMs, beats * 6);
 	}

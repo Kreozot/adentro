@@ -13,7 +13,7 @@ class VueltaGradientElement extends VueltaElement {
 		super(animation, pathStr);
 	}
 
-	animationFunction(lengthMs, beats, direction, startPart, stopPart) {
+	animationFunction({lengthMs, startPart = 0, stopPart = 1}) {
 		//Если идём из начала в конец, то инвертируем цвета градиента
 		if (startPart > stopPart) {
 			this.setColors(this.rightColor, this.leftColor);
