@@ -1,4 +1,4 @@
-import {directions} from './commons/DanceAnimation';
+import {directions, FIGURE_HANDS} from './commons/DanceAnimation';
 import GatoAnimation from './GatoAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import {bailecito} from './svg/svg';
@@ -7,7 +7,7 @@ class BailecitoAvanceRetrocesoElement extends PairElement {
 	constructor(animation, pathStrings) {
 		super(animation, pathStrings);
 
-		this.manDanceAnimationElement.animationFunction = function ({lengthMs, beats, startPart = 0, stopPart = 1}) {
+		this.manDanceAnimationElement.animationFunction = function ({lengthMs, beats, startPart = 0, stopPart = 1, figureHands}) {
 			return this.animation.animateFigurePath({
 				figure: this.figure,
 				startAngle: this.position === 'left' ? -90 : 90,
@@ -16,10 +16,11 @@ class BailecitoAvanceRetrocesoElement extends PairElement {
 				stopLen: this.pathLength * stopPart,
 				timeLength: lengthMs,
 				beats,
-				direction: directions.STRAIGHT_FORWARD
+				direction: directions.STRAIGHT_FORWARD,
+				figureHands
 			});
 		};
-		this.womanDanceAnimationElement.animationFunction = function ({lengthMs, beats, startPart = 0, stopPart = 1}) {
+		this.womanDanceAnimationElement.animationFunction = function ({lengthMs, beats, startPart = 0, stopPart = 1, figureHands}) {
 			return this.animation.animateFigurePath({
 				figure: this.figure,
 				startAngle: this.position === 'left' ? -90 : 90,
@@ -28,7 +29,8 @@ class BailecitoAvanceRetrocesoElement extends PairElement {
 				stopLen: this.pathLength * stopPart,
 				timeLength: lengthMs,
 				beats,
-				direction: directions.STRAIGHT_FORWARD
+				direction: directions.STRAIGHT_FORWARD,
+				figureHands
 			});
 		};
 	}
@@ -59,7 +61,7 @@ export default class BailecitoAnimation extends GatoAnimation {
 			beats,
 			manPosition,
 			direction: directions.STRAIGHT_FORWARD,
-			figureTop: 'panuelo'
+			figureHands: FIGURE_HANDS.PANUELO
 		});
 	}
 
@@ -69,6 +71,7 @@ export default class BailecitoAnimation extends GatoAnimation {
 			beats,
 			manPosition,
 			direction: directions.STRAIGHT_FORWARD,
+			figureHands: FIGURE_HANDS.PANUELO,
 			startPart: 1,
 			stopPart: 0
 		});
@@ -79,7 +82,8 @@ export default class BailecitoAnimation extends GatoAnimation {
 			lengthS,
 			beats,
 			manPosition,
-			direction: directions.STRAIGHT_FORWARD
+			direction: directions.STRAIGHT_FORWARD,
+			figureHands: FIGURE_HANDS.PANUELO
 		});
 	}
 
@@ -89,6 +93,7 @@ export default class BailecitoAnimation extends GatoAnimation {
 			beats,
 			manPosition,
 			direction: directions.STRAIGHT_FORWARD,
+			figureHands: FIGURE_HANDS.PANUELO,
 			startPart: 1,
 			stopPart: 0
 		});

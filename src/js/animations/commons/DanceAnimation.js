@@ -16,6 +16,12 @@ export const directions = {
 	FROM_END_TO_START: 3,
 };
 
+export const FIGURE_HANDS = {
+	CASTANETAS: 'castanetas',
+	PANUELO: 'panuelo',
+	DOWN: 'down'
+};
+
 const figuresSvg = {
 	man: getSvgElement('figures.svg', '#man'),
 	woman: getSvgElement('figures.svg', '#woman'),
@@ -91,6 +97,10 @@ export default class DanceAnimation {
 			.addClass('invisible')
 			.addClass('figure')
 			.addClass('figure--' + gender);
+		$('.hands', figure.node)
+			.attr('style', null)
+			.attr('display', null)
+			.addClass('invisible');
 		figure.angle = null;
 		return figure;
 	}
@@ -219,8 +229,10 @@ export default class DanceAnimation {
 	 * @param  {Number} direction  Константа, определяющая направление движения
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
-	animateFigurePath({figure, startAngle, path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, easing = mina.linear}) {
+	animateFigurePath({figure, startAngle, path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS}) {
+		// Перенос фигура на верх DOM-а (TODO: Исправить на группировку)
 		figure.node.parentNode.appendChild(figure.node);
+
 		let angle = startAngle;
 		if ((direction === directions.BACKWARD) || (direction === directions.FROM_END_TO_START)) {
 			angle = -angle;
@@ -244,6 +256,10 @@ export default class DanceAnimation {
 		};
 
 		transformAtLength(startLen);
+
+		$(`.hands:not(.hands--${figureHands})`, figure.node).addClass('invisible');
+		$(`.hands--${figureHands}`, figure.node).removeClass('invisible');
+
 		figure.removeClass('invisible');
 
 		return new Promise(resolve => {

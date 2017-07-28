@@ -1,16 +1,5 @@
-.figure {
-	stroke-width: 2px;
-	stroke: black;
-}
-.figure--man {
-	fill: blue;
-}
-.figure--woman {
-	fill: darkmagenta;
-}
-.figure--straight-beat {
-	stroke-width: 5px;
-	stroke: red;
+.hands {
+	transition: opacity 0.2s;
 }
 
 .path {

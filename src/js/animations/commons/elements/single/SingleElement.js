@@ -1,4 +1,4 @@
-import {directions} from 'animationClasses/commons/DanceAnimation';
+import {directions, FIGURE_HANDS} from 'animationClasses/commons/DanceAnimation';
 
 /**
  * Одиночная анимация
@@ -66,7 +66,7 @@ export default class SingleElement {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	animationFunction({lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1}) {
+	animationFunction({lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.CASTANETAS}) {
 		return this.animation.animateFigurePath({
 			figure: this.figure,
 			startAngle: 90 + this.angle,
@@ -76,7 +76,8 @@ export default class SingleElement {
 			timeLength: lengthMs,
 			beats,
 			direction,
-			easing: this.easing
+			easing: this.easing,
+			figureHands
 		});
 	}
 
@@ -88,8 +89,8 @@ export default class SingleElement {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	startAnimation({lengthS, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1}) {
-		return this.animationFunction({lengthMs: lengthS * 1000, beats, direction, startPart, stopPart});
+	startAnimation(options) {
+		return this.animationFunction({...options, lengthMs: options.lengthS * 1000});
 	}
 
 	/**
