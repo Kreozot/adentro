@@ -1,3 +1,5 @@
+import {directions} from 'animationClasses/commons/DanceAnimation';
+
 /**
  * Одиночная анимация
  * @param {Object} animation   Объект анимации
@@ -10,7 +12,6 @@ export default class SingleElement {
 		this.pathStrings = pathStrings;
 		this.gender = gender;
 		this.path = {};
-		// this.pathFunction = gender === "man" ? this.animation.manPath : this.animation.womanPath;
 		if (figure) {
 			this.figure = figure;
 		} else {
@@ -65,7 +66,7 @@ export default class SingleElement {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	animationFunction(lengthMs, beats, direction, startPart, stopPart) {
+	animationFunction(lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1) {
 		return this.animation.animateFigurePath(this.figure, 90 + this.angle, this.path,
 			this.pathLength * startPart, this.pathLength * stopPart, lengthMs, beats, direction, this.easing);
 	}
@@ -78,7 +79,8 @@ export default class SingleElement {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	startAnimation(lengthS, beats, direction, startPart = 0, stopPart = 1) {
+	startAnimation(options) {
+		const {lengthS, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1} = options;
 		return this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
 	}
 
@@ -91,9 +93,9 @@ export default class SingleElement {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	fullAnimation(lengthS, beats, position, direction, startPart, stopPart) {
+	fullAnimation(options) {
 		this.animation.clearPaths();
-		this.drawPath(position);
-		return this.startAnimation(lengthS, beats, direction, startPart, stopPart);
+		this.drawPath(options.position);
+		return this.startAnimation(options);
 	}
 }

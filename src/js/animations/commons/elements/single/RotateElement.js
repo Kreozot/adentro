@@ -21,9 +21,8 @@ export default class RotateElement extends SingleElement {
 		return this.animation.animateFigureTime(this.figure, lengthMs, beats * 6);
 	}
 
-	startAnimation(lengthS, beats, startAngle, direction, delay, startPart, stopPart) {
-		startPart = startPart || 0;
-		stopPart = stopPart || 1;
+	startAnimation(options) {
+		const {lengthS, beats, startAngle, startPart = 0, stopPart = 1} = options;
 
 		const angle = startAngle;
 		const startLen = this.pathLength * startPart;

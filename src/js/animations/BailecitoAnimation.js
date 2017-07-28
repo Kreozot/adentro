@@ -1,3 +1,4 @@
+import {directions} from './commons/DanceAnimation';
 import GatoAnimation from './GatoAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import {bailecito} from './svg/svg';
@@ -10,13 +11,13 @@ class BailecitoAvanceRetrocesoElement extends PairElement {
 			const angle = this.position === 'left' ? -90 : 90;
 			return this.animation.animateFigurePath(this.figure, angle, this.path,
 				this.pathLength * startPart, this.pathLength * stopPart,
-				lengthMs, beats, this.animation.DIRECTION_STRAIGHT_FORWARD);
+				lengthMs, beats, directions.STRAIGHT_FORWARD);
 		};
 		this.womanDanceAnimationElement.animationFunction = function (lengthMs, beats, direction, startPart, stopPart) {
 			const angle = this.position === 'left' ? -90 : 90;
 			return this.animation.animateFigurePath(this.figure, angle, this.path,
 				this.pathLength * startPart, this.pathLength * stopPart,
-				lengthMs, beats, this.animation.DIRECTION_STRAIGHT_FORWARD);
+				lengthMs, beats, directions.STRAIGHT_FORWARD);
 		};
 	}
 }
@@ -40,19 +41,19 @@ export default class BailecitoAnimation extends GatoAnimation {
 		};
 	}
 
-	avance1(seconds, manPosition, beats) {
-		return this.elements.avanceRetroceso1.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD);
+	avance1(lengthS, manPosition, beats) {
+		return this.elements.avanceRetroceso1.fullAnimation({lengthS, beats, manPosition, direction: directions.STRAIGHT_FORWARD});
 	}
 
-	retroceso2(seconds, manPosition, beats) {
-		return this.elements.avanceRetroceso1.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 1, 0);
+	avance2(lengthS, manPosition, beats) {
+		return this.elements.avanceRetroceso2.fullAnimation({lengthS, beats, manPosition, direction: directions.STRAIGHT_FORWARD, startPart: 1, stopPart: 0});
 	}
 
-	retroceso1(seconds, manPosition, beats) {
-		return this.elements.avanceRetroceso2.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD);
+	retroceso1(lengthS, manPosition, beats) {
+		return this.elements.avanceRetroceso2.fullAnimation({lengthS, beats, manPosition, direction: directions.STRAIGHT_FORWARD});
 	}
 
-	avance2(seconds, manPosition, beats) {
-		return this.elements.avanceRetroceso2.fullAnimation(seconds, beats, manPosition, this.DIRECTION_STRAIGHT_FORWARD, 1, 0);
+	retroceso2(lengthS, manPosition, beats) {
+		return this.elements.avanceRetroceso1.fullAnimation({lengthS, beats, manPosition, direction: directions.STRAIGHT_FORWARD, startPart: 1, stopPart: 0});
 	}
 }

@@ -16,16 +16,16 @@ export default class RotatePairElement extends PairElement {
 		this.womanDanceAnimationElement = new RotateElement(animation, pathStrings, 'woman', undefined, rotateAngle);
 	}
 
-	startAnimation(lengthS, beats, startAngleMan, startAngleWoman, direction, startPart, stopPart) {
+	startAnimation(options) {
 		return Promise.all([
-			this.manDanceAnimationElement.startAnimation(lengthS, beats, startAngleMan, direction, startPart, stopPart),
-			this.womanDanceAnimationElement.startAnimation(lengthS, beats, startAngleWoman, direction, startPart, stopPart)
+			this.manDanceAnimationElement.startAnimation({...options, startAngle: options.startAngleMan}),
+			this.womanDanceAnimationElement.startAnimation({...options, startAngle: options.startAngleWoman})
 		]);
 	}
 
-	fullAnimation(lengthS, beats, startAngleMan, startAngleWoman, manPosition, direction, startPart, stopPart) {
+	fullAnimation(options) {
 		this.animation.clearPaths();
-		this.drawPath(manPosition);
-		return this.startAnimation(lengthS, beats, startAngleMan, startAngleWoman, direction, 0, startPart, stopPart);
+		this.drawPath(options.manPosition);
+		return this.startAnimation(options);
 	}
 }

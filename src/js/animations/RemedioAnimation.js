@@ -1,5 +1,6 @@
 import Promise from 'bluebird';
 import EscondidoAnimation from './EscondidoAnimation';
+import {zapateoAnimation, zarandeoAnimation} from './GatoAnimation';
 import RotatePairElement from './commons/elements/double/RotatePairElement';
 import {getOppositePosition} from './commons/utils';
 
@@ -20,10 +21,12 @@ export default class RemedioAnimation extends EscondidoAnimation {
 				right: 'M 390,50 240,200'
 			}, -360)
 		};
+		this.zapateoAnimation = zapateoAnimation.bind(this);
+		this.zarandeoAnimation = zarandeoAnimation.bind(this);
 	}
 
-	rotateFigure(figure, seconds, beats, x, y, startAngle, endAngle) {
-		const timeLength = seconds * 1000;
+	rotateFigure(figure, lengthS, beats, x, y, startAngle, endAngle) {
+		const timeLength = lengthS * 1000;
 		var angle = startAngle - endAngle;
 		if (angle > 360) {
 			angle = angle - 360;
@@ -46,7 +49,7 @@ export default class RemedioAnimation extends EscondidoAnimation {
 		});
 	}
 
-	esquina(seconds, manPosition, beats) {
+	esquina(lengthS, manPosition, beats) {
 		this.clearPaths();
 		const leftPaths = {
 			esquinaPath: 'm 50,390 c 0,0 90,-70 90,-170 C 140,120 50,50 50,50',
@@ -104,7 +107,7 @@ export default class RemedioAnimation extends EscondidoAnimation {
 
 		this.initManWoman();
 
-		const timeLength = seconds * 1000;
+		const timeLength = lengthS * 1000;
 		const manEsquinaPathLength = manEsquinaPath.getTotalLength() - 1;
 		const womanEsquinaPathLength = womanEsquinaPath.getTotalLength() - 1;
 		const manMovePoint = manEsquinaPath.getPointAtLength(manEsquinaPathLength);
@@ -114,38 +117,24 @@ export default class RemedioAnimation extends EscondidoAnimation {
 			this.animateFigurePath(this.man, 90, manEsquinaPath, 0, manEsquinaPathLength, timeLength * 3 / 4, beats * 3 / 4),
 			this.animateFigurePath(this.woman, 90, womanEsquinaPath, 0, womanEsquinaPathLength, timeLength * 3 / 4, beats * 3 / 4)
 		]).then(() => Promise.all([
-			this.rotateFigure(this.man, seconds / 4, beats / 4, manMovePoint.x, manMovePoint.y, manMovePoint.alpha + 90, manPaths.angle - 270),
-			this.rotateFigure(this.woman, seconds / 4, beats / 4, womanMovePoint.x, womanMovePoint.y, womanMovePoint.alpha + 90, womanPaths.angle - 270)
+			this.rotateFigure(this.man, lengthS / 4, beats / 4, manMovePoint.x, manMovePoint.y, manMovePoint.alpha + 90, manPaths.angle - 270),
+			this.rotateFigure(this.woman, lengthS / 4, beats / 4, womanMovePoint.x, womanMovePoint.y, womanMovePoint.alpha + 90, womanPaths.angle - 270)
 		]));
 	}
 
-	zapateoZarandeo(seconds, manPosition, beats) {
+	zapateoZarandeo(lengthS, manPosition, beats) {
 		this.clearPaths();
-		this.elements.zarandeo.drawPath(getOppositePosition(manPosition));
-		const parts = beats >= 8 ? 4 : 2;
-		const partSeconds = seconds / parts;
-		const partBeats = beats / parts;
 
-		let zarandeoPromise = this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5)
-			.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1));
-		if (beats >= 8) {
-			zarandeoPromise = zarandeoPromise
-				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5))
-				.then(() => this.elements.zarandeo.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1));
-		}
-
-		this.elements.zapateo.drawPath(manPosition);
-		const zapateoPromise = this.elements.zapateo.startAnimation(seconds, beats);
-
-		return Promise.all([zarandeoPromise, zapateoPromise]);
+		return Promise.all([
+			this.zapateoAnimation(lengthS, manPosition, beats),
+			this.zarandeoAnimation(lengthS, manPosition, beats)
+		]);
 	}
 
-	giroContragiroCoronacion(seconds, manPosition, beats) {
+	giroContragiroCoronacion(lengthS, manPosition, beats) {
 		this.clearPaths();
-		const partSeconds = seconds / 2;
-		const partBeats = beats / 2;
-		const manAngle = this.startPos[manPosition].angle;
-		const womanAngle = this.startPos[getOppositePosition(manPosition)].angle;
+		const startAngleMan = this.startPos[manPosition].angle;
+		const startAngleWoman = this.startPos[getOppositePosition(manPosition)].angle;
 		this.elements.giroCoronacion.drawPath(manPosition);
 		this.elements.contragiroCoronacion.drawPath(manPosition, true);
 
@@ -154,7 +143,21 @@ export default class RemedioAnimation extends EscondidoAnimation {
 		this.initRotateIcon(162, 277, 45, true);
 		this.initRotateIcon(277, 162, 45, true);
 
-		return this.elements.giroCoronacion.startAnimation(partSeconds, partBeats, manAngle, womanAngle, this.DIRECTION_FORWARD, 0, 0.5)
-			.then(() => this.elements.contragiroCoronacion.startAnimation(partSeconds, partBeats, manAngle, womanAngle, this.DIRECTION_FORWARD, 0.5, 1));
+		return this.elements.giroCoronacion.startAnimation({
+			lengthS: lengthS / 2,
+			beats: beats / 2,
+			startAngleMan,
+			startAngleWoman,
+			startPart: 0,
+			stopPart: 0.5
+		})
+			.then(() => this.elements.contragiroCoronacion.startAnimation({
+				lengthS: lengthS / 2,
+				beats: beats / 2,
+				startAngleMan,
+				startAngleWoman,
+				startPart: 0.5,
+				stopPart: 1
+			}));
 	}
 }

@@ -1,5 +1,6 @@
 import Promise from 'bluebird';
 import QuatroElement from './commons/elements/quatro/QuatroElement';
+import {directions} from './commons/DanceAnimation';
 import Dance4Animation from './commons/Dance4Animation';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
@@ -93,86 +94,101 @@ export default class Chacarera4Animation extends Dance4Animation {
 		};
 	}
 
-	avance(seconds, manPosition, beats) {
+	avance(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.avance.drawPath(manPosition);
-		const partSeconds = seconds / 2;
+		const partSeconds = lengthS / 2;
 		const partBeats = beats / 2;
 
-		return this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5)
-			.then(() => this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1));
+		return this.elements.avance.startAnimation({lengthS: partSeconds, beats: partBeats, startPart: 0, stopPart: 0.5})
+			.then(() => this.elements.avance.startAnimation({lengthS: partSeconds, beats: partBeats, direction: directions.BACKWARD, startPart: 0.5, stopPart: 1}));
 	}
 
-	giro(seconds, manPosition, beats) {
-		return this.elements.giro.fullAnimation(seconds, beats, manPosition);
+	giro(lengthS, manPosition, beats) {
+		return this.elements.giro.fullAnimation({lengthS, beats, manPosition});
 	}
 
-	contraGiro(seconds, manPosition, beats) {
-		return this.elements.giro.fullAnimation(seconds, beats, manPosition, this.DIRECTION_BACKWARD, 1, 0);
+	contraGiro(lengthS, manPosition, beats) {
+		return this.elements.giro.fullAnimation({lengthS, beats, manPosition, direction: directions.BACKWARD, startPart: 1, stopPart: 0});
 	}
 
-	vuelta(seconds, manPosition, beats) {
+	vuelta(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.vueltaGradient.drawPath(manPosition);
-		this.elements.vueltaGradient.startAnimation(seconds, beats);
+		this.elements.vueltaGradient.startAnimation({lengthS, beats});
 
-		const partSeconds = seconds / 2;
+		const partSeconds = lengthS / 2;
 		const partBeats = beats / 2;
 
 		// TODO: Promise
 		this.elements.mediaVuelta.drawPath(manPosition, true);
-		this.elements.mediaVuelta.startAnimation(partSeconds, partBeats);
-		this.elements.mediaVuelta.drawPath(getOppositePosition(manPosition), true);
-		this.elements.mediaVuelta.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, partSeconds);
+		return this.elements.mediaVuelta.startAnimation({lengthS: partSeconds, beats: partBeats})
+			.then(() => {
+				this.elements.mediaVuelta.drawPath(getOppositePosition(manPosition), true);
+				return this.elements.mediaVuelta.startAnimation({lengthS: partSeconds, beats: partBeats, direction: directions.FORWARD});
+			});
 	}
 
-	mediaVuelta(seconds, manPosition, beats) {
+	mediaVuelta(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.vueltaGradient.drawPath(manPosition);
-		this.elements.vueltaGradient.startAnimation(seconds, beats, this.DIRECTION_FORWARD, 0, 0.5);
-
-		// TODO: Promise
 		this.elements.mediaVuelta.drawPath(manPosition, true);
-		this.elements.mediaVuelta.startAnimation(seconds, beats);
+		return Promise.all([
+			this.elements.vueltaGradient.startAnimation({lengthS, beats, startPart: 0, stopPart: 0.5}),
+			this.elements.mediaVuelta.startAnimation({lengthS, beats})
+		]);
 	}
 
-	zapateoZarandeo(seconds, manPosition, beats) {
+	zapateoZarandeo(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.zarandeo1.drawPath(getOppositePosition(manPosition));
 		this.elements.zarandeo2.drawPath(getOppositePosition(manPosition));
 		const parts = beats >= 8 ? 4 : 2;
-		const partSeconds = seconds / parts;
-		const partBeats = beats / parts;
+		const partOptions = {
+			lengthS: lengthS / parts,
+			beats: beats / parts
+		};
+		const forwardOptions = {
+			...partOptions,
+			startPart: 0,
+			stopPart: 0.5
+		};
+		const backwardOptions = {
+			...partOptions,
+			direction: directions.BACKWARD,
+			startPart: 0.5,
+			stopPart: 1
+		};
 
 		let zarandeoPromise = Promise.all([
-			this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5),
-			this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5)
+			this.elements.zarandeo1.startAnimation(forwardOptions),
+			this.elements.zarandeo2.startAnimation(forwardOptions)
 		]).then(() => Promise.all([
-			this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1),
-			this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1)
+			this.elements.zarandeo1.startAnimation(backwardOptions),
+			this.elements.zarandeo2.startAnimation(backwardOptions)
 		]));
 		if (beats >= 8) {
 			zarandeoPromise = zarandeoPromise
 				.then(() => Promise.all([
-					this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5),
-					this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5)
+					this.elements.zarandeo1.startAnimation(forwardOptions),
+					this.elements.zarandeo2.startAnimation(forwardOptions)
 				])).then(() => Promise.all([
-					this.elements.zarandeo1.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1),
-					this.elements.zarandeo2.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1)
+					this.elements.zarandeo1.startAnimation(backwardOptions),
+					this.elements.zarandeo2.startAnimation(backwardOptions)
 				]));
 		}
 
 		this.elements.zapateo1.drawPath(manPosition + 1);
 		this.elements.zapateo2.drawPath(manPosition + 2);
 		const zapateoPromise = Promise.all([
-			this.elements.zapateo1.startAnimation(seconds, beats),
-			this.elements.zapateo2.startAnimation(seconds, beats)
+			this.elements.zapateo1.startAnimation({lengthS, beats}),
+			this.elements.zapateo2.startAnimation({lengthS, beats})
 		]);
 
 		return Promise.all([zarandeoPromise, zapateoPromise]);
 	}
 
-	coronacion(seconds, manPosition, beats) {
-		return this.elements.coronacion.fullAnimation(seconds, beats, manPosition);
+	coronacion(lengthS, manPosition, beats) {
+		return this.elements.coronacion.fullAnimation({lengthS, beats, manPosition});
 	}
 }

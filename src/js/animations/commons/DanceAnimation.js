@@ -9,6 +9,13 @@ const FIGURE_STEP_AMPLITUDE = 26;
 const FIGURE_WIDTH = 20;
 const FIGURE_HEIGHT = 20;
 
+export const directions = {
+	FORWARD: 0,
+	BACKWARD: 1,
+	STRAIGHT_FORWARD: 2,
+	FROM_END_TO_START: 3,
+};
+
 const figuresSvg = {
 	man: getSvgElement('figures.svg', '#man'),
 	woman: getSvgElement('figures.svg', '#woman'),
@@ -32,10 +39,6 @@ export default class DanceAnimation {
 		this.MAN_COLOR = 'Blue';
 		this.WOMAN_COLOR = 'DarkMagenta';
 
-		this.DIRECTION_FORWARD = 0;
-		this.DIRECTION_BACKWARD = 1;
-		this.DIRECTION_STRAIGHT_FORWARD = 2;
-		this.DIRECTION_FROM_END_TO_START = 3;
 		this.initManWoman();
 		this.pathCache = {};
 		this.pathLengths = new Map();
@@ -180,7 +183,7 @@ export default class DanceAnimation {
 
 	/**
 	 * Позиционирование фигуры
-	 * @param  {Object} figure Объект фигуры танцора
+	 * @param  {Object} figure Объект фигуры
 	 * @param  {Number} x      Координата центра X
 	 * @param  {Number} y      Координата центра Y
 	 * @param  {Number} angle  Угол поворота (при 0 фигура стоит вертикально)
@@ -206,7 +209,7 @@ export default class DanceAnimation {
 
 	/**
 	 * Анимация фигуры по траектории
-	 * @param  {Object} figure     Фигура танцора для анимации
+	 * @param  {Object} figure     Фигура для анимации
 	 * @param  {Number} startAngle Угол наклона фигуры относительно траектории
 	 * @param  {Object} path       Path-объект траектории движения
 	 * @param  {Number} startLen   Позиция начала движения от начала траектории
@@ -216,10 +219,10 @@ export default class DanceAnimation {
 	 * @param  {Number} direction  Константа, определяющая направление движения
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
-	animateFigurePath(figure, startAngle, path, startLen, stopLen, timeLength, beats, direction = this.DIRECTION_FORWARD, easing = mina.linear) {
+	animateFigurePath(figure, startAngle, path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, easing = mina.linear) {
 		figure.node.parentNode.appendChild(figure.node);
 		let angle = startAngle;
-		if ((direction === this.DIRECTION_BACKWARD) || (direction === this.DIRECTION_FROM_END_TO_START)) {
+		if ((direction === directions.BACKWARD) || (direction === directions.FROM_END_TO_START)) {
 			angle = -angle;
 		}
 		if (!path) {
@@ -233,7 +236,7 @@ export default class DanceAnimation {
 				length = length - pathLength;
 			}
 			const movePoint = path.getPointAtLength(length);
-			if (direction === this.DIRECTION_STRAIGHT_FORWARD) {
+			if (direction === directions.STRAIGHT_FORWARD) {
 				this.positionFigure(figure, movePoint.x, movePoint.y, angle);
 			} else {
 				this.positionFigure(figure, movePoint.x, movePoint.y, movePoint.alpha + angle);
@@ -247,7 +250,7 @@ export default class DanceAnimation {
 			this.animations[this.animations.length] = Snap.animate(startLen, stopLen,
 				function (value) { //this - animation element
 					this.lastValue = value;
-					if (direction === this.DIRECTION_FROM_END_TO_START) {
+					if (direction === directions.FROM_END_TO_START) {
 						value = startLen + stopLen - value;
 					}
 					transformAtLength(value);
@@ -260,7 +263,7 @@ export default class DanceAnimation {
 	/**
 	 * Анимация мужской фигуры по траектории
 	 */
-	animateMan(path, startLen, stopLen, timeLength, beats, direction, startAngle = 90) {
+	animateMan(path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, startAngle = 90) {
 		return this.animateFigurePath(this.man, startAngle, path, startLen, stopLen, timeLength, beats, direction);
 	}
 
@@ -268,7 +271,7 @@ export default class DanceAnimation {
 	 * Анимация женской фигуры по траектории
 	 * @return {Function}    Функция инициализации анимации
 	 */
-	animateWoman(path, startLen, stopLen, timeLength, beats, direction, startAngle = 90) {
+	animateWoman(path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, startAngle = 90) {
 		return this.animateFigurePath(this.woman, startAngle, path, startLen, stopLen, timeLength, beats, direction);
 	}
 

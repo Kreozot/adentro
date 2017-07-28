@@ -1,4 +1,5 @@
 import ZambaAnimation from './ZambaAnimation';
+import {directions} from './commons/DanceAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import {getOppositePosition} from './commons/utils';
 
@@ -24,24 +25,22 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 		this.arresto2 = this.arresto;
 	}
 
-	mediaVuelta(seconds, manPosition, beats) {
+	mediaVuelta(lengthS, manPosition, beats) {
 		this.elements.mediaVuelta.setAngle(-45);
-		return this.elements.mediaVuelta.fullAnimation(seconds, beats, manPosition);
+		return this.elements.mediaVuelta.fullAnimation({lengthS, beats, manPosition});
 	}
 
-	vuelta(seconds, manPosition, beats) {
+	vuelta(lengthS, manPosition, beats) {
 		this.elements.vuelta.setAngle(-45);
-		return this.elements.vuelta.fullAnimation(seconds, beats, manPosition);
+		return this.elements.vuelta.fullAnimation({lengthS, beats, manPosition});
 	}
 
-	arresto(seconds, manPosition, beats) {
+	arresto(lengthS, manPosition, beats) {
 		this.elements.arrestoSimple.setAngle(-45);
-		return this.elements.arrestoSimple.fullAnimation(seconds, beats, manPosition);
+		return this.elements.arrestoSimple.fullAnimation({lengthS, beats, manPosition});
 	}
 
-	arrestoDoble(seconds, manPosition, beats) {
-		const partSeconds = seconds / 4;
-		const partBeats = beats / 4;
+	arrestoDoble(lengthS, manPosition, beats) {
 		this.elements.mediaVueltaToArresto.setAngle(-45);
 		this.elements.arresto.setAngle(45);
 		this.elements.arrestoBack.setAngle(-45);
@@ -51,22 +50,41 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 		this.elements.arresto.drawPath(manPosition);
 		this.elements.arrestoBack.drawPath(manPosition);
 
-		return this.elements.mediaVueltaToArresto.startAnimation(partSeconds, partBeats)
-			.then(() => this.elements.arresto.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 1, 0))
-			.then(() => this.elements.arresto.startAnimation(partSeconds, partBeats))
-			.then(() => this.elements.arrestoBack.startAnimation(partSeconds, partBeats));
+		return this.elements.mediaVueltaToArresto.startAnimation({
+			lengthS: lengthS / 4,
+			beats: beats / 4
+		})
+			.then(() => this.elements.arresto.startAnimation({
+				lengthS: lengthS / 4,
+				beats: beats / 4,
+				direction: directions.BACKWARD,
+				startPart: 1,
+				stopPart: 0
+			}))
+			.then(() => this.elements.arresto.startAnimation({
+				lengthS: lengthS / 4,
+				beats: beats / 4
+			}))
+			.then(() => this.elements.arrestoBack.startAnimation({
+				lengthS: lengthS / 4,
+				beats: beats / 4
+			}));
 	}
 
-	mediaVueltaCoronacion(seconds, manPosition, beats) {
-		const firstPart = 4 / beats;
-		const secondPart = 3 / beats;
+	mediaVueltaCoronacion(lengthS, manPosition, beats) {
 		this.elements.mediaVuelta.setAngle(-45);
 
 		this.clearPaths();
 		this.elements.mediaVuelta.drawPath(manPosition);
 		this.elements.coronacion.drawPath(getOppositePosition(manPosition));
 
-		return this.elements.mediaVuelta.startAnimation(seconds * firstPart, beats * firstPart)
-			.then(() => this.elements.coronacion.startAnimation(seconds * secondPart, beats * secondPart));
+		return this.elements.mediaVuelta.startAnimation({
+			lengthS: lengthS * 4 / beats,
+			beats: 4
+		})
+			.then(() => this.elements.coronacion.startAnimation({
+				lengthS: lengthS * 3 / beats,
+				beats: 3
+			}));
 	}
 }

@@ -53,10 +53,10 @@ export default class PairElement {
 	/**
 	 * Запуск анимации элементов
 	 */
-	startAnimation() {
+	startAnimation(options) {
 		return Promise.all([
-			this.manDanceAnimationElement.startAnimation(...arguments),
-			this.womanDanceAnimationElement.startAnimation(...arguments)
+			this.manDanceAnimationElement.startAnimation(options),
+			this.womanDanceAnimationElement.startAnimation(options)
 		]);
 	}
 
@@ -67,9 +67,9 @@ export default class PairElement {
 	 * @param  {String} manPosition Начальная позиция партнёра
 	 * @param  {String} direction 	Направление движения фигуры
 	 */
-	fullAnimation(lengthS, beats, manPosition, direction, startPart, stopPart) {
+	fullAnimation(options) {
 		this.animation.clearPaths();
-		this.drawPath(manPosition);
-		return this.startAnimation(lengthS, beats, direction, startPart, stopPart);
+		this.drawPath(options.manPosition);
+		return this.startAnimation(options);
 	}
 }

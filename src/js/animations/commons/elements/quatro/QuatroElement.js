@@ -53,12 +53,12 @@ export default class QuatroElement {
 	/**
 	 * startAnimation Запуск анимации элементов
 	 */
-	startAnimation() {
+	startAnimation(options) {
 		return Promise.all([
-			this.man1DanceAnimationElement.startAnimation(...arguments),
-			this.woman1DanceAnimationElement.startAnimation(...arguments),
-			this.man2DanceAnimationElement.startAnimation(...arguments),
-			this.woman2DanceAnimationElement.startAnimation(...arguments)
+			this.man1DanceAnimationElement.startAnimation(options),
+			this.woman1DanceAnimationElement.startAnimation(options),
+			this.man2DanceAnimationElement.startAnimation(options),
+			this.woman2DanceAnimationElement.startAnimation(options)
 		]);
 	}
 
@@ -69,9 +69,9 @@ export default class QuatroElement {
 	 * @param  {String} manPosition   начальная позиция партнёра
 	 * @param  {String} direction 	направление движения фигуры
 	 */
-	fullAnimation(lengthS, beats, manPosition, direction, startPart, stopPart) {
+	fullAnimation(options) {
 		this.animation.clearPaths();
-		this.drawPath(manPosition);
-		return this.startAnimation(lengthS, beats, direction, startPart, stopPart);
+		this.drawPath(options.manPosition);
+		return this.startAnimation(options);
 	}
 }

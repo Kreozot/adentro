@@ -1,4 +1,5 @@
 import Promise from 'bluebird';
+import {directions} from 'animationClasses/commons/DanceAnimation';
 import PairElement from './PairElement';
 
 export default class VueltaElement extends PairElement {
@@ -36,7 +37,7 @@ export default class VueltaElement extends PairElement {
 		}
 	}
 
-	animationFunction(lengthMs, beats, direction, startPart, stopPart) {
+	animationFunction(lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1) {
 		//Если идём из начала в конец, то инвертируем цвета градиента
 		if (startPart > stopPart) {
 			this.setColors(this.rightColor, this.leftColor);
@@ -59,7 +60,8 @@ export default class VueltaElement extends PairElement {
 		]);
 	}
 
-	startAnimation(lengthS, beats, direction, startPart = 0, stopPart = 1) {
+	startAnimation(options) {
+		const {lengthS, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1} = options;
 		return this.animationFunction(lengthS * 1000, beats, direction, startPart, stopPart);
 	}
 

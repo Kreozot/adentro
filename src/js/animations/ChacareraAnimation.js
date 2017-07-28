@@ -1,4 +1,5 @@
 import GatoAnimation from './GatoAnimation';
+import {directions} from './commons/DanceAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import {gato} from './svg/svg';
 
@@ -16,12 +17,24 @@ export default class ChacareraAnimation extends GatoAnimation {
 		};
 	}
 
-	avance(seconds, manPosition, beats) {
+	avance(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.avance.drawPath(manPosition);
-		const partSeconds = seconds / 2;
-		const partBeats = beats / 2;
-		return this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_FORWARD, 0, 0.5)
-			.then(() => this.elements.avance.startAnimation(partSeconds, partBeats, this.DIRECTION_BACKWARD, 0.5, 1));
+		const partOptions = {
+			lengthS: lengthS / 2,
+			beats: beats / 2
+		};
+
+		return this.elements.avance.startAnimation({
+			...partOptions,
+			startPart: 0,
+			stopPart: 0.5
+		})
+			.then(() => this.elements.avance.startAnimation({
+				...partOptions,
+				direction: directions.BACKWARD,
+				startPart: 0.5,
+				stopPart: 1
+			}));
 	}
 }
