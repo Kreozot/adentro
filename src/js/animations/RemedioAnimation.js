@@ -114,8 +114,24 @@ export default class RemedioAnimation extends EscondidoAnimation {
 		const womanMovePoint = womanEsquinaPath.getPointAtLength(womanEsquinaPathLength);
 
 		return Promise.all([
-			this.animateFigurePath(this.man, 90, manEsquinaPath, 0, manEsquinaPathLength, timeLength * 3 / 4, beats * 3 / 4),
-			this.animateFigurePath(this.woman, 90, womanEsquinaPath, 0, womanEsquinaPathLength, timeLength * 3 / 4, beats * 3 / 4)
+			this.animateFigurePath({
+				figure: this.man,
+				startAngle: 90,
+				path: manEsquinaPath,
+				startLen: 0,
+				stopLen: manEsquinaPathLength,
+				timeLength: timeLength * 3 / 4,
+				beats: beats * 3 / 4
+			}),
+			this.animateFigurePath({
+				figure: this.woman,
+				startAngle: 90,
+				path: womanEsquinaPath,
+				startLen: 0,
+				stopLen: womanEsquinaPathLength,
+				timeLength: timeLength * 3 / 4,
+				beats: beats * 3 / 4
+			})
 		]).then(() => Promise.all([
 			this.rotateFigure(this.man, lengthS / 4, beats / 4, manMovePoint.x, manMovePoint.y, manMovePoint.alpha + 90, manPaths.angle - 270),
 			this.rotateFigure(this.woman, lengthS / 4, beats / 4, womanMovePoint.x, womanMovePoint.y, womanMovePoint.alpha + 90, womanPaths.angle - 270)

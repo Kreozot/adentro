@@ -67,8 +67,17 @@ export default class SingleElement {
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
 	animationFunction({lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1}) {
-		return this.animation.animateFigurePath(this.figure, 90 + this.angle, this.path,
-			this.pathLength * startPart, this.pathLength * stopPart, lengthMs, beats, direction, this.easing);
+		return this.animation.animateFigurePath({
+			figure: this.figure,
+			startAngle: 90 + this.angle,
+			path: this.path,
+			startLen: this.pathLength * startPart,
+			stopLen: this.pathLength * stopPart,
+			timeLength: lengthMs,
+			beats,
+			direction,
+			easing: this.easing
+		});
 	}
 
 	/**
