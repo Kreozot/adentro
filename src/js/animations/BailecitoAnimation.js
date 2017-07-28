@@ -98,4 +98,25 @@ export default class BailecitoAnimation extends GatoAnimation {
 			stopPart: 0
 		});
 	}
+
+	giro(lengthS, manPosition, beats) {
+		return this.elements.giro.fullAnimation({
+			lengthS,
+			beats,
+			manPosition,
+			figureHands: FIGURE_HANDS.PANUELO
+		});
+	}
+
+	contraGiro(lengthS, manPosition, beats) {
+		return this.elements.giro.fullAnimation({
+			lengthS,
+			beats,
+			manPosition,
+			direction: directions.BACKWARD,
+			startPart: 1,
+			stopPart: 0,
+			figureHands: FIGURE_HANDS.PANUELO
+		});
+	}
 }
