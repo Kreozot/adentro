@@ -229,7 +229,7 @@ export default class DanceAnimation {
 	 * @param  {Number} direction  Константа, определяющая направление движения
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
-	animateFigurePath({figure, startAngle, path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS}) {
+	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS}) {
 		// Перенос фигура на верх DOM-а (TODO: Исправить на группировку)
 		figure.node.parentNode.appendChild(figure.node);
 
@@ -279,16 +279,15 @@ export default class DanceAnimation {
 	/**
 	 * Анимация мужской фигуры по траектории
 	 */
-	animateMan(path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, startAngle = 90) {
-		return this.animateFigurePath({figure: this.man, startAngle, path, startLen, stopLen, timeLength, beats, direction});
+	animateMan(options) {
+		return this.animateFigurePath({...options, figure: this.man});
 	}
 
 	/**
 	 * Анимация женской фигуры по траектории
-	 * @return {Function}    Функция инициализации анимации
 	 */
-	animateWoman(path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, startAngle = 90) {
-		return this.animateFigurePath({figure: this.woman, startAngle, path, startLen, stopLen, timeLength, beats, direction});
+	animateWoman(options) {
+		return this.animateFigurePath({...options, figure: this.woman});
 	}
 
 	/**

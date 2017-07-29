@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-import {directions} from 'animationClasses/commons/DanceAnimation';
+import {directions, FIGURE_HANDS} from 'animationClasses/commons/DanceAnimation';
 import PairElement from './PairElement';
 
 export default class VueltaElement extends PairElement {
@@ -37,7 +37,7 @@ export default class VueltaElement extends PairElement {
 		}
 	}
 
-	animationFunction({lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1}) {
+	animationFunction({lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.CASTANETAS}) {
 		//Если идём из начала в конец, то инвертируем цвета градиента
 		if (startPart > stopPart) {
 			this.setColors(this.rightColor, this.leftColor);
@@ -45,23 +45,41 @@ export default class VueltaElement extends PairElement {
 
 		const self = this;
 		const gradientAnimationPromise = new Promise(resolve => {
-			this.animation.animations[this.animation.animations.length] = Snap.animate(startPart * this.pathLength,
+			this.animation.animations[this.animation.animations.length] = Snap.animate(
+				startPart * this.pathLength,
 				stopPart * this.pathLength,
 				function (value) {
 					this.lastValue = value;
 					self.drawGradientAtPoint(value);
-				}, lengthMs, mina.linear, resolve);
+				}, lengthMs, mina.linear, resolve
+			);
 		});
 
 		return Promise.all([
 			gradientAnimationPromise,
-			this.animation.animateMan(this.path, this.startPos1, stopPart * this.pathLength + this.startPos1, lengthMs, beats, direction),
-			this.animation.animateWoman(this.path, this.startPos2, stopPart * this.pathLength + this.startPos2, lengthMs, beats, direction)
+			this.animation.animateMan({
+				path: this.path,
+				startLen: this.startPos1,
+				stopLen: stopPart * this.pathLength + this.startPos1,
+				timeLength: lengthMs,
+				beats,
+				direction,
+				figureHands
+			}),
+			this.animation.animateWoman({
+				path: this.path,
+				startLen: this.startPos2,
+				stopLen: stopPart * this.pathLength + this.startPos2,
+				timeLength: lengthMs,
+				beats,
+				direction,
+				figureHands
+			})
 		]);
 	}
 
-	startAnimation({lengthS, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1}) {
-		return this.animationFunction({lengthMs: lengthS * 1000, beats, direction, startPart, stopPart});
+	startAnimation(options) {
+		return this.animationFunction({...options, lengthMs: options.lengthS * 1000});
 	}
 
 	drawPath(manPosition) {

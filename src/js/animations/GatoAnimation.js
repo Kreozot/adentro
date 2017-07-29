@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-import DanceAnimation, {directions} from './commons/DanceAnimation';
+import DanceAnimation, {directions, FIGURE_HANDS} from './commons/DanceAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
@@ -10,7 +10,7 @@ import {gato, vuelta} from './svg/svg';
 export function zapateoAnimation(lengthS, manPosition, beats) {
 	this.elements.zapateo.drawPath(manPosition);
 
-	return this.elements.zapateo.startAnimation({lengthS, beats});
+	return this.elements.zapateo.startAnimation({lengthS, beats, figureHands: FIGURE_HANDS.DOWN});
 }
 
 export function zarandeoAnimation(lengthS, manPosition, beats) {
@@ -18,7 +18,8 @@ export function zarandeoAnimation(lengthS, manPosition, beats) {
 	const parts = beats >= 8 ? 4 : 2;
 	const partOptions = {
 		lengthS: lengthS / parts,
-		beats: beats / parts
+		beats: beats / parts,
+		figureHands: FIGURE_HANDS.DOWN
 	};
 	const forwardOptions = {
 		...partOptions,

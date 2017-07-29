@@ -1,6 +1,6 @@
 import Promise from 'bluebird';
 import GatoAnimation from './GatoAnimation';
-import {directions} from './commons/DanceAnimation';
+import {directions, FIGURE_HANDS} from './commons/DanceAnimation';
 import SingleElement from './commons/elements/single/SingleElement';
 import PairElement from './commons/elements/double/PairElement';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
@@ -10,7 +10,7 @@ class HuellaManAnimationElement extends SingleElement {
 	constructor(animation, pathStrings, gender, figure) {
 		super(animation, pathStrings, gender, figure);
 
-		this.animationFunction = function ({lengthMs, beats, startPart, stopPart}) {
+		this.animationFunction = function ({lengthMs, beats, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.CASTANETAS}) {
 			return this.animation.animateFigurePath({
 				figure: this.figure,
 				startAngle: this.position === 'left' ? -90 : 90,
@@ -19,6 +19,7 @@ class HuellaManAnimationElement extends SingleElement {
 				stopLen: this.pathLength * stopPart,
 				timeLength: lengthMs,
 				beats,
+				figureHands,
 				direction: directions.STRAIGHT_FORWARD
 			});
 		};
