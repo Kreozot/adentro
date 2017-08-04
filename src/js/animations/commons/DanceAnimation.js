@@ -6,8 +6,12 @@ import {normalizeAngle} from 'animationClasses/commons/utils';
 const FIGURE_ANGLE_TICK = 25;
 const FIGURE_ANGLE_SPEED = 3;
 const FIGURE_STEP_AMPLITUDE = 26;
+// Ширина фигуры
 const FIGURE_WIDTH = 20;
+// Высота фигуры
 const FIGURE_HEIGHT = 20;
+// Максимальный угол поворота верха фигуры
+// const FIGURE_TOP_ANGLE_MAX = 45;
 
 export const directions = {
 	FORWARD: 0,
@@ -198,13 +202,14 @@ export default class DanceAnimation {
 	 * @param  {Number} y      Координата центра Y
 	 * @param  {Number} angle  Угол поворота (при 0 фигура стоит вертикально)
 	 */
-	positionFigure(figure, x, y, angle) {
+	positionFigure(figure, x, y, angle, pairFigure) {
 		angle = normalizeAngle(angle);
 		if (!figure.angle) {
 			figure.angle = angle;
 		}
 		const angleDiff = figure.angle - angle;
-		if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) && (Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
+		if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) &&
+			(Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
 			if ((angleDiff > 190) || ((angleDiff < 0) && (angleDiff > -180))) {
 				figure.angle = figure.angle + FIGURE_ANGLE_SPEED;
 			} else {
@@ -215,6 +220,26 @@ export default class DanceAnimation {
 		}
 		figure.angle = normalizeAngle(figure.angle);
 		figure.transform(`t${x - figureWidthHalf},${y - figureHeightHalf}r${Math.floor(figure.angle)}`);
+		// return;
+		if (pairFigure) {
+			const figureTop = Snap($('.top', figure.node)[0]);
+			const figureBBox = figure.getBBox();
+			const figureX = figureBBox.x + figureBBox.width / 2;
+			const figureY = figureBBox.y + figureBBox.height / 2;
+			const pairFigureBBox = pairFigure.getBBox();
+			const pairFigureX = pairFigureBBox.x + pairFigureBBox.width / 2;
+			const pairFigureY = pairFigureBBox.y + pairFigureBBox.height / 2;
+			const lengthX = figureX - pairFigureX;
+			const lengthY = figureY - pairFigureY;
+			const angleBetweenFigures = Math.atan(lengthY / lengthX) * 180 / Math.PI;
+			/**
+			 * /'  y1 > y2, x1 < x2 --- 1 / -1 --- -45 + 90 = 45
+			 * '\  y1 > y2, x1 > x2 --- 1 / 1 --- 45 + 90 = 135
+			 * ./  y1 < y2, x1 > x2 --- -1 / 1 --- -45 - 90 = -135
+			 * \.  y1 < y2, x1 < x2 --- -1 / -1 --- 45 - 90 = -45
+			 */
+			figureTop.transform(`r${angleBetweenFigures - figure.angle}`);
+		}
 	}
 
 	/**
@@ -229,7 +254,7 @@ export default class DanceAnimation {
 	 * @param  {Number} direction  Константа, определяющая направление движения
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
-	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS}) {
+	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS, pairFigure}) {
 		// Перенос фигура на верх DOM-а (TODO: Исправить на группировку)
 		figure.node.parentNode.appendChild(figure.node);
 
@@ -249,9 +274,9 @@ export default class DanceAnimation {
 			}
 			const movePoint = path.getPointAtLength(length);
 			if (direction === directions.STRAIGHT_FORWARD) {
-				this.positionFigure(figure, movePoint.x, movePoint.y, angle);
+				this.positionFigure(figure, movePoint.x, movePoint.y, angle, pairFigure);
 			} else {
-				this.positionFigure(figure, movePoint.x, movePoint.y, movePoint.alpha + angle);
+				this.positionFigure(figure, movePoint.x, movePoint.y, movePoint.alpha + angle, pairFigure);
 			}
 		};
 
@@ -280,14 +305,14 @@ export default class DanceAnimation {
 	 * Анимация мужской фигуры по траектории
 	 */
 	animateMan(options) {
-		return this.animateFigurePath({...options, figure: this.man});
+		return this.animateFigurePath({...options, figure: this.man, pairFigure: this.woman});
 	}
 
 	/**
 	 * Анимация женской фигуры по траектории
 	 */
 	animateWoman(options) {
-		return this.animateFigurePath({...options, figure: this.woman});
+		return this.animateFigurePath({...options, figure: this.woman, pairFigure: this.man});
 	}
 
 	/**
