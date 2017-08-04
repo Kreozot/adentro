@@ -6,7 +6,7 @@ export default class ZapateoElement extends SingleElement {
 		super(animation, pathStrings, 'man', figure);
 	}
 
-	animationFunction({lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.CASTANETAS}) {
+	animationFunction({lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.DOWN}) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
 		if (this.pathStrings) {
 			return this.animation.animateFigurePath({
@@ -22,7 +22,7 @@ export default class ZapateoElement extends SingleElement {
 				figureHands
 			});
 		} else {
-			return this.animation.animateFigureTime(this.figure, lengthMs, beats * 6);
+			return this.animation.animateFigureTimeZapateo(this.figure, lengthMs, beats, figureHands);
 		}
 	}
 

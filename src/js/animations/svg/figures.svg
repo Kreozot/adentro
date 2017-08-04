@@ -55,7 +55,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.9999996"
-     inkscape:cx="12.520623"
+     inkscape:cx="6.7081223"
      inkscape:cy="79.335512"
      inkscape:document-units="px"
      inkscape:current-layer="man"
@@ -352,7 +352,7 @@
          inkscape:connector-curvature="0" />
     </g>
     <g
-       class="kick kick--right kick-back"
+       class="kick kick--right kick--back"
        id="g3452"
        transform="translate(0,-8)"
        display="none"

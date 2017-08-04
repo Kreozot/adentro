@@ -101,7 +101,7 @@ export default class DanceAnimation {
 			.addClass('invisible')
 			.addClass('figure')
 			.addClass('figure--' + gender);
-		$('.hands', figure.node)
+		$('.hands, .kick', figure.node)
 			.attr('style', null)
 			.attr('display', null)
 			.addClass('invisible');
@@ -147,24 +147,80 @@ export default class DanceAnimation {
 		}
 	}
 
-	animateLeg(figure, legStr, value) {
+	moveLeg(figure, legStr, value) {
 		figure.select('.leg--' + legStr)
 			.transform(`translate(0, ${value})`);
 	}
 
+	animateLeg(figure, legStr, duration, transformFrom, transformTo, easing = mina.linear) {
+		return new Promise(resolve => {
+			this.animations[this.animations.length] = Snap.animate(transformFrom, transformTo, value => this.moveLeg(figure, legStr, value), duration, easing, resolve);
+		});
+	}
+
+	kick(figure, legStr, kickType) {
+		$(`.kick`, figure.node)
+			.addClass(`invisible`);
+		$(`.kick--${legStr}.kick--${kickType}`, figure.node)
+			.removeClass(`invisible`);
+	}
+
 	animateLegs(figure, legStr, stepDuration, stepsLeft) {
-		const self = this;
-		const oppositeLegStr = legStr === 'left' ? 'right' : 'left';
 		if (stepsLeft < 1) {
 			return;
 		}
+		$(`.kick`, figure.node)
+			.addClass(`invisible`);
+		const self = this;
+		const oppositeLegStr = legStr === 'left' ? 'right' : 'left';
+
 		this.animations[this.animations.length] = Snap.animate(-FIGURE_STEP_AMPLITUDE / 2, FIGURE_STEP_AMPLITUDE / 2, function (value) {
-			self.animateLeg(figure, legStr, value);
-			self.animateLeg(figure, oppositeLegStr, -value);
-			this.lastValue = value;
+			self.moveLeg(figure, legStr, value);
+			self.moveLeg(figure, oppositeLegStr, -value);
 		}, stepDuration, mina.linear, () => {
 			self.animateLegs(figure, oppositeLegStr, stepDuration, stepsLeft - 1);
 		});
+	}
+
+	animateLegsZapateo(figure, legStr, stepDuration, stepsLeft) {
+		if (stepsLeft < 1) {
+			return Promise.resolve();
+		}
+		const oppositeLegStr = legStr === 'left' ? 'right' : 'left';
+		const transformFrom = 0;
+		const transformTo = FIGURE_STEP_AMPLITUDE / 2;
+
+		this.kick(figure, oppositeLegStr, 'back');
+		return this.animateLeg(figure, oppositeLegStr, stepDuration, transformTo, transformFrom, mina.easeout)
+			.delay(stepDuration)
+			.then(() => {
+				this.kick(figure, legStr, 'front');
+				return this.animateLeg(figure, legStr, stepDuration, transformFrom, transformTo);
+			})
+			.then(() => {
+				this.kick(figure, legStr, 'back');
+				return this.animateLeg(figure, legStr, stepDuration, transformTo, transformFrom, mina.easeout);
+			})
+			.then(() => {
+				this.kick(figure, oppositeLegStr, 'back');
+			})
+			.delay(stepDuration)
+			.then(() => {
+				this.kick(figure, legStr, 'front');
+				return this.animateLeg(figure, legStr, stepDuration, transformFrom, transformTo);
+			})
+			.then(() => this.animateLegsZapateo(figure, oppositeLegStr, stepDuration, stepsLeft - 1));
+	}
+
+	animateFigureTimeZapateo(figure, timeLength, beats, figureHands) {
+		$(`.hands:not(.hands--${figureHands})`, figure.node).addClass('invisible');
+		$(`.hands--${figureHands}`, figure.node).removeClass('invisible');
+
+		return this.animateLegsZapateo(figure, 'right', timeLength / beats / 6, beats)
+			.finally(() => {
+				$(`.kick`, figure.node)
+					.addClass(`invisible`);
+			});
 	}
 
 	/**
@@ -184,8 +240,6 @@ export default class DanceAnimation {
 		// const oneTimeLength = length / beats;
 		// this.animations[this.animations.length] = Snap.animate(0, length,
 		// 	function (value) { //this - animation element
-		// 		this.lastValue = value;
-		// 		debugger;
 		// 		// Если дробная часть от деления текущей позиции на длину такта достаточно близка к единице, значит сейчас сильная доля
 		// 		if (mod(value, oneTimeLength) > 0.8) {
 		// 			figure.addClass('figure--straight-beat');
@@ -220,7 +274,7 @@ export default class DanceAnimation {
 		}
 		figure.angle = normalizeAngle(figure.angle);
 		figure.transform(`t${x - figureWidthHalf},${y - figureHeightHalf}r${Math.floor(figure.angle)}`);
-		// return;
+		return;
 		if (pairFigure) {
 			const figureTop = Snap($('.top', figure.node)[0]);
 			const figureBBox = figure.getBBox();
@@ -290,7 +344,6 @@ export default class DanceAnimation {
 		return new Promise(resolve => {
 			this.animations[this.animations.length] = Snap.animate(startLen, stopLen,
 				function (value) { //this - animation element
-					this.lastValue = value;
 					if (direction === directions.FROM_END_TO_START) {
 						value = startLen + stopLen - value;
 					}
