@@ -229,8 +229,11 @@ export default class DanceAnimation {
 	 * @param  {Number} timeLength Длительность отрезка
 	 * @param  {Number} beats      Количество тактов отрезка
 	 */
-	animateFigureTime(figure, timeLength, beats) {
-		this.animateLegs(figure, 'right', timeLength / beats / 3, beats * 3);
+	animateFigureTime(figure, timeLength, beats, isLastElement) {
+		const stepDuration = timeLength / beats / 3;
+		// Если последний элемент, анимируем меньше на два шага (на 2/3 базового шага)
+		const steps = isLastElement ? (beats * 3 - 2) : (beats * 3);
+		this.animateLegs(figure, 'right', stepDuration, steps);
 		// const length = timeLength;
 		// const oneTimeLength = length / beats;
 		// Snap.animate(0, length)
@@ -308,7 +311,7 @@ export default class DanceAnimation {
 	 * @param  {Number} direction  Константа, определяющая направление движения
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
-	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS, pairFigure}) {
+	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS, pairFigure, isLastElement}) {
 		// Перенос фигура на верх DOM-а (TODO: Исправить на группировку)
 		figure.node.parentNode.appendChild(figure.node);
 
@@ -341,6 +344,11 @@ export default class DanceAnimation {
 
 		figure.removeClass('invisible');
 
+		// Если последний элемент, доходим быстрее на два шага (на 2/3 базового шага)
+		const timeLengthForPath = isLastElement ?
+			(beats * 3 - 2) * (timeLength / beats / 3) :
+			timeLength;
+
 		return new Promise(resolve => {
 			this.animations[this.animations.length] = Snap.animate(startLen, stopLen,
 				function (value) { //this - animation element
@@ -348,9 +356,9 @@ export default class DanceAnimation {
 						value = startLen + stopLen - value;
 					}
 					transformAtLength(value);
-				}, timeLength, easing, resolve);
+				}, timeLengthForPath, easing, resolve);
 
-			this.animateFigureTime(figure, timeLength, beats);
+			this.animateFigureTime(figure, timeLength, beats, isLastElement);
 		});
 	}
 
@@ -426,6 +434,8 @@ export default class DanceAnimation {
 		this.positionFigure(figure, coords.x, coords.y, coords.angle);
 		figure.removeClass('figure--straight-beat');
 		figure.removeClass('invisible');
+		$('.leg', figure.node)
+			.attr(`transform`, null);
 	}
 
 	/**

@@ -142,6 +142,6 @@ export default class EscondidoAnimation extends DanceAnimation {
 	}
 
 	coronacion(lengthS, manPosition, beats) {
-		return this.elements.coronacion.fullAnimation({lengthS, beats, manPosition});
+		return this.elements.coronacion.fullAnimation({lengthS, beats, manPosition, isLastElement: true});
 	}
 }

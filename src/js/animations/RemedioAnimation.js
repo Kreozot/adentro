@@ -173,7 +173,8 @@ export default class RemedioAnimation extends EscondidoAnimation {
 				startAngleMan,
 				startAngleWoman,
 				startPart: 0.5,
-				stopPart: 1
+				stopPart: 1,
+				isLastElement: true
 			}));
 	}
 }

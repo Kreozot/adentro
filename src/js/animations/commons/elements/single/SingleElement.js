@@ -66,7 +66,7 @@ export default class SingleElement {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	animationFunction({lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.CASTANETAS}) {
+	animationFunction({lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.CASTANETAS, isLastElement}) {
 		return this.animation.animateFigurePath({
 			figure: this.figure,
 			startAngle: 90 + this.angle,
@@ -77,6 +77,7 @@ export default class SingleElement {
 			beats,
 			direction,
 			easing: this.easing,
+			isLastElement,
 			figureHands
 		});
 	}

@@ -84,7 +84,8 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 		})
 			.then(() => this.elements.coronacion.startAnimation({
 				lengthS: lengthS * 3 / beats,
-				beats: 3
+				beats: 3,
+				isLastElement: true
 			}));
 	}
 }

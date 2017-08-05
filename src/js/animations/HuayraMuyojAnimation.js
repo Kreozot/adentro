@@ -238,7 +238,8 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 			beats,
 			startAngleMan: this.startPos['start_' + manPosition].angle,
 			startAngleWoman: this.startPos[getOppositePosition('start_' + manPosition)].angle,
-			manPosition
+			manPosition,
+			isLastElement: true
 		});
 	}
 }

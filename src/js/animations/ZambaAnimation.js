@@ -161,7 +161,8 @@ export default class ZambaAnimation extends GatoAnimation {
 			lengthS,
 			beats,
 			manPosition,
-			figureHands: FIGURE_HANDS.PANUELO
+			figureHands: FIGURE_HANDS.PANUELO,
+			isLastElement: true
 		});
 	}
 }
