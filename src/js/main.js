@@ -244,6 +244,8 @@ $(window).load(function () {
 $('.logo').on('click', () => {
 	if ($(window).width() <= 480) {
 		$('.dance-menu, .lang-links').toggleClass('visible');
+		$('.sidebar').toggleClass('sidebar--open')
+			.scrollTop(0);
 		$('.menu-icon').toggleClass('menu-icon--open');
 	}
 });

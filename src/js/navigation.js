@@ -16,6 +16,7 @@ export default class Navigation {
 					self.showSchema(schemeId);
 
 					$('.dance-menu, .lang-links').removeClass('visible');
+					$('.sidebar').removeClass('sidebar--open');
 					$('.menu-icon').removeClass('menu-icon--open');
 				}
 			});
