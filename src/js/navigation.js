@@ -14,6 +14,9 @@ export default class Navigation {
 				const schemeId = $(this).data('scheme');
 				if (self.currentScheme !== schemeId) {
 					self.showSchema(schemeId);
+
+					$('.dance-menu, .lang-links').removeClass('visible');
+					$('.menu-icon').removeClass('menu-icon--open');
 				}
 			});
 	}

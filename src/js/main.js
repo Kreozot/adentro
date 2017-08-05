@@ -128,7 +128,7 @@ class Adentro {
 			return lang;
 		});
 
-		$('#lang').html(langLinksTemplate({languages}));
+		$('.lang-links').html(langLinksTemplate({languages}));
 	}
 
 	renderScheme(scheme, schemeMods = {}) {
@@ -239,4 +239,11 @@ $(window).load(function () {
 	}
 
 	tour.startFirstTime();
+});
+
+$('.logo').on('click', () => {
+	if ($(window).width() <= 480) {
+		$('.dance-menu, .lang-links').toggleClass('visible');
+		$('.menu-icon').toggleClass('menu-icon--open');
+	}
 });

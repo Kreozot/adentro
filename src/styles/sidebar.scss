@@ -1,0 +1,71 @@
+@import 'mixins/_media.scss';
+
+.sidebar {
+	position: relative;
+	min-width: 200px;
+	background: white;
+
+	@mixin media S {
+		position: fixed;
+		z-index: 10;
+		left: 0;
+		top: 0;
+		width: 100%;
+	}
+
+	@mixin media M {
+		min-width: 120px;
+	}
+}
+
+.logo {
+	margin: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.menu-icon {
+	display: none;
+	height: 25px;
+	margin: 5px 15px 0 10px;
+
+	@mixin media S {
+		display: inline-block;
+	}
+}
+
+.logo-image {
+	height: 45px;
+
+	@mixin media S {
+		height: 30px;
+	}
+}
+
+.lang-links {
+	width: 100%;
+	text-align: right;
+
+	&__link, &__link:visited:not(.link--current) {
+		color: #939393;
+	}
+
+	@mixin media S {
+		width: auto;
+		position: absolute;
+		right: 20px;
+		top: 15px;
+		font-size: 1.3em;
+
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.3s 0s, visibility 0s 0.3s;
+		display: none;
+	}
+}
+
+.visible {
+	visibility: visible !important;
+	opacity: 1 !important;
+	display: block !important;
+}

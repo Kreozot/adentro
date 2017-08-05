@@ -1,20 +1,9 @@
+@import 'mixins/_media.scss';
+
 body {
 	margin-top: 0px;
 	font-family: Verdana, sans-serif;
 	font-size: 14px;
-}
-
-.logo {
-	margin: 10px;
-}
-
-.lang-links {
-	position: absolute;
-	right: 0;
-
-	&__link, &__link:visited:not(.link--current) {
-		color: #939393;
-	}
 }
 
 #navigation {
@@ -171,6 +160,10 @@ a.content_link.active {
 	flex-direction: column;
 	flex-grow: 1;
 	align-items: center;
+
+	@mixin media S {
+		margin-top: 30px;
+	}
 }
 
 .scheme-wrapper, .animation-wrapper {
@@ -178,5 +171,6 @@ a.content_link.active {
 	max-width: 800px;
 }
 
+@import 'sidebar.scss';
 @import 'blocks/link.scss';
 @import 'blocks/social-links.scss';
