@@ -5,7 +5,7 @@
 	min-width: 200px;
 	background: white;
 
-	@mixin media S {
+	@mixin media M {
 		position: fixed;
 		z-index: 10;
 		left: 0;
@@ -13,11 +13,11 @@
 		width: 100%;
 	}
 
-	@mixin media M {
+	@mixin media L {
 		min-width: 120px;
 	}
 
-	&--open {		
+	&--open {
 		height: 100%;
 		overflow: scroll;
 	}
@@ -27,6 +27,10 @@
 	margin: 10px;
 	display: flex;
 	align-items: center;
+
+	@mixin media M {
+		cursor: pointer;
+	}
 }
 
 .menu-icon {
@@ -34,7 +38,7 @@
 	height: 25px;
 	margin: 5px 15px 0 10px;
 
-	@mixin media S {
+	@mixin media M {
 		display: inline-block;
 	}
 }
@@ -55,7 +59,7 @@
 		color: #939393;
 	}
 
-	@mixin media S {
+	@mixin media M {
 		width: auto;
 		position: absolute;
 		right: 20px;

@@ -252,7 +252,7 @@ $(window).load(function () {
 });
 
 $('.logo').on('click', () => {
-	if ($(window).width() <= 480) {
+	if ($(window).width() <= 768) {
 		$('.dance-menu, .lang-links').toggleClass('visible');
 		$('.sidebar').toggleClass('sidebar--open')
 			.scrollTop(0);

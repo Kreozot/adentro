@@ -1,6 +1,6 @@
-$S: 650px;
+$S: 600px;
 $M: 768px;
-$L: 1170px;
+$L: 1030px;
 
 @define-mixin media $canvas {
 	@if $canvas == S {
