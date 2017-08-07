@@ -4,20 +4,18 @@ const argv = require('yargs').argv;
 const config = require('./config.js');
 const paths = config.paths;
 // const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
-const Visualizer = require('webpack-visualizer-plugin');
+// const Visualizer = require('webpack-visualizer-plugin');
 const schemesList = require('./schemesList.js');
-const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
-const yaml = require('js-yaml');
-const htmlmin = require('html-minifier');
 const cheerio = require('cheerio');
 
 const postcssPlugins = [
 	require('cssnano')(),
 	require('autoprefixer')(),
 	require('postcss-cssnext')(),
-	require('precss')()
+	require('precss')(),
+	// require('postcss-mixins')()
 ];
 
 var webpackConfig = [

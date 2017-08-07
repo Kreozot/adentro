@@ -1,134 +1,91 @@
 <%
-// Есть ли необходимость в выносах текста
-const usesTextLines = scheme.some(part => part.some(element => element.yOffset));
-const config = {
-	xMargin: 50,
-	schemaWidth: 800,
-	lineHeight: usesTextLines ? 80 : 60,
-	blockHeight: 20,
-	barWidth: 3
-};
-const fullWidth = config.schemaWidth + (config.xMargin * 2);
-const fullHeight = config.lineHeight * scheme.length;
-const ratio = fullHeight / fullWidth * 100;
-let clusterStartPos = 0;
+let clusterTimes = 0;
+let clusterIds = [];
 
-function renderBar(pos, line, oneTimeWidth) {
-	const x = config.xMargin + pos * oneTimeWidth + 1;
-	const y = (line - 1) * config.lineHeight + 1;
+function renderBar() {
 	%>
-	<line class="bar" x1="<%= x %>" y1="<%= y %>" x2="<%= x %>" y2="<%= y + config.blockHeight + 1 %>"/>
+	<div class="bar"></div>
 	<%
 }
 
-function renderElement(pos, line, oneTimeWidth, element, prevElement, nextElement) {
-	({id, title, visualization, manPosition, times, textOffset = 0, yOffset, class: className} = element);
-
-	let x = config.xMargin + pos * oneTimeWidth;
-	if (prevElement.bar) {
-		x++;
-	}
-	const y = (line - 1) * config.lineHeight + 1;
-	let blockWidth = oneTimeWidth * times;
-	if (prevElement.bar || nextElement.bar) {
-		blockWidth--;
-	}
-
-	const sameElement = element.title === nextElement.title;
+function renderElement(element, nextElement) {
+	const {id, visualization, manPosition, times, class: className} = element;
 %>
-
-	<rect class="element <%= className %>"
-		x="<%= x %>"
-		y="<%= y %>"
-		width="<%= blockWidth %>"
-		height="<%= config.blockHeight %>"
+	<div class="element element--<%= className %>"
+		style="flex: <%= times %>;"
 		id="<%= id %>"
 		data-visualization="<%= visualization %>"
 		data-manposition="<%= manPosition %>"
-		data-times="<%= times %>"/>
+		data-times="<%= times %>">
+		<%= times %>
+	</div>
+<%
+}
 
-	<rect class="active-frame"
-		x="<%= x + 1 %>"
-		y="<%= y + 2 %>"
-		width="<%= blockWidth - 3 %>"
-		height="<%= config.blockHeight - 4 %>"
-		id="<%= id %>-frame"/>
+function renderElementTitle(element, nextElement) {
+	const {id, title, times, textOffset = 0, yOffset, class: className} = element;
 
-	<text class="times-count-text"
-		x="<%= x + (blockWidth / 2) %>"
-		y="<%= y + config.blockHeight / 2 + 5 %>"><%= times %></text>
+	const nextElementIsSame = element.title === nextElement.title;
+	clusterIds.push(id);
 
-	<%
-	if (!sameElement) {
-		// Отступ по вертикали для подписи
-		const textTop = yOffset ? config.blockHeight + 50 : config.blockHeight + 16;
-		let textX = x + (blockWidth / 2);
-		if (clusterStartPos < pos) {
-			const clusterX = config.xMargin + clusterStartPos * oneTimeWidth;
-			const clusterWidth = oneTimeWidth * (pos - clusterStartPos + times);
-			textX = clusterX + clusterWidth / 2;
-		}
-		const textY = y + textTop;
+	if (!nextElementIsSame) {
 	%>
-
-		<% if (yOffset) { %>
-			<line class="text-line"
-				x1="<%= textX %>"
-				y1="<%= y + config.blockHeight + 4 %>"
-				x2="<%= textX %>"
-				y2="<%= y + textTop - 14 %>" />
-		<% } %>
-
-		<text class="element-text"
-			x="<%= textX + textOffset %>"
-			y="<%= textY %>"
-			id="<%= id %>-text"><%- title
-				.replace(/\$m\[([^\]]+)\]/g, `<tspan class="element-text--man">$1</tspan>`)
-				.replace(/\$w\[([^\]]+)\]/g, `<tspan class="element-text--woman">$1</tspan>`)
-				.replace(/->(.+)/g, `<tspan dy="14" x="${textX + textOffset}">$1</tspan>`)
-			%></text>
+		<div class="element-title <%= className %> <%= clusterIds.map(id => `element-title--${id}`).join(' ') %>"
+			style="flex: <%= clusterTimes + times %>;">
+			<div class="element-title__text <%= yOffset ? 'element-title__text--offset' : '' %>"><%- title
+				.replace(/\$m\[([^\]]+)\]/g, `<span class="element-text--man">$1</span>`)
+				.replace(/\$w\[([^\]]+)\]/g, `<span class="element-text--woman">$1</span>`)
+				.replace(/->/g, '<br>')
+			%></div>
+		</div>
 	<%
-		clusterStartPos = pos + times;
+		clusterTimes = 0;
+		clusterIds = [];
+	} else {
+		clusterTimes = clusterTimes + times;
 	}
 }
 
-function renderPart(config, elements, line) {
-	const beatsCount = elements.reduce((sum, element) => {
-		if (element.times) {
-			sum += element.times;
-		}
-		return sum;
-	}, 0);
-	const oneTimeWidth = config.schemaWidth / beatsCount;
-	let pos = 0;
-	clusterStartPos = 0;
-	elements.forEach((element, index) => {
-		if (element.bar) {
-			renderBar(pos, line, oneTimeWidth);
-		} else {
-			const nextElement = (index + 1 < elements.length) ? elements[index + 1] : {};
-			const prevElement = (index > 0) ? elements[index - 1] : {};
+function renderPart(elements) {
+	clusterTimes = 0;
+	clusterIds = [];
+%>
+<div>
+	<div class="scheme-row">
+	<%
+		elements.forEach((element, index) => {
+			if (element.bar) {
+				renderBar();
+			} else {
+				const nextElement = (index + 1 < elements.length) ? elements[index + 1] : {};
 
-			renderElement(pos, line, oneTimeWidth, element, prevElement, nextElement);
-			pos += element.times;
-		}
-	});
+				renderElement(element, nextElement);
+			}
+		});
+	%>
+	</div>
+	<div class="title-row">
+	<%
+		elements.forEach((element, index) => {
+			if (element.bar) {
+				renderBar();
+			} else {
+				const nextElement = (index + 1 < elements.length) ? elements[index + 1] : {};
+
+				renderElementTitle(element, nextElement);
+			}
+		});
+	%>
+	</div>
+</div>
+<%
 }
 %>
 
-<div class="svg-container" style="padding-bottom: <%= ratio %>%;">
-	<svg
-		class="stretch-svg"
-		width="100%"
-		height="100%"
-		viewBox="0 0 <%= fullWidth %> <%= fullHeight %>"
-		xmlns="http://www.w3.org/2000/svg"
-		xmlns:xlink="http://www.w3.org/1999/xlink"
-		overflow="hidden">
-		<%
-		scheme.forEach((elements, line) => {
-			renderPart(config, elements, line + 1);
-		});
-		%>
-	</svg>
+<div class="scheme">
+	<%
+	scheme.forEach((elements) => {
+		renderPart(elements);
+	});
+	%>
 </div>

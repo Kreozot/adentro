@@ -27,6 +27,7 @@
 	}
 
 	@mixin media S {
+		font-size: 18px;
 		padding: 5%;
 		opacity: 0;
 		visibility: hidden;

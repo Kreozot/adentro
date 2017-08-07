@@ -22,9 +22,8 @@ class Adentro {
 	 * Спрятать отображение текущего элемента на схеме
 	 */
 	hideCurrentElementMarkOnSchema() {
-		Snap.selectAll('text.current, rect.current').forEach(elem => {
-			elem.removeClass('current');
-		});
+		$('.element--current').removeClass('element--current');
+		$('.element-title__text--current').removeClass('element-title__text--current');
 	}
 
 	/**
@@ -37,40 +36,40 @@ class Adentro {
 
 	/**
 	 * Выделение текущего элемента на SVG-схеме
-	 * @param  {String} element 	  Идентификатор элемента
+	 * @param  {String} elementId 	  Идентификатор элемента
 	 */
-	markCurrentElementOnSchema(element) {
-		if (element[0] === '#') {
+	markCurrentElementOnSchema(elementId) {
+		if (elementId[0] === '#') {
 			//Пропускаем обработку служебных меток
 			return;
 		}
-		// Показываем рамку вокруг текущего блока
-		const frameId = `${element}-frame`;
-		Snap.selectAll(`rect.current:not(#${frameId})`).forEach(function (elem) {
-			elem.removeClass('current');
-		});
-		Snap(`#${frameId}`).addClass('current');
+		// Выделяем текущий элемент
+		$(`.element:not(#${elementId})`).removeClass('element--current');
+		$(`#${elementId}`).addClass('element--current');
+		// Выделяем подпись текущего элемента
+		$(`.element-title:not(.element-title--${elementId})`).removeClass('element-title--current');
+		$(`.element-title--${elementId}`).addClass('element-title--current');
 	}
 
 	/**
 	 * Отображение текущего элемента
-	 * @param  {String} element 	  Идентификатор элемента
+	 * @param  {String} elementId 	  Идентификатор элемента
 	 * @param  {Number} seconds    	  Длительность в секундах
 	 */
-	showCurrentElement(element, seconds) {
-		if (element.split('_')[0] === '#start') {
+	showCurrentElement(elementId, seconds) {
+		if (elementId.split('_')[0] === '#start') {
 			// Начальное расположение
 			this.animationLoader.animation.setAtStart();
 			this.hideCurrentElementMarkOnSchema();
 			return;
-		} else if (element[0] === '#') {
+		} else if (elementId[0] === '#') {
 			//Пропускаем обработку служебных меток
 			return;
 		}
 
-		this.markCurrentElementOnSchema(element);
+		this.markCurrentElementOnSchema(elementId);
 		// Запускаем соответствующую анимацию
-		const domElement = $('#' + element);
+		const domElement = $('#' + elementId);
 		const visualizationFuncName = domElement.data('visualization');
 		const manPosition = domElement.data('manposition');
 		const beats = domElement.data('times');
