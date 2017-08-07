@@ -140,6 +140,7 @@ class Adentro {
 			return element;
 		}));
 		$('#schemaDiv').html(schemeTemplate({scheme: modScheme}));
+		this.adaptiveLineHeight();
 
 		const player = this.player;
 		$('.element').on('click', function () {
@@ -211,6 +212,16 @@ class Adentro {
 		});
 	}
 
+	adaptiveLineHeight() {
+		$('.title-row').each(function () {
+			var maxHeight = 0;
+			$('.element-title__text', this).each(function () {
+				maxHeight = Math.max(maxHeight, $(this).height());
+			});
+			$(this).css('height', `${maxHeight + 5}px`);
+		});
+	}
+
 	localize(textObj) {
 		return textObj[this.lang];
 	}
@@ -248,3 +259,5 @@ $('.logo').on('click', () => {
 		$('.menu-icon').toggleClass('menu-icon--open');
 	}
 });
+
+$(window).on('resize', () => global.adentro.adaptiveLineHeight());
