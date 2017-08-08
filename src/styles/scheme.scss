@@ -5,8 +5,12 @@
 	stroke-width: 1px;
 }
 
-.scheme {
+.scheme-wrapper {
+	width: 100%;
 	max-width: 1000px;
+}
+
+.scheme {
 	margin: 0 50px;
 	font-size: 10pt;
 	transition: font-size 0.5s;
@@ -100,6 +104,22 @@
 	&__text {
 		position: absolute;
 		width: 100%;
+
+		&--offset {
+			padding-top: 3em;
+			left: -50px;
+			width: calc(100% + 100px);
+
+			&:before {
+				content: '';
+				position: absolute;
+				height: calc(3em - 3px);
+				width: 1px;
+				background-color: #939393;
+				left: 50%;
+				top: 3px;
+			}
+		}
 	}
 
 	&--current {
@@ -126,6 +146,8 @@
 		color: rgb(182, 26, 172);
 	}
 }
+
+
 
 .bar {
 	box-sizing: border-box;

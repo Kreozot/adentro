@@ -12,7 +12,7 @@
   - {times: 8, manPosition: left, class: zarandeo, id: zarandeo, visualization: zarandeo, title: "$w[Zarandeo]"}
   - bar: true
   - {times: 4, manPosition: left, class: vuelta, id: mediaVuelta, visualization: mediaVuelta, title: Media vuelta}
-  - {times: 4, manPosition: right, class: coronacion, id: coronacion, visualization: coronacion, title: Giro y&nbsp;coronación, yOffset: true}
+  - {times: 4, manPosition: right, class: coronacion, id: coronacion, visualization: coronacion, title: Giro y&nbsp;coronación}
 -
   - {times: 4, manPosition: right, class: esquina, id: esquina1_2, visualization: esquina, title: Esquina y&nbsp;balanceo}
   - {times: 4, manPosition: bottom, class: esquina, id: esquina2_2, visualization: esquina, title: Esquina y&nbsp;balanceo}
@@ -26,4 +26,4 @@
   - {times: 8, manPosition: right, class: zapateo, id: zapateo_2, visualization: zapateo, title: "$m[Zapateo]"}
   - bar: true
   - {times: 4, manPosition: right, class: vuelta, id: mediaVuelta_2, visualization: mediaVuelta, title: Media vuelta}
-  - {times: 4, manPosition: left, class: coronacion, id: coronacion_2, visualization: coronacion, title: Giro y&nbsp;coronación, yOffset: true}
+  - {times: 4, manPosition: left, class: coronacion, id: coronacion_2, visualization: coronacion, title: Giro y&nbsp;coronación}

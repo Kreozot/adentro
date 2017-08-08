@@ -216,9 +216,9 @@ class Adentro {
 		$('.title-row').each(function () {
 			var maxHeight = 0;
 			$('.element-title__text', this).each(function () {
-				maxHeight = Math.max(maxHeight, $(this).height());
+				maxHeight = Math.max(maxHeight, $(this).outerHeight());
 			});
-			$(this).css('height', `${maxHeight + 5}px`);
+			$(this).css('height', `${maxHeight + 7}px`);
 		});
 	}
 
