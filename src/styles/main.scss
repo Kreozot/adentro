@@ -1,4 +1,5 @@
 @import 'mixins/_media.scss';
+@import 'vars/_colors.scss';
 
 body {
 	margin-top: 0px;
@@ -27,7 +28,7 @@ body {
 .animation-links {
 	margin: 10px 0 20px;
 	text-align: center;
-	color: #939393;
+	color: $adentroGrey;
 }
 
 .music-links {
@@ -40,7 +41,7 @@ body {
 }
 
 .music-links__text {
-	color: #939393;
+	color: $adentroGrey;
 }
 
 .music-links__select {
@@ -56,10 +57,10 @@ ul {
 	font-size: 24px;
 	font-family: Negotiate, sans-serif;
 	font-weight: normal;
-	color: #939393;
+	color: $adentroGrey;
 
 	&:first-letter {
-		color: #0094ff;
+		color: $adentroBlue;
 	}
 }
 
@@ -113,7 +114,7 @@ a.content_link.active {
 
 .footer {
 	font-size: 11px;
-	color: #939393;
+	color: $adentroGrey;
 	display: flex;
 	justify-content: center;
 	align-items: center;

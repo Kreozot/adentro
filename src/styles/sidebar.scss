@@ -1,4 +1,5 @@
 @import 'mixins/_media.scss';
+@import 'vars/_colors.scss';
 
 .sidebar {
 	position: relative;
@@ -56,7 +57,7 @@
 	text-align: right;
 
 	&__link, &__link:visited:not(.link--current) {
-		color: #939393;
+		color: $adentroGrey;
 	}
 
 	@mixin media M {

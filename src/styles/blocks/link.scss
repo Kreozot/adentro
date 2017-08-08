@@ -1,3 +1,5 @@
+@import '../vars/_colors.scss';
+
 .link {
 	cursor: pointer;
 	text-decoration: underline;
@@ -5,12 +7,12 @@
 
 	&:hover:not(&--current) {
 		color: black;
-		-webkit-text-decoration-color: #0094FF;
-		text-decoration-color: #0094FF;
+		-webkit-text-decoration-color: $adentroBlue;
+		text-decoration-color: $adentroBlue;
 	}
 
 	&--current {
-		color: #0094FF;
+		color: $adentroBlue;
 		text-decoration: none;
 		cursor: default;
 		pointer-events: none;

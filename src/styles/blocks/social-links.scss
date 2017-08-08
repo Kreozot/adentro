@@ -1,3 +1,5 @@
+@import '../vars/_colors.scss';
+
 .social {
 	white-space: nowrap;
 
@@ -16,13 +18,13 @@
 		height: 16px;
 
 		path {
-			fill: #939393;
+			fill: $adentroGrey;
 			transition: fill 0.3s;
 		}
 
 		&:hover, &:active {
 			path {
-				fill: #0094FF;
+				fill: $adentroBlue;
 			}
 		}
 	}

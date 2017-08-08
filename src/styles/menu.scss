@@ -1,10 +1,11 @@
 @import 'mixins/_media.scss';
+@import 'vars/_colors.scss';
 
 .dance-menu {
 	padding: 0 5% 5%;
 	font-family: Negotiate, sans-serif;
 	font-size: 16px;
-	color: #939393;
+	color: $adentroGrey;
 
 	ul {
 		margin: 0;
@@ -51,7 +52,7 @@
 		position: absolute;
 		height: $basis;
 		width: 100%;
-		background: #939393;
+		background: $adentroGrey;
 		border-radius: $basis;
 		opacity: 1;
 		left: 0;
