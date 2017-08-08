@@ -106,9 +106,9 @@
 		width: 100%;
 
 		&--offset {
-			padding-top: 3em;
-			left: -50px;
-			width: calc(100% + 100px);
+			padding-top: 2.9em;
+			left: -35px;
+			width: calc(100% + 70px);
 
 			&:before {
 				content: '';
@@ -118,6 +118,16 @@
 				background-color: #939393;
 				left: 50%;
 				top: 3px;
+			}
+
+			@mixin media S {
+				padding-top: 0;
+				left: 0;
+				width: 100%;
+
+				&:before {
+					content: none;
+				}
 			}
 		}
 	}
