@@ -26,6 +26,12 @@ export const FIGURE_HANDS = {
 	DOWN: 'down'
 };
 
+export const STEP_STYLE = {
+	BASIC: 0,
+	ZAPATEO: 1,
+	SIMPLE: 2
+};
+
 const figuresSvg = {
 	man: getSvgElement('figures.svg', '#man'),
 	woman: getSvgElement('figures.svg', '#woman'),
@@ -212,9 +218,9 @@ export default class DanceAnimation {
 			.then(() => this.animateLegsZapateo(figure, oppositeLegStr, stepDuration, stepsLeft - 1));
 	}
 
-	animateFigureTimeZapateo(figure, timeLength, beats, figureHands) {
-		$(`.hands:not(.hands--${figureHands})`, figure.node).addClass('invisible');
-		$(`.hands--${figureHands}`, figure.node).removeClass('invisible');
+	animateFigureTimeZapateo(figure, timeLength, beats) {
+		$(`.hands:not(.hands--${FIGURE_HANDS.DOWN})`, figure.node).addClass('invisible');
+		$(`.hands--${FIGURE_HANDS.DOWN}`, figure.node).removeClass('invisible');
 
 		return this.animateLegsZapateo(figure, 'right', timeLength / beats / 6, beats)
 			.finally(() => {
@@ -223,33 +229,34 @@ export default class DanceAnimation {
 			});
 	}
 
+	animateFigureTimeBasic(figure, timeLength, beats, isLastElement) {
+		const stepDuration = timeLength / beats / 3;
+		// Если последний элемент, анимируем меньше на два шага (на 2/3 базового шага)
+		const steps = isLastElement ? (beats * 3 - 2) : (beats * 3);
+		this.animateLegs(figure, 'right', stepDuration, steps);
+	}
+
+	animateFigureTimeSimple(figure, timeLength, beats) {
+		this.animateLegs(figure, 'right', timeLength / beats, beats);
+	}
+
 	/**
 	 * Анимация фигур в такт
 	 * @param  {Ojbect} figure     Объект фигуры
 	 * @param  {Number} timeLength Длительность отрезка
 	 * @param  {Number} beats      Количество тактов отрезка
 	 */
-	animateFigureTime(figure, timeLength, beats, isLastElement) {
-		const stepDuration = timeLength / beats / 3;
-		// Если последний элемент, анимируем меньше на два шага (на 2/3 базового шага)
-		const steps = isLastElement ? (beats * 3 - 2) : (beats * 3);
-		this.animateLegs(figure, 'right', stepDuration, steps);
-		// const length = timeLength;
-		// const oneTimeLength = length / beats;
-		// Snap.animate(0, length)
-
-		// Пульсация в такт
-		// const length = timeLength;
-		// const oneTimeLength = length / beats;
-		// this.animations[this.animations.length] = Snap.animate(0, length,
-		// 	function (value) { //this - animation element
-		// 		// Если дробная часть от деления текущей позиции на длину такта достаточно близка к единице, значит сейчас сильная доля
-		// 		if (mod(value, oneTimeLength) > 0.8) {
-		// 			figure.addClass('figure--straight-beat');
-		// 		} else {
-		// 			figure.removeClass('figure--straight-beat');
-		// 		}
-		// 	}, timeLength, mina.linear);
+	animateFigureTime(figure, timeLength, beats, stepStyle, isLastElement) {
+		switch (stepStyle) {
+			case STEP_STYLE.ZAPATEO:
+				this.animateFigureTimeZapateo(figure, timeLength, beats);
+				break;
+			case STEP_STYLE.SIMPLE:
+				this.animateFigureTimeSimple(figure, timeLength, beats);
+				break;
+			default:
+				this.animateFigureTimeBasic(figure, timeLength, beats, isLastElement);
+		}
 	}
 
 	/**
@@ -311,7 +318,7 @@ export default class DanceAnimation {
 	 * @param  {Number} direction  Константа, определяющая направление движения
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
-	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS, pairFigure, isLastElement}) {
+	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS, pairFigure, isLastElement, stepStyle = STEP_STYLE.BASIC}) {
 		// Перенос фигура на верх DOM-а (TODO: Исправить на группировку)
 		figure.node.parentNode.appendChild(figure.node);
 
@@ -358,7 +365,7 @@ export default class DanceAnimation {
 					transformAtLength(value);
 				}, timeLengthForPath, easing, resolve);
 
-			this.animateFigureTime(figure, timeLength, beats, isLastElement);
+			this.animateFigureTime(figure, timeLength, beats, stepStyle, isLastElement);
 		});
 	}
 
