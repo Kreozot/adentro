@@ -44,6 +44,6 @@ export default class ElementTiming {
 	 * @return {Number} Время начала элемента в секундах
 	 */
 	getBeginTime() {
-		return Math.round(this.beats[0] * 10) / 10;
+		return Math.round(this.beats[0] * 100) / 100;
 	}
 }
