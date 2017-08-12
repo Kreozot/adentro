@@ -5,6 +5,7 @@ import {getElement} from './timing/timing';
 export default class Player {
 	constructor(main) {
 		this.main = main;
+		this.interval = null;
 		this.player = plyr.setup({
 			iconUrl: '/plyr.svg'
 		})[0];
@@ -24,20 +25,20 @@ export default class Player {
 	}
 
 	initEvents() {
-		this.player.on('timeupdate', () => {
-			// Если остановлено
-			if ((this.player.isPaused()) && (this.player.getCurrentTime() == 0)) {
-				this.main.hideCurrentElement();
-			} else {
-				this.main.animationLoader.animation.resume();
+		this.player.on('playing', () => {
+			const animation = this.main.animationLoader.animation;
+			this.interval = window.setInterval(() => {
+				animation.resume();
 				this.getAndShowCurrentElement();
-			}
+			}, 10);
 		});
 		this.player.on('ended', () => {
+			window.clearInterval(this.interval);
 			this.main.hideCurrentElement();
 			this.currentElement = null;
 		});
 		this.player.on('pause', () => {
+			window.clearInterval(this.interval);
 			if ((this.player.isPaused()) && (this.player.getCurrentTime() !== 0)) {
 				this.main.animationLoader.animation.pause();
 			}
