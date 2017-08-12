@@ -52,21 +52,29 @@ export default class Legs {
 		const transformFrom = 0;
 		const transformTo = FIGURE_STEP_AMPLITUDE / 2;
 
+		// Па!
 		this.kick(figure, oppositeLegStr, 'back');
-		return this.animateLeg(figure, oppositeLegStr, stepDuration, transformTo, transformFrom, mina.easeout)
-			.delay(stepDuration)
-			.then(() => {
-				this.kick(figure, legStr, 'front');
-				return this.animateLeg(figure, legStr, stepDuration, transformFrom, transformTo);
-			})
+		const resultPromise = this.animateLeg(figure, oppositeLegStr, stepDuration, transformTo, transformFrom, mina.easeout)
+			.delay(stepDuration);
+		if (stepsLeft === 1) {
+			return resultPromise;
+		}
+		// Па-
+		return resultPromise.then(() => {
+			this.kick(figure, legStr, 'front');
+			return this.animateLeg(figure, legStr, stepDuration, transformFrom, transformTo);
+		})
+			// Пи-
 			.then(() => {
 				this.kick(figure, legStr, 'back');
 				return this.animateLeg(figure, legStr, stepDuration, transformTo, transformFrom, mina.easeout);
 			})
+			// То-
 			.then(() => {
 				this.kick(figure, oppositeLegStr, 'back');
 			})
 			.delay(stepDuration)
+			// Па-
 			.then(() => {
 				this.kick(figure, legStr, 'front');
 				return this.animateLeg(figure, legStr, stepDuration, transformFrom, transformTo);
