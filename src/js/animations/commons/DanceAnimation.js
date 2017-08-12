@@ -297,8 +297,10 @@ export default class DanceAnimation {
 		}
 
 		if (gender === 'man') {
+			resultPath.removeClass('path--woman');
 			resultPath.addClass('path--man');
 		} else if (gender === 'woman') {
+			resultPath.removeClass('path--man');
 			resultPath.addClass('path--woman');
 		}
 
@@ -321,6 +323,7 @@ export default class DanceAnimation {
 	 */
 	startPosFigure(figure, coords) {
 		figure.angle = null;
+		this.changeFigureHands(figure, FIGURE_HANDS.DOWN);
 		this.positionFigure(figure, coords.x, coords.y, coords.angle);
 		figure.removeClass('invisible');
 		$('.leg', figure.node)
