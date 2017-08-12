@@ -1,4 +1,5 @@
 import Promise from 'bluebird';
+import {FIGURE_HANDS} from 'animationClasses/commons/const';
 import SingleElement from './SingleElement';
 
 /**
@@ -25,7 +26,7 @@ export default class RotateElement extends SingleElement {
 		});
 	}
 
-	startAnimation({lengthS, beats, startAngle, startPart = 0, stopPart = 1}) {
+	startAnimation({lengthS, beats, startAngle, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.CASTANETAS}) {
 		const angle = startAngle;
 		const startLen = this.pathLength * startPart;
 		const stopLen = this.pathLength * stopPart;
@@ -37,6 +38,12 @@ export default class RotateElement extends SingleElement {
 		};
 
 		transformAtLength(startLen);
+
+		this.animation.changeFigureHands(this.figure, figureHands);
+
+		$(`.kick`, this.figure.node)
+			.addClass(`invisible`);
+
 		this.figure.removeClass('invisible');
 
 		return new Promise(resolve => {
