@@ -23,7 +23,7 @@ export default class ZapateoElement extends SingleElement {
 				figureHands: FIGURE_HANDS.DOWN,
 			});
 		} else {
-			return this.animation.animateFigureTime({
+			return this.animation.legs.animateFigureTime({
 				figure: this.figure,
 				timeLength: lengthMs,
 				beats,

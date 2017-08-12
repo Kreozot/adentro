@@ -18,7 +18,7 @@ export default class RotateElement extends SingleElement {
 
 	animationFunction({lengthMs, beats}) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
-		return this.animation.animateFigureTime({
+		return this.animation.legs.animateFigureTime({
 			figure: this.figure,
 			timeLength: lengthMs,
 			beats: beats * 6
@@ -46,7 +46,7 @@ export default class RotateElement extends SingleElement {
 					transformAtLength(value);
 				}, lengthS * 1000, mina.linear, resolve);
 
-			this.animation.animateFigureTime({
+			this.animation.legs.animateFigureTime({
 				figure: this.figure,
 				timeLength: lengthS * 1000,
 				beats
