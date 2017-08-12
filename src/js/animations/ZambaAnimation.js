@@ -39,7 +39,6 @@ export default class ZambaAnimation extends GatoAnimation {
 
 	vuelta(lengthS, manPosition, beats) {
 		this.clearPaths();
-		this.elements.mediaVuelta.setAngle(-45);
 		this.elements.mediaVueltaToArresto.setAngle(-45);
 		this.elements.mediaVuelta.drawPath(manPosition);
 		this.elements.mediaVueltaToArresto.drawPath(getOppositePosition(manPosition));
@@ -98,14 +97,26 @@ export default class ZambaAnimation extends GatoAnimation {
 	}
 
 	mediaVuelta(lengthS, manPosition, beats) {
-		this.elements.mediaVueltaToArresto.setAngle(-45);
-		return this.elements.mediaVueltaToArresto.fullAnimation({
-			lengthS,
-			beats,
-			manPosition,
+		this.clearPaths();
+		this.elements.mediaVueltaToArresto.drawPath(getOppositePosition(manPosition));
+
+		return this.elements.mediaVueltaToArresto.startAnimation({
+			lengthS: lengthS / 2,
+			beats: beats / 2,
 			figureHands: FIGURE_HANDS.PANUELO,
-			stepStyle: STEP_STYLE.ZAMBA
-		});
+			stepStyle: STEP_STYLE.SIMPLE,
+			startPart: 0,
+			stopPart: 0.5
+		})
+			.then(() => this.elements.mediaVueltaToArresto.setAngle(-45))
+			.then(() => this.elements.mediaVueltaToArresto.startAnimation({
+				lengthS: lengthS / 2,
+				beats: beats / 2,
+				figureHands: FIGURE_HANDS.PANUELO,
+				stepStyle: STEP_STYLE.ZAMBA,
+				startPart: 0.5,
+				stopPart: 1
+			}));
 	}
 
 	arresto(lengthS, manPosition, beats) {
