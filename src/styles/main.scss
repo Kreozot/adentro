@@ -162,6 +162,10 @@ a.content_link.active {
 	flex-grow: 1;
 	align-items: center;
 
+	@mixin media M {
+		margin-top: 40px;
+	}
+
 	@mixin media S {
 		margin-top: 30px;
 	}
