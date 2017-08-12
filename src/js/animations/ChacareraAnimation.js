@@ -1,6 +1,6 @@
 import GatoAnimation from './GatoAnimation';
 import PairElement from './commons/elements/double/PairElement';
-import {DIRECTIONS} from './commons/DanceAnimation';
+import {DIRECTIONS} from './commons/const';
 import {gato} from './svg/svg';
 
 export default class ChacareraAnimation extends GatoAnimation {
