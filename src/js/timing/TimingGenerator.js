@@ -5,8 +5,9 @@ import yaml from 'js-yaml';
  * Генератор тайминга
  */
 export default class TimingGenerator {
-	constructor(main) {
+	constructor(main, scheme) {
 		this.main = main;
+		this.scheme = scheme;
 		this.elementsList = this.getElementsList();
 		console.log(this.elementsList);
 		this.elementsTiming = [];
@@ -25,23 +26,20 @@ export default class TimingGenerator {
 			elementsList.push({id, beatCount});
 		}
 
-		const svgdom = $('#schemaDiv svg');
-		let currentY = 0;
-		let currentPart = 1;
+		this.scheme.forEach((part, partIndex, parts) => {
+			addElement(`#start_${partIndex + 1}`, 1);
 
-		$('rect.element', svgdom).each(function (index, element) {
-			// Если перешли на новую строку, добавляем паузу
-			if (element.attributes.y.value != currentY) {
-				currentY = element.attributes.y.value;
-				if (currentPart != 1) {
-					addElement('#pause_' + currentPart, 1);
-				}
-				addElement('#start_' + currentPart, 1);
-				currentPart++;
+			part.filter(element => !element.bar)
+				.forEach(element => {
+					addElement(element.id, element.times);
+				});
+
+			if (partIndex < parts.length - 1) {
+				addElement(`#pause_${partIndex + 1}`, 1);
+			} else {
+				addElement(`#end`, 1);
 			}
-			addElement(element.id, element.attributes['data-times'].value);
 		});
-		addElement('#end', 1);
 
 		return elementsList;
 	}

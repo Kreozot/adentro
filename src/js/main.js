@@ -130,16 +130,19 @@ class Adentro {
 		$('.lang-links').html(langLinksTemplate({languages}));
 	}
 
-	renderScheme(scheme, schemeMods = {}) {
+	getModScheme(scheme, schemeMods = {}) {
 		const modElementIds = Object.keys(schemeMods);
-		const modScheme = scheme.map(part => part.map(element => {
+		return scheme.map(part => part.map(element => {
 			const elementModId = modElementIds.find(modElement => modElement === element.id);
 			if (elementModId) {
 				return {...element, ...schemeMods[elementModId]};
 			}
 			return element;
 		}));
-		$('#schemaDiv').html(schemeTemplate({scheme: modScheme}));
+	}
+
+	renderScheme(scheme) {
+		$('#schemaDiv').html(schemeTemplate({scheme}));
 		this.adaptiveLineHeight();
 
 		const player = this.player;
@@ -162,7 +165,8 @@ class Adentro {
 		this.showMusicLinks(schemeParams.music, musicId);
 		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
 
-		this.renderScheme(schemeParams.scheme, musicSchema.schemeMods);
+		const scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
+		this.renderScheme(scheme);
 
 		this.player.loadMusicSchema(musicSchema);
 		this.player.initEvents();
@@ -194,13 +198,14 @@ class Adentro {
 		this.showMusicLinks(schemeParams.music, musicId, true);
 		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
 
-		this.renderScheme(schemeParams.scheme, musicSchema.schemeMods);
+		const scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
+		this.renderScheme(scheme);
 
 		this.player.loadMusicSchema(musicSchema);
 
 		console.log('editor mode on');
 		$('#animationDiv').html('');
-		const timingGenerator = new TimingGenerator(this);
+		const timingGenerator = new TimingGenerator(this, scheme);
 
 		$('html').keypress(event => {
 			if (event.which == KEY_SPACE) {
