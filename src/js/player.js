@@ -60,6 +60,7 @@ export default class Player {
 		});
 		this.scheme = {...musicDef.schema};
 
+		// Смещаем все элементы на треть базового шага для того, чтобы успевала анимация
 		for (let key in this.scheme) {
 			if (this.scheme.hasOwnProperty(key)) {
 				const value = this.scheme[key];
@@ -71,9 +72,7 @@ export default class Player {
 					schemeElement = part.find(element => element.id === key);
 				});
 				if (schemeElement) {
-					console.log(time, schemeElement);
 					this.scheme[key] = value - (time / schemeElement.times / 3);
-					console.log(value, this.scheme[key]);
 				}
 			}
 		}
