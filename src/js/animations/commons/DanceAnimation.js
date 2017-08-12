@@ -95,6 +95,7 @@ export default class DanceAnimation {
 			.attr('style', null)
 			.attr('display', null)
 			.addClass('invisible');
+		this.changeFigureHands(figure, FIGURE_HANDS.DOWN);
 		figure.angle = null;
 		return figure;
 	}
@@ -184,6 +185,11 @@ export default class DanceAnimation {
 		}
 	}
 
+	changeFigureHands(figure, hands) {
+		$(`.hands:not(.hands--${hands})`, figure.node).addClass('invisible');
+		$(`.hands--${hands}`, figure.node).removeClass('invisible');
+	}
+
 	/**
 	 * Анимация фигуры по траектории
 	 * @param  {Object} figure     Фигура для анимации
@@ -221,8 +227,7 @@ export default class DanceAnimation {
 
 		transformAtLength(startLen);
 
-		$(`.hands:not(.hands--${figureHands})`, figure.node).addClass('invisible');
-		$(`.hands--${figureHands}`, figure.node).removeClass('invisible');
+		this.changeFigureHands(figure, figureHands);
 
 		$(`.kick`, figure.node)
 			.addClass(`invisible`);
@@ -317,8 +322,8 @@ export default class DanceAnimation {
 	startPosFigure(figure, coords) {
 		figure.angle = null;
 		this.positionFigure(figure, coords.x, coords.y, coords.angle);
-		figure.removeClass('figure--straight-beat');
 		figure.removeClass('invisible');
+		$('')
 		$('.leg', figure.node)
 			.attr(`transform`, null);
 	}
