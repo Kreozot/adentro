@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 import GatoAnimation, {zapateoAnimation} from './GatoAnimation';
-import {directions, FIGURE_HANDS} from './commons/DanceAnimation';
 import PairElement from './commons/elements/double/PairElement';
+import {DIRECTIONS, FIGURE_HANDS} from './commons/const';
 import {getOppositePosition} from './commons/utils';
 
 export default class ZambaAnimation extends GatoAnimation {
@@ -63,28 +63,28 @@ export default class ZambaAnimation extends GatoAnimation {
 		const zarandeoPromise = this.elements.zarandeo.startAnimation({
 			lengthS: lengthS * 2 / beats,
 			beats: 2,
-			direction: directions.FORWARD,
+			direction: DIRECTIONS.FORWARD,
 			startPart: 0,
 			stopPart: 0.5
 		})
 			.then(() => this.elements.zarandeo.startAnimation({
 				lengthS: lengthS * 2 / beats,
 				beats: 2,
-				direction: directions.BACKWARD,
+				direction: DIRECTIONS.BACKWARD,
 				startPart: 0.5,
 				stopPart: 1
 			}))
 			.then(() => this.elements.zarandeo.startAnimation({
 				lengthS: lengthS * 2 / beats,
 				beats: 2,
-				direction: directions.FORWARD,
+				direction: DIRECTIONS.FORWARD,
 				startPart: 0,
 				stopPart: 0.5
 			}))
 			.then(() => this.elements.zarandeo.startAnimation({
 				lengthS: lengthS * 2 / beats,
 				beats: 1,
-				direction: directions.BACKWARD,
+				direction: DIRECTIONS.BACKWARD,
 				startPart: 0.5,
 				stopPart: 0.75
 			}));
@@ -139,7 +139,7 @@ export default class ZambaAnimation extends GatoAnimation {
 			.then(() => this.elements.arresto.startAnimation({
 				lengthS: lengthS / 4,
 				beats: beats / 4,
-				direction: directions.BACKWARD,
+				direction: DIRECTIONS.BACKWARD,
 				startPart: 1,
 				stopPart: 0,
 				figureHands: FIGURE_HANDS.PANUELO

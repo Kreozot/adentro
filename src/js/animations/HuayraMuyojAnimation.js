@@ -1,10 +1,11 @@
 import Promise from 'bluebird';
-import DanceAnimation, {directions} from './commons/DanceAnimation';
+import DanceAnimation from './commons/DanceAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import RotatePairElement from './commons/elements/double/RotatePairElement';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import {zapateoAnimation, zarandeoAnimation} from './GatoAnimation';
+import {DIRECTIONS} from './commons/const';
 import {getOppositePosition} from './commons/utils';
 
 export default class HuayraMuyojAnimation extends DanceAnimation {
@@ -195,7 +196,7 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 			.then(() => this.elements.avance.startAnimation({
 				lengthS: lengthS / 2,
 				beats: beats / 2,
-				direction: directions.FORWARD,
+				direction: DIRECTIONS.FORWARD,
 				startPart: 1,
 				stopPart: 0
 			}));

@@ -1,9 +1,9 @@
 import Promise from 'bluebird';
 import GatoAnimation from './GatoAnimation';
-import {directions, FIGURE_HANDS} from './commons/DanceAnimation';
 import SingleElement from './commons/elements/single/SingleElement';
 import PairElement from './commons/elements/double/PairElement';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
+import {DIRECTIONS, FIGURE_HANDS} from './commons/const';
 import {getOppositePosition} from './commons/utils';
 
 class HuellaManAnimationElement extends SingleElement {
@@ -20,7 +20,7 @@ class HuellaManAnimationElement extends SingleElement {
 				timeLength: lengthMs,
 				beats,
 				figureHands,
-				direction: directions.STRAIGHT_FORWARD
+				direction: DIRECTIONS.STRAIGHT_FORWARD
 			});
 		};
 	}
@@ -104,17 +104,17 @@ export default class HuellaAnimation extends GatoAnimation {
 		const manPromise = this.elements.manGiro1.startAnimation({
 			lengthS: lengthS / 4,
 			beats: beats / 4,
-			direction: directions.STRAIGHT_FORWARD
+			direction: DIRECTIONS.STRAIGHT_FORWARD
 		})
 			.then(() => this.elements.manGiro2.startAnimation({
 				lengthS: lengthS / 2,
 				beats: beats / 2,
-				direction: directions.STRAIGHT_FORWARD
+				direction: DIRECTIONS.STRAIGHT_FORWARD
 			}))
 			.then(() => this.elements.manGiro3.startAnimation({
 				lengthS: lengthS / 4,
 				beats: beats / 4,
-				direction: directions.STRAIGHT_FORWARD
+				direction: DIRECTIONS.STRAIGHT_FORWARD
 			}));
 
 		return Promise.all([womanPromise, manPromise]);
@@ -130,24 +130,24 @@ export default class HuellaAnimation extends GatoAnimation {
 		const womanPromise = this.elements.womanGiro.startAnimation({
 			lengthS,
 			beats,
-			direction: directions.BACKWARD,
+			direction: DIRECTIONS.BACKWARD,
 			startPart: 1,
 			stopPart: 0
 		});
 		const manPromise = this.elements.manGiro1_contra.startAnimation({
 			lengthS: lengthS / 4,
 			beats: beats / 4,
-			direction: directions.STRAIGHT_FORWARD
+			direction: DIRECTIONS.STRAIGHT_FORWARD
 		})
 			.then(() => this.elements.manGiro2_contra.startAnimation({
 				lengthS: lengthS / 2,
 				beats: beats / 2,
-				direction: directions.STRAIGHT_FORWARD
+				direction: DIRECTIONS.STRAIGHT_FORWARD
 			}))
 			.then(() => this.elements.manGiro3_contra.startAnimation({
 				lengthS: lengthS / 4,
 				beats: beats / 4,
-				direction: directions.STRAIGHT_FORWARD
+				direction: DIRECTIONS.STRAIGHT_FORWARD
 			}));
 
 		return Promise.all([womanPromise, manPromise]);
@@ -162,14 +162,14 @@ export default class HuellaAnimation extends GatoAnimation {
 			this.elements.mediaContraVueltaMan.startAnimation({
 				lengthS,
 				beats,
-				direction: directions.FORWARD,
+				direction: DIRECTIONS.FORWARD,
 				startPart: 1,
 				stopPart: 0
 			}),
 			this.elements.mediaContraVueltaWoman.startAnimation({
 				lengthS,
 				beats,
-				direction: directions.BACKWARD,
+				direction: DIRECTIONS.BACKWARD,
 				startPart: 1,
 				stopPart: 0
 			})

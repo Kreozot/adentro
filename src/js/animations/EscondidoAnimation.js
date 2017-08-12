@@ -1,10 +1,11 @@
-import DanceAnimation, {directions} from './commons/DanceAnimation';
+import DanceAnimation from './commons/DanceAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import RotatePairElement from './commons/elements/double/RotatePairElement';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import VueltaElement from './commons/elements/double/VueltaElement';
 import {zarandeoAnimation} from './GatoAnimation';
+import {DIRECTIONS} from './commons/const';
 import {getOppositePosition} from './commons/utils';
 import {escondido} from './svg/svg';
 
@@ -102,12 +103,12 @@ export default class EscondidoAnimation extends DanceAnimation {
 			.then(() => this.elements.balanceo1.startAnimation({
 				lengthS: lengthS / 4,
 				beats: beats / 4,
-				direction: directions.STRAIGHT_FORWARD
+				direction: DIRECTIONS.STRAIGHT_FORWARD
 			}))
 			.then(() => this.elements.balanceo2.startAnimation({
 				lengthS: lengthS / 4,
 				beats: beats / 4,
-				direction: directions.STRAIGHT_FORWARD
+				direction: DIRECTIONS.STRAIGHT_FORWARD
 			}));
 	}
 

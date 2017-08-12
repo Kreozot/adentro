@@ -1,16 +1,7 @@
+import Promise from 'bluebird';
+import {LEGS, STEP_STYLE, FIGURE_HANDS} from './const';
+
 const FIGURE_STEP_AMPLITUDE = 26;
-
-export const STEP_STYLE = {
-	BASIC: 0,
-	ZAPATEO: 1,
-	SIMPLE: 2,
-	ZAMBA: 3
-};
-
-export const LEGS = {
-	LEFT: 'left',
-	RIGHT: 'right'
-};
 
 export default class Legs {
 	constructor(animations) {
@@ -43,8 +34,6 @@ export default class Legs {
 		if (stepsLeft < 1) {
 			return;
 		}
-		$(`.kick`, figure.node)
-			.addClass(`invisible`);
 		const self = this;
 		const oppositeLegStr = this.getOppositeLeg(legStr);
 
@@ -83,7 +72,11 @@ export default class Legs {
 				this.kick(figure, legStr, 'front');
 				return this.animateLeg(figure, legStr, stepDuration, transformFrom, transformTo);
 			})
-			.then(() => this.animateLegsZapateo(figure, oppositeLegStr, stepDuration, stepsLeft - 1));
+			.then(() => this.animateLegsZapateo(figure, oppositeLegStr, stepDuration, stepsLeft - 1))
+			.then(() => {
+				$(`.kick`, figure.node)
+					.addClass(`invisible`);
+			});
 	}
 
 	animateLegsZamba(figure, legStr, stepDuration, stepsLeft) {

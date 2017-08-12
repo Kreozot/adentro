@@ -1,5 +1,5 @@
 import ZambaAnimation from './ZambaAnimation';
-import {directions} from './commons/DanceAnimation';
+import {DIRECTIONS} from './commons/const';
 import PairElement from './commons/elements/double/PairElement';
 import {getOppositePosition} from './commons/utils';
 
@@ -57,7 +57,7 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 			.then(() => this.elements.arresto.startAnimation({
 				lengthS: lengthS / 4,
 				beats: beats / 4,
-				direction: directions.BACKWARD,
+				direction: DIRECTIONS.BACKWARD,
 				startPart: 1,
 				stopPart: 0
 			}))

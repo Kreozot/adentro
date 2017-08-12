@@ -1,10 +1,10 @@
 import Promise from 'bluebird';
 import QuatroElement from './commons/elements/quatro/QuatroElement';
-import {directions} from './commons/DanceAnimation';
 import Dance4Animation from './commons/Dance4Animation';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import VueltaElement from './commons/elements/double/VueltaElement';
+import {DIRECTIONS} from './commons/const';
 import {getOppositePosition} from './commons/utils';
 import {escondido} from './svg/svg';
 
@@ -101,7 +101,7 @@ export default class Chacarera4Animation extends Dance4Animation {
 		const partBeats = beats / 2;
 
 		return this.elements.avance.startAnimation({lengthS: partSeconds, beats: partBeats, startPart: 0, stopPart: 0.5})
-			.then(() => this.elements.avance.startAnimation({lengthS: partSeconds, beats: partBeats, direction: directions.BACKWARD, startPart: 0.5, stopPart: 1}));
+			.then(() => this.elements.avance.startAnimation({lengthS: partSeconds, beats: partBeats, direction: DIRECTIONS.BACKWARD, startPart: 0.5, stopPart: 1}));
 	}
 
 	giro(lengthS, manPosition, beats) {
@@ -109,7 +109,7 @@ export default class Chacarera4Animation extends Dance4Animation {
 	}
 
 	contraGiro(lengthS, manPosition, beats) {
-		return this.elements.giro.fullAnimation({lengthS, beats, manPosition, direction: directions.BACKWARD, startPart: 1, stopPart: 0});
+		return this.elements.giro.fullAnimation({lengthS, beats, manPosition, direction: DIRECTIONS.BACKWARD, startPart: 1, stopPart: 0});
 	}
 
 	vuelta(lengthS, manPosition, beats) {
@@ -125,7 +125,7 @@ export default class Chacarera4Animation extends Dance4Animation {
 		return this.elements.mediaVuelta.startAnimation({lengthS: partSeconds, beats: partBeats})
 			.then(() => {
 				this.elements.mediaVuelta.drawPath(getOppositePosition(manPosition), true);
-				return this.elements.mediaVuelta.startAnimation({lengthS: partSeconds, beats: partBeats, direction: directions.FORWARD});
+				return this.elements.mediaVuelta.startAnimation({lengthS: partSeconds, beats: partBeats, direction: DIRECTIONS.FORWARD});
 			});
 	}
 
@@ -155,7 +155,7 @@ export default class Chacarera4Animation extends Dance4Animation {
 		};
 		const backwardOptions = {
 			...partOptions,
-			direction: directions.BACKWARD,
+			direction: DIRECTIONS.BACKWARD,
 			startPart: 0.5,
 			stopPart: 1
 		};

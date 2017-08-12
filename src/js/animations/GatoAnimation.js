@@ -1,9 +1,10 @@
 import Promise from 'bluebird';
-import DanceAnimation, {directions, FIGURE_HANDS} from './commons/DanceAnimation';
+import DanceAnimation from './commons/DanceAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import VueltaElement from './commons/elements/double/VueltaElement';
+import {DIRECTIONS, FIGURE_HANDS} from './commons/const';
 import {getOppositePosition} from './commons/utils';
 import {gato, vuelta} from './svg/svg';
 
@@ -23,13 +24,13 @@ export function zarandeoAnimation(lengthS, manPosition, beats) {
 	};
 	const forwardOptions = {
 		...partOptions,
-		direction: directions.FORWARD,
+		direction: DIRECTIONS.FORWARD,
 		startPart: 0,
 		stopPart: 0.5
 	};
 	const backwardOptions = {
 		...partOptions,
-		direction: directions.BACKWARD,
+		direction: DIRECTIONS.BACKWARD,
 		startPart: 0.5,
 		stopPart: 1
 	};
@@ -94,7 +95,7 @@ export default class GatoAnimation extends DanceAnimation {
 	}
 
 	contraGiro(lengthS, manPosition, beats) {
-		return this.elements.giro.fullAnimation({lengthS, beats, manPosition, direction: directions.BACKWARD, startPart: 1, stopPart: 0});
+		return this.elements.giro.fullAnimation({lengthS, beats, manPosition, direction: DIRECTIONS.BACKWARD, startPart: 1, stopPart: 0});
 	}
 
 	zapateoZarandeo(lengthS, manPosition, beats) {

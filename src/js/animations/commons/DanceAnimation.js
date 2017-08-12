@@ -3,7 +3,8 @@ import Promise from 'bluebird';
 require('styles/animation.scss');
 import {normalizeAngle} from 'animationClasses/commons/utils';
 
-import Legs, {STEP_STYLE} from './Legs';
+import Legs from './Legs';
+import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS} from './const';
 
 const FIGURE_ANGLE_TICK = 25;
 const FIGURE_ANGLE_SPEED = 3;
@@ -14,18 +15,6 @@ const FIGURE_HEIGHT = 20;
 // Максимальный угол поворота верха фигуры
 // const FIGURE_TOP_ANGLE_MAX = 45;
 
-export const directions = {
-	FORWARD: 0,
-	BACKWARD: 1,
-	STRAIGHT_FORWARD: 2,
-	FROM_END_TO_START: 3,
-};
-
-export const FIGURE_HANDS = {
-	CASTANETAS: 'castanetas',
-	PANUELO: 'panuelo',
-	DOWN: 'down'
-};
 
 const figuresSvg = {
 	man: getSvgElement('figures.svg', '#man'),
@@ -208,12 +197,12 @@ export default class DanceAnimation {
 	 * @param  {Number} direction  Константа, определяющая направление движения
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
-	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = directions.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS, pairFigure, isLastElement, stepStyle = STEP_STYLE.BASIC}) {
+	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = DIRECTIONS.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS, pairFigure, isLastElement, stepStyle = STEP_STYLE.BASIC}) {
 		// Перенос фигура на верх DOM-а (TODO: Исправить на группировку)
 		figure.node.parentNode.appendChild(figure.node);
 
 		let angle = startAngle;
-		if ((direction === directions.BACKWARD) || (direction === directions.FROM_END_TO_START)) {
+		if ((direction === DIRECTIONS.BACKWARD) || (direction === DIRECTIONS.FROM_END_TO_START)) {
 			angle = -angle;
 		}
 		if (!path) {
@@ -227,7 +216,7 @@ export default class DanceAnimation {
 				length = length - pathLength;
 			}
 			const movePoint = path.getPointAtLength(length);
-			if (direction === directions.STRAIGHT_FORWARD) {
+			if (direction === DIRECTIONS.STRAIGHT_FORWARD) {
 				this.positionFigure(figure, movePoint.x, movePoint.y, angle, pairFigure);
 			} else {
 				this.positionFigure(figure, movePoint.x, movePoint.y, movePoint.alpha + angle, pairFigure);
@@ -249,7 +238,7 @@ export default class DanceAnimation {
 		return new Promise(resolve => {
 			this.animations[this.animations.length] = Snap.animate(startLen, stopLen,
 				function (value) { //this - animation element
-					if (direction === directions.FROM_END_TO_START) {
+					if (direction === DIRECTIONS.FROM_END_TO_START) {
 						value = startLen + stopLen - value;
 					}
 					transformAtLength(value);

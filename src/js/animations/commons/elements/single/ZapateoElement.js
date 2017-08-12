@@ -1,12 +1,12 @@
 import SingleElement from './SingleElement';
-import {directions, STEP_STYLE, FIGURE_HANDS} from 'animationClasses/commons/DanceAnimation';
+import {STEP_STYLE, FIGURE_HANDS, DIRECTIONS} from 'animationClasses/commons/const';
 
 export default class ZapateoElement extends SingleElement {
 	constructor(animation, figure, pathStrings) {
 		super(animation, pathStrings, 'man', figure);
 	}
 
-	animationFunction({lengthMs, beats, direction = directions.FORWARD, startPart = 0, stopPart = 1}) {
+	animationFunction({lengthMs, beats, direction = DIRECTIONS.FORWARD, startPart = 0, stopPart = 1}) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
 		if (this.pathStrings) {
 			return this.animation.animateFigurePath({

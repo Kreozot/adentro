@@ -1,6 +1,6 @@
 import GatoAnimation from './GatoAnimation';
-import {directions} from './commons/DanceAnimation';
 import PairElement from './commons/elements/double/PairElement';
+import {DIRECTIONS} from './commons/DanceAnimation';
 import {gato} from './svg/svg';
 
 export default class ChacareraAnimation extends GatoAnimation {
@@ -32,7 +32,7 @@ export default class ChacareraAnimation extends GatoAnimation {
 		})
 			.then(() => this.elements.avance.startAnimation({
 				...partOptions,
-				direction: directions.BACKWARD,
+				direction: DIRECTIONS.BACKWARD,
 				startPart: 0.5,
 				stopPart: 1
 			}));
