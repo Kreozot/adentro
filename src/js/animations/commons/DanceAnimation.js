@@ -323,7 +323,6 @@ export default class DanceAnimation {
 		figure.angle = null;
 		this.positionFigure(figure, coords.x, coords.y, coords.angle);
 		figure.removeClass('invisible');
-		$('')
 		$('.leg', figure.node)
 			.attr(`transform`, null);
 	}

@@ -174,7 +174,8 @@ export default class Navigation {
 			this.main.player.loadMusicSchema(musicSchema);
 			this.main.showMusicLinks(musicData, musicId);
 
-			this.main.renderScheme(schemeParams.scheme, musicSchema.schemeMods);
+			const scheme = this.main.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
+			this.main.renderScheme(scheme);
 		});
 		this.main.showLanguageLinks();
 	}
