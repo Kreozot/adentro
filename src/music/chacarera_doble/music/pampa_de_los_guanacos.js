@@ -5,9 +5,9 @@ module.exports = {
 	file: require('./pampa_de_los_guanacos.mp3'),
 	schema: require('./pampa_de_los_guanacos.yaml'),
 	schemeMods: {
-		vuelta: {times: 6},
-		vuelta2: {times: 6},
-		vuelta_2: {times: 6},
-		vuelta2_2: {times: 6}
+		vuelta: {beats: 6},
+		vuelta2: {beats: 6},
+		vuelta_2: {beats: 6},
+		vuelta2_2: {beats: 6}
 	}
 };

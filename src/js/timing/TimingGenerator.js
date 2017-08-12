@@ -31,7 +31,7 @@ export default class TimingGenerator {
 
 			part.filter(element => !element.bar)
 				.forEach(element => {
-					addElement(element.id, element.times);
+					addElement(element.id, element.beats);
 				});
 
 			if (partIndex < parts.length - 1) {

@@ -9,21 +9,21 @@ function renderBar() {
 }
 
 function renderElement(element, nextElement) {
-	const {id, visualization, manPosition, times, class: className} = element;
+	const {id, visualization, manPosition, beats, class: className} = element;
 %>
 	<div class="element element--<%= className %>"
-		style="flex: <%= times %>;"
+		style="flex: <%= beats %>;"
 		id="<%= id %>"
 		data-visualization="<%= visualization %>"
 		data-manposition="<%= manPosition %>"
-		data-times="<%= times %>">
-		<%= times %>
+		data-beats="<%= beats %>">
+		<%= beats %>
 	</div>
 <%
 }
 
 function renderElementTitle(element, nextElement) {
-	const {id, title, times, textOffset = 0, yOffset, class: className} = element;
+	const {id, title, beats, textOffset = 0, yOffset, class: className} = element;
 
 	const nextElementIsSame = element.title === nextElement.title;
 	clusterIds.push(id);
@@ -31,7 +31,7 @@ function renderElementTitle(element, nextElement) {
 	if (!nextElementIsSame) {
 	%>
 		<div class="element-title <%= className %> <%= clusterIds.map(id => `element-title--${id}`).join(' ') %>"
-			style="flex: <%= clusterTimes + times %>;">
+			style="flex: <%= clusterTimes + beats %>;">
 			<div class="element-title__text <%= yOffset ? 'element-title__text--offset' : '' %>"><%- title
 				.replace(/\$m\[([^\]]+)\]/g, `<span class="element-text--man">$1</span>`)
 				.replace(/\$w\[([^\]]+)\]/g, `<span class="element-text--woman">$1</span>`)
@@ -42,7 +42,7 @@ function renderElementTitle(element, nextElement) {
 		clusterTimes = 0;
 		clusterIds = [];
 	} else {
-		clusterTimes = clusterTimes + times;
+		clusterTimes = clusterTimes + beats;
 	}
 }
 

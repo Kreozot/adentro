@@ -1,21 +1,21 @@
 ---
 -
-  - {times: 8, manPosition: left, class: vuelta, id: vuelta, visualization: vuelta, title: Vuelta entera}
-  - {times: 4, manPosition: left, class: giro, id: giro, visualization: giro, title: Giro}
-  - {times: 4, manPosition: left, class: giro, id: contraGiro, visualization: contraGiro, title: Contra giro}
+  - {beats: 8, manPosition: left, class: vuelta, id: vuelta, visualization: vuelta, title: Vuelta entera}
+  - {beats: 4, manPosition: left, class: giro, id: giro, visualization: giro, title: Giro}
+  - {beats: 4, manPosition: left, class: giro, id: contraGiro, visualization: contraGiro, title: Contra giro}
   - bar: true
-  - {times: 8, manPosition: left, class: zapateo, id: zapateo, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
-  - {times: 4, manPosition: left, class: vuelta, id: mediaVuelta, visualization: mediaVuelta, title: Media vuelta}
+  - {beats: 8, manPosition: left, class: zapateo, id: zapateo, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - {beats: 4, manPosition: left, class: vuelta, id: mediaVuelta, visualization: mediaVuelta, title: Media vuelta}
   - bar: true
-  - {times: 8, manPosition: right, class: zapateo, id: zapateo2, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
-  - {times: 4, manPosition: right, class: coronacion, id: coronacion, visualization: coronacion, title: Giro y&nbsp;coronación}
+  - {beats: 8, manPosition: right, class: zapateo, id: zapateo2, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - {beats: 4, manPosition: right, class: coronacion, id: coronacion, visualization: coronacion, title: Giro y&nbsp;coronación}
 -
-  - {times: 8, manPosition: right, class: vuelta, id: vuelta_2, visualization: vuelta, title: Vuelta entera}
-  - {times: 4, manPosition: right, class: giro, id: giro_2, visualization: giro, title: Giro}
-  - {times: 4, manPosition: right, class: giro, id: contraGiro_2, visualization: contraGiro, title: Contra giro}
+  - {beats: 8, manPosition: right, class: vuelta, id: vuelta_2, visualization: vuelta, title: Vuelta entera}
+  - {beats: 4, manPosition: right, class: giro, id: giro_2, visualization: giro, title: Giro}
+  - {beats: 4, manPosition: right, class: giro, id: contraGiro_2, visualization: contraGiro, title: Contra giro}
   - bar: true
-  - {times: 8, manPosition: right, class: zapateo, id: zapateo_2, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
-  - {times: 4, manPosition: right, class: vuelta, id: mediaVuelta_2, visualization: mediaVuelta, title: Media vuelta}
+  - {beats: 8, manPosition: right, class: zapateo, id: zapateo_2, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - {beats: 4, manPosition: right, class: vuelta, id: mediaVuelta_2, visualization: mediaVuelta, title: Media vuelta}
   - bar: true
-  - {times: 8, manPosition: left, class: zapateo, id: zapateo2_2, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
-  - {times: 4, manPosition: left, class: coronacion, id: coronacion_2, visualization: coronacion, title: Giro y&nbsp;coronación}
+  - {beats: 8, manPosition: left, class: zapateo, id: zapateo2_2, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - {beats: 4, manPosition: left, class: coronacion, id: coronacion_2, visualization: coronacion, title: Giro y&nbsp;coronación}

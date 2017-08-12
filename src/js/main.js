@@ -72,7 +72,7 @@ class Adentro {
 		const domElement = $('#' + elementId);
 		const visualizationFuncName = domElement.data('visualization');
 		const manPosition = domElement.data('manposition');
-		const beats = domElement.data('times');
+		const beats = domElement.data('beats');
 		if (visualizationFuncName) {
 			const visualizationFunc = this.animationLoader.animation[visualizationFuncName];
 			if (visualizationFunc) {

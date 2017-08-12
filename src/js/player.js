@@ -72,7 +72,7 @@ export default class Player {
 					schemeElement = part.find(element => element.id === key);
 				});
 				if (schemeElement) {
-					this.scheme[key] = value - (time / schemeElement.times / 3);
+					this.scheme[key] = value - (time / schemeElement.beats / 3);
 				}
 			}
 		}
