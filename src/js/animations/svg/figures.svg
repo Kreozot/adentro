@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="100"
-   height="100"
-   viewBox="0 0 100 100"
+   width="115.62501"
+   height="75"
+   viewBox="0 0 115.62501 75"
    id="svg3431"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -21,30 +21,32 @@
     <marker
        inkscape:stockid="Arrow1Lend"
        orient="auto"
-       refY="0.0"
-       refX="0.0"
+       refY="0"
+       refX="0"
        id="Arrow1Lend"
-       style="overflow:visible;"
+       style="overflow:visible"
        inkscape:isstock="true">
       <path
          id="path4359"
-         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
-         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
     </marker>
     <marker
        inkscape:stockid="Arrow1Lstart"
        orient="auto"
-       refY="0.0"
-       refX="0.0"
+       refY="0"
+       refX="0"
        id="Arrow1Lstart"
        style="overflow:visible"
        inkscape:isstock="true">
       <path
          id="path4356"
-         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
-         transform="scale(0.8) translate(12.5,0)" />
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         inkscape:connector-curvature="0" />
     </marker>
   </defs>
   <sodipodi:namedview
@@ -55,10 +57,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.9999996"
-     inkscape:cx="6.7081223"
-     inkscape:cy="79.335512"
+     inkscape:cx="43.57993"
+     inkscape:cy="35.666469"
      inkscape:document-units="px"
-     inkscape:current-layer="man"
+     inkscape:current-layer="svg3431"
      showgrid="false"
      showguides="true"
      inkscape:window-width="1600"
@@ -66,10 +68,16 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     units="px">
+     units="px"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
     <inkscape:grid
        type="xygrid"
-       id="grid3441" />
+       id="grid3441"
+       originx="-0.66789401"
+       originy="-24.542902" />
   </sodipodi:namedview>
   <metadata
      id="metadata3436">
@@ -79,16 +87,14 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     id="man"
-     inkscape:transform-center-x="1.4142136"
-     inkscape:transform-center-y="0.72855339"
-     transform="translate(-28.707106,-9.292894)">
+     id="man">
     <g
+       transform="translate(6.625,10.250008)"
        id="g4765"
        class="bottom">
       <g
@@ -145,6 +151,7 @@
       </g>
     </g>
     <g
+       transform="translate(6.625,10.250008)"
        id="g4779"
        class="top">
       <ellipse
@@ -194,7 +201,7 @@
         </g>
       </g>
       <g
-         id="g4252"
+         id="g4273"
          class="hands hands--down"
          display="none"
          style="display:none">
@@ -301,13 +308,14 @@
     </g>
     <rect
        ry="0"
-       y="-10.250008"
-       x="-6.625"
+       y="3.7060548e-007"
+       x="0"
        height="75"
        width="115.62501"
        style="opacity:0.71300001;fill:none;fill-opacity:0.72068966;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.37241378"
        id="rect4302" />
     <g
+       transform="translate(6.625,10.250008)"
        id="g3431"
        class="kick kick--right kick--front"
        display="none"
@@ -330,6 +338,7 @@
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
     <g
+       transform="translate(6.625,10.250008)"
        id="g3447"
        class="kick kick--left kick--front"
        display="none"
@@ -354,7 +363,7 @@
     <g
        class="kick kick--right kick--back"
        id="g3452"
-       transform="translate(0,-8)"
+       transform="translate(6.625,2.250008)"
        display="none"
        style="display:none">
       <path
@@ -377,7 +386,7 @@
     <g
        class="kick kick--left kick--back"
        id="g3460"
-       transform="translate(0,-8)"
+       transform="translate(6.625,2.250008)"
        display="none"
        style="display:none">
       <path
@@ -399,13 +408,11 @@
     </g>
   </g>
   <g
-     transform="translate(-28.707106,-9.292894)"
-     inkscape:transform-center-y="0.72855339"
-     inkscape:transform-center-x="1.4142136"
      id="woman"
      display="none"
      style="display:none">
     <g
+       transform="translate(6.625,10.250008)"
        id="g4717"
        class="bottom">
       <g
@@ -441,6 +448,7 @@
          style="fill:#383fb8;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.6714976" />
     </g>
     <g
+       transform="translate(6.625,10.250008)"
        id="g4726"
        class="top">
       <ellipse
@@ -598,8 +606,8 @@
        style="opacity:0.71300001;fill:none;fill-opacity:0.72068966;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.37241378"
        width="115.62501"
        height="75"
-       x="-6.625"
-       y="-10.250008"
+       x="0"
+       y="3.7060548e-007"
        ry="0"
        id="rect4304" />
   </g>

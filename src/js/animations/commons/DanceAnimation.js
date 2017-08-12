@@ -9,9 +9,9 @@ import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS} from './const';
 const FIGURE_ANGLE_TICK = 25;
 const FIGURE_ANGLE_SPEED = 3;
 // Ширина фигуры
-const FIGURE_WIDTH = 20;
+const FIGURE_WIDTH = 115;
 // Высота фигуры
-const FIGURE_HEIGHT = 20;
+const FIGURE_HEIGHT = 75;
 // Максимальный угол поворота верха фигуры
 // const FIGURE_TOP_ANGLE_MAX = 45;
 
