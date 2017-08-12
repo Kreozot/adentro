@@ -88,3 +88,4 @@ globals:
   requireSchemes: true
   getSvgPaths: true
   getSvgElement: true
+  localize: true

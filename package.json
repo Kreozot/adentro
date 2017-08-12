@@ -48,8 +48,7 @@
   },
   "scripts": {
     "build": "gulp",
-    "test": "gulp test --mockmp3",
-    "codestylefix": "jscs src/js --fix --config=fix.jscsrc"
+    "test": "gulp test --mockmp3"
   },
   "dependencies": {
     "babel-preset-stage-2": "^6.24.1",

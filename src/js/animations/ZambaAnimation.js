@@ -48,7 +48,7 @@ export default class ZambaAnimation extends GatoAnimation {
 			lengthS: lengthS / 2,
 			beats: beats / 2,
 			figureHands: FIGURE_HANDS.PANUELO,
-			stepStyle: STEP_STYLE.ZAMBA
+			stepStyle: STEP_STYLE.SIMPLE
 		})
 			.then(() => this.elements.mediaVueltaToArresto.startAnimation({
 				lengthS: lengthS / 2,
