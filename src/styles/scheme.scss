@@ -141,6 +141,7 @@
 	&--current {
 		font-weight: bold;
 		opacity: 1;
+		letter-spacing: -0.7px;
 	}
 
 	@mixin media S {
