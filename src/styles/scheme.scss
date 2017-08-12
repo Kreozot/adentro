@@ -70,10 +70,16 @@
 	font-family: Verdana, sans-serif;
 	color: #2F4F4F;
 	font-size: 9pt;
+	padding: 0 1px;
+
+	& + &:not(&--current) {
+		border-left-color: transparent;
+	}
 
 	&--current {
 		border: 2px solid red;
 		line-height: 18px;
+		padding: 0;
 	}
 
 	@mixin element-mod vuelta 117 246 233;
@@ -157,11 +163,9 @@
 	}
 }
 
-
-
 .bar {
 	box-sizing: border-box;
 	background-color: black;
-	width: 3px;
+	width: 2px;
 	height: 100%;
 }
