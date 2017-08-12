@@ -171,7 +171,7 @@ export default class Navigation {
 		getSchemeParams(schemeParams => {
 			const musicData = schemeParams.music;
 			const musicSchema = musicData.filter(music => music.id === musicId)[0];
-			this.main.player.loadMusicSchema(musicSchema);
+			this.main.player.loadMusicSchema(musicSchema, schemeParams.scheme);
 			this.main.showMusicLinks(musicData, musicId);
 
 			const scheme = this.main.getModScheme(schemeParams.scheme, musicSchema.schemeMods);

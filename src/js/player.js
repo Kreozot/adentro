@@ -1,6 +1,6 @@
 import plyr from 'plyr';
 require('plyr/dist/plyr.css');
-import {getElement} from './timing/timing';
+import {getElement, getElementAfter} from './timing/timing';
 
 export default class Player {
 	constructor(main) {
@@ -49,7 +49,7 @@ export default class Player {
 	 * Загрузить музыку и тайминг
 	 * @param  {Object} musicDef Описание композиции
 	 */
-	loadMusicSchema(musicDef) {
+	loadMusicSchema(musicDef, scheme) {
 		this.player.source({
 			type: 'audio',
 			title: musicDef.title,
@@ -58,7 +58,25 @@ export default class Player {
 				type: 'audio/mp3'
 			}]
 		});
-		this.scheme = musicDef.schema;
+		this.scheme = {...musicDef.schema};
+
+		for (let key in this.scheme) {
+			if (this.scheme.hasOwnProperty(key)) {
+				const value = this.scheme[key];
+				const nextElement = getElementAfter(this.scheme, value);
+				const time = nextElement.time - value;
+
+				let schemeElement;
+				scheme.forEach(part => {
+					schemeElement = part.find(element => element.id === key);
+				});
+				if (schemeElement) {
+					console.log(time, schemeElement);
+					this.scheme[key] = value - (time / schemeElement.times / 3);
+					console.log(value, this.scheme[key]);
+				}
+			}
+		}
 	}
 
 	/**

@@ -168,7 +168,7 @@ class Adentro {
 		const scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
 		this.renderScheme(scheme);
 
-		this.player.loadMusicSchema(musicSchema);
+		this.player.loadMusicSchema(musicSchema, scheme);
 		this.player.initEvents();
 
 		contentSwitch.clearContent();
@@ -201,7 +201,7 @@ class Adentro {
 		const scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
 		this.renderScheme(scheme);
 
-		this.player.loadMusicSchema(musicSchema);
+		this.player.loadMusicSchema(musicSchema, scheme);
 
 		console.log('editor mode on');
 		$('#animationDiv').html('');
