@@ -34,15 +34,14 @@ export default class Legs {
 		if (stepsLeft < 1) {
 			return;
 		}
-		const self = this;
 		const oppositeLegStr = this.getOppositeLeg(legStr);
+		const amplitudeHalf = -FIGURE_STEP_AMPLITUDE / 2;
 
-		this.animations[this.animations.length] = Snap.animate(-FIGURE_STEP_AMPLITUDE / 2, FIGURE_STEP_AMPLITUDE / 2, function (value) {
-			self.moveLeg(figure, legStr, value);
-			self.moveLeg(figure, oppositeLegStr, -value);
-		}, stepDuration, mina.linear, () => {
-			self.animateLegs(figure, oppositeLegStr, stepDuration, stepsLeft - 1);
-		});
+		return Promise.all([
+			this.animateLeg(figure, legStr, stepDuration, -amplitudeHalf, amplitudeHalf, mina.linear),
+			this.animateLeg(figure, oppositeLegStr, stepDuration, amplitudeHalf, -amplitudeHalf, mina.linear)
+		])
+			.then(() => this.animateLegs(figure, oppositeLegStr, stepDuration, stepsLeft - 1));
 	}
 
 	animateLegsZapateo(figure, legStr, stepDuration, stepsLeft) {
