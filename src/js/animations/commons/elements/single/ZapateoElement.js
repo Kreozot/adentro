@@ -23,7 +23,12 @@ export default class ZapateoElement extends SingleElement {
 				figureHands: FIGURE_HANDS.DOWN,
 			});
 		} else {
-			return this.animation.animateFigureTime(this.figure, lengthMs, beats, STEP_STYLE.ZAPATEO);
+			return this.animation.animateFigureTime({
+				figure: this.figure,
+				timeLength: lengthMs,
+				beats,
+				stepStyle: STEP_STYLE.ZAPATEO
+			});
 		}
 	}
 

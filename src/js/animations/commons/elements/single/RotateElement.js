@@ -18,7 +18,11 @@ export default class RotateElement extends SingleElement {
 
 	animationFunction({lengthMs, beats}) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
-		return this.animation.animateFigureTime(this.figure, lengthMs, beats * 6);
+		return this.animation.animateFigureTime({
+			figure: this.figure,
+			timeLength: lengthMs,
+			beats: beats * 6
+		});
 	}
 
 	startAnimation({lengthS, beats, startAngle, startPart = 0, stopPart = 1}) {
@@ -42,7 +46,11 @@ export default class RotateElement extends SingleElement {
 					transformAtLength(value);
 				}, lengthS * 1000, mina.linear, resolve);
 
-			this.animation.animateFigureTime(this.figure, lengthS * 1000, beats);
+			this.animation.animateFigureTime({
+				figure: this.figure,
+				timeLength: lengthS * 1000,
+				beats
+			});
 		});
 	}
 }
