@@ -5,6 +5,13 @@ parserOptions:
   sourceType: module
   ecmaFeatures:
     experimentalObjectRestSpread: true
+env:
+  browser: true
+  node: true
+  amd: true
+  commonjs: true
+  jquery: true
+  es6: true
 rules:
   curly: [2, all]
   keyword-spacing: [2, {}]
@@ -63,6 +70,7 @@ rules:
   - always
   no-extra-semi: 2
   no-unused-vars: 2
+  no-undef: 2
   new-cap:
   - 2
   - capIsNewExceptions:
@@ -74,3 +82,9 @@ rules:
     - Snap
     - ObjectId
   no-delete-var: 2
+globals:
+  mina: true
+  Snap: true
+  requireSchemes: true
+  getSvgPaths: true
+  getSvgElement: true

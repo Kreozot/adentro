@@ -4,7 +4,7 @@ require('styles/animation.scss');
 import {normalizeAngle} from 'animationClasses/commons/utils';
 
 import Legs from './Legs';
-import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS} from './const';
+import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS} from './const';
 
 const FIGURE_ANGLE_TICK = 25;
 const FIGURE_ANGLE_SPEED = 3;
@@ -14,7 +14,6 @@ const FIGURE_WIDTH = 20;
 const FIGURE_HEIGHT = 20;
 // Максимальный угол поворота верха фигуры
 // const FIGURE_TOP_ANGLE_MAX = 45;
-
 
 const figuresSvg = {
 	man: getSvgElement('figures.svg', '#man'),
@@ -197,7 +196,7 @@ export default class DanceAnimation {
 	 * @param  {Number} direction  Константа, определяющая направление движения
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
-	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = DIRECTIONS.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS, pairFigure, isLastElement, stepStyle = STEP_STYLE.BASIC}) {
+	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = DIRECTIONS.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS, pairFigure, isLastElement, stepStyle = STEP_STYLE.BASIC, firstLeg = LEGS.LEFT}) {
 		// Перенос фигура на верх DOM-а (TODO: Исправить на группировку)
 		figure.node.parentNode.appendChild(figure.node);
 
@@ -216,17 +215,17 @@ export default class DanceAnimation {
 				length = length - pathLength;
 			}
 			const movePoint = path.getPointAtLength(length);
-			if (direction === DIRECTIONS.STRAIGHT_FORWARD) {
-				this.positionFigure(figure, movePoint.x, movePoint.y, angle, pairFigure);
-			} else {
-				this.positionFigure(figure, movePoint.x, movePoint.y, movePoint.alpha + angle, pairFigure);
-			}
+			const finalAngle = direction === DIRECTIONS.STRAIGHT_FORWARD ? angle : angle + movePoint.alpha;
+			this.positionFigure(figure, movePoint.x, movePoint.y, finalAngle, pairFigure);
 		};
 
 		transformAtLength(startLen);
 
 		$(`.hands:not(.hands--${figureHands})`, figure.node).addClass('invisible');
 		$(`.hands--${figureHands}`, figure.node).removeClass('invisible');
+
+		$(`.kick`, figure.node)
+			.addClass(`invisible`);
 
 		figure.removeClass('invisible');
 
@@ -244,7 +243,7 @@ export default class DanceAnimation {
 					transformAtLength(value);
 				}, timeLengthForPath, easing, resolve);
 
-			this.legs.animateFigureTime({figure, timeLength, beats, stepStyle, isLastElement});
+			this.legs.animateFigureTime({figure, timeLength, beats, stepStyle, isLastElement, firstLeg});
 		});
 	}
 

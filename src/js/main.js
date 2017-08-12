@@ -102,7 +102,7 @@ class Adentro {
 			musicData,
 			currentMusicId,
 			text: {
-				composition: localize({ru: 'Композиция', en: 'Composition'})
+				composition: this.localize({ru: 'Композиция', en: 'Composition'})
 			}
 		}));
 		$('#musicSelect').change(function () {
@@ -228,7 +228,7 @@ class Adentro {
 }
 
 global.adentro = new Adentro();
-global.localize = textObj => adentro.localize(textObj);
+global.localize = textObj => global.adentro.localize(textObj);
 global.tour = new Tour();
 export default Adentro;
 
@@ -241,14 +241,14 @@ $(window).load(function () {
 		}
 	};
 	window.addEventListener('popstate', () => {
-		adentro.navigation.loadSchemaByState();
+		global.adentro.navigation.loadSchemaByState();
 	});
 
-	if (!adentro.navigation.loadSchemaByUrl()) {
-		adentro.navigation.showSchema('chacarera');
+	if (!global.adentro.navigation.loadSchemaByUrl()) {
+		global.adentro.navigation.showSchema('chacarera');
 	}
 
-	tour.startFirstTime();
+	global.tour.startFirstTime();
 });
 
 $('.logo').on('click', () => {

@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 import GatoAnimation, {zapateoAnimation} from './GatoAnimation';
 import PairElement from './commons/elements/double/PairElement';
-import {DIRECTIONS, FIGURE_HANDS} from './commons/const';
+import {DIRECTIONS, FIGURE_HANDS, STEP_STYLE, LEGS} from './commons/const';
 import {getOppositePosition} from './commons/utils';
 
 export default class ZambaAnimation extends GatoAnimation {
@@ -47,12 +47,14 @@ export default class ZambaAnimation extends GatoAnimation {
 		return this.elements.mediaVuelta.startAnimation({
 			lengthS: lengthS / 2,
 			beats: beats / 2,
-			figureHands: FIGURE_HANDS.PANUELO
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA
 		})
 			.then(() => this.elements.mediaVueltaToArresto.startAnimation({
 				lengthS: lengthS / 2,
 				beats: beats / 2,
-				figureHands: FIGURE_HANDS.PANUELO
+				figureHands: FIGURE_HANDS.PANUELO,
+				stepStyle: STEP_STYLE.ZAMBA
 			}));
 	}
 
@@ -101,7 +103,8 @@ export default class ZambaAnimation extends GatoAnimation {
 			lengthS,
 			beats,
 			manPosition,
-			figureHands: FIGURE_HANDS.PANUELO
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA
 		});
 	}
 
@@ -115,12 +118,15 @@ export default class ZambaAnimation extends GatoAnimation {
 		return this.elements.arresto.startAnimation({
 			lengthS: lengthS / 2,
 			beats: beats / 2,
-			figureHands: FIGURE_HANDS.PANUELO
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA,
+			firstLeg: LEGS.RIGHT
 		})
 			.then(() => this.elements.arrestoBack.startAnimation({
 				lengthS: lengthS / 2,
 				beats: beats / 2,
-				figureHands: FIGURE_HANDS.PANUELO
+				figureHands: FIGURE_HANDS.PANUELO,
+				stepStyle: STEP_STYLE.ZAMBA
 			}));
 	}
 
@@ -134,7 +140,9 @@ export default class ZambaAnimation extends GatoAnimation {
 		return this.elements.arresto.startAnimation({
 			lengthS: lengthS / 4,
 			beats: beats / 4,
-			figureHands: FIGURE_HANDS.PANUELO
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA,
+			firstLeg: LEGS.RIGHT
 		})
 			.then(() => this.elements.arresto.startAnimation({
 				lengthS: lengthS / 4,
@@ -142,17 +150,21 @@ export default class ZambaAnimation extends GatoAnimation {
 				direction: DIRECTIONS.BACKWARD,
 				startPart: 1,
 				stopPart: 0,
-				figureHands: FIGURE_HANDS.PANUELO
+				figureHands: FIGURE_HANDS.PANUELO,
+				stepStyle: STEP_STYLE.ZAMBA
 			}))
 			.then(() => this.elements.arresto.startAnimation({
 				lengthS: lengthS / 4,
 				beats: beats / 4,
-				figureHands: FIGURE_HANDS.PANUELO
+				figureHands: FIGURE_HANDS.PANUELO,
+				stepStyle: STEP_STYLE.ZAMBA,
+				firstLeg: LEGS.RIGHT
 			}))
 			.then(() => this.elements.arrestoBack.startAnimation({
 				lengthS: lengthS / 4,
 				beats: beats / 4,
-				figureHands: FIGURE_HANDS.PANUELO
+				figureHands: FIGURE_HANDS.PANUELO,
+				stepStyle: STEP_STYLE.ZAMBA
 			}));
 	}
 
@@ -162,6 +174,7 @@ export default class ZambaAnimation extends GatoAnimation {
 			beats,
 			manPosition,
 			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA,
 			isLastElement: true
 		});
 	}
