@@ -4,7 +4,7 @@ require('styles/animation.scss');
 import {normalizeAngle} from 'animationClasses/commons/utils';
 
 import Legs from './Legs';
-import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS} from './const';
+import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS, ROTATE} from './const';
 
 const FIGURE_ANGLE_TICK = 25;
 const FIGURE_ANGLE_SPEED = 3;
@@ -145,7 +145,7 @@ export default class DanceAnimation {
 	 * @param  {Number} y      Координата центра Y
 	 * @param  {Number} angle  Угол поворота (при 0 фигура стоит вертикально)
 	 */
-	positionFigure(figure, x, y, angle, pairFigure) {
+	positionFigure(figure, x, y, angle, pairFigure, rotateDirection) {
 		angle = normalizeAngle(angle);
 		if (!figure.angle) {
 			figure.angle = angle;
@@ -153,7 +153,9 @@ export default class DanceAnimation {
 		const angleDiff = figure.angle - angle;
 		if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) &&
 			(Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
-			if ((angleDiff > 190) || ((angleDiff < 0) && (angleDiff > -180))) {
+			if ((rotateDirection === ROTATE.CLOCKWISE) ||
+				(angleDiff > 190) ||
+				((angleDiff < 0) && (angleDiff > -180))) {
 				figure.angle = figure.angle + FIGURE_ANGLE_SPEED;
 			} else {
 				figure.angle = figure.angle - FIGURE_ANGLE_SPEED;
@@ -202,7 +204,7 @@ export default class DanceAnimation {
 	 * @param  {Number} direction  Константа, определяющая направление движения
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
-	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = DIRECTIONS.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS, pairFigure, isLastElement, stepStyle = STEP_STYLE.BASIC, firstLeg = LEGS.LEFT}) {
+	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = DIRECTIONS.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS, pairFigure, isLastElement, stepStyle = STEP_STYLE.BASIC, firstLeg = LEGS.LEFT, rotateDirection}) {
 		// Перенос фигура на верх DOM-а (TODO: Исправить на группировку)
 		figure.node.parentNode.appendChild(figure.node);
 
@@ -222,7 +224,7 @@ export default class DanceAnimation {
 			}
 			const movePoint = path.getPointAtLength(length);
 			const finalAngle = direction === DIRECTIONS.STRAIGHT_FORWARD ? angle : angle + movePoint.alpha;
-			this.positionFigure(figure, movePoint.x, movePoint.y, finalAngle, pairFigure);
+			this.positionFigure(figure, movePoint.x, movePoint.y, finalAngle, pairFigure, rotateDirection);
 		};
 
 		transformAtLength(startLen);

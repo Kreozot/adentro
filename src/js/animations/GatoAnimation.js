@@ -4,7 +4,7 @@ import PairElement from './commons/elements/double/PairElement';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import VueltaElement from './commons/elements/double/VueltaElement';
-import {DIRECTIONS, FIGURE_HANDS} from './commons/const';
+import {DIRECTIONS, FIGURE_HANDS, ROTATE} from './commons/const';
 import {getOppositePosition} from './commons/utils';
 import {gato, vuelta} from './svg/svg';
 
@@ -108,7 +108,7 @@ export default class GatoAnimation extends DanceAnimation {
 	}
 
 	mediaVuelta(lengthS, manPosition, beats) {
-		return this.elements.mediaVuelta.fullAnimation({lengthS, beats, manPosition});
+		return this.elements.mediaVuelta.fullAnimation({lengthS, beats, manPosition, rotateDirection: ROTATE.CLOCKWISE});
 	}
 
 	coronacion(lengthS, manPosition, beats) {

@@ -22,3 +22,8 @@ export const FIGURE_HANDS = {
 	PANUELO: 'panuelo',
 	DOWN: 'down'
 };
+
+export const ROTATE = {
+	CLOCKWISE: 1,
+	COUNTERCLOCKWISE: 2
+};
