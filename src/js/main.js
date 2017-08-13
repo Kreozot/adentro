@@ -76,14 +76,14 @@ class Adentro {
 		if (visualizationFuncName) {
 			const visualizationFunc = this.animationLoader.animation[visualizationFuncName];
 			if (visualizationFunc) {
-				const result = visualizationFunc.call(this.animationLoader.animation, seconds, manPosition, beats);
-				if (result) {
-					result
-						.delay(50)
-						.then(() => {
-							this.player.getAndShowCurrentElement();
-						});
-				}
+				/*const result = */visualizationFunc.call(this.animationLoader.animation, seconds, manPosition, beats);
+				// if (result) {
+				// 	result
+				// 		.delay(50)
+				// 		.then(() => {
+				// 			this.player.getAndShowCurrentElement();
+				// 		});
+				// }
 			} else {
 				throw `Не найдена функция анимации ${visualizationFuncName}`;
 			}

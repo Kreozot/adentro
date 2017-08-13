@@ -5,7 +5,7 @@ import RotatePairElement from './commons/elements/double/RotatePairElement';
 import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import {zapateoAnimation, zarandeoAnimation} from './GatoAnimation';
-import {DIRECTIONS} from './commons/const';
+import {DIRECTIONS, STEP_STYLE} from './commons/const';
 import {getOppositePosition} from './commons/utils';
 
 export default class HuayraMuyojAnimation extends DanceAnimation {
@@ -203,7 +203,7 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 	}
 
 	regreso(lengthS, manPosition, beats) {
-		return this.elements.regreso.fullAnimation({lengthS, beats, manPosition});
+		return this.elements.regreso.fullAnimation({lengthS, beats, manPosition, stepStyle: STEP_STYLE.SIMPLE});
 	}
 
 	giro(lengthS, manPosition, beats) {
