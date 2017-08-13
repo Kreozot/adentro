@@ -3,6 +3,7 @@ import GatoAnimation, {zapateoAnimation} from './GatoAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import {DIRECTIONS, FIGURE_HANDS, STEP_STYLE, LEGS} from './commons/const';
 import {getOppositePosition} from './commons/utils';
+import {zamba} from './svg/svg';
 
 export default class ZambaAnimation extends GatoAnimation {
 	constructor(id) {
@@ -12,8 +13,8 @@ export default class ZambaAnimation extends GatoAnimation {
 			...this.elements,
 
 			mediaVueltaToArresto: new PairElement(this, {
-				left: 'm 40,160 c 0,40 160,80 240,80 110,0 110,-130 20,-130',
-				right: 'M 560,160 C 560,120 400,80 320,80 210,80 210,210 300,210'
+				left: zamba.media_vuelta_to_arresto_left,
+				right: zamba.media_vuelta_to_arresto_right,
 			}),
 
 			arresto: new PairElement(this, {
@@ -181,33 +182,24 @@ export default class ZambaAnimation extends GatoAnimation {
 
 	mediaVueltaCoronacion(lengthS, manPosition, beats) {
 		this.clearPaths();
-		this.elements.mediaVueltaToArresto.drawPath(manPosition);
+		this.elements.mediaVueltaCoronacion.drawPath(manPosition);
 
-		return this.elements.mediaVueltaToArresto.startAnimation({
+		return this.elements.mediaVueltaCoronacion.startAnimation({
 			lengthS: lengthS / 2,
 			beats: beats / 2,
 			figureHands: FIGURE_HANDS.PANUELO,
-			stepStyle: STEP_STYLE.SIMPLE,
+			stepStyle: STEP_STYLE.ZAMBA,
 			startPart: 0,
 			stopPart: 0.5
 		})
-			.then(() => this.elements.mediaVueltaToArresto.setAngle(-45))
-			.then(() => this.elements.mediaVueltaToArresto.startAnimation({
+			.then(() => this.elements.mediaVueltaCoronacion.setAngle(-45))
+			.then(() => this.elements.mediaVueltaCoronacion.startAnimation({
 				lengthS: lengthS / 2,
 				beats: beats / 2,
 				figureHands: FIGURE_HANDS.PANUELO,
-				stepStyle: STEP_STYLE.ZAMBA,
+				stepStyle: STEP_STYLE.SIMPLE,
 				startPart: 0.5,
 				stopPart: 1
 			}));
-
-		return this.elements.mediaVueltaCoronacion.fullAnimation({
-			lengthS,
-			beats,
-			manPosition,
-			figureHands: FIGURE_HANDS.PANUELO,
-			stepStyle: STEP_STYLE.ZAMBA,
-			isLastElement: true
-		});
 	}
 }

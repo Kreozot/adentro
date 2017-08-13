@@ -2,6 +2,7 @@ import ZambaAnimation from './ZambaAnimation';
 import {DIRECTIONS, FIGURE_HANDS, STEP_STYLE} from './commons/const';
 import PairElement from './commons/elements/double/PairElement';
 import {getOppositePosition} from './commons/utils';
+import {zamba} from './svg/svg';
 
 export default class ZambaSimpleAnimation extends ZambaAnimation {
 	constructor(id) {
@@ -16,8 +17,8 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 			}),
 
 			coronacion: new PairElement(this, {
-				left: 'm 40,160 230,0',
-				right: 'm 560,160 -230,0'
+				left: zamba.coronacion_left,
+				right: zamba.coronacion_right
 			})
 		};
 
@@ -74,7 +75,8 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 		this.elements.arrestoSimple.setAngle(-45);
 		return this.elements.arrestoSimple.fullAnimation({
 			lengthS, beats, manPosition,
-			figureHands: FIGURE_HANDS.PANUELO
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA,
 		});
 	}
 
@@ -91,7 +93,8 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 		return this.elements.mediaVueltaToArresto.startAnimation({
 			lengthS: lengthS / 4,
 			beats: beats / 4,
-			figureHands: FIGURE_HANDS.PANUELO
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA,
 		})
 			.then(() => this.elements.arresto.startAnimation({
 				lengthS: lengthS / 4,
@@ -99,17 +102,20 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 				direction: DIRECTIONS.BACKWARD,
 				startPart: 1,
 				stopPart: 0,
-				figureHands: FIGURE_HANDS.PANUELO
+				figureHands: FIGURE_HANDS.PANUELO,
+				stepStyle: STEP_STYLE.ZAMBA,
 			}))
 			.then(() => this.elements.arresto.startAnimation({
 				lengthS: lengthS / 4,
 				beats: beats / 4,
-				figureHands: FIGURE_HANDS.PANUELO
+				figureHands: FIGURE_HANDS.PANUELO,
+				stepStyle: STEP_STYLE.ZAMBA,
 			}))
 			.then(() => this.elements.arrestoBack.startAnimation({
 				lengthS: lengthS / 4,
 				beats: beats / 4,
-				figureHands: FIGURE_HANDS.PANUELO
+				figureHands: FIGURE_HANDS.PANUELO,
+				stepStyle: STEP_STYLE.ZAMBA,
 			}));
 	}
 
@@ -123,13 +129,15 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 		return this.elements.mediaVuelta.startAnimation({
 			lengthS: lengthS * 4 / beats,
 			beats: 4,
-			figureHands: FIGURE_HANDS.PANUELO
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA,
 		})
 			.then(() => this.elements.coronacion.startAnimation({
 				lengthS: lengthS * 3 / beats,
 				beats: 3,
 				isLastElement: true,
-				figureHands: FIGURE_HANDS.PANUELO
+				figureHands: FIGURE_HANDS.PANUELO,
+				stepStyle: STEP_STYLE.SIMPLE,
 			}));
 	}
 }
