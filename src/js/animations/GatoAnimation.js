@@ -117,10 +117,17 @@ export default class GatoAnimation extends DanceAnimation {
 	}
 
 	mediaVuelta(lengthS, manPosition, beats) {
-		return this.elements.mediaVuelta.fullAnimation({lengthS, beats, manPosition, rotateDirection: ROTATE.CLOCKWISE});
+		return this.elements.mediaVuelta.fullAnimation({
+			lengthS, beats, manPosition,
+			rotateDirection: ROTATE.CLOCKWISE
+		});
 	}
 
 	coronacion(lengthS, manPosition, beats) {
-		return this.elements.coronacion.fullAnimation({lengthS, beats, manPosition, isLastElement: true});
+		return this.elements.coronacion.fullAnimation({
+			lengthS, beats, manPosition,
+			isLastElement: true,
+			rotateDirection: ROTATE.CLOCKWISE
+		});
 	}
 }
