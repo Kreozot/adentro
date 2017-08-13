@@ -23,7 +23,7 @@ class Adentro {
 	 */
 	hideCurrentElementMarkOnSchema() {
 		$('.element--current').removeClass('element--current');
-		$('.element-title__text--current').removeClass('element-title__text--current');
+		$('.element-title--current').removeClass('element-title--current');
 	}
 
 	/**
@@ -121,11 +121,11 @@ class Adentro {
 		{
 			id: 'en',
 			title: 'en'
-		}].map(lang => {
-			lang.url = this.navigation.getLanguageLink(lang.id);
-			lang.isCurrent = lang.id === this.lang;
-			return lang;
-		});
+		}].map(lang => ({
+			...lang,
+			url: this.navigation.getLanguageLink(lang.id),
+			isCurrent: lang.id === this.lang
+		}));
 
 		$('.lang-links').html(langLinksTemplate({languages}));
 	}
