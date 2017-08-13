@@ -34,8 +34,12 @@ export default class ZambaAnimation extends GatoAnimation {
 		};
 		this.zapateoAnimation = zapateoAnimation.bind(this);
 
-		this.vueltaGato = this.vuelta;
+		// this.vueltaGato = this.vuelta;
 		this.arresto2 = this.arresto;
+	}
+
+	vueltaGato(lengthS, manPosition, beats) {
+		return this.elements.vuelta.fullAnimation({lengthS, beats, manPosition});
 	}
 
 	vuelta(lengthS, manPosition, beats) {

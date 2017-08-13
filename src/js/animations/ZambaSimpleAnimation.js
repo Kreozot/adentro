@@ -22,7 +22,7 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 			})
 		};
 
-		this.vueltaGato = this.vuelta;
+		// this.vueltaGato = this.vuelta;
 		this.arresto2 = this.arresto;
 	}
 
