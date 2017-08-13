@@ -153,9 +153,9 @@ export default class DanceAnimation {
 		const angleDiff = figure.angle - angle;
 		if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) &&
 			(Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
-			if ((rotateDirection === ROTATE.CLOCKWISE) ||
-				(angleDiff > 190) ||
-				((angleDiff < 0) && (angleDiff > -180))) {
+			const rotateTo = rotateDirection ||
+				(((angleDiff > 190) || ((angleDiff < 0) && (angleDiff > -180))) ? ROTATE.CLOCKWISE : ROTATE.COUNTERCLOCKWISE);
+			if (rotateTo === ROTATE.CLOCKWISE) {
 				figure.angle = figure.angle + FIGURE_ANGLE_SPEED;
 			} else {
 				figure.angle = figure.angle - FIGURE_ANGLE_SPEED;

@@ -1,4 +1,4 @@
-import {DIRECTIONS, FIGURE_HANDS} from './commons/const';
+import {DIRECTIONS, FIGURE_HANDS, ROTATE} from './commons/const';
 import GatoAnimation from './GatoAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import {bailecito} from './svg/svg';
@@ -116,7 +116,8 @@ export default class BailecitoAnimation extends GatoAnimation {
 			direction: DIRECTIONS.BACKWARD,
 			startPart: 1,
 			stopPart: 0,
-			figureHands: FIGURE_HANDS.PANUELO
+			figureHands: FIGURE_HANDS.PANUELO,
+			rotateDirection: ROTATE.COUNTERCLOCKWISE
 		});
 	}
 }
