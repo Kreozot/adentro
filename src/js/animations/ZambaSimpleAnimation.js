@@ -1,5 +1,5 @@
 import ZambaAnimation from './ZambaAnimation';
-import {DIRECTIONS} from './commons/const';
+import {DIRECTIONS, FIGURE_HANDS, STEP_STYLE} from './commons/const';
 import PairElement from './commons/elements/double/PairElement';
 import {getOppositePosition} from './commons/utils';
 
@@ -26,18 +26,56 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 	}
 
 	mediaVuelta(lengthS, manPosition, beats) {
-		this.elements.mediaVuelta.setAngle(-45);
-		return this.elements.mediaVuelta.fullAnimation({lengthS, beats, manPosition});
+		this.clearPaths();
+		this.elements.mediaVuelta.drawPath(manPosition);
+
+		return this.elements.mediaVuelta.startAnimation({
+			lengthS: lengthS / 2,
+			beats: beats / 2,
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.SIMPLE,
+			startPart: 0,
+			stopPart: 0.5
+		})
+			.then(() => this.elements.mediaVuelta.startAnimation({
+				lengthS: lengthS / 2,
+				beats: beats / 2,
+				figureHands: FIGURE_HANDS.PANUELO,
+				stepStyle: STEP_STYLE.ZAMBA,
+				startPart: 0.5,
+				stopPart: 1
+			}));
 	}
 
 	vuelta(lengthS, manPosition, beats) {
-		this.elements.vuelta.setAngle(-45);
-		return this.elements.vuelta.fullAnimation({lengthS, beats, manPosition});
+		this.clearPaths();
+		this.elements.vuelta.drawPath(manPosition);
+
+		return this.elements.vuelta.startAnimation({
+			lengthS: lengthS / 2,
+			beats: beats / 2,
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.SIMPLE,
+			startPart: 0,
+			stopPart: 0.5
+		})
+			.then(() => this.elements.vuelta.setAngle(-45))
+			.then(() => this.elements.vuelta.startAnimation({
+				lengthS: lengthS / 2,
+				beats: beats / 2,
+				figureHands: FIGURE_HANDS.PANUELO,
+				stepStyle: STEP_STYLE.ZAMBA,
+				startPart: 0.5,
+				stopPart: 1
+			}));
 	}
 
 	arresto(lengthS, manPosition, beats) {
 		this.elements.arrestoSimple.setAngle(-45);
-		return this.elements.arrestoSimple.fullAnimation({lengthS, beats, manPosition});
+		return this.elements.arrestoSimple.fullAnimation({
+			lengthS, beats, manPosition,
+			figureHands: FIGURE_HANDS.PANUELO
+		});
 	}
 
 	arrestoDoble(lengthS, manPosition, beats) {
@@ -52,22 +90,26 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 
 		return this.elements.mediaVueltaToArresto.startAnimation({
 			lengthS: lengthS / 4,
-			beats: beats / 4
+			beats: beats / 4,
+			figureHands: FIGURE_HANDS.PANUELO
 		})
 			.then(() => this.elements.arresto.startAnimation({
 				lengthS: lengthS / 4,
 				beats: beats / 4,
 				direction: DIRECTIONS.BACKWARD,
 				startPart: 1,
-				stopPart: 0
+				stopPart: 0,
+				figureHands: FIGURE_HANDS.PANUELO
 			}))
 			.then(() => this.elements.arresto.startAnimation({
 				lengthS: lengthS / 4,
-				beats: beats / 4
+				beats: beats / 4,
+				figureHands: FIGURE_HANDS.PANUELO
 			}))
 			.then(() => this.elements.arrestoBack.startAnimation({
 				lengthS: lengthS / 4,
-				beats: beats / 4
+				beats: beats / 4,
+				figureHands: FIGURE_HANDS.PANUELO
 			}));
 	}
 
@@ -80,12 +122,14 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 
 		return this.elements.mediaVuelta.startAnimation({
 			lengthS: lengthS * 4 / beats,
-			beats: 4
+			beats: 4,
+			figureHands: FIGURE_HANDS.PANUELO
 		})
 			.then(() => this.elements.coronacion.startAnimation({
 				lengthS: lengthS * 3 / beats,
 				beats: 3,
-				isLastElement: true
+				isLastElement: true,
+				figureHands: FIGURE_HANDS.PANUELO
 			}));
 	}
 }

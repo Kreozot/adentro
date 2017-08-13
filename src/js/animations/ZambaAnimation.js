@@ -39,8 +39,8 @@ export default class ZambaAnimation extends GatoAnimation {
 
 	vuelta(lengthS, manPosition, beats) {
 		this.clearPaths();
-		this.elements.mediaVueltaToArresto.setAngle(-45);
 		this.elements.mediaVuelta.drawPath(manPosition);
+		this.elements.mediaVueltaToArresto.setAngle(-45);
 		this.elements.mediaVueltaToArresto.drawPath(getOppositePosition(manPosition));
 
 		return this.elements.mediaVuelta.startAnimation({

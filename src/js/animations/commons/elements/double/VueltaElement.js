@@ -37,7 +37,7 @@ export default class VueltaElement extends PairElement {
 		}
 	}
 
-	animationFunction({lengthMs, beats, direction = DIRECTIONS.FORWARD, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.CASTANETAS}) {
+	animationFunction({lengthMs, beats, direction = DIRECTIONS.FORWARD, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.CASTANETAS, stepStyle, firstLeg, rotateDirection}) {
 		//Если идём из начала в конец, то инвертируем цвета градиента
 		if (startPart > stopPart) {
 			this.setColors(this.rightColor, this.leftColor);
@@ -55,25 +55,25 @@ export default class VueltaElement extends PairElement {
 			);
 		});
 
+		const options = {
+			path: this.path,
+			timeLength: lengthMs,
+			startLen: this.pathLength * startPart,
+			stopLen: this.pathLength * stopPart,
+			beats, direction, figureHands, stepStyle, firstLeg, rotateDirection
+		};
+
 		return Promise.all([
 			gradientAnimationPromise,
 			this.animation.animateMan({
-				path: this.path,
-				startLen: this.startPos1,
+				...options,
+				startLen: startPart * this.pathLength + this.startPos1,
 				stopLen: stopPart * this.pathLength + this.startPos1,
-				timeLength: lengthMs,
-				beats,
-				direction,
-				figureHands
 			}),
 			this.animation.animateWoman({
-				path: this.path,
-				startLen: this.startPos2,
+				...options,
+				startLen: startPart * this.pathLength + this.startPos2,
 				stopLen: stopPart * this.pathLength + this.startPos2,
-				timeLength: lengthMs,
-				beats,
-				direction,
-				figureHands
 			})
 		]);
 	}
