@@ -14,8 +14,8 @@
   - {beats: 4, manPosition: right, class: coronacion, id: coronacion, visualization: coronacion, title: Giro y&nbsp;coronación}
 -
   - {beats: 4, manPosition: right, class: vuelta, id: mediaVuelta_2, visualization: mediaVuelta, title: Media vuelta}
-  - {beats: 4, manPosition: right, class: giro, id: giro_2, visualization: giro, title: Giro}
-  - {beats: 4, manPosition: right, class: vuelta, id: mediaVuelta2_2, visualization: mediaVuelta, title: Media vuelta}
+  - {beats: 4, manPosition: left, class: giro, id: giro_2, visualization: giro, title: Giro}
+  - {beats: 4, manPosition: left, class: vuelta, id: mediaVuelta2_2, visualization: mediaVuelta, title: Media vuelta}
   - {beats: 4, manPosition: right, class: giro, id: giro2_2, visualization: giro, title: Giro}
   - bar: true
   - {beats: 4, manPosition: right, class: zapateo, id: zapateo_2, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]", yOffset: true}
