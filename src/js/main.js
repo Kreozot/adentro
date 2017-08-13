@@ -212,6 +212,7 @@ class Adentro {
 				if (!timingGenerator.addBeat(this.player.currentTime)) {
 					const newTiming = timingGenerator.getTiming();
 					$('#content').html(`<pre>${newTiming}</pre>`);
+					copyText(newTiming);
 				}
 			}
 		});
@@ -255,6 +256,19 @@ $(window).load(function () {
 
 	global.tour.startFirstTime();
 });
+
+function copyText(text) {
+	const textArea = document.createElement('textarea');
+	textArea.value = text;
+	document.body.appendChild(textArea);
+	textArea.select();
+	try {
+		document.execCommand('copy');
+	} catch (err) {
+		console.error('Oops, unable to copy: ' + err);
+	}
+	document.body.removeChild(textArea);
+}
 
 $('.logo').on('click', () => {
 	if ($(window).width() <= 768) {
