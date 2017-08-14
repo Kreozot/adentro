@@ -55,7 +55,7 @@
      inkscape:cx="155.93274"
      inkscape:cy="210.82015"
      inkscape:document-units="px"
-     inkscape:current-layer="layer17"
+     inkscape:current-layer="layer5"
      showgrid="true"
      inkscape:snap-global="true"
      showguides="false"
@@ -136,17 +136,17 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="coronazion"
-     style="display:none">
+     style="display:inline">
     <path
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.92476457px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 50,390 c 30,20 110,-20 150,-60 40,-40 20,-110 -20,-110 -20,0 -40,10 -40,40 0,25 20,40 40,40 40,0 60,-30 50,-60"
+       d="m 50,390 c 30,20 110,-10 150,-50 40,-40 16,-106 -24,-106 -20,0 -40,10 -40,40 0,25 20,44 40,44 40,0 64,-38 54,-68"
        id="coronacion_left"
        sodipodi:nodetypes="cssccc"
        inkscape:connector-curvature="0" />
     <path
        sodipodi:nodetypes="cssccc"
        id="coronacion_right"
-       d="m 390,50 c -30,-20 -110,20 -150,60 -40,40 -20,110 20,110 20,0 40,-10 40,-40 0,-25 -20,-40 -40,-40 -40,0 -60,30 -50,60"
+       d="m 390,50 c -30,-20 -110,10 -150,50 -40,40 -16,106 24,106 20,0 40,-10 40,-40 0,-25 -20,-44 -40,-44 -40,0 -64,38 -54,68"
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.92476457px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        inkscape:connector-curvature="0" />
   </g>
@@ -423,7 +423,7 @@
      inkscape:groupmode="layer"
      id="layer17"
      inkscape:label="chacarera 4 - coronacion"
-     style="display:inline">
+     style="display:none">
     <path
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.63745022px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 50,130 c 0,25 40,40 90,40 65,0 59,-60 23.59081,-60.44575 C 128.18162,109.1085 129,160 159.08475,160.08475 179,160 190,150 200.47939,139.55425"
