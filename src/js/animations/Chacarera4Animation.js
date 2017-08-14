@@ -85,11 +85,11 @@ export default class Chacarera4Animation extends Dance4Animation {
 			}, this.woman2),
 
 			coronacion: new QuatroElement(this, {
-				left: escondido.coronacion_1_left,
-				right: escondido.coronacion_1_right
+				left: escondido.chacarera_4_coronacion1_left,
+				right: escondido.chacarera_4_coronacion1_right
 			}, {
-				left: escondido.coronacion_2_left,
-				right: escondido.coronacion_2_right
+				left: escondido.chacarera_4_coronacion2_left,
+				right: escondido.chacarera_4_coronacion2_right
 			})
 		};
 	}
@@ -189,6 +189,6 @@ export default class Chacarera4Animation extends Dance4Animation {
 	}
 
 	coronacion(lengthS, manPosition, beats) {
-		return this.elements.coronacion.fullAnimation({lengthS, beats, manPosition});
+		return this.elements.coronacion.fullAnimation({lengthS, beats, manPosition, isLastElemet: true});
 	}
 }
