@@ -28,8 +28,8 @@ export default class ZambaAnimation extends GatoAnimation {
 			}),
 
 			mediaVueltaCoronacion: new PairElement(this, {
-				left: 'm 40,160 c 0,40 160,100 260,100 180,0 100,-200 20,-120',
-				right: 'M 560,160 C 560,120 400,60 300,60 120,60 200,260 280,180'
+				left: zamba.media_vuelta_coronacion_left,
+				right: zamba.media_vuelta_coronacion_right
 			})
 		};
 		this.zapateoAnimation = zapateoAnimation.bind(this);
@@ -189,20 +189,19 @@ export default class ZambaAnimation extends GatoAnimation {
 		this.elements.mediaVueltaCoronacion.drawPath(manPosition);
 
 		return this.elements.mediaVueltaCoronacion.startAnimation({
-			lengthS: lengthS / 2,
-			beats: beats / 2,
+			lengthS: lengthS / 7 * 4,
+			beats: beats / 7 * 4,
 			figureHands: FIGURE_HANDS.PANUELO,
 			stepStyle: STEP_STYLE.ZAMBA,
 			startPart: 0,
-			stopPart: 0.5
+			stopPart: 0.6
 		})
-			.then(() => this.elements.mediaVueltaCoronacion.setAngle(-45))
 			.then(() => this.elements.mediaVueltaCoronacion.startAnimation({
-				lengthS: lengthS / 2,
-				beats: beats / 2,
+				lengthS: lengthS / 7 * 3,
+				beats: beats / 7 * 3,
 				figureHands: FIGURE_HANDS.PANUELO,
 				stepStyle: STEP_STYLE.SIMPLE,
-				startPart: 0.5,
+				startPart: 0.6,
 				stopPart: 1
 			}));
 	}
