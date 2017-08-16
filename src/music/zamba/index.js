@@ -3,13 +3,13 @@ module.exports = {
 	scheme: require('./scheme.yaml'),
 	music: [require('./music/el_beso'), require('./music/zamba_cantora')],
 	animation: [{
-		id: 'classic',
-		animClass: require('animationClasses/ZambaAnimation').default,
-		title: localize({ru: 'Вариант 1', en: 'Variant 1'})
-	}, {
 		id: 'simple',
 		animClass: require('animationClasses/ZambaSimpleAnimation').default,
-		title: localize({ru: 'Упрощённая', en: 'Simplified'})
+		title: localize({ru: 'Традиционная', en: 'Traditional'})
+	}, {
+		id: 'classic',
+		animClass: require('animationClasses/ZambaAnimation').default,
+		title: localize({ru: 'Модифицированная', en: 'Modified'})
 	}],
 	info: require('infoData/zamba.inc')
 };
