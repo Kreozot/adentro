@@ -1,13 +1,13 @@
 ---
 -
   - {beats: 4, manPosition: left, class: esquina, id: esquina1, visualization: esquina, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
-  - {beats: 4, manPosition: top, class: zapateo, id: zapateoZarandeo1, visualization: zapateoZarandeo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - {beats: 4, manPosition: top, class: zapateo, id: zapateoZarandeo1, visualization: zapateoZarandeoConPanuelo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
   - {beats: 4, manPosition: top, class: esquina, id: esquina2, visualization: esquina, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
-  - {beats: 4, manPosition: right, class: zapateo, id: zapateoZarandeo2, visualization: zapateoZarandeo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - {beats: 4, manPosition: right, class: zapateo, id: zapateoZarandeo2, visualization: zapateoZarandeoConPanuelo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
   - {beats: 4, manPosition: right, class: esquina, id: esquina3, visualization: esquina, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
-  - {beats: 4, manPosition: bottom, class: zapateo, id: zapateoZarandeo3, visualization: zapateoZarandeo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - {beats: 4, manPosition: bottom, class: zapateo, id: zapateoZarandeo3, visualization: zapateoZarandeoConPanuelo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
   - {beats: 4, manPosition: bottom, class: esquina, id: esquina4, visualization: esquina, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
-  - {beats: 4, manPosition: left, class: zapateo, id: zapateoZarandeo4, visualization: zapateoZarandeo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - {beats: 4, manPosition: left, class: zapateo, id: zapateoZarandeo4, visualization: zapateoZarandeoConPanuelo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
   - bar: true
   - {beats: 8, manPosition: left, class: vuelta, id: vuelta, visualization: vueltaGiro, title: Vuelta entera y&nbsp;giro}
   - {beats: 8, manPosition: left, class: zapateo, id: zapateoZarandeo5, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
@@ -16,13 +16,13 @@
   - {beats: 4, manPosition: right, class: coronacion, id: coronacion, visualization: giroContragiroCoronacion, title: Giro y&nbsp;contra y&nbsp;coronación}
 -
   - {beats: 4, manPosition: right, class: esquina, id: esquina1_2, visualization: esquina, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
-  - {beats: 4, manPosition: bottom, class: zapateo, id: zapateoZarandeo1_2, visualization: zapateoZarandeo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - {beats: 4, manPosition: bottom, class: zapateo, id: zapateoZarandeo1_2, visualization: zapateoZarandeoConPanuelo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
   - {beats: 4, manPosition: bottom, class: esquina, id: esquina2_2, visualization: esquina, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
-  - {beats: 4, manPosition: left, class: zapateo, id: zapateoZarandeo2_2, visualization: zapateoZarandeo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - {beats: 4, manPosition: left, class: zapateo, id: zapateoZarandeo2_2, visualization: zapateoZarandeoConPanuelo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
   - {beats: 4, manPosition: left, class: esquina, id: esquina3_2, visualization: esquina, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
-  - {beats: 4, manPosition: top, class: zapateo, id: zapateoZarandeo3_2, visualization: zapateoZarandeo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - {beats: 4, manPosition: top, class: zapateo, id: zapateoZarandeo3_2, visualization: zapateoZarandeoConPanuelo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
   - {beats: 4, manPosition: top, class: esquina, id: esquina4_2, visualization: esquina, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
-  - {beats: 4, manPosition: right, class: zapateo, id: zapateoZarandeo4_2, visualization: zapateoZarandeo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - {beats: 4, manPosition: right, class: zapateo, id: zapateoZarandeo4_2, visualization: zapateoZarandeoConPanuelo, title: "Esquina y&nbsp;medio giro + $m[Zapateo]&nbsp;/ $w[Zarandeo]"}
   - bar: true
   - {beats: 8, manPosition: right, class: vuelta, id: vuelta_2, visualization: vueltaGiro, title: Vuelta entera y&nbsp;giro}
   - {beats: 8, manPosition: right, class: zapateo, id: zapateoZarandeo5_2, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}

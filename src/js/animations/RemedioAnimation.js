@@ -3,6 +3,7 @@ import EscondidoAnimation from './EscondidoAnimation';
 import {zapateoAnimation, zarandeoAnimation} from './GatoAnimation';
 import RotatePairElement from './commons/elements/double/RotatePairElement';
 import {getOppositePosition} from './commons/utils';
+import {FIGURE_HANDS} from './commons/const';
 import {remedio} from './svg/svg';
 
 export default class RemedioAnimation extends EscondidoAnimation {
@@ -122,7 +123,8 @@ export default class RemedioAnimation extends EscondidoAnimation {
 				startLen: 0,
 				stopLen: manEsquinaPathLength,
 				timeLength: timeLength * 3 / 4,
-				beats: beats * 3 / 4
+				beats: beats * 3 / 4,
+				figureHands: FIGURE_HANDS.PANUELO
 			}),
 			this.animateFigurePath({
 				figure: this.woman,
@@ -131,7 +133,8 @@ export default class RemedioAnimation extends EscondidoAnimation {
 				startLen: 0,
 				stopLen: womanEsquinaPathLength,
 				timeLength: timeLength * 3 / 4,
-				beats: beats * 3 / 4
+				beats: beats * 3 / 4,
+				figureHands: FIGURE_HANDS.PANUELO
 			})
 		]).then(() => Promise.all([
 			this.rotateFigure(this.man, lengthS / 4, beats / 4, manMovePoint.x, manMovePoint.y, manMovePoint.alpha + 90, manPaths.angle - 270),
@@ -145,6 +148,15 @@ export default class RemedioAnimation extends EscondidoAnimation {
 		return Promise.all([
 			this.zapateoAnimation(lengthS, manPosition, beats),
 			this.zarandeoAnimation(lengthS, manPosition, beats)
+		]);
+	}
+
+	zapateoZarandeoConPanuelo(lengthS, manPosition, beats) {
+		this.clearPaths();
+
+		return Promise.all([
+			this.zapateoAnimation(lengthS, manPosition, beats, true),
+			this.zarandeoAnimation(lengthS, manPosition, beats, true)
 		]);
 	}
 

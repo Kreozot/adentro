@@ -8,19 +8,22 @@ import {DIRECTIONS, FIGURE_HANDS, ROTATE} from './commons/const';
 import {getOppositePosition} from './commons/utils';
 import {gato, vuelta} from './svg/svg';
 
-export function zapateoAnimation(lengthS, manPosition, beats) {
+export function zapateoAnimation(lengthS, manPosition, beats, conPanuelo) {
 	this.elements.zapateo.drawPath(manPosition);
 
-	return this.elements.zapateo.startAnimation({lengthS, beats, figureHands: FIGURE_HANDS.DOWN});
+	return this.elements.zapateo.startAnimation({
+		lengthS, beats,
+		figureHands: conPanuelo ? FIGURE_HANDS.PANUELO : FIGURE_HANDS.DOWN,
+	});
 }
 
-export function zarandeoAnimation(lengthS, manPosition, beats) {
+export function zarandeoAnimation(lengthS, manPosition, beats, conPanuelo) {
 	this.elements.zarandeo.drawPath(getOppositePosition(manPosition));
 	const parts = beats >= 8 ? 4 : 2;
 	const partOptions = {
 		lengthS: lengthS / parts,
 		beats: beats / parts,
-		figureHands: FIGURE_HANDS.DOWN
+		figureHands: conPanuelo ? FIGURE_HANDS.PANUELO : FIGURE_HANDS.DOWN,
 	};
 	const forwardOptions = {
 		...partOptions,

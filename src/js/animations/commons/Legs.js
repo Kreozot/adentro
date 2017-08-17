@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-import {LEGS, STEP_STYLE, FIGURE_HANDS} from './const';
+import {LEGS, STEP_STYLE} from './const';
 
 const FIGURE_STEP_AMPLITUDE = 26;
 
@@ -101,9 +101,6 @@ export default class Legs {
 	}
 
 	animateFigureTimeZapateo(figure, timeLength, beats) {
-		$(`.hands:not(.hands--${FIGURE_HANDS.DOWN})`, figure.node).addClass('invisible');
-		$(`.hands--${FIGURE_HANDS.DOWN}`, figure.node).removeClass('invisible');
-
 		return this.animateLegsRepeatZapateo(figure, LEGS.RIGHT, timeLength / beats / 6, beats)
 			.finally(() => {
 				$(`.kick`, figure.node)
@@ -134,7 +131,11 @@ export default class Legs {
 	 * @param  {Number}  stepStyle  Стиль шага
 	 * @param  {Boolean} isLastElement Это последний элемент музкальной части
 	 */
-	animateFigureTime({figure, timeLength, beats, stepStyle, isLastElement, firstLeg = LEGS.LEFT}) {
+	animateFigureTime({figure, timeLength, beats, stepStyle, isLastElement, firstLeg = LEGS.LEFT, figureHands}) {
+		if (figureHands) {
+			$(`.hands:not(.hands--${figureHands})`, figure.node).addClass('invisible');
+			$(`.hands--${figureHands}`, figure.node).removeClass('invisible');
+		}
 		switch (stepStyle) {
 			case STEP_STYLE.ZAPATEO:
 				this.animateFigureTimeZapateo(figure, timeLength, beats);
