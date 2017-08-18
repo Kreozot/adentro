@@ -14,7 +14,7 @@ const KEY_SPACE = 32;
 class Adentro {
 	constructor() {
 		this.navigation = new Navigation(this);
-		this.player = new Player(this);
+		this.player = null;
 		this.animationLoader = new AnimationLoader(this);
 	}
 
@@ -145,6 +145,9 @@ class Adentro {
 		$('#schemaDiv').html(schemeTemplate({scheme}));
 		this.adaptiveLineHeight();
 
+		if (!this.player) {
+			this.player = new Player(this);
+		}
 		const player = this.player;
 		$('.element').on('click', function () {
 			const id = $(this).attr('id');
