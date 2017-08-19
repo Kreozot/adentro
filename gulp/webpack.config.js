@@ -100,7 +100,7 @@ var webpackConfig = [
 					xmlMode: true,
 					decodeEntities: true
 				});
-				return `\`${$.html(selector)}\``;
+				return `'${$.html(selector).replace(/\n/g, '')}'`;
 			}
 		}
 	}
