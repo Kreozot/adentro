@@ -1,3 +1,3 @@
-<% languages.forEach(lang => { %>
+<% languages.forEach(function (lang) { %>
 	<a class="lang-links__link link <%= lang.isCurrent ? 'link--current' : '' %>" href="<%= lang.url %>"><%= lang.title %></a>
 <% }); %>

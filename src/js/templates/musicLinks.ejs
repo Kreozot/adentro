@@ -1,7 +1,7 @@
 <span class="music-links__text"><%= text.composition %>: </span>
 <% if (musicData.length > 1) { %>
 	<select id="musicSelect" class="music-links__select">
-	<% musicData.forEach(musicDataEntry => { %>
+	<% musicData.forEach(function (musicDataEntry) { %>
 		<option <%- musicDataEntry.id === currentMusicId ? 'selected="selected"' : '' %> value="<%= musicDataEntry.id %>">
 			<%= musicDataEntry.title %>
 		</option>

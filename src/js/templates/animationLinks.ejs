@@ -1,6 +1,6 @@
 <span><%= text.variations %>:<span>
 <span>
-<% animationClassDefs.forEach(animationClassDef => { %>
+<% animationClassDefs.forEach(function (animationClassDef) { %>
 	<a class="animation-links__link link <%= animationClassDef.id === currentAnimationId ? 'link--current' : '' %>" data-animation-id="<%= animationClassDef.id %>"><%= animationClassDef.title %></a>
 <% }); %>
 </span>
