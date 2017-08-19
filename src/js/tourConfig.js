@@ -1,15 +1,22 @@
 module.exports = {
 	id: 'adentro_tour',
+	i18n: {
+		nextBtn: localize({ru: 'Далее', en: 'Next'}),
+		prevBtn: localize({ru: 'Назад', en: 'Prev'}),
+		doneBtn: localize({ru: 'Готово', en: 'Done'}),
+		skipBtn: localize({ru: 'Пропустить', en: 'Skip'}),
+		closeTooltip: localize({ru: 'Закрыть', en: 'Close'}),
+	},
 	steps: [
 		{
 			title: 'Adentro!',
 			content: localize({
-				ru: 'Добро пожаловать на Adentro.ru - проект по визуализации хореографии аргентинских народных танцев. В верхнем меню вы можете выбрать интересующий вас танец.',
-				en: 'Welcome to Adentro.ru - Argentina folk dances visualization project. You can choose a dance in the top menu.'
+				ru: 'Добро пожаловать на Adentro.ru - проект по визуализации хореографии аргентинских народных танцев. В меню слева вы можете выбрать интересующий вас танец.',
+				en: 'Welcome to Adentro.ru - Argentina folk dances visualization project. You can choose a dance in the left menu.'
 			}),
-			target: '#css3menu1>li',
+			target: '.logo-image',
 			zindex: 9999,
-			placement: 'bottom'
+			placement: 'right'
 		},
 		{
 			title: localize({
@@ -20,9 +27,9 @@ module.exports = {
 				ru: 'В плеере вы можете управлять воспроизведением музыки. Отображение хореографии начнётся автоматически в нужный фрагмент времени.',
 				en: 'This is the player. Visualization starts automatically when the music reaches a particular point in time.'
 			}),
-			target: 'jp_container_1',
+			target: '.plyr',
 			zindex: 9999,
-			placement: 'right'
+			placement: 'bottom'
 		},
 		{
 			title: localize({
@@ -33,7 +40,7 @@ module.exports = {
 				ru: 'Вы также можете выбирать различные музыкальные композиции. На примере нескольких разных композиций можно лучше понять, как хореография танца ложится на музыку.',
 				en: 'You can choose an another music track. This may be helpful to understand better how the choreography is connected to music.'
 			}),
-			target: '#musicLinks>select',
+			target: '#musicSelect',
 			zindex: 9999,
 			placement: 'bottom'
 		},
@@ -46,7 +53,7 @@ module.exports = {
 				ru: 'Схема здесь также интерактивна. Кликнув на любой элемент вы можете перемотать музыку на соответствующее место.',
 				en: 'The scheme is also interactive. You can rewind the music by clicking on elements.'
 			}),
-			target: 'schemaDiv',
+			target: '#schemaDiv',
 			zindex: 9999,
 			xOffset: 'center',
 			yOffset: -50,
@@ -58,10 +65,10 @@ module.exports = {
 				en: 'Visualization'
 			}),
 			content: localize({
-				ru: 'Под схемой будет отображаться визуализация хореографии. На акценте шага (на сильной доле) фигура будет мигать.',
-				en: 'Visualization will be shown under the scheme. On an accented step the shapes will blink.'
+				ru: 'Под схемой будет отображаться условная визуализация хореографии.',
+				en: 'Visualization will be shown under the scheme.'
 			}),
-			target: 'animationDiv',
+			target: '#animation_block',
 			zindex: 9999,
 			xOffset: 'center',
 			placement: 'top'
@@ -78,7 +85,7 @@ module.exports = {
 			target: '#animationLinks>a',
 			zindex: 9999,
 			xOffset: 'center',
-			placement: 'bottom'
+			placement: 'top'
 		}
 	]
 };

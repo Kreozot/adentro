@@ -279,24 +279,10 @@ div.hopscotch-bubble .hopscotch-nav-button.next {
   border-color: #1b5480;
   color: #fff;
   margin: 0 0 0 10px;
-  /* HS specific*/
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
-  background-color: #287bbc;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#287bbc', endColorstr='#23639a');
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #287bbc), color-stop(100%, #23639a));
-  background-image: -webkit-linear-gradient(top, #287bbc 0%, #23639a 100%);
-  background-image: -moz-linear-gradient(top, #287bbc 0%, #23639a 100%);
-  background-image: -o-linear-gradient(top, #287bbc 0%, #23639a 100%);
-  background-image: linear-gradient(top, #287bbc 0%, #23639a 100%);
+  background-color: #0094FF;
 }
 div.hopscotch-bubble .hopscotch-nav-button.next:hover {
   background-color: #2672ae;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#2672ae', endColorstr='#1e4f7e');
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #2672ae), color-stop(100%, #1e4f7e));
-  background-image: -webkit-linear-gradient(top, #2672ae 0%, #1e4f7e 100%);
-  background-image: -moz-linear-gradient(top, #2672ae 0%, #1e4f7e 100%);
-  background-image: -o-linear-gradient(top, #2672ae 0%, #1e4f7e 100%);
-  background-image: linear-gradient(top, #2672ae 0%, #1e4f7e 100%);
 }
 div.hopscotch-bubble .hopscotch-nav-button.prev {
   border-color: #a7a7a7;
@@ -400,6 +386,7 @@ div.hopscotch-bubble.no-number .hopscotch-bubble-content {
   margin: 0;
 }
 div.hopscotch-bubble .hopscotch-bubble-close {
+  border: none;
   color: #000;
   background: transparent url(../img/sprite-green.png) -192px -92px no-repeat;
   display: block;
