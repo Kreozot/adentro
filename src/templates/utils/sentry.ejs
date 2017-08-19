@@ -1,0 +1,7 @@
+<script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous"></script>
+<script>
+Raven.config('https://d3ffcee84dd64848b334063b8c13e5ba@sentry.io/205876', {
+	release: <%= version %>,
+	includePaths: [/https?:\/\/(?:www\.)?adentro\.(?:ru|org)/]
+}).install();
+</script>

@@ -9,6 +9,7 @@ const gutil = require('gulp-util');
 const version = require('../package.json').version;
 const rename = require('gulp-rename');
 const yaml = require('js-yaml');
+const argv = require('yargs').argv;
 
 gulp.task('clean-html', function () {
 	return del([
@@ -25,6 +26,7 @@ gulp.task('process-html', ['clean-html', 'copy-static'], function () {
 	return gulp.src(paths.src.templates + '/*.ejs')
 		.pipe(ejs({
 			version,
+			production: Boolean(argv.production),
 			menuItems: yaml.safeLoad(fs.readFileSync(`./src/config/menu.yaml`))
 		}).on('error', gutil.log))
 		.pipe(posthtml([
