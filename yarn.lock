@@ -2173,9 +2173,9 @@ etag@~1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.0.tgz#6f631aef336d6c46362b51764044ce216be3c051"
 
-eve@~0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/eve/-/eve-0.4.2.tgz#7eea0afc0e4efb7c9365615315a3576833ead2ae"
+eve@~0.5.1:
+  version "0.5.4"
+  resolved "https://registry.npmjs.org/eve/-/eve-0.5.4.tgz#67d080b9725291d7e389e34c26860dd97f1debaa"
 
 event-stream@^3.3.2:
   version "3.3.4"
@@ -6100,11 +6100,11 @@ sliced@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/sliced/-/sliced-1.0.1.tgz#0b3a662b5d04c3177b1926bea82b03f837a2ef41"
 
-snapsvg@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/snapsvg/-/snapsvg-0.4.0.tgz#e0767014167825957de7e125c29b0fa89796ea03"
+snapsvg@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.npmjs.org/snapsvg/-/snapsvg-0.5.1.tgz#0caf52c79189a290746fc446cc5e863f6bdddfe3"
   dependencies:
-    eve "~0.4.2"
+    eve "~0.5.1"
 
 sntp@1.x.x:
   version "1.0.9"
