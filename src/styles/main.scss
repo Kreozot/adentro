@@ -180,6 +180,10 @@ a.content_link.active {
 	max-width: 800px;
 }
 
+.plyr {
+	min-width: 300px !important;
+}
+
 @import 'sidebar.scss';
 @import 'blocks/link.scss';
 @import 'blocks/social-links.scss';
