@@ -24,8 +24,7 @@ export function disablePreloaderInItem($elements) {
 		const $element = $(this);
 
 		$element
-			.removeClass('preloader')
-			.removeClass('preloader--is-flow-item');
+			.removeClass('preloader');
 	});
 }
 
