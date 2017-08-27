@@ -5,6 +5,8 @@ $preloader-bg-opacity: 0.9;
 $preloader-color: #b4b4b4;
 
 .preloader {
+	position: relative;
+
 	&:after {
 		content: '';
 		position: absolute;
@@ -18,8 +20,4 @@ $preloader-color: #b4b4b4;
 		background-position: center center;
 		background-color: rgba($preloader-bg-color, $preloader-bg-opacity);
 	}
-}
-
-.preloader:not(.preloader--is-flow-item) {
-	position: relative;
 }
