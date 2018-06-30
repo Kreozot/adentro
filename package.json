@@ -36,6 +36,7 @@
     "posthtml-include": "^1.0.1",
     "promised-del": "^1.0.2",
     "raw-loader": "^0.5.1",
+    "recursive-readdir": "^2.2.2",
     "require-dir": "^0.3.0",
     "should": "^7.1.1",
     "style-loader": "^0.13.0",
