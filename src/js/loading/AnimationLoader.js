@@ -1,6 +1,7 @@
 import contentSwitch from './content_switch';
 import animationLinksTemplate from '../templates/animationLinks.ejs';
 import animationBlockTemplate from '../templates/animationBlock.ejs';
+import {disablePreloaderInItem, enablePreloaderInItem} from './preloader';
 
 const minAnimationWidth = 600;
 const maxAnimationHeight = 325;
@@ -22,15 +23,23 @@ export default class AnimationLoader {
 	/**
 	 * Загрузка анимации
 	 * @param  {Object} AnimationClass  Класс анимации
+	 * @param  {Object} turnOnPreloader  Нужно ли включать preloader для блока с анимацией
 	 */
-	loadAnimation(AnimationClass) {
+	loadAnimation(AnimationClass, turnOnPreloader = false) {
+		const $animationContainer = $('#animation_block');
+		const $animationBlock = $('#animation');
+
+		if (turnOnPreloader) {
+			enablePreloaderInItem($animationContainer);
+		}
+
 		if (this.animation) {
 			this.animation.clear();
 		}
 		this.animation = new AnimationClass('animation');
 		const ratio = Math.min(maxAnimationHeight, this.animation.height) / Math.max(minAnimationWidth, this.animation.width) * 100;
 		$('.animation-container').css('padding-bottom', ratio + '%');
-		$('#animation')
+		$animationBlock
 			.attr('width', '100%')
 			.attr('height', '100%')
 			.attr('viewBox', `-20 -20 ${this.animation.width + 40} ${this.animation.height + 40}`);

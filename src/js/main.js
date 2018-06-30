@@ -9,6 +9,9 @@ import schemeTemplate from './templates/scheme.ejs';
 import musicLinksTemplate from './templates/musicLinks.ejs';
 import langLinksTemplate from './templates/langLinks.ejs';
 
+
+import {disablePreloaderInItem, enablePreloaderInItem, itHasPreloader} from './loading/preloader';
+
 const KEY_SPACE = 32;
 
 class Adentro {
@@ -57,6 +60,12 @@ class Adentro {
 	 * @param  {Number} seconds    	  Длительность в секундах
 	 */
 	showCurrentElement(elementId, seconds) {
+		const $animationContainer = $('#animation_block');
+
+		if (itHasPreloader($animationContainer)) {
+			disablePreloaderInItem($animationContainer);
+		}
+
 		if (elementId.split('_')[0] === '#start') {
 			// Начальное расположение
 			this.animationLoader.animation.setAtStart();
