@@ -14,7 +14,7 @@
    viewBox="0 0 115.62501 75"
    id="svg3431"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="figures.svg">
   <defs
      id="defs3433">
@@ -57,14 +57,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.9999996"
-     inkscape:cx="43.57993"
-     inkscape:cy="35.666469"
+     inkscape:cx="5.7635132"
+     inkscape:cy="58.79147"
      inkscape:document-units="px"
      inkscape:current-layer="svg3431"
      showgrid="false"
      showguides="true"
-     inkscape:window-width="1600"
-     inkscape:window-height="837"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -87,12 +87,13 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     id="man">
+     id="man"
+     transform="translate(-57.875,-37.5)">
     <g
        transform="translate(6.625,10.250008)"
        id="g4765"
@@ -133,7 +134,7 @@
            cy="-23.445038"
            rx="5"
            ry="8.9999819"
-           transform="scale(-1,-1)" />
+           transform="scale(-1)" />
         <ellipse
            ry="8.9999819"
            rx="5"
@@ -141,7 +142,7 @@
            cx="-64.21418"
            id="ellipse4828"
            style="fill:#af7d24;fill-opacity:1;stroke:#323232;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.6714976"
-           transform="scale(-1,-1)" />
+           transform="scale(-1)" />
         <path
            sodipodi:nodetypes="zzscz"
            inkscape:connector-curvature="0"
@@ -262,7 +263,7 @@
            id="g4220">
           <path
              style="fill:#dab272;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-             d="m -21.292969,42.513672 -2.251953,0 c 0,0 -2.601049,2.2687 -2.375,5 0.282247,3.410264 2.564312,5.539883 3.72461,5.099609 0.0048,-1.960315 -0.0073,-3.953878 0.1875,-5.734375 0.186224,-1.702089 0.458877,-2.997206 0.714843,-4.365234 z"
+             d="m -21.292969,42.513672 h -2.251953 c 0,0 -2.601049,2.2687 -2.375,5 0.282247,3.410264 2.564312,5.539883 3.72461,5.099609 0.0048,-1.960315 -0.0073,-3.953878 0.1875,-5.734375 0.186224,-1.702089 0.458877,-2.997206 0.714843,-4.365234 z"
              id="path4239"
              transform="translate(28.707106,9.292894)"
              inkscape:connector-curvature="0" />
@@ -409,8 +410,7 @@
   </g>
   <g
      id="woman"
-     display="none"
-     style="display:none">
+     transform="translate(-57.875,-37.5)">
     <g
        transform="translate(6.625,10.250008)"
        id="g4717"
@@ -425,7 +425,7 @@
            cy="-30.482916"
            rx="3.9110041"
            ry="12"
-           transform="scale(-1,-1)" />
+           transform="scale(-1)" />
       </g>
       <g
          id="g4841"

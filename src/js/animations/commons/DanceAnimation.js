@@ -164,7 +164,7 @@ export default class DanceAnimation {
 			figure.angle = angle;
 		}
 		figure.angle = normalizeAngle(figure.angle);
-		figure.transform(`t${x - figureWidthHalf},${y - figureHeightHalf}r${Math.floor(figure.angle)}`);
+		figure.transform(`t${x},${y}r${Math.floor(figure.angle)}`);
 		return;
 		if (pairFigure) {
 			const figureTop = Snap($('.top', figure.node)[0]);
