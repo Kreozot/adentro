@@ -96,7 +96,7 @@ export default class GatoAnimation extends DanceAnimation {
 	giro(lengthS, manPosition, beats) {
 		return this.elements.giro.fullAnimation({
 			lengthS, beats, manPosition,
-			rotateDirection: ROTATE.CLOCKWISE
+			rotateDirection: ROTATE.COUNTERCLOCKWISE
 		});
 	}
 
@@ -106,7 +106,7 @@ export default class GatoAnimation extends DanceAnimation {
 			direction: DIRECTIONS.BACKWARD,
 			startPart: 1,
 			stopPart: 0,
-			rotateDirection: ROTATE.COUNTERCLOCKWISE
+			rotateDirection: ROTATE.CLOCKWISE
 		});
 	}
 
@@ -122,7 +122,7 @@ export default class GatoAnimation extends DanceAnimation {
 	mediaVuelta(lengthS, manPosition, beats) {
 		return this.elements.mediaVuelta.fullAnimation({
 			lengthS, beats, manPosition,
-			rotateDirection: ROTATE.CLOCKWISE
+			rotateDirection: ROTATE.COUNTERCLOCKWISE
 		});
 	}
 
@@ -130,7 +130,7 @@ export default class GatoAnimation extends DanceAnimation {
 		return this.elements.coronacion.fullAnimation({
 			lengthS, beats, manPosition,
 			isLastElement: true,
-			rotateDirection: ROTATE.CLOCKWISE
+			rotateDirection: ROTATE.COUNTERCLOCKWISE
 		});
 	}
 }

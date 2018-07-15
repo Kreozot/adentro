@@ -117,7 +117,7 @@ export default class BailecitoAnimation extends GatoAnimation {
 			startPart: 1,
 			stopPart: 0,
 			figureHands: FIGURE_HANDS.PANUELO,
-			rotateDirection: ROTATE.COUNTERCLOCKWISE
+			rotateDirection: ROTATE.CLOCKWISE
 		});
 	}
 }

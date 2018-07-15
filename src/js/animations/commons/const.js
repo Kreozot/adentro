@@ -24,6 +24,6 @@ export const FIGURE_HANDS = {
 };
 
 export const ROTATE = {
-	CLOCKWISE: 1,
-	COUNTERCLOCKWISE: 2
+	COUNTERCLOCKWISE: 1,
+	CLOCKWISE: 2
 };
