@@ -1,5 +1,5 @@
 import SingleElement from './SingleElement';
-import {STEP_STYLE, FIGURE_HANDS, DIRECTIONS} from 'animationClasses/commons/const';
+import {STEP_STYLE, FIGURE_HANDS, DIRECTIONS} from 'js/animations/commons/const';
 
 export default class ZapateoElement extends SingleElement {
 	constructor(animation, figure, pathStrings) {

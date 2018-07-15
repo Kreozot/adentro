@@ -4,12 +4,12 @@ module.exports = {
 	music: [require('./music/el_beso'), require('./music/zamba_cantora')],
 	animation: [{
 		id: 'simple',
-		animClass: require('animationClasses/ZambaSimpleAnimation').default,
+		animClass: require('js/animations/ZambaSimpleAnimation').default,
 		title: localize({ru: 'Традиционная', en: 'Traditional'})
 	}, {
 		id: 'classic',
-		animClass: require('animationClasses/ZambaAnimation').default,
+		animClass: require('js/animations/ZambaAnimation').default,
 		title: localize({ru: 'Модифицированная', en: 'Modified'})
 	}],
-	info: require('infoData/zamba.inc')
+	info: require('info/zamba.inc')
 };

@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-import {FIGURE_HANDS} from 'animationClasses/commons/const';
+import {FIGURE_HANDS} from 'js/animations/commons/const';
 import SingleElement from './SingleElement';
 
 /**

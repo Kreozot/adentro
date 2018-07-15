@@ -1,4 +1,4 @@
-import {DIRECTIONS, FIGURE_HANDS} from 'animationClasses/commons/const';
+import {DIRECTIONS, FIGURE_HANDS} from 'js/animations/commons/const';
 
 /**
  * Одиночная анимация
@@ -66,7 +66,19 @@ export default class SingleElement {
 	 * @param  {Number} startPart Позиция начала (0-1 относительно траектории)
 	 * @param  {Number} stopPart  Позиция конца (0-1 относительно траектории)
 	 */
-	animationFunction({lengthMs: timeLength, beats, direction = DIRECTIONS.FORWARD, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.CASTANETAS, isLastElement, stepStyle, firstLeg, rotateDirection}) {
+	animationFunction({
+		lengthMs: timeLength,
+		beats,
+		direction = DIRECTIONS.FORWARD,
+		startPart = 0,
+		stopPart = 1,
+		figureHands = FIGURE_HANDS.CASTANETAS,
+		isLastElement,
+		stepStyle,
+		firstLeg,
+		rotateDirection,
+		pairFigure
+	}) {
 		return this.animation.animateFigurePath({
 			figure: this.figure,
 			startAngle: 90 + this.angle,
@@ -81,7 +93,8 @@ export default class SingleElement {
 			figureHands,
 			stepStyle,
 			firstLeg,
-			rotateDirection
+			rotateDirection,
+			pairFigure
 		});
 	}
 

@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 
 require('styles/animation.scss');
-import {normalizeAngle} from 'animationClasses/commons/utils';
+import {normalizeAngle} from 'js/animations/commons/utils';
 
 import Legs from './Legs';
 import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS, ROTATE} from './const';

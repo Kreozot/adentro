@@ -22,15 +22,9 @@ const postcssPlugins = [
 var webpackConfig = [
 	{
 		resolve: {
-			root: paths.root,
+			root: path.join(paths.root, 'src'),
 			alias: {
-				musicData: 'src/music',
 				svgData: paths.temp.svgCompiled,
-				infoData: 'src/info',
-				animationClasses: 'src/js/animations',
-				schemeParams: 'src/music',
-				schemeTemplate: 'src/schemeTemplate',
-				styles: 'src/styles',
 			}
 		},
 		entry: {
@@ -76,8 +70,8 @@ var webpackConfig = [
 		callbackLoader: {
 			requireSchemes: () => '{' + schemesList.map(id => {
 				return `${id}: function (callback) {
-						require.ensure(['schemeParams/${id}'], function (require) {
-							callback(require('schemeParams/${id}'));
+						require.ensure(['music/${id}'], function (require) {
+							callback(require('music/${id}'));
 						}, '${id}');
 					}`;
 			}).join(',\n') + '}',

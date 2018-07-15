@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-import {getOppositePosition} from 'animationClasses/commons/utils';
+import {getOppositePosition} from 'js/animations/commons/utils';
 import SingleElement from '../single/SingleElement';
 
 /**

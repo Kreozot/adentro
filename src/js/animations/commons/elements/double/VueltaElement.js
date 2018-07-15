@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-import {DIRECTIONS, FIGURE_HANDS} from 'animationClasses/commons/const';
+import {DIRECTIONS, FIGURE_HANDS} from 'js/animations/commons/const';
 import PairElement from './PairElement';
 
 export default class VueltaElement extends PairElement {
@@ -37,7 +37,17 @@ export default class VueltaElement extends PairElement {
 		}
 	}
 
-	animationFunction({lengthMs, beats, direction = DIRECTIONS.FORWARD, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.CASTANETAS, stepStyle, firstLeg, rotateDirection}) {
+	animationFunction({
+		lengthMs,
+		beats,
+		direction = DIRECTIONS.FORWARD,
+		startPart = 0,
+		stopPart = 1,
+		figureHands = FIGURE_HANDS.CASTANETAS,
+		stepStyle,
+		firstLeg,
+		rotateDirection
+	}) {
 		//Если идём из начала в конец, то инвертируем цвета градиента
 		if (startPart > stopPart) {
 			this.setColors(this.rightColor, this.leftColor);
