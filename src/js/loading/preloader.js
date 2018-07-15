@@ -4,7 +4,6 @@
 export function enablePreloaderInItem($elements) {
 	return $elements.each(function () {
 		const $element = $(this);
-		const element = $element[0];
 
 		if ($element.hasClass('preloader')) {
 			return false;
@@ -29,7 +28,7 @@ export function disablePreloaderInItem($elements) {
 }
 
 /**
- * Отключить прелоадер у элемента
+ * Есть ли прелоадер у элемента
  */
 export function itHasPreloader($element) {
 	return ($element.length && $element.hasClass('preloader'));

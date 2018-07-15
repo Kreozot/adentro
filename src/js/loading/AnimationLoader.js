@@ -1,7 +1,7 @@
 import contentSwitch from './content_switch';
 import animationLinksTemplate from '../templates/animationLinks.ejs';
 import animationBlockTemplate from '../templates/animationBlock.ejs';
-import {disablePreloaderInItem, enablePreloaderInItem} from './preloader';
+import {enablePreloaderInItem} from './preloader';
 
 const minAnimationWidth = 600;
 const maxAnimationHeight = 325;

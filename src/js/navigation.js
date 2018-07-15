@@ -155,7 +155,7 @@ export default class Navigation {
 				animationClass = animationClassDefs;
 			}
 
-			this.main.animationLoader.loadAnimation(animationClass, true);
+			this.main.animationLoader.loadAnimation(animationClass);
 			this.main.animationLoader.showAnimationLinks(animationClassDefs, animationId);
 		});
 	}

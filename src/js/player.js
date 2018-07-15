@@ -1,7 +1,7 @@
 import plyr from 'plyr';
 require('plyr/dist/plyr.css');
 import {getElement, getElementAfter} from './timing/timing';
-import {disablePreloaderInItem, enablePreloaderInItem, itHasPreloader} from './loading/preloader';
+import {enablePreloaderInItem} from './loading/preloader';
 
 export default class Player {
 	constructor(main) {
