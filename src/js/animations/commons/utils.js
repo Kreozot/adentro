@@ -33,12 +33,12 @@ export function mod(upVal, downVal) {
 	return divVal - Math.floor(divVal);
 }
 
-// Транспонирует угол в промежуток от 0 до 360
-export function normalizeAngle(angle) {
-	if (angle > 360) {
+// Транспонирует угол в промежуток от startingAngle до startingAngle + 360
+export function normalizeAngle(angle, startingAngle = 0) {
+	if (angle > startingAngle + 360) {
 		angle = angle - 360;
 	}
-	if (angle < 0) {
+	if (angle < startingAngle) {
 		angle = 360 + angle;
 	}
 	return angle;

@@ -9,7 +9,7 @@ import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS, ROTATE} from './const';
 const FIGURE_ANGLE_TICK = 25;
 const FIGURE_ANGLE_SPEED = 3;
 // Максимальный угол поворота верха фигуры
-// const FIGURE_TOP_ANGLE_MAX = 45;
+const FIGURE_TOP_ANGLE_MAX = 90;
 
 const figuresSvg = {
 	man: getSvgElement('figures.svg', '#man'),
@@ -133,11 +133,47 @@ export default class DanceAnimation {
 	}
 
 	/**
+	 * Поворот верха фигуры по направлению к парной фигуре.
+	 * Если не задан pairFigure, то поворот сбрасывается.
+	 * @param  {Object} figure     Объект фигуры
+	 * @param  {Object} pairFigure Объект парной фигуры
+	 * @return {[type]}            [description]
+	 */
+	rotateTopToPairFigure(figure, pairFigure = null) {
+		const figureTop = Snap($('.top', figure.node)[0]);
+		// return;
+		if (pairFigure) {
+			const figureBBox = figure.getBBox();
+			const pairFigureBBox = pairFigure.getBBox();
+			const lengthX = figureBBox.x - pairFigureBBox.x;
+			const lengthY = figureBBox.y - pairFigureBBox.y;
+
+			// Угол между векторами фигур
+			const angleBetweenFigures = Math.atan(lengthY / lengthX) * 180 / Math.PI;
+			// Угол, корректирующий направление вектора в зависимости от того, какая фигура правее
+			const directionFixAngle = lengthX > 0 ? 90 : -90;
+			// Угол верха фигуры относительно остальной фигуры
+			let relativeAngle = normalizeAngle(angleBetweenFigures - figure.angle + directionFixAngle, -180);
+			if (relativeAngle > FIGURE_TOP_ANGLE_MAX) {
+				relativeAngle = FIGURE_TOP_ANGLE_MAX;
+			} else if (relativeAngle < -FIGURE_TOP_ANGLE_MAX) {
+				relativeAngle = -FIGURE_TOP_ANGLE_MAX;
+			}
+
+			figureTop.transform(`r${relativeAngle}`);
+		} else {
+			figureTop.transform('r0');
+		}
+	}
+
+	/**
 	 * Позиционирование фигуры
 	 * @param  {Object} figure Объект фигуры
 	 * @param  {Number} x      Координата центра X
 	 * @param  {Number} y      Координата центра Y
 	 * @param  {Number} angle  Угол поворота (при 0 фигура стоит вертикально)
+	 * @param  {Object} pairFigure Объект парной фигуры
+	 * @param  {Integer} rotateDirection Идентификатор направления вращения (для плавного изменения градуса)
 	 */
 	positionFigure(figure, x, y, angle, pairFigure, rotateDirection) {
 		angle = normalizeAngle(angle);
@@ -159,26 +195,8 @@ export default class DanceAnimation {
 		}
 		figure.angle = normalizeAngle(figure.angle);
 		figure.transform(`t${x},${y}r${Math.floor(figure.angle)}`);
-		return;
-		if (pairFigure) {
-			const figureTop = Snap($('.top', figure.node)[0]);
-			const figureBBox = figure.getBBox();
-			const figureX = figureBBox.x + figureBBox.width / 2;
-			const figureY = figureBBox.y + figureBBox.height / 2;
-			const pairFigureBBox = pairFigure.getBBox();
-			const pairFigureX = pairFigureBBox.x + pairFigureBBox.width / 2;
-			const pairFigureY = pairFigureBBox.y + pairFigureBBox.height / 2;
-			const lengthX = figureX - pairFigureX;
-			const lengthY = figureY - pairFigureY;
-			const angleBetweenFigures = Math.atan(lengthY / lengthX) * 180 / Math.PI;
-			/**
-			 * /'  y1 > y2, x1 < x2 --- 1 / -1 --- -45 + 90 = 45
-			 * '\  y1 > y2, x1 > x2 --- 1 / 1 --- 45 + 90 = 135
-			 * ./  y1 < y2, x1 > x2 --- -1 / 1 --- -45 - 90 = -135
-			 * \.  y1 < y2, x1 < x2 --- -1 / -1 --- 45 - 90 = -45
-			 */
-			figureTop.transform(`r${angleBetweenFigures - figure.angle}`);
-		}
+
+		this.rotateTopToPairFigure(figure, pairFigure);
 	}
 
 	changeFigureHands(figure, hands) {
@@ -204,7 +222,7 @@ export default class DanceAnimation {
 
 		let angle = startAngle;
 		if ((direction === DIRECTIONS.BACKWARD) || (direction === DIRECTIONS.FROM_END_TO_START)) {
-			angle = -angle;
+			angle = angle - 180;
 		}
 		if (!path) {
 			throw new 'path is not drawn yet';
