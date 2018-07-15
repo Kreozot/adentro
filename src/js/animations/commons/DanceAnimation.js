@@ -91,6 +91,7 @@ export default class DanceAnimation {
 			.addClass('invisible');
 		this.changeFigureHands(figure, FIGURE_HANDS.DOWN);
 		figure.angle = null;
+		figure.top = Snap($('.top', figure.node)[0]);
 		return figure;
 	}
 
@@ -139,7 +140,6 @@ export default class DanceAnimation {
 	 * @param  {Object} pairFigure Объект парной фигуры
 	 */
 	rotateTopToPairFigure(figure, pairFigure = null) {
-		const figureTop = Snap($('.top', figure.node)[0]);
 		// return;
 		if (pairFigure) {
 			const figureBBox = figure.getBBox();
@@ -161,13 +161,13 @@ export default class DanceAnimation {
 				relativeAngle = -FIGURE_TOP_ANGLE_MAX;
 				rotateDirection = ROTATE.COUNTERCLOCKWISE;
 			}
-			relativeAngle = this.smoothRotationAngle(relativeAngle, figureTop.angle, rotateDirection);
+			relativeAngle = this.smoothRotationAngle(relativeAngle, figure.top.angle, rotateDirection);
 
-			figureTop.transform(`r${relativeAngle}`);
-			figureTop.angle = relativeAngle;
+			figure.top.transform(`r${relativeAngle}`);
+			figure.top.angle = relativeAngle;
 		} else {
-			figureTop.transform('r0');
-			figureTop.angle = 0;
+			figure.top.transform('r0');
+			figure.top.angle = 0;
 		}
 	}
 
@@ -214,6 +214,11 @@ export default class DanceAnimation {
 		this.rotateTopToPairFigure(figure, pairFigure);
 	}
 
+	/**
+	 * Смена отображаемой вариации рук фигуры
+	 * @param  {Object} figure Объект фигуры
+	 * @param  {String} hands  Идентификатор вариации рук
+	 */
 	changeFigureHands(figure, hands) {
 		$(`.hands:not(.hands--${hands})`, figure.node).addClass('invisible');
 		$(`.hands--${hands}`, figure.node).removeClass('invisible');
