@@ -153,12 +153,15 @@ export default class DanceAnimation {
 			const directionFixAngle = lengthX > 0 ? 90 : -90;
 			// Угол верха фигуры относительно остальной фигуры
 			let relativeAngle = normalizeAngle(angleBetweenFigures - figure.angle + directionFixAngle, -180);
+			let rotateDirection = null;
 			if (relativeAngle > FIGURE_TOP_ANGLE_MAX) {
 				relativeAngle = FIGURE_TOP_ANGLE_MAX;
+				rotateDirection = ROTATE.CLOCKWISE;
 			} else if (relativeAngle < -FIGURE_TOP_ANGLE_MAX) {
 				relativeAngle = -FIGURE_TOP_ANGLE_MAX;
+				rotateDirection = ROTATE.COUNTERCLOCKWISE;
 			}
-			relativeAngle = this.smoothRotationAngle(relativeAngle, figureTop.angle);
+			relativeAngle = this.smoothRotationAngle(relativeAngle, figureTop.angle, rotateDirection);
 
 			figureTop.transform(`r${relativeAngle}`);
 			figureTop.angle = relativeAngle;
