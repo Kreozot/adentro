@@ -137,7 +137,6 @@ export default class DanceAnimation {
 	 * Если не задан pairFigure, то поворот сбрасывается.
 	 * @param  {Object} figure     Объект фигуры
 	 * @param  {Object} pairFigure Объект парной фигуры
-	 * @return {[type]}            [description]
 	 */
 	rotateTopToPairFigure(figure, pairFigure = null) {
 		const figureTop = Snap($('.top', figure.node)[0]);
@@ -161,9 +160,33 @@ export default class DanceAnimation {
 			}
 
 			figureTop.transform(`r${relativeAngle}`);
+			figureTop.angle = relativeAngle;
 		} else {
 			figureTop.transform('r0');
+			figureTop.angle = 0;
 		}
+	}
+
+	/**
+	 * Сгладить угол поворота
+	 * @param  {Number} newAngle Новый угол
+	 * @param  {Number} currentAngle Текущий угол
+	 * @param  {Number} rotateDirection Идентификатор направления поворота (для плавного изменения градуса)
+	 * @return {Number} Угол с учётом плавного поворота
+	 */
+	smoothRotationAngle(newAngle, currentAngle, rotateDirection) {
+		const angleDiff = currentAngle - newAngle;
+		if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) &&
+			(Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
+			const rotateTo = rotateDirection ||
+				(((angleDiff > 190) || ((angleDiff < 0) && (angleDiff > -180))) ? ROTATE.CLOCKWISE : ROTATE.COUNTERCLOCKWISE);
+			if (rotateTo === ROTATE.CLOCKWISE) {
+				return currentAngle + FIGURE_ANGLE_SPEED;
+			} else {
+				return currentAngle - FIGURE_ANGLE_SPEED;
+			}
+		}
+		return newAngle;
 	}
 
 	/**
@@ -173,26 +196,14 @@ export default class DanceAnimation {
 	 * @param  {Number} y      Координата центра Y
 	 * @param  {Number} angle  Угол поворота (при 0 фигура стоит вертикально)
 	 * @param  {Object} pairFigure Объект парной фигуры
-	 * @param  {Integer} rotateDirection Идентификатор направления вращения (для плавного изменения градуса)
+	 * @param  {Number} rotateDirection Идентификатор направления поворота (для плавного изменения градуса)
 	 */
 	positionFigure(figure, x, y, angle, pairFigure, rotateDirection) {
 		angle = normalizeAngle(angle);
 		if (!figure.angle) {
 			figure.angle = angle;
 		}
-		const angleDiff = figure.angle - angle;
-		if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) &&
-			(Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
-			const rotateTo = rotateDirection ||
-				(((angleDiff > 190) || ((angleDiff < 0) && (angleDiff > -180))) ? ROTATE.CLOCKWISE : ROTATE.COUNTERCLOCKWISE);
-			if (rotateTo === ROTATE.CLOCKWISE) {
-				figure.angle = figure.angle + FIGURE_ANGLE_SPEED;
-			} else {
-				figure.angle = figure.angle - FIGURE_ANGLE_SPEED;
-			}
-		} else {
-			figure.angle = angle;
-		}
+		figure.angle = this.smoothRotationAngle(angle, figure.angle, rotateDirection);
 		figure.angle = normalizeAngle(figure.angle);
 		figure.transform(`t${x},${y}r${Math.floor(figure.angle)}`);
 
