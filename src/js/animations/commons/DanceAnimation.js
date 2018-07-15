@@ -113,14 +113,19 @@ export default class DanceAnimation {
 		return arrows;
 	}
 
+	hideFigure(figure) {
+		figure.addClass('invisible');
+		figure.angle = null;
+		figure.top.transform('r0');
+		figure.top.angle = 0;
+	}
+
 	/**
 	 * Спрятать фигурки танцоров
 	 */
 	hideFigures() {
-		this.man.addClass('invisible');
-		this.man.angle = null;
-		this.woman.addClass('invisible');
-		this.woman.angle = null;
+		this.hideFigure(this.man);
+		this.hideFigure(this.woman);
 	}
 
 	/**
@@ -357,6 +362,8 @@ export default class DanceAnimation {
 	 */
 	startPosFigure(figure, coords) {
 		figure.angle = null;
+		figure.top.transform('r0');
+		figure.top.angle = 0;
 		this.changeFigureHands(figure, FIGURE_HANDS.DOWN);
 		this.positionFigure(figure, coords.x, coords.y, coords.angle);
 		figure.removeClass('invisible');

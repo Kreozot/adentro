@@ -9,10 +9,10 @@ export default class Dance4Animation extends DanceAnimation {
 	}
 
 	hideFigures() {
-		this.man.addClass('invisible');
-		this.woman.addClass('invisible');
-		this.man2.addClass('invisible');
-		this.woman2.addClass('invisible');
+		this.hideFigure(this.man);
+		this.hideFigure(this.woman);
+		this.hideFigure(this.man2);
+		this.hideFigure(this.woman2);
 	}
 
 	startPosition(leftCoords1, rightCoords1, leftCoords2, rightCoords2, manPosition) {
