@@ -158,6 +158,7 @@ export default class DanceAnimation {
 			} else if (relativeAngle < -FIGURE_TOP_ANGLE_MAX) {
 				relativeAngle = -FIGURE_TOP_ANGLE_MAX;
 			}
+			relativeAngle = this.smoothRotationAngle(relativeAngle, figureTop.angle);
 
 			figureTop.transform(`r${relativeAngle}`);
 			figureTop.angle = relativeAngle;
@@ -175,7 +176,7 @@ export default class DanceAnimation {
 	 * @return {Number} Угол с учётом плавного поворота
 	 */
 	smoothRotationAngle(newAngle, currentAngle, rotateDirection) {
-		const angleDiff = currentAngle - newAngle;
+		const angleDiff = normalizeAngle(currentAngle) - normalizeAngle(newAngle);
 		if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) &&
 			(Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
 			const rotateTo = rotateDirection ||
