@@ -157,16 +157,21 @@ export default class DanceAnimation {
 			// Угол, корректирующий направление вектора в зависимости от того, какая фигура правее
 			const directionFixAngle = lengthX > 0 ? 90 : -90;
 			// Угол верха фигуры относительно остальной фигуры
+			const log1 = angleBetweenFigures - figure.angle + directionFixAngle;
 			let relativeAngle = normalizeAngle(angleBetweenFigures - figure.angle + directionFixAngle, -180);
+			const log2 = relativeAngle;
 			let rotateDirection = null;
 			if (relativeAngle > FIGURE_TOP_ANGLE_MAX) {
 				relativeAngle = FIGURE_TOP_ANGLE_MAX;
-				rotateDirection = ROTATE.CLOCKWISE;
+				rotateDirection = ROTATE.COUNTERCLOCKWISE;
 			} else if (relativeAngle < -FIGURE_TOP_ANGLE_MAX) {
 				relativeAngle = -FIGURE_TOP_ANGLE_MAX;
-				rotateDirection = ROTATE.COUNTERCLOCKWISE;
+				rotateDirection = ROTATE.CLOCKWISE;
 			}
+			const log3 = relativeAngle;
 			relativeAngle = this.smoothRotationAngle(relativeAngle, figure.top.angle, rotateDirection);
+			const log4 = relativeAngle;
+			console.log(`${log1} (${angleBetweenFigures} - ${figure.angle} + ${directionFixAngle})`, log2, log3, log4);
 
 			figure.top.transform(`r${relativeAngle}`);
 			figure.top.angle = relativeAngle;
@@ -188,8 +193,8 @@ export default class DanceAnimation {
 		if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) &&
 			(Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
 			const rotateTo = rotateDirection ||
-				(((angleDiff > 190) || ((angleDiff < 0) && (angleDiff > -180))) ? ROTATE.CLOCKWISE : ROTATE.COUNTERCLOCKWISE);
-			if (rotateTo === ROTATE.CLOCKWISE) {
+				(((angleDiff > 190) || ((angleDiff < 0) && (angleDiff > -180))) ? ROTATE.COUNTERCLOCKWISE : ROTATE.CLOCKWISE);
+			if (rotateTo === ROTATE.COUNTERCLOCKWISE) {
 				return currentAngle + FIGURE_ANGLE_SPEED;
 			} else {
 				return currentAngle - FIGURE_ANGLE_SPEED;
@@ -208,6 +213,7 @@ export default class DanceAnimation {
 	 * @param  {Number} rotateDirection Идентификатор направления поворота (для плавного изменения градуса)
 	 */
 	positionFigure(figure, x, y, angle, pairFigure, rotateDirection) {
+		console.log('positionFigure', angle, normalizeAngle(angle));
 		angle = normalizeAngle(angle);
 		if (!figure.angle) {
 			figure.angle = angle;
@@ -246,9 +252,11 @@ export default class DanceAnimation {
 		figure.node.parentNode.appendChild(figure.node);
 
 		let angle = startAngle;
+		console.log(angle);
 		if ((direction === DIRECTIONS.BACKWARD) || (direction === DIRECTIONS.FROM_END_TO_START)) {
 			angle = angle - 180;
 		}
+		console.log(angle);
 		if (!path) {
 			throw new 'path is not drawn yet';
 		}
@@ -260,6 +268,7 @@ export default class DanceAnimation {
 				length = length - pathLength;
 			}
 			const movePoint = path.getPointAtLength(length);
+			// FIXME: Место, где угол меняется с -90 на -180. Уточнить насчёт alpha, стоит ли её менять при backward
 			const finalAngle = direction === DIRECTIONS.STRAIGHT_FORWARD ? angle : angle + movePoint.alpha;
 			this.positionFigure(figure, movePoint.x, movePoint.y, finalAngle, pairFigure, rotateDirection);
 		};
