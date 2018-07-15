@@ -7,15 +7,19 @@ import {DIRECTIONS, FIGURE_HANDS} from 'js/animations/commons/const';
  * @param {String} gender      Пол: "man"; "woman"
  */
 export default class SingleElement {
-	constructor(animation, pathStrings, gender, figure) {
+	constructor(animation, pathStrings, gender, figure, pairFigure) {
 		this.animation = animation;
 		this.pathStrings = pathStrings;
 		this.gender = gender;
 		this.path = {};
 		if (figure) {
 			this.figure = figure;
+			if (pairFigure) {
+				this.pairFigure = pairFigure;
+			}
 		} else {
 			this.figure = gender === 'man' ? this.animation.man : this.animation.woman;
+			this.pairFigure = gender === 'man' ? this.animation.woman : this.animation.man;
 		}
 		this.angle = 0;
 		this.easing = mina.linear;
@@ -76,8 +80,7 @@ export default class SingleElement {
 		isLastElement,
 		stepStyle,
 		firstLeg,
-		rotateDirection,
-		pairFigure
+		rotateDirection
 	}) {
 		return this.animation.animateFigurePath({
 			figure: this.figure,
@@ -94,7 +97,7 @@ export default class SingleElement {
 			stepStyle,
 			firstLeg,
 			rotateDirection,
-			pairFigure
+			pairFigure: this.pairFigure
 		});
 	}
 
