@@ -8,10 +8,6 @@ import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS, ROTATE} from './const';
 
 const FIGURE_ANGLE_TICK = 25;
 const FIGURE_ANGLE_SPEED = 3;
-// Ширина фигуры
-const FIGURE_WIDTH = 115;
-// Высота фигуры
-const FIGURE_HEIGHT = 75;
 // Максимальный угол поворота верха фигуры
 // const FIGURE_TOP_ANGLE_MAX = 45;
 
@@ -19,8 +15,6 @@ const figuresSvg = {
 	man: getSvgElement('figures.svg', '#man'),
 	woman: getSvgElement('figures.svg', '#woman'),
 };
-const figureWidthHalf = FIGURE_WIDTH / 2;
-const figureHeightHalf = FIGURE_HEIGHT / 2;
 
 /**
  * Объект анимации

@@ -1,14 +1,15 @@
 const webpack = require('webpack');
 const gutil = require('gulp-util');
+const fs = require('fs');
+const path = require('path');
+const cheerio = require('cheerio');
 const argv = require('yargs').argv;
+
+const schemesList = require('./schemesList.js');
 const config = require('./config.js');
 const paths = config.paths;
 // const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 // const Visualizer = require('webpack-visualizer-plugin');
-const schemesList = require('./schemesList.js');
-const fs = require('fs');
-const path = require('path');
-const cheerio = require('cheerio');
 
 const postcssPlugins = [
 	require('cssnano')(),
@@ -30,7 +31,6 @@ var webpackConfig = [
 				schemeParams: 'src/music',
 				schemeTemplate: 'src/schemeTemplate',
 				styles: 'src/styles',
-				mp3Files: argv.mockmp3 ? paths.temp.mp3Mock : 'src/music'
 			}
 		},
 		entry: {
