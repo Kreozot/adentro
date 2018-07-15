@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import Navigation from './navigation';
 import Player from './player';
 import contentSwitch from './loading/content_switch';
@@ -10,7 +11,7 @@ import musicLinksTemplate from './templates/musicLinks.ejs';
 import langLinksTemplate from './templates/langLinks.ejs';
 
 
-import {disablePreloaderInItem, enablePreloaderInItem, itHasPreloader} from './loading/preloader';
+import {disablePreloaderInItem, itHasPreloader} from './loading/preloader';
 
 const KEY_SPACE = 32;
 

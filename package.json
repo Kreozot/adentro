@@ -56,6 +56,7 @@
     "mock-mp3": "gulp mock-mp3"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "babel-preset-stage-2": "^6.24.1",
     "cheerio": "^1.0.0-rc.2",
     "cookie_js": "^1.2.2",
@@ -86,5 +87,8 @@
   },
   "resolutions": {
     "natives": "1.1.4"
-  }
+  },
+  "moduleRoots": [
+    "src"
+  ]
 }
