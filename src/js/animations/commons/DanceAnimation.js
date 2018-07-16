@@ -241,7 +241,23 @@ export default class DanceAnimation {
 	 * @param  {Number} direction  Константа, определяющая направление движения
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
-	animateFigurePath({figure, startAngle = 90, path, startLen, stopLen, timeLength, beats, direction = DIRECTIONS.FORWARD, easing = mina.linear, figureHands = FIGURE_HANDS.CASTANETAS, pairFigure, isLastElement, stepStyle = STEP_STYLE.BASIC, firstLeg = LEGS.LEFT, rotateDirection}) {
+	animateFigurePath({
+		figure,
+		startAngle = 90,
+		path,
+		startLen,
+		stopLen,
+		timeLength,
+		beats,
+		direction = DIRECTIONS.FORWARD,
+		easing = mina.linear,
+		figureHands = FIGURE_HANDS.CASTANETAS,
+		pairFigure,
+		isLastElement,
+		stepStyle = STEP_STYLE.BASIC,
+		firstLeg = LEGS.LEFT,
+		rotateDirection
+	}) {
 		// Перенос фигура на верх DOM-а (TODO: Исправить на группировку)
 		figure.node.parentNode.appendChild(figure.node);
 
@@ -274,9 +290,9 @@ export default class DanceAnimation {
 		figure.removeClass('invisible');
 
 		// Если последний элемент, доходим быстрее на два шага (на 2/3 базового шага)
-		const timeLengthForPath = isLastElement ?
-			(beats * 3 - 2) * (timeLength / beats / 3) :
-			timeLength;
+		const timeLengthForPath = isLastElement
+			? (beats * 3 - 2) * (timeLength / beats / 3)
+			: timeLength;
 
 		return new Promise(resolve => {
 			this.animations[this.animations.length] = Snap.animate(startLen, stopLen,
@@ -295,14 +311,22 @@ export default class DanceAnimation {
 	 * Анимация мужской фигуры по траектории
 	 */
 	animateMan(options) {
-		return this.animateFigurePath({...options, figure: this.man, pairFigure: this.woman});
+		return this.animateFigurePath({
+			...options,
+			figure: this.man,
+			pairFigure: this.woman
+		});
 	}
 
 	/**
 	 * Анимация женской фигуры по траектории
 	 */
 	animateWoman(options) {
-		return this.animateFigurePath({...options, figure: this.woman, pairFigure: this.man});
+		return this.animateFigurePath({
+			...options,
+			figure: this.woman,
+			pairFigure: this.man
+		});
 	}
 
 	/**
