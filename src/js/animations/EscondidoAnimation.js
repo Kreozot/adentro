@@ -7,7 +7,7 @@ import VueltaElement from './commons/elements/double/VueltaElement';
 import {zarandeoAnimation} from './GatoAnimation';
 import {DIRECTIONS} from './commons/const';
 import {getOppositePosition} from './commons/utils';
-import {escondido} from './svg/svg';
+import svg from 'js/animations/svg';
 
 export default class EscondidoAnimation extends DanceAnimation {
 	constructor(id) {
@@ -24,50 +24,50 @@ export default class EscondidoAnimation extends DanceAnimation {
 
 		this.elements = {
 			giro: new PairElement(this, {
-				left: escondido.giro_left,
-				right: escondido.giro_right
+				left: svg.escondido.giro_left,
+				right: svg.escondido.giro_right
 			}),
 
-			vuelta: new VueltaElement(this, escondido.vuelta),
+			vuelta: new VueltaElement(this, svg.escondido.vuelta),
 
 			zapateo: new ZapateoElement(this),
 
 			zarandeo: new ZarandeoElement(this, {
-				left: escondido.zarandeo_left,
-				top: escondido.zarandeo_top,
-				right: escondido.zarandeo_right,
-				bottom: escondido.zarandeo_bottom
+				left: svg.escondido.zarandeo_left,
+				top: svg.escondido.zarandeo_top,
+				right: svg.escondido.zarandeo_right,
+				bottom: svg.escondido.zarandeo_bottom
 			}),
 
 			mediaVuelta: new PairElement(this, {
-				left: escondido.media_vuelta_left,
-				right: escondido.media_vuelta_right
+				left: svg.escondido.media_vuelta_left,
+				right: svg.escondido.media_vuelta_right
 			}),
 
 			coronacion: new PairElement(this, {
-				left: escondido.coronacion_left,
-				right: escondido.coronacion_right
+				left: svg.escondido.coronacion_left,
+				right: svg.escondido.coronacion_right
 			}),
 
 			esquina: new RotatePairElement(this, {
-				left: escondido.esquina_left,
-				top: escondido.esquina_top,
-				right: escondido.esquina_right,
-				bottom: escondido.esquina_bottom
+				left: svg.escondido.esquina_left,
+				top: svg.escondido.esquina_top,
+				right: svg.escondido.esquina_right,
+				bottom: svg.escondido.esquina_bottom
 			}, 270),
 
 			balanceo1: new PairElement(this, {
-				left: escondido.balanceo_left,
-				top: escondido.balanceo_top,
-				right: escondido.balanceo_right,
-				bottom: escondido.balanceo_bottom
+				left: svg.escondido.balanceo_left,
+				top: svg.escondido.balanceo_top,
+				right: svg.escondido.balanceo_right,
+				bottom: svg.escondido.balanceo_bottom
 			}),
 
 			balanceo2: new PairElement(this, {
-				left: escondido.balanceo2_left,
-				top: escondido.balanceo2_top,
-				right: escondido.balanceo2_right,
-				bottom: escondido.balanceo2_bottom
+				left: svg.escondido.balanceo2_left,
+				top: svg.escondido.balanceo2_top,
+				right: svg.escondido.balanceo2_right,
+				bottom: svg.escondido.balanceo2_bottom
 			})
 		};
 		this.zarandeoAnimation = zarandeoAnimation.bind(this);

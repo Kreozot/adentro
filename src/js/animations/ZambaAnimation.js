@@ -3,7 +3,7 @@ import GatoAnimation, {zapateoAnimation} from './GatoAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import {DIRECTIONS, FIGURE_HANDS, STEP_STYLE, LEGS} from './commons/const';
 import {getOppositePosition} from './commons/utils';
-import {zamba} from './svg/svg';
+import svg from 'js/animations/svg';
 
 export default class ZambaAnimation extends GatoAnimation {
 	constructor(id) {
@@ -13,8 +13,8 @@ export default class ZambaAnimation extends GatoAnimation {
 			...this.elements,
 
 			mediaVueltaToArresto: new PairElement(this, {
-				left: zamba.media_vuelta_to_arresto_left,
-				right: zamba.media_vuelta_to_arresto_right,
+				left: svg.zamba.media_vuelta_to_arresto_left,
+				right: svg.zamba.media_vuelta_to_arresto_right,
 			}),
 
 			arresto: new PairElement(this, {
@@ -23,13 +23,13 @@ export default class ZambaAnimation extends GatoAnimation {
 			}),
 
 			arrestoBack: new PairElement(this, {
-				left: 'M 300,110 C 240,90 40,120 40,160',
-				right: 'm 300,210 c 60,20 260,-10 260,-50'
+				left: svg.zamba.arresto_back_left,
+				right: svg.zamba.arresto_back_right
 			}),
 
 			mediaVueltaCoronacion: new PairElement(this, {
-				left: zamba.media_vuelta_coronacion_left,
-				right: zamba.media_vuelta_coronacion_right
+				left: svg.zamba.media_vuelta_coronacion_left,
+				right: svg.zamba.media_vuelta_coronacion_right
 			})
 		};
 		this.zapateoAnimation = zapateoAnimation.bind(this);

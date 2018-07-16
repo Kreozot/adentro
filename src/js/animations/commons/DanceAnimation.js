@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 
 require('styles/animation.scss');
-import {arrows as arrowsSvg} from '../svg/svg';
+import svg from 'js/animations/svg';
 import {normalizeAngle} from 'js/animations/commons/utils';
 
 import Legs from './Legs';
@@ -106,8 +106,8 @@ export default class DanceAnimation {
 	 */
 	initRotateIcon(x, y, angle, clockwise) {
 		const arrows = this.svg.path(clockwise
-			? arrowsSvg.rotation_clockwise
-			: arrowsSvg.rotation_counterclockwise);
+			? svg.arrows.rotation_clockwise
+			: svg.arrows.rotation_counterclockwise);
 		arrows.addClass('rotation-arrows')
 			.transform(`t${x},${y}r${angle}`);
 		this.paths[this.paths.length] = arrows;

@@ -4,7 +4,7 @@ import {zapateoAnimation, zarandeoAnimation} from './GatoAnimation';
 import RotatePairElement from './commons/elements/double/RotatePairElement';
 import {getOppositePosition} from './commons/utils';
 import {FIGURE_HANDS} from './commons/const';
-import {remedio} from './svg/svg';
+import svg from 'js/animations/svg';
 
 export default class RemedioAnimation extends EscondidoAnimation {
 	constructor(id) {
@@ -14,13 +14,13 @@ export default class RemedioAnimation extends EscondidoAnimation {
 			...this.elements,
 
 			giroCoronacion: new RotatePairElement(this, {
-				left: remedio.coronacion_left,
-				right: remedio.coronacion_right
+				left: svg.remedio.coronacion_left,
+				right: svg.remedio.coronacion_right
 			}, 360),
 
 			contragiroCoronacion: new RotatePairElement(this, {
-				left: remedio.coronacion_left,
-				right: remedio.coronacion_right
+				left: svg.remedio.coronacion_left,
+				right: svg.remedio.coronacion_right
 			}, -360)
 		};
 		this.zapateoAnimation = zapateoAnimation.bind(this);
@@ -54,19 +54,19 @@ export default class RemedioAnimation extends EscondidoAnimation {
 	esquina(lengthS, manPosition, beats) {
 		this.clearPaths();
 		const leftPaths = {
-			esquinaPath: remedio.esquina_left,
+			esquinaPath: svg.remedio.esquina_left,
 			angle: 225
 		};
 		const topPaths = {
-			esquinaPath: remedio.esquina_top,
+			esquinaPath: svg.remedio.esquina_top,
 			angle: 315
 		};
 		const rightPaths = {
-			esquinaPath: remedio.esquina_right,
+			esquinaPath: svg.remedio.esquina_right,
 			angle: 45
 		};
 		const bottomPaths = {
-			esquinaPath: remedio.esquina_bottom,
+			esquinaPath: svg.remedio.esquina_bottom,
 			angle: 135
 		};
 		var manPaths;
