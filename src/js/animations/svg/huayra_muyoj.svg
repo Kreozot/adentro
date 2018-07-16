@@ -158,7 +158,7 @@
        inkscape:connector-curvature="0"
        transform="translate(0,-120)" />
     <path
-       transform="translate(-0.5,49.5)"
+       transform="translate(-0.5,50)"
        d="m 60,50 a 10,10 0 1 1 -20,0 10,10 0 1 1 20,0 z"
        sodipodi:ry="10"
        sodipodi:rx="10"
@@ -176,9 +176,9 @@
        sodipodi:rx="10"
        sodipodi:ry="10"
        d="m 60,50 a 10,10 0 1 1 -20,0 10,10 0 1 1 20,0 z"
-       transform="translate(339.5,49.5)" />
+       transform="translate(339.5,50)" />
     <path
-       transform="translate(169.5,49.5)"
+       transform="translate(169.5,50)"
        d="m 60,50 a 10,10 0 1 1 -20,0 10,10 0 1 1 20,0 z"
        sodipodi:ry="10"
        sodipodi:rx="10"
@@ -207,12 +207,12 @@
     <path
        inkscape:connector-curvature="0"
        id="path3196"
-       d="m 389.5,389.5 0,-170"
+       d="m 390,390 0,-170"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        inkscape:connector-curvature="0"
        id="path3198"
-       d="m 219.5,219.5 170,170"
+       d="m 220,220 170,170"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   </g>
   <g
@@ -222,43 +222,43 @@
      style="display:none">
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 49.5,49.5 340,0"
+       d="m 50,50 340,0"
        id="path3200"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 389.5,49.5 -170,170"
+       d="m 390,50 -170,170"
        id="path3202"
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
        id="path3234"
-       d="m 390.5,390.5 -170,-170"
+       d="m 390,390 -170,-170"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 49.5,390.5 170,-170"
+       d="m 50,390 170,-170"
        id="path3236"
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
        id="path3238"
-       d="m 49.5,49.5 170,170"
+       d="m 50,50 170,170"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        inkscape:connector-curvature="0"
        id="path3240"
-       d="m 389.5,50.5 0,340"
+       d="m 390,50 0,340"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 389.5,389.5 -340,0"
+       d="m 390,390 -340,0"
        id="path3242"
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
        id="path3244"
-       d="m 50.5,389.5 0,-340"
+       d="m 50,390 0,-340"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   </g>
   <g
@@ -269,12 +269,12 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 50,220 70,0"
-       id="path3247"
+       id="avance_left"
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
-       id="path3249"
-       d="m 389.5,219.5 -70,0"
+       id="avance_right"
+       d="m 390,220 -70,0"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   </g>
   <g
@@ -284,12 +284,12 @@
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 50,220 140,0"
-       id="path3252"
+       id="coronazion_left"
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
-       id="path3254"
-       d="m 389.5,220.5 -140,0"
+       id="coronazion_right"
+       d="m 390,220 -140,0"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   </g>
 </svg>

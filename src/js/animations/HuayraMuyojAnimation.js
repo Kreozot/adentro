@@ -7,6 +7,7 @@ import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import {zapateoAnimation, zarandeoAnimation} from './GatoAnimation';
 import {DIRECTIONS, STEP_STYLE} from './commons/const';
 import {getOppositePosition} from './commons/utils';
+import svg from 'js/animations/svg';
 
 export default class HuayraMuyojAnimation extends DanceAnimation {
 	constructor(id) {
@@ -63,27 +64,27 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 			zapateo: new ZapateoElement(this),
 
 			zarandeo: new ZarandeoElement(this, {
-				left: 'm 50,390 130,0 0,-130 -130,0 z',
-				top: 'm 50,50 0,130 130,0 0,-130 z',
-				right: 'm 390,50 -130,0 0,130 130,0 z',
-				bottom: 'm 390,390 0,-130 -130,0 0,130 z'
+				left: svg.escondido.zarandeo_left,
+				top: svg.escondido.zarandeo_top,
+				right: svg.escondido.zarandeo_right,
+				bottom: svg.escondido.zarandeo_bottom
 			}),
 
 			esquina: new RotatePairElement(this, {
-				left: 'M 50,390 50,50',
-				top: 'm 50,50 340,0',
-				right: 'm 390,50 0,340',
-				bottom: 'M 390,390 50,390'
+				left: svg.escondido.esquina_left,
+				top: svg.escondido.esquina_top,
+				right: svg.escondido.esquina_right,
+				bottom: svg.escondido.esquina_bottom
 			}, 270),
 
 			avance: new PairElement(this, {
-				left: 'm 50,220 70,0',
-				right: 'm 390,220 -70,0'
+				left: svg.huayraMuyoj.avance_left,
+				right: svg.huayraMuyoj.avance_right
 			}),
 
 			coronacion: new RotatePairElement(this, {
-				left: 'm 50,220 140,0',
-				right: 'm 390,220 -140,0'
+				left: svg.huayraMuyoj.coronazion_left,
+				right: svg.huayraMuyoj.coronazion_right
 			}, 360)
 		};
 		this.zapateoAnimation = zapateoAnimation.bind(this);
