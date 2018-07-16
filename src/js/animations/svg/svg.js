@@ -1,3 +1,4 @@
+export const arrows = getSvgPaths('arrows.svg');
 export const escondido = getSvgPaths('escondido.svg');
 export const gato = getSvgPaths('gato.svg');
 export const huayraMuyoj = getSvgPaths('huayra_muyoj.svg');
