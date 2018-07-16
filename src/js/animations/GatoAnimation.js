@@ -34,7 +34,7 @@ export function zarandeoAnimation(lengthS, manPosition, beats, conPanuelo) {
 	const backwardOptions = {
 		...partOptions,
 		direction: DIRECTIONS.BACKWARD,
-		startPart: 0.5,
+		startPart: 0.51, // Исправление погрешности svg-кривой
 		stopPart: 1
 	};
 

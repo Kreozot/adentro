@@ -1,6 +1,12 @@
 {
   "name": "adentro",
   "version": "2.0.1",
+  "scripts": {
+    "build": "gulp",
+    "watch": "gulp watch",
+    "test": "gulp test --mockmp3",
+    "mock-mp3": "gulp mock-mp3"
+  },
   "devDependencies": {
     "autoprefixer": "^6.1.1",
     "babel-core": "^6.26.3",
@@ -48,12 +54,6 @@
     "webpack-dev-server": "^1.14.0",
     "webpack-stream": "^2.2.0",
     "yargs": "^3.30.0"
-  },
-  "scripts": {
-    "build": "gulp",
-    "watch": "gulp watch",
-    "test": "gulp test --mockmp3",
-    "mock-mp3": "gulp mock-mp3"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
