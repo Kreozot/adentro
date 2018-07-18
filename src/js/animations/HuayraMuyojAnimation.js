@@ -204,7 +204,13 @@ export default class HuayraMuyojAnimation extends DanceAnimation {
 	}
 
 	regreso(lengthS, manPosition, beats) {
-		return this.elements.regreso.fullAnimation({lengthS, beats, manPosition, stepStyle: STEP_STYLE.SIMPLE});
+		return this.elements.regreso.fullAnimation({
+			lengthS,
+			beats,
+			manPosition,
+			dontLookAtPair: true,
+			stepStyle: STEP_STYLE.SIMPLE
+		});
 	}
 
 	giro(lengthS, manPosition, beats) {

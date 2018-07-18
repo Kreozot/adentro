@@ -44,7 +44,12 @@ export default class RemedioAnimation extends EscondidoAnimation {
 				function (value) {
 					this.lastValue = value;
 
-					self.positionFigure(figure, x, y, startAngle - angleSpeed * value);
+					self.positionFigure({
+						figure,
+						x,
+						y,
+						angle: startAngle - angleSpeed * value
+					});
 				}, timeLength, mina.linear, resolve);
 
 			this.legs.animateFigureTime({figure, timeLength, beats});

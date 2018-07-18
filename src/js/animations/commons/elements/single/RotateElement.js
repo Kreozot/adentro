@@ -34,7 +34,12 @@ export default class RotateElement extends SingleElement {
 
 		const transformAtLength = (length) => {
 			const movePoint = this.path.getPointAtLength(length);
-			this.animation.positionFigure(this.figure, movePoint.x, movePoint.y, angle - angleSpeed * (length - startLen));
+			this.animation.positionFigure({
+				figure: this.figure,
+				x: movePoint.x,
+				y: movePoint.y,
+				angle: angle - angleSpeed * (length - startLen)
+			});
 		};
 
 		transformAtLength(startLen);

@@ -7,7 +7,13 @@ class BailecitoAvanceRetrocesoElement extends PairElement {
 	constructor(animation, pathStrings) {
 		super(animation, pathStrings);
 
-		this.manDanceAnimationElement.animationFunction = function ({lengthMs, beats, startPart = 0, stopPart = 1, figureHands}) {
+		this.manDanceAnimationElement.animationFunction = function ({
+			lengthMs,
+			beats,
+			startPart = 0,
+			stopPart = 1,
+			figureHands
+		}) {
 			return this.animation.animateFigurePath({
 				figure: this.figure,
 				startAngle: this.position === 'left' ? -90 : 90,
@@ -20,7 +26,13 @@ class BailecitoAvanceRetrocesoElement extends PairElement {
 				figureHands
 			});
 		};
-		this.womanDanceAnimationElement.animationFunction = function ({lengthMs, beats, startPart = 0, stopPart = 1, figureHands}) {
+		this.womanDanceAnimationElement.animationFunction = function ({
+			lengthMs,
+			beats,
+			startPart = 0,
+			stopPart = 1,
+			figureHands
+		}) {
 			return this.animation.animateFigurePath({
 				figure: this.figure,
 				startAngle: this.position === 'left' ? -90 : 90,

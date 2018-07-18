@@ -200,15 +200,25 @@ export default class DanceAnimation {
 	}
 
 	/**
-	 * Позиционирование фигуры
+	 * Позиционирование фигуры в заданной точке под заданным углом.
+	 * Также выполняется корректировка угла фигуры чтобы обеспечить плавность поворота,
+	 * а также направление верхней части фигуры в сторону фигуры партнёра при необходимости.
 	 * @param  {Object} figure Объект фигуры
-	 * @param  {Number} x      Координата центра X
-	 * @param  {Number} y      Координата центра Y
-	 * @param  {Number} angle  Угол поворота (при 0 фигура стоит вертикально)
+	 * @param  {Number} x Координата центра X
+	 * @param  {Number} y Координата центра Y
+	 * @param  {Number} angle Угол поворота (при 0 фигура стоит вертикально)
 	 * @param  {Object} pairFigure Объект парной фигуры
 	 * @param  {Number} rotateDirection Идентификатор направления поворота (для плавного изменения градуса)
 	 */
-	positionFigure(figure, x, y, angle, pairFigure, rotateDirection) {
+	positionFigure({
+		figure,
+		x,
+		y,
+		angle,
+		pairFigure,
+		rotateDirection,
+		dontLookAtPair
+	}) {
 		angle = normalizeAngle(angle);
 		if (!figure.angle) {
 			figure.angle = angle;
@@ -216,8 +226,10 @@ export default class DanceAnimation {
 		figure.angle = this.smoothRotationAngle(angle, figure.angle, rotateDirection);
 		figure.angle = normalizeAngle(figure.angle);
 		figure.transform(`t${x},${y}r${Math.floor(figure.angle)}`);
-
-		this.rotateTopToPairFigure(figure, pairFigure);
+		// TODO: ПРинимать параметр направления и при straight forward не вращать
+		if (!dontLookAtPair) {
+			this.rotateTopToPairFigure(figure, pairFigure);
+		}
 	}
 
 	/**
@@ -254,6 +266,7 @@ export default class DanceAnimation {
 		easing = mina.linear,
 		figureHands = FIGURE_HANDS.CASTANETAS,
 		pairFigure,
+		dontLookAtPair,
 		isLastElement,
 		stepStyle = STEP_STYLE.BASIC,
 		firstLeg = LEGS.LEFT,
@@ -272,13 +285,28 @@ export default class DanceAnimation {
 
 		const pathLength = this.pathLengths.get(path);
 
+		/**
+		 * Трансформация положения фигуры на определённом участке кривой тракетории
+		 * @param  {Number} length Пройденная длина на кривой
+		 */
 		const transformAtLength = length => {
 			if (length > pathLength) {
 				length = length - pathLength;
 			}
 			const movePoint = path.getPointAtLength(length);
-			const finalAngle = direction === DIRECTIONS.STRAIGHT_FORWARD ? angle : angle + movePoint.alpha;
-			this.positionFigure(figure, movePoint.x, movePoint.y, finalAngle, pairFigure, rotateDirection);
+			const finalAngle = direction === DIRECTIONS.STRAIGHT_FORWARD
+				? angle
+				: angle + movePoint.alpha;
+			this.positionFigure({
+				figure,
+				x: movePoint.x,
+				y: movePoint.y,
+				angle: finalAngle,
+				pairFigure,
+				dontLookAtPair,
+				rotateDirection,
+				direction
+			});
 		};
 
 		transformAtLength(startLen);
@@ -390,7 +418,10 @@ export default class DanceAnimation {
 		figure.top.transform('r0');
 		figure.top.angle = 0;
 		this.changeFigureHands(figure, FIGURE_HANDS.DOWN);
-		this.positionFigure(figure, coords.x, coords.y, coords.angle);
+		this.positionFigure({
+			...coords,
+			figure,
+		});
 		figure.removeClass('invisible');
 		$('.leg', figure.node)
 			.attr(`transform`, null);

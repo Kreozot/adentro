@@ -80,7 +80,8 @@ export default class SingleElement {
 		isLastElement,
 		stepStyle,
 		firstLeg,
-		rotateDirection
+		rotateDirection,
+		dontLookAtPair,
 	}) {
 		return this.animation.animateFigurePath({
 			figure: this.figure,
@@ -97,7 +98,8 @@ export default class SingleElement {
 			stepStyle,
 			firstLeg,
 			rotateDirection,
-			pairFigure: this.pairFigure
+			pairFigure: this.pairFigure,
+			dontLookAtPair,
 		});
 	}
 
