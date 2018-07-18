@@ -2,13 +2,11 @@ import Promise from 'bluebird';
 
 require('styles/animation.scss');
 import svg from 'js/animations/svg';
-import {normalizeAngle} from 'js/animations/commons/utils';
+import {normalizeAngle, smoothRotationAngle} from 'js/animations/commons/angles';
 
 import Legs from './Legs';
 import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS, ROTATE} from './const';
 
-const FIGURE_ANGLE_TICK = 25;
-const FIGURE_ANGLE_SPEED = 3;
 // Максимальный угол поворота верха фигуры
 const FIGURE_TOP_ANGLE_MAX = 90;
 
@@ -167,7 +165,7 @@ export default class DanceAnimation {
 				relativeAngle = -FIGURE_TOP_ANGLE_MAX;
 				rotateDirection = ROTATE.CLOCKWISE;
 			}
-			relativeAngle = this.smoothRotationAngle(relativeAngle, figure.top.angle, rotateDirection);
+			relativeAngle = smoothRotationAngle(relativeAngle, figure.top.angle, rotateDirection);
 
 			figure.top.transform(`r${relativeAngle}`);
 			figure.top.angle = relativeAngle;
@@ -175,28 +173,6 @@ export default class DanceAnimation {
 			figure.top.transform('r0');
 			figure.top.angle = 0;
 		}
-	}
-
-	/**
-	 * Сгладить угол поворота
-	 * @param  {Number} newAngle Новый угол
-	 * @param  {Number} currentAngle Текущий угол
-	 * @param  {Number} rotateDirection Идентификатор направления поворота (для плавного изменения градуса)
-	 * @return {Number} Угол с учётом плавного поворота
-	 */
-	smoothRotationAngle(newAngle, currentAngle, rotateDirection) {
-		const angleDiff = normalizeAngle(currentAngle) - normalizeAngle(newAngle);
-		if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) &&
-			(Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
-			const rotateTo = rotateDirection ||
-				(((angleDiff > 190) || ((angleDiff < 0) && (angleDiff > -180))) ? ROTATE.COUNTERCLOCKWISE : ROTATE.CLOCKWISE);
-			if (rotateTo === ROTATE.COUNTERCLOCKWISE) {
-				return currentAngle + FIGURE_ANGLE_SPEED;
-			} else {
-				return currentAngle - FIGURE_ANGLE_SPEED;
-			}
-		}
-		return newAngle;
 	}
 
 	/**

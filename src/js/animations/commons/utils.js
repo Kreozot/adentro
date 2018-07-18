@@ -32,14 +32,3 @@ export function mod(upVal, downVal) {
 	const divVal = upVal / downVal;
 	return divVal - Math.floor(divVal);
 }
-
-// Транспонирует угол в промежуток от startingAngle до startingAngle + 360
-export function normalizeAngle(angle, startingAngle = 0) {
-	if (angle > startingAngle + 360) {
-		angle = angle - 360;
-	}
-	if (angle < startingAngle) {
-		angle = 360 + angle;
-	}
-	return angle;
-}
