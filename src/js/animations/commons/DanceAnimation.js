@@ -199,7 +199,7 @@ export default class DanceAnimation {
 		if (!figure.angle) {
 			figure.angle = angle;
 		}
-		figure.angle = this.smoothRotationAngle(angle, figure.angle, rotateDirection);
+		figure.angle = smoothRotationAngle(angle, figure.angle, rotateDirection);
 		figure.angle = normalizeAngle(figure.angle);
 		figure.transform(`t${x},${y}r${Math.floor(figure.angle)}`);
 		// TODO: ПРинимать параметр направления и при straight forward не вращать
