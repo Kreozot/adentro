@@ -148,8 +148,8 @@ export default class DanceAnimation {
 		if (pairFigure) {
 			const figureBBox = figure.getBBox();
 			const pairFigureBBox = pairFigure.getBBox();
-			const lengthX = figureBBox.x - pairFigureBBox.x;
-			const lengthY = figureBBox.y - pairFigureBBox.y;
+			const lengthX = figureBBox.cx - pairFigureBBox.cx;
+			const lengthY = figureBBox.cy - pairFigureBBox.cy;
 
 			// Угол между векторами фигур
 			const angleBetweenFigures = Math.atan(lengthY / lengthX) * 180 / Math.PI;
