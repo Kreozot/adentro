@@ -52,11 +52,17 @@ export default class RotateElement extends SingleElement {
 		this.figure.removeClass('invisible');
 
 		return new Promise(resolve => {
-			this.animation.animations[this.animation.animations.length] = Snap.animate(startLen, stopLen,
+			this.animation.animations.push(Snap.animate(
+				startLen,
+				stopLen,
 				function (value) { //this - animation element
 					this.lastValue = value;
 					transformAtLength(value);
-				}, lengthS * 1000, mina.linear, resolve);
+				},
+				lengthS * 1000,
+				mina.linear,
+				resolve)
+			);
 
 			this.animation.legs.animateFigureTime({
 				figure: this.figure,

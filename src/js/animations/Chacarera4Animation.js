@@ -20,12 +20,16 @@ class VueltaGradientElement extends VueltaElement {
 		}
 
 		var self = this;
-		this.animation.animations[this.animation.animations.length] = Snap.animate(startPart * this.pathLength,
+		this.animation.animations.push(Snap.animate(
+			startPart * this.pathLength,
 			stopPart * this.pathLength,
 			function (value) {
 				this.lastValue = value;
 				self.drawGradientAtPoint(value);
-			}, lengthMs, mina.linear);
+			},
+			lengthMs,
+			mina.linear)
+		);
 	}
 }
 

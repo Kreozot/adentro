@@ -55,13 +55,16 @@ export default class VueltaElement extends PairElement {
 
 		const self = this;
 		const gradientAnimationPromise = new Promise(resolve => {
-			this.animation.animations[this.animation.animations.length] = Snap.animate(
+			this.animation.animations.push(Snap.animate(
 				startPart * this.pathLength,
 				stopPart * this.pathLength,
 				function (value) {
 					this.lastValue = value;
 					self.drawGradientAtPoint(value);
-				}, lengthMs, mina.linear, resolve
+				},
+				lengthMs,
+				mina.linear,
+				resolve)
 			);
 		});
 

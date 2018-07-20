@@ -202,7 +202,7 @@ export default class DanceAnimation {
 		figure.angle = smoothRotationAngle(angle, figure.angle, rotateDirection);
 		figure.angle = normalizeAngle(figure.angle);
 		figure.transform(`t${x},${y}r${Math.floor(figure.angle)}`);
-		// TODO: ПРинимать параметр направления и при straight forward не вращать
+
 		if (!dontLookAtPair) {
 			this.rotateTopToPairFigure(figure, pairFigure);
 		}
@@ -265,7 +265,7 @@ export default class DanceAnimation {
 		 * Трансформация положения фигуры на определённом участке кривой тракетории
 		 * @param  {Number} length Пройденная длина на кривой
 		 */
-		const transformAtLength = length => {
+		const transformAtLength = (length) => {
 			if (length > pathLength) {
 				length = length - pathLength;
 			}
@@ -300,13 +300,19 @@ export default class DanceAnimation {
 			: timeLength;
 
 		return new Promise(resolve => {
-			this.animations[this.animations.length] = Snap.animate(startLen, stopLen,
-				function (value) { //this - animation element
+			this.animations.push(Snap.animate(
+				startLen,
+				stopLen,
+				function animationFunction(value) { //this - animation element
 					if (direction === DIRECTIONS.FROM_END_TO_START) {
 						value = startLen + stopLen - value;
 					}
 					transformAtLength(value);
-				}, timeLengthForPath, easing, resolve);
+				},
+				timeLengthForPath,
+				easing,
+				resolve)
+			);
 
 			this.legs.animateFigureTime({figure, timeLength, beats, stepStyle, isLastElement, firstLeg});
 		});

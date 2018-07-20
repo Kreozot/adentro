@@ -40,7 +40,9 @@ export default class RemedioAnimation extends EscondidoAnimation {
 
 		let self = this;
 		return new Promise(resolve => {
-			this.animations[this.animations.length] = Snap.animate(0, timeLength,
+			this.animations.push(Snap.animate(
+				0,
+				timeLength,
 				function (value) {
 					this.lastValue = value;
 
@@ -50,7 +52,11 @@ export default class RemedioAnimation extends EscondidoAnimation {
 						y,
 						angle: startAngle - angleSpeed * value
 					});
-				}, timeLength, mina.linear, resolve);
+				},
+				timeLength,
+				mina.linear,
+				resolve)
+			);
 
 			this.legs.animateFigureTime({figure, timeLength, beats});
 		});
