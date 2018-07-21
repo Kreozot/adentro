@@ -14,8 +14,15 @@ export default class Legs {
 	}
 
 	animateLeg(figure, legStr, duration, transformFrom, transformTo, easing = mina.linear) {
-		return new Promise(resolve => {
-			this.animations.push(Snap.animate(transformFrom, transformTo, value => this.moveLeg(figure, legStr, value), duration, easing, resolve));
+		return new Promise((resolve) => {
+			this.animations.push(Snap.animate(
+				transformFrom,
+				transformTo,
+				(value) => this.moveLeg(figure, legStr, value),
+				duration,
+				easing,
+				resolve)
+			);
 		});
 	}
 
