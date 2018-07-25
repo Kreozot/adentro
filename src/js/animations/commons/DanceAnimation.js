@@ -3,6 +3,7 @@ import Promise from 'bluebird';
 require('styles/animation.scss');
 import svg from 'js/animations/svg';
 import {normalizeAngle, smoothRotationAngle} from 'js/animations/commons/angles';
+import {getFigureCenter} from 'js/animations/commons/utils';
 
 import Legs from './Legs';
 import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS, ROTATE} from './const';
@@ -146,10 +147,10 @@ export default class DanceAnimation {
 	rotateTopToPairFigure(figure, pairFigure = null) {
 		// return;
 		if (pairFigure) {
-			const figureBBox = figure.getBBox();
-			const pairFigureBBox = pairFigure.getBBox();
-			const lengthX = figureBBox.cx - pairFigureBBox.cx;
-			const lengthY = figureBBox.cy - pairFigureBBox.cy;
+			const figureCenter = getFigureCenter(figure);
+			const pairFigureCenter = getFigureCenter(pairFigure);
+			const lengthX = figureCenter[0] - pairFigureCenter[0];
+			const lengthY = figureCenter[1] - pairFigureCenter[1];
 
 			// Угол между векторами фигур
 			const angleBetweenFigures = Math.atan(lengthY / lengthX) * 180 / Math.PI;
