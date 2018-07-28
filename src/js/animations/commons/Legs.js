@@ -1,7 +1,8 @@
 import Promise from 'bluebird';
 import {LEGS, STEP_STYLE} from './const';
 
-const FIGURE_STEP_AMPLITUDE = 26;
+// Амплитуда шага в пикселях (в одну сторону)
+const FIGURE_STEP_AMPLITUDE = 13;
 
 export default class Legs {
 	constructor(animations) {
@@ -42,7 +43,7 @@ export default class Legs {
 			return;
 		}
 		const oppositeLegStr = this.getOppositeLeg(legStr);
-		const amplitudeHalf = -FIGURE_STEP_AMPLITUDE / 2;
+		const amplitudeHalf = -FIGURE_STEP_AMPLITUDE;
 
 		return Promise.all([
 			this.animateLeg(figure, legStr, stepDuration, -amplitudeHalf, amplitudeHalf, mina.linear),
@@ -57,7 +58,7 @@ export default class Legs {
 		}
 		const oppositeLegStr = this.getOppositeLeg(legStr);
 		const transformFrom = 0;
-		const transformTo = FIGURE_STEP_AMPLITUDE / 2;
+		const transformTo = FIGURE_STEP_AMPLITUDE;
 
 		// Па!
 		this.kick(figure, oppositeLegStr, 'back');
@@ -94,7 +95,7 @@ export default class Legs {
 			return Promise.resolve();
 		}
 		const oppositeLegStr = this.getOppositeLeg(legStr);
-		const amplitudeHalf = -FIGURE_STEP_AMPLITUDE / 2;
+		const amplitudeHalf = -FIGURE_STEP_AMPLITUDE;
 
 		return Promise.all([
 			this.animateLeg(figure, legStr, stepDuration * 2, -amplitudeHalf, amplitudeHalf, mina.linear),
