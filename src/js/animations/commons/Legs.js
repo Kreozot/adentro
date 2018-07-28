@@ -43,11 +43,10 @@ export default class Legs {
 			return;
 		}
 		const oppositeLegStr = this.getOppositeLeg(legStr);
-		const amplitudeHalf = -FIGURE_STEP_AMPLITUDE;
 
 		return Promise.all([
-			this.animateLeg(figure, legStr, stepDuration, -amplitudeHalf, amplitudeHalf, mina.linear),
-			this.animateLeg(figure, oppositeLegStr, stepDuration, amplitudeHalf, -amplitudeHalf, mina.linear)
+			this.animateLeg(figure, legStr, stepDuration, FIGURE_STEP_AMPLITUDE, -FIGURE_STEP_AMPLITUDE, mina.linear),
+			this.animateLeg(figure, oppositeLegStr, stepDuration, -FIGURE_STEP_AMPLITUDE, FIGURE_STEP_AMPLITUDE, mina.linear)
 		])
 			.then(() => this.animateLegsRepeat(figure, oppositeLegStr, stepDuration, stepsLeft - 1));
 	}
@@ -95,15 +94,14 @@ export default class Legs {
 			return Promise.resolve();
 		}
 		const oppositeLegStr = this.getOppositeLeg(legStr);
-		const amplitudeHalf = -FIGURE_STEP_AMPLITUDE;
 
 		return Promise.all([
-			this.animateLeg(figure, legStr, stepDuration * 2, -amplitudeHalf, amplitudeHalf, mina.linear),
-			this.animateLeg(figure, oppositeLegStr, stepDuration * 2, amplitudeHalf, -amplitudeHalf, mina.linear)
+			this.animateLeg(figure, legStr, stepDuration * 2, FIGURE_STEP_AMPLITUDE, -FIGURE_STEP_AMPLITUDE, mina.linear),
+			this.animateLeg(figure, oppositeLegStr, stepDuration * 2, -FIGURE_STEP_AMPLITUDE, FIGURE_STEP_AMPLITUDE, mina.linear)
 		])
 			.then(() => Promise.all([
-				this.animateLeg(figure, oppositeLegStr, stepDuration, -amplitudeHalf, amplitudeHalf, mina.linear),
-				this.animateLeg(figure, legStr, stepDuration, amplitudeHalf, -amplitudeHalf, mina.linear)
+				this.animateLeg(figure, oppositeLegStr, stepDuration, FIGURE_STEP_AMPLITUDE, -FIGURE_STEP_AMPLITUDE, mina.linear),
+				this.animateLeg(figure, legStr, stepDuration, -FIGURE_STEP_AMPLITUDE, FIGURE_STEP_AMPLITUDE, mina.linear)
 			]))
 			.then(() => this.animateLegsRepeatZamba(figure, legStr, stepDuration, stepsLeft - 1));
 	}
