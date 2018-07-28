@@ -139,12 +139,36 @@ export default class Legs {
 		const oppositeLegStr = this.getOppositeLeg(legStr);
 
 		return Promise.all([
-			this.animateLeg(figure, legStr, stepDuration * 2, FIGURE_STEP_AMPLITUDE, -FIGURE_STEP_AMPLITUDE, mina.linear),
-			this.animateLeg(figure, oppositeLegStr, stepDuration * 2, -FIGURE_STEP_AMPLITUDE, FIGURE_STEP_AMPLITUDE, mina.linear)
+			this.animateLeg({
+				figure,
+				legStr,
+				duration: stepDuration * 2,
+				transformFrom: FIGURE_STEP_AMPLITUDE,
+				transformTo: -FIGURE_STEP_AMPLITUDE,
+			}),
+			this.animateLeg({
+				figure,
+				legStr: oppositeLegStr,
+				duration: stepDuration * 2,
+				transformFrom: -FIGURE_STEP_AMPLITUDE,
+				transformTo: FIGURE_STEP_AMPLITUDE,
+			})
 		])
 			.then(() => Promise.all([
-				this.animateLeg(figure, oppositeLegStr, stepDuration, FIGURE_STEP_AMPLITUDE, -FIGURE_STEP_AMPLITUDE, mina.linear),
-				this.animateLeg(figure, legStr, stepDuration, -FIGURE_STEP_AMPLITUDE, FIGURE_STEP_AMPLITUDE, mina.linear)
+				this.animateLeg({
+					figure,
+					legStr: oppositeLegStr,
+					duration: stepDuration,
+					transformFrom: FIGURE_STEP_AMPLITUDE,
+					transformTo: -FIGURE_STEP_AMPLITUDE,
+				}),
+				this.animateLeg({
+					figure,
+					legStr,
+					duration: stepDuration,
+					transformFrom: -FIGURE_STEP_AMPLITUDE,
+					transformTo: FIGURE_STEP_AMPLITUDE,
+				})
 			]))
 			.then(() => this.animateLegsRepeatZamba(figure, legStr, stepDuration, stepsLeft - 1));
 	}
