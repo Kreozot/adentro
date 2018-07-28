@@ -14,7 +14,14 @@ export default class Legs {
 			.transform(`translate(0, ${value})`);
 	}
 
-	animateLeg(figure, legStr, duration, transformFrom, transformTo, easing = mina.linear) {
+	animateLeg({
+		figure,
+		legStr,
+		duration,
+		transformFrom,
+		transformTo,
+		easing = mina.linear
+	}) {
 		return new Promise((resolve) => {
 			this.animations.push(Snap.animate(
 				transformFrom,
@@ -45,8 +52,20 @@ export default class Legs {
 		const oppositeLegStr = this.getOppositeLeg(legStr);
 
 		return Promise.all([
-			this.animateLeg(figure, legStr, stepDuration, FIGURE_STEP_AMPLITUDE, -FIGURE_STEP_AMPLITUDE, mina.linear),
-			this.animateLeg(figure, oppositeLegStr, stepDuration, -FIGURE_STEP_AMPLITUDE, FIGURE_STEP_AMPLITUDE, mina.linear)
+			this.animateLeg({
+				figure,
+				legStr,
+				duration: stepDuration,
+				transformFrom: FIGURE_STEP_AMPLITUDE,
+				transformTo: -FIGURE_STEP_AMPLITUDE
+			}),
+			this.animateLeg({
+				figure,
+				legStr: oppositeLegStr,
+				duration: stepDuration,
+				transformFrom: -FIGURE_STEP_AMPLITUDE,
+				transformTo: FIGURE_STEP_AMPLITUDE
+			})
 		])
 			.then(() => this.animateLegsRepeat(figure, oppositeLegStr, stepDuration, stepsLeft - 1));
 	}
@@ -56,12 +75,17 @@ export default class Legs {
 			return Promise.resolve();
 		}
 		const oppositeLegStr = this.getOppositeLeg(legStr);
-		const transformFrom = 0;
-		const transformTo = FIGURE_STEP_AMPLITUDE;
 
 		// Па!
 		this.kick(figure, oppositeLegStr, 'back');
-		const resultPromise = this.animateLeg(figure, oppositeLegStr, stepDuration, transformTo, transformFrom, mina.easeout)
+		const resultPromise = this.animateLeg({
+			figure,
+			legStr: oppositeLegStr,
+			duration: stepDuration,
+			transformFrom: FIGURE_STEP_AMPLITUDE,
+			transformTo: 0,
+			easing: mina.easeout
+		})
 			.delay(stepDuration);
 		if (stepsLeft === 1) {
 			return resultPromise;
@@ -69,12 +93,25 @@ export default class Legs {
 		// Па-
 		return resultPromise.then(() => {
 			this.kick(figure, legStr, 'front');
-			return this.animateLeg(figure, legStr, stepDuration, transformFrom, transformTo);
+			return this.animateLeg({
+				figure,
+				legStr,
+				duration: stepDuration,
+				transformFrom: 0,
+				transformTo: FIGURE_STEP_AMPLITUDE
+			});
 		})
 			// Пи-
 			.then(() => {
 				this.kick(figure, legStr, 'back');
-				return this.animateLeg(figure, legStr, stepDuration, transformTo, transformFrom, mina.easeout);
+				return this.animateLeg({
+					figure,
+					legStr,
+					duration: stepDuration,
+					transformFrom: FIGURE_STEP_AMPLITUDE,
+					transformTo: 0,
+					easing: mina.easeout
+				});
 			})
 			// То-
 			.then(() => {
@@ -84,7 +121,13 @@ export default class Legs {
 			// Па-
 			.then(() => {
 				this.kick(figure, legStr, 'front');
-				return this.animateLeg(figure, legStr, stepDuration, transformFrom, transformTo);
+				return this.animateLeg({
+					figure,
+					legStr,
+					duration: stepDuration,
+					transformFrom: 0,
+					transformTo: FIGURE_STEP_AMPLITUDE
+				});
 			})
 			.then(() => this.animateLegsRepeatZapateo(figure, oppositeLegStr, stepDuration, stepsLeft - 1));
 	}
@@ -137,7 +180,15 @@ export default class Legs {
 	 * @param  {Number}  stepStyle  Стиль шага
 	 * @param  {Boolean} isLastElement Это последний элемент музкальной части
 	 */
-	animateFigureTime({figure, timeLength, beats, stepStyle, isLastElement, firstLeg = LEGS.LEFT, figureHands}) {
+	animateFigureTime({
+		figure,
+		timeLength,
+		beats,
+		stepStyle,
+		isLastElement,
+		firstLeg = LEGS.LEFT,
+		figureHands
+	}) {
 		if (figureHands) {
 			$(`.hands:not(.hands--${figureHands})`, figure.node).addClass('invisible');
 			$(`.hands--${figureHands}`, figure.node).removeClass('invisible');

@@ -315,7 +315,14 @@ export default class DanceAnimation {
 				resolve)
 			);
 
-			this.legs.animateFigureTime({figure, timeLength, beats, stepStyle, isLastElement, firstLeg});
+			this.legs.animateFigureTime({
+				figure,
+				timeLength,
+				beats,
+				stepStyle,
+				isLastElement,
+				firstLeg
+			});
 		});
 	}
 
