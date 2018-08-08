@@ -13,7 +13,7 @@ export function normalizeAngle(angle, startingAngle = 0) {
 	if (angle < startingAngle) {
 		angle = 360 + angle;
 	}
-	return angle;
+	return Math.round(angle);
 }
 
 /**

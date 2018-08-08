@@ -168,8 +168,10 @@ export default class DanceAnimation {
 			}
 			relativeAngle = smoothRotationAngle(relativeAngle, figure.top.angle, rotateDirection);
 
-			figure.top.transform(`r${relativeAngle}`);
-			figure.top.angle = relativeAngle;
+			if (figure.top.angle !== relativeAngle) {
+				figure.top.transform(`r${relativeAngle}`);
+				figure.top.angle = relativeAngle;
+			}
 		} else {
 			figure.top.transform('r0');
 			figure.top.angle = 0;
