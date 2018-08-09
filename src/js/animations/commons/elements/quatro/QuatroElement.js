@@ -27,6 +27,7 @@ export default class QuatroElement {
 		this.woman1DanceAnimationElement.drawPath(getOppositePosition(manPosition), transparent);
 		this.man2DanceAnimationElement.drawPath(manPosition, transparent);
 		this.woman2DanceAnimationElement.drawPath(getOppositePosition(manPosition), transparent);
+		return this;
 	}
 
 	/**
@@ -48,6 +49,7 @@ export default class QuatroElement {
 		this.woman1DanceAnimationElement.setAngle(value);
 		this.man2DanceAnimationElement.setAngle(value);
 		this.woman2DanceAnimationElement.setAngle(value);
+		return this;
 	}
 
 	/**

@@ -41,5 +41,6 @@ export default class ZapateoElement extends SingleElement {
 			this.path = this.animation.path(this.pathStrings[position], this.gender, hidden);
 			this.pathLength = this.path.getTotalLength() - 1;
 		}
+		return this;
 	}
 }

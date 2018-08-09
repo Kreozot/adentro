@@ -4,6 +4,8 @@ import {LEGS, STEP_STYLE} from './const';
 // Амплитуда шага в пикселях (в одну сторону)
 const FIGURE_STEP_AMPLITUDE = 13;
 
+let counter = 0 ;
+
 export default class Legs {
 	constructor(animations) {
 		this.animations = animations;
@@ -23,13 +25,18 @@ export default class Legs {
 		easing = mina.linear
 	}) {
 		return new Promise((resolve) => {
+			const animIndex = counter++;
+			console.log('created', animIndex);
 			this.animations.push(Snap.animate(
 				transformFrom,
 				transformTo,
 				(value) => this.moveLeg(figure, legStr, value),
 				duration,
 				easing,
-				resolve)
+				() => {
+					console.log('finished', animIndex);
+					resolve();
+				})
 			);
 		});
 	}

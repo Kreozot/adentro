@@ -17,7 +17,7 @@ export default class ChacareraAnimation extends GatoAnimation {
 		};
 	}
 
-	avance(lengthS, manPosition, beats) {
+	async avance(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.avance.drawPath(manPosition);
 		const partOptions = {
@@ -25,16 +25,16 @@ export default class ChacareraAnimation extends GatoAnimation {
 			beats: beats / 2
 		};
 
-		return this.elements.avance.startAnimation({
+		await this.elements.avance.startAnimation({
 			...partOptions,
 			startPart: 0,
 			stopPart: 0.5
-		})
-			.then(() => this.elements.avance.startAnimation({
-				...partOptions,
-				direction: DIRECTIONS.BACKWARD,
-				startPart: 0.5,
-				stopPart: 1
-			}));
+		});
+		await this.elements.avance.startAnimation({
+			...partOptions,
+			direction: DIRECTIONS.BACKWARD,
+			startPart: 0.5,
+			stopPart: 1
+		});
 	}
 }

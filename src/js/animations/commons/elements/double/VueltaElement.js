@@ -13,6 +13,7 @@ export default class VueltaElement extends PairElement {
 		this.leftColor = leftColor;
 		this.rightColor = rightColor;
 		this.gColors = leftColor + '-' + rightColor;
+		return this;
 	}
 
 	drawGradientAtPoint(value) {
@@ -35,6 +36,7 @@ export default class VueltaElement extends PairElement {
 			this.g = this.animation.svg.gradient(`L(${movePoint1.x}, ${movePoint1.y}, ${movePoint2.x}, ${movePoint2.y})${this.gColors}`);
 			this.path.attr({stroke: this.g});
 		}
+		return this;
 	}
 
 	animationFunction({
@@ -114,5 +116,6 @@ export default class VueltaElement extends PairElement {
 		}
 
 		this.drawGradientAtPoint(0);
+		return this;
 	}
 }

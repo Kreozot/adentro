@@ -17,7 +17,7 @@ export function zapateoAnimation(lengthS, manPosition, beats, conPanuelo) {
 	});
 }
 
-export function zarandeoAnimation(lengthS, manPosition, beats, conPanuelo) {
+export async function zarandeoAnimation(lengthS, manPosition, beats, conPanuelo) {
 	this.elements.zarandeo.drawPath(getOppositePosition(manPosition));
 	const parts = beats >= 8 ? 4 : 2;
 	const partOptions = {
@@ -29,24 +29,21 @@ export function zarandeoAnimation(lengthS, manPosition, beats, conPanuelo) {
 		...partOptions,
 		direction: DIRECTIONS.FORWARD,
 		startPart: 0,
-		stopPart: 0.5
+		stopPart: 0.499
 	};
 	const backwardOptions = {
 		...partOptions,
 		direction: DIRECTIONS.BACKWARD,
-		startPart: 0.51, // Исправление погрешности svg-кривой
+		startPart: 0.501, // Исправление погрешности svg-кривой
 		stopPart: 1
 	};
 
-	let zarandeoPromise = this.elements.zarandeo.startAnimation(forwardOptions)
-		.then(() => this.elements.zarandeo.startAnimation(backwardOptions));
+	await this.elements.zarandeo.startAnimation(forwardOptions);
+	await this.elements.zarandeo.startAnimation(backwardOptions);
 	if (beats >= 8) {
-		zarandeoPromise = zarandeoPromise
-			.then(() => this.elements.zarandeo.startAnimation(forwardOptions))
-			.then(() => this.elements.zarandeo.startAnimation(backwardOptions));
+		await this.elements.zarandeo.startAnimation(forwardOptions);
+		await this.elements.zarandeo.startAnimation(backwardOptions);
 	}
-
-	return zarandeoPromise;
 }
 
 export default class GatoAnimation extends DanceAnimation {

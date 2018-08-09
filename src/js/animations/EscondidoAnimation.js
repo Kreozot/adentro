@@ -5,7 +5,7 @@ import ZapateoElement from './commons/elements/single/ZapateoElement';
 import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import VueltaElement from './commons/elements/double/VueltaElement';
 import {zarandeoAnimation} from './GatoAnimation';
-import {DIRECTIONS} from './commons/const';
+import {DIRECTIONS, LEGS} from './commons/const';
 import {getOppositePosition} from './commons/utils';
 import svg from 'js/animations/svg';
 
@@ -75,7 +75,7 @@ export default class EscondidoAnimation extends DanceAnimation {
 		this.elements.balanceo2.easing = mina.easeout;
 	}
 
-	esquina(lengthS, manPosition, beats) {
+	async esquina(lengthS, manPosition, beats) {
 		this.clearPaths();
 		const startAngleMan = this.startPos[manPosition].angle;
 		const startAngleWoman = this.startPos[getOppositePosition(manPosition)].angle;
@@ -94,41 +94,46 @@ export default class EscondidoAnimation extends DanceAnimation {
 		this.elements.balanceo1.setAngles(startAngleMan, startAngleWoman);
 		this.elements.balanceo2.setAngles(startAngleMan, startAngleWoman);
 
-		return this.elements.esquina.startAnimation({
+		await this.elements.esquina.startAnimation({
 			lengthS: lengthS / 2,
 			beats: beats / 2,
 			startAngleMan,
 			startAngleWoman
-		})
-			.then(() => this.elements.balanceo1.startAnimation({
-				lengthS: lengthS / 4,
-				beats: beats / 4,
-				direction: DIRECTIONS.STRAIGHT_FORWARD
-			}))
-			.then(() => this.elements.balanceo2.startAnimation({
-				lengthS: lengthS / 4,
-				beats: beats / 4,
-				direction: DIRECTIONS.STRAIGHT_FORWARD
-			}));
+		});
+		await this.elements.balanceo1.startAnimation({
+			lengthS: lengthS / 4,
+			beats: beats / 4,
+			direction: DIRECTIONS.STRAIGHT_FORWARD
+		});
+		await this.elements.balanceo2.startAnimation({
+			lengthS: lengthS / 4,
+			beats: beats / 4,
+			direction: DIRECTIONS.STRAIGHT_FORWARD,
+			firstLeg: LEGS.RIGHT,
+		});
 	}
 
-	vueltaGiro(lengthS, manPosition, beats) {
-		return this.elements.vuelta.fullAnimation({
+	async vueltaGiro(lengthS, manPosition, beats) {
+		await this.elements.vuelta.fullAnimation({
 			lengthS: lengthS * 6 / beats,
 			beats: 6,
 			manPosition
-		})
-			.then(() => this.elements.giro.fullAnimation({
-				lengthS: lengthS * 2 / beats,
-				beats: 2,
-				manPosition
-			}));
+		});
+		await this.elements.giro.fullAnimation({
+			lengthS: lengthS * 2 / beats,
+			beats: 2,
+			manPosition
+		});
 	}
 
 	zapateo(lengthS, manPosition, beats) {
 		this.setAtStart(manPosition);
 
-		return this.elements.zapateo.fullAnimation({lengthS, beats, position: manPosition});
+		return this.elements.zapateo.fullAnimation({
+			lengthS,
+			beats,
+			position: manPosition
+		});
 	}
 
 	zarandeo(lengthS, manPosition, beats) {
@@ -139,10 +144,19 @@ export default class EscondidoAnimation extends DanceAnimation {
 	}
 
 	mediaVuelta(lengthS, manPosition, beats) {
-		return this.elements.mediaVuelta.fullAnimation({lengthS, beats, manPosition});
+		return this.elements.mediaVuelta.fullAnimation({
+			lengthS,
+			beats,
+			manPosition
+		});
 	}
 
 	coronacion(lengthS, manPosition, beats) {
-		return this.elements.coronacion.fullAnimation({lengthS, beats, manPosition, isLastElement: true});
+		return this.elements.coronacion.fullAnimation({
+			lengthS,
+			beats,
+			manPosition,
+			isLastElement: true
+		});
 	}
 }

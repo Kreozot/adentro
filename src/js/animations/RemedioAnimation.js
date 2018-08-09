@@ -171,7 +171,7 @@ export default class RemedioAnimation extends EscondidoAnimation {
 		]);
 	}
 
-	giroContragiroCoronacion(lengthS, manPosition, beats) {
+	async giroContragiroCoronacion(lengthS, manPosition, beats) {
 		this.clearPaths();
 		const startAngleMan = this.startPos[manPosition].angle;
 		const startAngleWoman = this.startPos[getOppositePosition(manPosition)].angle;
@@ -183,7 +183,7 @@ export default class RemedioAnimation extends EscondidoAnimation {
 		this.initRotateIcon(162, 277, 45, true);
 		this.initRotateIcon(277, 162, 45, true);
 
-		return this.elements.giroCoronacion.startAnimation({
+		await this.elements.giroCoronacion.startAnimation({
 			lengthS: lengthS / 2,
 			beats: beats / 2,
 			startAngleMan,
@@ -191,14 +191,14 @@ export default class RemedioAnimation extends EscondidoAnimation {
 			startPart: 0,
 			stopPart: 0.5
 		})
-			.then(() => this.elements.contragiroCoronacion.startAnimation({
-				lengthS: lengthS / 2,
-				beats: beats / 2,
-				startAngleMan,
-				startAngleWoman,
-				startPart: 0.5,
-				stopPart: 1,
-				isLastElement: true
-			}));
+		await this.elements.contragiroCoronacion.startAnimation({
+			lengthS: lengthS / 2,
+			beats: beats / 2,
+			startAngleMan,
+			startAngleWoman,
+			startPart: 0.5,
+			stopPart: 1,
+			isLastElement: true
+		});
 	}
 }

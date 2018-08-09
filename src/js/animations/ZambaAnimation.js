@@ -42,24 +42,24 @@ export default class ZambaAnimation extends GatoAnimation {
 		return this.elements.vuelta.fullAnimation({lengthS, beats, manPosition});
 	}
 
-	vuelta(lengthS, manPosition, beats) {
+	async vuelta(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.mediaVuelta.drawPath(manPosition);
 		this.elements.mediaVueltaToArresto.setAngle(-45);
 		this.elements.mediaVueltaToArresto.drawPath(getOppositePosition(manPosition));
 
-		return this.elements.mediaVuelta.startAnimation({
+		await this.elements.mediaVuelta.startAnimation({
 			lengthS: lengthS / 2,
 			beats: beats / 2,
 			figureHands: FIGURE_HANDS.PANUELO,
 			stepStyle: STEP_STYLE.SIMPLE
-		})
-			.then(() => this.elements.mediaVueltaToArresto.startAnimation({
-				lengthS: lengthS / 2,
-				beats: beats / 2,
-				figureHands: FIGURE_HANDS.PANUELO,
-				stepStyle: STEP_STYLE.ZAMBA
-			}));
+		});
+		await this.elements.mediaVueltaToArresto.startAnimation({
+			lengthS: lengthS / 2,
+			beats: beats / 2,
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA
+		});
 	}
 
 	zapateoZarandeo(lengthS, manPosition, beats) {
@@ -101,11 +101,11 @@ export default class ZambaAnimation extends GatoAnimation {
 		]);
 	}
 
-	mediaVuelta(lengthS, manPosition, beats) {
+	async mediaVuelta(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.mediaVueltaToArresto.drawPath(manPosition);
 
-		return this.elements.mediaVueltaToArresto.startAnimation({
+		await this.elements.mediaVueltaToArresto.startAnimation({
 			lengthS: lengthS / 2,
 			beats: beats / 2,
 			figureHands: FIGURE_HANDS.PANUELO,
@@ -113,96 +113,96 @@ export default class ZambaAnimation extends GatoAnimation {
 			startPart: 0,
 			stopPart: 0.5
 		})
-			.then(() => this.elements.mediaVueltaToArresto.setAngle(-45))
-			.then(() => this.elements.mediaVueltaToArresto.startAnimation({
-				lengthS: lengthS / 2,
-				beats: beats / 2,
-				figureHands: FIGURE_HANDS.PANUELO,
-				stepStyle: STEP_STYLE.ZAMBA,
-				startPart: 0.5,
-				stopPart: 1
-			}));
+		this.elements.mediaVueltaToArresto.setAngle(-45);
+		await this.elements.mediaVueltaToArresto.startAnimation({
+			lengthS: lengthS / 2,
+			beats: beats / 2,
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA,
+			startPart: 0.5,
+			stopPart: 1
+		});
 	}
 
-	arresto(lengthS, manPosition, beats) {
+	async arresto(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.arresto.setAngle(45);
 		this.elements.arrestoBack.setAngle(-45);
 		this.elements.arresto.drawPath(manPosition);
 		this.elements.arrestoBack.drawPath(manPosition);
 
-		return this.elements.arresto.startAnimation({
+		await this.elements.arresto.startAnimation({
 			lengthS: lengthS / 2,
 			beats: beats / 2,
 			figureHands: FIGURE_HANDS.PANUELO,
 			stepStyle: STEP_STYLE.ZAMBA,
 			firstLeg: LEGS.RIGHT
-		})
-			.then(() => this.elements.arrestoBack.startAnimation({
-				lengthS: lengthS / 2,
-				beats: beats / 2,
-				figureHands: FIGURE_HANDS.PANUELO,
-				stepStyle: STEP_STYLE.ZAMBA
-			}));
+		});
+		await this.elements.arrestoBack.startAnimation({
+			lengthS: lengthS / 2,
+			beats: beats / 2,
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA
+		});
 	}
 
-	arrestoDoble(lengthS, manPosition, beats) {
+	async arrestoDoble(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.arresto.setAngle(45);
 		this.elements.arrestoBack.setAngle(-45);
 		this.elements.arresto.drawPath(manPosition);
 		this.elements.arrestoBack.drawPath(manPosition);
 
-		return this.elements.arresto.startAnimation({
+		await this.elements.arresto.startAnimation({
 			lengthS: lengthS / 4,
 			beats: beats / 4,
 			figureHands: FIGURE_HANDS.PANUELO,
 			stepStyle: STEP_STYLE.ZAMBA,
 			firstLeg: LEGS.RIGHT
-		})
-			.then(() => this.elements.arresto.startAnimation({
-				lengthS: lengthS / 4,
-				beats: beats / 4,
-				direction: DIRECTIONS.BACKWARD,
-				startPart: 1,
-				stopPart: 0,
-				figureHands: FIGURE_HANDS.PANUELO,
-				stepStyle: STEP_STYLE.ZAMBA
-			}))
-			.then(() => this.elements.arresto.startAnimation({
-				lengthS: lengthS / 4,
-				beats: beats / 4,
-				figureHands: FIGURE_HANDS.PANUELO,
-				stepStyle: STEP_STYLE.ZAMBA,
-				firstLeg: LEGS.RIGHT
-			}))
-			.then(() => this.elements.arrestoBack.startAnimation({
-				lengthS: lengthS / 4,
-				beats: beats / 4,
-				figureHands: FIGURE_HANDS.PANUELO,
-				stepStyle: STEP_STYLE.ZAMBA
-			}));
+		});
+		await this.elements.arresto.startAnimation({
+			lengthS: lengthS / 4,
+			beats: beats / 4,
+			direction: DIRECTIONS.BACKWARD,
+			startPart: 1,
+			stopPart: 0,
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA
+		});
+		await this.elements.arresto.startAnimation({
+			lengthS: lengthS / 4,
+			beats: beats / 4,
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA,
+			firstLeg: LEGS.RIGHT
+		});
+		await this.elements.arrestoBack.startAnimation({
+			lengthS: lengthS / 4,
+			beats: beats / 4,
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.ZAMBA
+		});
 	}
 
-	mediaVueltaCoronacion(lengthS, manPosition, beats) {
+	async mediaVueltaCoronacion(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.mediaVueltaCoronacion.drawPath(manPosition);
 
-		return this.elements.mediaVueltaCoronacion.startAnimation({
+		await this.elements.mediaVueltaCoronacion.startAnimation({
 			lengthS: lengthS / 7 * 4,
 			beats: beats / 7 * 4,
 			figureHands: FIGURE_HANDS.PANUELO,
 			stepStyle: STEP_STYLE.ZAMBA,
 			startPart: 0,
 			stopPart: 0.6
-		})
-			.then(() => this.elements.mediaVueltaCoronacion.startAnimation({
-				lengthS: lengthS / 7 * 3,
-				beats: beats / 7 * 3,
-				figureHands: FIGURE_HANDS.PANUELO,
-				stepStyle: STEP_STYLE.SIMPLE,
-				startPart: 0.6,
-				stopPart: 1
-			}));
+		});
+		await this.elements.mediaVueltaCoronacion.startAnimation({
+			lengthS: lengthS / 7 * 3,
+			beats: beats / 7 * 3,
+			figureHands: FIGURE_HANDS.PANUELO,
+			stepStyle: STEP_STYLE.SIMPLE,
+			startPart: 0.6,
+			stopPart: 1
+		});
 	}
 }

@@ -98,14 +98,25 @@ export default class Chacarera4Animation extends Dance4Animation {
 		};
 	}
 
-	avance(lengthS, manPosition, beats) {
+	async avance(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.avance.drawPath(manPosition);
 		const partSeconds = lengthS / 2;
 		const partBeats = beats / 2;
 
-		return this.elements.avance.startAnimation({lengthS: partSeconds, beats: partBeats, startPart: 0, stopPart: 0.5})
-			.then(() => this.elements.avance.startAnimation({lengthS: partSeconds, beats: partBeats, direction: DIRECTIONS.BACKWARD, startPart: 0.5, stopPart: 1}));
+		await this.elements.avance.startAnimation({
+			lengthS: partSeconds,
+			beats: partBeats,
+			startPart: 0,
+			stopPart: 0.5
+		});
+		await this.elements.avance.startAnimation({
+			lengthS: partSeconds,
+			beats: partBeats,
+			direction: DIRECTIONS.BACKWARD,
+			startPart: 0.5,
+			stopPart: 1
+		});
 	}
 
 	giro(lengthS, manPosition, beats) {
@@ -116,7 +127,7 @@ export default class Chacarera4Animation extends Dance4Animation {
 		return this.elements.giro.fullAnimation({lengthS, beats, manPosition, direction: DIRECTIONS.BACKWARD, startPart: 1, stopPart: 0});
 	}
 
-	vuelta(lengthS, manPosition, beats) {
+	async vuelta(lengthS, manPosition, beats) {
 		this.clearPaths();
 		this.elements.vueltaGradient.drawPath(manPosition);
 		this.elements.vueltaGradient.startAnimation({lengthS, beats});
@@ -124,13 +135,18 @@ export default class Chacarera4Animation extends Dance4Animation {
 		const partSeconds = lengthS / 2;
 		const partBeats = beats / 2;
 
-		// TODO: Promise
 		this.elements.mediaVuelta.drawPath(manPosition, true);
-		return this.elements.mediaVuelta.startAnimation({lengthS: partSeconds, beats: partBeats})
-			.then(() => {
-				this.elements.mediaVuelta.drawPath(getOppositePosition(manPosition), true);
-				return this.elements.mediaVuelta.startAnimation({lengthS: partSeconds, beats: partBeats, direction: DIRECTIONS.FORWARD});
-			});
+		await this.elements.mediaVuelta.startAnimation({
+			lengthS: partSeconds,
+			beats: partBeats
+		});
+
+		this.elements.mediaVuelta.drawPath(getOppositePosition(manPosition), true);
+		await this.elements.mediaVuelta.startAnimation({
+			lengthS: partSeconds,
+			beats: partBeats,
+			direction: DIRECTIONS.FORWARD
+		});
 	}
 
 	mediaVuelta(lengthS, manPosition, beats) {
@@ -138,8 +154,16 @@ export default class Chacarera4Animation extends Dance4Animation {
 		this.elements.vueltaGradient.drawPath(manPosition);
 		this.elements.mediaVuelta.drawPath(manPosition, true);
 		return Promise.all([
-			this.elements.vueltaGradient.startAnimation({lengthS, beats, startPart: 0, stopPart: 0.5}),
-			this.elements.mediaVuelta.startAnimation({lengthS, beats})
+			this.elements.vueltaGradient.startAnimation({
+				lengthS,
+				beats,
+				startPart: 0,
+				stopPart: 0.5
+			}),
+			this.elements.mediaVuelta.startAnimation({
+				lengthS,
+				beats
+			})
 		]);
 	}
 

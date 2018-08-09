@@ -45,6 +45,7 @@ export default class SingleElement {
 		this.position = position;
 		this.path = this.animation.path(this.pathStrings[position], this.gender, hidden);
 		this.pathLength = this.path.getTotalLength() - 1;
+		return this;
 	}
 
 	/**
@@ -60,6 +61,7 @@ export default class SingleElement {
 	 */
 	setAngle(value) {
 		this.angle = value;
+		return this;
 	}
 
 	/**

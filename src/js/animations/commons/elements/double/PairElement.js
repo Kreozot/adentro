@@ -22,6 +22,7 @@ export default class PairElement {
 		this.animation.manPosition = manPosition;
 		this.manDanceAnimationElement.drawPath(manPosition, transparent);
 		this.womanDanceAnimationElement.drawPath(getOppositePosition(manPosition), transparent);
+		return this;
 	}
 
 	/**
@@ -38,6 +39,7 @@ export default class PairElement {
 	setAngle(value) {
 		this.manDanceAnimationElement.setAngle(value);
 		this.womanDanceAnimationElement.setAngle(value);
+		return this;
 	}
 
 	/**
@@ -48,6 +50,7 @@ export default class PairElement {
 	setAngles(manValue, womanValue) {
 		this.manDanceAnimationElement.setAngle(manValue);
 		this.womanDanceAnimationElement.setAngle(womanValue);
+		return this;
 	}
 
 	/**
