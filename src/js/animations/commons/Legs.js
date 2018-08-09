@@ -4,8 +4,6 @@ import {LEGS, STEP_STYLE} from './const';
 // Амплитуда шага в пикселях (в одну сторону)
 const FIGURE_STEP_AMPLITUDE = 13;
 
-let counter = 0 ;
-
 export default class Legs {
 	constructor(animations) {
 		this.animations = animations;
@@ -25,8 +23,6 @@ export default class Legs {
 		easing = mina.linear
 	}) {
 		return new Promise((resolve) => {
-			const animIndex = counter++;
-			console.log('created', animIndex);
 			this.animations.push(Snap.animate(
 				transformFrom,
 				transformTo,
@@ -34,7 +30,6 @@ export default class Legs {
 				duration,
 				easing,
 				() => {
-					console.log('finished', animIndex);
 					resolve();
 				})
 			);
@@ -192,20 +187,20 @@ export default class Legs {
 		const stepDuration = timeLength / beats / 3;
 		// Если последний элемент, анимируем меньше на два шага (на 2/3 базового шага)
 		const steps = isLastElement ? (beats * 3 - 2) : (beats * 3);
-		this.animateLegsRepeat(figure, firstLeg, stepDuration, steps);
+		return this.animateLegsRepeat(figure, firstLeg, stepDuration, steps);
 	}
 
 	animateFigureTimeZamba(figure, timeLength, beats, firstLeg) {
-		this.animateLegsRepeatZamba(figure, firstLeg, timeLength / beats / 3, beats);
+		return this.animateLegsRepeatZamba(figure, firstLeg, timeLength / beats / 3, beats);
 	}
 
 	animateFigureTimeSimple(figure, timeLength, beats, firstLeg) {
-		this.animateLegsRepeat(figure, firstLeg, timeLength / beats, beats);
+		return this.animateLegsRepeat(figure, firstLeg, timeLength / beats, beats);
 	}
 
 	/**
 	 * Анимация фигур в такт
-	 * @param  {Ojbect}  figure     Объект фигуры
+	 * @param  {Object}  figure     Объект фигуры
 	 * @param  {Number}  timeLength Длительность отрезка
 	 * @param  {Number}  beats      Количество тактов отрезка
 	 * @param  {Number}  stepStyle  Стиль шага
@@ -226,16 +221,13 @@ export default class Legs {
 		}
 		switch (stepStyle) {
 			case STEP_STYLE.ZAPATEO:
-				this.animateFigureTimeZapateo(figure, timeLength, beats);
-				break;
+				return this.animateFigureTimeZapateo(figure, timeLength, beats);
 			case STEP_STYLE.SIMPLE:
-				this.animateFigureTimeSimple(figure, timeLength, beats, firstLeg);
-				break;
+				return this.animateFigureTimeSimple(figure, timeLength, beats, firstLeg);
 			case STEP_STYLE.ZAMBA:
-				this.animateFigureTimeZamba(figure, timeLength, beats, firstLeg);
-				break;
+				return this.animateFigureTimeZamba(figure, timeLength, beats, firstLeg);
 			default:
-				this.animateFigureTimeBasic(figure, timeLength, beats, firstLeg, isLastElement);
+				return this.animateFigureTimeBasic(figure, timeLength, beats, firstLeg, isLastElement);
 		}
 	}
 
