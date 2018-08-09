@@ -47,13 +47,18 @@ export default class Legs {
 		return leg === LEGS.LEFT ? LEGS.RIGHT : LEGS.LEFT;
 	}
 
-	animateLegsRepeat(figure, legStr, stepDuration, stepsLeft) {
+	async animateLegsRepeat({
+		figure,
+		legStr,
+		stepDuration,
+		stepsLeft
+	}) {
 		if (stepsLeft < 1) {
 			return;
 		}
 		const oppositeLegStr = this.getOppositeLeg(legStr);
 
-		return Promise.all([
+		await Promise.all([
 			this.animateLeg({
 				figure,
 				legStr,
@@ -68,11 +73,21 @@ export default class Legs {
 				transformFrom: -FIGURE_STEP_AMPLITUDE,
 				transformTo: FIGURE_STEP_AMPLITUDE
 			})
-		])
-			.then(() => this.animateLegsRepeat(figure, oppositeLegStr, stepDuration, stepsLeft - 1));
+		]);
+		await this.animateLegsRepeat({
+			figure,
+			legStr: oppositeLegStr,
+			stepDuration,
+			stepsLeft: stepsLeft - 1
+		});
 	}
 
-	animateLegsRepeatZapateo(figure, legStr, stepDuration, stepsLeft) {
+	animateLegsRepeatZapateo({
+		figure,
+		legStr,
+		stepDuration,
+		stepsLeft
+	}) {
 		if (stepsLeft < 1) {
 			return Promise.resolve();
 		}
@@ -131,16 +146,26 @@ export default class Legs {
 					transformTo: FIGURE_STEP_AMPLITUDE
 				});
 			})
-			.then(() => this.animateLegsRepeatZapateo(figure, oppositeLegStr, stepDuration, stepsLeft - 1));
+			.then(() => this.animateLegsRepeatZapateo({
+				figure,
+				legStr: oppositeLegStr,
+				stepDuration,
+				stepsLeft: stepsLeft - 1
+			}));
 	}
 
-	animateLegsRepeatZamba(figure, legStr, stepDuration, stepsLeft) {
+	async animateLegsRepeatZamba({
+		figure,
+		legStr,
+		stepDuration,
+		stepsLeft
+	}) {
 		if (stepsLeft < 1) {
 			return Promise.resolve();
 		}
 		const oppositeLegStr = this.getOppositeLeg(legStr);
 
-		return Promise.all([
+		await Promise.all([
 			this.animateLeg({
 				figure,
 				legStr,
@@ -155,28 +180,38 @@ export default class Legs {
 				transformFrom: -FIGURE_STEP_AMPLITUDE,
 				transformTo: FIGURE_STEP_AMPLITUDE,
 			})
-		])
-			.then(() => Promise.all([
-				this.animateLeg({
-					figure,
-					legStr: oppositeLegStr,
-					duration: stepDuration,
-					transformFrom: FIGURE_STEP_AMPLITUDE,
-					transformTo: -FIGURE_STEP_AMPLITUDE,
-				}),
-				this.animateLeg({
-					figure,
-					legStr,
-					duration: stepDuration,
-					transformFrom: -FIGURE_STEP_AMPLITUDE,
-					transformTo: FIGURE_STEP_AMPLITUDE,
-				})
-			]))
-			.then(() => this.animateLegsRepeatZamba(figure, legStr, stepDuration, stepsLeft - 1));
+		]);
+		await Promise.all([
+			this.animateLeg({
+				figure,
+				legStr: oppositeLegStr,
+				duration: stepDuration,
+				transformFrom: FIGURE_STEP_AMPLITUDE,
+				transformTo: -FIGURE_STEP_AMPLITUDE,
+			}),
+			this.animateLeg({
+				figure,
+				legStr,
+				duration: stepDuration,
+				transformFrom: -FIGURE_STEP_AMPLITUDE,
+				transformTo: FIGURE_STEP_AMPLITUDE,
+			})
+		]);
+		await this.animateLegsRepeatZamba({
+			figure,
+			legStr,
+			stepDuration,
+			stepsLeft: stepsLeft - 1
+		});
 	}
 
 	animateFigureTimeZapateo(figure, timeLength, beats) {
-		return this.animateLegsRepeatZapateo(figure, LEGS.RIGHT, timeLength / beats / 6, beats)
+		return this.animateLegsRepeatZapateo({
+			figure,
+			legStr: LEGS.RIGHT,
+			stepDuration: timeLength / beats / 6,
+			stepsLeft: beats
+		})
 			.finally(() => {
 				$(`.kick`, figure.node)
 					.addClass(`invisible`);
@@ -187,15 +222,30 @@ export default class Legs {
 		const stepDuration = timeLength / beats / 3;
 		// Если последний элемент, анимируем меньше на два шага (на 2/3 базового шага)
 		const steps = isLastElement ? (beats * 3 - 2) : (beats * 3);
-		return this.animateLegsRepeat(figure, firstLeg, stepDuration, steps);
+		return this.animateLegsRepeat({
+			figure,
+			legStr: firstLeg,
+			stepDuration,
+			stepsLeft: steps
+		});
 	}
 
 	animateFigureTimeZamba(figure, timeLength, beats, firstLeg) {
-		return this.animateLegsRepeatZamba(figure, firstLeg, timeLength / beats / 3, beats);
+		return this.animateLegsRepeatZamba({
+			figure,
+			legStr: firstLeg,
+			stepDuration: timeLength / beats / 3,
+			stepsLeft: beats
+		});
 	}
 
 	animateFigureTimeSimple(figure, timeLength, beats, firstLeg) {
-		return this.animateLegsRepeat(figure, firstLeg, timeLength / beats, beats);
+		return this.animateLegsRepeat({
+			figure,
+			legStr: firstLeg,
+			stepDuration: timeLength / beats,
+			stepsLeft: beats
+		});
 	}
 
 	/**
