@@ -16,9 +16,8 @@ export const DIRECTIONS = {
 	FORWARD: 0,
 	// Спиной по траектории
 	BACKWARD: 1,
-	// Головой в одном направлении вне зависимости от траектории
-	STRAIGHT_FORWARD: 2,
-	FROM_END_TO_START: 3,
+	// Головой в исходном направлении вне зависимости от траектории
+	STRAIGHT_FORWARD: 2
 };
 
 export const FIGURE_HANDS = {

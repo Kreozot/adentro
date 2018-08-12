@@ -255,7 +255,7 @@ export default class DanceAnimation {
 		figure.node.parentNode.appendChild(figure.node);
 
 		let angle = startAngle;
-		if ((direction === DIRECTIONS.BACKWARD) || (direction === DIRECTIONS.FROM_END_TO_START)) {
+		if (direction === DIRECTIONS.BACKWARD) {
 			angle = angle - 180;
 		}
 		if (!path) {
@@ -306,12 +306,7 @@ export default class DanceAnimation {
 			this.animations.push(Snap.animate(
 				startLen,
 				stopLen,
-				function animationFunction(value) { //this - animation element
-					if (direction === DIRECTIONS.FROM_END_TO_START) {
-						value = startLen + stopLen - value;
-					}
-					transformAtLength(value);
-				},
+				transformAtLength,
 				timeLengthForPath,
 				easing,
 				resolve)
