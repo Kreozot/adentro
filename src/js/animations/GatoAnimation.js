@@ -28,14 +28,14 @@ export async function zarandeoAnimation(lengthS, manPosition, beats, conPanuelo)
 	const forwardOptions = {
 		...partOptions,
 		direction: DIRECTIONS.FORWARD,
-		startPart: 0,
+		startPart: 0.001,
 		stopPart: 0.499
 	};
 	const backwardOptions = {
 		...partOptions,
 		direction: DIRECTIONS.BACKWARD,
 		startPart: 0.501, // Исправление погрешности svg-кривой
-		stopPart: 1
+		stopPart: 0.999
 	};
 
 	await this.elements.zarandeo.startAnimation(forwardOptions);

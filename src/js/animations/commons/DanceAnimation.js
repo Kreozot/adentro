@@ -2,6 +2,8 @@ import Promise from 'bluebird';
 
 require('styles/animation.scss');
 import svg from 'js/animations/svg';
+import _get from 'lodash/get';
+import objectHash from 'object-hash';
 import {normalizeAngle, smoothRotationAngle} from 'js/animations/commons/angles';
 import {getFigureCenter} from 'js/animations/commons/utils';
 
@@ -24,6 +26,7 @@ export default class DanceAnimation {
 	constructor(id) {
 		this.svg = new Snap('#' + id);
 
+		this.cache = {};
 		this.animations = [];
 		this.paths = [];
 		this.paused = false;
@@ -47,10 +50,15 @@ export default class DanceAnimation {
 		}
 	}
 
+	clearCache() {
+		this.cache = {};
+	}
+
 	clear() {
 		this.paused = false;
 		this.hideFigures();
 		this.clearPaths();
+		this.firstRun = true;
 		this.manPosition = 'left';
 	}
 
@@ -144,33 +152,45 @@ export default class DanceAnimation {
 	 * @param  {Object} figure     Объект фигуры
 	 * @param  {Object} pairFigure Объект парной фигуры
 	 */
-	rotateTopToPairFigure(figure, pairFigure = null) {
+	rotateTopToPairFigure({
+		figure,
+		pairFigure = null,
+		transformCache,
+		smoothRotation = true
+	}) {
 		// return;
 		if (pairFigure) {
-			const figureCenter = getFigureCenter(figure);
-			const pairFigureCenter = getFigureCenter(pairFigure);
-			const lengthX = figureCenter[0] - pairFigureCenter[0];
-			const lengthY = figureCenter[1] - pairFigureCenter[1];
+			if (!transformCache.figureTopAngle) {
+				const figureCenter = getFigureCenter(figure);
+				const pairFigureCenter = getFigureCenter(pairFigure);
+				const lengthX = figureCenter[0] - pairFigureCenter[0];
+				const lengthY = figureCenter[1] - pairFigureCenter[1];
 
-			// Угол между векторами фигур
-			const angleBetweenFigures = Math.atan(lengthY / lengthX) * 180 / Math.PI;
-			// Угол, корректирующий направление вектора в зависимости от того, какая фигура правее
-			const directionFixAngle = lengthX > 0 ? 90 : -90;
-			// Угол верха фигуры относительно остальной фигуры
-			let relativeAngle = normalizeAngle(angleBetweenFigures - figure.angle + directionFixAngle, -180);
-			let rotateDirection = null;
-			if (relativeAngle > FIGURE_TOP_ANGLE_MAX) {
-				relativeAngle = FIGURE_TOP_ANGLE_MAX;
-				rotateDirection = ROTATE.COUNTERCLOCKWISE;
-			} else if (relativeAngle < -FIGURE_TOP_ANGLE_MAX) {
-				relativeAngle = -FIGURE_TOP_ANGLE_MAX;
-				rotateDirection = ROTATE.CLOCKWISE;
+				// Угол между векторами фигур
+				const angleBetweenFigures = Math.atan(lengthY / lengthX) * 180 / Math.PI;
+				// Угол, корректирующий направление вектора в зависимости от того, какая фигура правее
+				const directionFixAngle = lengthX > 0 ? 90 : -90;
+				// Угол верха фигуры относительно остальной фигуры
+				let newTopAngle = normalizeAngle(angleBetweenFigures - figure.angle + directionFixAngle, -180);
+				let rotateDirection = null;
+				if (newTopAngle > FIGURE_TOP_ANGLE_MAX) {
+					newTopAngle = FIGURE_TOP_ANGLE_MAX;
+					rotateDirection = ROTATE.COUNTERCLOCKWISE;
+				} else if (newTopAngle < -FIGURE_TOP_ANGLE_MAX) {
+					newTopAngle = -FIGURE_TOP_ANGLE_MAX;
+					rotateDirection = ROTATE.CLOCKWISE;
+				}
+				transformCache.figureTopAngle = smoothRotation
+					? smoothRotationAngle(newTopAngle, figure.top.angle, rotateDirection)
+					: newTopAngle;
+			} else {
+				console.log('transformCache.figureTopAngle from cache');
 			}
-			relativeAngle = smoothRotationAngle(relativeAngle, figure.top.angle, rotateDirection);
+			const figureTopAngle = transformCache.figureTopAngle;
 
-			if (figure.top.angle !== relativeAngle) {
-				figure.top.transform(`r${relativeAngle}`);
-				figure.top.angle = relativeAngle;
+			if (figure.top.angle !== figureTopAngle) {
+				figure.top.transform(`r${figureTopAngle}`);
+				figure.top.angle = figureTopAngle;
 			}
 		} else {
 			figure.top.transform('r0');
@@ -196,18 +216,27 @@ export default class DanceAnimation {
 		angle,
 		pairFigure,
 		rotateDirection,
-		dontLookAtPair
+		dontLookAtPair,
+		transformCache,
+		smoothRotation = true
 	}) {
 		angle = normalizeAngle(angle);
 		if (!figure.angle) {
 			figure.angle = angle;
 		}
-		figure.angle = smoothRotationAngle(angle, figure.angle, rotateDirection);
+		figure.angle = smoothRotation
+			? smoothRotationAngle(angle, figure.angle, rotateDirection)
+			: angle;
 		figure.angle = normalizeAngle(figure.angle);
 		figure.transform(`t${x},${y}r${Math.floor(figure.angle)}`);
 
 		if (!dontLookAtPair) {
-			this.rotateTopToPairFigure(figure, pairFigure);
+			this.rotateTopToPairFigure({
+				figure,
+				pairFigure,
+				transformCache,
+				smoothRotation
+			});
 		}
 	}
 
@@ -233,31 +262,44 @@ export default class DanceAnimation {
 	 * @param  {Number} direction  Константа, определяющая направление движения
 	 * @param  {[type]} easing     Snap mina easing - объект, определяющий характер движения (линейный по-умолчанию)
 	 */
-	animateFigurePath({
-		figure,
-		startAngle = 90,
-		path,
-		startLen,
-		stopLen,
-		timeLength,
-		beats,
-		direction = DIRECTIONS.FORWARD,
-		easing = mina.linear,
-		figureHands = FIGURE_HANDS.CASTANETAS,
-		pairFigure,
-		dontLookAtPair,
-		isLastElement,
-		stepStyle = STEP_STYLE.BASIC,
-		firstLeg = LEGS.LEFT,
-		rotateDirection
-	}) {
-		// Перенос фигура на верх DOM-а (TODO: Исправить на группировку)
+	animateFigurePath(params) {
+		const {
+			figure,
+			startAngle = 90,
+			path,
+			startLen,
+			stopLen,
+			timeLength,
+			beats,
+			direction = DIRECTIONS.FORWARD,
+			easing = mina.linear,
+			figureHands = FIGURE_HANDS.CASTANETAS,
+			pairFigure,
+			dontLookAtPair,
+			isLastElement,
+			stepStyle = STEP_STYLE.BASIC,
+			firstLeg = LEGS.LEFT,
+			rotateDirection
+		} = params;
+		const paramsHash = objectHash({
+			...params,
+			figure: figure.node.id,
+			path: path.node.outerHTML,
+			pairFigure: _get(pairFigure, 'node.id', null)
+		});
+		if (!this.cache[paramsHash]) {
+			this.cache[paramsHash] = {};
+		}
+		const cache = this.cache[paramsHash];
+		console.log(paramsHash);
+
+		// Перенос фигуры на верх DOM-а (TODO: Исправить на группировку)
 		figure.node.parentNode.appendChild(figure.node);
 
-		let angle = startAngle;
-		if (direction === DIRECTIONS.BACKWARD) {
-			angle = angle - 180;
-		}
+		const angle = direction === DIRECTIONS.BACKWARD
+			? startAngle - 180
+			: startAngle;
+
 		if (!path) {
 			throw new Error('path is not drawn yet');
 		}
@@ -272,10 +314,27 @@ export default class DanceAnimation {
 			if (length > pathLength) {
 				length = length - pathLength;
 			}
-			const movePoint = path.getPointAtLength(length);
+			length = Math.round(length);
+
+			if (!cache[length]) {
+				cache[length] = {};
+			}
+			const transformCache = cache[length];
+
+			if (!transformCache.pointAtLength) {
+				const pointAtLength = path.getPointAtLength(length);
+				transformCache.pointAtLength = {
+					...pointAtLength,
+					x: Math.round(pointAtLength.x),
+					y: Math.round(pointAtLength.y),
+				};
+			}
+			const movePoint = transformCache.pointAtLength;
+
 			const finalAngle = direction === DIRECTIONS.STRAIGHT_FORWARD
 				? angle
 				: angle + movePoint.alpha;
+
 			this.positionFigure({
 				figure,
 				x: movePoint.x,
@@ -284,8 +343,12 @@ export default class DanceAnimation {
 				pairFigure,
 				dontLookAtPair,
 				rotateDirection,
-				direction
+				direction,
+				transformCache,
+				smoothRotation: !this.firstRun
 			});
+
+			this.firstRun = false;
 		};
 
 		transformAtLength(startLen);
@@ -309,8 +372,8 @@ export default class DanceAnimation {
 				transformAtLength,
 				timeLengthForPath,
 				easing,
-				resolve)
-			);
+				resolve
+			));
 
 			this.legs.animateFigureTime({
 				figure,
@@ -408,6 +471,7 @@ export default class DanceAnimation {
 		this.positionFigure({
 			...coords,
 			figure,
+			smoothRotation: !this.firstRun
 		});
 		figure.removeClass('invisible');
 		$('.leg', figure.node)
