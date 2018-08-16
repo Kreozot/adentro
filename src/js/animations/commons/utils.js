@@ -37,6 +37,10 @@ export function getFigureCenter(figure) {
 	// Исправлено на getBoundingClientRect из-за 10-кратной разницы производительности
 	// const bBox = figure.getBBox();
 	// return [bBox.cx, bBox.cy];
-	const rect = figure.node.getBoundingClientRect();
-	return [rect.x + rect.width / 2, rect.y + rect.height / 2];
+	if (figure.coords) {
+		return figure.coords;
+	} else {
+		const rect = figure.node.getBoundingClientRect();
+		return [rect.x + rect.width / 2, rect.y + rect.height / 2];
+	}
 }

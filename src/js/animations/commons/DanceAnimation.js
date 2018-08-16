@@ -204,6 +204,7 @@ export default class DanceAnimation {
 		}
 		figure.angle = smoothRotationAngle(angle, figure.angle, rotateDirection);
 		figure.angle = normalizeAngle(figure.angle);
+		figure.coords = [x, y];
 		figure.transform(`t${x},${y}r${Math.floor(figure.angle)}`);
 
 		if (!dontLookAtPair) {
