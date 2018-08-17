@@ -1,7 +1,6 @@
 import plyr from 'plyr';
 require('plyr/dist/plyr.css');
 import {getElement, getElementAfter} from './timing/timing';
-import {enablePreloaderInItem} from './loading/preloader';
 
 export default class Player {
 	constructor(main) {
@@ -27,10 +26,6 @@ export default class Player {
 
 	initEvents() {
 		this.player.on('playing', () => {
-			if (this.player.getCurrentTime() === 0) {
-				const $animationContainer = $('#animation_block');
-			}
-
 			const animation = this.main.animationLoader.animation;
 			this.interval = window.setInterval(() => {
 				animation.resume();
