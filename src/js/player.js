@@ -29,7 +29,6 @@ export default class Player {
 		this.player.on('playing', () => {
 			if (this.player.getCurrentTime() === 0) {
 				const $animationContainer = $('#animation_block');
-				enablePreloaderInItem($animationContainer);
 			}
 
 			const animation = this.main.animationLoader.animation;
