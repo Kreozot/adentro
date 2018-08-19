@@ -1,4 +1,4 @@
-import plyr from 'plyr';
+import Plyr from 'plyr';
 require('plyr/dist/plyr.css');
 import {getElement, getElementAfter} from './timing/timing';
 
@@ -6,15 +6,15 @@ export default class Player {
 	constructor(main) {
 		this.main = main;
 		this.interval = null;
-		this.player = plyr.setup({
+		this.player = new Plyr('#player', {
 			iconUrl: '/plyr.svg'
-		})[0];
+		});
 		this.scheme = [];
 		this.currentElement = null;
 	}
 
 	getAndShowCurrentElement() {
-		const time = this.player.getCurrentTime();
+		const time = this.player.currentTime;
 		const element = getElement(this.scheme, time);
 		if (this.currentElement !== element.name) {
 			this.currentElement = element.name;
@@ -25,21 +25,21 @@ export default class Player {
 	}
 
 	initEvents() {
-		this.player.on('playing', () => {
+		this.player.once('playing', () => {
 			const animation = this.main.animationLoader.animation;
 			this.interval = window.setInterval(() => {
 				animation.resume();
 				this.getAndShowCurrentElement();
 			}, 10);
 		});
-		this.player.on('ended', () => {
+		this.player.once('ended', () => {
 			window.clearInterval(this.interval);
 			this.main.hideCurrentElement();
 			this.currentElement = null;
 		});
-		this.player.on('pause', () => {
+		this.player.once('pause', () => {
 			window.clearInterval(this.interval);
-			if ((this.player.isPaused()) && (this.player.getCurrentTime() !== 0)) {
+			if (this.player.paused && (this.player.currentTime !== 0)) {
 				this.main.animationLoader.animation.pause();
 			}
 		});
@@ -50,14 +50,14 @@ export default class Player {
 	 * @param  {Object} musicDef Описание композиции
 	 */
 	loadMusicSchema(musicDef, scheme) {
-		this.player.source({
+		this.player.source = {
 			type: 'audio',
 			title: musicDef.title,
 			sources: [{
 				src: musicDef.file,
 				type: 'audio/mp3'
 			}]
-		});
+		};
 		this.scheme = {...musicDef.schema};
 
 		// Смещаем все элементы на треть базового шага для того, чтобы успевала анимация
@@ -85,11 +85,11 @@ export default class Player {
 	playElement(element) {
 		const time = this.scheme[element];
 		this.main.animationLoader.animation.clear();
-		this.player.seek(time);
+		this.player.currentTime = time;
 		this.player.play();
 	}
 
 	get currentTime() {
-		return this.player.getCurrentTime();
+		return this.player.currentTime;
 	}
 }

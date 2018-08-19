@@ -35,10 +35,11 @@ var webpackConfig = [
 			path: paths.dist.js,
 			filename: '[name].js'
 		},
-		devtool: 'source-map',
+		devtool: 'eval',
+		// devtool: 'source-map',
 		module: {
 			loaders: [
-				{test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&presets[]=es2015&presets[]=stage-2'},
+				{test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&presets[]=es2015&presets[]=stage-2&sourceMap=true'},
 				{test: /\.ejs$/, loader: 'ejs-compiled'},
 				{test: /\.json$/, loader: 'json'},
 				{test: /\.yaml$/, loader: 'json!yaml'},

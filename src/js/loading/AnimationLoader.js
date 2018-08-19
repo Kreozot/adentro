@@ -1,7 +1,6 @@
 import contentSwitch from './content_switch';
 import animationLinksTemplate from '../templates/animationLinks.ejs';
 import animationBlockTemplate from '../templates/animationBlock.ejs';
-import {enablePreloaderInItem} from './preloader';
 
 const minAnimationWidth = 600;
 const maxAnimationHeight = 325;
@@ -25,13 +24,8 @@ export default class AnimationLoader {
 	 * @param  {Object} AnimationClass  Класс анимации
 	 * @param  {Object} turnOnPreloader  Нужно ли включать preloader для блока с анимацией
 	 */
-	loadAnimation(AnimationClass, turnOnPreloader = false) {
-		const $animationContainer = $('#animation_block');
+	loadAnimation(AnimationClass) {
 		const $animationBlock = $('#animation');
-
-		if (turnOnPreloader) {
-			enablePreloaderInItem($animationContainer);
-		}
 
 		if (this.animation) {
 			this.animation.clear();
