@@ -1,9 +1,10 @@
 import Promise from 'bluebird';
 import EscondidoAnimation from './EscondidoAnimation';
 import {zapateoAnimation, zarandeoAnimation} from './GatoAnimation';
+import PairElement from './commons/elements/double/PairElement';
 import RotatePairElement from './commons/elements/double/RotatePairElement';
 import {getOppositePosition} from './commons/utils';
-import {FIGURE_HANDS} from './commons/const';
+import {FIGURE_HANDS, DIRECTIONS} from './commons/const';
 import svg from 'js/animations/svg';
 
 export default class RemedioAnimation extends EscondidoAnimation {
@@ -21,7 +22,14 @@ export default class RemedioAnimation extends EscondidoAnimation {
 			contragiroCoronacion: new RotatePairElement(this, {
 				left: svg.remedio.coronacion_left,
 				right: svg.remedio.coronacion_right
-			}, -360)
+			}, -360),
+
+			avance: new PairElement(this, {
+				left: svg.escondido.zarandeo_left,
+				top: svg.escondido.zarandeo_top,
+				right: svg.escondido.zarandeo_right,
+				bottom: svg.escondido.zarandeo_bottom
+			}),
 		};
 		this.zapateoAnimation = zapateoAnimation.bind(this);
 		this.zarandeoAnimation = zarandeoAnimation.bind(this);
@@ -190,7 +198,7 @@ export default class RemedioAnimation extends EscondidoAnimation {
 			startAngleWoman,
 			startPart: 0,
 			stopPart: 0.5
-		})
+		});
 		await this.elements.contragiroCoronacion.startAnimation({
 			lengthS: lengthS / 2,
 			beats: beats / 2,
@@ -199,6 +207,27 @@ export default class RemedioAnimation extends EscondidoAnimation {
 			startPart: 0.5,
 			stopPart: 1,
 			isLastElement: true
+		});
+	}
+
+	async avance(lengthS, manPosition, beats) {
+		this.clearPaths();
+		this.elements.avance.drawPath(manPosition);
+		const partOptions = {
+			lengthS: lengthS / 2,
+			beats: beats / 2
+		};
+
+		await this.elements.avance.startAnimation({
+			...partOptions,
+			startPart: 0,
+			stopPart: 0.499
+		});
+		await this.elements.avance.startAnimation({
+			...partOptions,
+			direction: DIRECTIONS.BACKWARD,
+			startPart: 0.501,
+			stopPart: 1
 		});
 	}
 }
