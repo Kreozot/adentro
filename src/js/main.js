@@ -182,7 +182,6 @@ class Adentro {
 		this.renderScheme(scheme);
 
 		this.player.loadMusicSchema(musicSchema, scheme);
-		this.player.initEvents();
 
 		contentSwitch.clearContent();
 

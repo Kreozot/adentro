@@ -11,6 +11,7 @@ export default class Player {
 		});
 		this.scheme = [];
 		this.currentElement = null;
+		this.initEvents();
 	}
 
 	getAndShowCurrentElement() {
@@ -25,19 +26,20 @@ export default class Player {
 	}
 
 	initEvents() {
-		this.player.once('playing', () => {
+		this.player.on('playing', () => {
+			window.clearInterval(this.interval);
 			const animation = this.main.animationLoader.animation;
 			this.interval = window.setInterval(() => {
 				animation.resume();
 				this.getAndShowCurrentElement();
 			}, 10);
 		});
-		this.player.once('ended', () => {
+		this.player.on('ended', () => {
 			window.clearInterval(this.interval);
 			this.main.hideCurrentElement();
 			this.currentElement = null;
 		});
-		this.player.once('pause', () => {
+		this.player.on('pause', () => {
 			window.clearInterval(this.interval);
 			if (this.player.paused && (this.player.currentTime !== 0)) {
 				this.main.animationLoader.animation.pause();
