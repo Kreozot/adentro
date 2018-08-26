@@ -79,16 +79,13 @@ class Adentro {
 
 		this.markCurrentElementOnSchema(elementId);
 		// Запускаем соответствующую анимацию
-		const domElement = $('#' + elementId);
-		const visualizationFuncName = domElement.data('visualization');
-		const manPosition = domElement.data('manposition');
-		const beats = domElement.data('beats');
-		if (visualizationFuncName) {
-			const visualizationFunc = this.animationLoader.animation[visualizationFuncName];
+		const {visualization, manPosition, beats} = this.schemeMap[elementId];
+		if (visualization) {
+			const visualizationFunc = this.animationLoader.animation[visualization];
 			if (visualizationFunc) {
 				visualizationFunc.call(this.animationLoader.animation, seconds, manPosition, beats);
 			} else {
-				throw `Не найдена функция анимации ${visualizationFuncName}`;
+				throw `Не найдена функция анимации ${visualization}`;
 			}
 		}
 	}
@@ -144,6 +141,20 @@ class Adentro {
 		}));
 	}
 
+	getSchemeMap(scheme) {
+		return scheme.reduce((result, part) => {
+			return {
+				...result,
+				...part.reduce((partResult, element) => {
+					return {
+						...partResult,
+						[element.id]: element
+					};
+				}, {})
+			};
+		}, {});
+	}
+
 	renderScheme(scheme, editorMode = false) {
 		$('#schemaDiv').html(schemeTemplate({scheme}));
 		this.adaptiveLineHeight();
@@ -173,10 +184,11 @@ class Adentro {
 		this.showMusicLinks(schemeParams.music, musicId);
 		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
 
-		const scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
-		this.renderScheme(scheme);
+		this.scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
+		this.schemeMap = this.getSchemeMap(this.scheme);
+		this.renderScheme(this.scheme);
 
-		this.player.loadMusicSchema(musicSchema, scheme);
+		this.player.loadMusicSchema(musicSchema, this.scheme);
 
 		contentSwitch.clearContent();
 
@@ -205,14 +217,15 @@ class Adentro {
 		this.showMusicLinks(schemeParams.music, musicId, true);
 		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
 
-		const scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
-		this.renderScheme(scheme, true);
+		this.scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
+		this.schemeMap = this.getSchemeMap(this.scheme);
+		this.renderScheme(this.scheme, true);
 
-		this.player.loadMusicSchema(musicSchema, scheme);
+		this.player.loadMusicSchema(musicSchema, this.scheme);
 
 		console.log('editor mode on');
 		$('#animationDiv').html('');
-		const timingGenerator = new TimingGenerator(this, scheme);
+		const timingGenerator = new TimingGenerator(this, this.scheme);
 
 		$('html').keypress((event) => {
 			if (event.which == KEY_SPACE) {
