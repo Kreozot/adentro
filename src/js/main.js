@@ -86,14 +86,7 @@ class Adentro {
 		if (visualizationFuncName) {
 			const visualizationFunc = this.animationLoader.animation[visualizationFuncName];
 			if (visualizationFunc) {
-				/*const result = */visualizationFunc.call(this.animationLoader.animation, seconds, manPosition, beats);
-				// if (result) {
-				// 	result
-				// 		.delay(50)
-				// 		.then(() => {
-				// 			this.player.getAndShowCurrentElement();
-				// 		});
-				// }
+				visualizationFunc.call(this.animationLoader.animation, seconds, manPosition, beats);
 			} else {
 				throw `Не найдена функция анимации ${visualizationFuncName}`;
 			}
@@ -151,18 +144,20 @@ class Adentro {
 		}));
 	}
 
-	renderScheme(scheme) {
+	renderScheme(scheme, editorMode = false) {
 		$('#schemaDiv').html(schemeTemplate({scheme}));
 		this.adaptiveLineHeight();
 
 		if (!this.player) {
-			this.player = new Player(this);
+			this.player = new Player(this, editorMode);
 		}
-		const player = this.player;
-		$('.element').on('click', function () {
-			const id = $(this).attr('id');
-			player.playElement(id);
-		});
+		if (!editorMode) {
+			const player = this.player;
+			$('.element').on('click', function () {
+				const id = $(this).attr('id');
+				player.playElement(id);
+			});
+		}
 	}
 
 	/**
@@ -211,7 +206,7 @@ class Adentro {
 		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
 
 		const scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
-		this.renderScheme(scheme);
+		this.renderScheme(scheme, true);
 
 		this.player.loadMusicSchema(musicSchema, scheme);
 
@@ -219,7 +214,7 @@ class Adentro {
 		$('#animationDiv').html('');
 		const timingGenerator = new TimingGenerator(this, scheme);
 
-		$('html').keypress(event => {
+		$('html').keypress((event) => {
 			if (event.which == KEY_SPACE) {
 				if (!timingGenerator.addBeat(this.player.currentTime)) {
 					const newTiming = timingGenerator.getTiming();

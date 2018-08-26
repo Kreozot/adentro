@@ -3,7 +3,7 @@ require('plyr/dist/plyr.css');
 import {getElement, getElementAfter} from './timing/timing';
 
 export default class Player {
-	constructor(main) {
+	constructor(main, editorMode) {
 		this.main = main;
 		this.interval = null;
 		this.player = new Plyr('#player', {
@@ -11,7 +11,9 @@ export default class Player {
 		});
 		this.scheme = [];
 		this.currentElement = null;
-		this.initEvents();
+		if (!editorMode) {
+			this.initEvents();
+		}
 	}
 
 	getAndShowCurrentElement() {
@@ -27,8 +29,9 @@ export default class Player {
 
 	initEvents() {
 		this.player.on('playing', () => {
+			const {animation} = this.main.animationLoader;
+
 			window.clearInterval(this.interval);
-			const animation = this.main.animationLoader.animation;
 			this.interval = window.setInterval(() => {
 				animation.resume();
 				this.getAndShowCurrentElement();
@@ -40,9 +43,11 @@ export default class Player {
 			this.currentElement = null;
 		});
 		this.player.on('pause', () => {
+			const {animation} = this.main.animationLoader;
+
 			window.clearInterval(this.interval);
 			if (this.player.paused && (this.player.currentTime !== 0)) {
-				this.main.animationLoader.animation.pause();
+				animation.pause();
 			}
 		});
 	}

@@ -1,6 +1,6 @@
 import RemedioAnimation from './RemedioAnimation';
 import PairElement from './commons/elements/double/PairElement';
-import {DIRECTIONS} from './commons/const';
+import {FIGURE_HANDS, DIRECTIONS} from './commons/const';
 import svg from 'js/animations/svg';
 //TODO: mediaVueltaCoronacion
 export default class ArunguitaAnimation extends RemedioAnimation {
@@ -18,8 +18,8 @@ export default class ArunguitaAnimation extends RemedioAnimation {
 			}),
 
 			mediaVueltaCoronacion: new PairElement(this, {
-				left: svg.escondido.media_vuelta_coronacion_left,
-				right: svg.escondido.media_vuelta_coronacion_right
+				left: svg.remedio.media_vuelta_coronacion_left,
+				right: svg.remedio.media_vuelta_coronacion_right
 			}),
 		};
 	}
@@ -35,13 +35,15 @@ export default class ArunguitaAnimation extends RemedioAnimation {
 		await this.elements.avance.startAnimation({
 			...partOptions,
 			startPart: 0,
-			stopPart: 0.499
+			stopPart: 0.499,
+			figureHands: FIGURE_HANDS.PANUELO
 		});
 		await this.elements.avance.startAnimation({
 			...partOptions,
 			direction: DIRECTIONS.BACKWARD,
 			startPart: 0.501,
-			stopPart: 1
+			stopPart: 1,
+			figureHands: FIGURE_HANDS.PANUELO
 		});
 	}
 
