@@ -22,7 +22,7 @@ export default class Player {
 		if (this.currentElement !== element.name) {
 			this.currentElement = element.name;
 			if (element.name) {
-				this.main.showCurrentElement(element.name, element.timeLength);
+				this.main.showCurrentElement(element);
 			}
 		}
 	}

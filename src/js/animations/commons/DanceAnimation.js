@@ -416,7 +416,7 @@ export default class DanceAnimation {
 	}
 
 	/**
-	 * Установить фигуры танцоров на определённые позиции
+	 * Установить фигуры на определённые позиции
 	 * @param  {Object} leftCoords  Объект с описанием координат левой позиции {x, y, angle}
 	 * @param  {Object} rightCoords Объект с описанием координат правой позиции {x, y, angle}
 	 * @param  {String} manPosition Позиция партнёра
@@ -436,7 +436,7 @@ export default class DanceAnimation {
 	}
 
 	/**
-	 * Установить фигуры танцоров на начальные позиции
+	 * Установить фигуры на начальные позиции
 	 * @param {String} manPosition Позиция партнёра
 	 */
 	setAtStart(manPosition) {

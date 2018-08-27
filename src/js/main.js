@@ -5,6 +5,7 @@ import contentSwitch from './loading/content_switch';
 import AnimationLoader from './loading/AnimationLoader';
 import TimingGenerator from './timing/TimingGenerator';
 import Tour from './tour';
+import {getElementAfter} from './timing/timing';
 
 import schemeTemplate from './templates/scheme.ejs';
 import musicLinksTemplate from './templates/musicLinks.ejs';
@@ -60,30 +61,31 @@ class Adentro {
 	 * @param  {String} elementId 	  Идентификатор элемента
 	 * @param  {Number} seconds    	  Длительность в секундах
 	 */
-	showCurrentElement(elementId, seconds) {
+	showCurrentElement(element) {
 		const $animationContainer = $('#animation_block');
 
 		if (itHasPreloader($animationContainer)) {
 			disablePreloaderInItem($animationContainer);
 		}
 
-		if (elementId.split('_')[0] === '#start') {
-			// Начальное расположение
-			this.animationLoader.animation.setAtStart();
+		if (element.name.split('_')[0] === '#start') {
+			// Устанавливаем фигуры в начальное расположение следующего элемента
+			const manPosition = this.schemeMap[element.nextElementId];
+			this.animationLoader.animation.setAtStart(manPosition);
 			this.hideCurrentElementMarkOnSchema();
 			return;
-		} else if (elementId[0] === '#') {
+		} else if (element.name[0] === '#') {
 			//Пропускаем обработку служебных меток
 			return;
 		}
 
-		this.markCurrentElementOnSchema(elementId);
+		this.markCurrentElementOnSchema(element.name);
 		// Запускаем соответствующую анимацию
-		const {visualization, manPosition, beats} = this.schemeMap[elementId];
+		const {visualization, manPosition, beats} = this.schemeMap[element.name];
 		if (visualization) {
 			const visualizationFunc = this.animationLoader.animation[visualization];
 			if (visualizationFunc) {
-				visualizationFunc.call(this.animationLoader.animation, seconds, manPosition, beats);
+				visualizationFunc.call(this.animationLoader.animation, element.timeLength, manPosition, beats);
 			} else {
 				throw `Не найдена функция анимации ${visualization}`;
 			}

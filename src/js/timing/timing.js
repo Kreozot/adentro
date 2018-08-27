@@ -37,6 +37,7 @@ export const getElement = function (scheme, time) {
 
 	const nextElement = getElementAfter(scheme, nearestElement.time);
 	nearestElement.timeLength = nextElement.time - nearestElement.time;
+	nearestElement.nextElementId = nextElement.name;
 
 	return nearestElement;
 };
