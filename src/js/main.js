@@ -70,7 +70,7 @@ class Adentro {
 
 		if (element.name.split('_')[0] === '#start') {
 			// Устанавливаем фигуры в начальное расположение следующего элемента
-			const manPosition = this.schemeMap[element.nextElementId];
+			const {manPosition} = this.schemeMap[element.nextElementId];
 			this.animationLoader.animation.setAtStart(manPosition);
 			this.hideCurrentElementMarkOnSchema();
 			return;
