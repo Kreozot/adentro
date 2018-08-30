@@ -194,7 +194,7 @@ export default class DanceAnimation {
 		dontLookAtPair
 	}) {
 		angle = normalizeAngle(angle);
-		if (!figure.angle) {
+		if (!figure.angle && (figure.angle !== 0)) {
 			figure.angle = angle;
 		}
 		figure.angle = smoothRotationAngle(angle, figure.angle, rotateDirection);

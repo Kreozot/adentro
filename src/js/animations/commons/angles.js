@@ -1,9 +1,9 @@
 import {ROTATE} from './const';
 
 // Угол поворота после которого срабатывает сглаживание вращения
-const FIGURE_ANGLE_TICK = 25;
+export const FIGURE_ANGLE_TICK = 25;
 // Максимальный угол поворота за такт анимации
-const FIGURE_ANGLE_SPEED = 3;
+export const FIGURE_ANGLE_SPEED = 3;
 
 // Транспонирует угол в промежуток от startingAngle до startingAngle + 360
 export function normalizeAngle(angle, startingAngle = 0) {
@@ -17,6 +17,15 @@ export function normalizeAngle(angle, startingAngle = 0) {
 }
 
 /**
+ * Получить разницу между двумя углами
+ * @param {Number} angle1 Угол в градусах
+ * @param {Number} angle2 Второй угол в градусах
+ */
+export function getAngleDiff(angle1, angle2) {
+	return normalizeAngle(normalizeAngle(angle2, -180) - normalizeAngle(angle1, -180), -180);
+}
+
+/**
  * Сгладить угол поворота
  * @param  {Number} newAngle Новый угол
  * @param  {Number} currentAngle Текущий угол
@@ -24,12 +33,11 @@ export function normalizeAngle(angle, startingAngle = 0) {
  * @return {Number} Угол с учётом плавного поворота
  */
 export function smoothRotationAngle(newAngle, currentAngle, rotateDirection) {
-	const angleDiff = normalizeAngle(currentAngle) - normalizeAngle(newAngle);
-	//TODO: anglediff неадекватен на некоторых сарандео. проверить правильность работы с углами
+	const angleDiff = getAngleDiff(currentAngle, newAngle);
 	if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) &&
 		(Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
 		const rotateTo = rotateDirection ||
-			(((angleDiff > 190) || ((angleDiff < 0) && (angleDiff > -180))) ? ROTATE.COUNTERCLOCKWISE : ROTATE.CLOCKWISE);
+			(angleDiff > 0 ? ROTATE.COUNTERCLOCKWISE : ROTATE.CLOCKWISE);
 		if (rotateTo === ROTATE.COUNTERCLOCKWISE) {
 			return currentAngle + FIGURE_ANGLE_SPEED;
 		} else {

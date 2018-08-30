@@ -4,7 +4,7 @@
   "scripts": {
     "build": "gulp",
     "watch": "gulp watch",
-    "test": "gulp test --mockmp3",
+    "test": "jest ./src",
     "mock-mp3": "gulp mock-mp3"
   },
   "devDependencies": {
@@ -70,6 +70,7 @@
     "hopscotch": "^0.2.5",
     "html-minifier": "^3.5.19",
     "htmlnano": "^0.1.9",
+    "jest": "^23.5.0",
     "jplayer": "^2.9.2",
     "jquery": "^2.1.4",
     "js-yaml": "^3.9.1",

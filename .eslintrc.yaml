@@ -12,6 +12,7 @@ env:
   commonjs: true
   jquery: true
   es6: true
+  jest: true
 rules:
   curly: [2, all]
   keyword-spacing: [2, {}]
