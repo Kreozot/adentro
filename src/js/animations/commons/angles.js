@@ -25,6 +25,7 @@ export function normalizeAngle(angle, startingAngle = 0) {
  */
 export function smoothRotationAngle(newAngle, currentAngle, rotateDirection) {
 	const angleDiff = normalizeAngle(currentAngle) - normalizeAngle(newAngle);
+	//TODO: anglediff неадекватен на некоторых сарандео. проверить правильность работы с углами
 	if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) &&
 		(Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {
 		const rotateTo = rotateDirection ||
@@ -36,4 +37,18 @@ export function smoothRotationAngle(newAngle, currentAngle, rotateDirection) {
 		}
 	}
 	return newAngle;
+}
+
+/**
+ * Получить угол между прямой, соединяющей две точки и горизонтальной осью
+ * @param {Array} point1 Координаты [x, y] первой точки
+ * @param {Array} point2 Координаты [x, y] второй точки
+ */
+export function getAngleBetweenPoints(point1, point2) {
+	const lengthX = point1[0] - point2[0];
+	const lengthY = point1[1] - point2[1];
+	// Угол, корректирующий направление угла в зависимости от того, какая фигура правее
+	const directionFix = lengthX > 0 ? 0 : -180;
+
+	return (Math.atan(lengthY / lengthX) * 180 / Math.PI) + directionFix;
 }
