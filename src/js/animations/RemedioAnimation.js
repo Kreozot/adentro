@@ -5,7 +5,7 @@ import RotatePairElement from './commons/elements/double/RotatePairElement';
 import {getOppositePosition} from './commons/utils';
 import {FIGURE_HANDS} from './commons/const';
 import svg from 'js/animations/svg';
-//TODO: mediaVueltaCoronacion
+
 export default class RemedioAnimation extends EscondidoAnimation {
 	constructor(id) {
 		super(id);
