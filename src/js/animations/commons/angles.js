@@ -1,7 +1,7 @@
 import {ROTATE} from './const';
 
 // Угол поворота после которого срабатывает сглаживание вращения
-export const FIGURE_ANGLE_TICK = 25;
+export const FIGURE_ANGLE_TICK = 18;
 // Максимальный угол поворота за такт анимации
 export const FIGURE_ANGLE_SPEED = 3;
 

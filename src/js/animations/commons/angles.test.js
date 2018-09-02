@@ -11,16 +11,25 @@ describe('angles', () => {
 	describe('normalizeAngle', () => {
 		test('нормализует угол от -180 до 180', () => {
 			const res = normalizeAngle(-270, -180);
+			const res2 = normalizeAngle(200, -180);
 			expect(res).toBe(90);
+			expect(res2).toBe(-160);
+		});
+
+		test('нормализует угол от 0 до 360', () => {
+			const res = normalizeAngle(-270);
+			const res2 = normalizeAngle(400);
+			expect(res).toBe(90);
+			expect(res2).toBe(40);
 		});
 	});
 
 	describe('getAngleBetweenPoints', () => {
-		test('должна возвращать 45 если точки являются противоположными углами квадрата', () => {
+		test('возвращает 45 если точки являются противоположными углами квадрата', () => {
 			const res = getAngleBetweenPoints([90, 90], [0, 0]);
 			expect(res).toBe(45);
 		});
-		test('должна возвращать -135 если вторая точка правее первой', () => {
+		test('возвращает -135 если вторая точка правее первой', () => {
 			const res = getAngleBetweenPoints([0, 0], [90, 90]);
 			expect(res).toBe(-135);
 		});
@@ -54,14 +63,14 @@ describe('angles', () => {
 	});
 
 	describe('smoothRotationAngle', () => {
-		test('Должен возвращать угол с плавным изменением, если разница углов выше пороговой', () => {
+		test('возвращает угол с плавным изменением, если разница углов выше пороговой', () => {
 			const currentAngle = 180;
 			const newAngle = currentAngle + FIGURE_ANGLE_TICK + 1;
 			const res = smoothRotationAngle(newAngle, currentAngle);
 			expect(res).toBe(currentAngle + FIGURE_ANGLE_SPEED);
 		});
 
-		test('Должен возвращать угол с плавным изменением, если разница углов выше пороговой (отрицательная)', () => {
+		test('возвращает угол с плавным изменением, если разница углов выше пороговой (отрицательная)', () => {
 			const currentAngle = 180;
 			const newAngle = currentAngle - FIGURE_ANGLE_TICK - 1;
 			const res = smoothRotationAngle(newAngle, currentAngle);
