@@ -5,6 +5,7 @@ import contentSwitch from './loading/content_switch';
 import AnimationLoader from './loading/AnimationLoader';
 import TimingGenerator from './timing/TimingGenerator';
 import Tour from './tour';
+import {getElementAfter} from './timing/timing';
 
 import schemeTemplate from './templates/scheme.ejs';
 import musicLinksTemplate from './templates/musicLinks.ejs';
@@ -60,42 +61,33 @@ class Adentro {
 	 * @param  {String} elementId 	  Идентификатор элемента
 	 * @param  {Number} seconds    	  Длительность в секундах
 	 */
-	showCurrentElement(elementId, seconds) {
+	showCurrentElement(element) {
 		const $animationContainer = $('#animation_block');
 
 		if (itHasPreloader($animationContainer)) {
 			disablePreloaderInItem($animationContainer);
 		}
 
-		if (elementId.split('_')[0] === '#start') {
-			// Начальное расположение
-			this.animationLoader.animation.setAtStart();
+		if (element.name.split('_')[0] === '#start') {
+			// Устанавливаем фигуры в начальное расположение следующего элемента
+			const {manPosition} = this.schemeMap[element.nextElementId];
+			this.animationLoader.animation.setAtStart(manPosition);
 			this.hideCurrentElementMarkOnSchema();
 			return;
-		} else if (elementId[0] === '#') {
+		} else if (element.name[0] === '#') {
 			//Пропускаем обработку служебных меток
 			return;
 		}
 
-		this.markCurrentElementOnSchema(elementId);
+		this.markCurrentElementOnSchema(element.name);
 		// Запускаем соответствующую анимацию
-		const domElement = $('#' + elementId);
-		const visualizationFuncName = domElement.data('visualization');
-		const manPosition = domElement.data('manposition');
-		const beats = domElement.data('beats');
-		if (visualizationFuncName) {
-			const visualizationFunc = this.animationLoader.animation[visualizationFuncName];
+		const {visualization, manPosition, beats} = this.schemeMap[element.name];
+		if (visualization) {
+			const visualizationFunc = this.animationLoader.animation[visualization];
 			if (visualizationFunc) {
-				/*const result = */visualizationFunc.call(this.animationLoader.animation, seconds, manPosition, beats);
-				// if (result) {
-				// 	result
-				// 		.delay(50)
-				// 		.then(() => {
-				// 			this.player.getAndShowCurrentElement();
-				// 		});
-				// }
+				visualizationFunc.call(this.animationLoader.animation, element.timeLength, manPosition, beats);
 			} else {
-				throw `Не найдена функция анимации ${visualizationFuncName}`;
+				throw `Не найдена функция анимации ${visualization}`;
 			}
 		}
 	}
@@ -151,18 +143,34 @@ class Adentro {
 		}));
 	}
 
-	renderScheme(scheme) {
+	getSchemeMap(scheme) {
+		return scheme.reduce((result, part) => {
+			return {
+				...result,
+				...part.reduce((partResult, element) => {
+					return {
+						...partResult,
+						[element.id]: element
+					};
+				}, {})
+			};
+		}, {});
+	}
+
+	renderScheme(scheme, editorMode = false) {
 		$('#schemaDiv').html(schemeTemplate({scheme}));
 		this.adaptiveLineHeight();
 
 		if (!this.player) {
-			this.player = new Player(this);
+			this.player = new Player(this, editorMode);
 		}
-		const player = this.player;
-		$('.element').on('click', function () {
-			const id = $(this).attr('id');
-			player.playElement(id);
-		});
+		if (!editorMode) {
+			const player = this.player;
+			$('.element').on('click', function () {
+				const id = $(this).attr('id');
+				player.playElement(id);
+			});
+		}
 	}
 
 	/**
@@ -178,10 +186,11 @@ class Adentro {
 		this.showMusicLinks(schemeParams.music, musicId);
 		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
 
-		const scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
-		this.renderScheme(scheme);
+		this.scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
+		this.schemeMap = this.getSchemeMap(this.scheme);
+		this.renderScheme(this.scheme);
 
-		this.player.loadMusicSchema(musicSchema, scheme);
+		this.player.loadMusicSchema(musicSchema, this.scheme);
 
 		contentSwitch.clearContent();
 
@@ -210,16 +219,17 @@ class Adentro {
 		this.showMusicLinks(schemeParams.music, musicId, true);
 		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
 
-		const scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
-		this.renderScheme(scheme);
+		this.scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
+		this.schemeMap = this.getSchemeMap(this.scheme);
+		this.renderScheme(this.scheme, true);
 
-		this.player.loadMusicSchema(musicSchema, scheme);
+		this.player.loadMusicSchema(musicSchema, this.scheme);
 
 		console.log('editor mode on');
 		$('#animationDiv').html('');
-		const timingGenerator = new TimingGenerator(this, scheme);
+		const timingGenerator = new TimingGenerator(this, this.scheme);
 
-		$('html').keypress(event => {
+		$('html').keypress((event) => {
 			if (event.which == KEY_SPACE) {
 				if (!timingGenerator.addBeat(this.player.currentTime)) {
 					const newTiming = timingGenerator.getTiming();

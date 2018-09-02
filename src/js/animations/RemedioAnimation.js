@@ -21,7 +21,7 @@ export default class RemedioAnimation extends EscondidoAnimation {
 			contragiroCoronacion: new RotatePairElement(this, {
 				left: svg.remedio.coronacion_left,
 				right: svg.remedio.coronacion_right
-			}, -360)
+			}, -360),
 		};
 		this.zapateoAnimation = zapateoAnimation.bind(this);
 		this.zarandeoAnimation = zarandeoAnimation.bind(this);
@@ -190,7 +190,7 @@ export default class RemedioAnimation extends EscondidoAnimation {
 			startAngleWoman,
 			startPart: 0,
 			stopPart: 0.5
-		})
+		});
 		await this.elements.contragiroCoronacion.startAnimation({
 			lengthS: lengthS / 2,
 			beats: beats / 2,

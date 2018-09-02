@@ -2,7 +2,7 @@ import Promise from 'bluebird';
 
 require('styles/animation.scss');
 import svg from 'js/animations/svg';
-import {normalizeAngle, smoothRotationAngle} from 'js/animations/commons/angles';
+import {normalizeAngle, smoothRotationAngle, getAngleBetweenPoints} from 'js/animations/commons/angles';
 import {getFigureCenter} from 'js/animations/commons/utils';
 
 import Legs from './Legs';
@@ -145,19 +145,14 @@ export default class DanceAnimation {
 	 * @param  {Object} pairFigure Объект парной фигуры
 	 */
 	rotateTopToPairFigure(figure, pairFigure = null) {
-		// return;
 		if (pairFigure) {
 			const figureCenter = getFigureCenter(figure);
 			const pairFigureCenter = getFigureCenter(pairFigure);
-			const lengthX = figureCenter[0] - pairFigureCenter[0];
-			const lengthY = figureCenter[1] - pairFigureCenter[1];
 
-			// Угол между векторами фигур
-			const angleBetweenFigures = Math.atan(lengthY / lengthX) * 180 / Math.PI;
-			// Угол, корректирующий направление вектора в зависимости от того, какая фигура правее
-			const directionFixAngle = lengthX > 0 ? 90 : -90;
+			// Угол между линией, соединяющей фигуры и горизонтальной осью
+			const angleBetweenFigures = getAngleBetweenPoints(figureCenter, pairFigureCenter);
 			// Угол верха фигуры относительно остальной фигуры
-			let relativeAngle = normalizeAngle(angleBetweenFigures - figure.angle + directionFixAngle, -180);
+			let relativeAngle = normalizeAngle(angleBetweenFigures + 90 - figure.angle, -180);
 			let rotateDirection = null;
 			if (relativeAngle > FIGURE_TOP_ANGLE_MAX) {
 				relativeAngle = FIGURE_TOP_ANGLE_MAX;
@@ -199,7 +194,7 @@ export default class DanceAnimation {
 		dontLookAtPair
 	}) {
 		angle = normalizeAngle(angle);
-		if (!figure.angle) {
+		if (!figure.angle && (figure.angle !== 0)) {
 			figure.angle = angle;
 		}
 		figure.angle = smoothRotationAngle(angle, figure.angle, rotateDirection);
@@ -416,7 +411,7 @@ export default class DanceAnimation {
 	}
 
 	/**
-	 * Установить фигуры танцоров на определённые позиции
+	 * Установить фигуры на определённые позиции
 	 * @param  {Object} leftCoords  Объект с описанием координат левой позиции {x, y, angle}
 	 * @param  {Object} rightCoords Объект с описанием координат правой позиции {x, y, angle}
 	 * @param  {String} manPosition Позиция партнёра
@@ -436,7 +431,7 @@ export default class DanceAnimation {
 	}
 
 	/**
-	 * Установить фигуры танцоров на начальные позиции
+	 * Установить фигуры на начальные позиции
 	 * @param {String} manPosition Позиция партнёра
 	 */
 	setAtStart(manPosition) {

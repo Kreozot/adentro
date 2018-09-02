@@ -1,0 +1,21 @@
+---
+-
+  - {beats: 4, manPosition: left, class: esquina, id: esquina1, visualization: esquina, title: "Esquina y&nbsp;medio giro"}
+  - {beats: 4, manPosition: top, class: esquina, id: esquina2, visualization: esquina, title: "Esquina y&nbsp;medio giro"}
+  - {beats: 4, manPosition: right, class: esquina, id: esquina3, visualization: esquina, title: "Esquina y&nbsp;medio giro"}
+  - {beats: 4, manPosition: bottom, class: esquina, id: esquina4, visualization: esquina, title: "Esquina y&nbsp;medio giro"}
+  - bar: true
+  - {beats: 4, manPosition: left, class: avance, id: avance, visualization: avance, title: Avance y&nbsp;retroceso}
+  - {beats: 4, manPosition: left, class: zapateo, id: zapateoZarandeo, visualization: zapateoZarandeoConPanuelo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - bar: true
+  - {beats: 4, manPosition: left, class: coronacion, id: coronacion, visualization: mediaVueltaCoronacion, title: Media vuelta y&nbsp;coronación}
+-
+  - {beats: 4, manPosition: right, class: esquina, id: esquina1_2, visualization: esquina, title: "Esquina y&nbsp;medio giro"}
+  - {beats: 4, manPosition: bottom, class: esquina, id: esquina2_2, visualization: esquina, title: "Esquina y&nbsp;medio giro"}
+  - {beats: 4, manPosition: left, class: esquina, id: esquina3_2, visualization: esquina, title: "Esquina y&nbsp;medio giro"}
+  - {beats: 4, manPosition: top, class: esquina, id: esquina4_2, visualization: esquina, title: "Esquina y&nbsp;medio giro"}
+  - bar: true
+  - {beats: 4, manPosition: right, class: avance, id: avance_2, visualization: avance, title: Avance y&nbsp;retroceso}
+  - {beats: 4, manPosition: right, class: zapateo, id: zapateoZarandeo_2, visualization: zapateoZarandeoConPanuelo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
+  - bar: true
+  - {beats: 4, manPosition: right, class: coronacion, id: coronacion_2, visualization: mediaVueltaCoronacion, title: Media vuelta y&nbsp;coronación}

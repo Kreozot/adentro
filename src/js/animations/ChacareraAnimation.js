@@ -28,12 +28,12 @@ export default class ChacareraAnimation extends GatoAnimation {
 		await this.elements.avance.startAnimation({
 			...partOptions,
 			startPart: 0,
-			stopPart: 0.5
+			stopPart: 0.499
 		});
 		await this.elements.avance.startAnimation({
 			...partOptions,
 			direction: DIRECTIONS.BACKWARD,
-			startPart: 0.5,
+			startPart: 0.501,
 			stopPart: 1
 		});
 	}

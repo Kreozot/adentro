@@ -13,7 +13,7 @@
    height="440"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="remedio.svg">
   <defs
      id="defs4">
@@ -51,18 +51,18 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.475"
-     inkscape:cx="239.66102"
-     inkscape:cy="210.82015"
+     inkscape:zoom="2.085965"
+     inkscape:cx="280.46126"
+     inkscape:cy="283.62087"
      inkscape:document-units="px"
      inkscape:current-layer="svg2"
      showgrid="true"
      inkscape:snap-global="true"
      showguides="false"
      inkscape:window-width="1600"
-     inkscape:window-height="837"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-height="821"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
      inkscape:window-maximized="1"
      inkscape:snap-nodes="true"
      inkscape:snap-bbox="true">
@@ -73,11 +73,11 @@
        visible="true"
        enabled="true"
        snapvisiblegridlinesonly="true"
-       spacingx="10px"
-       spacingy="10px"
+       spacingx="10"
+       spacingy="10"
        dotted="false"
-       originx="0px"
-       originy="0px" />
+       originx="0"
+       originy="0" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -132,5 +132,21 @@
        id="coronacion_right"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
+  </g>
+  <g
+     id="mediaVueltaFinal"
+     transform="matrix(0.9246781,0,0,0.92596388,109.03863,6.7919211)">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M -63.847765,413.84776 C 11.854255,413.84776 120,371.42135 190.71068,300.71067 357.92063,122.25971 120,68.261927 120,197.85661"
+       id="media_vuelta_coronacion_left"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc" />
+    <path
+       sodipodi:nodetypes="ccc"
+       inkscape:connector-curvature="0"
+       id="media_vuelta_coronacion_right"
+       d="M 303.84776,46.662812 C 228.14574,46.662812 120,89.089222 49.289316,159.7999 -117.92063,338.25086 120,392.24864 120,262.65396"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   </g>
 </svg>

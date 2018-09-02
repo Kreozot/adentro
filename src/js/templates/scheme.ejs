@@ -12,10 +12,7 @@ function renderElement(element) {
 %>
 	<div class="element element--<%= element.class %>"
 		style="flex: <%= element.beats %>;"
-		id="<%= element.id %>"
-		data-visualization="<%= element.visualization %>"
-		data-manposition="<%= element.manPosition %>"
-		data-beats="<%= element.beats %>">
+		id="<%= element.id %>">
 		<%= element.beats %>
 	</div>
 <%
