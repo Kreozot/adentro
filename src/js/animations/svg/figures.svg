@@ -58,7 +58,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="15.999999"
      inkscape:cx="-5.288706"
-     inkscape:cy="64.816785"
+     inkscape:cy="74.816786"
      inkscape:document-units="px"
      inkscape:current-layer="g4214"
      showgrid="false"
@@ -459,14 +459,13 @@
          height="75"
          width="115.62501"
          style="opacity:0.71300001;fill:none;fill-opacity:0.72068966;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.37241378" />
-      <ellipse
-         cx="-0.22781372"
-         cy="0.59501803"
-         rx="24.5"
-         ry="11.792893"
+      <path
+         transform="scale(1,-1)"
          style="fill:#3a96c3;fill-opacity:1;stroke:none;stroke-opacity:0.6714976"
+         d="m 24.272186,0.59501803 c 0,6.51303487 -10.969023,11.79289297 -24.49999972,11.79289297 -13.53097628,0 -24.50000028,-5.279858 -24.50000028,-11.79289297 0,-3.25651753 0.742256,-4.20474083 5.175884,-6.33883463 2.216814,-1.067047 4.79446,-7.5530524 9.7876105,-8.5273144 5.8111918,-1.133877 8.2162618,3.073256 9.53650578,3.073256 1.38274402,0 3.88980992,-4.445428 9.53650562,-3.073256 5.6744091,1.378906 7.5707961,7.4602675 9.7876101,8.5273144 4.433628,2.1340939 5.175884,3.0823172 5.175884,6.33883463 z"
          id="ellipse4681"
-         transform="scale(1,-1)" />
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="sssssssss" />
       <g
          transform="translate(-51.25,-27.249992)"
          id="g4745"
