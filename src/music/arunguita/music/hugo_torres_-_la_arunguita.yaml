@@ -1,9 +1,9 @@
 '#start_1': 0
-esquina1: 11.93
-esquina2: 16.3
-esquina3: 20.91
+esquina1: 11.5
+esquina2: 16.0
+esquina3: 20.6
 esquina4: 25.3
-avance: 29.81
+avance: 29.6
 zapateoZarandeo: 34.34
 coronacion: 38.84
 '#pause_1': 42.23
@@ -15,4 +15,4 @@ esquina4_2: 68.64
 avance_2: 73.22
 zapateoZarandeo_2: 77.64
 coronacion_2: 82.05
-'#end': 85.44
+'#end': 85.3
