@@ -23,7 +23,7 @@ export async function zarandeoAnimation(lengthS, manPosition, beats, conPanuelo)
 	const partOptions = {
 		lengthS: lengthS / parts,
 		beats: beats / parts,
-		figureHands: conPanuelo ? FIGURE_HANDS.PANUELO : FIGURE_HANDS.DOWN,
+		figureHands: conPanuelo ? FIGURE_HANDS.PANUELO : FIGURE_HANDS.ZARANDEO,
 	};
 	const forwardOptions = {
 		...partOptions,

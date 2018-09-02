@@ -23,7 +23,8 @@ export const DIRECTIONS = {
 export const FIGURE_HANDS = {
 	CASTANETAS: 'castanetas',
 	PANUELO: 'panuelo',
-	DOWN: 'down'
+	DOWN: 'down',
+	ZARANDEO: 'zarandeo',
 };
 
 export const ROTATE = {
