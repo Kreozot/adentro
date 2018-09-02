@@ -1,4 +1,4 @@
-import contentSwitch from './content_switch';
+import contentSwitch from './contentSwitch';
 import animationLinksTemplate from '../templates/animationLinks.ejs';
 import animationBlockTemplate from '../templates/animationBlock.ejs';
 

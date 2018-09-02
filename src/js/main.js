@@ -1,11 +1,10 @@
 import 'babel-polyfill';
 import Navigation from './navigation';
 import Player from './player';
-import contentSwitch from './loading/content_switch';
+import contentSwitch from './loading/contentSwitch';
 import AnimationLoader from './loading/AnimationLoader';
 import TimingGenerator from './timing/TimingGenerator';
 import Tour from './tour';
-import {getElementAfter} from './timing/timing';
 
 import schemeTemplate from './templates/scheme.ejs';
 import musicLinksTemplate from './templates/musicLinks.ejs';
