@@ -3,7 +3,6 @@ var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var webpackConfig = require('./webpack.config.js');
 var config = require('./config.js');
-var paths = config.paths;
 var gutil = require('gulp-util');
 
 gulp.task('webpack-dev-server', function (callback) {

@@ -4,7 +4,7 @@ const del = require('promised-del');
 const mergeStream = require('merge-stream');
 const config = require('./config.js');
 const Promise = require('bluebird');
-const readdir = require("recursive-readdir");
+const readdir = require('recursive-readdir');
 const path = require('path');
 const fs = Promise.promisifyAll(require('fs'));
 
