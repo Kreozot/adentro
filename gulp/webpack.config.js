@@ -131,8 +131,6 @@ webpackConfig.push({
 		// Сторонние библиотеки
 		vendor: [
 			'expose?$!expose?jQuery!jquery/dist/jquery.js',
-			'jplayer/dist/jplayer/jquery.jplayer.js',
-			'jplayer/dist/jplayer/jquery.jplayer.swf',
 			'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
 		]
 	},
