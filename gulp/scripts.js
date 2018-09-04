@@ -11,7 +11,7 @@ gulp.task('clean-js', function () {
 	return del([
 		paths.dist.js + '/**/*.js',
 		paths.dist.js + '/**/*.js.map',
-		// paths.dist.js + '/**/*.mp3'
+		paths.dist.js + '/**/*.mp3'
 	]);
 });
 
