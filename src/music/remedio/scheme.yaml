@@ -1,9 +1,9 @@
 ---
 -
-  - {beats: 4, manPosition: left, class: esquina, id: esquina1, visualization: esquina, title: Esquina y&nbsp;medio giro}
-  - {beats: 4, manPosition: top, class: esquina, id: esquina2, visualization: esquina, title: Esquina y&nbsp;medio giro}
-  - {beats: 4, manPosition: right, class: esquina, id: esquina3, visualization: esquina, title: Esquina y&nbsp;medio giro}
-  - {beats: 4, manPosition: bottom, class: esquina, id: esquina4, visualization: esquina, title: Esquina y&nbsp;medio giro}
+  - {beats: 4, manPosition: left, class: esquina, id: esquina1, visualization: esquina, title: Esquina de&nbsp;medio giro}
+  - {beats: 4, manPosition: top, class: esquina, id: esquina2, visualization: esquina, title: Esquina de&nbsp;medio giro}
+  - {beats: 4, manPosition: right, class: esquina, id: esquina3, visualization: esquina, title: Esquina de&nbsp;medio giro}
+  - {beats: 4, manPosition: bottom, class: esquina, id: esquina4, visualization: esquina, title: Esquina de&nbsp;medio giro}
   - bar: true
   - {beats: 8, manPosition: left, class: vuelta, id: vuelta, visualization: vueltaGiro, title: Vuelta entera y&nbsp;giro}
   - {beats: 8, manPosition: left, class: zapateo, id: zapateoZarandeo, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
@@ -14,10 +14,10 @@
   - {beats: 4, manPosition: left, class: vuelta, id: mediaVuelta, visualization: mediaVuelta, title: Media vuelta}
   - {beats: 4, manPosition: right, class: coronacion, id: coronacion, visualization: coronacion, title: Giro y&nbsp;coronación}
 -
-  - {beats: 4, manPosition: right, class: esquina, id: esquina1_2, visualization: esquina, title: Esquina y&nbsp;medio giro}
-  - {beats: 4, manPosition: bottom, class: esquina, id: esquina2_2, visualization: esquina, title: Esquina y&nbsp;medio giro}
-  - {beats: 4, manPosition: left, class: esquina, id: esquina3_2, visualization: esquina, title: Esquina y&nbsp;medio giro}
-  - {beats: 4, manPosition: top, class: esquina, id: esquina4_2, visualization: esquina, title: Esquina y&nbsp;medio giro}
+  - {beats: 4, manPosition: right, class: esquina, id: esquina1_2, visualization: esquina, title: Esquina de&nbsp;medio giro}
+  - {beats: 4, manPosition: bottom, class: esquina, id: esquina2_2, visualization: esquina, title: Esquina de&nbsp;medio giro}
+  - {beats: 4, manPosition: left, class: esquina, id: esquina3_2, visualization: esquina, title: Esquina de&nbsp;medio giro}
+  - {beats: 4, manPosition: top, class: esquina, id: esquina4_2, visualization: esquina, title: Esquina de&nbsp;medio giro}
   - bar: true
   - {beats: 8, manPosition: right, class: vuelta, id: vuelta_2, visualization: vueltaGiro, title: Vuelta entera y&nbsp;giro}
   - {beats: 8, manPosition: right, class: zapateo, id: zapateoZarandeo_2, visualization: zapateoZarandeo, title: "$m[Zapateo]&nbsp;/ $w[Zarandeo]"}
