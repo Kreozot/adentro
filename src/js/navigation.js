@@ -186,8 +186,8 @@ export default class Navigation {
 	 * @return {Boolean} True если схема была загружена
 	 */
 	loadSchemaByState() {
-		const state = history.state;
-		if (state.schema) {
+		const {state} = history;
+		if (state && state.schema) {
 			this.context.schema = state.schema;
 			this.context.animation = state.animation;
 			this.context.music = state.music;
