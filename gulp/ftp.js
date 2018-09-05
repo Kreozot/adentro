@@ -42,7 +42,23 @@ gulp.task('download-mp3', async () => {
 			await findLocalAndDownload(mp3list[index], client);
 		}
 	} catch (err) {
-		console.log(err);
+		console.error(err);
+	} finally {
+		client.close();
+	}
+});
+
+gulp.task('deploy', ['build'], async () => {
+	const client = new ftp.Client();
+	try {
+		await client.access({
+			...config.ftp,
+			user: process.env.FTP_USER,
+			password: process.env.FTP_PASSWORD
+		});
+		await client.uploadDir(config.paths.dist.js);
+	} catch (err) {
+		console.error(err);
 	} finally {
 		client.close();
 	}

@@ -1,8 +1,9 @@
 {
   "name": "adentro",
-  "version": "2.0.1",
+  "version": "2.1.1",
   "scripts": {
     "build": "gulp",
+    "deploy": "gulp deploy --production",
     "watch": "gulp watch",
     "test": "jest ./src",
     "mock-mp3": "gulp mock-mp3"
