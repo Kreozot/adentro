@@ -52,9 +52,11 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "babel-preset-stage-2": "^6.24.1",
+    "basic-ftp": "^2.13.2",
     "cheerio": "^1.0.0-rc.2",
     "cookie_js": "^1.2.2",
     "cssnano": "^3.10.0",
+    "dotenv": "^6.0.0",
     "ejs": "^2.6.1",
     "ejs-compiled-loader": "^2.2.0",
     "eslint": "^4.19.1",

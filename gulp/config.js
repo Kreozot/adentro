@@ -31,5 +31,9 @@ module.exports = {
 	devServer: {
 		host: 'localhost',
 		port: 8080
+	},
+	ftp: {
+		host: 'adentro.ru',
+		port: 21
 	}
 };
