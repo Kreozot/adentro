@@ -39,7 +39,7 @@ var webpackConfig = [
 		// devtool: 'source-map',
 		module: {
 			loaders: [
-				{test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&presets[]=es2015&presets[]=stage-2&sourceMap=true'},
+				{test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&sourceMap=true'},
 				{test: /\.ejs$/, loader: 'ejs-compiled'},
 				{test: /\.json$/, loader: 'json'},
 				{test: /\.yaml$/, loader: 'json!yaml'},
@@ -76,7 +76,7 @@ var webpackConfig = [
 						}, '${id}');
 					}`;
 			}).join(',\n') + '}',
-			getSvgPaths: svgFile => {
+			getSvgPaths: (svgFile) => {
 				const svg = String(fs.readFileSync(path.join(paths.src.animationSvg, svgFile)));
 				const $ = cheerio.load(svg, {
 					xmlMode: true,
@@ -95,7 +95,11 @@ var webpackConfig = [
 					xmlMode: true,
 					decodeEntities: true
 				});
-				return `\`'${$.html(selector).replace(/\n/g, '')}\``;
+				const svgCode = $.html(selector);
+				const svgCodeString = svgCode.split('\n')
+					.map((str) => `'${ str.replace(/\r/g, '').replace(/'/g, `\\'`) }'`)
+					.join(' + \n');
+				return svgCodeString;
 			}
 		}
 	}
@@ -155,7 +159,7 @@ if (argv.production) {
 	webpackConfig = webpackConfig.map(config => {
 		config.plugins.push(
 			new webpack.optimize.UglifyJsPlugin({
-				sourceMap: false,
+				sourceMap: true,
 				comments: false,
 				compress: {
 					warnings: false
