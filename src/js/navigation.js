@@ -1,7 +1,7 @@
 const schemes = require('./schemes.js');
 const URI = require('urijs/src/URI.js');
 
-const supportsHistoryApi = Boolean(window.history && history.pushState);
+const supportsHistoryApi = Boolean(window.history && window.history.pushState);
 
 export default class Navigation {
 	constructor(main) {
@@ -79,7 +79,7 @@ export default class Navigation {
 	 */
 	pushStateOrRedirect(params, query) {
 		if (supportsHistoryApi) {
-			history.pushState(params, null, query);
+			window.history.pushState(params, null, query);
 		} else {
 			window.location.href = query;
 		}
@@ -186,7 +186,7 @@ export default class Navigation {
 	 * @return {Boolean} True если схема была загружена
 	 */
 	loadSchemaByState() {
-		const {state} = history;
+		const {state} = window.history;
 		if (state && state.schema) {
 			this.context.schema = state.schema;
 			this.context.animation = state.animation;
