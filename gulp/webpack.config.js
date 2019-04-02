@@ -5,8 +5,11 @@ const argv = require('yargs').argv;
 
 const config = require('./config.js');
 const paths = config.paths;
-// const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
-// const Visualizer = require('webpack-visualizer-plugin');
+
+const webpackDebug = argv.webpackDebug;
+
+const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
+const Visualizer = require('webpack-visualizer-plugin');
 
 const postcssPlugins = [
 	require('cssnano')(),
@@ -143,6 +146,19 @@ if (argv.production) {
 		);
 		config.devtool = 'source-map';
 		return config;
+	});
+}
+
+if (webpackDebug) {
+	webpackConfig.forEach((configEntry) => {
+		configEntry.plugins.push(
+			new StatsWriterPlugin({
+				filename: 'stats.json'
+			})
+		);
+		configEntry.plugins.push(
+			new Visualizer()
+		);
 	});
 }
 

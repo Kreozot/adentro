@@ -3,7 +3,6 @@ import Navigation from './navigation';
 import Player from './player';
 import contentSwitch from './loading/contentSwitch';
 import AnimationLoader from './loading/AnimationLoader';
-import TimingGenerator from './timing/TimingGenerator';
 import Tour from './tour';
 
 import schemeTemplate from './templates/scheme.ejs';
@@ -14,6 +13,12 @@ import langLinksTemplate from './templates/langLinks.ejs';
 import {disablePreloaderInItem, itHasPreloader} from './loading/preloader';
 
 const KEY_SPACE = 32;
+
+function loadTimingGenerator(callback) {
+	require.ensure(['./timing/TimingGenerator'], function (require) {
+		callback(require('./timing/TimingGenerator').default);
+	}, 'TimingGenerator');
+}
 
 class Adentro {
 	constructor() {
@@ -212,30 +217,32 @@ class Adentro {
 	 * @param  {String} musicId    	   Идентификатор музыки
 	 */
 	loadSchemaEditor(schemeParams, musicId) {
-		$('#danceName').html(schemeParams.name + ' (editor mode)');
+		loadTimingGenerator((TimingGenerator) => {
+			$('#danceName').html(schemeParams.name + ' (editor mode)');
 
-		musicId = musicId || schemeParams.music[0].id;
-		this.showMusicLinks(schemeParams.music, musicId, true);
-		const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
+			musicId = musicId || schemeParams.music[0].id;
+			this.showMusicLinks(schemeParams.music, musicId, true);
+			const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
 
-		this.scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
-		this.schemeMap = this.getSchemeMap(this.scheme);
-		this.renderScheme(this.scheme, true);
+			this.scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
+			this.schemeMap = this.getSchemeMap(this.scheme);
+			this.renderScheme(this.scheme, true);
 
-		this.player.loadMusicSchema(musicSchema, this.scheme);
+			this.player.loadMusicSchema(musicSchema, this.scheme);
 
-		console.log('editor mode on');
-		$('#animationDiv').html('');
-		const timingGenerator = new TimingGenerator(this, this.scheme);
+			console.log('editor mode on');
+			$('#animationDiv').html('');
+			const timingGenerator = new TimingGenerator(this, this.scheme);
 
-		$('html').keypress((event) => {
-			if (event.which == KEY_SPACE) {
-				if (!timingGenerator.addBeat(this.player.currentTime)) {
-					const newTiming = timingGenerator.getTiming();
-					$('#content').html(`<pre>${newTiming}</pre>`);
-					copyText(newTiming);
+			$('html').keypress((event) => {
+				if (event.which == KEY_SPACE) {
+					if (!timingGenerator.addBeat(this.player.currentTime)) {
+						const newTiming = timingGenerator.getTiming();
+						$('#content').html(`<pre>${newTiming}</pre>`);
+						copyText(newTiming);
+					}
 				}
-			}
+			});
 		});
 	}
 
