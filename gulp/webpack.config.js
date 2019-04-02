@@ -36,7 +36,7 @@ var webpackConfig = [
 		devtool: 'source-map',
 		module: {
 			loaders: [
-				{test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&sourceMap=true'},
+				{test: /\.js$/, exclude: /node_modules/, loader: 'babel?cacheDirectory&sourceMap=true'},
 				{test: /\.ejs$/, loader: 'ejs-compiled'},
 				{test: /\.json$/, loader: 'json'},
 				{test: /\.yaml$/, loader: 'json!yaml'},
