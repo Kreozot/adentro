@@ -16,6 +16,8 @@ const svg = [
 	'zamba.svg',
 ];
 
+const IGNORE_PATH_REGEXP = /^path[0-9]+$/;
+
 function getSvgPaths(svgFile) {
 	const svg = String(fs.readFileSync(path.join(paths.src.animationSvg, svgFile)));
 	const $ = cheerio.load(svg, {
@@ -25,7 +27,10 @@ function getSvgPaths(svgFile) {
 	let result = {};
 	$('path').each((i, pathTag) => {
 		const $pathTag = $(pathTag);
-		result[$pathTag.attr('id')] = $pathTag.attr('d');
+		const pathId = $pathTag.attr('id');
+		if (!IGNORE_PATH_REGEXP.test(pathId)) {
+			result[pathId] = $pathTag.attr('d');
+		}
 	});
 	return result;
 }

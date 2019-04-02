@@ -112,7 +112,7 @@ export default class ZambaAnimation extends GatoAnimation {
 			stepStyle: STEP_STYLE.SIMPLE,
 			startPart: 0,
 			stopPart: 0.5
-		})
+		});
 		this.elements.mediaVueltaToArresto.setAngle(-45);
 		await this.elements.mediaVueltaToArresto.startAnimation({
 			lengthS: lengthS / 2,
