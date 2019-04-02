@@ -6,7 +6,7 @@ import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import VueltaElement from './commons/elements/double/VueltaElement';
 import {DIRECTIONS} from './commons/const';
 import {getOppositePosition} from './commons/utils';
-import svg from 'js/animations/svg';
+import escondidoPaths from 'svgData/escondido.paths';
 
 class VueltaGradientElement extends VueltaElement {
 	constructor(animation, pathStr) {
@@ -49,51 +49,51 @@ export default class Chacarera4Animation extends Dance4Animation {
 
 		this.elements = {
 			avance: new QuatroElement(this, {
-				left: svg.escondido.avance_1_left,
-				right: svg.escondido.avance_1_right
+				left: escondidoPaths.avance_1_left,
+				right: escondidoPaths.avance_1_right
 			}, {
-				left: svg.escondido.avance_2_left,
-				right: svg.escondido.avance_2_right
+				left: escondidoPaths.avance_2_left,
+				right: escondidoPaths.avance_2_right
 			}),
 
 			giro: new QuatroElement(this, {
-				left: svg.escondido.giro_1_left,
-				right: svg.escondido.giro_1_right
+				left: escondidoPaths.giro_1_left,
+				right: escondidoPaths.giro_1_right
 			}, {
-				left: svg.escondido.giro_2_left,
-				right: svg.escondido.giro_2_right
+				left: escondidoPaths.giro_2_left,
+				right: escondidoPaths.giro_2_right
 			}),
 
 			mediaVuelta: new QuatroElement(this, {
-				left: svg.escondido.media_vuelta_1_left,
-				right: svg.escondido.media_vuelta_1_right
+				left: escondidoPaths.media_vuelta_1_left,
+				right: escondidoPaths.media_vuelta_1_right
 			}, {
-				left: svg.escondido.media_vuelta_2_left,
-				right: svg.escondido.media_vuelta_2_right
+				left: escondidoPaths.media_vuelta_2_left,
+				right: escondidoPaths.media_vuelta_2_right
 			}),
 
-			vueltaGradient: new VueltaGradientElement(this, svg.escondido.vuelta_all),
+			vueltaGradient: new VueltaGradientElement(this, escondidoPaths.vuelta_all),
 
 			zapateo1: new ZapateoElement(this, this.man),
 
 			zapateo2: new ZapateoElement(this, this.man2),
 
 			zarandeo1: new ZarandeoElement(this, {
-				left: svg.escondido.avance_1_left,
-				right: svg.escondido.avance_1_right
+				left: escondidoPaths.avance_1_left,
+				right: escondidoPaths.avance_1_right
 			}, this.woman),
 
 			zarandeo2: new ZarandeoElement(this, {
-				left: svg.escondido.avance_2_left,
-				right: svg.escondido.avance_2_right
+				left: escondidoPaths.avance_2_left,
+				right: escondidoPaths.avance_2_right
 			}, this.woman2),
 
 			coronacion: new QuatroElement(this, {
-				left: svg.escondido.chacarera_4_coronacion1_left,
-				right: svg.escondido.chacarera_4_coronacion1_right
+				left: escondidoPaths.chacarera_4_coronacion1_left,
+				right: escondidoPaths.chacarera_4_coronacion1_right
 			}, {
-				left: svg.escondido.chacarera_4_coronacion2_left,
-				right: svg.escondido.chacarera_4_coronacion2_right
+				left: escondidoPaths.chacarera_4_coronacion2_left,
+				right: escondidoPaths.chacarera_4_coronacion2_right
 			})
 		};
 	}

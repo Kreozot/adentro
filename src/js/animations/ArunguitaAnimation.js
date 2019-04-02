@@ -1,7 +1,9 @@
 import RemedioAnimation from './RemedioAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import {FIGURE_HANDS, DIRECTIONS} from './commons/const';
-import svg from 'js/animations/svg';
+import escondidoPaths from 'svgData/escondido.paths';
+import remedioPaths from 'svgData/remedio.paths';
+
 //TODO: mediaVueltaCoronacion
 export default class ArunguitaAnimation extends RemedioAnimation {
 	constructor(id) {
@@ -11,15 +13,15 @@ export default class ArunguitaAnimation extends RemedioAnimation {
 			...this.elements,
 
 			avance: new PairElement(this, {
-				left: svg.escondido.zarandeo_left,
-				top: svg.escondido.zarandeo_top,
-				right: svg.escondido.zarandeo_right,
-				bottom: svg.escondido.zarandeo_bottom
+				left: escondidoPaths.zarandeo_left,
+				top: escondidoPaths.zarandeo_top,
+				right: escondidoPaths.zarandeo_right,
+				bottom: escondidoPaths.zarandeo_bottom
 			}),
 
 			mediaVueltaCoronacion: new PairElement(this, {
-				left: svg.remedio.media_vuelta_coronacion_left,
-				right: svg.remedio.media_vuelta_coronacion_right
+				left: remedioPaths.media_vuelta_coronacion_left,
+				right: remedioPaths.media_vuelta_coronacion_right
 			}),
 		};
 	}

@@ -87,6 +87,4 @@ globals:
   mina: true
   Snap: true
   requireSchemes: true
-  getSvgPaths: true
-  getSvgElement: true
   localize: true

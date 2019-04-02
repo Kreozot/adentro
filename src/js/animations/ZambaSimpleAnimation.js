@@ -2,7 +2,7 @@ import ZambaAnimation from './ZambaAnimation';
 import {DIRECTIONS, FIGURE_HANDS, STEP_STYLE} from './commons/const';
 import PairElement from './commons/elements/double/PairElement';
 import {getOppositePosition} from './commons/utils';
-import svg from 'js/animations/svg';
+import zambaPaths from 'svgData/zamba.paths';
 
 export default class ZambaSimpleAnimation extends ZambaAnimation {
 	constructor(id) {
@@ -12,13 +12,13 @@ export default class ZambaSimpleAnimation extends ZambaAnimation {
 			...this.elements,
 
 			arrestoSimple: new PairElement(this, {
-				left: svg.zamba.arresto_simple_left,
-				right: svg.zamba.arresto_simple_right
+				left: zambaPaths.arresto_simple_left,
+				right: zambaPaths.arresto_simple_right
 			}),
 
 			coronacion: new PairElement(this, {
-				left: svg.zamba.coronacion_left,
-				right: svg.zamba.coronacion_right
+				left: zambaPaths.coronacion_left,
+				right: zambaPaths.coronacion_right
 			})
 		};
 

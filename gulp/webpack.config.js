@@ -35,8 +35,8 @@ var webpackConfig = [
 			path: paths.dist.js,
 			filename: '[name].js'
 		},
-		devtool: 'eval',
-		// devtool: 'source-map',
+		// devtool: 'eval',
+		devtool: 'source-map',
 		module: {
 			loaders: [
 				{test: /\.js$/, exclude: /node_modules/, loader: 'callback!babel?cacheDirectory&sourceMap=true'},
@@ -76,31 +76,6 @@ var webpackConfig = [
 						}, '${id}');
 					}`;
 			}).join(',\n') + '}',
-			getSvgPaths: (svgFile) => {
-				const svg = String(fs.readFileSync(path.join(paths.src.animationSvg, svgFile)));
-				const $ = cheerio.load(svg, {
-					xmlMode: true,
-					decodeEntities: true
-				});
-				let result = {};
-				$('path').each((i, pathTag) => {
-					const $pathTag = $(pathTag);
-					result[$pathTag.attr('id')] = $pathTag.attr('d');
-				});
-				return JSON.stringify(result);
-			},
-			getSvgElement: (svgFile, selector) => {
-				const svg = String(fs.readFileSync(path.join(paths.src.animationSvg, svgFile)));
-				const $ = cheerio.load(svg, {
-					xmlMode: true,
-					decodeEntities: true
-				});
-				const svgCode = $.html(selector);
-				const svgCodeString = svgCode.split('\n')
-					.map((str) => `'${ str.replace(/\r/g, '').replace(/'/g, `\\'`) }'`)
-					.join(' + \n');
-				return svgCodeString;
-			}
 		}
 	}
 ];

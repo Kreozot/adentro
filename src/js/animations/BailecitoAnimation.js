@@ -1,7 +1,7 @@
 import {DIRECTIONS, FIGURE_HANDS, ROTATE} from './commons/const';
 import GatoAnimation from './GatoAnimation';
 import PairElement from './commons/elements/double/PairElement';
-import svg from 'js/animations/svg';
+import bailecitoPaths from 'svgData/bailecito.paths';
 
 class BailecitoAvanceRetrocesoElement extends PairElement {
 	constructor(animation, pathStrings) {
@@ -56,13 +56,13 @@ export default class BailecitoAnimation extends GatoAnimation {
 			...this.elements,
 
 			avanceRetroceso1: new BailecitoAvanceRetrocesoElement(this, {
-				left: svg.bailecito.avance_retroceso_1_left,
-				right: svg.bailecito.avance_retroceso_1_right
+				left: bailecitoPaths.avance_retroceso_1_left,
+				right: bailecitoPaths.avance_retroceso_1_right
 			}),
 
 			avanceRetroceso2: new BailecitoAvanceRetrocesoElement(this, {
-				left: svg.bailecito.avance_retroceso_2_left,
-				right: svg.bailecito.avance_retroceso_2_right
+				left: bailecitoPaths.avance_retroceso_2_left,
+				right: bailecitoPaths.avance_retroceso_2_right
 			})
 		};
 	}

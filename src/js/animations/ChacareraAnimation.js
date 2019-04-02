@@ -1,7 +1,7 @@
 import GatoAnimation from './GatoAnimation';
 import PairElement from './commons/elements/double/PairElement';
 import {DIRECTIONS} from './commons/const';
-import svg from 'js/animations/svg';
+import gatoPaths from 'svgData/gato.paths';
 
 export default class ChacareraAnimation extends GatoAnimation {
 	constructor(id) {
@@ -11,8 +11,8 @@ export default class ChacareraAnimation extends GatoAnimation {
 			...this.elements,
 
 			avance: new PairElement(this, {
-				left: svg.gato.zarandeo_left,
-				right: svg.gato.zarandeo_right
+				left: gatoPaths.zarandeo_left,
+				right: gatoPaths.zarandeo_right
 			})
 		};
 	}

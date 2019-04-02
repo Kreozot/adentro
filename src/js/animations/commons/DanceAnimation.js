@@ -1,20 +1,17 @@
 import Promise from 'bluebird';
 
 require('styles/animation.scss');
-import svg from 'js/animations/svg';
 import {normalizeAngle, smoothRotationAngle, getAngleBetweenPoints} from 'js/animations/commons/angles';
 import {getFigureCenter} from 'js/animations/commons/utils';
 
 import Legs from './Legs';
 import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS, ROTATE} from './const';
 
+import arrowsPaths from 'svgData/arrows.paths';
+import figuresSvg from 'svgData/figures.elements';
+
 // Максимальный угол поворота верха фигуры
 const FIGURE_TOP_ANGLE_MAX = 90;
-
-const figuresSvg = {
-	man: getSvgElement('figures.svg', '#man'),
-	woman: getSvgElement('figures.svg', '#woman'),
-};
 
 /**
  * Объект анимации
@@ -105,8 +102,8 @@ export default class DanceAnimation {
 	 */
 	initRotateIcon(x, y, angle, clockwise) {
 		const arrows = this.svg.path(clockwise
-			? svg.arrows.rotation_clockwise
-			: svg.arrows.rotation_counterclockwise);
+			? arrowsPaths.rotation_clockwise
+			: arrowsPaths.rotation_counterclockwise);
 		arrows.addClass('rotation-arrows')
 			.transform(`t${x},${y}r${angle}`);
 		this.paths[this.paths.length] = arrows;

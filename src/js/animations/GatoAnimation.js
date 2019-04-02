@@ -6,7 +6,7 @@ import ZarandeoElement from './commons/elements/single/ZarandeoElement';
 import VueltaElement from './commons/elements/double/VueltaElement';
 import {DIRECTIONS, FIGURE_HANDS, ROTATE} from './commons/const';
 import {getOppositePosition} from './commons/utils';
-import svg from 'js/animations/svg';
+import gatoPaths from 'svgData/gato.paths';
 
 export function zapateoAnimation(lengthS, manPosition, beats, conPanuelo) {
 	this.elements.zapateo.drawPath(manPosition);
@@ -59,25 +59,25 @@ export default class GatoAnimation extends DanceAnimation {
 
 		this.elements = {
 			giro: new PairElement(this, {
-				left: svg.gato.giro_left,
-				right: svg.gato.giro_right
+				left: gatoPaths.giro_left,
+				right: gatoPaths.giro_right
 			}),
 
 			mediaVuelta: new PairElement(this, {
-				left: svg.gato.media_vuelta_left,
-				right: svg.gato.media_vuelta_right
+				left: gatoPaths.media_vuelta_left,
+				right: gatoPaths.media_vuelta_right
 			}),
 
 			coronacion: new PairElement(this, {
-				left: svg.gato.coronacion_left,
-				right: svg.gato.coronacion_right
+				left: gatoPaths.coronacion_left,
+				right: gatoPaths.coronacion_right
 			}),
 
 			zapateo: new ZapateoElement(this),
 
 			zarandeo: new ZarandeoElement(this, {
-				left: svg.gato.zarandeo_left,
-				right: svg.gato.zarandeo_right
+				left: gatoPaths.zarandeo_left,
+				right: gatoPaths.zarandeo_right
 			}),
 
 			vuelta: new VueltaElement(this, svg.vuelta.vuelta)
