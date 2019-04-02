@@ -1,7 +1,9 @@
 module.exports = {
 	name: 'Zamba Alegre',
 	scheme: require('./scheme.yaml'),
-	music: [require('./music/la_zamba_alegre')],
+	music: [
+		require('./music/la_zamba_alegre'),
+	],
 	animation: [{
 		id: 'simple',
 		animClass: require('js/animations/ZambaSimpleAnimation').default,
