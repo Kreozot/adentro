@@ -1,11 +1,8 @@
 const webpack = require('webpack');
 const gutil = require('gulp-util');
-const fs = require('fs');
 const path = require('path');
-const cheerio = require('cheerio');
 const argv = require('yargs').argv;
 
-const schemesList = require('./schemesList.js');
 const config = require('./config.js');
 const paths = config.paths;
 // const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
@@ -68,15 +65,6 @@ var webpackConfig = [
 			// })
 			// new Visualizer()
 		],
-		callbackLoader: {
-			requireSchemes: () => '{' + schemesList.map(id => {
-				return `${id}: function (callback) {
-						require.ensure(['music/${id}'], function (require) {
-							callback(require('music/${id}'));
-						}, '${id}');
-					}`;
-			}).join(',\n') + '}',
-		}
 	}
 ];
 

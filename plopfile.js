@@ -3,8 +3,9 @@ const schemesList = require('./gulp/schemesList.js');
 const ESPANOL_REGEXP = /^[ A-Za-záéóíúüñ-]+$/i;
 const RUSSIAN_REGEXP = /^[ А-Яа-яЁё-]+$/i;
 const ID_REGEXP = /^[a-z_]+$/;
-const END_OF_FILE = /\n$/gm;
-const MUSIC_ARRAY = /music: \[/gm;
+const END_OF_FILE_REGEXP = /\n$/gm;
+const MUSIC_ARRAY_REGEXP = /music: \[/gm;
+const MODULE_EXPORTS_REGEXP = /module.exports = {/;
 
 module.exports = function (plop) {
 	plop.setGenerator('scheme', {
@@ -44,7 +45,13 @@ module.exports = function (plop) {
 				type: 'append',
 				path: 'src/config/menu.yaml',
 				templateFile: 'plop-templates/menu-item.hbs',
-				pattern: END_OF_FILE
+				pattern: END_OF_FILE_REGEXP
+			},
+			{
+				type: 'append',
+				path: 'src/js/schemes.js',
+				templateFile: 'plop-templates/scheme-require.hbs',
+				pattern: MODULE_EXPORTS_REGEXP
 			},
 		],
 	});
@@ -84,7 +91,7 @@ module.exports = function (plop) {
 				type: 'append',
 				path: 'src/music/{{danceId}}/index.js',
 				templateFile: 'plop-templates/music-item.hbs',
-				pattern: MUSIC_ARRAY
+				pattern: MUSIC_ARRAY_REGEXP
 			},
 		],
 	});

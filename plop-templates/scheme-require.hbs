@@ -1,0 +1,5 @@
+	{{id}}: function (callback) {
+		require.ensure(['music/{{id}}'], function (require) {
+			callback(require('music/{{id}}'));
+		}, '{{id}}');
+	},
