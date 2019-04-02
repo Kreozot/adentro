@@ -92,11 +92,6 @@ webpackConfig.push({
 });
 
 webpackConfig.push({
-	module: {
-		loaders: [
-			{test: /\.swf$/i, loader: 'file?name=[name].[ext]'}
-		]
-	},
 	entry: {
 		// Сторонние библиотеки
 		vendor: [
