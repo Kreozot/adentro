@@ -51,7 +51,7 @@
 }
 
 @mixin element-mod($name, $r, $g, $b) {
-	.element--#{name} {
+	&--#{$name} {
 		background-color: rgba($r, $g, $b, 0.6);
 
 		&:hover {

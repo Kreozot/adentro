@@ -1,4 +1,9 @@
 import 'babel-polyfill';
+
+import '../styles/main.scss';
+import '../styles/menu.scss';
+import '../styles/scheme.scss';
+
 import Navigation from './navigation';
 import Player from './player';
 import contentSwitch from './loading/contentSwitch';
