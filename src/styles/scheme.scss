@@ -50,12 +50,12 @@
 	}
 }
 
-@define-mixin element-mod $name $r $g $b {
-	&--$(name) {
-		background-color: rgba($(r), $(g), $(b), 0.6);
+@mixin element-mod($name, $r, $g, $b) {
+	.element--#{name} {
+		background-color: rgba($r, $g, $b, 0.6);
 
 		&:hover {
-			background-color: rgb($(r), $(g), $(b));
+			background-color: rgb($r, $g, $b);
 		}
 	}
 }
@@ -82,23 +82,23 @@
 		padding: 0;
 	}
 
-	@mixin element-mod vuelta 117 246 233;
+	@include element-mod(vuelta, 117, 246, 233);
 
-	@mixin element-mod coronacion 189 157 255;
+	@include element-mod(coronacion, 189, 157, 255);
 
-	@mixin element-mod arresto 160 246 117;
+	@include element-mod(arresto, 160, 246, 117);
 
-	@mixin element-mod zapateo 246 207 117;
+	@include element-mod(zapateo, 246, 207, 117);
 
-	@mixin element-mod zarandeo 246 207 117;
+	@include element-mod(zarandeo, 246, 207, 117);
 
-	@mixin element-mod giro 0 238 0;
+	@include element-mod(giro, 0, 238, 0);
 
-	@mixin element-mod avance 51 153 255;
+	@include element-mod(avance, 51, 153, 255);
 
-	@mixin element-mod esquina 68 136 255;
+	@include element-mod(esquina, 68, 136, 255);
 
-	@mixin element-mod regreso 154 171 238;
+	@include element-mod(regreso, 154, 171, 238);
 }
 
 .element-title {
@@ -126,7 +126,7 @@
 				top: 3px;
 			}
 
-			@mixin media S {
+			@include media(S) {
 				padding-top: 0;
 				left: 0;
 				width: 100%;
@@ -144,7 +144,7 @@
 		letter-spacing: -0.7px;
 	}
 
-	@mixin media S {
+	@include media(S) {
 		position: absolute;
 		width: 100%;
 		opacity: 0;

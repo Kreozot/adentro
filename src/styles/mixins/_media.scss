@@ -2,14 +2,14 @@ $S: 600px;
 $M: 768px;
 $L: 1030px;
 
-@define-mixin media $canvas {
+@mixin media($canvas) {
 	@if $canvas == S {
-		@media only screen and (max-width: $S) { @mixin-content; }
+		@media only screen and (max-width: $S) { @content; }
 	}
 	@else if $canvas == M {
-		@media only screen and (max-width: $M) { @mixin-content; }
+		@media only screen and (max-width: $M) { @content; }
 	}
 	@else if $canvas == L {
-		@media only screen and (max-width: $L) { @mixin-content; }
+		@media only screen and (max-width: $L) { @content; }
 	}
 }

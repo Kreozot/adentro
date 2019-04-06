@@ -15,9 +15,6 @@
 		margin: 5%;
 		list-style-type: none;
 
-		&--1 {
-		}
-
 		&--2 {
 			margin-left: 15%;
 		}
@@ -27,7 +24,7 @@
 		text-decoration: none;
 	}
 
-	@mixin media M {
+	@include media(M) {
 		font-size: 18px;
 		padding: 5%;
 		opacity: 0;
@@ -41,7 +38,7 @@
 	$basis: 5px;
 
 	width: 30px;
-	height: calc($basis * 5);
+	height: $basis * 5;
 	position: relative;
 	transform: rotate(0deg);
 	transition: .5s ease-in-out;
@@ -66,12 +63,12 @@
 	}
 
 	span:nth-child(2) {
-	  top: calc($basis * 2);
+	  top: $basis * 2;
 	  transform-origin: left center;
 	}
 
 	span:nth-child(3) {
-	  top: calc($basis * 4);
+	  top: $basis * 4;
 	  transform-origin: left center;
 	}
 

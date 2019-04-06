@@ -1,0 +1,184 @@
+const webpack = require('webpack');
+const path = require('path');
+const argv = require('yargs').argv;
+
+const config = require('./gulp/config.js');
+const paths = config.paths;
+
+const webpackDebug = argv.webpackDebug;
+
+const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
+const Visualizer = require('webpack-visualizer-plugin');
+// const SentryCliPlugin = require('@sentry/webpack-plugin');
+
+const webpackConfig = {
+	mode: argv.production ? 'production' : 'development',
+	resolve: {
+		modules: [
+			path.join(paths.root, 'src'),
+			'node_modules',
+		],
+		alias: {
+			svgData: paths.temp.svgCompiled,
+		}
+	},
+	entry: {
+		// Главный модуль для интерфейса и навигации
+		main: paths.src.js + '/main.js',
+		styles: paths.src.js + '/styles.js',
+		vendor: [
+			'jquery/dist/jquery.js',
+			'snapsvg/dist/snap.svg.js'
+		]
+	},
+	output: {
+		path: paths.dist.js,
+		filename: '[name].js'
+	},
+	// devtool: 'eval',
+	devtool: 'source-map',
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							cacheDirectory: true,
+						}
+					},
+				],
+			},
+			{
+				test: /\.ejs$/,
+				use: [
+					{
+						loader: 'compile-ejs-loader',
+						options: {
+							htmlmin: false,
+							compileDebug: true,
+							beautify: false
+						}
+					}
+				],
+			},
+			{
+				test: /\.yaml$/,
+				use: [
+					'js-yaml-loader',
+				],
+			},
+			{
+				test: /\.s?css$/,
+				use: [
+					'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							importLoaders: 1,
+						}
+					},
+					'postcss-loader',
+					'sass-loader',
+				],
+			},
+			{
+				test: /\.(jpe?g|png|gif)$/i,
+				use: [
+					'url-loader',
+				],
+			},
+			{
+				test: /\.mp3$/i,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							outputPath: 'dist/music',
+							name: '[name].[hash:6].[ext]',
+						}
+					},
+				],
+			},
+			{
+				test: /\.svg$/i,
+				use: [
+					'raw-loader',
+				],
+			},
+			{
+				test: /\.inc$/i,
+				use: [
+					'raw-loader',
+				],
+			},
+			{
+				test: require.resolve('jquery/dist/jquery.js'),
+				use: [
+					{
+						loader: 'expose-loader',
+						options: 'jQuery'
+					},{
+						loader: 'expose-loader',
+						options: '$'
+					}
+				]
+			},
+			{
+				test: require.resolve('snapsvg/dist/snap.svg.js'),
+				use: 'imports-loader?this=>window,fix=>module.exports=0'
+			}
+		]
+	},
+	plugins: [
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			jQuery: 'jquery',
+			'global.$': 'jquery',
+			'global.jQuery': 'jquery'
+		})
+	],
+	optimization: {
+		splitChunks: {
+			chunks: 'async',
+			minSize: 10000,
+			maxSize: 0,
+			minChunks: 2,
+			maxAsyncRequests: 5,
+			maxInitialRequests: 3,
+			automaticNameDelimiter: '~',
+			name: true,
+			cacheGroups: {
+				vendors: {
+					test: /[\\/]node_modules[\\/]/,
+					priority: -10
+				},
+				default: {
+					minChunks: 2,
+					priority: -20,
+					reuseExistingChunk: true
+				},
+			},
+		},
+	},
+	performance: {
+		assetFilter: (assetFilename) => {
+			return !assetFilename.endsWith('.mp3');
+		}
+	}
+};
+
+if (webpackDebug) {
+	webpackConfig.plugins.push(
+		new StatsWriterPlugin({
+			filename: 'stats.json'
+		})
+	);
+	webpackConfig.plugins.push(
+		new Visualizer()
+	);
+}
+
+module.exports = webpackConfig;

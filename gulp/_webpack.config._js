@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const gutil = require('gulp-util');
 const path = require('path');
 const argv = require('yargs').argv;
+const version = require('../package.json').version;
 
 const config = require('./config.js');
 const paths = config.paths;
@@ -10,6 +11,7 @@ const webpackDebug = argv.webpackDebug;
 
 const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 const Visualizer = require('webpack-visualizer-plugin');
+const SentryCliPlugin = require('@sentry/webpack-plugin');
 
 const postcssPlugins = [
 	require('cssnano')(),
@@ -138,6 +140,12 @@ if (argv.production) {
 				'process.env.NODE_ENV': '"production"',
 				'process.env.BLUEBIRD_WARNINGS': 0,
 			})
+		);
+		config.plugins.push(
+			new SentryCliPlugin({
+				include: './dist',
+				release: version,
+			}),
 		);
 		config.devtool = 'source-map';
 		return config;

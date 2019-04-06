@@ -6,7 +6,7 @@
 	min-width: 200px;
 	background: white;
 
-	@mixin media M {
+	@include media(M) {
 		position: fixed;
 		z-index: 10;
 		left: 0;
@@ -14,7 +14,7 @@
 		width: 100%;
 	}
 
-	@mixin media L {
+	@include media(L) {
 		min-width: 120px;
 	}
 
@@ -29,7 +29,7 @@
 	display: flex;
 	align-items: center;
 
-	@mixin media M {
+	@include media(M) {
 		cursor: pointer;
 	}
 }
@@ -39,7 +39,7 @@
 	height: 25px;
 	margin: 5px 15px 0 10px;
 
-	@mixin media M {
+	@include media(M) {
 		display: inline-block;
 	}
 }
@@ -47,7 +47,7 @@
 .logo-image {
 	height: 45px;
 
-	@mixin media S {
+	@include media(S) {
 		height: 30px;
 	}
 }
@@ -60,7 +60,7 @@
 		color: $adentroGrey;
 	}
 
-	@mixin media M {
+	@include media(M) {
 		width: auto;
 		position: absolute;
 		right: 20px;
