@@ -1,18 +1,17 @@
 const webpack = require('webpack');
 const path = require('path');
-const argv = require('yargs').argv;
-
-const config = require('./gulp/config.js');
-const paths = config.paths;
-
-const webpackDebug = argv.webpackDebug;
+const { argv } = require('yargs');
+const { version } = require('./package.json');
+const { paths } = require('./gulp/config.js');
 
 const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 const Visualizer = require('webpack-visualizer-plugin');
-// const SentryCliPlugin = require('@sentry/webpack-plugin');
+const SentryCliPlugin = require('@sentry/webpack-plugin');
+
+const { isWebpackDebug, isProduction } = argv;
 
 const webpackConfig = {
-	mode: argv.production ? 'production' : 'development',
+	mode: isProduction ? 'production' : 'development',
 	resolve: {
 		modules: [
 			path.join(paths.root, 'src'),
@@ -24,8 +23,7 @@ const webpackConfig = {
 	},
 	entry: {
 		// Главный модуль для интерфейса и навигации
-		main: paths.src.js + '/main.js',
-		styles: paths.src.js + '/styles.js',
+		main: path.join(paths.src.js, 'main.js'),
 		vendor: [
 			'jquery/dist/jquery.js',
 			'snapsvg/dist/snap.svg.js'
@@ -138,8 +136,16 @@ const webpackConfig = {
 			jQuery: 'jquery',
 			'global.$': 'jquery',
 			'global.jQuery': 'jquery'
-		})
-	],
+		}),
+		isProduction && new SentryCliPlugin({
+			include: './dist',
+			release: version,
+		}),
+		isWebpackDebug && new StatsWriterPlugin({
+			filename: 'stats.json'
+		}),
+		isWebpackDebug && new Visualizer(),
+	].filter(Boolean),
 	optimization: {
 		splitChunks: {
 			chunks: 'async',
@@ -169,16 +175,5 @@ const webpackConfig = {
 		}
 	}
 };
-
-if (webpackDebug) {
-	webpackConfig.plugins.push(
-		new StatsWriterPlugin({
-			filename: 'stats.json'
-		})
-	);
-	webpackConfig.plugins.push(
-		new Visualizer()
-	);
-}
 
 module.exports = webpackConfig;
