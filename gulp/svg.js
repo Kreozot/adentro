@@ -53,7 +53,7 @@ gulp.task('clean-svg', function () {
 	]);
 });
 
-gulp.task('build-svg', ['clean-svg'], function () {
+gulp.task('build-svg', gulp.series('clean-svg', function (done) {
 	if (!fs.existsSync(paths.temp.svgCompiled)) {
 		fs.mkdirSync(paths.temp.svgCompiled);
 	}
@@ -69,4 +69,5 @@ gulp.task('build-svg', ['clean-svg'], function () {
 		woman: getSvgElement('figures.svg', '#woman'),
 	};
 	fs.writeFileSync(path.join(paths.temp.svgCompiled, 'figures.elements.json'), JSON.stringify(svgElements, null, '\t'));
-});
+	done();
+}));

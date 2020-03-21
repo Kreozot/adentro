@@ -17,12 +17,12 @@ gulp.task('clean-html', function () {
 	]);
 });
 
-gulp.task('copy-static', ['clean-html'], function () {
+gulp.task('copy-static', gulp.series('clean-html', function () {
 	return gulp.src(paths.src.static + '/**/*')
 		.pipe(gulp.dest(paths.dist.html));
-});
+}));
 
-gulp.task('process-html', ['clean-html', 'copy-static'], function () {
+gulp.task('process-html', gulp.series('copy-static', function () {
 	return gulp.src(paths.src.templates + '/*.ejs')
 		.pipe(ejs({
 			version,
@@ -44,8 +44,4 @@ gulp.task('process-html', ['clean-html', 'copy-static'], function () {
 			extname: '.html'
 		}))
 		.pipe(gulp.dest(paths.dist.html));
-});
-
-gulp.task('watch-html', ['connect', 'process-html'], function () {
-	return gulp.watch([paths.src.templates + '/**/*.ejs'], ['process-html']);
-});
+}));

@@ -48,7 +48,7 @@ gulp.task('download-mp3', async () => {
 	}
 });
 
-gulp.task('deploy', ['build'], async () => {
+gulp.task('deploy', gulp.series('build', async () => {
 	const client = new ftp.Client();
 	try {
 		await client.access({
@@ -62,4 +62,4 @@ gulp.task('deploy', ['build'], async () => {
 	} finally {
 		client.close();
 	}
-});
+}));

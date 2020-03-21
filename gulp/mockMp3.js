@@ -29,14 +29,14 @@ function getMp3List() {
 			})
 		)
 		// Убираем пустые вхождения
-		.filter((filepath) => filepath);
+		.filter(Boolean);
 }
 
 gulp.task('clean-mp3-mock', function () {
 	return del([config.paths.temp.mp3Mock]);
 });
 
-gulp.task('mock-mp3', ['clean-mp3-mock'], function () {
+gulp.task('mock-mp3', gulp.series('clean-mp3-mock', function () {
 	return getMp3List()
 		.then((mp3List) => {
 			const merged = mergeStream();
@@ -49,4 +49,4 @@ gulp.task('mock-mp3', ['clean-mp3-mock'], function () {
 			});
 			return merged;
 		});
-});
+}));

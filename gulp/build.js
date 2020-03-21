@@ -1,3 +1,3 @@
 var gulp = require('gulp');
 
-gulp.task('build', ['build-js', 'process-html']);
+gulp.task('build', gulp.series('build-js', 'process-html'));
