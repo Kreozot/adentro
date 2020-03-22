@@ -70,6 +70,7 @@ const webpackConfig = {
 			},
 			{
 				test: /\.s?css$/,
+				exclude: /node_modules/,
 				use: [
 					'style-loader',
 					{
@@ -80,6 +81,19 @@ const webpackConfig = {
 					},
 					'postcss-loader',
 					'sass-loader',
+				],
+			},
+			{
+				test: /\.css$/,
+				include: /node_modules/,
+				use: [
+					'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							importLoaders: 1,
+						}
+					},
 				],
 			},
 			{

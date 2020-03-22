@@ -26,7 +26,7 @@ async function findLocalAndDownload(fileName, client) {
 }
 
 // Скачать mp3-файлы композиций с сервера
-gulp.task('download-mp3', async () => {
+gulp.task('download-mp3', async function downloadMp3() {
 	const client = new ftp.Client();
 	try {
 		await client.access({
@@ -48,7 +48,7 @@ gulp.task('download-mp3', async () => {
 	}
 });
 
-gulp.task('deploy', gulp.series('build', async () => {
+gulp.task('deploy', gulp.series('build', async function deploy() {
 	const client = new ftp.Client();
 	try {
 		await client.access({

@@ -11,18 +11,18 @@ const rename = require('gulp-rename');
 const yaml = require('js-yaml');
 const argv = require('yargs').argv;
 
-gulp.task('clean-html', function () {
+gulp.task('clean-html', function cleanHtml() {
 	return del([
 		config.paths.dist.html + '/*.html'
 	]);
 });
 
-gulp.task('copy-static', gulp.series('clean-html', function () {
+gulp.task('copy-static', gulp.series('clean-html', function copyStatic() {
 	return gulp.src(paths.src.static + '/**/*')
 		.pipe(gulp.dest(paths.dist.html));
 }));
 
-gulp.task('process-html', gulp.series('copy-static', function () {
+gulp.task('process-html', gulp.series('copy-static', function processHtml() {
 	return gulp.src(paths.src.templates + '/*.ejs')
 		.pipe(ejs({
 			version,

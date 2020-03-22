@@ -32,11 +32,11 @@ function getMp3List() {
 		.filter(Boolean);
 }
 
-gulp.task('clean-mp3-mock', function () {
+gulp.task('clean-mp3-mock', function cleanMockMp3() {
 	return del([config.paths.temp.mp3Mock]);
 });
 
-gulp.task('mock-mp3', gulp.series('clean-mp3-mock', function () {
+gulp.task('mock-mp3', gulp.series('clean-mp3-mock', function mockMp3() {
 	return getMp3List()
 		.then((mp3List) => {
 			const merged = mergeStream();

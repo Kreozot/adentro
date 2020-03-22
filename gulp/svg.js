@@ -47,13 +47,13 @@ function getSvgElement(svgFile, selector) {
 }
 
 
-gulp.task('clean-svg', function () {
+gulp.task('clean-svg', function cleanSvg() {
 	return del([
 		path.join(paths.temp.svgCompiled, '**/*'),
 	]);
 });
 
-gulp.task('build-svg', gulp.series('clean-svg', function (done) {
+gulp.task('build-svg', gulp.series('clean-svg', function buildSvg(done) {
 	if (!fs.existsSync(paths.temp.svgCompiled)) {
 		fs.mkdirSync(paths.temp.svgCompiled);
 	}
