@@ -10,8 +10,9 @@ const argv = require('yargs').argv;
 gulp.task('clean-js', async function () {
 	return del([
 		paths.dist.js + '/**/*.js',
-		paths.dist.js + '/**/*.js.map',
-		paths.dist.js + '/**/*.mp3'
+		paths.dist.js + '/**/*.map',
+		paths.dist.js + '/**/*.mp3',
+		paths.dist.js + '/**/*.css',
 	]);
 });
 

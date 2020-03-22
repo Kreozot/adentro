@@ -137,14 +137,15 @@ const webpackConfig = {
 			'global.$': 'jquery',
 			'global.jQuery': 'jquery'
 		}),
-		isProduction && new SentryCliPlugin({
+		Boolean(isProduction) && new SentryCliPlugin({
 			include: './dist',
 			release: version,
 		}),
 		isWebpackDebug && new StatsWriterPlugin({
+		Boolean(isWebpackDebug) && new StatsWriterPlugin({
 			filename: 'stats.json'
 		}),
-		isWebpackDebug && new Visualizer(),
+		Boolean(isWebpackDebug) && new Visualizer(),
 	].filter(Boolean),
 	optimization: {
 		splitChunks: {
