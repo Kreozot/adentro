@@ -142,7 +142,6 @@ const webpackConfig = {
 			release: version,
 		}),
 		isWebpackDebug && new StatsWriterPlugin({
-		Boolean(isWebpackDebug) && new StatsWriterPlugin({
 			filename: 'stats.json'
 		}),
 		Boolean(isWebpackDebug) && new Visualizer(),
