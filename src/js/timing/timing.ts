@@ -1,4 +1,11 @@
-export const getElementAfter = function (scheme, time) {
+export type Element = {
+	name: string;
+	time: number;
+	timeLength?: number;
+	nextElementId?: string;
+}
+
+export const getElementAfter = function (scheme, time): Element {
 	const nextElement = {name: '', time: 10000};
 
 	for (let key in scheme) {
@@ -20,10 +27,10 @@ export const getElementAfter = function (scheme, time) {
  * Получить элемент хореографии для данного момента в музыке
  * @param  {Object} scheme Схема
  * @param  {Number} time Позиция музыки в секундах
- * @return {String}      Объект нужного элемента с параметрами name, time, timeLength
+ * @return {Object}      Объект нужного элемента с параметрами name, time, timeLength
  */
-export const getElement = function (scheme, time) {
-	const nearestElement = {name: '', time: -1};
+export const getElement = function (scheme, time): Element {
+	const nearestElement: Element = {name: '', time: -1};
 	for (let key in scheme) {
 		if (scheme.hasOwnProperty(key)) {
 			const value = scheme[key];

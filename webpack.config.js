@@ -19,11 +19,12 @@ const webpackConfig = {
 		],
 		alias: {
 			svgData: paths.temp.svgCompiled,
-		}
+		},
+		extensions: ['.ts', '.js', '.json'],
 	},
 	entry: {
 		// Главный модуль для интерфейса и навигации
-		main: path.join(paths.src.js, 'main.js'),
+		main: path.join(paths.src.js, 'main'),
 		vendor: [
 			'jquery/dist/jquery.js',
 			'snapsvg/dist/snap.svg.js'
@@ -37,6 +38,21 @@ const webpackConfig = {
 	devtool: 'source-map',
 	module: {
 		rules: [
+			{
+				test: /\.ts$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							cacheDirectory: true,
+						}
+					},
+					{
+						loader: 'ts-loader'
+					},
+				],
+			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,

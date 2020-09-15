@@ -10,12 +10,11 @@ import contentSwitch from './loading/contentSwitch';
 import AnimationLoader from './loading/AnimationLoader';
 import Tour from './tour';
 
-import schemeTemplate from './templates/scheme.ejs';
-import musicLinksTemplate from './templates/musicLinks.ejs';
-import langLinksTemplate from './templates/langLinks.ejs';
-
-
 import {disablePreloaderInItem, itHasPreloader} from './loading/preloader';
+
+const schemeTemplate = require('./templates/scheme.ejs');
+const musicLinksTemplate = require('./templates/musicLinks.ejs');
+const langLinksTemplate = require('./templates/langLinks.ejs');
 
 const KEY_SPACE = 32;
 
@@ -25,7 +24,26 @@ function loadTimingGenerator(callback) {
 	}, 'TimingGenerator');
 }
 
+export type SchemeElement = {
+	beats: number;
+	manPosition: 'left'| 'right' | 'bottom' | 'top';
+	class: 'esquina' | 'avance' | 'zapateo' | 'coronacion';
+	visualization: string;
+	title: string;
+};
+
+export type Scheme = SchemeElement[];
+
 class Adentro {
+	navigation: Navigation;
+	player: Player;
+	animationLoader: AnimationLoader;
+	scheme: Scheme;
+	schemeMap: {
+		[key: string]: SchemeElement
+	};
+	lang: 'ru' | 'en';
+
 	constructor() {
 		this.navigation = new Navigation(this);
 		this.player = null;
@@ -226,7 +244,7 @@ class Adentro {
 			$('#danceName').html(schemeParams.name + ' (editor mode)');
 
 			musicId = musicId || schemeParams.music[0].id;
-			this.showMusicLinks(schemeParams.music, musicId, true);
+			this.showMusicLinks(schemeParams.music, musicId);
 			const musicSchema = schemeParams.music.filter(data => data.id === musicId)[0];
 
 			this.scheme = this.getModScheme(schemeParams.scheme, musicSchema.schemeMods);
@@ -266,14 +284,21 @@ class Adentro {
 	}
 }
 
+interface CustomNodeJsGlobal extends NodeJS.Global {
+	adentro: Adentro;
+	localize: any; // TODO
+	tour: Tour;
+}
+declare const global: CustomNodeJsGlobal;
+
 global.adentro = new Adentro();
 global.localize = textObj => global.adentro.localize(textObj);
 global.tour = new Tour();
 export default Adentro;
 
-$(window).load(function () {
+$(window).on('load', function () {
 	// Хак для корректной простановки параметра viewBox в SVG через jQuery
-	$.attrHooks['viewbox'] = {
+	($ as any).attrHooks['viewbox'] = {
 		set: (elem, value) => {
 			elem.setAttributeNS(null, 'viewBox', String(value));
 			return value;
