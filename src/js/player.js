@@ -7,7 +7,8 @@ export default class Player {
 		this.main = main;
 		this.interval = null;
 		this.player = new Plyr('#player', {
-			iconUrl: '/plyr.svg'
+			iconUrl: '/plyr.svg',
+			invertTime: false,
 		});
 		this.scheme = [];
 		this.currentElement = null;
