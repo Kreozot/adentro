@@ -11,6 +11,7 @@ import AnimationLoader from './loading/AnimationLoader';
 import Tour from './tour';
 
 import {disablePreloaderInItem, itHasPreloader} from './loading/preloader';
+import { Scheme, SchemeElement, Element, MusicData, SchemeParams } from './types';
 
 const schemeTemplate = require('./templates/scheme.ejs');
 const musicLinksTemplate = require('./templates/musicLinks.ejs');
@@ -23,16 +24,6 @@ function loadTimingGenerator(callback) {
 		callback(require('./timing/TimingGenerator').default);
 	}, 'TimingGenerator');
 }
-
-export type SchemeElement = {
-	beats: number;
-	manPosition: 'left'| 'right' | 'bottom' | 'top';
-	class: 'esquina' | 'avance' | 'zapateo' | 'coronacion';
-	visualization: string;
-	title: string;
-};
-
-export type Scheme = SchemeElement[];
 
 class Adentro {
 	navigation: Navigation;
@@ -70,7 +61,7 @@ class Adentro {
 	 * Выделение текущего элемента на SVG-схеме
 	 * @param  {String} elementId 	  Идентификатор элемента
 	 */
-	markCurrentElementOnSchema(elementId) {
+	markCurrentElementOnSchema(elementId: string) {
 		if (elementId[0] === '#') {
 			//Пропускаем обработку служебных меток
 			return;
@@ -88,7 +79,7 @@ class Adentro {
 	 * @param  {String} elementId 	  Идентификатор элемента
 	 * @param  {Number} seconds    	  Длительность в секундах
 	 */
-	showCurrentElement(element) {
+	showCurrentElement(element: Element) {
 		const $animationContainer = $('#animation_block');
 
 		if (itHasPreloader($animationContainer)) {
@@ -124,7 +115,7 @@ class Adentro {
 	 * @param  {Object} musicData          Массив информации о композициях
 	 * @param  {String} currentMusicId    Идентификатор текущей композиции
 	 */
-	showMusicLinks(musicData, currentMusicId) {
+	showMusicLinks(musicData: MusicData[], currentMusicId: string) {
 		const navigation = this.navigation;
 
 		$('#musicLinks').html(musicLinksTemplate({
@@ -206,7 +197,7 @@ class Adentro {
 	 * @param  {String} musicId    	   Идентификатор музыки
 	 * @param  {String} animationId    Идентификатор конкретной анимации (если в animationClass пришёл список)
 	 */
-	loadSchema(schemeParams, musicId, animationId) {
+	loadSchema(schemeParams: SchemeParams, musicId: string, animationId: string) {
 		$('#danceName').html(schemeParams.name);
 
 		musicId = musicId || schemeParams.music[0].id;
@@ -239,7 +230,7 @@ class Adentro {
 	 * @param  {String} schemeParams   Объект параметров схемы
 	 * @param  {String} musicId    	   Идентификатор музыки
 	 */
-	loadSchemaEditor(schemeParams, musicId) {
+	loadSchemaEditor(schemeParams: SchemeParams, musicId: string) {
 		loadTimingGenerator((TimingGenerator) => {
 			$('#danceName').html(schemeParams.name + ' (editor mode)');
 

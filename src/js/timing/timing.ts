@@ -1,9 +1,4 @@
-export type Element = {
-	name: string;
-	time: number;
-	timeLength?: number;
-	nextElementId?: string;
-}
+import { Element } from "../types";
 
 export const getElementAfter = function (scheme, time): Element {
 	const nextElement = {name: '', time: 10000};
