@@ -16,8 +16,15 @@ const FIGURE_TOP_ANGLE_MAX = 90;
 
 interface Figure extends Snap.Paper {
 	angle?: number | null;
-	top?: Snap.Paper;
+	top?: Figure;
+	coords?: [number, number];
 }
+
+export type Gender = 'man' | 'woman';
+
+export type Coords = {x: number, y: number, angle: number};
+
+export type FigurePosition = 'left' | 'right' | 'top' | 'bottom';
 
 /**
  * Объект анимации
@@ -28,7 +35,7 @@ export default class DanceAnimation {
 	animations: mina.MinaAnimation[];
 	paths: Snap.Element[];
 	paused: boolean;
-	manPosition: 'left' | 'right' | 'top' | 'bottom';
+	manPosition: FigurePosition;
 	MAN_COLOR: string;
 	WOMAN_COLOR: string;
 	pathCache: {
@@ -39,10 +46,10 @@ export default class DanceAnimation {
 	man: Figure;
 	woman: Figure;
 	startPos: {
-		left?: {x: number, y: number, angle: number},
-		right?: {x: number, y: number, angle: number},
-		top?: {x: number, y: number, angle: number},
-		bottom?: {x: number, y: number, angle: number},
+		left?: Coords,
+		right?: Coords,
+		top?: Coords,
+		bottom?: Coords,
 	}
 	width: number;
 	height: number;
@@ -94,10 +101,10 @@ export default class DanceAnimation {
 
 	/**
 	 * Создание фигуры танцора
-	 * @param  {String} gender Пол
+	 * @param  {Gender} gender Пол
 	 * @return {Object}        SVG-объект танцора
 	 */
-	initFigure(gender): Figure {
+	initFigure(gender: Gender): Figure {
 		const figureSvg = Snap.parse(figuresSvg[gender]);
 		this.svg.append(figureSvg as Snap.Element);
 		const figure: Figure = this.svg.g(
@@ -129,7 +136,7 @@ export default class DanceAnimation {
 	 * @param  {Boolean} clockwise По часовой стрелке
 	 * @return {Object}            Path-объект иконки
 	 */
-	initRotateIcon(x, y, angle, clockwise) {
+	initRotateIcon(x: number, y: number, angle: number, clockwise: boolean): Snap.Element {
 		const arrows = this.svg.path(clockwise
 			? arrowsPaths.rotation_clockwise
 			: arrowsPaths.rotation_counterclockwise);
@@ -139,7 +146,7 @@ export default class DanceAnimation {
 		return arrows;
 	}
 
-	hideFigure(figure) {
+	hideFigure(figure: Figure): void {
 		figure.addClass('invisible');
 		figure.angle = null;
 		figure.top.transform('r0');
@@ -149,7 +156,7 @@ export default class DanceAnimation {
 	/**
 	 * Спрятать фигурки танцоров
 	 */
-	hideFigures() {
+	hideFigures(): void {
 		this.hideFigure(this.man);
 		this.hideFigure(this.woman);
 	}
@@ -157,7 +164,7 @@ export default class DanceAnimation {
 	/**
 	 * Инициализация фигур партнёра и партнёрши
 	 */
-	initManWoman() {
+	initManWoman(): void {
 		if ((!this.man) || (!this.woman)) {
 			this.man = this.initFigure('man');
 			this.woman = this.initFigure('woman');
@@ -170,7 +177,7 @@ export default class DanceAnimation {
 	 * @param  {Object} figure     Объект фигуры
 	 * @param  {Object} pairFigure Объект парной фигуры
 	 */
-	rotateTopToPairFigure(figure, pairFigure = null) {
+	rotateTopToPairFigure(figure: Figure, pairFigure: Figure = null) {
 		if (pairFigure) {
 			const figureCenter = getFigureCenter(figure);
 			const pairFigureCenter = getFigureCenter(pairFigure);
@@ -218,6 +225,14 @@ export default class DanceAnimation {
 		pairFigure,
 		rotateDirection,
 		dontLookAtPair
+	}: {
+		figure: Figure;
+		x: number;
+		y: number;
+		angle: number;
+		pairFigure: Figure;
+		rotateDirection: ROTATE,
+		dontLookAtPair: boolean;
 	}) {
 		angle = normalizeAngle(angle);
 		if (!figure.angle && (figure.angle !== 0)) {
@@ -238,7 +253,7 @@ export default class DanceAnimation {
 	 * @param  {Object} figure Объект фигуры
 	 * @param  {String} hands  Идентификатор вариации рук
 	 */
-	changeFigureHands(figure, hands) {
+	changeFigureHands(figure: Figure, hands: FIGURE_HANDS) {
 		$(`.hands:not(.hands--${hands})`, figure.node).addClass('invisible');
 		$(`.hands--${hands}`, figure.node).removeClass('invisible');
 	}
@@ -272,6 +287,23 @@ export default class DanceAnimation {
 		stepStyle = STEP_STYLE.BASIC,
 		firstLeg = LEGS.LEFT,
 		rotateDirection
+	}: {
+		figure: Figure,
+		startAngle: number,
+		path: Snap.Element,
+		startLen: number,
+		stopLen: number,
+		timeLength: number,
+		beats: number,
+		direction: DIRECTIONS,
+		easing: (num: number) => number,
+		figureHands: FIGURE_HANDS,
+		pairFigure: Figure,
+		dontLookAtPair: boolean,
+		isLastElement: boolean,
+		stepStyle: STEP_STYLE,
+		firstLeg: LEGS,
+		rotateDirection: ROTATE
 	}) {
 		// Перенос фигура на верх DOM-а (TODO: Исправить на группировку)
 		figure.node.parentNode.appendChild(figure.node);
@@ -347,7 +379,22 @@ export default class DanceAnimation {
 	/**
 	 * Анимация мужской фигуры по траектории
 	 */
-	animateMan(options) {
+	animateMan(options: {
+		startAngle: number,
+		path,
+		startLen: number,
+		stopLen: number,
+		timeLength: number,
+		beats: number,
+		direction: DIRECTIONS,
+		easing: (num: number) => number,
+		figureHands: FIGURE_HANDS,
+		dontLookAtPair: boolean,
+		isLastElement: boolean,
+		stepStyle: STEP_STYLE,
+		firstLeg: LEGS,
+		rotateDirection: ROTATE
+	}) {
 		return this.animateFigurePath({
 			...options,
 			figure: this.man,
@@ -358,7 +405,22 @@ export default class DanceAnimation {
 	/**
 	 * Анимация женской фигуры по траектории
 	 */
-	animateWoman(options) {
+	animateWoman(options: {
+		startAngle: number,
+		path,
+		startLen: number,
+		stopLen: number,
+		timeLength: number,
+		beats: number,
+		direction: DIRECTIONS,
+		easing: (num: number) => number,
+		figureHands: FIGURE_HANDS,
+		dontLookAtPair: boolean,
+		isLastElement: boolean,
+		stepStyle: STEP_STYLE,
+		firstLeg: LEGS,
+		rotateDirection: ROTATE
+	}) {
 		return this.animateFigurePath({
 			...options,
 			figure: this.woman,
@@ -371,7 +433,7 @@ export default class DanceAnimation {
 	 * @param  {String} pathStr      Описание траектории в формате SVG path
 	 * @return {Object}              Path-объект траектории
 	 */
-	createPath(pathStr: string) {
+	createPath(pathStr: string): Snap.Element {
 		const resultPath = this.svg.path(pathStr)
 			.addClass('path')
 			.addClass('invisible');
@@ -387,7 +449,7 @@ export default class DanceAnimation {
 	 * @param  {Boolean} hidden      Создать невидимым
 	 * @return {Object}              Path-объект траектории
 	 */
-	path(pathStr: string, gender: 'man' | 'woman', hidden?: boolean) {
+	path(pathStr: string, gender: Gender, hidden?: boolean): Snap.Element {
 		const resultPath = this.pathCache[pathStr] || this.createPath(pathStr);
 
 		if (hidden) {
@@ -408,11 +470,11 @@ export default class DanceAnimation {
 		return resultPath;
 	}
 
-	manPath(pathStr) {
+	manPath(pathStr: string): Snap.Element {
 		return this.path(pathStr, 'man');
 	}
 
-	womanPath(pathStr) {
+	womanPath(pathStr: string): Snap.Element {
 		return this.path(pathStr, 'woman');
 	}
 
@@ -421,7 +483,7 @@ export default class DanceAnimation {
 	 * @param  {Object} figure Объект фигуры танцора
 	 * @param  {Object} coords Объект с описанием координат {x, y, angle}
 	 */
-	startPosFigure(figure, coords) {
+	startPosFigure(figure: Figure, coords) { // TODO: coords: Coords
 		figure.angle = null;
 		figure.top.transform('r0');
 		figure.top.angle = 0;
@@ -441,7 +503,7 @@ export default class DanceAnimation {
 	 * @param  {Object} rightCoords Объект с описанием координат правой позиции {x, y, angle}
 	 * @param  {String} manPosition Позиция партнёра
 	 */
-	startPosition(leftCoords, rightCoords, manPosition) {
+	startPosition(leftCoords: Coords, rightCoords: Coords, manPosition: FigurePosition): void {
 		this.clearPaths();
 
 		manPosition = manPosition || this.manPosition;
@@ -459,7 +521,7 @@ export default class DanceAnimation {
 	 * Установить фигуры на начальные позиции
 	 * @param {String} manPosition Позиция партнёра
 	 */
-	setAtStart(manPosition) {
+	setAtStart(manPosition: FigurePosition): void {
 		this.startPosition(this.startPos.left, this.startPos.right,	manPosition);
 	}
 }
