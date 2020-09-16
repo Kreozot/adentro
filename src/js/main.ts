@@ -11,7 +11,7 @@ import AnimationLoader from './loading/AnimationLoader';
 import Tour from './tour';
 
 import {disablePreloaderInItem, itHasPreloader} from './loading/preloader';
-import { Scheme, SchemeElement, Element, MusicData, SchemeParams } from './types';
+import { Scheme, SchemeElement, Element, MusicData, SchemeParams, MainClass } from './types';
 
 const schemeTemplate = require('./templates/scheme.ejs');
 const musicLinksTemplate = require('./templates/musicLinks.ejs');
@@ -25,7 +25,7 @@ function loadTimingGenerator(callback) {
 	}, 'TimingGenerator');
 }
 
-class Adentro {
+class Adentro implements MainClass {
 	navigation: Navigation;
 	player: Player;
 	animationLoader: AnimationLoader;
@@ -88,7 +88,7 @@ class Adentro {
 
 		if (element.name.split('_')[0] === '#start') {
 			// Устанавливаем фигуры в начальное расположение следующего элемента
-			const {manPosition} = this.schemeMap[element.nextElementId];
+			const { manPosition } = this.schemeMap[element.nextElementId];
 			this.animationLoader.animation.setAtStart(manPosition);
 			this.hideCurrentElementMarkOnSchema();
 			return;
@@ -99,7 +99,7 @@ class Adentro {
 
 		this.markCurrentElementOnSchema(element.name);
 		// Запускаем соответствующую анимацию
-		const {visualization, manPosition, beats} = this.schemeMap[element.name];
+		const { visualization, manPosition, beats } = this.schemeMap[element.name];
 		if (visualization) {
 			const visualizationFunc = this.animationLoader.animation[visualization];
 			if (visualizationFunc) {

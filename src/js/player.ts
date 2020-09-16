@@ -1,25 +1,33 @@
-import Plyr from 'plyr';
+import * as Plyr from 'plyr';
 require('plyr/dist/plyr.css');
-import {getElement, getElementAfter} from './timing/timing';
+
+import { getElement, getElementAfter } from './timing/timing';
+import { isSchemeElement, MainClass, MusicData, Scheme, SchemeBar, SchemeElement, Timing } from './types';
 
 export default class Player {
-	constructor(main, editorMode) {
+	main: MainClass;
+	player: Plyr;
+	interval: number;
+	timing: Timing;
+	currentElement: string;
+
+	constructor(main: MainClass, editorMode: boolean) {
 		this.main = main;
 		this.interval = null;
 		this.player = new Plyr('#player', {
 			iconUrl: '/plyr.svg',
 			invertTime: false,
 		});
-		this.scheme = [];
+		this.timing = {};
 		this.currentElement = null;
 		if (!editorMode) {
 			this.initEvents();
 		}
 	}
 
-	getAndShowCurrentElement() {
+	showCurrentElement() {
 		const time = this.player.currentTime;
-		const element = getElement(this.scheme, time);
+		const element = getElement(this.timing, time);
 		if (this.currentElement !== element.name) {
 			this.currentElement = element.name;
 			if (element.name) {
@@ -35,7 +43,7 @@ export default class Player {
 			window.clearInterval(this.interval);
 			this.interval = window.setInterval(() => {
 				animation.resume();
-				this.getAndShowCurrentElement();
+				this.showCurrentElement();
 			}, 10);
 		});
 		this.player.on('ended', () => {
@@ -57,7 +65,7 @@ export default class Player {
 	 * Загрузить музыку и тайминг
 	 * @param  {Object} musicDef Описание композиции
 	 */
-	loadMusicSchema(musicDef, scheme) {
+	loadMusicSchema(musicDef: MusicData, scheme: Scheme) {
 		this.player.source = {
 			type: 'audio',
 			title: musicDef.title,
@@ -66,21 +74,25 @@ export default class Player {
 				type: 'audio/mp3'
 			}]
 		};
-		this.scheme = {...musicDef.schema};
+		this.timing = {...musicDef.schema};
 
 		// Смещаем все элементы на треть базового шага для того, чтобы успевала анимация
-		for (let key in this.scheme) {
-			if (this.scheme.hasOwnProperty(key)) {
-				const value = this.scheme[key];
-				const nextElement = getElementAfter(this.scheme, value);
+		for (let key in this.timing) {
+			if (this.timing.hasOwnProperty(key)) {
+				const value = this.timing[key];
+				const nextElement = getElementAfter(this.timing, value);
 				const time = nextElement.time - value;
 
 				let schemeElement;
-				scheme.forEach(part => {
-					schemeElement = part.find(element => element.id === key);
+				scheme.forEach((schemePart) => {
+					schemeElement = schemePart.find((element) => {
+						if (isSchemeElement(element)) {
+							return element.id === key;
+						}
+					});
 				});
 				if (schemeElement) {
-					this.scheme[key] = value - (time / schemeElement.beats / 3);
+					this.timing[key] = value - (time / schemeElement.beats / 3);
 				}
 			}
 		}
@@ -88,10 +100,10 @@ export default class Player {
 
 	/**
 	 * Воспроизвести музыку с момента определённого элемента в хореографии
-	 * @param  {String} element Идентификатор элемента
+	 * @param  {String} elementId Идентификатор элемента
 	 */
-	playElement(element) {
-		const time = this.scheme[element];
+	playElement(elementId: string) {
+		const time = this.timing[elementId];
 		this.main.animationLoader.animation.clear();
 		this.player.currentTime = time;
 		this.player.play();
