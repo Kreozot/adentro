@@ -10,7 +10,6 @@ import contentSwitch from './loading/contentSwitch';
 import AnimationLoader from './loading/AnimationLoader';
 import Tour from './tour';
 
-import {disablePreloaderInItem, itHasPreloader} from './loading/preloader';
 import { Scheme, SchemeElement, Element, MusicData, SchemeParams, MainClass } from './types';
 
 const schemeTemplate = require('./templates/scheme.ejs');
@@ -80,12 +79,6 @@ class Adentro implements MainClass {
 	 * @param  {Number} seconds    	  Длительность в секундах
 	 */
 	showCurrentElement(element: Element) {
-		const $animationContainer = $('#animation_block');
-
-		if (itHasPreloader($animationContainer)) {
-			disablePreloaderInItem($animationContainer);
-		}
-
 		if (element.name.split('_')[0] === '#start') {
 			// Устанавливаем фигуры в начальное расположение следующего элемента
 			const { manPosition } = this.schemeMap[element.nextElementId];

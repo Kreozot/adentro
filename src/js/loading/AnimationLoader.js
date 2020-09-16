@@ -22,7 +22,6 @@ export default class AnimationLoader {
 	/**
 	 * Загрузка анимации
 	 * @param  {Object} AnimationClass  Класс анимации
-	 * @param  {Object} turnOnPreloader  Нужно ли включать preloader для блока с анимацией
 	 */
 	loadAnimation(AnimationClass) {
 		const $animationBlock = $('#animation');
