@@ -19,6 +19,7 @@ const webpackConfig = {
 		],
 		alias: {
 			svgData: paths.temp.svgCompiled,
+			snapsvg: 'snapsvg/dist/snap.svg.js',
 		},
 		extensions: ['.ts', '.js', '.json'],
 	},

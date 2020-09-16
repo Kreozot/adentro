@@ -1,4 +1,5 @@
 import Promise from 'bluebird';
+import * as Snap from 'snapsvg';
 
 require('styles/animation.scss');
 import {normalizeAngle, smoothRotationAngle, getAngleBetweenPoints} from 'js/animations/commons/angles';
@@ -7,8 +8,8 @@ import {getFigureCenter} from 'js/animations/commons/utils';
 import Legs from './Legs';
 import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS, ROTATE} from './const';
 
-import arrowsPaths from 'svgData/arrows.paths';
-import figuresSvg from 'svgData/figures.elements';
+const arrowsPaths = require('svgData/arrows.paths');
+const figuresSvg = require('svgData/figures.elements');
 
 // Максимальный угол поворота верха фигуры
 const FIGURE_TOP_ANGLE_MAX = 90;
@@ -18,8 +19,23 @@ const FIGURE_TOP_ANGLE_MAX = 90;
  * @param {String} id DOM-идентификатор SVG-объекта
  */
 export default class DanceAnimation {
+	svg: Snap.Paper;
+	animations: mina.MinaAnimation[];
+	paths: Snap.Element[];
+	paused: boolean;
+	manPosition: 'left' | 'right' | 'top' | 'bottom';
+	MAN_COLOR: string;
+	WOMAN_COLOR: string;
+	pathCache: {
+		[key: string]: Snap.Element[];
+	};
+	pathLengths: Map<Snap.Element, number>;
+	legs: Legs;
+	man: Snap.Paper;
+	woman: Snap.Paper;
+
 	constructor(id) {
-		this.svg = new Snap('#' + id);
+		this.svg = Snap('#' + id);
 
 		this.animations = [];
 		this.paths = [];
