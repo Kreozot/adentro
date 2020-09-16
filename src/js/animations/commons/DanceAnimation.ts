@@ -1,4 +1,4 @@
-import Promise from 'bluebird';
+import * as Promise from 'bluebird';
 import * as Snap from 'snapsvg';
 
 require('styles/animation.scss');
@@ -44,6 +44,8 @@ export default class DanceAnimation {
 		top?: {x: number, y: number, angle: number},
 		bottom?: {x: number, y: number, angle: number},
 	}
+	width: number;
+	height: number;
 
 	constructor(id) {
 		this.svg = Snap('#' + id);
@@ -62,7 +64,7 @@ export default class DanceAnimation {
 		this.legs = new Legs(this.animations);
 	}
 
-	clearPaths() {
+	clearPaths(): void {
 		this.paths.forEach(path => path.addClass('invisible'));
 
 		this.animations.forEach(animation => animation.stop());
@@ -71,19 +73,19 @@ export default class DanceAnimation {
 		}
 	}
 
-	clear() {
+	clear(): void {
 		this.paused = false;
 		this.hideFigures();
 		this.clearPaths();
 		this.manPosition = 'left';
 	}
 
-	pause() {
+	pause(): void {
 		this.paused = true;
 		this.animations.forEach(animation => (animation as any).pause());
 	}
 
-	resume() {
+	resume(): void {
 		if (this.paused) {
 			this.paused = false;
 			this.animations.forEach(animation => (animation as any).resume());
@@ -97,7 +99,7 @@ export default class DanceAnimation {
 	 */
 	initFigure(gender): Figure {
 		const figureSvg = Snap.parse(figuresSvg[gender]);
-		this.svg.append(figureSvg);
+		this.svg.append(figureSvg as Snap.Element);
 		const figure: Figure = this.svg.g(
 			this.svg.select('#' + gender)
 				.attr({id: gender + '_figure-inner', display: 'block'})
@@ -115,7 +117,7 @@ export default class DanceAnimation {
 			.addClass('invisible');
 		this.changeFigureHands(figure, FIGURE_HANDS.DOWN);
 		figure.angle = null;
-		figure.top = Snap($('.top', figure.node)[0]);
+		figure.top = Snap($('.top', figure.node)[0] as SVGElement);
 		return figure;
 	}
 

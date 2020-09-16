@@ -30,7 +30,7 @@ export default class AnimationLoader {
 	 * Загрузка анимации
 	 * @param  {Object} AnimationClass  Класс анимации
 	 */
-	loadAnimation(AnimationClass: DanceAnimation) {
+	loadAnimation(AnimationClass: typeof DanceAnimation) {
 		const $animationBlock = $('#animation');
 
 		if (this.animation) {

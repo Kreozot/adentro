@@ -1,4 +1,4 @@
-import { MainClass } from "./types";
+import { MainClass, isAnimationVariantParamsArray } from "./types";
 import locale from 'js/locale';
 
 import schemes from './schemes';
@@ -163,15 +163,15 @@ export default class Navigation {
 		getSchemeParams((schemeParams) => {
 			const animationClassDefs = schemeParams.animation;
 			let animationClass;
-			if (typeof animationClassDefs === 'object') {
+			if (isAnimationVariantParamsArray(animationClassDefs)) {
 				const animationClassDef = this.main.animationLoader.getAnimationClassDef(animationClassDefs, animationId);
 				animationClass = animationClassDef.animClass;
+				this.main.animationLoader.showAnimationLinks(animationClassDefs, animationId);
 			} else {
 				animationClass = animationClassDefs;
 			}
 
 			this.main.animationLoader.loadAnimation(animationClass);
-			this.main.animationLoader.showAnimationLinks(animationClassDefs, animationId);
 		});
 	}
 

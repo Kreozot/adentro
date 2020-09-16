@@ -51,24 +51,22 @@ export type MusicData = {
 	}
 }
 
-export type ExtendedAnimationType = {
+export type AnimationVariantParams = {
 	id: string;
-	animClass: DanceAnimation;
+	animClass: typeof DanceAnimation;
 	title: string;
+}
+
+export function isAnimationVariantParamsArray(item: typeof DanceAnimation | AnimationVariantParams[]): item is AnimationVariantParams[] {
+	return (typeof item === 'object');
 }
 
 export type SchemeParams = {
 	name: string;
 	scheme: Scheme;
 	music: MusicData[];
-	animation: DanceAnimation | ExtendedAnimationType[];
+	animation: typeof DanceAnimation | AnimationVariantParams[];
 };
-
-export type AnimationVariantParams = {
-	id: string;
-	title: string;
-	animClass: DanceAnimation;
-}
 
 export interface MainClass {
 	showCurrentElement(element: Element);
