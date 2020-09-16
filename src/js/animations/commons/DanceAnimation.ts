@@ -14,6 +14,11 @@ const figuresSvg = require('svgData/figures.elements');
 // Максимальный угол поворота верха фигуры
 const FIGURE_TOP_ANGLE_MAX = 90;
 
+interface Figure extends Snap.Paper {
+	angle?: number | null;
+	top?: Snap.Paper;
+}
+
 /**
  * Объект анимации
  * @param {String} id DOM-идентификатор SVG-объекта
@@ -27,12 +32,18 @@ export default class DanceAnimation {
 	MAN_COLOR: string;
 	WOMAN_COLOR: string;
 	pathCache: {
-		[key: string]: Snap.Element[];
+		[key: string]: Snap.Element;
 	};
 	pathLengths: Map<Snap.Element, number>;
 	legs: Legs;
-	man: Snap.Paper;
-	woman: Snap.Paper;
+	man: Figure;
+	woman: Figure;
+	startPos: {
+		left?: {x: number, y: number, angle: number},
+		right?: {x: number, y: number, angle: number},
+		top?: {x: number, y: number, angle: number},
+		bottom?: {x: number, y: number, angle: number},
+	}
 
 	constructor(id) {
 		this.svg = Snap('#' + id);
@@ -69,13 +80,13 @@ export default class DanceAnimation {
 
 	pause() {
 		this.paused = true;
-		this.animations.forEach(animation => animation.pause());
+		this.animations.forEach(animation => (animation as any).pause());
 	}
 
 	resume() {
 		if (this.paused) {
 			this.paused = false;
-			this.animations.forEach(animation => animation.resume());
+			this.animations.forEach(animation => (animation as any).resume());
 		}
 	}
 
@@ -84,10 +95,10 @@ export default class DanceAnimation {
 	 * @param  {String} gender Пол
 	 * @return {Object}        SVG-объект танцора
 	 */
-	initFigure(gender) {
+	initFigure(gender): Figure {
 		const figureSvg = Snap.parse(figuresSvg[gender]);
 		this.svg.append(figureSvg);
-		const figure = this.svg.g(
+		const figure: Figure = this.svg.g(
 			this.svg.select('#' + gender)
 				.attr({id: gender + '_figure-inner', display: 'block'})
 		);
@@ -293,7 +304,6 @@ export default class DanceAnimation {
 				pairFigure,
 				dontLookAtPair,
 				rotateDirection,
-				direction
 			});
 		};
 
@@ -359,7 +369,7 @@ export default class DanceAnimation {
 	 * @param  {String} pathStr      Описание траектории в формате SVG path
 	 * @return {Object}              Path-объект траектории
 	 */
-	createPath(pathStr) {
+	createPath(pathStr: string) {
 		const resultPath = this.svg.path(pathStr)
 			.addClass('path')
 			.addClass('invisible');
@@ -375,7 +385,7 @@ export default class DanceAnimation {
 	 * @param  {Boolean} hidden      Создать невидимым
 	 * @return {Object}              Path-объект траектории
 	 */
-	path(pathStr, gender, hidden) {
+	path(pathStr: string, gender: 'man' | 'woman', hidden?: boolean) {
 		const resultPath = this.pathCache[pathStr] || this.createPath(pathStr);
 
 		if (hidden) {
