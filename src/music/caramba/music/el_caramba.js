@@ -1,4 +1,3 @@
-// Caramba
 module.exports = {
 	id: 'caramba',
 	title: 'El Caramba',

@@ -54,6 +54,7 @@
     "yargs": "^3.30.0"
   },
   "dependencies": {
+    "@types/cookie_js": "^1.2.1",
     "@types/jquery": "^2.0.46",
     "babel-polyfill": "^6.26.0",
     "babel-preset-stage-2": "^6.24.1",

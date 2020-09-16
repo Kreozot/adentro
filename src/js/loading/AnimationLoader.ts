@@ -1,11 +1,18 @@
 import contentSwitch from './contentSwitch';
-import animationLinksTemplate from '../templates/animationLinks.ejs';
-import animationBlockTemplate from '../templates/animationBlock.ejs';
+import locale from 'js/locale';
+import { AnimationVariantParams, MainClass } from 'js/types';
+import DanceAnimation from 'js/animations/commons/DanceAnimation';
+
+const animationLinksTemplate = require('../templates/animationLinks.ejs');
+const animationBlockTemplate = require('../templates/animationBlock.ejs');
 
 const minAnimationWidth = 600;
 const maxAnimationHeight = 325;
 
 export default class AnimationLoader {
+	main: MainClass;
+	animation: DanceAnimation;
+
 	constructor(main) {
 		this.main = main;
 		this.animation = null;
@@ -15,7 +22,7 @@ export default class AnimationLoader {
 	 * Загрузка блока анимации
 	 */
 	loadAnimationBlock() {
-		contentSwitch.addBlock('animation_block', localize({ru: 'Хореография', en: 'Choreography'}),
+		contentSwitch.addBlock('animation_block', locale.get({ru: 'Хореография', en: 'Choreography'}),
 			animationBlockTemplate());
 	}
 
@@ -23,7 +30,7 @@ export default class AnimationLoader {
 	 * Загрузка анимации
 	 * @param  {Object} AnimationClass  Класс анимации
 	 */
-	loadAnimation(AnimationClass) {
+	loadAnimation(AnimationClass: DanceAnimation) {
 		const $animationBlock = $('#animation');
 
 		if (this.animation) {
@@ -44,7 +51,7 @@ export default class AnimationLoader {
 	 * @param  {String} animationId         Идентификатор нужного класса
 	 * @return {Object}                     Описание класса в виде {id, name, title}
 	 */
-	getAnimationClassDef(animationClassDefs, animationId) {
+	getAnimationClassDef(animationClassDefs: AnimationVariantParams[], animationId: string) {
 		let animationClass = animationClassDefs.filter(animationClassDef => animationClassDef.id === animationId);
 		return animationClass[0] || animationClassDefs[0];
 	}
@@ -54,13 +61,13 @@ export default class AnimationLoader {
 	 * @param  {Object} animationClassDefs  Массив описаний анимаций
 	 * @param  {String} currentAnimationId         Идентификатор текущей анимации
 	 */
-	showAnimationLinks(animationClassDefs, currentAnimationId) {
+	showAnimationLinks(animationClassDefs: AnimationVariantParams[], currentAnimationId: string) {
 		const navigation = this.main.navigation;
 		$('#animationLinks').html(animationLinksTemplate({
 			animationClassDefs,
 			currentAnimationId,
 			text: {
-				variations: localize({ru: 'Вариации', en: 'Variations'})
+				variations: locale.get({ru: 'Вариации', en: 'Variations'})
 			}
 		}));
 		$('.animation-links__link').on('click', function () {

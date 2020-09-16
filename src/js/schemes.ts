@@ -1,4 +1,11 @@
-module.exports = {
+import { SchemeParams } from "./types";
+
+type GetSchemeParamsCallback = (schemeParams: SchemeParams) => void;
+type GetSchemeParamsMap = {
+	[key: string]: (callback: GetSchemeParamsCallback) => void;
+}
+
+export default {
 	arunguita: function (callback) {
 		require.ensure(['music/arunguita'], function (require) {
 			callback(require('music/arunguita'));
@@ -69,4 +76,4 @@ module.exports = {
 			callback(require('music/zamba_alegre'));
 		}, 'zamba_alegre');
 	},
-};
+} as GetSchemeParamsMap;

@@ -1,4 +1,3 @@
-// Bailecito
 module.exports = {
 	id: 'hugo_torres_la_arunguita',
 	title: 'Hugo Torres - La arunguita',

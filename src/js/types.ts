@@ -1,5 +1,7 @@
 import DanceAnimation from './animations/commons/DanceAnimation';
 import AnimationLoader from './loading/AnimationLoader';
+import Navigation from './navigation';
+import Player from './player';
 
 export type Element = {
 	name: string;
@@ -31,6 +33,10 @@ export type SchemePart = SchemeItem[];
 
 export type Scheme = SchemePart[];
 
+export type SchemeMap = {
+	[key: string]: SchemeElement
+};
+
 export type Timing = {
 	[key: string]: number;
 }
@@ -58,9 +64,23 @@ export type SchemeParams = {
 	animation: DanceAnimation | ExtendedAnimationType[];
 };
 
+export type AnimationVariantParams = {
+	id: string;
+	title: string;
+	animClass: DanceAnimation;
+}
+
 export interface MainClass {
 	showCurrentElement(element: Element);
 	hideCurrentElement();
 	animationLoader: AnimationLoader;
+	player: Player;
+	navigation: Navigation;
+	loadSchema(schemeParams: SchemeParams, musicId: string, animationId: string);
+	showLanguageLinks();
+	loadSchemaEditor(schemeParams: SchemeParams, musicId: string);
+	showMusicLinks(musicData: MusicData[], currentMusicId: string);
+	getModScheme(scheme: Scheme, schemeMods?);
+	renderScheme(scheme: Scheme, editorMode?);
 }
 

@@ -1,10 +1,25 @@
-const schemes = require('./schemes.js');
+import { MainClass } from "./types";
+import locale from 'js/locale';
+
+import schemes from './schemes';
 const URI = require('urijs/src/URI.js');
 
 const supportsHistoryApi = Boolean(window.history && window.history.pushState);
 
+interface NavigationContext {
+	schema?: string;
+	lang?: string;
+	animation?: string;
+	music?: string;
+	editor?: string;
+}
+
 export default class Navigation {
-	constructor(main) {
+	context: NavigationContext;
+	main: MainClass;
+	currentScheme: string;
+
+	constructor(main: MainClass) {
 		this.context = {};
 		this.main = main;
 
@@ -22,7 +37,7 @@ export default class Navigation {
 			});
 	}
 
-	updateMenu(currentSchemeId) {
+	updateMenu(currentSchemeId: string): void {
 		$(`.dance-menu__link:not([data-scheme=${currentSchemeId}])`)
 			.removeClass('link--current');
 		$(`.dance-menu__link[data-scheme=${currentSchemeId}]`)
@@ -35,9 +50,9 @@ export default class Navigation {
 	 * @param  {String} animationId  Идентификатор анимации
 	 * @param  {String} musicId      Идентификатор композиции
 	 */
-	loadSchemaByName(name, animationId, musicId) {
+	loadSchemaByName(name: string, animationId: string, musicId: string): void {
 		const getSchemeParams = schemes[name] || schemes.chacarera;
-		getSchemeParams(schemeParams => {
+		getSchemeParams((schemeParams) => {
 			document.title = `${schemeParams.name} - ¡Adentro!`;
 			this.main.loadSchema(schemeParams, musicId, animationId);
 		});
@@ -50,9 +65,9 @@ export default class Navigation {
 	 * @param  {String} name     Идентификатор схемы
 	 * @param  {String} musicId  Идентификатор композиции
 	 */
-	loadSchemaEditorByName(name, musicId) {
+	loadSchemaEditorByName(name: string, musicId: string): void {
 		const getSchemeParams = schemes[name] || schemes.chacarera;
-		getSchemeParams(schemeParams => {
+		getSchemeParams((schemeParams) => {
 			this.main.loadSchemaEditor(schemeParams, musicId);
 		});
 		this.main.showLanguageLinks();
@@ -63,7 +78,7 @@ export default class Navigation {
 	 * @param  {String} lang Идентификатор языка
 	 * @return {String}      URL текущей страницы со всеми параметрами и параметром lang
 	 */
-	getLanguageLink(lang) {
+	getLanguageLink(lang): string {
 		const uri = new URI();
 		const query = uri.query(true);
 		query.lang = lang;
@@ -87,39 +102,39 @@ export default class Navigation {
 
 	/**
 	 * Получить относительный адрес URL для заданных параметров
-	 * @param  {String} schema    Идентификатор схемы
-	 * @param  {String} animation Идентификатор анимации
-	 * @param  {String} music     Идентификатор композиции
+	 * @param  {String} schemaId    Идентификатор схемы
+	 * @param  {String} animationId Идентификатор анимации
+	 * @param  {String} musicId     Идентификатор композиции
 	 * @return {String}           Относительный путь URL
 	 */
-	getRelativeUrl(schema, animation, music) {
-		return '?schema=' + schema +
-			(animation ? ('&animation=' + animation) : '') +
-			(music ? ('&music=' + music) : '');
+	getRelativeUrl(schemaId: string, animationId: string, musicId: string): string {
+		return '?schema=' + schemaId +
+			(animationId ? ('&animation=' + animationId) : '') +
+			(musicId ? ('&music=' + musicId) : '');
 	}
 
 	/**
 	 * Получение параметров контекста из URL
 	 * @return {Object} Объект контекста
 	 */
-	getContextFromUrl() {
+	getContextFromUrl(): NavigationContext {
 		const url = new URI();
 		const params = url.query(true);
-		const context = {};
-		context.schema = params.schema;
-		context.lang = params.lang || 'ru';
-		this.main.lang = context.lang;
-		context.animation = params.animation;
-		context.music = params.music;
-		context.editor = params.editor;
-		return context;
+		locale.lang = params.lang;
+		return {
+			schema: params.schema,
+			lang: params.lang || 'ru',
+			animation: params.animation,
+			music: params.music,
+			editor: params.editor,
+		};
 	}
 
 	/**
 	 * Перейти на указанную схему по URL
 	 * @param  {String} schemaId Идентификатор схемы
 	 */
-	showSchema(schemaId) {
+	showSchema(schemaId: string): void {
 		this.context.schema = schemaId;
 		this.context.animation = undefined;
 		this.context.music = undefined;
@@ -130,7 +145,7 @@ export default class Navigation {
 	/**
 	 * Обновить URL в соответствии с текущим контекстом
 	 */
-	updateUrl() {
+	updateUrl(): void {
 		const {schema, animation, music} = this.context;
 
 		this.pushStateOrRedirect({schema, animation, music}, this.getRelativeUrl(schema, animation, music));
@@ -140,12 +155,12 @@ export default class Navigation {
 	 * Переключиться на определённую анимацию
 	 * @param  {Number} animationId  Идентификатор анимации
 	 */
-	showAnimation(animationId) {
+	showAnimation(animationId: string): void {
 		this.context.animation = animationId;
 		this.updateUrl();
 
 		const getSchemeParams = schemes[this.context.schema];
-		getSchemeParams(schemeParams => {
+		getSchemeParams((schemeParams) => {
 			const animationClassDefs = schemeParams.animation;
 			let animationClass;
 			if (typeof animationClassDefs === 'object') {
@@ -206,13 +221,12 @@ export default class Navigation {
 	 * @return {Boolean} True если схема была загружена
 	 */
 	loadSchemaByUrl() {
-		let context = this.getContextFromUrl();
-		this.context = context;
-		if (context.schema) {
-			if (context.editor) {
-				this.loadSchemaEditorByName(context.schema, context.music);
+		this.context = this.getContextFromUrl();
+		if (this.context.schema) {
+			if (this.context.editor) {
+				this.loadSchemaEditorByName(this.context.schema, this.context.music);
 			} else {
-				this.loadSchemaByName(context.schema, context.animation, context.music);
+				this.loadSchemaByName(this.context.schema, this.context.animation, this.context.music);
 			}
 			return true;
 		}

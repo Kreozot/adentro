@@ -1,4 +1,3 @@
-// Bailecito
 module.exports = {
 	id: 'bailecito',
 	title: 'Abel Figueroa — Toda la noche',

@@ -9,8 +9,9 @@ import Player from './player';
 import contentSwitch from './loading/contentSwitch';
 import AnimationLoader from './loading/AnimationLoader';
 import Tour from './tour';
+import locale from 'js/locale';
 
-import { Scheme, SchemeElement, Element, MusicData, SchemeParams, MainClass } from './types';
+import { Scheme, Element, MusicData, SchemeParams, MainClass, isSchemeElement, SchemeMap } from './types';
 
 const schemeTemplate = require('./templates/scheme.ejs');
 const musicLinksTemplate = require('./templates/musicLinks.ejs');
@@ -29,10 +30,7 @@ class Adentro implements MainClass {
 	player: Player;
 	animationLoader: AnimationLoader;
 	scheme: Scheme;
-	schemeMap: {
-		[key: string]: SchemeElement
-	};
-	lang: 'ru' | 'en';
+	schemeMap: SchemeMap;
 
 	constructor() {
 		this.navigation = new Navigation(this);
@@ -115,7 +113,7 @@ class Adentro implements MainClass {
 			musicData,
 			currentMusicId,
 			text: {
-				composition: this.localize({ru: 'Композиция', en: 'Composition'})
+				composition: locale.get({ru: 'Композиция', en: 'Composition'})
 			}
 		}));
 		$('#musicSelect').change(function () {
@@ -137,38 +135,45 @@ class Adentro implements MainClass {
 		}].map(lang => ({
 			...lang,
 			url: this.navigation.getLanguageLink(lang.id),
-			isCurrent: lang.id === this.lang
+			isCurrent: lang.id === locale.lang
 		}));
 
 		$('.lang-links').html(langLinksTemplate({languages}));
 	}
 
-	getModScheme(scheme, schemeMods = {}) {
+	getModScheme(scheme: Scheme, schemeMods = {}) {
 		const modElementIds = Object.keys(schemeMods);
 		return scheme.map(part => part.map(element => {
-			const elementModId = modElementIds.find(modElement => modElement === element.id);
-			if (elementModId) {
-				return {...element, ...schemeMods[elementModId]};
+			if (isSchemeElement(element)) {
+				const elementModId = modElementIds.find((modElement) => {
+					return modElement === element.id
+				});
+				if (elementModId) {
+					return {...element, ...schemeMods[elementModId]};
+				}
 			}
 			return element;
 		}));
 	}
 
-	getSchemeMap(scheme) {
-		return scheme.reduce((result, part) => {
+	getSchemeMap(scheme: Scheme): SchemeMap {
+		return scheme.reduce((result: SchemeMap, part) => {
 			return {
 				...result,
-				...part.reduce((partResult, element) => {
-					return {
-						...partResult,
-						[element.id]: element
-					};
+				...part.reduce((partResult: SchemeMap, element) => {
+					if (isSchemeElement(element)) {
+						return {
+							...partResult,
+							[element.id]: element
+						};
+					}
+					return partResult;
 				}, {})
 			};
 		}, {});
 	}
 
-	renderScheme(scheme, editorMode = false) {
+	renderScheme(scheme: Scheme, editorMode = false) {
 		$('#schemaDiv').html(schemeTemplate({scheme}));
 		this.adaptiveLineHeight();
 
@@ -262,10 +267,6 @@ class Adentro implements MainClass {
 			$(this).css('height', `${maxHeight + 7}px`);
 		});
 	}
-
-	localize(textObj) {
-		return textObj[this.lang];
-	}
 }
 
 interface CustomNodeJsGlobal extends NodeJS.Global {
@@ -276,7 +277,7 @@ interface CustomNodeJsGlobal extends NodeJS.Global {
 declare const global: CustomNodeJsGlobal;
 
 global.adentro = new Adentro();
-global.localize = textObj => global.adentro.localize(textObj);
+global.localize = textObj => locale.get(textObj);
 global.tour = new Tour();
 export default Adentro;
 
