@@ -1,6 +1,9 @@
-import Promise from 'bluebird';
-import {getOppositePosition} from 'js/animations/commons/utils';
+import * as Promise from 'bluebird';
+import { getOppositePosition } from 'js/animations/commons/utils';
+import { FigurePosition, PathStrings } from 'js/animations/commons/AnimationTypes';
+import DanceAnimation from 'js/animations/commons/DanceAnimation';
 import SingleElement from '../single/SingleElement';
+import { DIRECTIONS, FIGURE_HANDS, LEGS, ROTATE, STEP_STYLE } from '../../const';
 
 /**
  * Парная анимация
@@ -8,7 +11,11 @@ import SingleElement from '../single/SingleElement';
  * @param {Object} pathStrings Строковое описание траекторий в формате позиция: траектория, ...
  */
 export default class PairElement {
-	constructor(animation, pathStrings) {
+	animation: DanceAnimation;
+	manDanceAnimationElement: SingleElement;
+	womanDanceAnimationElement: SingleElement;
+
+	constructor(animation: DanceAnimation, pathStrings: PathStrings) {
 		this.animation = animation;
 		this.manDanceAnimationElement = new SingleElement(animation, pathStrings, 'man');
 		this.womanDanceAnimationElement = new SingleElement(animation, pathStrings, 'woman');
@@ -18,45 +25,55 @@ export default class PairElement {
 	 * Отрисовка траекторий
 	 * @param  {String} manPosition Позиция партнёра
 	 */
-	drawPath(manPosition, transparent) {
+	drawPath(manPosition: FigurePosition, transparent?: boolean): void {
 		this.animation.manPosition = manPosition;
 		this.manDanceAnimationElement.drawPath(manPosition, transparent);
 		this.womanDanceAnimationElement.drawPath(getOppositePosition(manPosition), transparent);
-		return this;
 	}
 
 	/**
 	 * Отрисованы ли траектории
 	 */
-	isPathsDrawn() {
-		return (this.manDanceAnimationElement.isPathsDrawn() && this.womanDanceAnimationElement.isPathsDrawn());
+	isPathsDrawn(): boolean {
+		return this.manDanceAnimationElement.isPathsDrawn() &&
+			this.womanDanceAnimationElement.isPathsDrawn();
 	}
 
 	/**
 	 * Задать относительный угол разворота
-	 * @param {Number} value Значение угла
+	 * @param {Number} angle Значение угла
 	 */
-	setAngle(value) {
-		this.manDanceAnimationElement.setAngle(value);
-		this.womanDanceAnimationElement.setAngle(value);
-		return this;
+	setAngle(angle: number): void {
+		this.manDanceAnimationElement.setAngle(angle);
+		this.womanDanceAnimationElement.setAngle(angle);
 	}
 
 	/**
 	 * Задать относительный углов разворота
-	 * @param {Number} manValue   Значение угла для партнёра
-	 * @param {Number} womanValue Значение угла для партнёрши
+	 * @param {Number} manAngle   Значение угла для партнёра
+	 * @param {Number} womanAngle Значение угла для партнёрши
 	 */
-	setAngles(manValue, womanValue) {
-		this.manDanceAnimationElement.setAngle(manValue);
-		this.womanDanceAnimationElement.setAngle(womanValue);
-		return this;
+	setAngles(manAngle: number, womanAngle: number): void {
+		this.manDanceAnimationElement.setAngle(manAngle);
+		this.womanDanceAnimationElement.setAngle(womanAngle);
 	}
 
 	/**
 	 * Запуск анимации элементов
 	 */
-	startAnimation(options) {
+	startAnimation(options: {
+		lengthS: number;
+		beats: number;
+		direction?: DIRECTIONS;
+		startPart?: number;
+		stopPart?: number;
+		figureHands?: FIGURE_HANDS;
+		isLastElement: boolean;
+		stepStyle: STEP_STYLE,
+		firstLeg: LEGS,
+		rotateDirection: ROTATE,
+		dontLookAtPair: boolean;
+	}): Promise {
 		return Promise.all([
 			this.manDanceAnimationElement.startAnimation(options),
 			this.womanDanceAnimationElement.startAnimation(options)
@@ -70,7 +87,20 @@ export default class PairElement {
 	 * @param  {String} manPosition Начальная позиция партнёра
 	 * @param  {String} direction 	Направление движения фигуры
 	 */
-	fullAnimation(options) {
+	fullAnimation(options: {
+		lengthS: number;
+		beats: number;
+		direction?: DIRECTIONS;
+		startPart?: number;
+		stopPart?: number;
+		figureHands?: FIGURE_HANDS;
+		isLastElement: boolean;
+		stepStyle: STEP_STYLE,
+		firstLeg: LEGS,
+		rotateDirection: ROTATE,
+		dontLookAtPair: boolean;
+		manPosition: FigurePosition;
+	}) {
 		this.animation.clearPaths();
 		this.drawPath(options.manPosition);
 		return this.startAnimation(options);

@@ -32,7 +32,7 @@ export function getAngleDiff(angle1, angle2) {
  * @param  {Number} rotateDirection Идентификатор направления поворота (для плавного изменения градуса)
  * @return {Number} Угол с учётом плавного поворота
  */
-export function smoothRotationAngle(newAngle, currentAngle, rotateDirection) {
+export function smoothRotationAngle(newAngle: number, currentAngle: number, rotateDirection?: ROTATE) {
 	const angleDiff = getAngleDiff(currentAngle, newAngle);
 	if ((Math.abs(angleDiff) > FIGURE_ANGLE_TICK) &&
 		(Math.abs(angleDiff) < 360 - FIGURE_ANGLE_TICK)) {

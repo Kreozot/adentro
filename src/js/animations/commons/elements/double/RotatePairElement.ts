@@ -1,4 +1,5 @@
-import Promise from 'bluebird';
+import * as Promise from 'bluebird';
+
 import PairElement from './PairElement';
 import RotateElement from '../single/RotateElement';
 
@@ -9,8 +10,9 @@ import RotateElement from '../single/RotateElement';
  * @param {Number} rotateAngle Угол поворота
  */
 export default class RotatePairElement extends PairElement {
+
 	constructor(animation, pathStrings, rotateAngle) {
-		super(animation, pathStrings, rotateAngle);
+		super(animation, pathStrings);
 
 		this.manDanceAnimationElement = new RotateElement(animation, pathStrings, 'man', undefined, rotateAngle);
 		this.womanDanceAnimationElement = new RotateElement(animation, pathStrings, 'woman', undefined, rotateAngle);

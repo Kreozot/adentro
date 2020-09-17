@@ -6,25 +6,14 @@ import {normalizeAngle, smoothRotationAngle, getAngleBetweenPoints} from 'js/ani
 import {getFigureCenter} from 'js/animations/commons/utils';
 
 import Legs from './Legs';
-import {STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS, ROTATE} from './const';
+import { STEP_STYLE, DIRECTIONS, FIGURE_HANDS, LEGS, ROTATE } from './const';
+import { FigurePosition, Figure, EasingFunction, Gender, Coords } from './AnimationTypes';
 
 const arrowsPaths = require('svgData/arrows.paths');
 const figuresSvg = require('svgData/figures.elements');
 
 // Максимальный угол поворота верха фигуры
 const FIGURE_TOP_ANGLE_MAX = 90;
-
-interface Figure extends Snap.Paper {
-	angle?: number | null;
-	top?: Figure;
-	coords?: [number, number];
-}
-
-export type Gender = 'man' | 'woman';
-
-export type Coords = {x: number, y: number, angle: number};
-
-export type FigurePosition = 'left' | 'right' | 'top' | 'bottom';
 
 /**
  * Объект анимации
@@ -46,10 +35,8 @@ export default class DanceAnimation {
 	man: Figure;
 	woman: Figure;
 	startPos: {
-		left?: Coords,
-		right?: Coords,
-		top?: Coords,
-		bottom?: Coords,
+		left: Coords,
+		right: Coords,
 	}
 	width: number;
 	height: number;
@@ -230,9 +217,9 @@ export default class DanceAnimation {
 		x: number;
 		y: number;
 		angle: number;
-		pairFigure: Figure;
-		rotateDirection: ROTATE,
-		dontLookAtPair: boolean;
+		pairFigure?: Figure;
+		rotateDirection?: ROTATE,
+		dontLookAtPair?: boolean;
 	}) {
 		angle = normalizeAngle(angle);
 		if (!figure.angle && (figure.angle !== 0)) {
@@ -296,7 +283,7 @@ export default class DanceAnimation {
 		timeLength: number,
 		beats: number,
 		direction: DIRECTIONS,
-		easing: (num: number) => number,
+		easing: EasingFunction,
 		figureHands: FIGURE_HANDS,
 		pairFigure: Figure,
 		dontLookAtPair: boolean,
@@ -387,7 +374,7 @@ export default class DanceAnimation {
 		timeLength: number,
 		beats: number,
 		direction: DIRECTIONS,
-		easing: (num: number) => number,
+		easing: EasingFunction,
 		figureHands: FIGURE_HANDS,
 		dontLookAtPair: boolean,
 		isLastElement: boolean,
@@ -413,7 +400,7 @@ export default class DanceAnimation {
 		timeLength: number,
 		beats: number,
 		direction: DIRECTIONS,
-		easing: (num: number) => number,
+		easing: EasingFunction,
 		figureHands: FIGURE_HANDS,
 		dontLookAtPair: boolean,
 		isLastElement: boolean,
@@ -429,7 +416,7 @@ export default class DanceAnimation {
 	}
 
 	/**
-	 * СОздать path-объект и полоить его в кеш
+	 * СОздать path-объект и положить его в кеш
 	 * @param  {String} pathStr      Описание траектории в формате SVG path
 	 * @return {Object}              Path-объект траектории
 	 */
@@ -503,7 +490,7 @@ export default class DanceAnimation {
 	 * @param  {Object} rightCoords Объект с описанием координат правой позиции {x, y, angle}
 	 * @param  {String} manPosition Позиция партнёра
 	 */
-	startPosition(leftCoords: Coords, rightCoords: Coords, manPosition: FigurePosition): void {
+	private startPosition(leftCoords: Coords, rightCoords: Coords, manPosition: FigurePosition): void {
 		this.clearPaths();
 
 		manPosition = manPosition || this.manPosition;

@@ -1,6 +1,16 @@
+import { Coords, Figure, FigurePosition } from './AnimationTypes';
 import DanceAnimation from './DanceAnimation';
 
 export default class Dance4Animation extends DanceAnimation {
+	man2: Figure;
+	woman2: Figure;
+	protected startPos4: {
+		left1?: Coords,
+		right1?: Coords,
+		left2?: Coords,
+		right2?: Coords,
+	};
+
 	constructor(id) {
 		super(id);
 
@@ -15,7 +25,7 @@ export default class Dance4Animation extends DanceAnimation {
 		this.hideFigure(this.woman2);
 	}
 
-	startPosition(leftCoords1, rightCoords1, leftCoords2, rightCoords2, manPosition) {
+	private startPosition4(leftCoords1: Coords, rightCoords1: Coords, leftCoords2: Coords, rightCoords2: Coords, manPosition: FigurePosition) {
 		this.clearPaths();
 
 		if (!manPosition) {
@@ -36,6 +46,6 @@ export default class Dance4Animation extends DanceAnimation {
 	}
 
 	setAtStart(manPosition) {
-		this.startPosition(this.startPos.left1, this.startPos.right1, this.startPos.left2, this.startPos.right2, manPosition);
+		this.startPosition4(this.startPos4.left1, this.startPos4.right1, this.startPos4.left2, this.startPos4.right2, manPosition);
 	}
 }

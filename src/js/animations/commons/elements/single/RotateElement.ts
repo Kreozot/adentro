@@ -1,6 +1,8 @@
-import Promise from 'bluebird';
-import {FIGURE_HANDS} from 'js/animations/commons/const';
-import SingleElement from './SingleElement';
+import * as Promise from 'bluebird';
+import * as Snap from 'snapsvg';
+
+import { FIGURE_HANDS } from 'js/animations/commons/const';
+import SingleElement, { AnimationFunctionParameters, StartAnimationParameters } from './SingleElement';
 
 /**
  * Продвижение с вращением
@@ -11,13 +13,15 @@ import SingleElement from './SingleElement';
  * @param {Number} rotateAngle Угол поворота
  */
 export default class RotateElement extends SingleElement {
+	rotateAngle: number;
+
 	constructor(animation, pathStrings, gender, figure, rotateAngle) {
 		super(animation, pathStrings, gender, figure, rotateAngle);
 
 		this.rotateAngle = rotateAngle;
 	}
 
-	animationFunction({lengthMs, beats}) {
+	animationFunction({lengthMs, beats}: AnimationFunctionParameters) {
 		this.animation.startPosFigure(this.figure, this.animation.startPos[this.position]);
 		return this.animation.legs.animateFigureTime({
 			figure: this.figure,
@@ -26,7 +30,14 @@ export default class RotateElement extends SingleElement {
 		});
 	}
 
-	startAnimation({lengthS, beats, startAngle, startPart = 0, stopPart = 1, figureHands = FIGURE_HANDS.CASTANETAS}) {
+	startAnimation({
+		lengthS,
+		beats,
+		startAngle,
+		startPart = 0,
+		stopPart = 1,
+		figureHands = FIGURE_HANDS.CASTANETAS
+	}: StartAnimationParameters) {
 		const angle = startAngle;
 		const startLen = this.pathLength * startPart;
 		const stopLen = this.pathLength * stopPart;
