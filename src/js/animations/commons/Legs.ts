@@ -1,10 +1,15 @@
-import Promise from 'bluebird';
-import {LEGS, STEP_STYLE} from './const';
+import * as Promise from 'bluebird';
+import * as Snap from 'snapsvg';
+
+import { EasingFunction, Figure } from './AnimationTypes';
+import { FIGURE_HANDS, LEGS, STEP_STYLE } from './const';
 
 // Амплитуда шага в пикселях (в одну сторону)
 const FIGURE_STEP_AMPLITUDE = 13;
 
 export default class Legs {
+	animations: mina.MinaAnimation[];
+
 	constructor(animations) {
 		this.animations = animations;
 	}
@@ -21,6 +26,14 @@ export default class Legs {
 		transformFrom,
 		transformTo,
 		easing = mina.linear
+	}: {
+		figure: Figure;
+		legStr: string;
+		duration: number;
+		transformFrom: number;
+		transformTo: number;
+		easing?
+		: EasingFunction;
 	}) {
 		return new Promise((resolve) => {
 			this.animations.push(Snap.animate(
@@ -256,7 +269,7 @@ export default class Legs {
 	 * @param  {Number}  stepStyle  Стиль шага
 	 * @param  {Boolean} isLastElement Это последний элемент музкальной части
 	 */
-	animateFigureTime({
+	public animateFigureTime({
 		figure,
 		timeLength,
 		beats,
@@ -264,6 +277,14 @@ export default class Legs {
 		isLastElement,
 		firstLeg = LEGS.LEFT,
 		figureHands
+	}: {
+		figure: Figure;
+		timeLength: number;
+		beats: number;
+		stepStyle: STEP_STYLE;
+		isLastElement: boolean;
+		firstLeg?: LEGS;
+		figureHands?: FIGURE_HANDS;
 	}) {
 		if (figureHands) {
 			$(`.hands:not(.hands--${figureHands})`, figure.node).addClass('invisible');
