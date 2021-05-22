@@ -1,8 +1,10 @@
+import { MusicData } from 'js/types';
+
 // Chacarera simple 6
-module.exports = {
+module.exports = <MusicData>{
 	id: 'la_penadora',
 	title: 'La Penadora (6)',
-	file: require('./la_penadora.mp3'),
+	file: 'https://res.cloudinary.com/adentro/video/upload/v1621676410/music/la_penadora.mp3',
 	schema: require('./la_penadora.yaml'),
 	schemeMods: {
 		vuelta: {beats: 6},
