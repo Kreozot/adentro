@@ -271,13 +271,11 @@ class Adentro implements MainClass {
 
 interface CustomNodeJsGlobal extends NodeJS.Global {
 	adentro: Adentro;
-	localize: any; // TODO
 	tour: Tour;
 }
 declare const global: CustomNodeJsGlobal;
 
 global.adentro = new Adentro();
-global.localize = textObj => locale.get(textObj);
 global.tour = new Tour();
 export default Adentro;
 

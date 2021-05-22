@@ -87,4 +87,3 @@ globals:
   mina: true
   Snap: true
   requireSchemes: true
-  localize: true

@@ -1,3 +1,5 @@
+import locale from 'js/locale';
+
 module.exports = {
 	name: 'Chacarera',
 	scheme: require('./scheme.yaml'),
@@ -10,11 +12,11 @@ module.exports = {
 	animation: [{
 		id: 'onTwo',
 		animClass: require('js/animations/ChacareraAnimation').default,
-		title: localize({ru: 'На двоих', en: 'On two people'})
+		title: locale.get({ru: 'На двоих', en: 'On two people'})
 	}, {
 		id: 'onFour',
 		animClass: require('js/animations/Chacarera4Animation').default,
-		title: localize({ru: 'На четверых', en: 'On four people'})
+		title: locale.get({ru: 'На четверых', en: 'On four people'})
 	}],
 	info: require('info/chacarera.inc'),
 	zapateo: true

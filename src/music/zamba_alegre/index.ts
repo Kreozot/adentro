@@ -1,3 +1,5 @@
+import locale from 'js/locale';
+
 module.exports = {
 	name: 'Zamba Alegre',
 	scheme: require('./scheme.yaml'),
@@ -7,11 +9,11 @@ module.exports = {
 	animation: [{
 		id: 'simple',
 		animClass: require('js/animations/ZambaSimpleAnimation').default,
-		title: localize({ru: 'Традиционная', en: 'Traditional'})
+		title: locale.get({ru: 'Традиционная', en: 'Traditional'})
 	}, {
 		id: 'classic',
 		animClass: require('js/animations/ZambaAnimation').default,
-		title: localize({ru: 'Модифицированная', en: 'Modified'})
+		title: locale.get({ru: 'Модифицированная', en: 'Modified'})
 	}],
 	zapateo: true
 };
