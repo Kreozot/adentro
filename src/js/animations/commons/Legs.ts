@@ -1,4 +1,4 @@
-import * as Promise from 'bluebird';
+import * as BluebirdPromise from 'bluebird';
 import * as Snap from 'snapsvg';
 
 import { EasingFunction, Figure } from './AnimationTypes';
@@ -35,7 +35,7 @@ export default class Legs {
 		easing?
 		: EasingFunction;
 	}) {
-		return new Promise((resolve) => {
+		return new BluebirdPromise((resolve) => {
 			this.animations.push(Snap.animate(
 				transformFrom,
 				transformTo,
@@ -71,7 +71,7 @@ export default class Legs {
 		}
 		const oppositeLegStr = this.getOppositeLeg(legStr);
 
-		await Promise.all([
+		await BluebirdPromise.all([
 			this.animateLeg({
 				figure,
 				legStr,
@@ -102,7 +102,7 @@ export default class Legs {
 		stepsLeft
 	}) {
 		if (stepsLeft < 1) {
-			return Promise.resolve();
+			return BluebirdPromise.resolve();
 		}
 		const oppositeLegStr = this.getOppositeLeg(legStr);
 
@@ -174,11 +174,11 @@ export default class Legs {
 		stepsLeft
 	}) {
 		if (stepsLeft < 1) {
-			return Promise.resolve();
+			return BluebirdPromise.resolve();
 		}
 		const oppositeLegStr = this.getOppositeLeg(legStr);
 
-		await Promise.all([
+		await BluebirdPromise.all([
 			this.animateLeg({
 				figure,
 				legStr,
@@ -194,7 +194,7 @@ export default class Legs {
 				transformTo: FIGURE_STEP_AMPLITUDE,
 			})
 		]);
-		await Promise.all([
+		await BluebirdPromise.all([
 			this.animateLeg({
 				figure,
 				legStr: oppositeLegStr,
@@ -273,16 +273,16 @@ export default class Legs {
 		figure,
 		timeLength,
 		beats,
-		stepStyle,
-		isLastElement,
+		stepStyle = STEP_STYLE.BASIC,
+		isLastElement = false,
 		firstLeg = LEGS.LEFT,
 		figureHands
 	}: {
 		figure: Figure;
 		timeLength: number;
 		beats: number;
-		stepStyle: STEP_STYLE;
-		isLastElement: boolean;
+		stepStyle?: STEP_STYLE;
+		isLastElement?: boolean;
 		firstLeg?: LEGS;
 		figureHands?: FIGURE_HANDS;
 	}) {
