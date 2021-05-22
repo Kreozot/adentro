@@ -9,7 +9,7 @@ import Player from './player';
 import contentSwitch from './loading/contentSwitch';
 import AnimationLoader from './loading/AnimationLoader';
 import Tour from './tour';
-import locale from 'js/locale';
+import locale, { Locale } from 'js/locale';
 
 import { Scheme, Element, MusicData, SchemeParams, MainClass, isSchemeElement, SchemeMap } from './types';
 
@@ -146,7 +146,7 @@ class Adentro implements MainClass {
 		return scheme.map(part => part.map(element => {
 			if (isSchemeElement(element)) {
 				const elementModId = modElementIds.find((modElement) => {
-					return modElement === element.id
+					return modElement === element.id;
 				});
 				if (elementModId) {
 					return {...element, ...schemeMods[elementModId]};
@@ -269,14 +269,17 @@ class Adentro implements MainClass {
 	}
 }
 
-interface CustomNodeJsGlobal extends NodeJS.Global {
-	adentro: Adentro;
-	tour: Tour;
+declare global {
+    // eslint-disable-next-line no-unused-vars
+    interface Window {
+        adentro: Adentro;
+		tour: Tour;
+		adentroLocale: Locale;
+    }
 }
-declare const global: CustomNodeJsGlobal;
 
-global.adentro = new Adentro();
-global.tour = new Tour();
+window.adentro = new Adentro();
+window.tour = new Tour();
 export default Adentro;
 
 $(window).on('load', function () {
@@ -288,14 +291,14 @@ $(window).on('load', function () {
 		}
 	};
 	window.addEventListener('popstate', () => {
-		global.adentro.navigation.loadSchemaByState();
+		window.adentro.navigation.loadSchemaByState();
 	});
 
-	if (!global.adentro.navigation.loadSchemaByUrl()) {
-		global.adentro.navigation.showSchema('chacarera');
+	if (!window.adentro.navigation.loadSchemaByUrl()) {
+		window.adentro.navigation.showSchema('chacarera');
 	}
 
-	global.tour.startFirstTime();
+	window.tour.startFirstTime();
 });
 
 function copyText(text) {
@@ -320,4 +323,4 @@ $('.logo').on('click', () => {
 	}
 });
 
-$(window).on('resize', () => global.adentro.adaptiveLineHeight());
+$(window).on('resize', () => window.adentro.adaptiveLineHeight());

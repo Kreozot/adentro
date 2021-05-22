@@ -1,4 +1,4 @@
-import { Element, MusicData, Timing } from "../types";
+import { Element, Timing } from '../types';
 
 export const getElementAfter = function (timing: Timing, time: number): Element {
 	const nextElement = {name: '', time: 10000};

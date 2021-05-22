@@ -7,7 +7,7 @@ interface TextLocales {
 	en: string;
 }
 
-class Locale {
+export class Locale {
 	_lang: LocaleId;
 
 	constructor() {
@@ -27,14 +27,9 @@ class Locale {
 	}
 }
 
-interface CustomNodeJsGlobal extends NodeJS.Global {
-	adentroLocale: Locale;
-}
-declare const global: CustomNodeJsGlobal;
-
 // Использование global для того, чтобы использовать модуль в разных бандлах
-if (!global.adentroLocale) {
-	global.adentroLocale = new Locale();
+if (!window.adentroLocale) {
+	window.adentroLocale = new Locale();
 }
 
-export default global.adentroLocale;
+export default window.adentroLocale;

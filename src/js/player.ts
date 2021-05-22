@@ -2,7 +2,7 @@ import * as Plyr from 'plyr';
 require('plyr/dist/plyr.css');
 
 import { getElement, getElementAfter } from './timing/timing';
-import { isSchemeElement, MainClass, MusicData, Scheme, SchemeBar, SchemeElement, Timing } from './types';
+import { isSchemeElement, MainClass, MusicData, Scheme, Timing } from './types';
 
 export default class Player {
 	main: MainClass;
