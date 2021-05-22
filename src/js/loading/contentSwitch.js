@@ -1,4 +1,4 @@
-let contentSwitch = {
+const contentSwitch = {
 	/**
 	 * Очистить содержимое страницы
 	 */

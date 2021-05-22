@@ -1,4 +1,4 @@
-import { MainClass, isAnimationVariantParamsArray } from "./types";
+import { MainClass, isAnimationVariantParamsArray } from './types';
 import locale from 'js/locale';
 
 import schemes from './schemes';

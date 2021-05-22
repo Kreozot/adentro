@@ -21,7 +21,7 @@ export interface SchemeElement {
 	class: string;
 	visualization: string;
 	title: string;
-};
+}
 
 export type SchemeItem = (SchemeElement | SchemeBar);
 
