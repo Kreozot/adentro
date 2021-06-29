@@ -78,7 +78,7 @@
     "html-minifier": "^3.5.21",
     "htmlnano": "^0.2.5",
     "jest": "^27.0.6",
-    "jquery": "^2.1.4",
+    "jquery": "^3.5.0",
     "js-yaml": "^3.13.1",
     "js-yaml-loader": "^1.2.2",
     "plyr": "^3.5.10",
