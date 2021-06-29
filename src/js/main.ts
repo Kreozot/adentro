@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 import '../styles/main.scss';
 import '../styles/menu.scss';

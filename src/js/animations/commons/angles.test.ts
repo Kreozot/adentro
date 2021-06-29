@@ -1,4 +1,10 @@
 import {
+	describe,
+	test,
+	expect,
+} from '@jest/globals';
+
+import {
 	normalizeAngle,
 	getAngleDiff,
 	smoothRotationAngle,

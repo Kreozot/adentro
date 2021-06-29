@@ -10,3 +10,4 @@
 /.env
 /.history
 /.sentryclirc
+/coverage
