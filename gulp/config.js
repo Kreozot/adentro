@@ -25,15 +25,8 @@ module.exports = {
 			html: path.resolve('./dist')
 		}
 	},
-	files: {
-		mockMp3: path.resolve('./test/fixtures/pomogator.mp3')
-	},
 	devServer: {
 		host: 'localhost',
 		port: 8080
 	},
-	ftp: {
-		host: 'adentro.ru',
-		port: 21
-	}
 };

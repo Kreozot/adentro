@@ -5,7 +5,6 @@ const webpack = require('webpack');
 const webpackConfig = require('../webpack.config.js');
 const gutil = require('gulp-util');
 const del = require('promised-del');
-const argv = require('yargs').argv;
 
 gulp.task('clean-js', function cleanFs() {
 	return del([
@@ -17,9 +16,6 @@ gulp.task('clean-js', function cleanFs() {
 });
 
 const buildDeps = ['clean-js', 'build-svg'];
-if (argv.mockmp3) {
-	buildDeps.push('mock-mp3');
-}
 
 gulp.task('build-js', gulp.series(...buildDeps, function buildJs(callback) {
 	webpack(webpackConfig, function (err, stats) {
