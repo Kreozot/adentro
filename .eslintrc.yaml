@@ -1,0 +1,13 @@
+---
+extends:
+- eslint-config-airbnb-typescript
+- eslint-config-airbnb/hooks
+parserOptions:
+  project: ./tsconfig.json
+
+env:
+  browser: true
+
+rules:
+  react/prop-types: 'off'
+  arrow-body-style: 'off'
