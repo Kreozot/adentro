@@ -11,3 +11,5 @@
 /.history
 /.sentryclirc
 /coverage
+/.cache
+/public

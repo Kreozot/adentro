@@ -34,23 +34,23 @@
 	}
 }
 
-.menu-icon {
-	display: none;
-	height: 25px;
-	margin: 5px 15px 0 10px;
+// .menu-icon {
+// 	display: none;
+// 	height: 25px;
+// 	margin: 5px 15px 0 10px;
 
-	@include media(M) {
-		display: inline-block;
-	}
-}
+// 	@include media(M) {
+// 		display: inline-block;
+// 	}
+// }
 
-.logo-image {
-	height: 45px;
+// .logo-image {
+// 	height: 45px;
 
-	@include media(S) {
-		height: 30px;
-	}
-}
+// 	@include media(S) {
+// 		height: 30px;
+// 	}
+// }
 
 .lang-links {
 	width: 100%;
