@@ -1,8 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { Link, useParams } from 'gatsby';
 
 import { COLORS, MEDIA } from '../../../../styles';
-import { MenuItemData } from '../menuList';
+import { MenuItemData } from '../../../../menuList';
 
 const Item = styled.li`
 
@@ -14,11 +15,11 @@ interface MenuItemProps {
 }
 
 const MenuItem = ({ active, data }: MenuItemProps) => {
-
-
   return (
     <Item>
-      {data.title.es}
+      <Link to={`/${data.scheme}`}>
+        {data.title.es}
+      </Link>
     </Item>
   );
 };

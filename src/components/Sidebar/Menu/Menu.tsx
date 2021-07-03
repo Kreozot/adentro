@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { COLORS, MEDIA } from '../../../styles';
-import { MENU_LIST } from './menuList';
+import { MENU_LIST } from '../../../menuList';
 import MenuItem from './MenuItem';
 
 const Navigation = styled.nav`
