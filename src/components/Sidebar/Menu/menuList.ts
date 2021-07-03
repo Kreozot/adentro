@@ -1,9 +1,9 @@
-export type MenuItem = {
+export type MenuItemData = {
   title: LocalizedString,
   scheme: string,
 };
 
-export const MENU_LIST: MenuItem[] = [
+export const MENU_LIST: MenuItemData[] = [
   {
     title: {
       es: 'Chacarera Simple',
