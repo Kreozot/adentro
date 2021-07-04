@@ -11,3 +11,4 @@ env:
 rules:
   react/prop-types: 'off'
   arrow-body-style: 'off'
+  max-len: 'off'

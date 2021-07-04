@@ -1,9 +1,10 @@
 {
-	"compilerOptions": {
-		"sourceMap": true,
-		"target": "es5",
-		"baseUrl": "./src",
-		"allowJs": true,
-		"jsx": "react"
-	}
+  "compilerOptions": {
+    "outDir": "./dist",
+    "sourceMap": true,
+    "target": "es5",
+    "baseUrl": "./src",
+    "allowJs": true,
+    "jsx": "react"
+  }
 }
