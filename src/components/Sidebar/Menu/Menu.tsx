@@ -7,9 +7,6 @@ import MenuItem from './MenuItem';
 
 const Navigation = styled.nav`
   padding: 0 5% 5%;
-  font-family: Negotiate, sans-serif;
-  font-size: 16px;
-  color: ${COLORS.adentroGrey};
 `;
 
 const MenuList = styled.ul`
@@ -21,7 +18,7 @@ const Menu = () => {
     return MENU_LIST
       .sort((a, b) => a.title.es.localeCompare(b.title.es))
       .map((menuItemData) => (
-        <MenuItem active={false} data={menuItemData} />
+        <MenuItem active={false} data={menuItemData} key={menuItemData.scheme} />
       ));
   }, []);
 

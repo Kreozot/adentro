@@ -14,3 +14,5 @@ export const MEDIA = {
   M: `@media only screen and (max-width: ${BREAKPOINTS.M})`,
   L: `@media only screen and (max-width: ${BREAKPOINTS.L})`,
 };
+
+export const TRANSITION_TIME = '0.3s';
