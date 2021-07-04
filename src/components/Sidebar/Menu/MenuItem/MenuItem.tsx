@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Link, useParams } from 'gatsby';
+import { Link } from 'gatsby';
 
 import { COLORS, MEDIA } from '../../../../styles';
 import { MenuItemData } from '../../../../menuList';
