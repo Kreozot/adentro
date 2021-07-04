@@ -1,5 +1,7 @@
+import { MenuLocalizedString } from './locale';
+
 export type MenuItemData = {
-  title: LocalizedString,
+  title: MenuLocalizedString,
   scheme: string,
 };
 
