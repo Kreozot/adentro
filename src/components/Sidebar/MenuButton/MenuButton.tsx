@@ -74,15 +74,14 @@ const BurgerButton = styled.span<BurgerButtonProps>`
   }
 `;
 
-const MenuButton = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+interface MenuButtonProps {
+  open: boolean;
+  onClick: () => void;
+}
 
-  const handleClick = React.useCallback(() => {
-    setIsOpen(!isOpen);
-  }, [isOpen]);
-
+const MenuButton = ({ open, onClick }: MenuButtonProps) => {
   return (
-    <BurgerButton open={isOpen} onClick={handleClick}>
+    <BurgerButton open={open} onClick={onClick}>
       <Stripe1 />
       <Stripe2 />
       <Stripe3 />

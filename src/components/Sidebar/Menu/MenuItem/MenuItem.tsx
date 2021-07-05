@@ -4,11 +4,11 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import StyledLink from '../../../common/StyledLink';
 import { RootState } from '../../../../store/store';
-import { COLORS, MEDIA, TRANSITION_TIME } from '../../../../styles';
+import { COLORS, INDENTS } from '../../../../styles';
 import { MenuItemData } from '../../../../menuList';
 
 const Item = styled.li`
-  margin: 8px;
+  margin: ${INDENTS.INNER.VERTICAL} ${INDENTS.INNER.HORIZONTAL};
   list-style-type: none;
   font-family: Negotiate, sans-serif;
   font-size: 16px;

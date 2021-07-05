@@ -5,13 +5,19 @@ import Logo from './Logo';
 import Menu from './Menu';
 
 const Sidebar = () => {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const handleMenuButtonClick = React.useCallback(() => {
+    setIsMenuOpen(!isMenuOpen);
+  }, [isMenuOpen]);
+
   return (
     <div>
       <div>
-        <MenuButton />
+        <MenuButton onClick={handleMenuButtonClick} open={isMenuOpen} />
         <Logo />
       </div>
-      <Menu />
+      <Menu open={isMenuOpen} />
     </div>
   );
 };

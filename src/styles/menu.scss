@@ -7,31 +7,31 @@
 	font-size: 16px;
 	color: $adentroGrey;
 
-	ul {
-		margin: 0;
-	}
+	// ul {
+	// 	margin: 0;
+	// }
 
-	&__item {
-		margin: 5%;
-		list-style-type: none;
+	// &__item {
+	// 	margin: 5%;
+	// 	list-style-type: none;
 
-		&--2 {
-			margin-left: 15%;
-		}
-	}
+	// 	&--2 {
+	// 		margin-left: 15%;
+	// 	}
+	// }
 
-	&__link {
-		text-decoration: none;
-	}
+	// &__link {
+	// 	text-decoration: none;
+	// }
 
-	@include media(M) {
-		font-size: 18px;
-		padding: 5%;
-		opacity: 0;
-		visibility: hidden;
-		transition: opacity 0.3s 0s, visibility 0s 0.3s;
-		display: none;
-	}
+	// @include media(M) {
+	// 	font-size: 18px;
+	// 	padding: 5%;
+	// 	opacity: 0;
+	// 	visibility: hidden;
+	// 	transition: opacity 0.3s 0s, visibility 0s 0.3s;
+	// 	display: none;
+	// }
 }
 
 // .menu-icon {

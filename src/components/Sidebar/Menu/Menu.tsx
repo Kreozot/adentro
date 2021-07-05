@@ -1,29 +1,45 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { COLORS, MEDIA } from '../../../styles';
+import { TRANSITION_TIME, MEDIA } from '../../../styles';
 import { MENU_LIST } from '../../../menuList';
 import MenuItem from './MenuItem';
 
-const Navigation = styled.nav`
-  padding: 0 5% 5%;
+interface NavigationProps {
+  open: boolean;
+}
+
+const Navigation = styled.nav<NavigationProps>`
+  ${MEDIA.M} {
+    font-size: 18px;
+    transition: opacity ${TRANSITION_TIME} 0s;
+    ${({ open }) => !open && `
+      opacity: 0;
+      visibility: hidden;
+      transition: visibility 0s ${TRANSITION_TIME}, opacity ${TRANSITION_TIME} 0s;
+    `}
+  }
 `;
 
 const MenuList = styled.ul`
-
+  padding: 0;
 `;
 
-const Menu = () => {
+interface MenuProps {
+  open: boolean;
+}
+
+const Menu = ({ open }: MenuProps) => {
   const items = React.useMemo(() => {
     return MENU_LIST
       .sort((a, b) => a.title.es.localeCompare(b.title.es))
       .map((menuItemData) => (
-        <MenuItem active={false} data={menuItemData} key={menuItemData.scheme} />
+        <MenuItem data={menuItemData} key={menuItemData.scheme} />
       ));
   }, []);
 
   return (
-    <Navigation>
+    <Navigation open={open}>
       <MenuList>
         {items}
       </MenuList>
