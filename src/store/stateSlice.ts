@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { DanceId } from '../schemes';
-import { LocaleId } from '../locale';
+import { DanceId } from 'schemes';
+import { getLocaleId, LocaleId } from 'locale';
 
 interface AppState {
   localeId: LocaleId;
@@ -9,11 +9,11 @@ interface AppState {
 }
 
 const initialState: AppState = {
-  localeId: 'ru',
+  localeId: getLocaleId(),
   danceId: 'chacarera',
 };
 
-export const counterSlice = createSlice({
+const stateSlice = createSlice({
   name: 'state',
   initialState,
   reducers: {
@@ -32,4 +32,4 @@ export const counterSlice = createSlice({
   },
 });
 
-export default counterSlice;
+export default stateSlice;
