@@ -1,6 +1,7 @@
 export const COLORS = {
   adentroGrey: '#939393',
   adentroBlue: '#0094FF',
+  background: '#FFF',
 };
 
 export const BREAKPOINTS = {

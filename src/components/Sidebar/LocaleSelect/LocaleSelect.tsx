@@ -9,10 +9,20 @@ const LOCALE_ITEMS: LocalizedString = {
   ru: 'ru',
 };
 
+const LocaleContainer = styled.div`
+  display: flex;
+`;
+
 const LocaleSelect = () => {
-  return Object.keys(LOCALE_ITEMS).map((key) => (
+  const items = Object.keys(LOCALE_ITEMS).map((key) => (
     <LocaleItem localeId={key} localeTitle={LOCALE_ITEMS[key]} key={key} />
   ));
+
+  return (
+    <LocaleContainer>
+      {items}
+    </LocaleContainer>
+  );
 };
 
 export default LocaleSelect;

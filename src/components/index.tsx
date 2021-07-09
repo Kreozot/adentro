@@ -3,7 +3,8 @@ import { Router } from '@reach/router';
 
 import Layout from './Layout';
 
-import '../static/font.css';
+import 'font.css';
+import 'main.css';
 
 const IndexPage = ({ scheme }) => {
   return (
