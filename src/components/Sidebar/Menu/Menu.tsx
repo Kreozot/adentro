@@ -13,9 +13,11 @@ const Navigation = styled.nav<NavigationProps>`
   ${MEDIA.M} {
     font-size: 18px;
     transition: opacity ${TRANSITION_TIME} 0s;
+
     ${({ open }) => !open && `
       opacity: 0;
       visibility: hidden;
+      height: 0;
       transition: visibility 0s ${TRANSITION_TIME}, opacity ${TRANSITION_TIME} 0s;
     `}
   }

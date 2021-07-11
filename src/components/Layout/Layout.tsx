@@ -1,9 +1,15 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { RouteComponentProps } from '@reach/router';
 
 import Sidebar from '../Sidebar';
 import Content from '../Content';
 import Footer from '../Footer';
+
+const Main = styled.main`
+  display: flex;
+  width: 100%;
+`;
 
 interface PageProps extends RouteComponentProps {
   scheme: string;
@@ -12,11 +18,10 @@ interface PageProps extends RouteComponentProps {
 const Layout = ({ scheme }: PageProps) => {
   return (
     <>
-      <main>
+      <Main>
         <Sidebar />
-        {scheme}
         <Content />
-      </main>
+      </Main>
       <footer>
         <Footer />
       </footer>

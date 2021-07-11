@@ -5,15 +5,15 @@ export const COLORS = {
 };
 
 export const BREAKPOINTS = {
-  S: '600px',
-  M: '768px',
-  L: '1030px',
+  S: 600,
+  M: 768,
+  L: 1030,
 };
 
 export const MEDIA = {
-  S: `@media only screen and (max-width: ${BREAKPOINTS.S})`,
-  M: `@media only screen and (max-width: ${BREAKPOINTS.M})`,
-  L: `@media only screen and (max-width: ${BREAKPOINTS.L})`,
+  S: `@media only screen and (max-width: ${BREAKPOINTS.S}px)`,
+  M: `@media only screen and (max-width: ${BREAKPOINTS.M}px)`,
+  L: `@media only screen and (max-width: ${BREAKPOINTS.L}px)`,
 };
 
 export const INTERVALS = {

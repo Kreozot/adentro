@@ -76,12 +76,11 @@ const BurgerButton = styled.span<BurgerButtonProps>`
 
 interface MenuButtonProps {
   open: boolean;
-  onClick: () => void;
 }
 
-const MenuButton = ({ open, onClick }: MenuButtonProps) => {
+const MenuButton = ({ open }: MenuButtonProps) => {
   return (
-    <BurgerButton open={open} onClick={onClick}>
+    <BurgerButton open={open}>
       <Stripe1 />
       <Stripe2 />
       <Stripe3 />

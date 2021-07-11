@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-const Sidebar = () => {
-    return (
-        <div>Sidebar</div>
-    );
+const Content = () => {
+  return (
+    <div>Content</div>
+  );
 };
-export default Sidebar;
+export default Content;
