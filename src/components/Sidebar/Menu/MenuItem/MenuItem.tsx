@@ -30,14 +30,14 @@ const MenuItem = ({ danceId, data }: MenuItemProps) => {
   return (
     <Item>
       {
-        danceId === data.scheme
+        danceId === data.danceId
           ? (
             <CurrentItem>
               {data.title.es}
             </CurrentItem>
           )
           : (
-            <MenuLink to={`/${data.scheme}`}>
+            <MenuLink to={`/${data.danceId}`}>
               {data.title.es}
             </MenuLink>
           )

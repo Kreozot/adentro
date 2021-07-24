@@ -11,11 +11,9 @@ const Main = styled.main`
   width: 100%;
 `;
 
-interface PageProps extends RouteComponentProps {
-  scheme: string;
-}
+interface PageProps extends RouteComponentProps {}
 
-const Layout = ({ scheme }: PageProps) => {
+const Layout: React.FunctionComponent<PageProps> = () => {
   return (
     <>
       <Main>

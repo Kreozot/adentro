@@ -20,15 +20,15 @@ module.exports.createPages = ({ actions: { createPage } }) => {
     path: '/',
     component: require.resolve('./src/components/index.tsx'),
     context: {
-      schemeId: 'chacarera',
+      danceId: 'chacarera',
     },
   });
-  SCHEMES.forEach((schemeId) => {
+  SCHEMES.forEach((danceId) => {
     createPage({
-      path: `/${schemeId}`,
+      path: `/${danceId}`,
       component: require.resolve('./src/components/index.tsx'),
       context: {
-        schemeId,
+        danceId,
       },
     });
   });

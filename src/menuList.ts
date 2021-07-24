@@ -2,7 +2,7 @@ import { MenuLocalizedString } from './locale';
 
 export type MenuItemData = {
   title: MenuLocalizedString,
-  scheme: string,
+  danceId: string,
 };
 
 export const MENU_LIST: MenuItemData[] = [
@@ -12,7 +12,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Chacarera Simple',
       ru: 'Чакарера симпле',
     },
-    scheme: 'chacarera',
+    danceId: 'chacarera',
   },
   {
     title: {
@@ -20,7 +20,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Chacarera Doble',
       ru: 'Чакарера добле',
     },
-    scheme: 'chacarera_doble',
+    danceId: 'chacarera_doble',
   },
   {
     title: {
@@ -28,7 +28,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Zamba',
       ru: 'Самба',
     },
-    scheme: 'zamba',
+    danceId: 'zamba',
   },
   {
     title: {
@@ -36,7 +36,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Zamba Alegre',
       ru: 'Самба алегре',
     },
-    scheme: 'zamba_alegre',
+    danceId: 'zamba_alegre',
   },
   {
     title: {
@@ -44,7 +44,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Gato',
       ru: 'Гато',
     },
-    scheme: 'gato',
+    danceId: 'gato',
   },
   {
     title: {
@@ -52,7 +52,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Gato Cuyano',
       ru: 'Гато кужано',
     },
-    scheme: 'gato_cuyano',
+    danceId: 'gato_cuyano',
   },
   {
     title: {
@@ -60,7 +60,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Caramba',
       ru: 'Карамба',
     },
-    scheme: 'caramba',
+    danceId: 'caramba',
   },
   {
     title: {
@@ -68,7 +68,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Bailecito',
       ru: 'Байлесито',
     },
-    scheme: 'bailecito',
+    danceId: 'bailecito',
   },
   {
     title: {
@@ -76,7 +76,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Escondido',
       ru: 'Эскондидо',
     },
-    scheme: 'escondido',
+    danceId: 'escondido',
   },
   {
     title: {
@@ -84,7 +84,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Remedio Norteño',
       ru: 'Ремедио нортеньо',
     },
-    scheme: 'remedio',
+    danceId: 'remedio',
   },
   {
     title: {
@@ -92,7 +92,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Remedio Atamisqueño',
       ru: 'Ремедио атамискеньо',
     },
-    scheme: 'remedio_atamisqueno',
+    danceId: 'remedio_atamisqueno',
   },
   {
     title: {
@@ -100,7 +100,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Huayra Muyoj',
       ru: 'Уайра мужох',
     },
-    scheme: 'huayra_muyoj',
+    danceId: 'huayra_muyoj',
   },
   {
     title: {
@@ -108,7 +108,7 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Huella',
       ru: 'Уэжа',
     },
-    scheme: 'huella',
+    danceId: 'huella',
   },
   {
     title: {
@@ -116,6 +116,6 @@ export const MENU_LIST: MenuItemData[] = [
       en: 'Arunguita',
       ru: 'Арунгита',
     },
-    scheme: 'arunguita',
+    danceId: 'arunguita',
   },
 ];

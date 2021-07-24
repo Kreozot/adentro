@@ -1,7 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { COLORS, MEDIA, INTERVALS, BREAKPOINTS } from 'styles';
+import {
+  COLORS, MEDIA, INTERVALS, BREAKPOINTS,
+} from 'styles';
 import MenuButton from './MenuButton';
 import Logo from './Logo';
 import Menu from './Menu';

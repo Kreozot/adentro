@@ -36,7 +36,7 @@ const Menu = ({ open }: MenuProps) => {
     return MENU_LIST
       .sort((a, b) => a.title.es.localeCompare(b.title.es))
       .map((menuItemData) => (
-        <MenuItem data={menuItemData} key={menuItemData.scheme} />
+        <MenuItem data={menuItemData} key={menuItemData.danceId} />
       ));
   }, []);
 
